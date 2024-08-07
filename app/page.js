@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
      <div className="home-text">
-        <h1 className="title">Hi, I'm Franco!</h1>
+        <h1 className="title">Hi, I&apos;m Franco!</h1>
         <Image className="title2" src="/favicon.ico" alt="GitHub" width={50} height={50} />
         <div className="socialmedia">
           <a href="https://github.com/Fransei29" target="_blank" rel="noopener noreferrer">
