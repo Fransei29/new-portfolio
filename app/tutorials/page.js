@@ -210,12 +210,12 @@ export default function Projects() {
         <a href="#learnreact">React</a>
         <a href="#learnredis">Redis</a>
         <a href="#learngraphql">GraphQL</a>
-        <a href="#learnnext">Next.js</a>
+        <a href="#learnnext">Next</a>
         <a href="#learnairtable">Airtable</a>
         <a href="#learnaxios">Axios</a>
         <a href="#learnmongo">MongoDB</a>
         <a href="#learnsequelize">Sequelize</a>
-        <a href="#learnrest">REST</a>
+        <a href="#learnrest">Rest</a>
         <a href="#learnhtml">HTML</a>
         <a href="#learncss">CSS</a>
         <a href="#learnexpress">Express</a>
