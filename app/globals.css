@@ -9,6 +9,11 @@ html, body {
   overflow-x: hidden;
 }
 
+h1, .highlight, .footer, .socialmedia {
+  user-select: none;
+  cursor: default;
+}
+
 body {
   position: relative;
   background-image: url('/img/bg1.jpg'); /* Ruta a tu imagen */
@@ -76,7 +81,7 @@ body::before {
   background: rgb(0, 0, 0,0.9);
   font-size: 18px;
   color: #fff;
-  padding: 3px 7%;
+  padding: 3px 14%;
   grid-area: footer; 
 }
 
@@ -146,7 +151,7 @@ nav {
   position: fixed;
   background: rgb(0, 0, 0,0.9);
   color: #fff;
-  padding: 6px 18%;
+  padding: 6px 11.5%;
   justify-content: center;
   align-items: center;
   width: 100%;
