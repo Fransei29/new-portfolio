@@ -367,7 +367,7 @@ nav a:hover {
   content: '';
   width: 0.6em; /* Ancho del rectángulo */
   height: 1em; /* Alto del rectángulo */
-  background-color: rgba(241, 22, 168, 0.9);
+  background-color: rgb(192, 2, 129);
   position: absolute;
   left: -1%;
   top: 10%;
