@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
               <p className="nav-link">Tutorials</p>
             </Link>
             <Link href="/projects" passHref>
-              <p className="nav-link">My Projects</p>
+              <p className="nav-link">Projects</p>
             </Link>
           </nav>
         </header>

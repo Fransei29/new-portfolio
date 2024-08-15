@@ -5,7 +5,10 @@ export default function Home() {
     <>
      <div className="home-text">
         <h1 className="title">Hi, I&apos;m Franco!</h1>
-        <Image className="title2" src="/favicon.ico" alt="GitHub" width={50} height={50} />
+        <div className="title-section">
+            <Image className="title-icon" src="/favicon.ico" alt="Icon" width={50} height={50} />
+            <p className="subtitle">Improve your skills with tutorials</p>
+         </div>
         <div className="socialmedia">
           <a href="https://github.com/Fransei29" target="_blank" rel="noopener noreferrer">
           <i className="soicon fab fa-github"></i>
