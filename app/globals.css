@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
 html, body {
   margin: 0;
@@ -178,10 +179,10 @@ nav a::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 18px; /* Asegúrate de que el subrayado esté justo debajo del texto */
+  bottom: 18px;
   width: 0;
   height: 2px;
-  background-color: rgb(144, 143, 153);
+  background-color: #f667ae;
   transition: width 0.4s ease;
 }
 
@@ -198,9 +199,18 @@ nav a:hover {
   width: 100%;
 }
 
+.logo-container {
+  position: absolute;
+  left:28%; 
+}
+
+.logo {
+  width: 37px;
+  height: 37px;
+}
 
 .mario {
-  width: 60px; /* Ajusta el ancho según lo necesites */
+  width: 60px; 
   height: auto;
   padding-right: 50%;
 }
@@ -228,19 +238,23 @@ nav a:hover {
 .project-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #a7a8b1;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin: 34px;
-  border-radius: 10px;
-  background-color: rgb(196, 196, 196);
+  border: 1px solid  rgb(197, 145, 218);
+  padding-top: 8px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgb(216, 162, 240) 0%, #e28db7 100%);
   text-align: center; 
   align-items: center;
+  width: 83%;
+  max-width: 620px;
+  margin: 30px auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-  background-color: rgb(180, 180, 182);
   cursor: pointer;
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -257,16 +271,17 @@ nav a:hover {
   color: #fff;
   font-size: 17px;
   background-color: rgb(6, 2, 112);
-  border-radius: 8px; /* Bordes redondeados */
-  text-decoration: none; /* Quita el subrayado */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+  background-color: rgba(13, 1, 136, 0.968);
+  border-radius: 8px; 
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 
 
 .project-card a:hover {
-  background-color: #005bb5; /* Cambia el color de fondo en hover */
-  transform: scale(1.1); /* Escala el botón en hover */
+  background-color: #044a90; 
+  transform: scale(1.1); 
 }
 
 .project-card i{
@@ -277,7 +292,7 @@ nav a:hover {
 .pages {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-  gap: 20px; /* Espacio entre las tarjetas */
+  gap: 5px;
   padding: 20px; 
   scroll-behavior: smooth;
 }
@@ -297,16 +312,15 @@ nav a:hover {
 .project-image{
   width:340; 
   height:200;
-  border-radius: 13px;
+  border-radius: 6px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
 }
 .project-image:hover {
-  transform: scale(1.1); /* Escala más suave */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .project-title {
-  font-size: 17px;
+  font-size: 17.5px;
 }
 
 .keywords {
@@ -323,7 +337,7 @@ nav a:hover {
   font-weight: 400;
   position: relative;
   padding-left: 20%;
-  color: black; /* Color del texto */
+  color: black; 
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -332,7 +346,7 @@ nav a:hover {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -2px; /* Asegúrate de que el subrayado esté justo debajo del texto */
+  bottom: -2px;
   width: 0;
   height: 2px;
   background-color: rgb(144, 143, 153);
@@ -353,7 +367,7 @@ nav a:hover {
   content: '';
   width: 0.6em; /* Ancho del rectángulo */
   height: 1em; /* Alto del rectángulo */
-  background-color: rgb(6, 2, 112, 0.8);
+  background-color: rgba(241, 22, 168, 0.9);
   position: absolute;
   left: -1%;
   top: 10%;
@@ -367,6 +381,7 @@ nav a:hover {
   padding: 10px 10px;
   color: rgb(6, 2, 112);
   font-size: 18px;
+  font-family: 'Lato';
 }
 
 .logs {
@@ -388,7 +403,8 @@ nav a:hover {
 }
 
 .project-description {
-  font-size: 19px; /* Ajusta el tamaño del texto aquí */ /* Ajusta el margen según sea necesario */
+  font-size: 18px;
+  font-family: 'Lato';
 }
 .tech-nav {
   display: flex;
@@ -412,8 +428,8 @@ nav a:hover {
 }
 
 .tech-nav a:hover {
-  color: rgb(217, 217, 241); /* Ajusta el color de hover según sea necesario */
-  transform: scale(1.1); /* Efecto de hover */
+  color: #f853c6;
+  transform: scale(1.1);
 }
 .tit{
   padding-top: 9%;
@@ -421,4 +437,92 @@ nav a:hover {
 
 .project-description{
   padding: 8px;
+}
+
+@media (max-width: 768px) {
+  /* Ajustes para la cabecera */
+  .header {
+    padding-right: 5%;
+    text-align: center;
+  }
+
+  /* Ajustes para el cuerpo principal */
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "home-text"
+      "about";
+    height: auto;
+  }
+
+  .home-text {
+    padding-top: 5%;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 32px; /* Ajustar tamaño de la fuente para que se vea en mobile */
+    padding-top: 32%;
+    padding-right: 30%;
+  }
+
+  .title2 {
+    padding-top: 2%;
+    padding-right: 72%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .socialmedia {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 20%;
+    padding-left: 35%;
+    gap: 15px;
+  }
+
+  .about {
+    padding-left: 20%;
+    font-size: 18px;
+  }
+
+  .nav a{
+    padding-right: 15%;
+    gap:0;
+  }
+}
+@media (max-width: 768px) {
+  /* Ajustes para la barra de navegación de tecnologías */
+  .tech-nav {
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px;
+    font-size: 14px;/* Ajustar el tamaño de la fuente */
+  }
+}
+@media (max-width: 768px) {
+  .pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-title{
+    padding-top: 155%;
+    margin-top: 60%;
+  }
+  .project-card { /* Ajustar el margen para que se vea bien en mobile */
+    width: 100%; /* Asegurar que las tarjetas ocupen todo el ancho disponible */
+  }
+
+  .project-image {
+    width: 100%; /* Asegurar que la imagen ocupe todo el ancho disponible */
+    height: auto; /* Mantener la proporción de la imagen */
+  }
+
+  .page-title {
+    font-size: 28px;
+    padding-top: 5%;
+  }
 }

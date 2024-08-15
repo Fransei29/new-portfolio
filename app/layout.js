@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import './globals.css';
 
@@ -18,6 +19,9 @@ export default function RootLayout({ children }) {
       <body className="container">
         <header className="header">
           <nav className="nav">
+            <div className="logo-container">
+              <Image src="/favicon.ico" alt="Logo" width={30} height={30} className="logo" />
+            </div>
             <Link href="/" passHref>
               <p className="nav-link">Home</p>
             </Link>
