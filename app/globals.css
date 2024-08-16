@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
+/* --- GENERAL --- */
 html, body {
   margin: 0;
   padding: 0;
@@ -43,6 +44,9 @@ body::before {
   background-color: rgba(255, 255, 255, 0.7); /* Capa semi-transparente */
   z-index: -1;
 }
+
+/* --- GENERAL CONTAINER --- */
+
 .container {  
   display: grid;
   grid-template-columns: 1fr;
@@ -62,6 +66,8 @@ body::before {
   padding-right: 22%;
 }
 
+/* --- HOME PAGE STYLES --- */
+
 .main { 
   grid-area: main;
   display: grid; 
@@ -76,15 +82,7 @@ body::before {
   overflow: hidden;
 }
 
-.footer { 
-  display: flex;
-  justify-content:flex-end;
-  background: rgb(0, 0, 0,0.9);
-  font-size: 16px;
-  color: #fff;
-  padding: 5px 19%;
-  grid-area: footer; 
-}
+/* --- HOME PAGE --- */
 
 .home-text {
   grid-area: home-text;
@@ -121,6 +119,8 @@ body::before {
   }
 }
 
+/* --- SOCIAL MEDIA --- */
+
 .socialmedia {
   display: flex;
   justify-content: flex-start;
@@ -132,14 +132,50 @@ body::before {
 }
 
 .soicon {
-  color: #020101; /* Ajusta el color de los iconos */
-  font-size: 28px; /* Ajusta el tamaño de los iconos */
+  color: #020101; 
+  font-size: 28px; 
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), color 0.7s ease-in-out;  
 }
 
 .socialmedia a:hover .soicon {
   transform: scale(1.5);
 }
+
+.project-icon{
+  width:38px; 
+  height:38px;
+  padding: 5px;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+}
+
+.title-icon {
+  margin-right: 15px;
+}
+
+.subtitle {
+  font-size: 23px;
+  color: #0e0b0b;
+}
+
+.about{
+  grid-area: about;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-size: 35px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 12%;
+  align-items: center
+}
+
+/* --- NAV BAR --- */
 
 nav {
   display: flex;
@@ -185,7 +221,7 @@ nav a:hover::after {
 }
 
 nav a:hover {
-  color: rgb(217, 217, 241); /* Cambia el color del texto en hover */
+  color: rgb(217, 217, 241); 
 }
 
 
@@ -203,31 +239,8 @@ nav a:hover {
   height: 37px;
 }
 
-.mario {
-  width: 60px; 
-  height: auto;
-  padding-right: 50%;
-}
-.about{
-  grid-area: about;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
-  font-size: 35px;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  padding: 12%;
-  align-items: center
-}
 
-
-.project-icon{
-  width:38px; 
-  height:38px;
-  padding: 5px;
-}
+/* --- CARDS --- */
 
 .project-card {
   display: flex;
@@ -264,14 +277,11 @@ nav a:hover {
   margin: 7px;
   color: #fff;
   font-size: 17px;
-  background-color: rgb(6, 2, 112);
   background-color: rgba(13, 1, 136, 0.968);
   border-radius: 8px; 
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease; 
 }
-
-
 
 .project-card a:hover {
   background-color: #044a90; 
@@ -282,6 +292,63 @@ nav a:hover {
   padding-right: 40px;
 }
 
+.project-image{
+  width:340; 
+  height:200;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+}
+
+/* --- LOGS FROM CARDS --- */
+
+.logs-toggle {
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 10px 10px;
+  color: rgb(6, 2, 112);
+  font-size: 18px;
+  font-family: 'Lato';
+}
+
+.logs {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: flex-start;
+  width:auto;
+  padding: 5px;
+  background-color: rgba(165, 164, 195, 0.3);
+  border-radius: 6px;
+}
+
+.logs p {
+  font-size: 18px;
+  margin: 4px 0;
+  padding: 2px; 
+  line-height: 1.3;
+}
+
+.project-description {
+  font-size: 18px;
+  font-family: 'Lato';
+  padding: 8px;
+}
+
+
+/* --- FOOTER --- */
+
+.footer { 
+  display: flex;
+  justify-content:flex-end;
+  background: rgb(0, 0, 0,0.9);
+  font-size: 16px;
+  color: #fff;
+  padding: 5px 19%;
+  grid-area: footer; 
+}
+
+/* --- PAGES --- */
 
 .pages {
   display: grid;
@@ -302,20 +369,11 @@ nav a:hover {
   font-weight: bold;
 }
 
-
-.project-image{
-  width:340; 
-  height:200;
-  border-radius: 6px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
-}
-.project-image:hover {
-}
-
 .project-title {
   font-size: 17.5px;
 }
+
+/* --- KEYWORDS FROM HOME PAGE --- */
 
 .keywords {
   display: flex;
@@ -353,67 +411,24 @@ nav a:hover {
 
 .highlight:hover {
   color: rgb(104, 104, 120);
-  cursor:pointer; /* Cambia el color del texto en hover */
+  cursor:pointer; 
 }
 
 
 .highlight::before {
   content: '';
-  width: 0.6em; /* Ancho del rectángulo */
-  height: 1em; /* Alto del rectángulo */
+  width: 0.6em; 
+  height: 1em;
   background-color: rgb(192, 2, 129);
   position: absolute;
   left: 13%;
   top: 10%;
-  transform: translateY(-50%); /* Centrar verticalmente */
+  transform: translateY(-50%); 
 }
 
 
-.title-section {
-  display: flex;
-  align-items: center;
-}
+/* --- TUTORIALS NAV BAR --- */
 
-.title-icon {
-  margin-right: 15px;
-}
-
-.subtitle {
-  font-size: 23px;
-  color: #0e0b0b;
-}
-
-.logs-toggle {
-  cursor: pointer;
-  margin-top: 10px;
-  padding: 10px 10px;
-  color: rgb(6, 2, 112);
-  font-size: 18px;
-  font-family: 'Lato';
-}
-
-.logs {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  align-items: flex-start;
-  width:auto;
-  padding: 5px;
-  background-color: rgba(165, 164, 195, 0.3);
-  border-radius: 6px;
-}
-
-.logs p {
-  font-size: 18px;
-  margin: 4px 0;
-  padding: 2px; 
-  line-height: 1.3;
-}
-
-.project-description {
-  font-size: 18px;
-  font-family: 'Lato';
-}
 .tech-nav {
   display: flex;
   justify-content: center;
@@ -439,15 +454,16 @@ nav a:hover {
   color: #f853c6;
   transform: scale(1.1);
 }
+
 .tit{
   padding-top: 9%;
 }
 
-.project-description{
-  padding: 8px;
-}
+
+/* --- MEDIA QUERIES --- */
 
 @media (max-width: 768px) {
+
   /* Ajustes para la cabecera */
   .header {
     padding-right: 5%;
@@ -462,52 +478,79 @@ nav a:hover {
       "home-text"
       "about";
     height: auto;
+    justify-items: end
   }
 
   .home-text {
-    padding-top: 5%;
+    padding-top: 15%;
+    padding-right: 5%;
     align-items: center;
-    padding: 10px;
+    order: 1;
   }
 
   .title {
-    font-size: 32px; /* Ajustar tamaño de la fuente para que se vea en mobile */
-    padding-top: 32%;
-    padding-right: 30%;
+    font-size: 28px; 
+    padding-top: 26%;
+    padding-right: 27%;
   }
 
-  .title2 {
-    padding-top: 2%;
-    padding-right: 72%;
-    width: 40px;
-    height: 40px;
+  .subtitle {
+    font-size: 22px;
   }
 
   .socialmedia {
     flex-direction: row;
     align-items: center;
-    padding-top: 20%;
-    padding-left: 35%;
-    gap: 15px;
+    padding-top: 8%;
+    padding-left: 3%;
+    padding-right: 18%;
+    gap: 11px;
+    order: 3;
+  }
+
+  .soicon {
+    font-size: 20px; 
   }
 
   .about {
-    padding-left: 20%;
+    padding-left: %;
+    padding-bottom: 20%;
+    order: 2;
+  }
+  .keywords {
+    padding-bottom: 20%;
+    padding-right: 10%;
+    margin-right: 10%;
+  }
+  
+  .highlight {
     font-size: 18px;
+    padding-right: 10%;
+    margin-right: 10%;
   }
 
   .nav a{
-    padding-right: 15%;
-    gap:0;
+    padding-right: 8%;
+    gap: 0;
+  }
+
+  .titlepro {
+    margin-top: -40%;
   }
 }
+
 @media (max-width: 768px) {
   /* Ajustes para la barra de navegación de tecnologías */
   .tech-nav {
+    display: flex;
     flex-direction: row;
     gap: 10px;
     padding: 20px;
-    font-size: 14px;/* Ajustar el tamaño de la fuente */
+    font-size: 11px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: baseline;
   }
 }
 @media (max-width: 768px) {
@@ -516,21 +559,33 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
   }
-  .page-title{
-    padding-top: 155%;
-    margin-top: 60%;
+  .project-card {  
+    width: 95%;
   }
-  .project-card { /* Ajustar el margen para que se vea bien en mobile */
-    width: 100%; /* Asegurar que las tarjetas ocupen todo el ancho disponible */
+  .project-title{
+    font-size: 16px;
   }
-
+  .project-description{
+    width: 90%;
+    font-size: 16px;
+  }
+  .project-card a {
+    font-size: 14px;
+  }
+  .project-card i{
+    padding-right: 10px;
+    font-size: 14px;
+  }
   .project-image {
-    width: 100%; /* Asegurar que la imagen ocupe todo el ancho disponible */
-    height: auto; /* Mantener la proporción de la imagen */
+    width: 80%; 
+    height: auto;
   }
-
+  .logs-toggle{
+    font-size: 16px;
+  }
   .page-title {
     font-size: 28px;
     padding-top: 5%;
+    margin-top: 70%;
   }
 }

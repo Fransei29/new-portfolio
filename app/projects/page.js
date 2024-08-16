@@ -99,7 +99,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <div className='pages'>
+    <div className='pages titlepro'>
       <h1 className="page-title">Projects</h1>
       {projects.map((project, index) => (
         <ProjectCard key={index} project={project} />
