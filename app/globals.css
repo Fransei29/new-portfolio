@@ -459,6 +459,50 @@ nav a:hover {
   padding-top: 9%;
 }
 
+/* --- SIGN-IN BOTTOM --- */
+
+/* --- SIGN-IN/OUT BUTTONS --- */
+.auth-container {
+  display: flex;
+  text-align: center;
+  padding-bottom: 5%;
+}
+
+.welcome {
+  margin-bottom: 7px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 23px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+}
+
+.sign-in-button, .sign-out-button {
+  padding:8px 25px;
+  margin: 2%;
+  font-size: 17px;
+  color: #fff;
+  background-color: #0e0880;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.sign-in-button{
+  margin-bottom: 50%;
+}
+
+.sign-in-button:hover, .sign-out-button:hover {
+  background-color: rgba(44, 36, 200, 0.9);
+}
 
 /* --- MEDIA QUERIES --- */
 
@@ -513,20 +557,13 @@ nav a:hover {
   }
 
   .about {
-    padding-left: %;
+    display: flex;
+    flex-direction: row;
     padding-bottom: 20%;
     order: 2;
   }
   .keywords {
-    padding-bottom: 20%;
-    padding-right: 10%;
-    margin-right: 10%;
-  }
-  
-  .highlight {
-    font-size: 18px;
-    padding-right: 10%;
-    margin-right: 10%;
+    display: none;
   }
 
   .nav a{
@@ -587,5 +624,14 @@ nav a:hover {
     font-size: 28px;
     padding-top: 5%;
     margin-top: 70%;
+  }
+  .sign-in-button, .sign-out-button {
+    font-size: 14px;
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
   }
 }

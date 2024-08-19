@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="container">
+      <SessionProvider>
         <header className="header">
           <nav className="nav">
             <div className="logo-container">
@@ -39,6 +41,7 @@ export default function RootLayout({ children }) {
         <footer className="footer">
           <p>© 2024 Franco Seiler all rights reserved</p>
         </footer>
+      </SessionProvider>
       </body>
     </html>
   );

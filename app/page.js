@@ -1,6 +1,11 @@
+"use client";
+
 import Image from 'next/image';
+import { signIn, signOut, useSession } from 'next-auth/react'; // Importar el hook de signIn
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <>
      <div className="home-text">
@@ -22,7 +27,26 @@ export default function Home() {
         </div>
       </div>
       <div className="about">
-      <div className="keywords">
+        <div className="auth-container">
+          {session ? (
+                <div className="user-info">
+                  <p className='welcome'>Welcome {session.user.name}</p>
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name}
+                    width={50}
+                    height={50}
+                    className="user-avatar"
+                  />
+                  <button onClick={() => signOut()} className="sign-out-button">Sign out</button>
+                </div>
+              ) : (
+                <div className="auth-button">
+                  <button onClick={() => signIn()} className="sign-in-button">Sign in</button>
+                </div>
+              )}
+       </div>
+       <div className="keywords">
           <p className="highlight">Design</p>
           <p className="highlight">Development</p>
           <p className="highlight">Collaboration</p>
@@ -31,3 +55,4 @@ export default function Home() {
     </>
   );
 }
+
