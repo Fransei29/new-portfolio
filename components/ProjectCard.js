@@ -4,7 +4,7 @@ import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useState } from 'react';
 
-const ProjectCard = ({ project, showDocumentation = true }) => {
+const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
   
   const [showLogs, setShowLogs] = useState(false);
 
@@ -33,6 +33,7 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
           />
         </div>
       )}
+      <div>
       <p className="project-description">{project.description}</p>
       {showDocumentation && project.link1 && (
         <a href={project.link1} target="_blank" rel="noopener noreferrer">
@@ -59,6 +60,8 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
           ))}
         </div>
       )}
+    </div>
+    <button onClick={onComplete} className="complete-button">Done</button>
     </div>
   );
 };

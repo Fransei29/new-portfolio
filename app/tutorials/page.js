@@ -1,8 +1,13 @@
+"use client";
+
+import { useState } from 'react';
 import ProjectCard from '../../components/ProjectCard';
+import CircularProgress from '../../components/CircularProgress';
 
 const projects = [
   {
     title: 'Learn Node',
+    isTutorial: true,
     description: 'Master the basics of Node.js with this comprehensive guide.',
     icon: '/icons/node2.png',
     link1: 'https://nodejs.org/docs/latest/api/',
@@ -18,6 +23,7 @@ const projects = [
   },
   {
     title: 'Learn React',
+    isTutorial: true,
     description: 'Get started with React and build interactive UIs.',
     icon: '/icons/react.png',
     link1: 'https://react.dev/learn',
@@ -34,6 +40,7 @@ const projects = [
   },
   {
     title: 'Learn Redis',
+    isTutorial: true,
     description: 'Explore Redis, the in-memory data structure store.',
     icon: '/icons/redis.png',
     link1: 'https://redis.io/docs/latest/',
@@ -49,6 +56,7 @@ const projects = [
   },
   {
     title: 'Learn GraphQL',
+    isTutorial: true,
     description: 'Learn GraphQL to query your APIs efficiently.',
     icon: '/icons/gra.png',
     link1: 'https://graphql.org/learn/',
@@ -64,6 +72,7 @@ const projects = [
   },
   {
     title: 'Learn Next',
+    isTutorial: true,
     description: 'Discover the power of server-side rendering with Next.js.',
     icon: '/icons/next.png',
     link1: 'https://nextjs.org/docs',
@@ -80,6 +89,7 @@ const projects = [
   },
   {
     title: 'Learn Airtable',
+    isTutorial: true,
     description: 'Integrate Airtable into your projects seamlessly.',
     icon: '/icons/airtable.png',
     link1: 'https://support.airtable.com/docs/introduction-to-airtable-basics',
@@ -95,6 +105,7 @@ const projects = [
   },
   {
     title: 'Learn Axios',
+    isTutorial: true,
     description: 'Simplify HTTP requests with Axios.',
     icon: '/icons/axios.png',
     link1: 'https://axios-http.com/docs/intro',
@@ -110,6 +121,7 @@ const projects = [
   },
   {
     title: 'Learn Mongo',
+    isTutorial: true,
     description: 'Dive into MongoDB, the NoSQL database.',
     icon: '/icons/mongo.png',
     link1: 'https://www.mongodb.com/docs/',
@@ -126,6 +138,7 @@ const projects = [
   },
   {
     title: 'Learn Sequelize',
+    isTutorial: true,
     description: 'Understand Sequelize for database ORM in Node.js.',
     icon: '/icons/Sequelize.png',
     link1: 'https://sequelize.org/docs/v6/getting-started/',
@@ -141,6 +154,7 @@ const projects = [
   },
   {
     title: 'Learn REST',
+    isTutorial: true,
     description: 'Build RESTful APIs with ease.',
     icon: '/icons/rest.png',
     link1: 'https://www.ibm.com/docs/en/intelligent-promising?topic=reference-rest-api-documentation',
@@ -156,6 +170,7 @@ const projects = [
   },
   {
     title: 'Learn HTML',
+    isTutorial: true,
     description: 'A comprehensive tutorial on building web pages using HTML.',
     icon: '/icons/html.png',
     link1: 'https://www.w3schools.com/html/html_intro.asp',
@@ -171,6 +186,7 @@ const projects = [
   },
   {
     title: 'Learn CSS',
+    isTutorial: true,
     description: 'Small tutorial on styling web pages using CSS.',
     icon: '/icons/css.png',
     link1: 'https://www.w3schools.com/css/css_intro.asp',
@@ -186,6 +202,7 @@ const projects = [
   },
   {
     title: 'Learn Express',
+    isTutorial: true,
     description: 'Here you will see how to create your first Server using Express.',
     icon: '/icons/ex.png',
     link1: 'https://expressjs.com/es/starter/installing.html',
@@ -203,6 +220,12 @@ const projects = [
 
 
 export default function Projects() {
+  const [progress, setProgress] = useState(0);
+
+  const handleComplete = () => {
+    setProgress(prev => Math.min(prev + (100 / projects.length), 100));
+  };
+
   return (
     <div className='pages'>
       <nav className="tech-nav">
@@ -220,10 +243,22 @@ export default function Projects() {
         <a href="#learncss">CSS</a>
         <a href="#learnexpress">Express</a>
       </nav>
-      <h1 className="page-title tit">Tutorials</h1>
+      {/* Contenedor para el título y el círculo */}
+    <div className="title-container">
+      <div className="tit1">
+         <CircularProgress progress={progress} />
+      </div>
+      <div className="tit2">
+        <h1 className="page-title tit">Tutorials</h1>
+      </div>
+    </div>
+
+    {/* Contenedor para los proyectos */}
+    <div className="projects-grid">
       {projects.map((project, index) => (
-        <ProjectCard key={index} project={project} />
+        <ProjectCard key={index} project={project} onComplete={handleComplete} />
       ))}
     </div>
-  );
+  </div>
+);
 }

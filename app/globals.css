@@ -352,10 +352,16 @@ nav a:hover {
 
 .pages {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+  grid-template-columns: repeat(1, 1fr); /* Dos columnas iguales */
   gap: 5px;
   padding: 20px; 
   scroll-behavior: smooth;
+}
+
+.projects1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+  gap: 5px;
 }
 
 .page-title {
@@ -504,6 +510,88 @@ nav a:hover {
   background-color: rgba(44, 36, 200, 0.9);
 }
 
+/* --- PROGRESS BAR --- */
+
+
+.title-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "tit1 tit2";
+  gap: 5px;
+  padding-top: 7%;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ocupa toda la anchura */
+}
+.tit1{
+  grid-area: tit1;
+}
+.tit2{
+  grid-area: tit2;
+  display: flex;
+  margin-left: -15%;
+  padding-bottom: 2%;
+}
+
+.title-container .page-title {
+  margin-left: 10px; /* Espacio entre el círculo y el texto */
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas para los tutoriales */
+  gap: 20px; /* Espacio entre los elementos */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+}
+
+.progress-circle {
+  grid-column: span 2;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.progress-svg {
+  transform: rotate(-90deg);
+}
+
+.progress-circle-bg {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-circle-fg {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-circle-text {
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+}
+.complete-button {
+  margin: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: #0c0882;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background-color: #1e2b81;
+}
+
 /* --- MEDIA QUERIES --- */
 
 @media (max-width: 768px) {
@@ -591,7 +679,7 @@ nav a:hover {
   }
 }
 @media (max-width: 768px) {
-  .pages {
+  .pages, .projects-grid, .title-container, .projects1 {
     display: flex;
     flex-direction: column;
     align-items: center;
