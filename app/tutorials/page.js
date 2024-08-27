@@ -222,8 +222,19 @@ const projects = [
 export default function Projects() {
   const [progress, setProgress] = useState(0);
 
-  const handleComplete = () => {
-    setProgress(prev => Math.min(prev + (100 / projects.length), 100));
+  // Función para marcar un tutorial como completado
+  const handleComplete = async (tutorialId) => {
+
+    try {
+      await axios.post('/api/progress', {
+        userId: session.user.id,           // Suponiendo que tienes la sesión del usuario
+        tutorialId: tutorialId,            // ID del tutorial que se está completando
+        completed: true,                   // Marca como completado
+      });
+      setProgress((prev) => ({ ...prev, [tutorialId]: true }));  // Actualiza el estado del progreso en el frontend
+    } catch (error) {
+      console.error('Error al marcar como completado', error);
+    }
   };
 
   return (

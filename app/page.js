@@ -2,9 +2,19 @@
 
 import Image from 'next/image';
 import { signIn, signOut, useSession } from 'next-auth/react'; // Importar el hook de signIn
+import { useEffect } from 'react';
 
 export default function Home() {
   const { data: session } = useSession();
+
+  useEffect(() => {
+    const syncDatabase = async () => {
+      await fetch('/api/sync');
+    };
+
+    syncDatabase(); // Sincroniza la base de datos cuando la página se carga
+  }, []);
+
 
   return (
     <>

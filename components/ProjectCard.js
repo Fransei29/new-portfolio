@@ -62,6 +62,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
       )}
     </div>
     <button onClick={onComplete} className="complete-button">Done</button>
+    
     </div>
   );
 };
