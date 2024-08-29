@@ -61,7 +61,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
         </div>
       )}
     </div>
-    <button onClick={onComplete} className="complete-button">Done</button>
+    <button onClick={() => onComplete(project.id)} className="complete-button">Done</button>
     
     </div>
   );

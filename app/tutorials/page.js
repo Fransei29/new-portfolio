@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import ProjectCard from '../../components/ProjectCard';
 import CircularProgress from '../../components/CircularProgress';
+import axios from 'axios';
 
 const projects = [
   {
+    id: '1',
     title: 'Learn Node',
     isTutorial: true,
     description: 'Master the basics of Node.js with this comprehensive guide.',
@@ -22,6 +25,7 @@ const projects = [
     ]
   },
   {
+    id: '2',
     title: 'Learn React',
     isTutorial: true,
     description: 'Get started with React and build interactive UIs.',
@@ -39,6 +43,7 @@ const projects = [
     ]
   },
   {
+    id: '3',
     title: 'Learn Redis',
     isTutorial: true,
     description: 'Explore Redis, the in-memory data structure store.',
@@ -55,6 +60,7 @@ const projects = [
     ]
   },
   {
+    id: '4',
     title: 'Learn GraphQL',
     isTutorial: true,
     description: 'Learn GraphQL to query your APIs efficiently.',
@@ -71,6 +77,7 @@ const projects = [
     ]
   },
   {
+    id: '5',
     title: 'Learn Next',
     isTutorial: true,
     description: 'Discover the power of server-side rendering with Next.js.',
@@ -88,6 +95,7 @@ const projects = [
     ]
   },
   {
+    id: '6',
     title: 'Learn Airtable',
     isTutorial: true,
     description: 'Integrate Airtable into your projects seamlessly.',
@@ -104,6 +112,7 @@ const projects = [
     ]
   },
   {
+    id: '7',
     title: 'Learn Axios',
     isTutorial: true,
     description: 'Simplify HTTP requests with Axios.',
@@ -120,6 +129,7 @@ const projects = [
     ]
   },
   {
+    id: '8',
     title: 'Learn Mongo',
     isTutorial: true,
     description: 'Dive into MongoDB, the NoSQL database.',
@@ -137,6 +147,7 @@ const projects = [
     ]
   },
   {
+    id: '9',
     title: 'Learn Sequelize',
     isTutorial: true,
     description: 'Understand Sequelize for database ORM in Node.js.',
@@ -153,6 +164,7 @@ const projects = [
     ]
   },
   {
+    id: '10',
     title: 'Learn REST',
     isTutorial: true,
     description: 'Build RESTful APIs with ease.',
@@ -169,6 +181,7 @@ const projects = [
     ]
   },
   {
+    id: '11',
     title: 'Learn HTML',
     isTutorial: true,
     description: 'A comprehensive tutorial on building web pages using HTML.',
@@ -185,6 +198,7 @@ const projects = [
     ]
   },
   {
+    id: '12',
     title: 'Learn CSS',
     isTutorial: true,
     description: 'Small tutorial on styling web pages using CSS.',
@@ -201,6 +215,7 @@ const projects = [
     ]
   },
   {
+    id: '13',
     title: 'Learn Express',
     isTutorial: true,
     description: 'Here you will see how to create your first Server using Express.',
@@ -220,18 +235,41 @@ const projects = [
 
 
 export default function Projects() {
-  const [progress, setProgress] = useState(0);
+  const { data: session } = useSession(); // Asegúrate de que la sesión está disponible
+  const [progress, setProgress] = useState(0); // Estado para almacenar el progreso en porcentaje
+  const [completedTutorials, setCompletedTutorials] = useState({}); // Estado para almacenar los tutoriales completados
+  
 
-  // Función para marcar un tutorial como completado
-  const handleComplete = async (tutorialId) => {
+  // Función para calcular el progreso basado en los tutoriales completados
+  const calculateProgress = () => {
+    const totalTutorials = projects.length;
+    const completedCount = projects.filter(project => completedTutorials[project.id]).length;
+    return (completedCount / totalTutorials) * 100;
+  };
+
+  // Efecto para actualizar el progreso cuando cambia el estado de los tutoriales completados
+  useEffect(() => {
+    setProgress(calculateProgress());
+  }, [completedTutorials]);
+
+
+   // Función para marcar un tutorial como completado
+   const handleComplete = async (tutorialId) => {
+    if (!session) {
+      console.error('No hay sesión disponible');
+      return;
+    }
 
     try {
-      await axios.post('/api/progress', {
+      const response = await axios.post('/api/progress', {
         userId: session.user.id,           // Suponiendo que tienes la sesión del usuario
         tutorialId: tutorialId,            // ID del tutorial que se está completando
         completed: true,                   // Marca como completado
       });
-      setProgress((prev) => ({ ...prev, [tutorialId]: true }));  // Actualiza el estado del progreso en el frontend
+
+
+      // Actualiza el estado de los tutoriales completados en el frontend
+      setCompletedTutorials((prev) => ({ ...prev, [tutorialId]: true }));
     } catch (error) {
       console.error('Error al marcar como completado', error);
     }

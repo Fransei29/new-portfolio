@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import '../app/globals.css';
 
 function CircularProgress({ progress }) {

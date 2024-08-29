@@ -2,7 +2,11 @@ import TutorialProgress from '../../models/TutorialProgress';
 
 // Handler principal para manejar las solicitudes API
 export default async function handler(req, res) {
+  
   const { method } = req;
+
+  console.log(`Método recibido: ${method}`); 
+  
 
   if (method === 'POST') {                  // Si la solicitud es POST, guarda el progreso  
     return await saveProgress(req, res);
@@ -18,6 +22,8 @@ export default async function handler(req, res) {
 async function saveProgress(req, res) {
   const { userId, tutorialId, completed } = req.body;
 
+  console.log('Datos recibidos en el backend:', { userId, tutorialId, completed });
+  
   try {
     const [progress, created] = await TutorialProgress.findOrCreate({
       where: { userId, tutorialId },

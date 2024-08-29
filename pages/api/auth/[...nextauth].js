@@ -10,4 +10,13 @@ export default NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,  // Asegúrate de definir esta variable en tu entorno
+
+  // Configura los callbacks para personalizar la sesión
+  callbacks: {
+    async session({ session, token }) {
+      // Incluye el userId en la sesión a partir del token
+      session.user.id = token.sub; // token.sub contiene el userId después del login
+      return session; // Retorna la sesión con el userId agregado
+    },
+  },
 });
