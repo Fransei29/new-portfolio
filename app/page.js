@@ -41,13 +41,7 @@ export default function Home() {
           {session ? (
                 <div className="user-info">
                   <p className='welcome'>Welcome {session.user.name}</p>
-                  <Image
-                    src={session.user.image}
-                    alt={session.user.name}
-                    width={50}
-                    height={50}
-                    className="user-avatar"
-                  />
+                  <Image  src={session.user.image} alt={session.user.name} width={50} height={50}className="user-avatar"/>
                   <button onClick={() => signOut()} className="sign-out-button">Sign out</button>
                 </div>
               ) : (

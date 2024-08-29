@@ -24,13 +24,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
       </div>
       {project.previewImage && (
         <div className="project-preview">
-          <Image
-            src={project.previewImage}
-            alt={`${project.title} Preview`}
-            width={340} 
-            height={200} 
-            className="project-image"
-          />
+          <Image src={project.previewImage} alt={`${project.title} Preview`} width={340} height={200} className="project-image"/>
         </div>
       )}
       <div>
@@ -62,7 +56,6 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
       )}
     </div>
     <button onClick={() => onComplete(project.id)} className="complete-button">Done</button>
-    
     </div>
   );
 };

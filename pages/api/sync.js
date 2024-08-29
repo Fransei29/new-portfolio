@@ -1,6 +1,4 @@
-// pages/api/sync.js
-
-import sequelize from '../../lib/sequelize'; // Asegúrate de que la ruta a sequelize es correcta
+import sequelize from '../../lib/sequelize';
 
 export default async function handler(req, res) {
   try {

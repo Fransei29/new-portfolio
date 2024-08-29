@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 // Función para guardar el progreso del tutorial en la base de datos
 async function saveProgress(req, res) {
   const { userId, tutorialId, completed } = req.body;
-
+  
   console.log('Datos recibidos en el backend:', { userId, tutorialId, completed });
   
   try {
@@ -36,7 +36,6 @@ async function saveProgress(req, res) {
 
     return res.status(200).json({ message: 'Progreso guardado exitosamente' });
   } catch (error) {
-    console.error('Error al guardar progreso:', error);
     return res.status(500).json({ error: 'Error al guardar progreso' });
   }
 }
@@ -49,7 +48,6 @@ async function getProgress(req, res) {
     const progress = await TutorialProgress.findAll({ where: { userId } });
     return res.status(200).json(progress);
   } catch (error) {
-    console.error('Error al obtener progreso:', error);
     return res.status(500).json({ error: 'Error al obtener progreso' });
   }
 }
