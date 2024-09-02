@@ -26,6 +26,24 @@ const projects = [
   },
   {
     id: '2',
+    title: 'Learn TypeScript',
+    isTutorial: true,
+    description: 'Learn TypeScript to enhance the safety and scalability of your React applications.',
+    icon: '/icons/type.png',
+    link1: 'https://www.typescriptlang.org/docs/',
+    link2: 'https://github.com/Fransei29/react-typescript/blob/main/src/App.tsx',
+    link3: 'https://react-typescript-oqzgk3zxt-francos-projects-94304a5e.vercel.app/',
+    previewImage: '/img/type.png',
+    logs: [
+      'git init',
+      'git clone https://github.com/Fransei29/react-typescript.git',
+      'cd react-typescript',
+      'npm install',
+      'npm run start'
+    ]
+  },
+  {
+    id: '3',
     title: 'Learn React',
     isTutorial: true,
     description: 'Get started with React and build interactive UIs.',
@@ -43,7 +61,7 @@ const projects = [
     ]
   },
   {
-    id: '3',
+    id: '4',
     title: 'Learn Redis',
     isTutorial: true,
     description: 'Explore Redis, the in-memory data structure store.',
@@ -60,7 +78,7 @@ const projects = [
     ]
   },
   {
-    id: '4',
+    id: '5',
     title: 'Learn GraphQL',
     isTutorial: true,
     description: 'Learn GraphQL to query your APIs efficiently.',
@@ -77,7 +95,7 @@ const projects = [
     ]
   },
   {
-    id: '5',
+    id: '6',
     title: 'Learn Next',
     isTutorial: true,
     description: 'Discover the power of server-side rendering with Next.js.',
@@ -95,7 +113,7 @@ const projects = [
     ]
   },
   {
-    id: '6',
+    id: '7',
     title: 'Learn Airtable',
     isTutorial: true,
     description: 'Integrate Airtable into your projects seamlessly.',
@@ -112,7 +130,7 @@ const projects = [
     ]
   },
   {
-    id: '7',
+    id: '8',
     title: 'Learn Axios',
     isTutorial: true,
     description: 'Simplify HTTP requests with Axios.',
@@ -129,7 +147,7 @@ const projects = [
     ]
   },
   {
-    id: '8',
+    id: '9',
     title: 'Learn Mongo',
     isTutorial: true,
     description: 'Dive into MongoDB, the NoSQL database.',
@@ -147,7 +165,7 @@ const projects = [
     ]
   },
   {
-    id: '9',
+    id: '10',
     title: 'Learn Sequelize',
     isTutorial: true,
     description: 'Understand Sequelize for database ORM in Node.js.',
@@ -164,7 +182,7 @@ const projects = [
     ]
   },
   {
-    id: '10',
+    id: '11',
     title: 'Learn REST',
     isTutorial: true,
     description: 'Build RESTful APIs with ease.',
@@ -181,7 +199,7 @@ const projects = [
     ]
   },
   {
-    id: '11',
+    id: '12',
     title: 'Learn HTML',
     isTutorial: true,
     description: 'A comprehensive tutorial on building web pages using HTML.',
@@ -198,7 +216,7 @@ const projects = [
     ]
   },
   {
-    id: '12',
+    id: '13',
     title: 'Learn CSS',
     isTutorial: true,
     description: 'Small tutorial on styling web pages using CSS.',
@@ -215,7 +233,7 @@ const projects = [
     ]
   },
   {
-    id: '13',
+    id: '14',
     title: 'Learn Express',
     isTutorial: true,
     description: 'Here you will see how to create your first Server using Express.',
