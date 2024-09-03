@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ProjectCard from '../../components/ProjectCard';
 import CircularProgress from '../../components/CircularProgress';
 import axios from 'axios';
@@ -253,38 +253,38 @@ const projects = [
 
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]); // Estado para almacenar proyectos
   const { data: session } = useSession(); // Asegúrate de que la sesión está disponible
   const [progress, setProgress] = useState(0); // Estado para almacenar el progreso en porcentaje
   const [completedTutorials, setCompletedTutorials] = useState({}); // Estado para almacenar los tutoriales completados
   
 
   // Función para calcular el progreso basado en los tutoriales completados
-  const calculateProgress = () => {
+   const calculateProgress = useCallback(() => {
     const totalTutorials = projects.length;
     const completedCount = projects.filter(project => completedTutorials[project.id]).length;
     return (completedCount / totalTutorials) * 100;
-  };
+   }, [projects, completedTutorials]); 
 
-  // Efecto para actualizar el progreso cuando cambia el estado de los tutoriales completados
-  useEffect(() => {
+   // Efecto para actualizar el progreso cuando cambia el estado de los tutoriales completados
+   useEffect(() => {
     setProgress(calculateProgress());
-  }, [completedTutorials]);
+   }, [calculateProgress]);
 
 
    // Función para marcar un tutorial como completado
-   const handleComplete = async (tutorialId) => {
+  const handleComplete = async (tutorialId) => {
     if (!session) {
       console.error('No hay sesión disponible');
       return;
     }
 
     try {
-      const response = await axios.post('/api/progress', {
-        userId: session.user.id,           // Suponiendo que tienes la sesión del usuario
-        tutorialId: tutorialId,            // ID del tutorial que se está completando
-        completed: true,                   // Marca como completado
+      await axios.post('/api/progress', {
+        userId: session.user.id,
+        tutorialId: tutorialId,
+        completed: true,
       });
-
 
       // Actualiza el estado de los tutoriales completados en el frontend
       setCompletedTutorials((prev) => ({ ...prev, [tutorialId]: true }));
