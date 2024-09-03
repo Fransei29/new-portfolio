@@ -96,16 +96,29 @@ body::before {
   padding-top: 9%;
 }
 
+.title-section {
+  display: flex;
+  align-items: center;
+}
+
 .title {
-  font-size: 40px;
+  font-size: 42px;
   margin: 0;
   padding: 6%;
   padding-right: 12%;
   padding-top: 15%;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 28px;
+  color: #302d2d;
+
 }
 
 .title-icon {
   animation: slideTop 1s linear forwards;
+  margin-right: 15px;
 }
 
 @keyframes slideTop {
@@ -124,7 +137,7 @@ body::before {
 .socialmedia {
   display: flex;
   justify-content: flex-start;
-  gap: 24px;
+  gap: 30px;
   margin-top: 18px;
   padding-top: 22%;
   padding-left: 17%;
@@ -133,7 +146,7 @@ body::before {
 
 .soicon {
   color: #020101; 
-  font-size: 28px; 
+  font-size: 32px; 
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), color 0.7s ease-in-out;  
 }
 
@@ -145,20 +158,6 @@ body::before {
   width:38px; 
   height:38px;
   padding: 5px;
-}
-
-.title-section {
-  display: flex;
-  align-items: center;
-}
-
-.title-icon {
-  margin-right: 15px;
-}
-
-.subtitle {
-  font-size: 23px;
-  color: #0e0b0b;
 }
 
 .about{
@@ -190,9 +189,7 @@ nav {
 }
 
 nav a {
-  font-size: 20px;
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
+  font-size: 21px;
   color: white;
   margin: 0 13px;
   padding-right: 2%;
@@ -235,8 +232,8 @@ nav a:hover {
 }
 
 .logo {
-  width: 37px;
-  height: 37px;
+  width: 40px;
+  height: 40px;
 }
 
 
@@ -259,9 +256,8 @@ nav a:hover {
 }
 
 .project-card:hover {
-  cursor: pointer;
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-12px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -369,14 +365,13 @@ nav a:hover {
   text-align: center;
   margin-bottom: 20px;
   padding-top: 6%;
+  padding-bottom: 4%;
   font-size: 40px;
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
-  font-weight: bold;
 }
 
 .project-title {
-  font-size: 17.5px;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 /* --- KEYWORDS FROM HOME PAGE --- */
@@ -391,8 +386,6 @@ nav a:hover {
 
 .highlight {
   font-size: 30px;
-  font-family: "Libre Baskerville", serif;
-  font-weight: 400;
   position: relative;
   padding-left: 39%;
   color: black; 
@@ -440,16 +433,20 @@ nav a:hover {
   justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: 54px;
+  margin-top: 58px;
   left: 0;
-  padding: 10px;
+  padding: 17px;
   background-color: rgba(41, 40, 40, 0.9);
   color: #fff;
   width: 100%;
   box-sizing: border-box;
+  overflow-x: auto; 
+  white-space: nowrap;
 }
 
 .tech-nav a {
+  display: inline-block;
+  padding: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 17px;
@@ -490,9 +487,9 @@ nav a:hover {
 }
 
 .sign-in-button, .sign-out-button {
-  padding:8px 25px;
+  padding:11px 29px;
   margin: 2%;
-  font-size: 17px;
+  font-size: 18px;
   color: #fff;
   background-color: #0e0880;
   border: none;

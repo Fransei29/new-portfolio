@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <header className="header">
           <nav className="nav">
             <div className="logo-container">
-              <Image src="/favicon.ico" alt="Logo" width={30} height={30} className="logo" />
+              <Image src="/favicon.ico" alt="Logo" width={32} height={32} className="logo" />
             </div>
             <Link href="/" passHref>
               <p className="nav-link">Home</p>

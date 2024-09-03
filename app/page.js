@@ -21,7 +21,6 @@ export default function Home() {
      <div className="home-text">
         <h1 className="title">Hi, I&apos;m Franco!</h1>
         <div className="title-section">
-            <Image className="title-icon" src="/favicon.ico" alt="Icon" width={50} height={50} />
             <p className="subtitle">Improve your skills with tutorials</p>
          </div>
         <div className="socialmedia">

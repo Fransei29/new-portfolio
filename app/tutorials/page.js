@@ -297,6 +297,7 @@ export default function Projects() {
     <div className='pages'>
       <nav className="tech-nav">
         <a href="#learnnode">Node.js</a>
+        <a href="#learntypescript">TypeScript</a>
         <a href="#learnreact">React</a>
         <a href="#learnredis">Redis</a>
         <a href="#learngraphql">GraphQL</a>
@@ -310,8 +311,7 @@ export default function Projects() {
         <a href="#learncss">CSS</a>
         <a href="#learnexpress">Express</a>
       </nav>
-      {/* Contenedor para el título y el círculo */}
-    <div className="title-container">
+    <div className="title-container">     {/* Contenedor para el título y el círculo */}
       <div className="tit1">
          <CircularProgress progress={progress} />
       </div>
@@ -319,9 +319,7 @@ export default function Projects() {
         <h1 className="page-title tit">Tutorials</h1>
       </div>
     </div>
-
-    {/* Contenedor para los proyectos */}
-    <div className="projects-grid">
+    <div className="projects-grid">        {/* Contenedor para los proyectos */}
       {projects.map((project, index) => (
         <ProjectCard key={index} project={project} onComplete={handleComplete} />
       ))}
