@@ -294,7 +294,7 @@ export default function Projects() {
   };
 
   return (
-    <div className='pages'>
+    <div className='tutorial-page'>
       <nav className="tech-nav">
         <a href="#learnnode">Node.js</a>
         <a href="#learntypescript">TypeScript</a>

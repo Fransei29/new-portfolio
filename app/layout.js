@@ -10,6 +10,7 @@ import './globals.css';
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isSpecificPage = pathname === '/tutorials' || pathname === '/projects';
+  const isAboutPage = pathname === '/about'; 
 
   return (
     <html lang="en">
@@ -33,9 +34,12 @@ export default function RootLayout({ children }) {
             <Link href="/projects" passHref>
               <p className="nav-link">Projects</p>
             </Link>
+            <Link href="/about" passHref>
+              <p className="nav-link">About me</p>
+            </Link>
           </nav>
         </header>
-        <main className={isSpecificPage ? '' : 'main'}>
+        <main className={isSpecificPage ? '' : isAboutPage ? 'about-main' : 'maina'}>
           {children}
         </main>
         <footer className="footer">
