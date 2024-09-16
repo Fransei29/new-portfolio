@@ -238,7 +238,8 @@ nav a:hover {
   text-align: center; 
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 580px;
+
   margin: 30px auto;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -495,7 +496,7 @@ nav a:hover {
   margin: 2%;
   font-size: 18px;
   color: #fff;
-  background-color: #0e0880;
+  background-color: #1f1b6d;
   border: none;
   border-radius: 6px;
   cursor: pointer;
