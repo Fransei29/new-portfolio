@@ -12,8 +12,6 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
     setShowLogs(!showLogs);
   };
 
-
-
   return (
     <div className="project-card" id={project.title.toLowerCase().replace(/\s/g, '')}>
       <div className="project-title">
@@ -44,6 +42,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
          <i className="fas fa-external-link-alt"></i> Live
         </a>
       )}
+      <button onClick={() => onComplete(project.id)} className="complete-button"><i class="fa-regular fa-circle-check"></i></button>
      <div className="logs-toggle" onClick={toggleLogs}>
         <i className={`fas fa-chevron-${showLogs ? 'up' : 'down'}`}></i> Logs
       </div>
@@ -55,8 +54,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
         </div>
       )}
     </div>
-    <button onClick={() => onComplete(project.id)} className="complete-button">Done</button>
-    </div>
+ </div>
   );
 };
 

@@ -28,6 +28,20 @@ const projects = [
     ]
   },
   {
+    title: 'Task Manager',
+    description: "A simple yet efficient web application designed to help users manage their tasks, with features such as task creation, editing, deletion, and secure user authentication.",
+    link2: 'https://github.com/Fransei29/task-manager.git',
+    previewImage: '/img/task.png',
+    logs: [
+      "git init",
+      "git clone https://github.com/Fransei29/task-manager.git",
+      "cd task-manager",
+      "npm install",
+      "Follow the setup instructions in the README file for environment variables configuration.",
+      "npm run dev"
+    ]
+  },
+  {
     title: "My Firt Portfolio",
     description: 'A simple and elegant portfolio website built using HTML and CSS, showcasing my initial projects and skills.',
     link2: 'https://github.com/Fransei29/Portfolio.git',
@@ -100,7 +114,7 @@ const projects = [
 export default function Projects() {
   return (
     <div className='titlepro'>
-      <h1 className="page-title">Projects</h1>
+      <h1 className="page-title titleP">Projects</h1>
     <div className='projects1'>
       {projects.map((project, index) => (
         <ProjectCard key={index} project={project} />
