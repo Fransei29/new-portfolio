@@ -29,6 +29,20 @@ const projects = [
     ]
   },
   {
+    title: 'Holistic Wellness Portal',
+    description: 'A website dedicated to alternative therapies and holistic wellness services.',
+    link2: 'https://github.com/Fransei29/AmnerisWeb.git',
+    link3: 'https://amneris-web.vercel.app/',
+    previewImage: '/img/holis.png',
+    logs: [
+      'git init',
+      'git clone https://github.com/Fransei29/AmnerisWeb.git',
+      'cd AmnerisWeb',
+      'npm install',
+      'npm run start'
+    ]
+  },
+  {
     title: 'Task Manager',
     description: "A simple yet efficient web application designed to help users manage their tasks, with features such as task creation, editing, deletion, and secure user authentication.",
     link2: 'https://github.com/Fransei29/task-manager.git',
@@ -67,20 +81,7 @@ const projects = [
       'npm run start'
     ]
   },
-  {
-    title: 'Holistic Wellness Portal',
-    description: 'A website dedicated to alternative therapies and holistic wellness services.',
-    link2: 'https://github.com/Fransei29/AmnerisWeb.git',
-    link3: 'https://amneris-web.vercel.app/',
-    previewImage: '/img/holis.png',
-    logs: [
-      'git init',
-      'git clone https://github.com/Fransei29/AmnerisWeb.git',
-      'cd AmnerisWeb',
-      'npm install',
-      'npm run start'
-    ]
-  },
+  
   {
     title: 'Trip Planner',
     description: 'An app designed to help users plan their trips with ease, offering various travel-related services.',
