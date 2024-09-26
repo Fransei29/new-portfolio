@@ -611,9 +611,13 @@ nav a:hover {
 
   /* Ajustes para la cabecera */
   .header {
-    padding-right: 5%;
+    
+    display: flex;
     text-align: center;
-  }
+    justify-content: center;
+    font-size: 14px;
+    width: 100%;
+    }
 
   /* Ajustes para el cuerpo principal */
   .main {
@@ -630,6 +634,7 @@ nav a:hover {
     padding-top: 15%;
     padding-right: 5%;
     align-items: center;
+    justify-content: center;
     order: 1;
   }
 
@@ -659,8 +664,8 @@ nav a:hover {
 
   .about {
     display: flex;
-    flex-direction: row;
-    padding-bottom: 20%;
+    flex-direction: column;
+    justify-content: flex-end;
     order: 2;
   }
   .keywords {
@@ -668,8 +673,9 @@ nav a:hover {
   }
 
   .nav a{
-    padding-right: 8%;
+    font-size: 18px;
     gap: 0;
+    padding-left: 2%;
   }
 
   .titlepro {

@@ -68,6 +68,7 @@ const projects = [
     icon: '/icons/redis.png',
     link1: 'https://redis.io/docs/latest/',
     link2: 'https://github.com/Fransei29/Redis/blob/main/index.js',
+    link3: 'https://vestire-front-s196.vercel.app/',
     previewImage: '/img/vestire.png',
     logs: [
       'git init',

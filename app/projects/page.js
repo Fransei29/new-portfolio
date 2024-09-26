@@ -18,6 +18,7 @@ const projects = [
     title: 'Vestiré',
     description: 'A fashion E-Commerce website offering a wide range of clothing and accessories.',
     link2: 'https://github.com/Fransei29/vestire_front.git',
+    link3: 'https://vestire-front-s196.vercel.app/',
     previewImage: '/img/vestire2.png',
     logs: [
       'git init',
