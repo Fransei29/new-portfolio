@@ -5,6 +5,7 @@ const projects = [
     title: 'Greengrocery El Gringo',
     description: 'An E-Commerce platform for fresh produce and groceries.',
     link2: 'https://github.com/Fransei29/Verdufront.git',
+    link3: 'https://verdufront-zbzb.vercel.app/',
     previewImage: '/img/verdu.png',
     logs: [
       'git init',

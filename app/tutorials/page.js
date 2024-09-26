@@ -15,6 +15,7 @@ const projects = [
     icon: '/icons/node2.png',
     link1: 'https://nodejs.org/docs/latest/api/',
     link2: 'https://github.com/Fransei29/NodeJS/blob/main/hello.js',
+    link3: 'https://verdufront-zbzb.vercel.app/', 
     previewImage: '/img/verdu2.png',
     logs: [
       'git init',
@@ -241,6 +242,7 @@ const projects = [
     icon: '/icons/ex.png',
     link1: 'https://expressjs.com/es/starter/installing.html',
     link2: 'https://github.com/Fransei29/NodeJS/blob/main/index.js',
+    link3: 'https://verdufront-zbzb.vercel.app/',
     previewImage: '/img/verdu.png',
     logs: [
       'git init',
