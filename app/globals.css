@@ -231,17 +231,15 @@ nav a:hover {
 .project-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid  rgb(197, 145, 218);
   padding-top: 8px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, rgb(216, 162, 240) 0%, #e28db7 100%);
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(215, 129, 255) 0%,rgb(251, 104, 238) 100%);
   text-align: center; 
   align-items: center;
   width: 100%;
   max-width: 580px;
-
   margin: 30px auto;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -269,31 +267,31 @@ nav a:hover {
   margin: 7px;
   color: #fff;
   font-size: 17px;
-  background-color: rgba(15, 14, 14, 0.9); 
-  border-radius: 5px; 
+  background-color: rgb(66, 65, 65); 
+  border-radius: 4px; 
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .project-card a:hover {
-  background-color: rgba(41, 40, 40, 0.9);
+  background-color: rgb(85, 83, 83);
   transform: scale(1.1); 
 }
 
 .project-card i{
-  padding-right: 40px;
+  padding-right: 60px;
 }
 
 .project-image{
-  width:340; 
-  height:200;
-  border-radius: 6px;
+  width:280; 
+  height:150;
+  border-radius: 4px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
 }
 
 .project-description {
-  font-size: 17px;
+  font-size: 16px;
   color: #262525;
   font-family: 'Lato';
   padding-right: 3%;
@@ -585,12 +583,12 @@ nav a:hover {
   margin-top: 5px;
   margin-left: 70%;
   margin-bottom: -5%;
-  padding: 6px 9px;
-  font-size: 17px;
-  background-color: #0e6b16;
+  padding: 5px 5px;
+  font-size: 15px;
+  background-color: rgb(71, 72, 71);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.1s ease, transform 0.3s ease; 
 }

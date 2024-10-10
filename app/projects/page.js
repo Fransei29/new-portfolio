@@ -117,7 +117,7 @@ const projects = [
 export default function Projects() {
   return (
     <div className='titlepro'>
-      <h1 className="page-title titleP">Projects</h1>
+      <h1 className="page-title titleP">My Projects</h1>
     <div className='projects1'>
       {projects.map((project, index) => (
         <ProjectCard key={index} project={project} />

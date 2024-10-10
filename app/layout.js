@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
               <p className="nav-link">Tutorials</p>
             </Link>
             <Link href="/projects" passHref>
-              <p className="nav-link">Projects</p>
+              <p className="nav-link">My Projects</p>
             </Link>
             <Link href="/about" passHref>
               <p className="nav-link">About me</p>
