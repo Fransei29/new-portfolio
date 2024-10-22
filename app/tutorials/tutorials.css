@@ -1,0 +1,121 @@
+
+.tutorial-page {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Dos columnas iguales */
+    gap: 5px;
+    padding: 20px; 
+    scroll-behavior: smooth;
+  }
+
+  .tit3{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin-left: 10%;
+    margin-top: 12.5%;
+    margin-right: 40%;
+    margin-bottom: 4%;
+  }
+
+  .tit-tutorial, .tit-tutorial1, .tit-tutorial2 {
+    margin: 1%;
+  }
+
+  .tit-tutorial{
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .tit-tutorial1, .tit-tutorial2{
+    font-size: 20px;
+  }
+
+  
+  /* --- TUTORIALS NAV BAR --- */
+
+.tech-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1px;
+    margin-top: 60px;
+    left: 0;
+    padding: 15px;
+    background-color: rgba(41, 40, 40, 0.0);
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto; 
+    white-space: nowrap;
+  }
+  
+  .tech-nav a {
+    display: inline-block;
+    padding: 0 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .tech-nav a:hover {
+    color: black;
+    transform: scale(1.2);
+  }
+  
+  .tit{
+    padding-top: 7%;
+  }
+
+  
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas para los tutoriales */
+    gap: 20px; /* Espacio entre los elementos */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+  }
+  
+  .page-title {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 6%;
+    padding-bottom: 4%;
+    font-size: 40px;
+  }
+
+  @media (max-width: 768px) {
+  .container, .tutorial-page {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px !important;
+  }
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .title-container {
+    padding: 0;
+    margin-top: 65%;
+    margin-right: 0;
+    
+  }
+
+  .tit3{
+    margin: 0;
+    padding: 0;
+  }
+
+  .tech-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    padding: 20px;
+    margin-top: 16%;
+    font-size: 11px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: baseline;
+  }
+}

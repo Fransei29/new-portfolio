@@ -1,15 +1,14 @@
 "use client";
 
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import ProjectCard from '../../components/ProjectCard';
-import CircularProgress from '../../components/CircularProgress';
-import axios from 'axios';
+import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import './/tutorials.css';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const projects = [
   {
     id: '1',
-    title: 'Learn Node',
+    title: 'Discover Node',
     isTutorial: true,
     description: 'Learn the fundamentals of Node.js by building a simple server that handles HTTP requests. This tutorial will guide you through creating RESTful APIs, managing routing, and handling data with Express.js. You will also learn how to connect to databases and implement basic CRUD operations.',
     icon: '/icons/node2.png',
@@ -27,7 +26,7 @@ const projects = [
   },
   {
     id: '2',
-    title: 'Learn TypeScript',
+    title: 'Discover TypeScript',
     isTutorial: true,
     description: 'Enhance your JavaScript skills with TypeScript. This tutorial covers how to set up TypeScript in a project, use its powerful type-checking features, and integrate it with popular frameworks like React. You will build a small application to see how TypeScript can improve code quality and reduce bugs.',
     icon: '/icons/type.png',
@@ -45,7 +44,7 @@ const projects = [
   },
   {
     id: '3',
-    title: 'Learn React',
+    title: 'Discover React',
     isTutorial: true,
     description: 'Dive into the core concepts of React by creating a dynamic, interactive web application. You will learn about components, hooks, state management, and lifecycle methods. This tutorial also demonstrates how to handle user input, manage form data, and make API requests to fetch and display data.',
     icon: '/icons/react.png',
@@ -63,7 +62,7 @@ const projects = [
   },
   {
     id: '4',
-    title: 'Learn Redis',
+    title: 'Discover Redis',
     isTutorial: true,
     description: "Discover how to use Redis as an in-memory database to boost your app's performance. This tutorial explains the installation, setup, and basic commands for caching data, managing sessions, and handling real-time data. You'll also implement a caching mechanism in a Node.js app to optimize performance.",
     icon: '/icons/redis.png',
@@ -81,7 +80,7 @@ const projects = [
   },
   {
     id: '5',
-    title: 'Learn GraphQL',
+    title: 'Discover GraphQL',
     isTutorial: true,
     description: "Master GraphQL by building a server that can handle complex queries efficiently. You'll learn how to set up a GraphQL server, define schemas, and create resolvers. This tutorial also covers integrating GraphQL with a front-end framework like React to fetch and display data dynamically.",
     icon: '/icons/gra.png',
@@ -98,7 +97,7 @@ const projects = [
   },
   {
     id: '6',
-    title: 'Learn Next',
+    title: 'Discover Next',
     isTutorial: true,
     description: "Explore server-side rendering and static site generation with Next.js. This tutorial teaches you to build a modern web application with optimized performance and SEO. Learn how to create dynamic routes, fetch data server-side, and deploy your application to platforms like Vercel.",
     icon: '/icons/next.png',
@@ -116,7 +115,7 @@ const projects = [
   },
   {
     id: '7',
-    title: 'Learn Airtable',
+    title: 'Discover Airtable',
     isTutorial: true,
     description: "Learn how to use Airtable as a lightweight database and backend service for your applications. This tutorial shows you how to set up an Airtable base, manage data, and interact with it through APIs. You'll integrate Airtable with a JavaScript application to fetch and display data.",
     icon: '/icons/airtable.png',
@@ -133,7 +132,7 @@ const projects = [
   },
   {
     id: '8',
-    title: 'Learn Axios',
+    title: 'Discover Axios',
     isTutorial: true,
     description: "Simplify HTTP requests with Axios. You'll learn how to handle HTTP requests and responses, manage errors, and make asynchronous operations easier. This tutorial will help you create a seamless data-fetching experience in your web applications.",
     icon: '/icons/axios.png',
@@ -150,7 +149,7 @@ const projects = [
   },
   {
     id: '9',
-    title: 'Learn Mongo',
+    title: 'Discover Mongo',
     isTutorial: true,
     description: "Get started with MongoDB by building a CRUD application. This tutorial covers setting up a MongoDB database, connecting it with a Node.js backend, and performing operations like inserting, updating, deleting, and retrieving data.",
     icon: '/icons/mongo.png',
@@ -168,7 +167,7 @@ const projects = [
   },
   {
     id: '10',
-    title: 'Learn Sequelize',
+    title: 'Discover Sequelize',
     isTutorial: true,
     description: "Understand how to use Sequelize, an ORM for Node.js, to manage your relational databases effectively. This tutorial guides you through setting up Sequelize, defining models, and creating associations. You'll build a simple API that interacts with a PostgreSQL database.",
     icon: '/icons/Sequelize.png',
@@ -185,7 +184,7 @@ const projects = [
   },
   {
     id: '11',
-    title: 'Learn REST',
+    title: 'Discover REST',
     isTutorial: true,
     description: "Learn how to design and implement RESTful APIs using Node.js and Express.js. This tutorial walks you through creating routes, handling HTTP methods, and managing CRUD operations. By the end, you'll have a functional API that can handle various client requests.",
     icon: '/icons/rest.png',
@@ -202,7 +201,7 @@ const projects = [
   },
   {
     id: '12',
-    title: 'Learn HTML',
+    title: 'Discover HTML',
     isTutorial: true,
     description: "Build a solid foundation in web development with this tutorial on HTML and CSS. You'll learn how to create structured web pages, style them with CSS, and make them responsive. By the end, you'll have a portfolio-ready webpage that looks great on any device.",
     icon: '/icons/html.png',
@@ -219,9 +218,9 @@ const projects = [
   },
   {
     id: '13',
-    title: 'Learn CSS',
+    title: 'Discover CSS',
     isTutorial: true,
-    description: 'Small tutorial on styling web pages using CSS.',
+    description: 'An introductory tutorial focused on the fundamentals of CSS for styling web pages. It demonstrates how to effectively use CSS to create visually appealing, well-structured websites.',
     icon: '/icons/css.png',
     link1: 'https://www.w3schools.com/css/css_intro.asp',
     link2: 'https://github.com/Fransei29/Portfolio/blob/main/style.css',
@@ -236,7 +235,7 @@ const projects = [
   },
   {
     id: '14',
-    title: 'Learn Express',
+    title: 'Discover Express',
     isTutorial: true,
     description: "Deepen your understanding of backend development with Express.js. This tutorial covers middleware, routing, and error handling in Express. You'll build a web server that can handle multiple requests and serve dynamic content efficiently.",
     icon: '/icons/ex.png',
@@ -256,77 +255,46 @@ const projects = [
 
 
 export default function Projects() {
-  const { data: session } = useSession(); // Asegúrate de que la sesión está disponible
-  const [progress, setProgress] = useState(0); // Estado para almacenar el progreso en porcentaje
-  const [completedTutorials, setCompletedTutorials] = useState({}); // Estado para almacenar los tutoriales completados
-  
-
-  // Función para calcular el progreso basado en los tutoriales completados
-  const calculateProgress = () => {
-    const totalTutorials = projects.length;
-    const completedCount = projects.filter(project => completedTutorials[project.id]).length;
-    return (completedCount / totalTutorials) * 100;
-  };
-
-  // Efecto para actualizar el progreso cuando cambia el estado de los tutoriales completados
-  useEffect(() => {
-    setProgress(calculateProgress());
-  }, [completedTutorials]);
-
-
-   // Función para marcar un tutorial como completado
-   const handleComplete = async (tutorialId) => {
-    if (!session) {
-      console.error('No hay sesión disponible');
-      return;
-    }
-
-    try {
-      const response = await axios.post('/api/progress', {
-        userId: session.user.id,           // Suponiendo que tienes la sesión del usuario
-        tutorialId: tutorialId,            // ID del tutorial que se está completando
-        completed: true,                   // Marca como completado
-      });
-
-
-      // Actualiza el estado de los tutoriales completados en el frontend
-      setCompletedTutorials((prev) => ({ ...prev, [tutorialId]: true }));
-    } catch (error) {
-      console.error('Error al marcar como completado', error);
-    }
-  };
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
     <div className='tutorial-page'>
       <nav className="tech-nav">
-        <a href="#learnnode">Node.js</a>
-        <a href="#learntypescript">TypeScript</a>
-        <a href="#learnreact">React</a>
-        <a href="#learnredis">Redis</a>
-        <a href="#learngraphql">GraphQL</a>
-        <a href="#learnnext">Next</a>
-        <a href="#learnairtable">Airtable</a>
-        <a href="#learnaxios">Axios</a>
-        <a href="#learnmongo">MongoDB</a>
-        <a href="#learnsequelize">Sequelize</a>
-        <a href="#learnrest">Rest</a>
-        <a href="#learnhtml">HTML</a>
-        <a href="#learncss">CSS</a>
-        <a href="#learnexpress">Express</a>
+        <a href="#discoverhtml">HTML</a>
+        <a href="#discovercss">CSS</a>
+        <a href="#discovertypescript">TypeScript</a>
+        <a href="#discovernode">Node.js</a>
+        <a href="#discoverexpress">Express</a>
+        <a href="#discoverrest">Rest</a>
+        <a href="#discovergraphql">GraphQL</a>
+        <a href="#discoveraxios">Axios</a>
+        <a href="#discoverreact">React</a>
+        <a href="#discovernext">Next</a>
+        <a href="#discovermongo">MongoDB</a>
+        <a href="#discoversequelize">Sequelize</a>
+        <a href="#discoverredis">Redis</a>  
+        <a href="#discoverairtable">Airtable</a>   
       </nav>
     <div className="title-container">     {/* Contenedor para el título y el círculo */}
-      <div className="tit1">
-         <CircularProgress progress={progress} />
-      </div>
-      <div className="tit2">
-        <h1 className="page-title tit">Tutorials</h1>
+      <div className="tit3">
+        <p className="tit-tutorial">Welcome to the Tutorials Section</p>
+        <p className="tit-tutorial1">Dive into a collection of hands-on tutorials that will guide you through various technologies and tools</p>
+        <p className="tit-tutorial2">Explore and learn at your own pace</p>
       </div>
     </div>
-    <div className="projects-grid">        {/* Contenedor para los proyectos */}
-      {projects.map((project, index) => (
-        <ProjectCard key={index} project={project} onComplete={handleComplete} />
-      ))}
+    <div className="projects-grid" ref={ref}>
+        {projects.map((project, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}         // Aparecer desde abajo con opacidad 0
+            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
+            transition={{ duration: 0.5, delay: index * 0.4 }}   // Delay para escalonar las animaciones
+          >
+            <ProjectCard project={project} />
+          </motion.div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
 }

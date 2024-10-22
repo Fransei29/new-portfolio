@@ -1,61 +1,40 @@
 "use client";
 
-import Image from 'next/image';
-import { signIn, signOut, useSession } from 'next-auth/react'; // Importar el hook de signIn
-import { useEffect } from 'react';
+import Link from 'next/link';
+import './globals.css';
+import ProjectsSection from '@/components/Projects';
+import Experience from '@/components/Experience';
+import Skills from '@/components/Skills';
+import SocialMedia from '@/components/SocialMedia';
+import ContactForm from '@/components/ContactForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'; // Importar el ícono de aquí
+
+
 
 export default function Home() {
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    const syncDatabase = async () => {
-      await fetch('/api/sync');
-    };
-
-    syncDatabase(); // Sincroniza la base de datos cuando la página se carga
-  }, []);
-
-
   return (
     <>
      <div className="home-text">
-        <h1 className="title">Hi, I&apos;m Franco!</h1>
-        <div className="title-section">
-            <p className="subtitle">Improve your skills with tutorials</p>
-         </div>
-        <div className="socialmedia">
-          <a href="https://github.com/Fransei29" target="_blank" rel="noopener noreferrer">
-          <i className="soicon fab fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/franco-seiler/" target="_blank" rel="noopener noreferrer">
-          <i className="soicon fab fa-linkedin"></i>
-          </a>
-          <a href="mailto:seilerfranco317@gmail.com" target="_blank" rel="noopener noreferrer">
-          <i className="soicon fas fa-envelope"></i>
-          </a>
-        </div>
+            <h1 className="title">Hi, <span className="name-highlight"> I&apos;m Franco</span> <span className="waving-hand">👋</span></h1>
+            <p className="subtitle">Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack</strong> 
+            </p>
+            <SocialMedia></SocialMedia>
+            <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow" />
       </div>
-      <div className="about">
-        <div className="auth-container">
-          {session ? (
-                <div className="user-info">
-                  <p className='welcome'>Welcome {session.user.name}</p>
-                  <Image  src={session.user.image} alt={session.user.name} width={50} height={50}className="user-avatar"/>
-                  <button onClick={() => signOut()} className="sign-out-button">Sign out</button>
-                </div>
-              ) : (
-                <div className="auth-button">
-                  <button onClick={() => signIn()} className="sign-in-button">Sign in</button>
-                </div>
-              )}
-       </div>
-       <div className="keywords">
-          <p className="highlight">Design</p>
-          <p className="highlight">Development</p>
-          <p className="highlight">Collaboration</p>
-        </div>
+      <div className="containerGeneral"> 
+        <ProjectsSection></ProjectsSection>
+        <Experience></Experience>
+        <Skills></Skills>
+        <h2 className="highlight contact-page-title">Get in Touch</h2>
+        <p className="tit-contact1">If you're looking for a developer passionate about building effective solutions, don't hesitate to reach out.</p>
+        <p className="tit-contact2">I'm always open to hearing about new ideas and work opportunities.</p>
+        <div className='button-container-to-go'>
+          <Link href="/contact">
+            <button className="button-to-go">Contact</button>
+          </Link>
+      </div>
       </div>
     </>
   );
 }
-

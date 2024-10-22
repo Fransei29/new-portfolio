@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useState } from 'react';
+import './/ProjectCard.css'
 
 const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
   
@@ -42,7 +43,6 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
          <i className="fas fa-external-link-alt"></i> Live
         </a>
       )}
-      <button onClick={() => onComplete(project.id)} className="complete-button"><i class="fa-regular fa-circle-check"></i></button>
      <div className="logs-toggle" onClick={toggleLogs}>
         <i className={`fas fa-chevron-${showLogs ? 'up' : 'down'}`}></i> Logs
       </div>

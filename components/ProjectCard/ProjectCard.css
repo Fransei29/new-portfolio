@@ -1,0 +1,110 @@
+/* --- CARDS --- */
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgb(215, 129, 255, 0.2) 0%,rgb(251, 104, 238, 0.2) 100%);
+    text-align: center; 
+    align-items: center;
+    width: 100%;
+    max-width: 580px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .project-icon{
+    width: 35px; 
+    height:35px;
+    padding-top: 8px;
+    padding-bottom: 2px;
+  }
+  
+  .project-card h2 {
+    margin-top: 0;
+  }
+  
+  .project-card a {
+    display: inline-block;
+    position: relative;
+    flex-direction: row;
+    padding: 5px 15px;
+    margin: 7px;
+    color: #fff;
+    font-size: 17px;
+    background-color: rgb(35, 35, 35); 
+    border-radius: 4px; 
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+  }
+  
+  .project-card a:hover {
+    background-color: rgb(50, 47, 47);
+    transform: scale(1.1); 
+  }
+  
+  .project-card i{
+    padding-right: 60px;
+  }
+  
+  .project-image{
+    width:280; 
+    height:150;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .project-description {
+    font-size: 18px;
+    color: rgb(30, 30, 30);
+    font-family: 'Lato';
+    padding-right: 3%;
+    padding-left: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    letter-spacing: 0.4px; /* Aumenta el espacio entre letras */
+    word-spacing: 1px; 
+    line-height: 1.3;
+  }
+  
+  .project-title {
+    font-size: 18px;
+    font-weight: bold;
+    color:#302f2f;
+  }
+  
+  /* --- LOGS FROM CARDS --- */
+  
+  .logs-toggle {
+    cursor: pointer;
+    padding-bottom: 18px;
+    padding-top: 8px;
+    color: rgb(18, 18, 19);
+    font-size: 18px;
+    font-family: 'Lato';
+  }
+  
+  .logs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:auto;
+    padding: 5px;
+  }
+  
+  .logs p {
+    font-size: 18px;
+    margin: 4px 0;
+    padding: 2px; 
+    line-height: 1.3;
+  }
+  
+ 
