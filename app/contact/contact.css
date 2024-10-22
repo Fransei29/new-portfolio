@@ -87,9 +87,8 @@
 }
 
 .contact-form button:hover {
-    background-color: rgb(219, 55, 137); 
+    background-color: rgb(219, 55, 137, 0.9); 
     cursor: pointer;
-    transform: scale(1.1);
 }
 
 .success-message,
