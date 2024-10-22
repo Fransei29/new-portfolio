@@ -27,8 +27,8 @@ export default function Home() {
         <Experience></Experience>
         <Skills></Skills>
         <h2 className="highlight contact-page-title">Get in Touch</h2>
-        <p className="tit-contact1">If you're looking for a developer passionate about building effective solutions, don't hesitate to reach out.</p>
-        <p className="tit-contact2">I'm always open to hearing about new ideas and work opportunities.</p>
+        <p className="tit-contact1">If you are looking for a developer passionate about building effective solutions, do not hesitate to reach out.</p>
+        <p className="tit-contact2">I am always open to hearing about new ideas and work opportunities.</p>
         <div className='button-container-to-go'>
           <Link href="/contact">
             <button className="button-to-go">Contact</button>

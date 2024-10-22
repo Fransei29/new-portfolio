@@ -55,7 +55,7 @@ export default function ContactForm() {
     <div className="contact-section">
       {submitted ? (
         // Mensaje de éxito cuando se envía el formulario
-        <p className="success-message">Thank you for reaching out! I'll get back to you soon.</p>
+        <p className="success-message">Thank you for reaching out! I will get back to you soon.</p>
       ) : (
         // Formulario de contacto
         <form onSubmit={handleSubmit} className="contact-form">
