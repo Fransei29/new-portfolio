@@ -23,6 +23,24 @@ const projects = [
     ]
   },
   {
+    title: 'Task Manager',
+    description: `This is a efficient web application designed and created to help users manage their tasks, 
+      featuring task creation, editing, deletion, and secure user authentication. 
+      Built with React, Next, Axios and PostgreSQL, it includes a user-friendly interface 
+      for managing tasks and user sessions. I was responsible for implementing 
+      authentication and creating the task management functionalities, resulting in a highly usable application.`,
+    link2: 'https://github.com/Fransei29/task-manager.git',
+    previewImage: '/img/task.png',
+    logs: [
+      "git init",
+      "git clone https://github.com/Fransei29/task-manager.git",
+      "cd task-manager",
+      "npm install",
+      "Follow the setup instructions in the README file for environment variables configuration.",
+      "npm run dev"
+    ]
+  },
+  {
     title: 'Flipper',
     description: `A Twitter clone with functionalities like tweeting, following, 
       and real-time updates. Built with Redis, Node, Express and Redis the application leverages 
@@ -39,24 +57,7 @@ const projects = [
       'npm run start'
     ]
   },
-  {
-    title: 'Task Manager',
-    description: `A simple yet efficient web application designed to help users manage their tasks, 
-      featuring task creation, editing, deletion, and secure user authentication. 
-      Built with React, Next, Axios and PostgreSQL, it includes a user-friendly interface 
-      for managing tasks and user sessions. I was responsible for implementing 
-      authentication and creating the task management functionalities, resulting in a highly usable application.`,
-    link2: 'https://github.com/Fransei29/task-manager.git',
-    previewImage: '/img/task.png',
-    logs: [
-      "git init",
-      "git clone https://github.com/Fransei29/task-manager.git",
-      "cd task-manager",
-      "npm install",
-      "Follow the setup instructions in the README file for environment variables configuration.",
-      "npm run dev"
-    ]
-  },
+  
   {
     title: 'Holistic Wellness Portal',
     description: `A website dedicated to alternative therapies and holistic wellness services. 
