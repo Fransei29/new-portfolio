@@ -17,7 +17,7 @@ const backEndSkills = [
   { name: "Express", icon: "/icons/ex.png" },
   { name: "RESTful", icon: "/icons/rest.png" },
   { name: "GraphQL", icon: "/icons/gra.png" },
-  { name: "Sequelize", icon: "/icons/sequelize.png" },
+  { name: "Sequelize", icon: "/icons/sequ.png" },
   { name: "MongoDB", icon: "/icons/mongo.png" },
   { name: "PostgreSQL", icon: "/icons/post.png" },
   { name: "Redis", icon: "/icons/redis.png" },
