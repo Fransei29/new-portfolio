@@ -30,6 +30,7 @@ const projects = [
       for managing tasks and user sessions. I was responsible for implementing 
       authentication and creating the task management functionalities, resulting in a highly usable application.`,
     link2: 'https://github.com/Fransei29/task-manager.git',
+    link3: 'https://task-manager-dade.onrender.com/',
     previewImage: '/img/task.png',
     logs: [
       "git init",
