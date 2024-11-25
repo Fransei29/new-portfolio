@@ -2,17 +2,20 @@
 
 .project-card {
     display: flex;
-    flex-direction: column;
-    padding-top: 8px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     border-radius: 2px;
-    background: linear-gradient(90deg, rgb(215, 129, 255, 0.2) 0%,rgb(251, 104, 238, 0.2) 100%);
+    background: linear-gradient(90deg, rgba(232, 193, 251, 0.6) 0%,rgba(249, 192, 244, 0.6) 100%);
     text-align: center; 
     align-items: center;
     width: 100%;
     max-width: 580px;
+    max-height: 700px;
     margin: 30px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
   }
   
   .project-card:hover {
@@ -60,19 +63,19 @@
     border-radius: 4px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+    margin-top: 8%;
   }
   
   .project-description {
     font-size: 18px;
-    color: rgb(30, 30, 30);
+    color: rgb(31, 30, 30);
     font-family: 'Lato';
     padding-right: 3%;
     padding-left: 3%;
-    padding-bottom: 1%;
-    padding-top: 1%;
     letter-spacing: 0.4px; /* Aumenta el espacio entre letras */
     word-spacing: 1px; 
     line-height: 1.3;
+    text-align: left;
   }
   
   .project-title {
@@ -87,7 +90,7 @@
     cursor: pointer;
     padding-bottom: 18px;
     padding-top: 8px;
-    color: rgb(18, 18, 19);
+    color: rgb(35, 35, 36);
     font-size: 18px;
     font-family: 'Lato';
   }
@@ -95,9 +98,10 @@
   .logs {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width:auto;
-    padding: 5px;
+    padding: 5%;
+    color: rgb(40, 40, 40);
   }
   
   .logs p {

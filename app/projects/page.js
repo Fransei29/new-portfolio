@@ -6,11 +6,7 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     title: 'Vestiré',
-    description: `A fashion E-Commerce website offering a wide range of clothing and accessories. 
-      Built with Express, React, Axios and PostgreSQL. The site provides an intuitive interface for browsing products, 
-      a smooth checkout process, and product reviews to aid decision-making. 
-      I designed and developed the entire user flow from product selection to checkout, 
-      ensuring a seamless shopping experience.`,
+    description: `E-commerce platform offering a wide selection of clothing with intuitive navigation and a seamless checkout process. I designed and developed the complete user flow, from start to finalizing purchases. Built using Express, React, Axios, and PostgreSQL. `,
     link2: 'https://github.com/Fransei29/vestire_front.git',
     link3: 'https://vestire-front-s196.vercel.app/',
     previewImage: '/img/vestire2.png',
@@ -24,11 +20,7 @@ const projects = [
   },
   {
     title: 'Task Manager',
-    description: `This is a efficient web application designed and created to help users manage their tasks, 
-      featuring task creation, editing, deletion, and secure user authentication. 
-      Built with React, Next, Axios and PostgreSQL, it includes a user-friendly interface 
-      for managing tasks and user sessions. I was responsible for implementing 
-      authentication and creating the task management functionalities, resulting in a highly usable application.`,
+    description: `An efficient app for managing tasks with functionalities like creating, editing, deleting, and user authentication. Its user-friendly interface supports seamless task and session handling. Built using React, Next.js, Axios, and PostgreSQL.`,
     link2: 'https://github.com/Fransei29/task-manager.git',
     link3: 'https://task-manager-dade.onrender.com/',
     previewImage: '/img/task.png',
@@ -37,18 +29,15 @@ const projects = [
       "git clone https://github.com/Fransei29/task-manager.git",
       "cd task-manager",
       "npm install",
-      "Follow the setup instructions in the README file for environment variables configuration.",
+      "README file for environment variables configuration.",
       "npm run dev"
     ]
   },
   {
     title: 'Flipper',
-    description: `A Twitter clone with functionalities like tweeting, following, 
-      and real-time updates. Built with Redis, Node, Express and Redis the application leverages 
-      WebSockets for real-time communication. My contributions included developing 
-      the core functionalities for posting tweets and following users, ensuring a responsive 
-      and engaging experience.`,
+    description: `A Twitter-inspired app supporting functionalities like tweeting, following, and live updates. Real-time interactions are powered by WebSockets, ensuring responsiveness and high user engagement. Built with Redis, Node.js, Express, Redis and Tailwind CSS`,
     link2: 'https://github.com/Fransei29/clonetwitter.git',
+    link3: 'https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/',
     previewImage: '/img/flipper.png',
     logs: [
       'git init',
@@ -60,12 +49,8 @@ const projects = [
   },
   
   {
-    title: 'Holistic Wellness Portal',
-    description: `A website dedicated to alternative therapies and holistic wellness services. 
-      The site is built using Html, Css and Sass, providing information about various services 
-      with a focus on user engagement. Features include service descriptions, 
-      booking options, and client testimonials. My role involved developing the frontend, 
-      enhancing user interaction, and ensuring a responsive design.`,
+    title: 'Holistic Portal',
+    description: `Informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options. It focuses on user interaction and professional presentation. Built using HTML, CSS, and Sass.`,
     link2: 'https://github.com/Fransei29/AmnerisWeb.git',
     link3: 'https://amneris-web.vercel.app/',
     previewImage: '/img/holis.png',
@@ -78,11 +63,8 @@ const projects = [
     ]
   },
   {
-    title: "My First Portfolio",
-    description: `A simple and elegant portfolio website built using HTML and CSS, showcasing 
-      my initial projects and skills. This project highlights my design capabilities and 
-      serves as an online resume. I designed the layout and structure, ensuring it was visually appealing 
-      and easy to navigate.`,
+    title: "First Portfolio",
+    description: `A polished portfolio website that highlights my initial projects, skills, and design style. I carefully crafted the structure and aesthetics, ensuring it was visually attractive and simple to navigate for any visitor. Built using HTML and CSS.`,
     link2: 'https://github.com/Fransei29/Portfolio.git',
     link3:'https://portfolio-gamma-green-78.vercel.app/',
     previewImage: '/img/port.png',
@@ -95,11 +77,7 @@ const projects = [
   },
   {
     title: 'Trip Planner',
-    description: `An app designed to help users plan their trips with ease, 
-      offering various travel-related services. Built using Express, React, Axios and MongoDB, this application 
-      features a trip itinerary planner and destination suggestions. 
-      My role involved developing and ensuring a smooth user 
-      experience through effective design and navigation.`,
+    description: `Application designed to simplify trip planning with itinerary management and other travel tools. Its effective navigation and smooth design enhance the user experience significantly. Built with Express, React, Axios, and MongoDB.`,
     link2: 'https://github.com/Fransei29/tripplanner.git',
     link3: 'https://tripplanner-beryl.vercel.app/',
     previewImage: '/img/trip.png',
@@ -112,12 +90,8 @@ const projects = [
     ]
   },
   {
-    title: "Post's place",
-    description: `A website dedicated to creating, viewing, and managing posts, 
-      with support for various content types. Built using Express, Sequelize, PostgreSQL and GraphQL, 
-      this project allows users to create and manage their content efficiently. 
-      I was responsible for the overall frontend design and implementation, focusing on user 
-      experience and content management features.`,
+    title: "Content Management",
+    description: `A robust website for creating, managing, and displaying posts with various content types. It provides tools for users to efficiently handle and organize their digital content. Built using Express, Sequelize, PostgreSQL, and GraphQL`,
     link2: 'https://github.com/Fransei29/graphql_front.git',
     previewImage: '/img/gra.png',
     logs: [
@@ -129,12 +103,8 @@ const projects = [
     ]
   },
   {
-    title: 'Greengrocery El Gringo',
-    description: `An E-Commerce platform for fresh produce and groceries. 
-      Built using React, it features a user-friendly shopping cart, a searchable product catalog, 
-      and an admin panel for inventory management. My contribution included 
-      implementing the shopping cart functionalities and optimizing user experience through Jest testing, 
-      improving the conversion rate significantly.`,
+    title: 'Greengrocery',
+    description: `Online store specializing in fresh groceries with a shopping cart and an optimized shopping experience. It incorporates testing with Jest, ensuring smooth functionality and higher conversion rates for users. Built using React.`,
     link2: 'https://github.com/Fransei29/Verdufront.git',
     link3: 'https://verdufront-zbzb.vercel.app/',
     previewImage: '/img/verdu.png',
