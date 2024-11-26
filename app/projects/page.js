@@ -47,7 +47,20 @@ const projects = [
       'npm run start'
     ]
   },
-  
+  {
+    title: 'Dynamic Blog App',
+    description: `A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable. Features include dynamic routing, user blog management, and a clean, responsive design. Built using Next.js, Tailwind CSS, and Parser.`,
+    link2: 'https://github.com/Fransei29/next-blogs-post/blob/main/app/page.js',
+    link3: 'https://next-blogs-post-ahua.vercel.app/',
+    previewImage: '/img/next.png',
+    logs: [
+      'git init',
+      'git clone https://github.com/Fransei29/next-blogs-post.git',
+      'cd next-blogs-post',
+      'npm install',
+      'npm run dev'
+    ]
+  },
   {
     title: 'Holistic Portal',
     description: `Informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options. It focuses on user interaction and professional presentation. Built using HTML, CSS, and Sass.`,
