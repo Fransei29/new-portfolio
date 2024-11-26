@@ -22,7 +22,7 @@ const projects = [
     title: 'Task Manager',
     description: `An efficient app for managing tasks with functionalities like creating, editing, deleting, and user authentication. Its user-friendly interface supports seamless task and session handling. Built using React, Next.js, Axios, and PostgreSQL.`,
     link2: 'https://github.com/Fransei29/task-manager.git',
-    link3: 'https://task-manager-dade.onrender.com/',
+    link3: 'https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/',
     previewImage: '/img/task.png',
     logs: [
       "git init",
