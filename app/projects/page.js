@@ -62,6 +62,20 @@ const projects = [
     ]
   },
   {
+    title: 'Trip Planner',
+    description: `Application designed to simplify trip planning with itinerary management and other travel tools. Its effective navigation and smooth design enhance the user experience significantly. Built with Express, React, Axios, and MongoDB.`,
+    link2: 'https://github.com/Fransei29/tripplanner.git',
+    link3: 'https://trip-planner-c.vercel.app/',
+    previewImage: '/img/trip.png',
+    logs: [
+      'git init',
+      'git clone https://github.com/Fransei29/tripplanner.git',
+      'cd tripplanner',
+      'npm install',
+      'npm run start'
+    ]
+  },
+  {
     title: 'Holistic Portal',
     description: `Informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options. It focuses on user interaction and professional presentation. Built using HTML, CSS, and Sass.`,
     link2: 'https://github.com/Fransei29/AmnerisWeb.git',
@@ -88,20 +102,7 @@ const projects = [
       'go live'
     ]
   },
-  {
-    title: 'Trip Planner',
-    description: `Application designed to simplify trip planning with itinerary management and other travel tools. Its effective navigation and smooth design enhance the user experience significantly. Built with Express, React, Axios, and MongoDB.`,
-    link2: 'https://github.com/Fransei29/tripplanner.git',
-    link3: 'https://tripplanner-beryl.vercel.app/',
-    previewImage: '/img/trip.png',
-    logs: [
-      'git init',
-      'git clone https://github.com/Fransei29/tripplanner.git',
-      'cd tripplanner',
-      'npm install',
-      'npm run start'
-    ]
-  },
+
   {
     title: "Content Management",
     description: `A robust website for creating, managing, and displaying posts with various content types. It provides tools for users to efficiently handle and organize their digital content. Built using Express, Sequelize, PostgreSQL, and GraphQL`,
