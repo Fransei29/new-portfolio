@@ -272,6 +272,29 @@ body::before {
     margin-bottom: 4%;
   }
 
+  .title-experience {
+    padding-left: 4%;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .text-experience {
+    font-size: 28px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid #db3789;;
+    margin-top: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 80%;
+  }
+  
+  p{
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+    }
+
   /* titulos del project Section */
   .tit2{
     display: flex;

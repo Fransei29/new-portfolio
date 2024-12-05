@@ -4,20 +4,25 @@ const Experience = () => {
   return (
     <section className="experience-section">
       <h2 className="highlight">Experience</h2>
+      <h1 className='title-experience'>Front-End Developer at Digital Innovators</h1>
       <p>
-        I have worked on numerous projects as a 
-        <strong> Freelancer Developer</strong>, delivering tailored solutions that meet diverse client needs.
+        I significantly enhanced user engagement by building and 
+        maintaining SPAs with <strong>React</strong> and 
+        <strong> Redux</strong>, resulting in a 15% increase in user retention.
       </p>
       <p>
-        As a <strong>Front-End Developer</strong> at <strong>Digital Innovators</strong>, I significantly enhanced user engagement by building and 
-        maintaining <u>SPAs</u> with <strong>React</strong> and 
-        <strong> Redux</strong>, resulting in a <strong>15%</strong> increase in user retention.
-      </p>
-      <p>
-        My optimizations led to a <strong>20% improvement in conversion rates</strong>, 
+        My optimizations led to a <strong>20% </strong>improvement in conversion rates, 
         and my contributions to an internal component library reduced future development 
-        time by <strong>30%</strong>.
+        time by 30%.
       </p> 
+      <hr className="divider" />
+      <h1 className='title-experience'>Freelance Full-Stack Developer</h1>
+      <p>
+        I have worked on numerous Full-Stack projects, delivering tailored solutions that meet diverse client needs. My work spans both frontend development with <strong>Next.js</strong> and React, and backend functionality using <strong>Node.js</strong> and <strong>Express</strong>.
+      </p>
+      <p>
+        Additionally, I have integrated databases like <strong>PostgreSQL</strong> and  <strong>MongoDB</strong> to provide scalable and efficient data solutions.
+      </p>
     </section>
   );
 };

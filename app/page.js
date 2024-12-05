@@ -17,7 +17,7 @@ export default function Home() {
     <>
      <div className="home-text">
             <h1 className="title">Hi, <span className="name-highlight"> I&apos;m Franco</span> <span className="waving-hand">👋</span></h1>
-            <p className="subtitle">Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack</strong> 
+            <p className="subtitle">Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack.</strong> 
             </p>
             <SocialMedia></SocialMedia>
             <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow" />
