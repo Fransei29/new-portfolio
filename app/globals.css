@@ -254,17 +254,23 @@ body::before {
   }
 
   /* Experience Section */
-  .experience-section {
+  .experience-section, .projects-section {
     margin-top: 10%;
     margin-bottom: 10%;
   }
   
-  .experience-section h2 {
+  .experience-section h2, .projects-section h2 {
     font-size: 28px;
-    color: #222;
-    
+    color: #222; 
   }
   
+  .projects-section p {
+    font-size: 21px;
+    color: #202020;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
   .experience-section p {
     font-size: 21px;
     color: #202020;
@@ -272,24 +278,32 @@ body::before {
     margin-bottom: 4%;
   }
 
+  .special-text {
+    padding-bottom: 2%;
+  }
+
   .title-experience {
     padding-left: 4%;
     font-size: 24px;
     font-weight: 600;
+    margin-bottom: -10px;
   }
 
-  .text-experience {
-    font-size: 28px;
-  }
   .divider {
     border: none;
     border-top: 1px solid #db3789;;
-    margin-top: 2%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    margin-top: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     width: 80%;
   }
   
+  .experience-date {
+    color: #555; 
+    font-size: 17px !important; 
+    text-align: right;
+  }
+
   p{
     word-spacing: 1px;
     letter-spacing: 0.5px;
@@ -349,6 +363,7 @@ body::before {
     font-size: 22px;
     padding-top: 6%;
     padding-bottom: 1%;
+    padding-left: 1%;
   }
   
   .skills-grid {
@@ -544,7 +559,6 @@ p {
 .highlight:hover {
   color: rgb(104, 104, 120);
 }
-
 
 .highlight::before {
   content: '';

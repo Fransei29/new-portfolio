@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const ProjectsSection = () => {
   return (
-    <section className="experience-section">
+    <section className="projects-section">
       <h2 className="highlight">Projects</h2>
       <p>
         My projects showcase my commitment to web development, focusing on applications designed to enhance user experience and ensure scalability.
