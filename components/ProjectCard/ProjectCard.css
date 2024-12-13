@@ -1,68 +1,67 @@
-/* --- CARDS --- */
 
+
+/* --- CARDS --- */
 .project-card {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    border-radius: 2px;
-    background: linear-gradient(90deg, rgba(232, 193, 251, 0.6) 0%,rgba(249, 192, 244, 0.6) 100%);
+    padding: 3%;
+    border-radius: 15px;
+    background: linear-gradient(90deg, rgb(246, 239, 250) 0%,rgb(249, 233, 247) 100%);
     text-align: center; 
     align-items: center;
     width: 100%;
     max-width: 580px;
     max-height: 700px;
-    margin: 30px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 35px auto;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
   }
   
   .project-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
   
   .project-icon{
-    width: 35px; 
-    height:35px;
-    padding-top: 8px;
+    width: 40px; 
+    height:40px;
+    padding-top: 11px;
     padding-bottom: 2px;
-  }
-  
-  .project-card h2 {
-    margin-top: 0;
   }
   
   .project-card a {
     display: inline-block;
     position: relative;
     flex-direction: row;
-    padding: 5px 15px;
-    margin: 7px;
-    color: #fff;
+    padding: 7px 35px;
+    margin: 10px;
+    color: rgb(11, 11, 11);
     font-size: 17px;
-    background-color: rgb(35, 35, 35); 
-    border-radius: 4px; 
+    background-color: rgba(248, 152, 200, 0.8);
+    border-radius: 10px; 
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease; 
   }
   
   .project-card a:hover {
-    background-color: rgb(50, 47, 47);
-    transform: scale(1.1); 
+    background-color: rgb(245, 84, 165, 0.9);
+    transform: scale(1.05); 
   }
   
   .project-card i{
-    padding-right: 60px;
+    padding-right: 20px;
   }
   
   .project-image{
-    width:280; 
+    width:270; 
     height:150;
-    border-radius: 4px;
+    border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); 
     margin-top: 8%;
   }
   
@@ -82,6 +81,10 @@
     font-size: 18px;
     font-weight: bold;
     color:#302f2f;
+  }
+
+  .highlight-second-word {
+    color: var(--primary-color);
   }
   
   /* --- LOGS FROM CARDS --- */

@@ -5,6 +5,20 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useState } from 'react';
 import './/ProjectCard.css'
 
+// Función para formatear el título
+const formatTitle = (title) => {
+  const words = title.split(' ');
+  return (
+    <>
+      {words[0]}{" "}
+      <span className="highlight-second-word">
+        {words[1] || ''}
+      </span>
+      {words.slice(2).length > 0 && ` ${words.slice(2).join(' ')}`}
+    </>
+  );
+};
+
 const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
   
   const [showLogs, setShowLogs] = useState(false);
@@ -19,11 +33,11 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
         {project.icon && (
           <Image src={project.icon} alt={`${project.title} Icon`} width={38} height={38} className="project-icon" />
         )}
-        <h2>{project.title}</h2>
+        <h2>{formatTitle(project.title)}</h2>
       </div>
       {project.previewImage && (
         <div className="project-preview">
-          <Image src={project.previewImage} alt={`${project.title} Preview`} width={270} height={150} className="project-image"/>
+          <Image src={project.previewImage} alt={`${project.title} Preview`} width={190} height={95} className="project-image"/>
         </div>
       )}
       <div>

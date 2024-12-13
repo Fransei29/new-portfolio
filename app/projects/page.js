@@ -48,7 +48,7 @@ const projects = [
     ]
   },
   {
-    title: 'Dynamic Blog App',
+    title: 'Dynamic Blog',
     description: `A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable. Features include dynamic routing, user blog management, and a clean, responsive design. Built using Next.js, Tailwind CSS, and Parser.`,
     link2: 'https://github.com/Fransei29/next-blogs-post/blob/main/app/page.js',
     link3: 'https://next-blogs-post-ahua.vercel.app/',
