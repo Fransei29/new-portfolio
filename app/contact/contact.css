@@ -107,6 +107,11 @@
     color: #f44336; 
 }
 
+.dark .contact-section {
+  color: var(--text-color-dark-mode);
+}
+
+
 @media (max-width: 768px) {
 
   .contact-section{
