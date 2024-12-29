@@ -379,9 +379,10 @@ canvas {
     flex-direction: column;
     align-content: flex-start;
     margin-left: 11%;
-    margin-top: 13%;
+    margin-top: 7%;
     margin-right: 20%;
     margin-bottom: 4%;
+    color:rgb(52, 51, 51)
   }
 
   .tit-project, .tit-project1, .tit-project2 {
@@ -478,6 +479,7 @@ nav a {
   color: black;
   margin: 0 13px;
   padding-right: 0.9%;
+  padding-top: 8px;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;
@@ -567,7 +569,7 @@ nav a:hover {
 .highlight {
   display: flex;
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
+  font-size: 28px;
   position: relative;
   padding-left: 17%;
   margin-top: 2%;
@@ -575,6 +577,10 @@ nav a:hover {
   color: var(--text-color); 
   text-decoration: none;
   transition: color 0.3s ease;
+}
+
+.projects-section h2 {
+  color: rgb(53, 53, 53);
 }
 
 p {
@@ -602,14 +608,14 @@ p {
 
 .highlight::before {
   content: '';
-  width: 0.5em; 
-  height: 1.1em;
+  width: 9px; 
+  height: 40px;
+  border-radius: 20px;
   background-color: var(--primary-color);
   position: absolute;
-  left: 13%;
+  left: 14%;
   top: 46%;
   transform: translateY(-50%); 
-  border-radius: 9%;
 }
 
 
