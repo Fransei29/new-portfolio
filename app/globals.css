@@ -8,7 +8,7 @@
   --text-color-dark-mode:rgb(237, 236, 236);
   --button-color:rgba(248, 152, 200, 0.8);
   --button-color-hover:rgb(245, 84, 165, 0.9);
-  background-color: rgb(240, 240, 233);
+  background-color: rgb(240, 240, 238);
 }
 
 /* --- GENERAL --- */
@@ -168,7 +168,7 @@ canvas {
 .title {
   font-size: 53px;
   margin-right: 25%;
-  padding-top: 10%;
+  padding-top: 4%;
   font-weight: 700;
   margin-bottom: -0.1%;
 }
@@ -456,7 +456,7 @@ canvas {
 
 nav {
   display: flex;
-  position: absolute;
+  position: relative;
   overflow-x: hidden;
   background: rgb(0, 0, 0,0.0);
   color: #fff;

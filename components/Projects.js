@@ -6,13 +6,10 @@ const ProjectsSection = () => {
     <section className="projects-section">
       <h2 className="highlight">Projects</h2>
       <p>
-        My projects showcase my commitment to web development, focusing on applications designed to enhance user experience and ensure scalability.
-      </p>
-      <p>
         You can check my projects in <strong>My Projects Section</strong> to explore the applications I have built.
       </p>
       <p>
-        Do not miss out the <strong>Tutorials Section</strong>, where you will find practical guides to help you to discover/practice <u><strong>+13 technologies</strong></u>, empowering you to create your own dynamic applications.
+        Do not miss out the <strong>Tutorials Section</strong>, where you will find practical guides to help you to discover/practice <u>+13 technologies</u>, empowering you to create your own dynamic applications.
       </p>
       <div className='button-container'>
         <Link href="/projects">
