@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { useState } from 'react';
 import './globals.css';
 import ProjectsSection from '@/components/Projects';
 import Experience from '@/components/Experience';
@@ -14,6 +15,11 @@ import ThemeWrapper from '@/components/ThemeWrapper';
 
 export default function Home() {
   const { theme, setTheme } = useTheme();  // Obtén el tema actual y la función para cambiarlo
+  const [loaded, setLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setLoaded(true); // Cuando la imagen se carga, activamos la clase 'loaded'
+  };
 
   return (
     <>
@@ -22,10 +28,22 @@ export default function Home() {
         <h1 className="title">
           Hi, <span className="name-highlight"> I&apos;m Franco</span> <span className="waving-hand">👋</span>
         </h1>
-        <p className="subtitle">
-          Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack.</strong>
+        <div  className="subtitle">
+        <p className='subtitle2'>
+          Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack.</strong> 
         </p>
-        
+        <div className='fotofrancocontainer'>
+        <Image
+            src="/img/f.jpg"
+            alt="Modo Claro"
+            className={`fotofranco ${loaded ? 'loaded' : ''}`} // Añadimos la clase 'loaded' cuando la imagen se haya cargado
+            width={190}
+            height={190}
+            onLoadingComplete={handleImageLoad} // Llama a la función cuando la imagen se haya cargado
+          />
+         </div> 
+        </div>
+
         {/* Botón para cambiar el tema */}
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}  // Cambia el tema
