@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useScrollAnimation } from '../hooks/Scroll';
 
 const frontEndSkills = [
   { name: "JavaScript", icon: "/icons/java1.png" },
@@ -40,8 +41,8 @@ const SkillsSection = ({ title, skills }) => (
           <Image 
             src={skill.icon} 
             alt={`${skill.name} Icon`} 
-            width={28} 
-            height={28} 
+            width={32} 
+            height={32} 
             className="skill-icon" 
           />
           <span className="skill-name">{skill.name}</span>
@@ -52,12 +53,20 @@ const SkillsSection = ({ title, skills }) => (
 );
 
 const Skills = () => {
+  const elementsRef = useScrollAnimation();
+
   return (
     <section className="skills-section">
       <h2 className="highlight">Skills</h2>
-      <SkillsSection id='title-first' title="Frontend" skills={frontEndSkills} />
+      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
+         <SkillsSection id='title-first' title="Frontend" skills={frontEndSkills} />
+      </div>
+      <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
       <SkillsSection title="Backend" skills={backEndSkills} />
+      </div>
+      <div ref={(el) => (elementsRef.current[2] = el)} className="fade-in-left">
       <SkillsSection title="Tools" skills={toolsSkills} />
+      </div>
     </section>
   );
 };

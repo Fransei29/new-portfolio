@@ -23,13 +23,13 @@ html, body {
 }
 
 .fotofrancocontainer {
-  padding-right: 22%;
-  margin-top: -3%;
+  padding-right: 20%;
+  margin-top: -3.5%;
 }
 
 .fotofranco {
   opacity: 0; /* Inicialmente invisible */
-  transform: scale(0.8); /* Reducir tamaño inicialmente */
+  transform: scale(0.1); /* Reducir tamaño inicialmente */
   transition: opacity 1s ease, transform 1s ease;
   border-radius: 50%;
   box-shadow:  0 6px 9px rgb(220, 43, 132);
@@ -184,7 +184,7 @@ canvas {
 }
 
 .title {
-  font-size: 53px;
+  font-size: 54px;
   margin-right: 37%;
   padding-top: 4%;
   font-weight: 700;
@@ -198,7 +198,7 @@ canvas {
 .subtitle {
   display: flex;
   flex-direction: row;
-  font-size: 22px;
+  font-size: 23px;
   color: var(--text-color);
   text-align: left;
 }
@@ -253,8 +253,8 @@ canvas {
 /* Button to change Mode */
 .theme-toggle-button {
   background-color: var(--button-color);
-  margin-left: 54%;
-  margin-top: 2%;
+  margin-left: 53%;
+  margin-top: 3%;
   border: none;
   cursor: pointer;
   display: flex;
@@ -279,9 +279,11 @@ canvas {
 }
 
 /* --- SOCIAL MEDIA --- */
-
+.fa-envelope{
+  margin-left: -8px;
+}
 .socialmedia {
-  gap: 28px;
+  gap: 25px;
   transition: transform 0.5s ease-in-out;
   padding-right: 30%;
   display: flex;
@@ -291,7 +293,7 @@ canvas {
 .soicon {
   color: var(--text-color);
   font-size: 33px; 
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), color 0.7s ease-in-out;  
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.7s ease-in-out;  
 }
 
 .socialmedia a:hover .soicon {
@@ -446,6 +448,7 @@ canvas {
     font-weight: bold;
     font-size: 22px;
     padding-top: 2%;
+    color: #222;
     padding-bottom: 0;
     padding-left: 1%;
   }
@@ -458,7 +461,7 @@ canvas {
  
   .skill-card {
     background-color:rgba(253, 121, 187, 0.9);
-    color: black;
+    color: rgb(28, 28, 28);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -466,7 +469,7 @@ canvas {
     padding: 5px 7px;
     text-align: center;
     border-radius: 7px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
@@ -529,13 +532,13 @@ nav a:hover {
 
 .logo-container {
   position: absolute;
-  left:20%; 
+  left:21%; 
 }
 
 .logo {
-  width: 53px;
-  height: 53px;
-  padding-top: 8%;
+  width: 65px;
+  height: 65px;
+  padding-top: 7%;
 }
 
  /* --- FOOTER --- */
@@ -640,6 +643,24 @@ p {
   transform: translateY(-50%); 
 }
 
+/* --- SCROLL ANIMATION --- */
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* --- MEDIA QUERIES --- */
 
@@ -680,7 +701,7 @@ p {
     display: flex;
     flex-direction: column;
     padding-left: 3%;
-    padding-right: %3;
+    padding-right: 3%;
     width: 100%;
     height: auto;
   }

@@ -12,10 +12,12 @@ import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from 'next-themes';  // Importa useTheme de next-themes
 import Image from 'next/image';
 import ThemeWrapper from '@/components/ThemeWrapper';
+import { useScrollAnimation } from '../hooks/Scroll';
 
 export default function Home() {
   const { theme, setTheme } = useTheme();  // Obtén el tema actual y la función para cambiarlo
   const [loaded, setLoaded] = useState(false);
+  const elementsRef = useScrollAnimation();
 
   const handleImageLoad = () => {
     setLoaded(true); // Cuando la imagen se carga, activamos la clase 'loaded'
@@ -24,6 +26,7 @@ export default function Home() {
   return (
     <>
     <ThemeWrapper>
+      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
       <div className="home-text">
         <h1 className="title">
           Hi, <span className="name-highlight"> I&apos;m Franco</span> <span className="waving-hand">👋</span>
@@ -37,8 +40,8 @@ export default function Home() {
             src="/img/f.jpg"
             alt="Modo Claro"
             className={`fotofranco ${loaded ? 'loaded' : ''}`} // Añadimos la clase 'loaded' cuando la imagen se haya cargado
-            width={190}
-            height={190}
+            width={220}
+            height={220}
             onLoadingComplete={handleImageLoad} // Llama a la función cuando la imagen se haya cargado
           />
          </div> 
@@ -72,18 +75,24 @@ export default function Home() {
         <SocialMedia />
         <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow" />
       </div>
-
+      </div>
       <div className="containerGeneral">
-        <ProjectsSection />
-        <Experience />
-        <Skills />
-        
+        <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
+          <ProjectsSection />
+        </div>
+        <div ref={(el) => (elementsRef.current[2] = el)} className="fade-in-left">
+          <Experience />
+        </div>
+        <div ref={(el) => (elementsRef.current[3] = el)} className="fade-in-right">
+          <Skills />
+        </div>
+        <div ref={(el) => (elementsRef.current[4] = el)} className="fade-in-left">
         <h2 className="highlight contact-page-title">Get in Touch</h2>
         <p className="tit-contact2">I am always open to hearing about new ideas and work opportunities.</p>
         <p className="tit-contact1">
           If you are looking for a developer passionate about building effective solutions, do not hesitate to<strong> reach out.</strong>
         </p>
-        
+        </div>
         <div className='button-container-to-go'>
           <Link href="/contact">
             <button className="button-to-go">Contact</button>

@@ -137,7 +137,7 @@ export default function Projects() {
   return (
     <div className='titlepro'>
       <div className="tit2">
-        <p className="tit-project">Welcome to the Projects Section</p>
+        <p className="tit-project">Welcome to Projects Section</p>
         <p className="tit-project1">Here you can find some of the projects I have worked on</p>
         <p className="tit-project2">Feel free to explore them</p>
       </div>

@@ -4,6 +4,7 @@ import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import './/tutorials.css';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useScrollAnimation } from '../../hooks/Scroll';
 
 const projects = [
   {
@@ -256,10 +257,14 @@ const projects = [
 
 export default function Projects() {
   const ref = useRef(null);
+  const elementsRef = useScrollAnimation();
   const isInView = useInView(ref, { once: true });
 
   return (
+    <>
+    
     <div className='tutorial-page'>
+    <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
       <nav className="tech-nav">
         <a href="#discoverhtml">HTML</a>
         <a href="#discovercss">CSS</a>
@@ -276,12 +281,15 @@ export default function Projects() {
         <a href="#discoverredis">Redis</a>  
         <a href="#discoverairtable">Airtable</a>   
       </nav>
+      </div>
+      <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
     <div className="title-container">     {/* Contenedor para el título y el círculo */}
       <div className="tit3">
-        <p className="tit-tutorial">Welcome to the Tutorials Section</p>
+        <p className="tit-tutorial">Welcome to Tutorials Section</p>
         <p className="tit-tutorial1">Dive into a collection of hands-on tutorials that will guide you through various technologies and tools</p>
         <p className="tit-tutorial2">Explore and learn at your own pace</p>
       </div>
+    </div>
     </div>
     <div className="projects-grid" ref={ref}>
         {projects.map((project, index) => (
@@ -296,5 +304,6 @@ export default function Projects() {
         ))}
       </div>
     </div>
+    </>
   );
 }

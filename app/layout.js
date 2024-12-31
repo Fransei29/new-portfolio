@@ -8,8 +8,10 @@ import Footer from '@/components/Footer';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import ThemeWrapper from '@/components/ThemeWrapper'; 
+import { useScrollAnimation } from '../hooks/Scroll';
 
 export default function RootLayout({ children }) {
+  const elementsRef = useScrollAnimation();
   const pathname = usePathname();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Aplica animación cuando entra en vista
@@ -25,14 +27,15 @@ export default function RootLayout({ children }) {
       </head>
       <ThemeWrapper>   {/* Usamos el ThemeProvider de next-themes */}
       <body className="container">
+      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
           <header className="header">
             <nav className="nav">
               <div className="logo-container">
                 <Image
                   src="/dev3.png"
                   alt="Logo"
-                  width={72}
-                  height={72}
+                  width={90}
+                  height={90}
                   className="logo"
                 />
               </div>
@@ -58,13 +61,13 @@ export default function RootLayout({ children }) {
               </Link>
             </nav>
           </header>
-
+          </div>
           {/* Animación de entrada para todas las páginas */}
           <motion.main
             ref={ref}  // Detecta cuando el contenedor principal está en la vista
             initial={{ opacity: 0, y: 1 }} // Empieza desde abajo
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 2 }} // Solo cuando esté visible
-            transition={{ duration: 0.5, delay:  0.3 }} // Duración ajustable para entrada suave
+            transition={{ duration: 1, delay:  0.4 }} // Duración ajustable para entrada suave
           >
             {children}
           </motion.main>
