@@ -37,7 +37,7 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
       </div>
       {project.previewImage && (
         <div className="project-preview">
-          <Image src={project.previewImage} alt={`${project.title} Preview`} width={190} height={95} className="project-image"/>
+          <Image src={project.previewImage} alt={`${project.title} Preview`} width={205} height={105} className="project-image"/>
         </div>
       )}
       <div>
