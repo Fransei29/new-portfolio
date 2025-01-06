@@ -749,7 +749,6 @@ p {
     font-size: 25px;
   }
 
-
   .experience-section {
     display: flex;
     flex-direction: column;
@@ -796,5 +795,7 @@ p {
   .logo-container {
     display: none;
   }
+
+  
 }
 

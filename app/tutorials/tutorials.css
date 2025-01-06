@@ -83,10 +83,21 @@
   .dark .tech-nav a, .dark .tutorial-page, .dark .page-title, .dark .title-container {
     color: rgb(234, 233, 233);
   }
-
-
+  .menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px; /* Ajusta según tu header */
+    right: 20px; /* Ajusta según tu diseño */
+    z-index: 9999; /* Asegúrate de que esté encima de otros elementos */
+  }
+  
   @media (max-width: 768px) {
   .tech-nav {
+    display: none;
     margin: 0;
     padding-top: 5px;
     padding-left: 0px;
@@ -94,9 +105,20 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    z-index: 1001;
+    color: rgb(251, 250, 248, 0.5);
+  }
+
+  .tech-nav.show {
+    display: flex; /* Muestra el menú cuando se activa */
+  }
+
+  .menu-toggle {
+    display: block; /* Muestra el botón hamburguesa */
   }
 
   .tech-nav a {
+    display: none;
     font-size: 14px;
   }
 
