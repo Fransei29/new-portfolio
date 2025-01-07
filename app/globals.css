@@ -32,7 +32,7 @@ html, body {
   transform: scale(0.1); /* Reducir tamaño inicialmente */
   transition: opacity 1s ease, transform 1s ease;
   border-radius: 50%;
-  box-shadow:  0 6px 9px rgb(220, 43, 132);
+  box-shadow:  0 6px 9px rgba(221, 47, 134, 0.511);
 }
 
 .fotofranco.loaded {
@@ -402,9 +402,9 @@ canvas {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    margin-left: 11%;
-    margin-top: 7%;
-    margin-right: 20%;
+    margin-left: 17%;
+    margin-top: 6%;
+    padding-right: 37%;
     margin-bottom: 4%;
     color:rgb(52, 51, 51)
   }
@@ -667,8 +667,8 @@ p {
 @media (max-width: 768px) {
 
   html {
-    overflow-x: hidden; /* Desactiva el scroll horizontal */
-    max-width: 100vh;        /* Asegura que el ancho no se desborde */
+    overflow-x: hidden; 
+    max-width: 100vh;    
     margin: 0;   
     padding: 0;
     height: auto;
@@ -685,13 +685,14 @@ p {
     margin: 0;
     padding: 0;
     font-size: 35px;
+    margin-top: 7%;
   }
 
   .subtitle {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 22px;
+    font-size: 19px;
   }
 
   .subtitle2 {
@@ -796,6 +797,27 @@ p {
     display: none;
   }
 
+  .tit-project {
+    font-size: 21px;
+  }
+
+  .tit-project1, .tit-project2 {
+    font-size: 17px;
+  }
   
+  .titlepro {
+    margin: 0;
+    padding: 0;
+  }
+
+  .tit2 {
+    margin-left: 5%;
+  }
+
+  .projects1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 7%;
+  }
 }
 

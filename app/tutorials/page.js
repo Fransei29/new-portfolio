@@ -278,7 +278,7 @@ export default function Projects() {
     <button
         onClick={toggleDrawer}
         style={{
-          display: "flex",
+          display: window.innerWidth > 1024 ? "none" : "flex",
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: 'rgba(248, 152, 200, 0.8)',

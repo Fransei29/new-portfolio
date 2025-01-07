@@ -2,6 +2,7 @@
 
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
+import { useScrollAnimation } from '../../hooks/Scroll';
 
 const projects = [
   {
@@ -134,12 +135,20 @@ const projects = [
 
 
 export default function Projects() {
+   const elementsRef = useScrollAnimation();
+
   return (
     <div className='titlepro'>
+      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
       <div className="tit2">
         <p className="tit-project">Welcome to Projects Section</p>
-        <p className="tit-project1">Here you can find some of the projects I have worked on</p>
-        <p className="tit-project2">Feel free to explore them</p>
+        <p className="tit-project1">
+          Here you can find some of the projects I have worked on, showcasing my skills and creativity.
+        </p>
+        <p className="tit-project2">
+          Feel free to explore them, and contact me if you would like to learn more about my process or discuss potential collaborations.
+        </p>
+      </div>
       </div>
       <div className='projects1'>
         {projects.map((project, index) => (
