@@ -5,7 +5,7 @@ import './/tutorials.css';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from '@mui/material';
@@ -264,6 +264,20 @@ export default function Projects() {
   const ref = useRef(null);
   const elementsRef = useScrollAnimation();
   const isInView = useInView(ref, { once: true });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Verificar si estamos en un entorno cliente
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+
+    handleResize(); // Comprobar al cargar la página
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   const toggleDrawer = () => {
     console.log("Drawer toggle clicked"); 
@@ -278,7 +292,7 @@ export default function Projects() {
     <button
         onClick={toggleDrawer}
         style={{
-          display: window.innerWidth > 1024 ? "none" : "flex",
+          display: isMobile ? "flex" : "none", 
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: 'rgba(248, 152, 200, 0.8)',
