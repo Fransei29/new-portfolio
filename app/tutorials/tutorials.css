@@ -4,8 +4,8 @@
     grid-template-columns: repeat(1, 1fr); /* Dos columnas iguales */
     gap: 5px;
     padding-top: 0;
-    padding-left: 2%;
-    padding-right: 2%; 
+    max-width: 1120px;
+    margin-inline: auto;
     scroll-behavior: smooth;
   }
 
@@ -13,12 +13,9 @@
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    margin-left: 10%;
     margin-top: 2%;
-    margin-right: 40%;
+    width: 70%;
     margin-bottom: 2%;
-    padding-left: 6%;
-    padding-right: 0%;
     color:rgb(52, 51, 51)
   }
 
@@ -42,18 +39,19 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1px;
-    left: 0;
-    padding: 15px;
+    gap: 20px;
     width: 100%;
     box-sizing: border-box;
     overflow-x: auto; 
     white-space: nowrap;
+    max-width: 1120px;
+    margin-inline: auto;
+    background-color: rgba(248, 152, 200, 0.8);
+    border-radius: 15px;
   }
   
   .tech-nav a {
     display: inline-block;
-    padding: 0 10px;
     color: rgb(46, 46, 46);
     text-decoration: none;
     font-size: 17px;

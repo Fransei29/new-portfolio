@@ -40,8 +40,8 @@ export default function Home() {
             src="/img/f.jpg"
             alt="Modo Claro"
             className={`fotofranco ${loaded ? 'loaded' : ''}`} // Añadimos la clase 'loaded' cuando la imagen se haya cargado
-            width={220}
-            height={220}
+            width={200}
+            height={200}
             onLoadingComplete={handleImageLoad} // Llama a la función cuando la imagen se haya cargado
           />
          </div> 
