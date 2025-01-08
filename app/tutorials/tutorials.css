@@ -118,7 +118,13 @@
   }
 
   .menu-toggle {
-    display: block; /* Muestra el botón hamburguesa */
+    display: flex;/* Muestra el botón hamburguesa */
+  }
+
+  .button-container-menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
   }
 
   .tech-nav a {
@@ -133,7 +139,7 @@
 
   .tit3 {
     margin-left: 0%;
-    padding-left: 2%;
+    padding-left: 4%;
     width: 90%;
     padding-right: 0%;
   }

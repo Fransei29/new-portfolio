@@ -289,70 +289,73 @@ export default function Projects() {
     <>
     <div className='tutorial-page'>
     <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
-    <button
-        onClick={toggleDrawer}
-        style={{
-          display: isMobile ? "flex" : "none", 
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: 'rgba(248, 152, 200, 0.8)',
-          border: "none",
-          padding: "10px",
-          borderRadius: "15px",  
-        }}
-      >
-        <MenuIcon sx={{ color: "black" }} />
-      </button>
-      {/* Drawer (menú desplegable) */}
-      <Drawer anchor="left" open={open} onClose={toggleDrawer}>
-        <List sx={{
-            backgroundColor: 'rgba(248, 152, 200, 0.8)', // Ajuste del color con opacidad
-            width: 160
-          }}>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="HTML" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="CSS" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="TypeScript" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Node.js" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Express" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Rest" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="GraphQL" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Axios" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="React" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Next" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="MongoDB" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Sequelize" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Redis" />
-          </ListItem>
-          <ListItem button onClick={toggleDrawer}>
-            <ListItemText primary="Airtable" />
-          </ListItem>
-        </List>
-      </Drawer>
+    <div className='button-container-menu'>
+        <button
+            onClick={toggleDrawer}
+            style={{
+              display: isMobile ? "flex" : "none", 
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              backgroundColor: 'rgba(248, 152, 200, 0.8)',
+              border: "none",
+              padding: "7px",
+              marginBottom:'-7%',
+              borderRadius: "15px",  
+            }}
+          >
+            <MenuIcon sx={{ color: "black" }} />
+          </button>
+          {/* Drawer (menú desplegable) */}
+          <Drawer anchor="left" open={open} onClose={toggleDrawer}>
+            <List sx={{
+                backgroundColor: 'rgba(248, 152, 200, 0.8)', // Ajuste del color con opacidad
+                width: 160
+              }}>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="HTML" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="CSS" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="TypeScript" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Node.js" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Express" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Rest" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="GraphQL" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Axios" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="React" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Next" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="MongoDB" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Sequelize" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Redis" />
+              </ListItem>
+              <ListItem button onClick={toggleDrawer}>
+                <ListItemText primary="Airtable" />
+              </ListItem>
+            </List>
+          </Drawer>
+      </div>
   
       <nav className='tech-nav'>
         <a href="#discoverhtml">HTML</a>

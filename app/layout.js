@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
               </Link>
               <Link href="/projects" passHref>
                 <p className={`nav-link ${pathname === '/projects' ? 'active' : ''}`}>
-                  My Projects
+                  Projects
                 </p>
               </Link>
               <Link href="/contact" passHref>
