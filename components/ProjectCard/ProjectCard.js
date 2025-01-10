@@ -57,16 +57,6 @@ const ProjectCard = ({ project, showDocumentation = true, onComplete }) => {
          <i className="fas fa-external-link-alt"></i> Live
         </a>
       )}
-     <div className="logs-toggle" onClick={toggleLogs}>
-        <i className={`fas fa-chevron-${showLogs ? 'up' : 'down'}`}></i> Logs
-      </div>
-      {showLogs && (
-        <div className="logs">
-          {project.logs && project.logs.map((log, index) => (
-            <p key={index}>{log}</p>
-          ))}
-        </div>
-      )}
     </div>
  </div>
   );

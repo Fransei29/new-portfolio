@@ -31,37 +31,6 @@
   .tit-tutorial1, .tit-tutorial2{
     font-size: 20px;
   }
-
-  
-  /* --- TUTORIALS NAV BAR --- */
-
-.tech-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto; 
-    white-space: nowrap;
-    max-width: 1120px;
-    margin-inline: auto;
-    background-color: rgba(248, 152, 200, 0.8);
-    border-radius: 15px;
-  }
-  
-  .tech-nav a {
-    display: inline-block;
-    color: rgb(46, 46, 46);
-    text-decoration: none;
-    font-size: 17px;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .tech-nav a:hover {
-    color: rgb(34, 34, 34);
-    transform: scale(1.2);
-  }
   
   .tit{
     padding-top: 7%;

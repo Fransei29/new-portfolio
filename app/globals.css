@@ -22,9 +22,6 @@ html, body {
   font-family: 'Nunito', sans-serif;
 }
 
-.fotofrancocontainer {
-}
-
 .fotofranco {
   opacity: 0; /* Inicialmente invisible */
   transform: scale(0.1); /* Reducir tamaño inicialmente */
@@ -45,15 +42,15 @@ h1, .highlight, .footer, .socialmedia {
 }
 
 html.dark {
-  background-color: #1e1e1e
+  background-color: #131313
 }
 
 html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .socialmedia i,html.dark .scroll-arrow {
-  color: rgb(231, 223, 223) !important;
+  color: rgb(233, 233, 233) !important;
 }
 
 .dark p, .title.dark {
-  color: white;
+  color: rgb(233, 233, 233);
  }
 
 /* --- GENERAL CONTAINER --- */
@@ -61,10 +58,11 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 850px;
+  max-width: 1000px;
   margin-inline: auto;
   color: var(--text-color);
   z-index: 10;
+  padding: 0 2rem;
 }
 
 .button-container-to-go{
@@ -79,17 +77,17 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   padding: 10px 50px;
   margin-bottom: 5%;
   font-size: 20px;
-  color: rgb(11, 11, 11);
-  background-color: rgba(248, 152, 200, 0.8);
-  border: none;
+  background-color: rgb(33, 33, 41);
+  color: rgb(231, 231, 231);
+  border: 1px solid rgb(251, 188, 220); 
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .button-to-go:hover {
-  transform: scale(1.05);
   background-color: rgb(245, 84, 165, 0.9);
+  transform: scale(1.01); 
 }
 
 .button-container{
@@ -104,9 +102,9 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   margin-right: 30px;
   margin-bottom: 10%;
   font-size: 20px;
-  color: rgb(11, 11, 11);
-  background-color: rgba(248, 152, 200, 0.8);
-  border: none;
+  background-color: rgb(33, 33, 41);
+  color: rgb(231, 231, 231);
+  border: 1px solid rgb(251, 188, 220); 
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -119,8 +117,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .button-tutorials:hover {
-  transform: scale(1.05);
   background-color: rgb(245, 84, 165, 0.9);
+  transform: scale(1.01); 
 }
 
 .scroll-arrow {
@@ -165,11 +163,11 @@ canvas {
 
 .home-text {
   color: var(--text-color);
-  max-width: 850px;
+  max-width: 1000px;
   margin-inline: auto;
   display: flex;
   position: relative;
-  padding: 0;
+  padding: 0 2rem;
   flex-direction: column;
   justify-content:center;
   flex-wrap: wrap;
@@ -186,7 +184,7 @@ canvas {
 .title {
   font-size: 54px;
   margin-left: -25px;
-  padding-right: 280px;
+  padding-right: 300px;
   padding-top: 4%;
   font-weight: 700;
   margin-bottom: -0.1%;
@@ -205,7 +203,7 @@ canvas {
 }
 
 .subtitle2{
-
+  padding-right: 90px;
 }
 
 @keyframes wave-text {
@@ -303,6 +301,10 @@ canvas {
   color: rgb(219, 55, 137);
 }
 
+
+.projects-section {
+  width: 100%;
+}
   /* Experience Section */
   .experience-section, .projects-section, .contact-section, .skills-section {
     margin-top: 5%;
@@ -489,10 +491,11 @@ nav {
   overflow-x: hidden;
   background: rgb(0, 0, 0,0.0);
   color: #fff;
-  padding: 15px 11.5%;
-  justify-content: center;
+  padding: 10px 0px;
+  justify-content: space-evenly;
   align-items: center;
-  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
   z-index: 1000;
   top: 0;
 }
@@ -534,14 +537,16 @@ nav a:hover {
 }
 
 .logo-container {
-  position: absolute;
-  left:21%; 
+  display: flex;
+  flex-direction: row;
+  left:0; 
 }
 
 .logo {
   width: 65px;
   height: 65px;
-  padding-top: 7%;
+  padding-top: 10px;
+  padding-right: 80px;
 }
 
  /* --- FOOTER --- */

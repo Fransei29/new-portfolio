@@ -357,22 +357,6 @@ export default function Projects() {
           </Drawer>
       </div>
   
-      <nav className='tech-nav'>
-        <a href="#discoverhtml">HTML</a>
-        <a href="#discovercss">CSS</a>
-        <a href="#discovertypescript">TypeScript</a>
-        <a href="#discovernode">Node.js</a>
-        <a href="#discoverexpress">Express</a>
-        <a href="#discoverrest">Rest</a>
-        <a href="#discovergraphql">GraphQL</a>
-        <a href="#discoveraxios">Axios</a>
-        <a href="#discoverreact">React</a>
-        <a href="#discovernext">Next</a>
-        <a href="#discovermongo">MongoDB</a>
-        <a href="#discoversequelize">Sequelize</a>
-        <a href="#discoverredis">Redis</a>  
-        <a href="#discoverairtable">Airtable</a>   
-      </nav>
       </div>
       <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
     <div className="title-container">     {/* Contenedor para el título y el círculo */}

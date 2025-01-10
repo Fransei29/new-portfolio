@@ -30,20 +30,22 @@ export default function RootLayout({ children }) {
       <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
           <header className="header">
             <nav className="nav">
-              <div className="logo-container">
-                <Image
-                  src="/dev3.png"
-                  alt="Logo"
-                  width={90}
-                  height={90}
-                  className="logo"
-                />
+              <div>
+                <div className="logo-container">
+                  <Image
+                    src="/dev3.png"
+                    alt="Logo"
+                    width={90}
+                    height={90}
+                    className="logo"
+                  />
+                <Link href="/" passHref>
+                  <p className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
+                    Home
+                  </p>
+                </Link>
+                </div>
               </div>
-              <Link href="/" passHref>
-                <p className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
-                  Home
-                </p>
-              </Link>
               <Link href="/tutorials" passHref>
                 <p className={`nav-link ${pathname === '/tutorials' ? 'active' : ''}`}>
                   Tutorials
