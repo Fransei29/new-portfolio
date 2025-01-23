@@ -42,7 +42,18 @@ h1, .highlight, .footer, .socialmedia {
 }
 
 html.dark {
-  background-color: #131313
+  background-image: url('/img/back1');
+}
+
+html.dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);  
+  z-index: -11111; 
 }
 
 html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .socialmedia i,html.dark .scroll-arrow {
@@ -405,20 +416,21 @@ canvas {
   .tit2{
     max-width: 1120px;
     margin-inline: auto;
-    margin-top: 40px;
+    margin-top: 25px;
     margin-bottom: 40px;
     color:rgb(52, 51, 51)
   }
 
   .tit-project, .tit-project1, .tit-project2 {
-    margin: 1%;
+    margin: 0;
   }
 
   .tit-project1, .tit-project2 {
-    width: 70%;
+    width: 100%;
   }
 
   .tit-project{
+    padding-bottom: 8px;
     font-size: 30px;
     font-weight: bold;
   }
@@ -785,6 +797,8 @@ p {
   }
 
   .nav {
+    display: flex;
+    flex-direction: row;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -794,9 +808,19 @@ p {
   .nav a {
     font-size: 17px;
   }
+
+  .logo {
+    padding: 0;
+    margin: 0;
+  }
   
-  .logo-container {
+  .contact-link {
     display: none;
+  }
+
+  .logo-container {
+    padding: 0;
+    margin: 0;
   }
 
   .tit-project {

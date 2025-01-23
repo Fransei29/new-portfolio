@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
                 </p>
               </Link>
               <Link href="/contact" passHref>
-                <p className={`nav-link ${pathname === '/contact' ? 'active' : ''}`}>
+                <p className={`nav-link contact-link ${pathname === '/contact' ? 'active' : ''}`}>
                   Contact
                 </p>
               </Link>

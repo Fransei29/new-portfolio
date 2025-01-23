@@ -260,7 +260,6 @@ const projects = [
 
 
 export default function Projects() {
-  const [open, setOpen] = useState(false); // Estado para controlar la apertura del Drawer
   const ref = useRef(null);
   const elementsRef = useScrollAnimation();
   const isInView = useInView(ref, { once: true });
@@ -278,85 +277,11 @@ export default function Projects() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
-  const toggleDrawer = () => {
-    console.log("Drawer toggle clicked"); 
-    setOpen(!open); // Cambia el estado para abrir/cerrar el Drawer
-  };
-
  
   return (
     <>
     <div className='tutorial-page'>
     <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
-    <div className='button-container-menu'>
-        <button
-            onClick={toggleDrawer}
-            style={{
-              display: isMobile ? "flex" : "none", 
-              justifyContent: "flex-end",
-              alignItems: "flex-end",
-              backgroundColor: 'rgba(248, 152, 200, 0.8)',
-              border: "none",
-              padding: "7px",
-              marginBottom:'-7%',
-              borderRadius: "15px",  
-            }}
-          >
-            <MenuIcon sx={{ color: "black" }} />
-          </button>
-          {/* Drawer (menú desplegable) */}
-          <Drawer anchor="left" open={open} onClose={toggleDrawer}>
-            <List sx={{
-                backgroundColor: 'rgba(248, 152, 200, 0.8)', // Ajuste del color con opacidad
-                width: 160
-              }}>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="HTML" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="CSS" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="TypeScript" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Node.js" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Express" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Rest" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="GraphQL" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Axios" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="React" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Next" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="MongoDB" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Sequelize" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Redis" />
-              </ListItem>
-              <ListItem button onClick={toggleDrawer}>
-                <ListItemText primary="Airtable" />
-              </ListItem>
-            </List>
-          </Drawer>
-      </div>
-  
       </div>
       <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
     <div className="title-container">     {/* Contenedor para el título y el círculo */}
