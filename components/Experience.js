@@ -9,7 +9,7 @@ const Experience = () => {
 
   return (
     <>
-    <h2 className="highlight">Experience</h2>
+    <p className="highlight">Experience</p>
     <section className="experience-section">
       {/* Coursfy */}
       <div className="experience-item"  onClick={() => toggleDetail('coursfy')}>

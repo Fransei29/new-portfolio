@@ -3,14 +3,16 @@
   .contact-section {
     display: flex;
     flex-direction: column;
+    max-width: 880px;
+    margin-inline:auto;
+    min-height: 70vh
   }
 
   .title-contact-container{
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    margin-left: 19%;
-    padding-right: 35%;
+    
   }
 
   .tit-contact, .tit-contact1, .tit-contact2 {
@@ -20,7 +22,7 @@
   .tit-contact{
     font-size: 30px;
     color: rgb(45, 45, 45);
-    font-weight: bold;
+    margin-top: 20px;
   }
 
   .tit-contact1, .tit-contact2{
@@ -41,7 +43,6 @@
     width: 450px;
     height: 200px;
     margin: 0 auto; 
-    margin-bottom: 10%;
     border-style: none;
 }
 

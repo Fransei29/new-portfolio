@@ -4,13 +4,6 @@ import Link from 'next/link';
 const ProjectsSection = () => {
   return (
     <section className="projects-section">
-      <h2 className="highlight">Projects</h2>
-      <p>
-        You can see my projects in <strong>My Projects Section</strong> to explore the applications I have built.
-      </p>
-      <p>
-        Do not miss out the <strong>Tutorials Section</strong>, where you will find practical guides to help you to discover/practice <u>+13 technologies</u>, empowering you to create your own dynamic applications.
-      </p>
       <div className='button-container'>
         <Link href="/projects">
           <button className="button-tutorials">

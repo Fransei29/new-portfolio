@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import './globals.css';
 import Footer from '@/components/Footer';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ThemeWrapper from '@/components/ThemeWrapper'; 
 import { useScrollAnimation } from '../hooks/Scroll';
 

@@ -23,8 +23,8 @@ html, body {
 }
 
 .fotofranco {
-  opacity: 0; /* Inicialmente invisible */
-  transform: scale(0.1); /* Reducir tamaño inicialmente */
+  opacity: 0; 
+  transform: scale(0.1); 
   transition: opacity 1s ease, transform 1s ease;
   border-radius: 23%;
   margin-left: 10px;
@@ -32,8 +32,8 @@ html, body {
 }
 
 .fotofranco.loaded {
-  opacity: 1; /* Hacer visible */
-  transform: scale(1); /* Escalar al tamaño original */
+  opacity: 1; 
+  transform: scale(1); 
 }
 
 h1, .highlight, .footer, .socialmedia {
@@ -42,18 +42,7 @@ h1, .highlight, .footer, .socialmedia {
 }
 
 html.dark {
-  background-image: url('/img/back1');
-}
-
-html.dark::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);  
-  z-index: -11111; 
+  background-color: #100a15;
 }
 
 html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .socialmedia i,html.dark .scroll-arrow {
@@ -69,49 +58,18 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 1000px;
+  max-width: 880px;
   margin-inline: auto;
   color: var(--text-color);
   z-index: 10;
   padding: 0 2rem;
 }
 
-.button-container-to-go{
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-  margin-right: 30%;
-  margin-bottom:3%;
-}
-
-.button-to-go{
-  padding: 10px 50px;
-  margin-bottom: 5%;
-  font-size: 20px;
-  background-color: rgb(33, 33, 41);
-  color: rgb(231, 231, 231);
-  border: 1px solid rgb(251, 188, 220); 
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.button-to-go:hover {
-  background-color: rgb(245, 84, 165, 0.9);
-  transform: scale(1.01); 
-}
-
-.button-container{
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-}
-
-.button-tutorials{
-  padding: 10px 50px;
+.button-tutorials, .button-to-go{
+  padding: 12px 55px;
   margin-left: 30px;
   margin-right: 30px;
-  margin-bottom: 10%;
+  margin-bottom: 40px;
   font-size: 20px;
   background-color: rgb(33, 33, 41);
   color: rgb(231, 231, 231);
@@ -120,6 +78,13 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.dark .button-tutorials, .dark .button-to-go{
+  background-color: rgb(236, 214, 231);
+  color: rgb(38, 38, 38);
+  border: 1px solid rgb(250, 100, 175); 
+}
+
 
 .fas {
   margin-left: 5px; 
@@ -127,7 +92,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   font-size: 19px; 
 }
 
-.button-tutorials:hover {
+.button-tutorials:hover, .button-to-go:hover {
   background-color: rgb(245, 84, 165, 0.9);
   transform: scale(1.01); 
 }
@@ -174,11 +139,10 @@ canvas {
 
 .home-text {
   color: var(--text-color);
-  max-width: 1000px;
+  max-width: 880px;
   margin-inline: auto;
   display: flex;
   position: relative;
-  padding: 0 2rem;
   flex-direction: column;
   justify-content:center;
   flex-wrap: wrap;
@@ -314,10 +278,12 @@ canvas {
 
 
 .projects-section {
-  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
   /* Experience Section */
-  .experience-section, .projects-section, .contact-section, .skills-section {
+  .experience-section, .projects-section, .skills-section {
     margin-top: 5%;
     margin-bottom: 7%;
   }
@@ -410,11 +376,44 @@ canvas {
   p {
     word-spacing: 1px;
     letter-spacing: 0.5px;
-    }
+  }
+
+  /* seccion de contact */
+
+  .contact-section-container {
+    display: flex;
+    flex-direction: row;
+  } 
+
+  .contact-section-first {
+    font-size: 20px;
+    width: 60%;
+  }
+
+.tit-contact-start {
+  margin-top: 50px;
+}
+
+.tit-contact-end {
+  margin-bottom: 50px;
+}
+
+  .contact-section-second {
+    display: flex;
+    align-items: center;
+  }
+
+  .dark .button-to-go{
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+
+
+ 
 
   /* titulos del project Section */
   .tit2{
-    max-width: 1120px;
+    max-width: 880px;
     margin-inline: auto;
     margin-top: 25px;
     margin-bottom: 40px;
@@ -432,7 +431,6 @@ canvas {
   .tit-project{
     padding-bottom: 8px;
     font-size: 30px;
-    font-weight: bold;
   }
 
   .tit-project1{
@@ -460,11 +458,10 @@ canvas {
     margin-bottom: 0;
   }
 
-  h3 {
+ .skills-title-divide {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
     font-size: 22px;
-    padding-top: 2%;
+    padding-top: 10px;
     color: #222;
     padding-bottom: 0;
     padding-left: 1%;
@@ -477,7 +474,8 @@ canvas {
   }
  
   .skill-card {
-    background-color:rgba(253, 121, 187, 0.9);
+    background-color:rgb(245, 221, 233); 
+    border: 1px solid var(--primary-color);
     color: rgb(28, 28, 28);
     display: flex;
     flex-direction: row;
@@ -491,7 +489,7 @@ canvas {
   }
 
   .skill-card:hover {
-    background-color: rgba(250, 121, 235, 0.5);
+    background-color: rgb(241, 194, 218); 
     transform: scale(1.05) ;
   }
  
@@ -506,7 +504,7 @@ nav {
   padding: 10px 0px;
   justify-content: space-evenly;
   align-items: center;
-  max-width: 1000px;
+  max-width: 880px;
   margin-inline: auto;
   z-index: 1000;
   top: 0;
@@ -565,24 +563,25 @@ nav a:hover {
   
  .footer { 
   display: flex;
+  max-width: 880px;
+  align-content: flex-end;
+  right: 0;
+  text-align: right;
   justify-content:flex-end;
   background: rgb(0, 0, 0,0.0);
   font-size: 17px;
   color: black;
-  padding: 5px 12%;
   grid-area: footer; 
+  margin-top: 20px;
+  margin-bottom: 10px;
 }  
-
-.tit-contact2, .tit-contact1 {
-  font-size: 20px;
-}
 
 /* --- PAGES --- */
 
 .projects1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
-  max-width: 1120px;
+  max-width: 880px;
   margin-inline: auto; 
   scroll-behavior: smooth;
   margin-top: 0;
@@ -609,7 +608,7 @@ nav a:hover {
   font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   position: relative;
-  padding-left: 17%;
+  padding-left: 30px;
   margin-top: 2%;
   margin-bottom: 4%;
   color: var(--text-color); 
@@ -646,13 +645,13 @@ p {
 
 .highlight::before {
   content: '';
-  width: 9px; 
+  width: 7px; 
   height: 40px;
-  border-radius: 20px;
+  border-radius: 4px;
   background-color: var(--primary-color);
   position: absolute;
-  left: 14%;
-  top: 46%;
+  left: 0;
+  top: 18px;
   transform: translateY(-50%); 
 }
 
@@ -698,7 +697,8 @@ p {
     margin: 0;
     padding: 0;
     font-size: 35px;
-    margin-top: 7%;
+    margin-top: 2px;
+    text-align: left;
   }
 
   .subtitle {
@@ -719,7 +719,8 @@ p {
 
 
   .socialmedia {
-    padding: 0;
+    margin: 0;
+    padding-top: 10px;
   }
 
   .socialmedia i {
@@ -740,13 +741,6 @@ p {
     padding-right: 7%;
     padding-left: 3%;
     margin: 0;
-  }
-
-  .scroll-arrow {
-    margin: 0;
-    padding-top: 10%;
-    padding-bottom: 6%;
-    font-size: 30px;
   }
 
   .button-tutorials {
@@ -778,13 +772,47 @@ p {
     font-size: 19px;
   }
 
-  .highlight::before{
-    left:12%
+  .highlight::before {
+    content: '';
+    width: 7px; 
+    height: 40px;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    transform: translateY(-50%); 
+  }
+
+  .contact-section-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-section-first {
+    width: 100%;
+  }
+
+  .contact-section-second {
+    display: flex;
+  }
+
+  .button-container {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tres columnas en móviles */
   }
 
   .skills-section h3 {
     font-size: 22px;
     margin-bottom: 5px;
+  }
+
+  .skill-card {
+    width: 90%;
   }
 
   .tit-contact1, .tit-contact2 {
@@ -796,13 +824,27 @@ p {
     padding: 0;
   }
 
+  .button-to-go{
+    padding: 8px 15px;
+    margin-top: 4px;
+    font-size: 18px;
+    background-color: rgb(33, 33, 41);
+    color: rgb(231, 231, 231);
+    border: 1px solid rgb(251, 188, 220); 
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
   .nav {
     display: flex;
+    justify-content: center;
     flex-direction: row;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 75px;
+    padding: 0 0.2rem;
   }
 
   .nav a {
@@ -810,17 +852,7 @@ p {
   }
 
   .logo {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .contact-link {
     display: none;
-  }
-
-  .logo-container {
-    padding: 0;
-    margin: 0;
   }
 
   .tit-project {
@@ -845,6 +877,31 @@ p {
     display: flex;
     flex-direction: column;
     margin-right: 7%;
+  }
+
+  .home-text{
+    align-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    display: flex;
+  }
+
+  .scroll-arrow {
+    display: none;
+  }
+
+  .container-social {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  .theme-toggle-button {
+    margin-left: 0
   }
 }
 

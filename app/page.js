@@ -28,9 +28,9 @@ export default function Home() {
     <ThemeWrapper>
       <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
       <div className="home-text">
-        <h1 className="title">
+        <h3 className="title">
           Hi, <span className="name-highlight"> I&apos;m Franco</span> <span className="waving-hand">👋</span>
-        </h1>
+        </h3>
         <div  className="subtitle">
         <p className='subtitle2'>
           Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack.</strong> 
@@ -47,32 +47,37 @@ export default function Home() {
          </div> 
         </div>
 
-        {/* Botón para cambiar el tema */}
-        <button
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}  // Cambia el tema
-          className={`theme-toggle-button ${theme === 'dark' ? 'dark' : ''}`}
-        >
-          {theme === 'light' ? (
-            <Image
-              src="/icons/sun.png" // Ruta correcta a la imagen del sol
-              alt="Modo Claro"
-              width={28}
-              height={28}
-            />
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="#fff"
-              width="24px"
-              height="24px"
+        <div className='container-social'>
+          <div>
+            {/* Botón para cambiar el tema */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}  // Cambia el tema
+              className={`theme-toggle-button ${theme === 'dark' ? 'dark' : ''}`}
             >
-              <path d="M21.64 13A9 9 0 1111 2.36 7 7 0 0021.64 13z" />
-            </svg>
-          )}
-        </button>
-
-        <SocialMedia />
+              {theme === 'light' ? (
+                <Image
+                  src="/icons/sun.png" // Ruta correcta a la imagen del sol
+                  alt="Modo Claro"
+                  width={28}
+                  height={28}
+                />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="#fff"
+                  width="24px"
+                  height="24px"
+                >
+                  <path d="M21.64 13A9 9 0 1111 2.36 7 7 0 0021.64 13z" />
+                </svg>
+              )}
+            </button>
+          </div>
+          <div>
+            <SocialMedia />
+          </div>
+        </div>
         <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow" />
       </div>
       </div>
@@ -87,17 +92,29 @@ export default function Home() {
           <Skills />
         </div>
         <div ref={(el) => (elementsRef.current[4] = el)} className="fade-in-left">
-        <h2 className="highlight contact-page-title">Get in Touch</h2>
-        <p className="tit-contact2">I am always open to hearing about new ideas and work opportunities.</p>
-        <p className="tit-contact1">
-          If you are looking for a developer passionate about building effective solutions, do not hesitate to<strong> reach out.</strong>
-        </p>
-        </div>
-        <div className='button-container-to-go'>
-          <Link href="/contact">
-            <button className="button-to-go">Contact</button>
-          </Link>
-        </div>
+        
+        <div className='contact-section-container'> 
+
+          <div className='contact-section-first'>
+            <p className="highlight contact-page-title">Get in Touch</p>
+            <p className="tit-contact2 tit-contact-start">I am always open to hearing about new ideas and work opportunities.</p>
+            <p className="tit-contact1 tit-contact-end">
+              If you are looking for a developer passionate about building effective solutions,<strong> reach out.</strong>
+            </p>
+          </div>
+          
+          <div className='contact-section-second'>
+              <div className='button-container-to-go'>
+                <Link href="/contact">
+                  <button className="button-to-go">
+                    Contact <i className="fas fa-arrow-right arrow"></i>
+                  </button>
+                </Link>
+              </div>
+          </div>
+
+       </div>
+      </div>
       </div>
       </ThemeWrapper>
     </>

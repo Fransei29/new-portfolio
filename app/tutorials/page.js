@@ -20,7 +20,7 @@ const projects = [
     link1: 'https://nodejs.org/docs/latest/api/',
     link2: 'https://github.com/Fransei29/NodeJS/blob/main/hello.js',
     link3: 'https://verdufront-zbzb.vercel.app/', 
-    previewImage: '/img/verdu2.png',
+    previewImage: '/img/verdu3.png',
     logs: [
       'git init',
       'git clone https://github.com/Fransei29/NodeJS.git',

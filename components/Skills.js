@@ -34,7 +34,7 @@ const toolsSkills = [
 
 const SkillsSection = ({ title, skills }) => (
   <div className="skills-category">
-    <h3>{title}</h3>
+    <p  className="skills-title-divide">{title}</p>
     <div className="skills-grid">
       {skills.map((skill, index) => (
         <div className="skill-card" key={index}>
@@ -57,7 +57,7 @@ const Skills = () => {
 
   return (
     <section className="skills-section">
-      <h2 className="highlight">Skills</h2>
+      <p className="highlight">Skills</p>
       <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
          <SkillsSection id='title-first' title="Frontend" skills={frontEndSkills} />
       </div>

@@ -4,7 +4,7 @@
     grid-template-columns: repeat(1, 1fr); /* Dos columnas iguales */
     gap: 5px;
     padding-top: 0;
-    max-width: 1120px;
+    max-width: 880px;
     margin-inline: auto;
     scroll-behavior: smooth;
   }
@@ -14,7 +14,7 @@
     flex-direction: column;
     align-content: flex-start;
     margin-top: 2%;
-    width: 70%;
+    width: 60%;
     margin-bottom: 2%;
     color:rgb(52, 51, 51)
   }
@@ -25,11 +25,10 @@
 
   .tit-tutorial{
     font-size: 30px;
-    font-weight: bold;
   }
 
   .tit-tutorial1, .tit-tutorial2{
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .tit{
