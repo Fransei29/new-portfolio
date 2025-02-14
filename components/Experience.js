@@ -16,7 +16,7 @@ const Experience = () => {
           <div className="experience-item" onClick={() => toggleDetail("coursfy")}>
             <div className="circle"></div>
             <div className="experience-content">
-              <h1 className="title-experience">Full Stack Developer at Coursfy</h1>
+              <h1 className="title-experience">Full Stack Developer at Intelligent Apps Sweden</h1>
               <p className="experience-date">October 2024 - Present</p>
               {isOpen.coursfy && (
                 <ul>

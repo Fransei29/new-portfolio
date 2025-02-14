@@ -305,6 +305,7 @@ canvas {
     margin-top: 50px;
     margin-bottom: 50px;
   }
+
   .timeline {
     position: relative;
     width: 100%; /* Ajusta según el tamaño del contenido */
@@ -354,7 +355,14 @@ canvas {
   }
   
   .title-experience {
-    font-size: 20px;
+    font-size: 21px;
+    font-weight: 400;
+    color: rgb(67, 67, 67);
+    margin: 0;
+  }
+
+  .dark .title-experience {
+    font-size: 21px;
     font-weight: 400;
     color: rgb(227, 227, 227);
     margin: 0;
@@ -370,16 +378,21 @@ canvas {
     list-style: none;
     padding: 0;
     font-size: 14px;
+    color: rgb(27, 27, 27);
+  }
+  
+  .dark ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 35px;
     color: white;
   }
-  
+
   ul li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
     line-height: 1.5;
-  }
-  
-  .experience-item:hover .title-experience {
-    color: #f0f0f0;
   }
   
   /* seccion de contact */
@@ -709,7 +722,7 @@ p {
   .title{
     margin: 0;
     padding: 0;
-    font-size: 33px;
+    font-size: 37px;
     margin-top: 2px;
     text-align: left;
   }
@@ -723,22 +736,23 @@ p {
   }
 
   .subtitle2 {
-    font-size: 17px;
+    font-size: 16px;
     padding-right: 20px;
   }
 
   .waving-hand {
-    font-size: 35px;
+    font-size: 33px;
   }
 
 
   .socialmedia {
     margin: 0;
-    padding-top: 10px;
+    padding-top: 7px;
+    gap: 17px;
   }
 
   .socialmedia i {
-    font-size: 25px;
+    font-size: 27px;
     margin-bottom: 35px;
   }
 
@@ -747,19 +761,26 @@ p {
   }
 
   .button-container{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
   }
   
   .button-tutorials {
-    padding: 5px 25px;
-    font-size: 16px;
+    padding: 11px 50px;
+    margin-bottom: 25px;
+    font-size: 17px;
     background-color: rgb(33, 33, 41);
     color: rgb(231, 231, 231);
     border: 1px solid rgb(251, 188, 220); 
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .fas {
+    font-size: 17px;
   }
 
   .fa-arrow-right{
@@ -776,7 +797,7 @@ p {
     text-align: center;
     align-items: center;
     align-content: center;
-    margin-top: 25px;
+    margin-top: 0px;
     margin-bottom: 25px;
   }
 
@@ -914,6 +935,8 @@ p {
   }
 
   .theme-toggle-button {
+    width: 35px;
+    height: 35px;
     margin-left: 0
   }
 
