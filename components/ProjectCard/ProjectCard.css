@@ -29,14 +29,15 @@
   }
   
   .project-icon{
-    width: 50px; 
-    height: 50px;
+    width: 45px; 
+    height: 45px;
   }
   
   .project-links {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
   }
 
   .project-card a {
@@ -157,18 +158,28 @@
 
 @media (max-width: 768px) {
   .project-card {
-    padding: 1px;
-    margin-top: 0px;
-    margin-bottom: 18px;
-    margin-left: 8px;
-    margin-right: 5px;
-    max-height: 400px;
-    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 8px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgb(246, 239, 250) 0%,rgb(249, 233, 247) 100%);
+    text-align: center; 
+    align-items: center;
+    width: 80%;
+    min-height: 350px;
+    max-height: 450px;
+    margin: 10px auto;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.9s ease, box-shadow 0.5s ease;
+    position: relative;
+    overflow: hidden;
   }
 
   .project-title {
     margin: 0;
-    padding: 2px;
+    padding: 0;
   }
 
   .project-title h2 {
@@ -178,13 +189,13 @@
   }
 
   .project-image {
-    width: 300px;
-    height: 170px;
+    width: 200px;
+    height: 50px;
   }
 
   .project-icon {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
 
   .project-description {

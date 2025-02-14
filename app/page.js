@@ -36,14 +36,14 @@ export default function Home() {
           Curious <strong>Designer</strong> and <strong>Developer</strong> specializing in building scalable, user-centric web applications. With expertise in <strong>JavaScript</strong>, modern frameworks, and databases, I deliver seamless solutions across the <strong>full stack.</strong> 
         </p>
         <div className='fotofrancocontainer'>
-        <Image
-            src="/img/f.jpg"
-            alt="Modo Claro"
-            className={`fotofranco ${loaded ? 'loaded' : ''}`} // Añadimos la clase 'loaded' cuando la imagen se haya cargado
-            width={200}
-            height={200}
-            onLoadingComplete={handleImageLoad} // Llama a la función cuando la imagen se haya cargado
-          />
+          <Image
+              src="/img/f.jpg"
+              alt="Modo Claro"
+              className={`fotofranco ${loaded ? 'loaded' : ''}`} // Añadimos la clase 'loaded' cuando la imagen se haya cargado
+              width={200}
+              height={200}
+              onLoadingComplete={handleImageLoad} // Llama a la función cuando la imagen se haya cargado
+            />
          </div> 
         </div>
 
@@ -77,10 +77,12 @@ export default function Home() {
           <div>
             <SocialMedia />
           </div>
+        </div> 
+      </div>
+      </div>
+      <div className='scrollcontainer'>
+          <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow"/>
         </div>
-        <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow" />
-      </div>
-      </div>
       <div className="containerGeneral">
         <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
           <ProjectsSection />

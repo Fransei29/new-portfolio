@@ -287,8 +287,13 @@ export default function Projects() {
     <div className="title-container">     {/* Contenedor para el título y el círculo */}
       <div className="tit3">
         <p className="tit-tutorial">Welcome to Tutorials Section</p>
-        <p className="tit-tutorial1">Dive into a collection of hands-on tutorials that will guide you through various technologies and tools</p>
-        <p className="tit-tutorial2">Explore and learn at your own pace</p>
+        <p className="tit-tutorial1">
+          Discover <u>+13 technologies</u> through interactive tutorials designed to make learning exciting and practical.
+        </p>
+        <p className="tit-tutorial2">
+          Whether you are a beginner or an expert, dive in and master new skills at your own pace!
+        </p>
+
       </div>
     </div>
     </div>

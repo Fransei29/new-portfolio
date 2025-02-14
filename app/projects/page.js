@@ -143,10 +143,10 @@ export default function Projects() {
       <div className="tit2">
         <p className="tit-project">Welcome to Projects Section</p>
         <p className="tit-project1">
-          Here you can find some of the projects I have worked on, showcasing my skills and creativity.
+          Explore a selection of my projects, where I bring ideas to life through code, design, and creativity.
         </p>
         <p className="tit-project2">
-          Feel free to explore them, and contact me if you would like to learn more about my process or discuss potential collaborations.
+          Feel free to dive in!
         </p>
       </div>
       </div>
