@@ -72,7 +72,7 @@ export default function Home() {
                         />
                     </span>
                   </p>
-                  <p className='introduction-text'>I help people to learn to code.</p>
+                  <p className='introduction-text'>I help people to learn to code through tutorials.</p>
                   <p className='tech-icons'>
                     <FaReact size={35} color="rgb(233, 232, 232);" />
                     <TbBrandNextjs size={35} color="rgb(233, 232, 232);" />

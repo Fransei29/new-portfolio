@@ -137,7 +137,7 @@
 
   .dark .project-header h2,
   .dark .project-description {
-    color: rgb(61, 61, 61) !important; /* Forzar negro en modo oscuro */
+    color: rgb(223, 223, 223) !important; /* Forzar negro en modo oscuro */
   }
 
   .highlight-second-word {
@@ -145,7 +145,8 @@
   }
   
  .dark .project-card {
-  background: #efe7ec;
+  background: rgba(22, 22, 22, 0.2); 
+  border: 1px solid rgb(236, 3, 119);
   box-shadow: 3px 3px 6px rgb(110, 57, 97);
  }
 

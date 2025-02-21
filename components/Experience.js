@@ -37,7 +37,7 @@ const Experience = () => {
               <p className="experience-date">March 2024 - October 2024</p>
               {isOpen.freelance && (
                 <ul>
-                  <li>Developed responsive web apps with <strong>React</strong> and <strong>Next.js</strong>.</li>
+                  <li>Built responsive web applications using <strong>React</strong> and <strong>Next.js</strong>.</li>
                   <li>Optimized performance, improving loading times by 30%.</li>
                   <li>Integrated <strong>Redux</strong> for state management in e-commerce platforms.</li>
                   <li>Applied <strong>TypeScript</strong> for improved code quality and reduced runtime errors.</li>

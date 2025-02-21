@@ -403,22 +403,23 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   }
 
   .tit-project1, .tit-project2 {
-    width: 65%;
+    width: 60%;
   }
 
   .tit-project{
     padding-bottom: 8px;
-    font-size: 30px;
+    font-size: 3rem;
+    width: 45%;
   }
 
   .tit-project1{
     margin-bottom: 8px;
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .tit-project2{
     margin-top: 3px;
-    font-size: 20px;
+    font-size: 21px;
   }
   
   /* Skills Section */
