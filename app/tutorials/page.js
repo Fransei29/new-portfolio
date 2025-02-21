@@ -286,7 +286,7 @@ export default function Projects() {
       <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
     <div className="title-container">     {/* Contenedor para el título y el círculo */}
       <div className="tit3">
-        <p className="tit-tutorial">Welcome to Tutorials Section</p>
+        <p className="tit-tutorial">Welcome to <span style={{ color: "rgb(236, 3, 119)" }}>Tutorials Section</span></p>
         <p className="tit-tutorial1">
           Discover <u>+13 technologies</u> through interactive tutorials designed to make learning exciting and practical.
         </p>

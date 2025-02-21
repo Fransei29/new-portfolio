@@ -4,7 +4,7 @@
     grid-template-columns: repeat(1, 1fr); /* Dos columnas iguales */
     gap: 5px;
     padding-top: 0;
-    max-width: 880px;
+    max-width: 1000px;
     margin-inline: auto;
     scroll-behavior: smooth;
   }

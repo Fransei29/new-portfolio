@@ -141,7 +141,7 @@ export default function Projects() {
     <div className='titlepro'>
       <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
       <div className="tit2">
-        <p className="tit-project">Welcome to Projects Section</p>
+        <p className="tit-project">Welcome to <span style={{ color: "rgb(236, 3, 119)" }}>Projects Section</span></p>
         <p className="tit-project1">
           Explore a selection of my projects, where I bring ideas to life through code, design, and creativity.
         </p>
