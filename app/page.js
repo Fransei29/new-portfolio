@@ -22,7 +22,6 @@ import { motion } from "framer-motion";
 
 const texts = [
   "Front End Developer",
-  "UI/UX Designer",
   "Creative Problem Solver"
 ];
 
@@ -36,7 +35,7 @@ export default function Home() {
     const interval = setInterval(() => {
       index = (index + 1) % texts.length;
       setCurrentText(texts[index]);
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -65,10 +64,10 @@ export default function Home() {
                           words={texts}
                           loop={0}
                           cursor
-                          cursorStyle="|"
-                          typeSpeed={80}
-                          deleteSpeed={60}
-                          delaySpeed={1500}
+                          cursorStyle=""
+                          typeSpeed={100}
+                          deleteSpeed={80}
+                          delaySpeed={2000}
                         />
                     </span>
                   </p>

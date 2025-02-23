@@ -312,7 +312,12 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     width: 600px;
     padding: 25px 20px;
     border-radius: 5px;
-    text-align: left; /* Asegura que el texto esté centrado */
+    text-align: left; 
+    transition: transform 0.3s ease;
+  }
+
+  .experience-content:hover {
+    transform: scale(1.03);
   }
   
   .title-experience {

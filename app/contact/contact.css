@@ -8,7 +8,17 @@
     min-height: 70vh
   }
 
+  .about-me-section {
+    margin-top: 1.5rem;
+  }
+
+  .info-about-text {
+    width: 80%;
+    font-size: 22px;
+  }
+
   .title-contact-container{
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     align-content: flex-start;
@@ -30,8 +40,7 @@
   }
 
   .h3 {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 19px;
     margin-bottom: 10px;
     color: rgb(201, 40, 121); ;
   }
@@ -43,6 +52,7 @@
     width: 450px;
     height: 200px;
     margin: 0 auto; 
+    margin-top: 1.5rem;
     border-style: none;
 }
 
@@ -50,7 +60,7 @@
 .contact-form input {
     resize: none;
     padding: 20px 40px;   
-    border-radius: 15px;
+    border-radius: 8px;
     font-size: 15px; 
     width: 100%;
     box-sizing: border-box; 
@@ -60,8 +70,8 @@
 
 .contact-form textarea {
     height: 170px;
-    margin-bottom: 8%;
-    border-radius: 15px;
+    margin-bottom: 2rem;
+    border-radius: 8px;
     
 }
 
@@ -80,7 +90,7 @@
     background-color: rgb(219, 55, 137); 
     color: white; 
     border: none; 
-    border-radius: 15px; 
+    border-radius: 8px; 
     padding: 0.75rem; 
     font-size: 1rem; 
     cursor: pointer; 
