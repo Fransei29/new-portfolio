@@ -665,21 +665,21 @@ p {
   .containerGeneral{
     margin: 0;
     width: 100%;
-    padding: 0 14px; /* Ajusta el padding según prefieras */
+    padding: 0 14px;
     box-sizing: border-box;
   }
 
   main{
     margin: 0;
     width: 100%;
-    padding: 0 14px; /* Ajusta el padding según prefieras */
+    padding: 0 14px; 
     box-sizing: border-box;
   }
 
   .title{
     margin: 0;
     padding: 0;
-    font-size: 37px;
+    font-size: 2.4rem;
     margin-top: 2px;
     text-align: left;
   }
@@ -692,19 +692,25 @@ p {
     width: 100%;
   }
 
-  .subtitle2 {
+  .subtitle-text {
     font-size: 16px;
-    padding-right: 20px;
+  }
+  
+  .changing-text {
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
   }
 
-  .waving-hand {
-    font-size: 33px;
+  .introduction-text{
+    margin-bottom: 1rem;
+    padding: 0;
+    font-size: 1.2rem;
   }
-
 
   .socialmedia {
     margin: 0;
-    padding-top: 7px;
+    padding:0;
     gap: 17px;
   }
 
@@ -713,7 +719,7 @@ p {
     margin-bottom: 35px;
   }
 
-  .fotofrancocontainer{
+  .home-textB{
     display: none;
   }
 
@@ -722,6 +728,7 @@ p {
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    padding-bottom: 2rem;
   }
   
   .button-tutorials {
@@ -754,8 +761,8 @@ p {
     text-align: center;
     align-items: center;
     align-content: center;
-    margin-top: 0px;
-    margin-bottom: 25px;
+    margin-top: 2rem;
+    margin-bottom: 2.4rem;
   }
 
   .title-experience {
@@ -793,7 +800,7 @@ p {
   }
 
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr); /* Tres columnas en móviles */
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .skills-section h3 {
@@ -802,7 +809,7 @@ p {
   }
 
   .skill-card {
-    width: 90%;
+    width: 80%;
   }
 
   .tit-contact1, .tit-contact2 {
@@ -858,10 +865,6 @@ p {
     padding: 0;
   }
 
-  .tit2 {
-
-  }
-
   .projects1 {
     display: flex;
     flex-direction: column;
@@ -873,8 +876,8 @@ p {
     align-items: flex-start;
     width: 100%;
     display: flex;
-    padding-top: 25px;
-    padding-bottom: 30px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .scroll-arrow {
@@ -882,13 +885,13 @@ p {
   }
 
   .container-social {
-    margin-top: 5px;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: space-between;
-    width: 60%;
+    width: 100%;
+    padding: 0;
   }
 
   .theme-toggle-button {
@@ -902,13 +905,13 @@ p {
   }
 
   .timeline::before {
-    left:-15px
+    left:-30px
   }
 
   .circle {
-    left: -25px;
-    width: 17px;
-    height: 17px;
+    left: -41px;
+    width: 20px;
+    height: 20px;
   }
 }
 
