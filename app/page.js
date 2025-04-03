@@ -7,6 +7,7 @@ import ProjectsSection from '@/components/Projects';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
 import SocialMedia from '@/components/SocialMedia';
+import ContactForm from '@/components/ContactForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from 'next-themes';  
@@ -20,9 +21,10 @@ import { SiTypescript } from "react-icons/si";
 import { Typewriter } from 'react-simple-typewriter';
 import { motion } from "framer-motion";
 
+
 const texts = [
   "Front End Developer",
-  "Creative Problem Solver"
+  "Creative Problem Solver",
 ];
 
 export default function Home() {
@@ -65,13 +67,15 @@ export default function Home() {
                           loop={0}
                           cursor
                           cursorStyle=""
-                          typeSpeed={100}
-                          deleteSpeed={80}
+                          typeSpeed={60}
+                          deleteSpeed={60}
                           delaySpeed={2000}
                         />
                     </span>
                   </p>
-                  <p className='introduction-text'>I help people to learn to code through tutorials.</p>
+                  <div className="subtitle-textA">
+                   <p className='introduction-text'>JavaScript developer with 1.5+ years of experience and expertise in Next, React, Node and TypeScript.<br></br> I create web apps and help others learn to code.</p>
+                  </div>
                   <p className='tech-icons'>
                     <FaReact size={35} color="rgb(233, 232, 232);" />
                     <TbBrandNextjs size={35} color="rgb(233, 232, 232);" />
@@ -115,24 +119,13 @@ export default function Home() {
                       src="/img/f.jpg"
                       alt="Modo Claro"
                       className="fotofranco"
-                      width={200}
-                      height={200}
+                      width={300}
+                      height={300}
                       onLoadingComplete={handleImageLoad} 
                   />
                   <SocialMedia />
           </div>
           </div>
-      </div>
-
-
-      <div className='scrollcontainer'>
-          <motion.div 
-            className="scrollcontainer"
-            animate={{ y: [0, 15, 0] }} 
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          >
-            <FontAwesomeIcon icon={faAnglesDown} className="scroll-arrow"/>
-          </motion.div>
       </div>
 
       <div className="containerGeneral">
@@ -145,33 +138,24 @@ export default function Home() {
         <div ref={(el) => (elementsRef.current[3] = el)} className="fade-in-right">
           <Skills />
         </div>
-        <div ref={(el) => (elementsRef.current[4] = el)} className="fade-in-left">
+      </div>
+
+      <div ref={(el) => (elementsRef.current[4] = el)} className="fade-in-left"> 
+      <div className='contact-section-container'> 
+
+        <div className='contact-section-first'>
+          <p className="highlight contact-page-title">
+            Get in Touch
+          </p>
+          <p className="tit-contact2 tit-contact-start">
+            I am always open to hearing about new ideas and work opportunities.
+          </p>
+          <p className="tit-contact1 tit-contact-end">
+            If you are looking for a developer passionate about building effective solutions,<strong> reach out.</strong>
+          </p>
+        </div>
         
-        <div className='contact-section-container'> 
-
-          <div className='contact-section-first'>
-            <p className="highlight contact-page-title">
-              Get in Touch
-            </p>
-            <p className="tit-contact2 tit-contact-start">
-              I am always open to hearing about new ideas and work opportunities.
-            </p>
-            <p className="tit-contact1 tit-contact-end">
-              If you are looking for a developer passionate about building effective solutions,<strong> reach out.</strong>
-            </p>
-          </div>
-          
-          <div className='contact-section-second'>
-              <div className='button-container-to-go'>
-                <Link href="/contact">
-                  <button className="button-to-go">
-                    Contact <i className="fas fa-arrow-right arrow"></i>
-                  </button>
-                </Link>
-              </div>
-          </div>
-
-       </div>
+        <ContactForm/>
       </div>
       </div>
       </ThemeWrapper>

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import './globals.css';
-import Footer from '@/components/Footer';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import ThemeWrapper from '@/components/ThemeWrapper'; 
@@ -56,11 +55,6 @@ export default function RootLayout({ children }) {
                   Projects
                 </p>
               </Link>
-              <Link href="/contact" passHref>
-                <p className={`nav-link contact-link ${pathname === '/contact' ? 'active' : ''}`}>
-                  Contact
-                </p>
-              </Link>
             </nav>
           </header>
           </div>
@@ -74,7 +68,7 @@ export default function RootLayout({ children }) {
             {children}
           </motion.main>
 
-          <Footer />
+          
 
       </body>
       </ThemeWrapper> 

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import emailjs from 'emailjs-com'; // Importar EmailJS
-import '../app/contact/contact.css'; // Estilos compartidos
 
 export default function ContactForm() {
   // Estados para manejar los datos del formulario, el envío y los errores.

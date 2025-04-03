@@ -5,7 +5,7 @@ import { ThemeProvider } from 'next-themes';  // Importa el ThemeProvider de nex
 
 export default function ThemeWrapper({ children }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark">
+    <ThemeProvider attribute="class" defaultTheme="light">
       {children}
     </ThemeProvider>
   );
