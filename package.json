@@ -27,6 +27,7 @@
     "emailjs-com": "^3.2.0",
     "font-awesome": "^4.7.0",
     "framer-motion": "^11.18.2",
+    "lucide-react": "^0.487.0",
     "next": "^15.1.7",
     "next-themes": "^0.4.4",
     "nodemailer": "^6.9.15",
@@ -46,6 +47,7 @@
     "typeface-poppins": "^1.1.13"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5"
   }

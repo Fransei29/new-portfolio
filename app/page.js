@@ -74,13 +74,21 @@ export default function Home() {
                     </span>
                   </p>
                   <div className="subtitle-textA">
-                   <p className='introduction-text'>JavaScript developer with 1.5+ years of experience and expertise in Next, React, Node and TypeScript.<br></br> I create web apps and help others learn to code.</p>
+                  <p className="introduction-text">
+                    JavaScript developer with 1.5+ years of experience and expertise in 
+                    <span className="tech-words"> Next</span>, 
+                    <span className="tech-words"> React</span>, 
+                    <span className="tech-words"> Node</span> and 
+                    <span className="tech-words"> TypeScript</span>.
+                    <br />
+                    I create web apps and help others learn to code.
+                  </p>
                   </div>
                   <p className='tech-icons'>
-                    <FaReact size={35} color="rgb(233, 232, 232);" />
-                    <TbBrandNextjs size={35} color="rgb(233, 232, 232);" />
-                    <FaNodeJs size={35} color="rgb(233, 232, 232);" />
-                    <SiTypescript size={35} color="rgb(233, 232, 232);" />
+                    <FaReact size={40} color="rgb(151, 0, 76)" />
+                    <TbBrandNextjs size={40} color="rgb(151, 0, 76)" />
+                    <FaNodeJs size={40} color="rgb(151, 0, 76)" />
+                    <SiTypescript size={40} color="rgb(151, 0, 76)" />
                   </p>
                 </div>
             </div>
@@ -96,8 +104,8 @@ export default function Home() {
                     <Image
                       src="/icons/sun.png" 
                       alt="Modo Claro"
-                      width={28}
-                      height={28}
+                      width={32}
+                      height={32}
                     />
                   ) : (
                     <svg

@@ -53,31 +53,46 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   z-index: 10;
 }
 
+.button-container{
+  display: flex;
+  flex-direction: row;
+}
+
 .button-tutorials, .button-to-go{
-  padding: 12px 55px;
+  padding: 12px 45px;
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 3.5rem;
   margin-top: 2rem;
   font-size: 20px;
   background-color:rgb(240, 240, 240);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   color: rgb(36, 36, 36);
-  border: var(--border);
+  border: 2px solid rgb(151, 0, 76);
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none !important;
+}
+
+.button-tutorials {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+.iconSmallA {
+  margin-left: 20px;
+  color: rgb(151, 0, 76);
+  width: 24px;
+  height: 24px; 
 }
 
 .dark .button-tutorials, .dark .button-to-go{
   background-color: rgb(236, 214, 231);
   color: rgb(38, 38, 38);
   border: 1px solid rgb(250, 100, 175); 
-}
-
-.fas {
-  margin-left: 5px; 
-  padding-left: 8px;
-  font-size: 19px; 
 }
 
 .button-tutorials:hover, .button-to-go:hover {
@@ -108,6 +123,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   min-width: 50%;
 }
 
+.tech-words {
+  color: rgb(151, 0 ,76);
+}
+
 .home-textB {
   display: flex;
   flex-direction: column;
@@ -116,9 +135,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .fotofranco {
-  border-radius: 15px;
+  border-radius: 12px;
   border:2px solid rgb(236, 3, 119);
-  box-shadow:  0 6px 9px rgba(221, 47, 134, 0.511);
+  box-shadow: 17px 17px 0px rgba(151, 0 ,76);
+  margin-bottom: 8px;
 }
 
 .title {
@@ -186,7 +206,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   padding-top: 0.2rem;
 }
 
-
 /* Button to change Mode */
 
 .container-social {
@@ -196,33 +215,28 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
 .theme-toggle-button {
   background-color: var(--button-color);
-  border: var(--border);
+  border: 2px solid rgb(151, 0, 76);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
 .theme-toggle-button.dark {
   background-color: rgb(255, 44, 149);
-  transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(32, 32, 32, 0.3);
 }
 
 .theme-toggle-button:hover {
   background-color: var(--button-color-hover);
-  transform: scale(1.05);
 }
 
 /* --- SOCIAL MEDIA --- */
-.fa-envelope{
-  margin-left: -8px;
-}
 
 .socialmedia {
   display: flex;
@@ -234,13 +248,17 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
 .soicon {
   color: var(--text-color);
-  font-size: 33px; 
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.7s ease-in-out;  
+  width: 40px;
+  height: 40px;
+}
+
+.cv-icon{
+  width: 44px;
+  height: 44px;
 }
 
 .socialmedia a:hover .soicon {
-  transform: scale(1.2);
-  color: rgb(219, 55, 137);
+  color: rgb(151, 0 ,76);
 }
 
 .projects-section {
@@ -248,6 +266,14 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   align-content: center;
   justify-content: center;
 }
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  color: rgb(151, 0, 76); 
+}
+
   /* Experience Section */
 
   .experience-section{
@@ -258,7 +284,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
   .timeline {
     position: relative;
-    width: 100%; /* Ajusta según el tamaño del contenido */
+    width: 100%; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -271,7 +297,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     top: 0;
     width: 1.8px;
     height: 100%;
-    background-color: rgb(236, 3, 119);
+    background-color: rgb(151, 0, 76);
     border-radius: 2px;
   }
   
@@ -288,7 +314,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .circle {
     width: 24px;
     height: 24px;
-    border: 2.4px solid rgb(236, 3, 119); /* Solo borde, sin relleno */
+    border: 2.4px solid rgb(151, 0, 76); /* Solo borde, sin relleno */
     background-color: transparent;
     border-radius: 50%;
     position: absolute;
@@ -298,9 +324,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   
   .experience-content {
     background-color: rgba(240, 240, 240, 0.7);
-    border: var(--border);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+    border: 2px solid rgb(151, 0, 76);
     width: 600px;
-    padding: 25px 20px;
+    padding: 32px 28px;
     border-radius: 10px;
     text-align: left; 
     transition: transform 0.3s ease;
@@ -311,7 +338,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   }
   
   .title-experience {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 400;
     color: rgb(67, 67, 67);
     margin: 0;
@@ -485,6 +512,20 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     width: 100%;
   }
 
+  .skill-icon, .skill-iconA {
+    color: rgb(151, 0, 76);
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+
+  .project-icon{
+    color: rgb(151, 0, 76);
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
   .skill-name {
     font-size: 15px;
     padding-left: 1rem;
@@ -522,7 +563,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     padding: 10px 15px;
     text-align: center;
     border-radius: 7px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
@@ -546,7 +587,7 @@ nav {
   padding: 5px 0px;
   justify-content: space-evenly;
   align-items: center;
-  max-width: 850px;
+  max-width: 750px;
   margin-inline: auto;
   z-index: 1000;
   top: 0;
@@ -557,10 +598,10 @@ nav {
 }
 
 nav a {
-  font-size: 24px;
+  font-size: 23px;
   color: black;
   margin: 0;
-  padding-top: 4px;
+  padding-top: 5px;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;

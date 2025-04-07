@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import './globals.css';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import ThemeWrapper from '@/components/ThemeWrapper'; 
 import { useScrollAnimation } from '../hooks/Scroll';
 
@@ -40,19 +40,19 @@ export default function RootLayout({ children }) {
                   />
                 <Link href="/" passHref>
                   <p className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
-                    Home
+                   Home
                   </p>
                 </Link>
                 </div>
               </div>
               <Link href="/tutorials" passHref>
                 <p className={`nav-link ${pathname === '/tutorials' ? 'active' : ''}`}>
-                  Tutorials
+                 Tutorials
                 </p>
               </Link>
               <Link href="/projects" passHref>
                 <p className={`nav-link ${pathname === '/projects' ? 'active' : ''}`}>
-                  Projects
+                 Projects
                 </p>
               </Link>
             </nav>

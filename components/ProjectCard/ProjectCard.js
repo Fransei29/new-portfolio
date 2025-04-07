@@ -2,7 +2,11 @@
 
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { useState } from 'react';
+import {
+  FileText,
+  Github,
+  ExternalLink
+} from 'lucide-react';
 import './/ProjectCard.css'
 
 // Función para formatear el título
@@ -26,21 +30,16 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
       <div className="project-header">
         {/* Logo + título */}
         <div className="project-title-container-card">
-        <div className="project-title">
+          <div className="project-title">
             {project.icon && (
-              <Image
-                src={project.icon}
-                alt={`${project.title} Icon`}
-                width={38}
-                height={38}
-                className="project-icon"
-              />
+              <project.icon className="project-icon" />
             )}
           </div>
           <div>
             <h2>{project.title}</h2>
           </div>
         </div>
+
 
         {/* Imagen de previsualización */}
         {project.previewImage && (
@@ -65,17 +64,17 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
         <div className="project-links">
           {showDocumentation && project.link1 && (
             <a href={project.link1} target="_blank" rel="noopener noreferrer">
-              <i className="fas fa-file-alt"></i> Docs
+              <FileText className="iconSmall" size={19} /> Docs
             </a>
           )}
           {project.link2 && (
             <a href={project.link2} target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-github"></i> Github
+              <Github className="iconSmall" size={19} /> GitHub
             </a>
           )}
           {project.link3 && (
             <a href={project.link3} target="_blank" rel="noopener noreferrer">
-              <i className="fas fa-external-link-alt"></i> Live
+              <ExternalLink className="iconSmall" size={19} /> Live
             </a>
           )}
         </div>

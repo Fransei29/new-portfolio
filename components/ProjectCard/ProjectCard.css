@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     padding: 8px;
     border-radius: 12px;
-    background: linear-gradient(90deg, rgb(246, 239, 250) 0%,rgb(249, 233, 247) 100%);
+    background-color:rgb(240, 240, 240);
     text-align: center; 
     align-items: center;
     width: 100%;
@@ -14,7 +14,7 @@
     min-height: 450px;
     max-height: 470px;
     margin: 35px auto;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 0 rgba(151, 0, 76, 0.3);
     transition: transform 0.9s ease, box-shadow 0.5s ease;
     position: relative;
     overflow: hidden;
@@ -41,8 +41,9 @@
   }
 
   .project-card a {
-    display: inline-block;
+    display: flex;
     position: relative;
+    justify-content: flex-start;
     flex-direction: row;
     align-items: center;
     padding: 6px 20px;
@@ -50,11 +51,16 @@
     width: 70%;
     color: rgb(11, 11, 11);
     font-size: 16px;
-    background-color: rgba(248, 152, 200, 0.8);
+    background-color:rgb(246, 246, 246);
     border-radius: 7px; 
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease; 
-    border: 1px solid var(--primary-color); 
+    border: 2px solid rgb(151, 0, 76);
+  }
+
+  .iconSmall{
+    margin-right: 15px;
+    font-weight: bold;
   }
 
   .dark .project-card a {
