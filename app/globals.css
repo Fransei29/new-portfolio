@@ -24,7 +24,7 @@ html, body {
   font-family: 'Nunito', sans-serif;
 }
 
-h1, .highlight, .footer, .socialmedia {
+h1, .highlight, .socialmedia {
   user-select: none;
   cursor: default;
 }
@@ -66,7 +66,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   margin-top: 2rem;
   font-size: 20px;
   background-color:rgb(240, 240, 240);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.6);
   color: rgb(36, 36, 36);
   border: 2px solid rgb(151, 0, 76);
   border-radius: 10px;
@@ -112,7 +112,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   flex-wrap: wrap;
   align-content: center;
   align-items: flex-start;
-  padding-top: 4.5rem;
+  padding-top: 1rem;
 }
 
 .home-textA{
@@ -223,7 +223,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   border-radius: 10px;
   width: 50px;
   height: 50px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.6);
   transition: all 0.3s ease;
 }
 
@@ -277,9 +277,13 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   /* Experience Section */
 
   .experience-section{
-    margin-top: 50px;
+    margin-top: 1rem;
     margin-bottom: 50px;
     font-family: 'Nunito', sans-serif;
+    border: 2px solid rgb(151, 0, 76);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 5px 5px 0 rgb(151, 0, 76, 0.6);
   }
 
   .timeline {
@@ -298,6 +302,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     width: 1.8px;
     height: 100%;
     background-color: rgb(151, 0, 76);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
     border-radius: 2px;
   }
   
@@ -314,12 +319,13 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .circle {
     width: 24px;
     height: 24px;
-    border: 2.4px solid rgb(151, 0, 76); /* Solo borde, sin relleno */
+    border: 2.4px solid rgb(151, 0, 76);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
     background-color: transparent;
     border-radius: 50%;
     position: absolute;
     left: 55px;
-    top: 10px; /* Alinea el círculo con la línea */
+    top: 10px;
   }
   
   .experience-content {
@@ -380,17 +386,33 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   
   /* seccion de contact */
 
+  .contact-section{
+    margin: 0;
+    padding: 0;
+  }
+
   .contact-section-container {
     display: flex;
-    flex-direction:row;
+    flex-direction:column;
     max-width: 1000px;
     margin-inline: auto;
-    height: 90vh;
+    height: 100vh;
+    border: 2px solid rgb(151, 0, 76);
+    box-shadow: 5px 5px 0 rgb(151, 0, 76, 0.6);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1rem;
   } 
 
   .contact-section-first {
     font-size: 20px;
-    width: 70%;
+    width: 50%;
+  }
+
+  .contact-section-second {
+    display: flex;
+    justify-content: right;
+    margin-top: -2rem;
   }
 
   /* Contact Form */
@@ -402,7 +424,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     width: 450px;
     height: 200px;
     margin: 0 auto; 
-    margin-top: 7rem;
     border-style: none;
 }
 
@@ -475,11 +496,17 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
   /* titulos del project Section */
   .tit2{
-    max-width: 1000px;
+    box-sizing: content-box;
+    max-width: 940px;
     margin-inline: auto;
-    margin-top: 25px;
-    margin-bottom: 40px;
-    color:rgb(52, 51, 51)
+    color:rgb(52, 51, 51);
+    border: 1px solid rgb(151, 0, 76);
+    border-radius: 10px;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem; 
+    padding-right: 2rem;
+    box-shadow: 5px 5px 0 rgb(151, 0, 76, 0.6);
   }
 
   .tit-project, .tit-project1, .tit-project2 {
@@ -582,12 +609,13 @@ nav {
   display: flex;
   position: relative;
   overflow-x: hidden;
-  background: rgb(0, 0, 0,0.0);
+  background: rgb(0, 0, 0, 0);
+  border-radius: 10px;
   color: #fff;
-  padding: 5px 0px;
+  padding: 0;
   justify-content: space-evenly;
   align-items: center;
-  max-width: 750px;
+  max-width: 400px;
   margin-inline: auto;
   z-index: 1000;
   top: 0;
@@ -635,22 +663,17 @@ nav a:hover {
 .logo {
   width: 55px;
   height: 55px;
-  padding-top: 15px;
-  padding-right: 80px;
+  padding-top: 14px;
+  padding-right: 3rem;
 }
 
  /* --- FOOTER --- */
   
  .footer { 
   display: flex;
-  align-content: flex-end;
-  right: 0;
-  bottom: 0;
-  text-align: right;
-  justify-content:flex-end;
-  background: rgb(0, 0, 0,0.0);
-  font-size: 17px;
-  color: black;
+  font-size: 20px;
+  justify-content: center;
+  padding-bottom: 1rem;
 }  
 
 /* --- PAGES --- */
@@ -662,6 +685,7 @@ nav a:hover {
   margin-inline: auto; 
   scroll-behavior: smooth;
   margin-top: 0;
+  gap: 20px;
 }
 
 .page-title {

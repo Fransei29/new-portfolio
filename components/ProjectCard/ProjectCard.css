@@ -14,7 +14,10 @@
     min-height: 450px;
     max-height: 470px;
     margin: 35px auto;
-    box-shadow: 4px 4px 0 rgba(151, 0, 76, 0.3);
+    border: 1px solid rgb(151, 0, 76, 0.6);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 5px 5px 0 rgb(151, 0, 76, 0.6);
     transition: transform 0.9s ease, box-shadow 0.5s ease;
     position: relative;
     overflow: hidden;

@@ -8,6 +8,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import ThemeWrapper from '@/components/ThemeWrapper'; 
 import { useScrollAnimation } from '../hooks/Scroll';
+import { Home, BookOpen, Folder } from "lucide-react";
 
 export default function RootLayout({ children }) {
   const elementsRef = useScrollAnimation();
@@ -25,8 +26,8 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <ThemeWrapper>   {/* Usamos el ThemeProvider de next-themes */}
-      <body className="container">
       <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
+      <body className="container">
           <header className="header">
             <nav className="nav">
               <div>
@@ -40,27 +41,26 @@ export default function RootLayout({ children }) {
                   />
                 <Link href="/" passHref>
                   <p className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
-                   Home
+                  <Home className="iconNav" size={30} />
                   </p>
                 </Link>
                 </div>
               </div>
               <Link href="/tutorials" passHref>
                 <p className={`nav-link ${pathname === '/tutorials' ? 'active' : ''}`}>
-                 Tutorials
+                <BookOpen className="iconNav" size={30} />
                 </p>
               </Link>
               <Link href="/projects" passHref>
                 <p className={`nav-link ${pathname === '/projects' ? 'active' : ''}`}>
-                 Projects
+                <Folder className="iconNav" size={30} />
                 </p>
               </Link>
             </nav>
           </header>
-          </div>
-          {/* Animación de entrada para todas las páginas */}
-          <motion.main
-            ref={ref}  // Detecta cuando el contenedor principal está en la vista
+          
+          <motion.main    /* Animación de entrada para todas las páginas */
+            ref={ref}                       // Detecta cuando el contenedor principal está en la vista
             initial={{ opacity: 0, y: 1 }} // Empieza desde abajo
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 2 }} // Solo cuando esté visible
             transition={{ duration: 1, delay:  0.4 }} // Duración ajustable para entrada suave
@@ -68,9 +68,8 @@ export default function RootLayout({ children }) {
             {children}
           </motion.main>
 
-          
-
       </body>
+      </div>
       </ThemeWrapper> 
     </html>
   );

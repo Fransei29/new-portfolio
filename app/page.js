@@ -8,6 +8,7 @@ import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
 import SocialMedia from '@/components/SocialMedia';
 import ContactForm from '@/components/ContactForm';
+import Footer from '@/components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from 'next-themes';  
@@ -102,7 +103,7 @@ export default function Home() {
                 >
                   {theme === 'light' ? (
                     <Image
-                      src="/icons/sun.png" 
+                      src="/sun.svg" 
                       alt="Modo Claro"
                       width={32}
                       height={32}
@@ -150,7 +151,6 @@ export default function Home() {
 
       <div ref={(el) => (elementsRef.current[4] = el)} className="fade-in-left"> 
       <div className='contact-section-container'> 
-
         <div className='contact-section-first'>
           <p className="highlight contact-page-title">
             Get in Touch
@@ -161,12 +161,14 @@ export default function Home() {
           <p className="tit-contact1 tit-contact-end">
             If you are looking for a developer passionate about building effective solutions,<strong> reach out.</strong>
           </p>
+        </div> 
+        <div className='contact-section-second'>
+          <ContactForm/>
         </div>
-        
-        <ContactForm/>
       </div>
-      </div>
-      </ThemeWrapper>
-    </>
-  );
+      <Footer/>
+    </div>
+    </ThemeWrapper>
+  </>
+ );
 }

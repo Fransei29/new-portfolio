@@ -9,8 +9,8 @@ const Experience = () => {
 
   return (
     <>
-      <p className="highlight">Experience</p>
       <section className="experience-section">
+      <p className="highlight">Experience</p>
         <div className="timeline">
           {/* Coursfy */}
           <div className="experience-item" onClick={() => toggleDetail("coursfy")}>
