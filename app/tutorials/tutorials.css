@@ -74,18 +74,17 @@
   }
 
   .tit3 {
-    padding-top: 10px;
-    padding-left: 15px;
-    width: 90%;
-    padding-bottom: 15px;
+    width: 100%;
   }
 
   .tit-tutorial {
-    font-size: 21px
+    width: 100%;
+    font-size: 32px
   }
 
   .tit-tutorial1,.tit-tutorial2 {
-    font-size: 17px;
+    width: 100%;
+    font-size: 19px;
   }
 
   .projects-grid {
