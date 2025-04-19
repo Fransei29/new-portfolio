@@ -268,12 +268,26 @@ const projects = [
   }
 ];
 
+// Definir los tipos de los tutoriales
+interface Projects {
+  id: string,
+  title: string;
+  isTutorial?:boolean;
+  description: string;
+  icon?: string;
+  link1?: string;
+  link2?: string;
+  link3?: string;
+  previewImage?: string;
+  logs?: string[];
+}
 
-export default function Projects() {
-  const ref = useRef(null);
+const Tutorials = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const elementsRef = useScrollAnimation();
-  const isInView = useInView(ref, { once: true });
-  const [isMobile, setIsMobile] = useState(false);
+  const inViewRef = useRef(null);
+  const inView = useInView(inViewRef);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     // Verificar si estamos en un entorno cliente
@@ -282,44 +296,46 @@ export default function Projects() {
     };
 
     handleResize(); // Comprobar al cargar la página
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
- 
+
+  console.log('Projects:', projects);
+
   return (
     <>
-    <div className='tutorial-page'>
-    <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
-      </div>
-      <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
-    <div className="title-container">     {/* Contenedor para el título y el círculo */}
-      <div className="tit3">
-        <p className="tit-tutorial">Welcome to <span style={{ color: "rgb(236, 3, 119)" }}>Tutorials Section</span></p>
-        <p className="tit-tutorial1">
-          Discover <u>+13 technologies</u> through interactive tutorials designed to make learning exciting and practical.
-        </p>
-        <p className="tit-tutorial2">
-          Whether you are a beginner or an expert, dive in and master new skills at your own pace!
-        </p>
+      <div className="tutorial-page">
+      <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+          {/* Otro contenido si es necesario */}
+        </div>
+        <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
+          <div className="title-container"> {/* Contenedor para el título y el círculo */}
+            <div className="tit3">
+              <p className="tit-tutorial">
+                Welcome to <span style={{ color: 'rgb(236, 3, 119)' }}>Tutorials Section</span>
+              </p>
+              <p className="tit-tutorial1">
+                Discover <u>+13 technologies</u> through interactive tutorials designed to make learning exciting and practical.
+              </p>
+              <p className="tit-tutorial2">
+                Whether you are a beginner or an expert, dive in and master new skills at your own pace!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="projects-grid" ref={ref}>
+          {projects
+            .filter((project) => project.isTutorial)
+            .map((project, index) => (
+                <ProjectCard key={project.id} project={project} />
 
+          ))}
+        </div>
       </div>
-    </div>
-    </div>
-    <div className="projects-grid" ref={ref}>
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 30 }}         // Aparecer desde abajo con opacidad 0
-            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
-            transition={{ duration: 0.5, delay: index * 0.4 }}   // Delay para escalonar las animaciones
-          >
-            <ProjectCard project={project} />
-          </motion.div>
-        ))}
-      </div>
-    </div>
     </>
   );
-}
+};
+
+export default Tutorials;

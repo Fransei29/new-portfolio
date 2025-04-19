@@ -3,10 +3,12 @@
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
+import { Key } from 'react';
 
 const projects = [
   {
     title: 'Vestiré',
+    isTutorial: false,
     description: `E-commerce platform offering a wide selection of clothing with intuitive navigation and a seamless checkout process. I designed and developed the complete user flow, from start to finalizing purchases. Built using Express, React, Axios, and PostgreSQL. `,
     link2: 'https://github.com/Fransei29/vestire_front.git',
     link3: 'https://vestire-front-s196.vercel.app/',
@@ -21,6 +23,7 @@ const projects = [
   },
   {
     title: 'Task Manager',
+    isTutorial: false,
     description: `An efficient app for managing tasks with functionalities like creating, editing, deleting, and user authentication. Its user-friendly interface supports seamless task and session handling. Built using React, Next.js, Axios, and PostgreSQL.`,
     link2: 'https://github.com/Fransei29/task-manager.git',
     link3: 'https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/',
@@ -36,6 +39,7 @@ const projects = [
   },
   {
     title: 'Flipper',
+    isTutorial: false,
     description: `A Twitter-inspired app supporting functionalities like tweeting, following, and live updates. Real-time interactions are powered by WebSockets, ensuring responsiveness and high user engagement. Built with Redis, Node.js, Express, Redis and Tailwind CSS`,
     link2: 'https://github.com/Fransei29/clonetwitter.git',
     link3: 'https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/',
@@ -50,6 +54,7 @@ const projects = [
   },
   {
     title: 'Dynamic Blog',
+    isTutorial: false,
     description: `A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable. Features include dynamic routing, user blog management, and a clean, responsive design. Built using Next.js, Tailwind CSS, and Parser.`,
     link2: 'https://github.com/Fransei29/next-blogs-post/blob/main/app/page.js',
     link3: 'https://next-blogs-post-ahua.vercel.app/',
@@ -64,6 +69,7 @@ const projects = [
   },
   {
     title: 'Trip Planner',
+    isTutorial: false,
     description: `Application designed to simplify trip planning with itinerary management and other travel tools. Its effective navigation and smooth design enhance the user experience significantly. Built with Express, React, Axios, and MongoDB.`,
     link2: 'https://github.com/Fransei29/tripplanner.git',
     link3: 'https://trip-planner-c.vercel.app/',
@@ -78,6 +84,7 @@ const projects = [
   },
   {
     title: 'Holistic Portal',
+    isTutorial: false,
     description: `Informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options. It focuses on user interaction and professional presentation. Built using HTML, CSS, and Sass.`,
     link2: 'https://github.com/Fransei29/AmnerisWeb.git',
     link3: 'https://amneris-web.vercel.app/',
@@ -92,6 +99,7 @@ const projects = [
   },
   {
     title: "First Portfolio",
+    isTutorial: false,
     description: `A polished portfolio website that highlights my initial projects, skills, and design style. I carefully crafted the structure and aesthetics, ensuring it was visually attractive and simple to navigate for any visitor. Built using HTML and CSS.`,
     link2: 'https://github.com/Fransei29/Portfolio.git',
     link3:'https://portfolio-gamma-green-78.vercel.app/',
@@ -106,6 +114,7 @@ const projects = [
 
   {
     title: "Content Management",
+    isTutorial: false,      
     description: `A robust website for creating, managing, and displaying posts with various content types. It provides tools for users to efficiently handle and organize their digital content. Built using Express, Sequelize, PostgreSQL, and GraphQL`,
     link2: 'https://github.com/Fransei29/graphql_front.git',
     previewImage: '/img/gra.png',
@@ -119,6 +128,7 @@ const projects = [
   },
   {
     title: 'Greengrocery',
+    isTutorial: false,
     description: `Online store specializing in fresh groceries with a shopping cart and an optimized shopping experience. It incorporates testing with Jest, ensuring smooth functionality and higher conversion rates for users. Built using React.`,
     link2: 'https://github.com/Fransei29/Verdufront.git',
     link3: 'https://verdufront-zbzb.vercel.app/',
@@ -133,30 +143,42 @@ const projects = [
   },
 ];
 
+// Definir los tipos de los proyectos
+interface Projects {
+  title: string;
+  isTutorial?:boolean;
+  description: string;
+  link1?: string;
+  link2?: string;
+  link3?: string;
+  previewImage?: string;
+  logs?: string[];
+  
+}
 
-export default function Projects() {
-   const elementsRef = useScrollAnimation();
+const Projects = () => {
+  const elementsRef = useScrollAnimation();
 
   return (
-    <div className='titlepro'>
-      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-right">
-      <div className="tit2">
-        <p className="tit-project">Welcome to <span style={{ color: "rgb(236, 3, 119)" }}>Projects Section</span></p>
-        <p className="tit-project1">
-          Explore a selection of my projects, where I bring ideas to life through code, design, and creativity.
-        </p>
-        <p className="tit-project2">
-          Feel free to dive in!
-        </p>
+    <div className="titlepro">
+      <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
+        <div className="tit2">
+          <p className="tit-project">
+            Welcome to <span style={{ color: 'rgb(236, 3, 119)' }}>Projects Section</span>
+          </p>
+          <p className="tit-project1">
+            Explore a selection of my projects, where I bring ideas to life through code, design, and creativity.
+          </p>
+          <p className="tit-project2">Feel free to dive in!</p>
+        </div>
       </div>
-      </div>
-      <div className='projects1'>
+      <div className="projects1">
         {projects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 30 }} // Inicio opaco y desplazado hacia abajo
             animate={{ opacity: 1, y: 0 }} // Al final, totalmente visible y en posición original
-            transition={{ duration: 0.5, delay: index * 0.4 }} // Ajusta la duración y el retraso para que aparezcan una tras otra
+            transition={{ duration: 0.5, delay: (index as number) * 0.4 }} // Ajusta la duración y el retraso para que aparezcan una tras otra
           >
             <ProjectCard project={project} />
           </motion.div>
@@ -164,4 +186,6 @@ export default function Projects() {
       </div>
     </div>
   );
-}
+};
+
+export default Projects;

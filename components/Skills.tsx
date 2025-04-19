@@ -1,5 +1,3 @@
-'use client';
-
 import { useScrollAnimation } from '../hooks/Scroll';
 import Image from 'next/image';
 
@@ -29,8 +27,14 @@ import WordpressIcon from './icons/wordpress.svg';
 import FigmaIcon from './icons/figma.svg';
 import JestIcon from './icons/jest.svg';
 
+// Definir tipos para las habilidades
+interface Skill {
+  name: string;
+  icon: React.ElementType | string;
+}
+
 // Arrays de skills
-const frontEndSkills = [
+const frontEndSkills: Skill[] = [
   { name: "JavaScript", icon: JavascriptIcon },
   { name: "TypeScript", icon: TypescriptIcon },
   { name: "React", icon: ReactIcon },
@@ -42,7 +46,7 @@ const frontEndSkills = [
   { name: "Sass", icon: SassIcon }
 ];
 
-const backEndSkills = [
+const backEndSkills: Skill[] = [
   { name: "Node.js", icon: NodeIcon },
   { name: "Express", icon: ExpressIcon },
   { name: "GraphQL", icon: GraphqlIcon },
@@ -53,7 +57,7 @@ const backEndSkills = [
   { name: "Airtable", icon: AirtableIcon },
 ];
 
-const toolsSkills = [
+const toolsSkills: Skill[] = [
   { name: "Git", icon: GitIcon },
   { name: "Docker", icon: DockerIcon },
   { name: "Wordpress", icon: WordpressIcon },
@@ -62,7 +66,12 @@ const toolsSkills = [
 ];
 
 // Componente de sección
-const SkillsSection = ({ title, skills }) => (
+interface SkillsSectionProps {
+  title: string;
+  skills: Skill[];
+}
+
+const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills }) => (
   <div className="skills-category">
     <p className="skills-title-divide">{title}</p>
     <div className="skills-grid">
@@ -74,12 +83,12 @@ const SkillsSection = ({ title, skills }) => (
             {isComponent ? (
               <skill.icon className="skill-iconA" />
             ) : (
-              <Image 
-                src={skill.icon} 
-                alt={`${skill.name} Icon`} 
-                width={20} 
-                height={20} 
-                className="skill-icon" 
+              <Image
+                src={typeof skill.icon === 'string' ? skill.icon : ''}
+                alt={`${skill.name} Icon`}
+                width={20}
+                height={20}
+                className="skill-icon"
               />
             )}
             <span className="skill-name">{skill.name}</span>
@@ -91,23 +100,25 @@ const SkillsSection = ({ title, skills }) => (
 );
 
 // Componente principal
-const Skills = () => {
-  const elementsRef = useScrollAnimation();
+const Skills: React.FC = () => {
+  const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
 
   return (
     <section className="skills-section">
-      <p className="highlight">Skills</p>
+      <p className="highlight skills-title">Skills</p>
 
-      <div ref={(el) => (elementsRef.current[0] = el)} className="fade-in-left">
-        <SkillsSection title="Frontend" skills={frontEndSkills} />
-      </div>
+      <div className="skills-cards">
+      <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+          <SkillsSection title="Frontend" skills={frontEndSkills} />
+        </div>
 
-      <div ref={(el) => (elementsRef.current[1] = el)} className="fade-in-right">
-        <SkillsSection title="Backend" skills={backEndSkills} />
-      </div>
+        <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
+          <SkillsSection title="Backend" skills={backEndSkills} />
+        </div>
 
-      <div ref={(el) => (elementsRef.current[2] = el)} className="fade-in-left">
-        <SkillsSection title="Tools" skills={toolsSkills} />
+        <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
+          <SkillsSection title="Tools" skills={toolsSkills} />
+        </div>
       </div>
     </section>
   );

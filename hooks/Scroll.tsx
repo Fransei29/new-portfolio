@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 export const useScrollAnimation = () => {
-  const elementsRef = useRef([]);
+  // Usamos useRef para almacenar las referencias de los elementos
+  const elementsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,10 +13,15 @@ export const useScrollAnimation = () => {
           }
         });
       },
-      { threshold: 0.2 } // Se activa cuando el 20% del elemento está en pantalla
+      { threshold: 0.1 } // Se activa cuando el 20% del elemento está en pantalla
     );
 
-    elementsRef.current.forEach((el) => observer.observe(el));
+    // Observamos todos los elementos referenciados
+    elementsRef.current.forEach((el) => {
+      if (el) {
+        observer.observe(el);
+      }
+    });
 
     return () => observer.disconnect();
   }, []);

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 
-const Experience = () => {
-  const [isOpen, setIsOpen] = useState({});
+// Interfaz para definir el tipo del estado isOpen
+interface IsOpenState {
+  [key: string]: boolean;
+}
 
-  const toggleDetail = (id) => {
+const Experience: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<IsOpenState>({});
+
+  const toggleDetail = (id: string): void => {
     setIsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
     <>
       <section className="experience-section">
-      <p className="highlight">Experience</p>
+        <p className="highlight">Experience</p>
         <div className="timeline">
           {/* Coursfy */}
           <div className="experience-item" onClick={() => toggleDetail("coursfy")}>
@@ -69,4 +74,3 @@ const Experience = () => {
 };
 
 export default Experience;
-

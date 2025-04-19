@@ -8,7 +8,7 @@
   --text-color-dark-mode:rgb(237, 236, 236);
   --button-color:rgba(248, 152, 200, 0.8);
   --button-color-hover:rgb(245, 84, 165, 0.9);
-    background-color: rgb(239, 239, 232);
+    background-color: rgb(248, 248, 248);
   --border:2px solid rgb(236, 3, 119);
 }
 
@@ -47,7 +47,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   flex-direction: column;
   height: 100%;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin-inline: auto;
   color: var(--text-color);
   z-index: 10;
@@ -89,6 +89,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   height: 24px; 
 }
 
+.iconNav{
+  padding: 0.1rem 1.7rem;
+}
+
 .dark .button-tutorials, .dark .button-to-go{
   background-color: rgb(236, 214, 231);
   color: rgb(38, 38, 38);
@@ -103,7 +107,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
 .home-text {
   color: var(--text-color);
-  max-width: 1000px;
+  max-width: 1100px;
   margin-inline: auto;
   display: flex;
   position: relative;
@@ -180,7 +184,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   align-items: center;
   justify-content: flex-start;
   min-height: 40px;
-  min-width: 300px; 
+  max-width: 80px;
   position: relative;
 }
 
@@ -189,6 +193,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   text-align: left;
   white-space: nowrap;
   font-size: 2.5em;
+  width: fit-content;
   transition: opacity 0.5s ease-in-out;
   position: absolute; 
   left: 0;
@@ -394,7 +399,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .contact-section-container {
     display: flex;
     flex-direction:column;
-    max-width: 1000px;
+    max-width: 1100px;
     margin-inline: auto;
     height: 100vh;
     border: 2px solid rgb(151, 0, 76);
@@ -497,7 +502,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   /* titulos del project Section */
   .tit2{
     box-sizing: content-box;
-    max-width: 940px;
+    max-width: 1100px;
     margin-inline: auto;
     color:rgb(52, 51, 51);
     border: 1px solid rgb(151, 0, 76);
@@ -681,7 +686,7 @@ nav a:hover {
 .projects1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
-  max-width: 1000px;
+  max-width: 1100px;
   margin-inline: auto; 
   scroll-behavior: smooth;
   margin-top: 0;

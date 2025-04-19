@@ -1,16 +1,26 @@
-"use client"
+'use client';
 
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import {
-  FileText,
-  Github,
-  ExternalLink
-} from 'lucide-react';
-import './/ProjectCard.css'
+import { FileText, Github, ExternalLink } from 'lucide-react';
+import './ProjectCard.css';
+import { JSX } from 'react';
+import React from 'react';
+
+// Definir tipos para el proyecto
+interface Project {
+  title: string;
+  isTutorial?:boolean;
+  description: string;
+  icon?:string;
+  previewImage?: string;
+  link1?: string;
+  link2?: string;
+  link3?: string;
+}
 
 // Función para formatear el título
-const formatTitle = (title) => {
+const formatTitle = (title: string): JSX.Element => {
   const words = title.split(' ');
   return (
     <>
@@ -23,7 +33,12 @@ const formatTitle = (title) => {
   );
 };
 
-const ProjectCard = ({ project, showDocumentation = true }) => {
+interface ProjectCardProps {
+  project: Project;
+  showDocumentation?: boolean;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = true }) => {
   return (
     <div className="project-card" id={project.title.toLowerCase().replace(/\s/g, "")}>
       {/* Contenedor superior con logo y preview */}
@@ -31,15 +46,17 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
         {/* Logo + título */}
         <div className="project-title-container-card">
           <div className="project-title">
-            {project.icon && (
-              <project.icon className="project-icon" />
-            )}
+          {project.icon &&
+            (typeof project.icon === 'string' ? (
+              <Image src={project.icon} alt={`${project.title} Icon`} width={50} height={50} className="project-icon" />
+            ) : (
+              React.createElement(project.icon, { className: "project-icon" })
+            ))}
           </div>
           <div>
             <h2>{project.title}</h2>
           </div>
         </div>
-
 
         {/* Imagen de previsualización */}
         {project.previewImage && (
@@ -47,10 +64,9 @@ const ProjectCard = ({ project, showDocumentation = true }) => {
             <Image
               src={project.previewImage}
               alt={`${project.title} Preview`}
-              width={270} // Reducimos un poco el tamaño para que encaje mejor
+              width={270}
               height={120}
               quality={100}
-              layout="intrinsic"
               priority
               className="project-image"
             />

@@ -6,16 +6,16 @@ import { useTheme } from 'next-themes';  // Usamos el hook de next-themes
 
 export default function ThemeToggleButton() {
   const { theme, setTheme } = useTheme();  // Obtenemos el tema actual y la función para cambiarlo
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);  // Estado para saber si el componente ya está montado
 
   // Solo después de que el componente esté montado, cambiar el tema
   useEffect(() => {
-    setIsMounted(true);
+    setIsMounted(true);  // Se asegura que el código se ejecute solo en el cliente
   }, []);
 
+  // Asegúrate de que no se renderice nada hasta que el componente esté montado
   if (!isMounted) {
-    // Devuelve un fallback o un componente vacío mientras se hidrata
-    return null;
+    return null;  // No renderizamos nada hasta que se haya montado completamente
   }
 
   const toggleTheme = () => {
@@ -27,21 +27,18 @@ export default function ThemeToggleButton() {
     <button onClick={toggleTheme} className={`theme-toggle-button ${theme === 'dark' ? 'dark' : ''}`}>
       {theme === 'light' ? (
         <Image
-          src="/icons/sun.png" // Ruta de la imagen del sol
+          src="/moon.png" // Ruta de la imagen de la luna
           alt="Modo Claro"
           width={28}
           height={28}
         />
       ) : (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="#fff"
-          width="24px"
-          height="24px"
-        >
-          <path d="M21.64 13A9 9 0 1111 2.36 7 7 0 0021.64 13z" />
-        </svg>
+        <Image
+          src="/sun.svg" // Ruta de la imagen del sol
+          alt="Modo Oscuro"
+          width={28}
+          height={28}
+        />
       )}
     </button>
   );

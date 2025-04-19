@@ -1,21 +1,26 @@
-"use client";  // Indica que el componente es para uso en la parte del cliente.
-
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import emailjs from 'emailjs-com'; // Importar EmailJS
+
+// Definir tipos para el formulario
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function ContactForm() {
   // Estados para manejar los datos del formulario, el envío y los errores.
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   // Maneja los cambios en los inputs del formulario
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -24,7 +29,7 @@ export default function ContactForm() {
   };
 
   // Envía el formulario usando EmailJS
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Parámetros necesarios para EmailJS
@@ -33,7 +38,7 @@ export default function ContactForm() {
     const userID = 'KadAicMAaNEheSzf5';
 
     // Enviar el email con EmailJS
-    emailjs.send(serviceID, templateID, formData, userID)
+    emailjs.send(serviceID, templateID, { ...formData }, userID)
       .then((response) => {
         console.log('Email sent successfully!', response.status, response.text);
         setSubmitted(true);
@@ -58,7 +63,7 @@ export default function ContactForm() {
       ) : (
         // Formulario de contacto
         <form onSubmit={handleSubmit} className="contact-form">
-          <p className='h3'>Name</p>
+          <p className="h3">Name</p>
           <div className="form-group">
             <input
               type="text"
@@ -71,7 +76,7 @@ export default function ContactForm() {
             />
           </div>
 
-          <p className='h3'>Email</p>
+          <p className="h3">Email</p>
           <div className="form-group">
             <input
               type="email"
@@ -84,7 +89,7 @@ export default function ContactForm() {
             />
           </div>
 
-          <p className='h3'>Message</p>
+          <p className="h3">Message</p>
           <div className="form-group">
             <textarea
               id="message"
