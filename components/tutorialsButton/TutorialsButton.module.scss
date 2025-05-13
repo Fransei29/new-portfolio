@@ -1,0 +1,74 @@
+
+.buttonTutorials, .buttonToGo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none !important;
+    padding: 12px 50px;
+    font-size: 20px;
+    background-color:rgba(250, 6, 128, 0.1);
+    border: none;
+    box-shadow: var(--box-shadow);
+    color: var(--text-color-light);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none !important;
+
+    &:hover {
+      background-color: rgb(241, 194, 218, 0.7); 
+    }
+      :global(html.dark) & {
+        background-color: var(--dark-light);
+        color: white;
+      }
+  }
+  
+  .iconSmallA {
+    margin-left: 20px;
+    color: var(--text-color-light);
+    width: 24px;
+    height: 24px; 
+  }
+
+  @media (max-width: 768px) {
+  .buttonTutorials {
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: 1px solid rgb(251, 188, 220); 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .iconSmallA{
+    width: 22px;  
+    height: 22px;
+  }
+
+  .buttonContainer {
+    display: flex;
+  }
+
+  .buttonContainerToGo {
+    margin: 0;
+    padding: 0;
+  }
+
+  .buttonToGo{
+    padding: 8px 15px;
+    margin:0;
+    font-size: 18px;
+    background-color: rgb(231, 231, 231);
+    color: rgb(33, 33, 41);
+    border: 1px solid rgb(251, 188, 220); 
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+}

@@ -1,0 +1,90 @@
+.homeTextContainer{
+  padding: 2rem 0rem;
+}
+
+.title {
+  font-family: 'Geist Sans', sans-serif;
+  font-size: 5rem;
+  font-weight: 500;
+  margin: 0;
+  padding-top: 1rem;
+  color: var(--text-color-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.01em; 
+  line-height: 1.1;       
+}
+  
+  .nameHighlight {
+    color: var(--primary-color);
+  }
+  
+  .subtitle {
+    display: flex;
+    flex-direction: row;
+    color: #696969;
+  }
+  
+  .subtitleText {
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .subtitleTextA {
+   width: 92%;
+   color: #696969;
+  }
+  
+  .subtitle2 {
+    font-size: 1.2rem;
+  }
+  
+  .introductionText {
+    font-size: 1.5rem;
+    width: 90%;
+    line-height: 1.4;
+    padding-bottom: 3rem;
+  }
+  
+  .techIcons {
+    display: flex;
+    gap: 20px;
+    justify-content: left;
+    padding-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+  
+  .homeTextContainer{
+    padding: 0.5rem;
+  }
+  
+  .title{
+    margin: 0;
+    padding:0;
+    font-size: 3rem;
+    text-align: left;
+  }
+
+  .subtitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .subtitleTextA {
+    width: 100%;
+   }
+
+  .introductionText{
+    padding: 1rem 0rem;
+    margin: 0;
+    font-size: 1.5rem;
+  }
+}

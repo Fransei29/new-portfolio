@@ -1,0 +1,47 @@
+.themeToggleButton {
+    background-color:transparent;
+    border: 2px solid rgb(151, 0, 76);
+    cursor: pointer;
+    display: flex;
+    color: var(--text-color-light);
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 45px;
+    height: 45px;
+    box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.6);
+    transition: all 0.3s ease;
+  }
+  
+  .themeToggleButton.dark {
+    background-color: rgb(255, 44, 149);
+    box-shadow: 0 4px 6px rgba(32, 32, 32, 0.3);
+  }
+  
+  .themeToggleButton:hover {
+    background-color: rgb(241, 194, 218, 0.7); 
+  }
+  
+  .containerSocial {
+    display: flex;
+    padding-top: 2rem;
+  }
+  @media (max-width: 768px) {
+  .containerSocial {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin-top: -20px;
+    margin-bottom: 1rem;
+  }
+
+  .themeToggleButton {
+    width: 35px;
+    height: 35px;
+    margin-left: 0
+  }
+  }

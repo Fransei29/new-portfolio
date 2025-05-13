@@ -1,0 +1,13 @@
+.highlight {
+  display: inline-block;
+  position: relative;
+  font-size: 32px;
+  color: var(--text-color-light);
+  text-decoration: none;
+  padding:0;
+  margin: 1rem 0rem;
+
+  @media (max-width: 600px) {
+    font-size: 1.8rem;
+  }
+}

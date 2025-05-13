@@ -1,0 +1,241 @@
+@import '../../app/styles/utilities.scss'; 
+
+.experienceContainer{
+  width: 100%;
+  background-color: var(--background-colorB);
+  box-shadow: inset 0 10px 20px -10px rgb(206, 206, 206, 0.4);
+
+  
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(238, 236, 236);
+    box-shadow: inset 0 10px 20px -10px rgb(56, 56, 56);
+  }
+}
+
+.experienceSection{
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+.timeline {
+  position: relative;
+ padding: 2rem;
+  width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 2.8rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #9b9a9a;
+  }
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 0;
+  width: 95%;
+  position: relative;
+}
+
+.timelineLeft {
+  width: 4rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.timelineIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  z-index: 2;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelineRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  cursor: pointer;
+  flex: 1;
+  padding: 1rem 2rem;
+  width: 100%;
+  max-width: 85%;
+  border-radius: 8px;
+  background: rgba(248, 234, 241, 0.1);
+  box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.2);
+  color: var(--text-color);
+  border: 1px solid rgb(151, 0, 76, 0.2);
+
+  &:hover {
+    background: rgba(248, 234, 241, 0.3);
+    box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.5);
+    transition: all 0.3s ease;
+  }
+
+}
+
+.timelineSvg {
+  width: 1rem;
+  height: 1rem;
+  color: #9b9a9a;
+}
+
+.timelineContent {
+  margin-left: 3rem; 
+  width: calc(100% - 4rem);
+}
+
+.timelineItem {
+  &:nth-child(odd) {
+    .timelineContent {
+      text-align: left;
+    }
+  }
+  &:nth-child(even) {
+    .timelineContent {
+      text-align: left;
+    }
+  }
+}
+
+// text
+.titleExperience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.jobTitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.companyName {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+  .experienceDate {
+    font-size: 15px;
+    color: #aaa;
+    margin: 7px 0px;
+  }
+  
+  .experienceList {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    list-style: none;
+    margin-bottom: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  
+  .experienceList li {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 0.2rem; 
+    color: var(--text-color-light);
+  }
+  
+  .experienceList li::before {
+    content: "✓";
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  @media (max-width: 768px) {
+  .experienceSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .experienceList {
+    text-align: left;
+    margin:0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .experienceList li {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.2rem;
+    padding-left: 1rem; 
+  }
+
+  .experienceList li::before {
+    content: "✓";
+    position: absolute;
+    left: -0.5rem;
+    top: 0.1rem;
+  }
+
+  .timelineRight{
+    width: 100%;
+    margin: 0;
+    padding: 0 2rem;
+  }
+
+  .timelineLeft{
+    margin: 0;
+    padding: 0;
+    width: 1.7rem;
+  }
+  
+  .timelineItem {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .titleExperience {
+    font-size: 19px;
+    align-items: flex-start;
+  }
+
+  .jobTitle{
+    font-size: 1.5rem;
+  }
+
+  .companyName{
+    font-size: 1.2rem;
+  }
+
+  .timeline {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .timeline::before, .circle {
+    display: none;
+  }
+  }

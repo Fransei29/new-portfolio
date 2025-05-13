@@ -1,6 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import ClientLayout from '../components/ClientLayout';
+import ClientLayout from '../components/clientLayout/ClientLayout';
 import Head from 'next/head';
 
 export const metadata = {
@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
           />
+          <link rel="stylesheet" href="https://geisthub.vercel.app/font.css" />
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Portfolio de desarrollador frontend." />
           <meta property="og:title" content="Franco Seiler | Portfolio" />
