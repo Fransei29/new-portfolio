@@ -3,20 +3,20 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   const projects = [
     {
-      title: 'Vestiré',
+      title: 'Ecommerce',
       isTutorial: false,
-      description: `E-commerce platform offering a wide selection of clothing with intuitive navigation and a seamless checkout process. \nI designed and developed the complete user flow, from start to finalizing purchases. \nBuilt using Express, React, Axios, and PostgreSQL.`,
-      link2: 'https://github.com/Fransei29/vestire_front.git',
-      link3: 'https://vestire-front-s196.vercel.app/',
-      previewImage: '/img/vestire2.png',
+      description: `A fullstack eCommerce platform with user authentication, product management, shopping cart, and Mercado Pago payment integration. \nBuilt with Next.js, Supabase, Prisma, Docker, and deployed on Vercel.`,
+      link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
+      link3: 'https://sport-ecommerce-58pi.vercel.app/',
+      previewImage: '/img/ecommerce.jpg',
       logs: [
         'git init',
-        'git clone https://github.com/Fransei29/vestire_front.git',
-        'cd vestire_front',
+        'git clone https://github.com/Fransei29/Ecommerce-Tutorial.git',
+        'cd Ecommerce-Tutorial',
         'npm install',
-        'npm run start',
-      ],
-    },
+        'npm run dev'
+      ]
+    },    
     {
       title: 'Task Manager',
       isTutorial: false,
@@ -31,6 +31,21 @@ export async function GET() {
         'npm install',
         'README file for environment variables configuration.',
         'npm run dev',
+      ],
+    },
+    {
+      title: 'Vestiré',
+      isTutorial: false,
+      description: `E-commerce platform offering a wide selection of clothing with intuitive navigation and a seamless checkout process. \nI designed and developed the complete user flow, from start to finalizing purchases. \nBuilt using Express, React, Axios, and PostgreSQL.`,
+      link2: 'https://github.com/Fransei29/vestire_front.git',
+      link3: 'https://vestire-front-s196.vercel.app/',
+      previewImage: '/img/vesti.jpg',
+      logs: [
+        'git init',
+        'git clone https://github.com/Fransei29/vestire_front.git',
+        'cd vestire_front',
+        'npm install',
+        'npm run start',
       ],
     },
     {
