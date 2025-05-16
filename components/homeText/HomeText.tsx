@@ -21,7 +21,7 @@ const HomeText: React.FC<HomeTextProps> = () => {
         <div className={styles.subtitleText}>
           <div className={styles.subtitleTextA}>
             <p className={styles.introductionText}>
-            Frontend developer specialized in crafting digital experiences with the latest technologies 
+            Frontend developer with 2+ years of experience crafting impactful digital experiences focused on design and usability.
             </p>
           </div>
           <p className={styles.techIcons}> 
