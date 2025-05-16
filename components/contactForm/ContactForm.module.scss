@@ -8,13 +8,18 @@
     border-style: none;
     border: 1px solid rgb(129, 128, 128, 0.2);
     box-shadow: var(--box-shadow);
-    
     border-radius: 10px;
     padding: 2rem;
 
-    p{
+     p {
         margin-bottom: 0.8rem;
-    }
+      }
+    
+      :global(html.dark) & {
+        background-color: #181c33;
+        color: rgb(228, 227, 227);
+        border: 1px solid rgba(248, 248, 248, 0.3);
+      }
 }
 
 .contactForm  textarea,
@@ -56,6 +61,11 @@
     font-size: 1rem; 
     cursor: pointer; 
     transition: background-color 0.3s ease, transform 0.3s ease; 
+    :global(html.dark) & {
+        background-color: #181c33;
+        color: rgb(228, 227, 227);
+        border: 1px solid rgba(248, 248, 248, 0.3);
+      }
 }
 
 .contactForm button:hover {

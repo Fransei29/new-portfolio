@@ -30,9 +30,9 @@ export default function ThemeToggleButton() {
       className={`${styles.themeToggleButton} ${theme === 'dark' ? styles.dark : ''}`}
     >
       {theme === 'light' ? (
-        <Image src="/moon.png" alt="Modo Claro" width={19} height={19} />
+        <Image src="/moon.png" alt="Modo Claro" width={22} height={22} />
       ) : (
-        <Image src="/sun.svg" alt="Modo Oscuro" width={22} height={22} />
+        <Image src="/sun.svg" alt="Modo Oscuro" width={26} height={26} />
       )}
     </button>
   );

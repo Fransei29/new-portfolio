@@ -25,10 +25,10 @@ const HomeText: React.FC<HomeTextProps> = () => {
             </p>
           </div>
           <p className={styles.techIcons}> 
-              <FaReact size={32} color="rgb(151, 0, 76)" />
-              <TbBrandNextjs size={32} color="rgb(151, 0, 76)" />
-              <FaNodeJs size={32} color="rgb(151, 0, 76)" />
-              <SiTypescript size={32} color="rgb(151, 0, 76)" />
+            <FaReact size={32} className={styles.icon} />
+            <TbBrandNextjs size={32} className={styles.icon} />
+            <FaNodeJs size={32} className={styles.icon} />
+            <SiTypescript size={32} className={styles.icon} />
           </p>
           <ThemeToggleButton />
         </div>

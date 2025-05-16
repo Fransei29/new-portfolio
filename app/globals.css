@@ -6,7 +6,7 @@
   /* Paleta de colores */
   --primary-color:rgb(204, 2, 103);
   --dark:#090a16;
-  --dark-light:#090a16;
+  --dark-light:#111320;
   --text-color:rgb(46, 46, 46);
   --text-color-light: #696969;
   --text-color-dark-mode:rgb(237, 236, 236);
@@ -31,6 +31,7 @@ html, body {
   overflow-x: hidden;
   font-family: 'Geist', sans-serif;
   color: var(--text-color-light);
+  
 }
 
 h1, .highlight, .socialmedia {
@@ -39,7 +40,11 @@ h1, .highlight, .socialmedia {
 }
 
 html.dark {
-  background-color: var(--dark)
+  background-color: var(--dark-light)
+}
+
+html.dark .svg-duo {
+  opacity: 0.9;
 }
 
 html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .socialmedia i,html.dark .scroll-arrow {
@@ -90,6 +95,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   width: 300px; 
   height: 282px;
   margin: 0 auto;
+  opacity: 0.8;
+  
 }
 
 .svg-overlap {
@@ -98,14 +105,12 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-a {
-  opacity: 0.7;
   top: 10px;
   left: 0px;
   z-index: 1;
 }
 
 .shape-b {
-  opacity: 0.7;
   top: -10px;
   left: 140px;
   z-index: 2;

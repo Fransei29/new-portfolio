@@ -20,7 +20,8 @@
     }
       :global(html.dark) & {
         background-color: var(--dark-light);
-        color: white;
+        color: rgb(226, 224, 224);
+        border: 1px solid rgba(248, 248, 248, 0.3);
       }
   }
   
@@ -29,6 +30,10 @@
     color: var(--text-color-light);
     width: 24px;
     height: 24px; 
+    
+    :global(html.dark) & {
+      color: rgb(226, 224, 224);
+    }
   }
 
   @media (max-width: 768px) {

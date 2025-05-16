@@ -11,11 +11,18 @@
     color: var(--text-color-light);
     width: 32px;
     height: 32px;
+
+    :global(html.dark) & {
+      color: rgb(214, 214, 214);
+    }
   }
   
   .cvIcon{
     width: 34px;
     height: 34px;
+    :global(html.dark) & {
+      color: rgb(214, 214, 214);
+    }
   }
   
   .socialMedia a:hover .soicon {

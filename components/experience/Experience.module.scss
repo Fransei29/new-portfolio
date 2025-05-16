@@ -83,6 +83,12 @@
     transition: all 0.3s ease;
   }
 
+  :global(html.dark) & {
+    background-color: #181c33;
+    color: rgb(228, 227, 227);
+    border: 1px solid rgba(248, 248, 248, 0.3);
+  }
+
 }
 
 .timelineSvg {
@@ -127,6 +133,10 @@
   font-size: 1.3rem;
   font-weight: 400;
   color: var(--text-color);
+  
+  :global(html.dark) & {
+    color: rgb(209, 209, 209);
+  }
 }
 
   .experienceDate {
@@ -151,6 +161,9 @@
     position: relative;
     padding-left: 0.2rem; 
     color: var(--text-color-light);
+    :global(html.dark) & {
+      color: rgb(209, 209, 209);
+    }
   }
   
   .experienceList li::before {

@@ -71,7 +71,7 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
       
      :global(html.dark) & {
-        background-color: var(--dark-light);
+        background-color: #181c33;
         color: white;
       }
   }

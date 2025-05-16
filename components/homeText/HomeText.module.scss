@@ -55,6 +55,16 @@
     justify-content: left;
     padding-bottom: 1rem;
   }
+
+  .icon {
+    color: rgb(151, 0, 76);
+    transition: color 0.3s ease;
+    
+    :global(html.dark) & {
+      color: rgb(226, 224, 224);
+    }
+  }
+  
   
   @media (max-width: 768px) {
   
