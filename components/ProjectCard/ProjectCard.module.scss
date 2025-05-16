@@ -8,7 +8,7 @@
   margin: 20px auto;
   box-shadow: 0 4px 8px rgba(229, 0, 114, 0.2);
   color: var(--text-color);
-  border: 1px solid rgb(151, 0, 76, 0.2);
+  border: 1px solid rgb(151, 0, 76, 0.4);
   transition: transform 0.5s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
   width: 100%;
@@ -25,6 +25,7 @@
   &:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     background-color: #f9f9f9;
+    border: 1px solid rgb(151, 0, 76, 0.5);
   }
 }
 
@@ -67,6 +68,11 @@
   overflow: hidden;
   z-index: 1;
   flex-shrink: 0;
+  opacity: 0.95;
+}
+
+.projectCard:hover .projectPreview   {
+  opacity: 1; 
 }
 
 .projectImage {
@@ -131,7 +137,7 @@
   transition: opacity 0.5s ease;
 }
 
-.projectCard:hover .infoText {
+.projectCard:hover .infoText  {
   opacity: 1; 
 }
 
