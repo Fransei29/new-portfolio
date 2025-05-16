@@ -1,13 +1,14 @@
 @import '../../app/styles/utilities.scss'; 
 
 .title{
-    font-size: 28px;
+    font-size: 2rem;
     color: var(--text-color-light);
     margin: 0;
     padding: 1rem 0;
 }
 
 .recentProjects {
+    padding: 1rem 0;
     width: 100%;
 }
 
