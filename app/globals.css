@@ -193,11 +193,12 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   }
 
   .home-text {
-    padding: 1rem 0rem;
+    padding: 2rem 0rem;
   }
 
   .svg-duo {
     height: 190px;
+    padding: 2rem 0;
   }
 }
 
