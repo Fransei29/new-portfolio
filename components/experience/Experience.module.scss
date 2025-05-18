@@ -3,13 +3,10 @@
 .experienceContainer{
   width: 100%;
   background-color: var(--background-colorB);
-  box-shadow: inset 0 10px 20px -10px rgb(206, 206, 206, 0.4);
-
   
   :global(html.dark) & {
     background-color: var(--dark-light);
     color: rgb(238, 236, 236);
-    box-shadow: inset 0 10px 20px -10px rgb(56, 56, 56);
   }
 }
 

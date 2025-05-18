@@ -3,12 +3,10 @@
 .projectsSectionContainer{
     width: 100%;
     background-color: var(--background-colorA);
-    box-shadow: inset 0 10px 20px -10px rgb(206, 206, 206, 0.4);
     
     :global(html.dark) & {
         background-color: var(--dark-light);
         color: rgb(235, 235, 235);
-        box-shadow: inset 0 10px 20px -10px rgb(56, 56, 56);
       }
 }
 
