@@ -16,6 +16,7 @@ interface Project {
   link1?: string;
   link2?: string;
   link3?: string;
+  technologies?: string[]; // Add technologies property
 }
 
 interface ProjectCardProps {
@@ -62,11 +63,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                     ) : (
                       React.createElement(project.icon, { className: styles.projectIcon })
                     ))}
-                </div>
-                <div>
                   <p className={styles.projectTitleX}>{project.title}</p>
                 </div>
               </div>
+              {/* Technologies section on the right */}
+              {project.technologies && project.technologies.length > 0 && (
+                <div className={styles.technologiesContainer}>
+                  {project.technologies.map((tech, index) => (
+                    <span key={index} className={styles.technology}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
             </header>
 
             {/* Footer con descripción y enlaces */}

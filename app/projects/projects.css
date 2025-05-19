@@ -2,7 +2,7 @@
   /* titulos del project Section */
 
   .containerProjects {
-    padding-top: 8rem;
+    padding-top: 2rem;
   }
   .tit2{
     box-sizing: content-box;
@@ -14,7 +14,7 @@
     padding-left: 2rem; 
     padding-right: 2rem;
     margin-bottom: 1rem;
-    color: var(--text-color-light);
+    color: var(--text-color);
     border: 1px solid rgb(129, 128, 128, 0.2);
     box-shadow: var(--box-shadow);
   }
@@ -24,6 +24,7 @@
   }
 
   .tit-project1, .tit-project2 {
+    color: var(--text-color-light);
     width: 60%;
   }
 
