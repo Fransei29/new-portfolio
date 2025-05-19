@@ -18,7 +18,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
+    <>
       <header className={styles.header}>
         <nav className={styles.nav}>
           
@@ -71,6 +71,6 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       >
         {children}
       </motion.main>
-    </div>
+      </>
   );
 }

@@ -1,5 +1,9 @@
 
   /* titulos del project Section */
+
+  .containerProjects {
+    padding-top: 8rem;
+  }
   .tit2{
     box-sizing: content-box;
     max-width: 1030px;

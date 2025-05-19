@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+
+import ClientLayout from '../components/clientLayout/ClientLayout';
 import './globals.css';
 import Experience from '../components/experience/Experience';
 import Skills from '../components/skills/Skills';
@@ -16,6 +18,7 @@ export default function Home() {
   const elementsRef = useScrollAnimation();
 
   return (
+    <ClientLayout>
     <div className='ContainerGeneralComplete'>
      <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
         <div className="home-text">
@@ -65,5 +68,6 @@ export default function Home() {
         <Footer />
       </section>
     </div>
+    </ClientLayout>
   );
 }

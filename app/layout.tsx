@@ -1,6 +1,6 @@
+// app/layout.tsx
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import ClientLayout from '../components/clientLayout/ClientLayout';
 import Head from 'next/head';
 
 export const metadata = {
@@ -28,11 +28,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Head>
       </head>
       <body className="container">
-        {/* Aquí se usa el ThemeProvider */}
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <ClientLayout>
-            {children}
-          </ClientLayout>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -5,6 +5,7 @@ import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import '../projects/projects.css';
+import ClientLayout from '../../components/clientLayout/ClientLayout';
 
 // Definir los tipos de los proyectos
 interface Projects {
@@ -38,6 +39,8 @@ const Projects = () => {
   }, []);
 
   return (
+    <ClientLayout>
+    <section className="containerProjects">
     <div className="titlepro">
       <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
         <div className="tit2">
@@ -65,6 +68,8 @@ const Projects = () => {
         ))}
       </div>
     </div>
+    </section>
+    </ClientLayout>
   );
 };
 
