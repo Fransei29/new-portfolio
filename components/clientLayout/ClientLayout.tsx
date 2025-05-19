@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import { Home, BookOpen, Folder } from 'lucide-react';
 import styles from './ClientLayout.module.scss'; 
 
 import { ReactNode } from 'react';
@@ -31,18 +30,18 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
             />
             <Link href="/" passHref>
             <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
-                <Home className={styles.iconNav} size={30} />
+                Home
               </p>
             </Link>
           </div>
           <Link href="/tutorials" passHref>
           <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
-              <BookOpen className={styles.iconNav} size={30} />
+              Tutorials
             </p>
           </Link>
           <Link href="/projects" passHref>
            <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
-              <Folder className={styles.iconNav} size={30} />
+              Projects
             </p>
           </Link>
         </nav>
