@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/homeText/HomeText';
 import ProjectsSection from '../components/projectsSection/ProjectsSection';
+import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -20,7 +21,7 @@ export default function Home() {
   return (
     <ClientLayout>
     <div className='ContainerGeneralComplete'>
-     <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+     <section id='banner' ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
         <div className="home-text">
           <div className="home-textA">
             <HomeText />
@@ -65,6 +66,7 @@ export default function Home() {
 
       <section ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-left">
         <ContactSection/>
+        <ScrollToTop/>
         <Footer />
       </section>
     </div>

@@ -19,6 +19,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
+    <section id='banner' ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
       <header className={styles.header}>
         <nav className={styles.nav}>
           
@@ -59,6 +60,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
           
         </nav>
       </header>
+      </section>
 
 
       {/* Añadido motion.div para animación más fluida */}
