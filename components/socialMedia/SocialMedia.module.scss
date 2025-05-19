@@ -3,23 +3,15 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 25px;
-    padding-top: 2rem;
+    padding: 2rem 0;
     transition: transform 0.5s ease-in-out;
   }
   
   .soicon {
     color: var(--text-color-light);
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
 
-    :global(html.dark) & {
-      color: rgb(214, 214, 214);
-    }
-  }
-  
-  .cvIcon{
-    width: 34px;
-    height: 34px;
     :global(html.dark) & {
       color: rgb(214, 214, 214);
     }

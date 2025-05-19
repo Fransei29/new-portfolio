@@ -1,16 +1,17 @@
 .themeToggleButton {
     background-color:transparent;
-    border: 2px solid rgb(151, 0, 76);
+    border: 1px solid rgb(151, 0, 76, 0.6);
     cursor: pointer;
     display: flex;
-    color: var(--text-color-light);
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.6);
     transition: all 0.3s ease;
+    color: var(--text-color-light);
+    border-radius: 10px;
   }
   
   .themeToggleButton.dark {
@@ -26,6 +27,7 @@
     display: flex;
     padding-top: 2rem;
   }
+  
   @media (max-width: 768px) {
   .containerSocial {
     display: flex;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React from 'react';
 import './globals.css';
 import Experience from '../components/experience/Experience';
 import Skills from '../components/skills/Skills';
@@ -8,30 +8,20 @@ import SocialMedia from '../components/socialMedia/SocialMedia';
 import ContactSection from '../components/contact/Contact';
 import Footer from '../components/footer/Footer'; 
 import Image from 'next/image';
+import ThemeToggleButton from '../components/themeToggleButton/ThemeToggleButton';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/homeText/HomeText';
 import ProjectsSection from '../components/projectsSection/ProjectsSection';
 
-const text = [
-  "ront End Developer",
-  "ull Stack Developer",
-];
-
-
 export default function Home() {  
   const elementsRef = useScrollAnimation();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   return (
     <div className='ContainerGeneralComplete'>
      <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
         <div className="home-text">
           <div className="home-textA">
-            <HomeText texts={text} />
+            <HomeText />
           </div>
           <div className="home-textB">
           <div className="svg-duo">
@@ -39,18 +29,19 @@ export default function Home() {
               src="/img/shapeA.svg"
               alt="Figura geométrica 1"
               className="svg-overlap shape-a"
-              width={160}
-              height={200}
+              width={130}
+              height={170}
             />
             <Image
               src="/img/shapeB.svg"
               alt="Figura geométrica 2"
               className="svg-overlap shape-b"
-              width={160}
-              height={200}
+              width={130}
+              height={170}
             />
           </div>
           <SocialMedia />
+          <ThemeToggleButton />
         </div>
 
 

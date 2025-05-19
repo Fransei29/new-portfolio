@@ -38,18 +38,6 @@ const SocialMedia = () => {
         <Mail className={styles.soicon}/>
       </a>
 
-      {/* CV Link */}
-      <Link href="/FrancoCV.pdf" passHref legacyBehavior>
-        <a href="/FrancoCV.pdf" target="_blank" rel="noopener noreferrer" className={styles.logoLink} aria-label="CV">
-          <Image
-            src="/dev6.png"
-            alt="CV Logo"
-            width={40}
-            height={40}
-            className={styles.cvIcon}
-          />
-        </a>
-      </Link>
     </div>
   );
 };

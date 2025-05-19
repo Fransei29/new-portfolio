@@ -1,70 +1,58 @@
-.homeTextContainer{
-  padding: 2rem 0rem;
+.homeTextContainer {
+  padding: 4rem 0;
+  margin: 0 auto;
+  color: var(--text-color-dark);
 }
 
-.title {
-  font-family: 'Geist Sans', sans-serif;
-  font-size: 5rem;
-  font-weight: 500;
-  margin: 0;
-  padding-top: 1rem;
+.greeting {
+  font-size: 1.5rem;
   color: var(--text-color-light);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  letter-spacing: -0.01em; 
-  line-height: 1.1;       
+  margin: 0 0 1rem 0;
+  font-weight: 500;
 }
-  
-  .nameHighlight {
-    color: var(--primary-color);
-  }
-  
-  .subtitle {
-    display: flex;
-    flex-direction: row;
-    color: #696969;
-  }
-  
-  .subtitleText {
-    letter-spacing: 0.4px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .subtitleTextA {
-   width: 92%;
-   color: #696969;
-  }
-  
-  .subtitle2 {
-    font-size: 1.2rem;
-  }
-  
-  .introductionText {
-    font-size: 1.5rem;
-    width: 90%;
-    line-height: 1.4;
-    padding-bottom: 3rem;
-  }
-  
-  .techIcons {
-    display: flex;
-    gap: 20px;
-    justify-content: left;
-    padding-bottom: 1rem;
-  }
 
-  .icon {
-    color: rgb(151, 0, 76);
-    transition: color 0.3s ease;
-    
-    :global(html.dark) & {
-      color: rgb(226, 224, 224);
-    }
-  }
-  
+.nameHighlight {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.mainTitle {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--text-color-lightest);
+  line-height: 1.1;
+}
+
+.subTitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-color-light); 
+  margin: 0 0 1rem 0;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #8f8f9e;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.techIcons {
+  display: flex;
+  gap: 20px;
+}
+
+.icon {
+  color: var(--text-color-light);
+  transition: color 0.3s ease;
+}
+
+:global(html.dark) .icon {
+  color: rgb(226, 224, 224);
+}
+
   
   @media (max-width: 768px) {
   

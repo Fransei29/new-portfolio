@@ -6,9 +6,9 @@
   border-radius: 16px;
   background-color: #ffffff;
   margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(229, 0, 114, 0.2);
+  box-shadow: 0 3px 6px rgba(138, 1, 69, 0.2);
   color: var(--text-color);
-  border: 1px solid rgb(151, 0, 76, 0.4);
+  border: 1px solid rgb(151, 0, 76, 0.1);
   transition: transform 0.5s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
   width: 100%;
@@ -68,12 +68,8 @@
   overflow: hidden;
   z-index: 1;
   flex-shrink: 0;
-  opacity: 0.95;
 }
 
-.projectCard:hover .projectPreview   {
-  opacity: 1; 
-}
 
 .projectImage {
   object-fit: cover;

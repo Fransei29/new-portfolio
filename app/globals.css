@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+
 
 
 :root {
@@ -8,16 +10,17 @@
   --dark:#090a16;
   --dark-light:#111320;
   --text-color:rgb(46, 46, 46);
-  --text-color-light: #696969;
+  --text-color-light: #6e6e6e;
+  --text-color-dark:rgb(27, 27, 27);
   --text-color-dark-mode:rgb(237, 236, 236);
   --button-color:rgba(248, 152, 200, 0.8);
   --button-color-hover:rgb(245, 84, 165, 0.9);
-    background-color: #f8f8f8;
+    background-color: rgb(255, 255, 255);
   --border:2px solid rgb(236, 3, 119, 0.6);
   --borderA: 1px solid rgb(151, 0, 76, 0.6);
   --box-shadow: 4px 5px 0 rgba(250, 81, 166, 0.4);
   box-shadow: 0 3px 4px rgba(192, 4, 98, 0.6);
-  --background-colorA: rgb(246, 246, 246);
+  --background-colorA: rgb(249, 249, 249);
   --background-colorB: rgb(251, 251, 251);
 }
 
@@ -29,7 +32,7 @@ html, body {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   overflow-x: hidden;
-  font-family: 'Geist', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   color: var(--text-color-light);
   
 }
@@ -77,8 +80,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   flex-wrap: wrap;
   align-content: center;
   align-items: flex-start;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
 }
 
 .home-textA{
@@ -89,11 +92,17 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   min-width: 50%;
 }
 
+.home-textB{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .svg-duo {
   display: flex;
   position: relative;
-  width: 300px; 
-  height: 308px;
+  width: 290px; 
+  height: 360px;
   margin: 0 auto;
   opacity: 0.8;
   
@@ -105,14 +114,14 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-a {
-  top: 10px;
-  left: 0px;
+  top: 100px;
+  left: 40px;
   z-index: 1;
 }
 
 .shape-b {
-  top: -10px;
-  left: 140px;
+  top: 80px;
+  left: 150px;
   z-index: 2;
 }
 
