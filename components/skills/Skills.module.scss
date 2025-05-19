@@ -55,7 +55,7 @@
   }
   
   .skillsCard {
-    background-color:rgba(226, 4, 115, 0.1);
+    background-color:transparent;
     border:none;
     color: var(--text-color-light);
     display: flex;
@@ -66,6 +66,7 @@
     text-align: center;
     border-radius: 7px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(226, 4, 115, 0.2);
     transition: transform 0.3s ease, background-color 0.3s ease;
       
      :global(html.dark) & {
