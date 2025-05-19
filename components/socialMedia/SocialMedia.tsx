@@ -28,16 +28,6 @@ const SocialMedia = () => {
         <Linkedin className={styles.soicon} />
       </a>
 
-      {/* Email Link */}
-      <a
-        href="mailto:seilerfranco317@gmail.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Email"
-      >
-        <Mail className={styles.soicon}/>
-      </a>
-
     </div>
   );
 };

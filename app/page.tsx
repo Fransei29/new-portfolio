@@ -8,7 +8,6 @@ import SocialMedia from '../components/socialMedia/SocialMedia';
 import ContactSection from '../components/contact/Contact';
 import Footer from '../components/footer/Footer'; 
 import Image from 'next/image';
-import ThemeToggleButton from '../components/themeToggleButton/ThemeToggleButton';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/homeText/HomeText';
 import ProjectsSection from '../components/projectsSection/ProjectsSection';
@@ -41,7 +40,6 @@ export default function Home() {
             />
           </div>
           <SocialMedia />
-          <ThemeToggleButton />
         </div>
 
 

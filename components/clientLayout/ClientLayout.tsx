@@ -7,6 +7,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import styles from './ClientLayout.module.scss'; 
+import ThemeToggleButton from '../themeToggleButton/ThemeToggleButton';
 
 import { ReactNode } from 'react';
 
@@ -20,6 +21,8 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
       <header className={styles.header}>
         <nav className={styles.nav}>
+          
+          {/* Logo a la izquierda */}
           <div className={styles.logoContainer}>
             <Image
               src="/dev3.png"
@@ -28,24 +31,35 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
               height={90}
               className={styles.logo}
             />
+          </div>
+
+          {/* Opciones centradas */}
+          <div className={styles.centerMenu}>
             <Link href="/" passHref>
-            <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
+              <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
                 Home
               </p>
             </Link>
+            <Link href="/projects" passHref>
+              <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
+                Projects
+              </p>
+            </Link>
+            <Link href="/tutorials" passHref>
+              <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
+                Tutorials
+              </p>
+            </Link>
           </div>
-          <Link href="/tutorials" passHref>
-          <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
-              Tutorials
-            </p>
-          </Link>
-          <Link href="/projects" passHref>
-           <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
-              Projects
-            </p>
-          </Link>
+
+          {/* Modo oscuro a la derecha */}
+          <div className={styles.rightContainer}>
+            <ThemeToggleButton />
+          </div>
+          
         </nav>
       </header>
+
 
       {/* Añadido motion.div para animación más fluida */}
       <motion.main
