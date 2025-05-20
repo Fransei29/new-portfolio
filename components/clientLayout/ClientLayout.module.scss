@@ -73,4 +73,12 @@
   .iconNav{
     padding: 0.1rem 1.7rem;
   }
+
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: row;
+      align-items: center;
+      padding: 0rem 0.2rem;
+    }
+  }
   

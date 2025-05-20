@@ -207,12 +207,13 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   }
 
   .home-text {
+    display: flex;
+    flex-direction: column;
     padding: 2rem 0rem;
   }
 
   .svg-duo {
-    height: 190px;
-    padding: 2rem 0;
+    display: none;
   }
 }
 
