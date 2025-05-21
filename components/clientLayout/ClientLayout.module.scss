@@ -35,6 +35,10 @@
     text-decoration: none;
     transition: transform 0.3s ease, color 0.3s ease;
     position: relative;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
   
   .nav a::after {

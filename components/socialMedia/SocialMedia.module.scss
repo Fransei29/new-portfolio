@@ -5,6 +5,10 @@
     gap: 25px;
     padding: 2rem 0;
     transition: transform 0.5s ease-in-out;
+  
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
   
   .soicon {
@@ -20,4 +24,6 @@
   .socialMedia a:hover .soicon {
     color: rgb(151, 0 ,76);
   }
+
+  
   

@@ -125,46 +125,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   z-index: 2;
 }
 
-/* --- KEYWORDS FROM HOME PAGE --- */
-
-.keywords {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-left: 58%;
-  margin-top: -20%;
-}
-
-.highlight {
-  display: flex;
-  font-size: 28px;
-  position: relative;
-  padding-left: 30px;
-  margin-top: 2%;
-  margin-bottom: 4%;
-  color: var(--text-color); 
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
 .projects-section h2 {
   color: rgb(53, 53, 53);
-}
-
-.highlight:hover {
-  color: rgb(104, 104, 120);
-}
-
-.highlight::before {
-  content: '';
-  width: 7px; 
-  height: 40px;
-  border-radius: 1px;
-  background-color: rgba(151, 0 ,76);
-  position: absolute;
-  left: 0;
-  top: 18px;
-  transform: translateY(-50%); 
 }
 
 /* --- SCROLL ANIMATION --- */
@@ -209,7 +171,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .home-text {
     display: flex;
     flex-direction: column;
-    padding: 2rem 0rem;
+    padding: 1.5rem 0.5rem;
+    height: auto;
   }
 
   .svg-duo {

@@ -9,6 +9,10 @@
   color: var(--text-color-light);
   margin: 0 0 1rem 0;
   font-weight: 500;
+ 
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 }
 
 .nameHighlight {
@@ -29,6 +33,10 @@
   font-weight: 600;
   color: var(--text-color-light); 
   margin: 0 0 1rem 0;
+   
+   @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .description {
@@ -54,37 +62,16 @@
   color: rgb(226, 224, 224);
 }
 
-  
   @media (max-width: 768px) {
-  
   .homeTextContainer{
     padding: 0.5rem;
   }
   
-  .title{
+  .mainTitle{
     margin: 0;
-    padding: 1rem 0;
-    font-size: 3rem;
+    padding-bottom: 1rem;
+    font-size: 4rem;
     text-align: left;
-  }
-
-  .subtitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  .subtitleTextA {
-    width: 100%;
-   }
-
-  .introductionText{
-    padding: 1rem 0rem;
-    margin: 0;
-    font-size: 1.5rem;
   }
 
   .techIcons {
@@ -93,6 +80,7 @@
   }
 
   .description {
-    width: 90%
+    width: 100%;
+    font-size: 1rem;
   }
 }
