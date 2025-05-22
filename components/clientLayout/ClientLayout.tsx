@@ -19,48 +19,54 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-    <section id='banner' ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+    
       <header className={styles.header}>
         <nav className={styles.nav}>
-          
-          {/* Logo a la izquierda */}
-          <div className={styles.logoContainer}>
-            <Image
-              src="/dev3.png"
-              alt="Logo"
-              width={90}
-              height={90}
-              className={styles.logo}
-            />
-          </div>
+          <section id="banner" ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
+              {/* Logo a la izquierda */}
+              <div className={styles.logoContainer}>
+                  <Image
+                    src="/dev3.png"
+                    alt="Logo"
+                    width={90}
+                    height={90}
+                    className={styles.logo}
+                  />
+              </div>
+          </section>
 
-          {/* Opciones centradas */}
-          <div className={styles.centerMenu}>
-            <Link href="/" passHref>
-              <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
-                Home
-              </p>
-            </Link>
-            <Link href="/projects" passHref>
-              <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
-                Projects
-              </p>
-            </Link>
-            <Link href="/tutorials" passHref>
-              <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
-                Tutorials
-              </p>
-            </Link>
-          </div>
+          <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">
+            {/* Opciones centradas */}
+            <div className={styles.centerMenu}>
+              <Link href="/" passHref>
+                <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
+                  Home
+                </p>
+              </Link>
+           
+              <Link href="/projects" passHref>
+                <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
+                  Projects
+                </p>
+              </Link>
+              <Link href="/tutorials" passHref>
+                <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
+                  Tutorials
+                </p>
+              </Link>
+            </div>
+          </section>
 
-          {/* Modo oscuro a la derecha */}
-          <div className={styles.rightContainer}>
-            <ThemeToggleButton />
-          </div>
+          <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
+              {/* Modo oscuro a la derecha */}
+              <div className={styles.rightContainer}>
+                 <ThemeToggleButton />
+              </div>
+          </section>
           
         </nav>
       </header>
-      </section>
+     
 
 
       {/* Añadido motion.div para animación más fluida */}

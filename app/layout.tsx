@@ -2,6 +2,7 @@
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
+import Footer from '../components/footer/Footer'; 
 
 export const metadata = {
   title: 'Franco Seiler | Portfolio',
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="container">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

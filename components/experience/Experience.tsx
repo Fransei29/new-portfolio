@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Experience.module.scss";
 import "../../app/globals.css";
+import { useScrollAnimation } from '../../hooks/Scroll';
 
 interface IsOpenState {
   [key: string]: boolean;
@@ -8,6 +9,7 @@ interface IsOpenState {
 
 const Experience: React.FC = () => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
+  const elementsRef = useScrollAnimation();
 
   const toggleDetail = (id: string): void => {
     setIsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -32,6 +34,7 @@ const Experience: React.FC = () => {
     <div className={styles.experienceSection}>
         <p className={styles.highlight}>Experience</p>
         <ol className={styles.timeline}>
+        <section id="banner" ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right">
           <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
             <div className={styles.timelineLeft}>
               <div className={styles.timelineIcon}>
@@ -54,7 +57,9 @@ const Experience: React.FC = () => {
               )}
             </div>
           </li>
+        </section>
 
+        <section ref={(el) => { elementsRef.current[1] = el;}} className="fade-in-left">
           <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
             <div className={styles.timelineLeft}>
               <div className={styles.timelineIcon}>
@@ -77,7 +82,9 @@ const Experience: React.FC = () => {
               )}
             </div>
           </li>
+        </section> 
 
+        <section ref={(el) => { elementsRef.current[2] = el;}} className="fade-in-right">
           <li className={styles.timelineItem} onClick={() => toggleDetail("digitalInnovators")}>
             <div className={styles.timelineLeft}>
               <div className={styles.timelineIcon}>
@@ -100,6 +107,8 @@ const Experience: React.FC = () => {
               )}
             </div>
           </li>
+        </section> 
+
         </ol>
         </div>
       </section>

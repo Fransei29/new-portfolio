@@ -29,7 +29,7 @@ export async function GET() {
         link1: 'https://www.typescriptlang.org/docs/',
         link2: 'https://github.com/Fransei29/react-typescript/blob/main/src/App.tsx',
         link3: 'https://react-typescript-oqzgk3zxt-francos-projects-94304a5e.vercel.app/',
-        previewImage: '/img/type.jpg',
+        previewImage: '/img/Type.webp',
         logs: [
           'git init',
           'git clone https://github.com/Fransei29/react-typescript.git',
