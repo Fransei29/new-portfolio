@@ -11,7 +11,7 @@ export async function GET() {
         link1: 'https://redis.io/docs/latest/',
         link2: 'https://github.com/Fransei29/Redis/blob/main/index.js',
         link3: 'https://vestire-front-s196.vercel.app/',
-        previewImage: '/img/vesti.jpg',
+        previewImage: '/img/vestire.webp',
         logs: [
           'git init',
           'git clone https://github.com/Fransei29/Redis.git',
@@ -190,7 +190,7 @@ export async function GET() {
           icon: '/icons/sequelize.svg',
           link1: 'https://sequelize.org/docs/v6/getting-started/',
           link2: 'https://github.com/Fransei29/SEQUELIZE/blob/main/index.js',
-          previewImage: '/img/vesti.jpg',
+          previewImage: '/img/vestire.webp',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/SEQUELIZE.git',

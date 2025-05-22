@@ -26,7 +26,7 @@ export async function GET() {
       description: `E-commerce platform offering a wide selection of clothing with intuitive navigation and a seamless checkout process. \nI designed and developed the complete user flow, from start to finalizing purchases.`,
       link2: 'https://github.com/Fransei29/vestire_front.git',
       link3: 'https://vestire-front-s196.vercel.app/',
-      previewImage: '/img/vesti.jpg',
+      previewImage: '/img/vestire.webp',
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'PostgreSQL'],
     },
     {
