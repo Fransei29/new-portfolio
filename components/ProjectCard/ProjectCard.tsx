@@ -4,7 +4,58 @@ import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FileText, Github, ExternalLink } from 'lucide-react';
 import styles from './ProjectCard.module.scss';
-import React, { useState } from 'react';
+import React, { JSX, useState } from 'react';
+import JavascriptIcon from '../icons/javascript.svg';
+import TypescriptIcon from '../icons/typescript.svg';
+import ReactIcon from '../icons/react.svg';
+import NextIcon from '../icons/nextdotjs.svg';
+import ReduxIcon from '../icons/redux.svg';
+import HtmlIcon from '../icons/html5.svg';
+import CssIcon from '../icons/css.svg';
+import BootstrapIcon from '../icons/bootstrap.svg';
+import SassIcon from '../icons/sass.svg';
+import NodeIcon from '../icons/nodedotjs.svg';
+import ExpressIcon from '../icons/express.svg';
+import GraphqlIcon from '../icons/graphql.svg';
+import SequelizeIcon from '../icons/sequelize.svg';
+import MongoIcon from '../icons/mongodb.svg';
+import PostgresIcon from '../icons/postgresql.svg';
+import RedisIcon from '../icons/redis.svg';
+import AirtableIcon from '../icons/airtable.svg';
+import GitIcon from '../icons/github.svg';
+import DockerIcon from '../icons/docker.svg';
+import WordpressIcon from '../icons/wordpress.svg';
+import FigmaIcon from '../icons/figma.svg';
+import JestIcon from '../icons/jest.svg';
+import Axios from  '../icons/axios.svg';
+
+const technologyIcons: { [key: string]: JSX.Element } = {
+  JavaScript: <JavascriptIcon />,
+  TypeScript: <TypescriptIcon />,
+  React: <ReactIcon />,
+  'Next.js': <NextIcon />,
+  Redux: <ReduxIcon />,
+  HTML: <HtmlIcon />,
+  CSS: <CssIcon />,
+  Bootstrap: <BootstrapIcon />,
+  Sass: <SassIcon />,
+  Node: <NodeIcon />,
+  'Node.js': <NodeIcon />,
+  Express: <ExpressIcon />,
+  GraphQL: <GraphqlIcon />,
+  Sequelize: <SequelizeIcon />,
+  MongoDB: <MongoIcon />,
+  PostgreSQL: <PostgresIcon />,
+  Redis: <RedisIcon />,
+  Airtable: <AirtableIcon />,
+  GitHub: <GitIcon />,
+  Docker: <DockerIcon />,
+  WordPress: <WordpressIcon />,
+  Figma: <FigmaIcon />,
+  Jest: <JestIcon />,
+  Axios: <Axios />,
+};
+
 
 // Definir tipos para el proyecto
 interface Project {
@@ -72,15 +123,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 <p className={styles.projectTitleX}>{project.title}</p>
               </div>
             </div>
-            {project.technologies && project.technologies.length > 0 && (
-              <div className={styles.technologiesContainer}>
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className={styles.technology}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
+            {!project.isTutorial && project.technologies && project.technologies.length > 0 && (
+            <div className={styles.technologiesContainer}>
+              {project.technologies.map((tech, index) => (
+                <span key={index} className={styles.technology} title={tech}>
+                  {technologyIcons[tech] ? technologyIcons[tech] : <span style={{ fontSize: 12 }}>{tech}</span>}
+
+                </span>
+              ))}
+            </div>
+          )}
+
           </header>
 
           <footer className={styles.projectFooter}>
