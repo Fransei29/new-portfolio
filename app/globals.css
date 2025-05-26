@@ -18,9 +18,10 @@
     background-color: rgb(255, 255, 255);
   --border:2px solid rgb(236, 3, 119, 0.6);
   --borderA: 1px solid rgb(151, 0, 76, 0.6);
-  --box-shadow: 0 3px 6px rgba(250, 81, 166, 0.3);
+  --box-shadow: 0 2px 4px rgba(87, 3, 45, 0.2);
     box-shadow: 0 3px 4px rgba(192, 4, 98, 0.6);
   --background-colorA: rgb(255, 255, 255);
+  --bg-hover: rgba(245, 84, 165, 0.9);
 }
 
 html, body {

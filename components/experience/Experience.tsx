@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styles from "./Experience.module.scss";
 import "../../app/globals.css";
 import { useScrollAnimation } from '../../hooks/Scroll';
+import { motion, AnimatePresence } from "framer-motion";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+
+
 
 interface IsOpenState {
   [key: string]: boolean;
@@ -31,89 +35,78 @@ const Experience: React.FC = () => {
 
   return (
     <section className={styles.experienceContainer}>
-    <div className={styles.experienceSection}>
+      <div className={styles.experienceSection}>
         <p className={styles.highlight}>Experience</p>
         <ol className={styles.timeline}>
-        <section id="banner" ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right">
-          <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
-            <div className={styles.timelineLeft}>
-              <div className={styles.timelineIcon}>
-                {renderIcon()}
+        <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-right">
+            <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
+              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
+              <div className={styles.timelineRight}>
+                <h3 className={styles.titleExperience}>
+                  <span className={styles.jobTitle}>Full Stack Developer</span>
+                  <span className={styles.companyName}>Intelligent Apps Sweden</span>
+                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.coursfy ? styles.iconOpen : ''}`} />
+                </h3>
+                <time className={styles.experienceDate}>October 2024 - Present</time>
+                {isOpen.coursfy && (
+                  <ul className={styles.experienceList}>
+                    <li>Developed responsive front-end pages with <strong>Next.js</strong> and <strong>React</strong>.</li>
+                    <li>Integrated a payment API for seamless transactions.</li>
+                    <li>Populated and consumed APIs for client-server communication.</li>
+                    <li>Collaborated on performance and scalability optimizations.</li>
+                  </ul>
+                )}
               </div>
-            </div>
-            <div className={styles.timelineRight}>
-            <h3 className={styles.titleExperience}>
-              <span className={styles.jobTitle}>Full Stack Developer</span>
-              <span className={styles.companyName}>Intelligent Apps Sweden</span>
-            </h3>
-              <time className={styles.experienceDate}>October 2024 - Present</time>
-              {isOpen.coursfy && (
-                <ul className={styles.experienceList}>
-                  <li>Developed responsive front-end pages with <strong>Next.js</strong> and <strong>React</strong>.</li>
-                  <li>Integrated a payment API for seamless transactions.</li>
-                  <li>Populated and consumed APIs for client-server communication.</li>
-                  <li>Collaborated on performance and scalability optimizations.</li>
-                </ul>
-              )}
-            </div>
-          </li>
-        </section>
-
-        <section ref={(el) => { elementsRef.current[1] = el;}} className="fade-in-left">
-          <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
-            <div className={styles.timelineLeft}>
-              <div className={styles.timelineIcon}>
-                {renderIcon()}
+            </li>
+          </section>
+  
+          <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">
+            <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
+              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
+              <div className={styles.timelineRight}>
+                <h3 className={styles.titleExperience}>
+                  <span className={styles.jobTitle}>Front End Developer</span>
+                  <span className={styles.companyName}>Freelance</span>
+                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.freelance ? styles.iconOpen : ''}`} />
+                </h3>
+                <time className={styles.experienceDate}>March 2024 - October 2024</time>
+                {isOpen.freelance && (
+                  <ul className={styles.experienceList}>
+                    <li>Built responsive web applications using <strong>React</strong> and <strong>Next.js</strong>.</li>
+                    <li>Optimized performance, improving loading times by 30%.</li>
+                    <li>Integrated <strong>Redux</strong> for state management in e-commerce platforms.</li>
+                    <li>Applied <strong>TypeScript</strong> for improved code quality and reduced runtime errors.</li>
+                  </ul>
+                )}
               </div>
-            </div>
-            <div className={styles.timelineRight}>
-              <h3 className={styles.titleExperience}>
-                <span className={styles.jobTitle}>Front End Developer</span>
-                <span className={styles.companyName}>Freelance</span>
-              </h3>
-              <time className={styles.experienceDate}>March 2024 - October 2024</time>
-              {isOpen.freelance && (
-                <ul className={styles.experienceList}>
-                  <li>Built responsive web applications using <strong>React</strong> and <strong>Next.js</strong>.</li>
-                  <li>Optimized performance, improving loading times by 30%.</li>
-                  <li>Integrated <strong>Redux</strong> for state management in e-commerce platforms.</li>
-                  <li>Applied <strong>TypeScript</strong> for improved code quality and reduced runtime errors.</li>
-                </ul>
-              )}
-            </div>
-          </li>
-        </section> 
-
-        <section ref={(el) => { elementsRef.current[2] = el;}} className="fade-in-right">
-          <li className={styles.timelineItem} onClick={() => toggleDetail("digitalInnovators")}>
-            <div className={styles.timelineLeft}>
-              <div className={styles.timelineIcon}>
-                {renderIcon()}
+            </li>
+          </section>
+  
+          <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-right">
+            <li className={styles.timelineItem} onClick={() => toggleDetail("digitalInnovators")}>
+              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
+              <div className={styles.timelineRight}>
+                <h3 className={styles.titleExperience}>
+                  <span className={styles.jobTitle}>Front End Developer</span>
+                  <span className={styles.companyName}>Digital Innovators</span>
+                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.digitalInnovators ? styles.iconOpen : ''}`} />
+                </h3>
+                <time className={styles.experienceDate}>May 2023 - February 2024</time>
+                {isOpen.digitalInnovators && (
+                  <ul className={styles.experienceList}>
+                    <li>Built and maintained SPAs using <strong>React</strong> and <strong>Redux</strong>.</li>
+                    <li>Increased user retention by 15% and improved conversion rates by 20%.</li>
+                    <li>Contributed to an internal component library, reducing development time by 30%.</li>
+                    <li>Developed custom <strong>React</strong> hooks to enhance code modularity.</li>
+                  </ul>
+                )}
               </div>
-            </div>
-            <div className={styles.timelineRight}>
-            <h3 className={styles.titleExperience}>
-              <span className={styles.jobTitle}>Front End Developer</span>
-              <span className={styles.companyName}>Digital Innovators</span>
-            </h3>
-              <time className={styles.experienceDate}>May 2023 - February 2024</time>
-              {isOpen.digitalInnovators && (
-                <ul className={styles.experienceList}>
-                  <li>Built and maintained SPAs using <strong>React</strong> and <strong>Redux</strong>.</li>
-                  <li>Increased user retention by 15% and improved conversion rates by 20%.</li>
-                  <li>Contributed to an internal component library, reducing development time by 30%.</li>
-                  <li>Developed custom <strong>React</strong> hooks to enhance code modularity.</li>
-                </ul>
-              )}
-            </div>
-          </li>
-        </section> 
-
+            </li>
+          </section>
+  
         </ol>
-        </div>
-      </section>
-
+      </div>
+    </section>
   );
-};
-
+}  
 export default Experience;

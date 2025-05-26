@@ -6,9 +6,9 @@
   border-radius: 16px;
   background-color: #ffffff;
   margin: 20px auto;
-  box-shadow: 0 3px 6px rgba(138, 1, 69, 0.2);
+  box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
   color: var(--text-color);
-  border: 1px solid rgb(151, 0, 76, 0.1);
+  border: 1px solid rgba(75, 1, 38, 0.1);
   transition: transform 0.5s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
   width: 100%;
@@ -24,9 +24,9 @@
   }
   
   &:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-    border: 1px solid rgba(240, 4, 122, 0.5);
+    border: 1px solid rgba(240, 4, 122, 0.3);
   }
 
   &.active .infoWrapper {
@@ -75,9 +75,6 @@
   padding: 1rem 1.7rem;
 }
 
-
-
-
 .projectPreview {
   position: relative;
   width: 100%; 
@@ -123,10 +120,10 @@
   height: 2.8rem;
   color: var(--text-color-light);
   background-color: transparent;
-  box-shadow: 0 2px 3px rgba(192, 4, 98, 0.2);
+  box-shadow: 0 2px 4px rgba(88, 1, 45, 0.2);
   border-radius: 8px;
   text-decoration: none;
-  border: 1px solid rgba(226, 4, 115, 0.2);
+  border: 1px solid rgba(226, 4, 115, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   :global(html.dark) & {
@@ -135,7 +132,7 @@
   }
   
   &:hover {
-    background-color: rgba(245, 84, 165, 0.9);
+    background-color:rgba(245, 84, 165, 0.9);
   }
 }
 

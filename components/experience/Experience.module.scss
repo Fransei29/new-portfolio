@@ -116,6 +116,24 @@
   }
 }
 
+.clickIcon {
+  margin:0;
+  font-size: 1.3rem;
+  color: #bbb;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+  transform: rotate(0deg);
+}
+
+.timelineItem:hover .clickIcon {
+  opacity: 1;
+}
+
+.iconOpen {
+  transform: rotate(90deg) !important; 
+  color: var(--primary-color) 
+}
+
 // text
 .titleExperience {
   display: flex;
