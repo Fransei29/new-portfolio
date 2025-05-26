@@ -22,4 +22,11 @@
     background-color: rgba(248, 152, 200, 0.4);
     transform: translateY(-1px);
   }
+
+  @media (max-width: 768px) {
+    bottom: 0rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }

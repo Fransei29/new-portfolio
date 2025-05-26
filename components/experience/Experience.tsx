@@ -38,7 +38,7 @@ const Experience: React.FC = () => {
       <div className={styles.experienceSection}>
         <p className={styles.highlight}>Experience</p>
         <ol className={styles.timeline}>
-        <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-right">
+          <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
             <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
