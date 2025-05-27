@@ -10,7 +10,7 @@ export default function LoadingWrapper({ children }: { children: React.ReactNode
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setLoading(false)
-    }, 10) // subí a 1000ms para que el spinner dure un poco más
+    }, 300) // subí a 1000ms para que el spinner dure un poco más
 
     // Mostrar contenido con fade-in un poco después del loading
     const showContentTimeout = setTimeout(() => {
