@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Footer from '../components/footer/Footer'; 
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
+import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
 
 
 export const metadata = {
@@ -15,6 +16,7 @@ export const metadata = {
 import { ReactNode } from 'react';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+
   return (
     <html lang="en">
       <head>
@@ -38,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
           <ThemeTransitionOverlay />
           <ScrollToTop />
+          <LoadingWrapper children={undefined} />
         </ThemeProvider>
       </body>
     </html>

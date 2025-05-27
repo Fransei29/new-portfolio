@@ -1,0 +1,24 @@
+/* LoadingSpinner.css */
+.loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.9); /* o transparente si querés */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+  }
+  
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    animation: spin 1s linear infinite;
+    color: var(--primary-color);
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

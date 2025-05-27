@@ -4,18 +4,11 @@
     pointer-events: none;
     z-index: 9999;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.1s ease;
   }
   
   .overlay.visible {
     opacity: 1;
   }
   
-  .overlay.dark {
-    background-color: rgba(1, 12, 128, 0.2);
-  }
-  
-  .overlay.light {
-    background-color:rgba(247, 235, 241, 0.2);
-  }
   
