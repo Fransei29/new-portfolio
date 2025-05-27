@@ -10,7 +10,6 @@ import styles from './ClientLayout.module.scss';
 import ThemeToggleButton from '../themeToggleButton/ThemeToggleButton';
 import { Menu, X } from 'lucide-react';
 import { ReactNode } from 'react';
-import { useReducedMotion } from "framer-motion";
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const elementsRef = useScrollAnimation();
