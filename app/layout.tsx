@@ -3,6 +3,9 @@ import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
 import Footer from '../components/footer/Footer'; 
+import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
+import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
+
 
 export const metadata = {
   title: 'Franco Seiler | Portfolio',
@@ -30,8 +33,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="container">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <div id="banner"></div> {/* Ensure this element exists */}
           {children}
           <Footer />
+          <ThemeTransitionOverlay />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

@@ -112,17 +112,17 @@ const Skills: React.FC = () => {
         </p>
 
         <div className={styles.skillsCards}>
-        <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
-            <SkillsSection title="Frontend" skills={frontEndSkills} />
-          </div>
+          <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+              <SkillsSection title="Frontend" skills={frontEndSkills} />
+            </div>
 
-          <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
-            <SkillsSection title="Backend" skills={backEndSkills} />
-          </div>
+            <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
+              <SkillsSection title="Backend" skills={backEndSkills} />
+            </div>
 
-          <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
-            <SkillsSection title="Tools" skills={toolsSkills} />
-          </div>
+            <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
+              <SkillsSection title="Tools" skills={toolsSkills} />
+            </div>
         </div>
       </div>
     </section>

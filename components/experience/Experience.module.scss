@@ -29,7 +29,7 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: #9b9a9a;
+    background: #ccc;
   }
 }
 
@@ -59,6 +59,7 @@
 }
 
 .timelineRight {
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,16 +69,14 @@
   padding: 1rem 2rem;
   width: 100%;
   max-width: 85%;
-  border-radius: 8px;
-  background: transparent;
-  box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.2);
+  border-radius: var(--br);
+  box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
   color: var(--text-color);
-  border: 1px solid rgb(151, 0, 76, 0.2);
+  border: 1px solid rgba(75, 1, 38, 0.1);
 
   &:hover {
-    background: rgba(248, 234, 241, 0.3);
-    box-shadow: 3px 3px 0 rgb(151, 0, 76, 0.5);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(240, 4, 122, 0.3);
   }
 
   :global(html.dark) & {
@@ -91,7 +90,7 @@
 .timelineSvg {
   width: 1rem;
   height: 1rem;
-  color: #9b9a9a;
+  color: #ccc;
   @media (max-width: 768px) {
     width: 0.9rem;
     height: 0.9rem;
@@ -119,7 +118,7 @@
 .clickIcon {
   margin:0;
   font-size: 1.3rem;
-  color: #bbb;
+  color: #ccc;
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.2s ease;
   transform: rotate(0deg);

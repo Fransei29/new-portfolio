@@ -12,7 +12,6 @@ import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/homeText/HomeText';
 import ProjectsSection from '../components/projectsSection/ProjectsSection';
-import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -71,7 +70,6 @@ export default function Home() {
 
       <section ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
         <ContactSection/>
-        <ScrollToTop/>
       </section>
     </div>
     </ClientLayout>

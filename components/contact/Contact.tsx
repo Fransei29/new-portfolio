@@ -1,7 +1,6 @@
 import styles from './Contact.module.scss';
 import ContactForm from '../contactForm/ContactForm';
 import '../../app/globals.css'
-import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 
 const ContactSection = () => {
   return (
@@ -21,7 +20,6 @@ const ContactSection = () => {
         </div> 
         <div className={styles.contactSecond}>
           <ContactForm />
-          <ScrollToTop/>
         </div>
       </div>
     </div>

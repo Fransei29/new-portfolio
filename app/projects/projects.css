@@ -8,14 +8,14 @@
     box-sizing: content-box;
     max-width: 1030px;
     margin-inline: auto;
-    border-radius: 10px;
+    border-radius: var(--br);
     padding-top: 4rem;
     padding-bottom: 4rem;
     padding-left: 2rem; 
     padding-right: 2rem;
     margin-bottom: 1rem;
     color: var(--text-color);
-    border: 1px solid rgb(129, 128, 128, 0.2);
+    border: 1px solid rgb(129, 128, 128, 0.1);
     box-shadow: var(--box-shadow);
   }
 
@@ -67,9 +67,14 @@
   }
   
 @media (max-width: 768px) {
+
+  .containerProjects {
+    padding-top: 0.5rem;
+  }
+
   .tit2{
     width: 90%;
-    padding: 3rem 0.5rem;
+    padding: 2.5rem 0.5rem;
     margin: 0.5rem;
   }
 
