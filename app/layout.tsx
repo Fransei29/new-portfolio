@@ -34,14 +34,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Head>
       </head>
       <body className="container">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <div id="banner"></div> {/* Ensure this element exists */}
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <LoadingWrapper>
+          <div id="banner"></div>
           {children}
           <Footer />
           <ThemeTransitionOverlay />
           <ScrollToTop />
-          <LoadingWrapper children={undefined} />
-        </ThemeProvider>
+        </LoadingWrapper>
+      </ThemeProvider>
       </body>
     </html>
   );
