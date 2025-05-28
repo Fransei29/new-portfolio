@@ -1,0 +1,149 @@
+@import '../../app/styles/utilities.scss'; 
+
+.testimonials {
+    width: 100%;
+    background-color: var(--background-colorA);
+    max-width: 1100px;
+    margin-inline: auto;
+    padding: 3rem 0;
+
+    :global(html.dark) & {
+        background-color: var(--dark-light);
+        color: rgb(235, 235, 235);
+    }
+      
+    @media (max-width: 768px) {
+        padding-inline: 0.5rem; 
+        box-sizing: border-box;
+    }
+  }
+  
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    padding: 2rem 0;
+
+    @media (max-width: 768px) {
+        padding: 0.5rem 0;
+        gap: 0.5rem;
+      }
+  }
+  
+  .card {
+    background: #fff;
+    border: 1px solid ;
+    padding: 2rem 1rem;
+    border-radius: var(--br);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    border: 1px solid rgba(75, 1, 38, 0.1);
+  
+    &:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        border: 1px solid rgba(240, 4, 122, 0.3);
+
+        .linkedinButton {
+            transform: rotate(20deg);
+          }
+    }
+
+    @media (max-width: 768px) {
+        padding: 1rem 0.5rem;
+        margin: 0 ;
+        width: 90%;
+      }
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    
+    @media (max-width: 768px) {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0
+    }
+  }
+  
+  .message {
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    color: var(--text-color-light)  ;
+    white-space: pre-line;
+
+    @media (max-width: 768px) {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    }
+  
+  .author {
+    strong {
+      display: block;
+      font-size: 1rem;
+      color: #111;
+    }
+  
+    span {
+      font-size: 0.9rem;
+      white-space: pre-line;
+      color: #aaa;
+    }
+  }
+  
+  .testimonialsSubtitle{
+    font-size: 22px;
+    color: var(--text-color-light);
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
+}
+
+  .secondSection{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .linkedinButton {
+    margin-top: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    background-color: transparent;
+    border: 1px solid #ccc;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+    &:hover {
+      background-color: #f4f9fd;
+    }
+  
+    svg {
+      vertical-align: middle;
+    }
+
+    @media (max-width: 768px) {
+        width: 35px;
+        height: 35px;
+        margin-bottom: 0
+    }
+  }
+  

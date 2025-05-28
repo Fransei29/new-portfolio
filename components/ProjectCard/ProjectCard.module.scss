@@ -132,7 +132,7 @@
   color: var(--text-color-light);
   background-color: transparent;
   box-shadow: 0 2px 4px rgba(88, 1, 45, 0.2);
-  border-radius: 8px;
+  border-radius: var(--br); 
   text-decoration: none;
   border: 1px solid rgba(226, 4, 115, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;

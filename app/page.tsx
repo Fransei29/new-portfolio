@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/homeText/HomeText';
 import ProjectsSection from '../components/projectsSection/ProjectsSection';
+import Testimonials from '../components/Testimonials/TestimonialsComponent';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -66,9 +67,12 @@ export default function Home() {
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
             <Skills />
           </div>
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left">
+            <Testimonials />
+          </div>
       </section>
 
-      <section ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
+      <section ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-right">
         <ContactSection/>
       </section>
     </div>
