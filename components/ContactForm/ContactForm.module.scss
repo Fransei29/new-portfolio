@@ -1,0 +1,111 @@
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 480px;
+    height: auto;
+    margin: 0 auto; 
+    border-style: none;
+    border: 1px solid rgb(129, 128, 128, 0.2);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--br);
+    padding: 2rem;
+
+     p {
+        margin-bottom: 0.8rem;
+      }
+    
+      :global(html.dark) & {
+        background-color: #181c33;
+        color: rgb(228, 227, 227);
+        border: 1px solid rgba(248, 248, 248, 0.3);
+      }
+}
+
+.contactForm  textarea,
+.contactForm  input {
+    resize: none;
+    padding: 20px 40px;   
+    border-radius: 8px;
+    font-size: 15px; 
+    width: 100%;
+    box-sizing: border-box; 
+    border: 1px solid transparent;
+    background-color: rgb(247, 244, 244);
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+}
+
+.contactForm textarea {
+    height: 170px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"] {
+    height: 50px;
+}
+
+.contactForm  input:focus,
+.contactForm textarea:focus {
+    border-color: rgb(219, 55, 137); 
+    outline: none; 
+}
+
+.contactForm button {
+    background-color:transparent;
+    border: 1px solid rgb(151, 0, 76, 0.2);
+    box-shadow: var(--box-shadow);
+    color: var(--text-color-light);
+    border-radius: var(--br); 
+    padding: 1rem; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    :global(html.dark) & {
+        background-color: #181c33;
+        color: rgb(228, 227, 227);
+        border: 1px solid rgba(248, 248, 248, 0.3);
+      }
+}
+
+.contactForm button:hover {
+    background-color: rgb(219, 55, 137, 0.2); 
+    cursor: pointer;
+}
+
+.h3 {
+    font-size: 1rem;
+}
+.successMessage,
+.errorMessage {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.successMessage {
+    font-size: 21px;
+    color: rgb(219, 55, 137); 
+}
+
+.errorMessage {
+    color: #f44336; 
+}
+
+.dark .contactSection {
+  color: var(--text-color-dark-mode);
+}
+ 
+@media (max-width: 768px) {
+.contactForm{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.7rem;
+    width: 90%;
+    height: auto;
+  }
+}

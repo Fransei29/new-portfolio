@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import '../projects/projects.css';
-import ClientLayout from '../../components/clientLayout/ClientLayout';
+import styles from '../projects/projects.module.scss';
+import ClientLayout from '../../components/ClientLayout/ClientLayout';
+import '../../app/styles/utilities.scss'; 
 
 // Definir los tipos de los proyectos
 interface Projects {
@@ -39,33 +40,30 @@ const Projects = () => {
 
   return (
     <ClientLayout>
-    <section className="containerProjects">
-    <div className="titlepro">
-      <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-        <div className="tit2">
-          <p className="tit-project">
-            Welcome to <span style={{ color: 'rgb(236, 3, 119)' }}>Projects Section</span>
+      <section className={styles.containerProjects}>
+        <div className={styles.projectsContent}>        
+          <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
+          <p className={styles.highlight}>
+            Projects
           </p>
-          <p className="tit-project1">
-            Explore a selection of my projects, where I bring ideas to life through code, design, and creativity.
+          <p className={styles.projectsSubtitle}>
+          Selected works that reflect how I think, build, and solve problems
           </p>
-          <p className="tit-project2">Discover how I turn ideas into interactive experiences.</p>
+          <div className={styles.projectsGrid}>
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.4 }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="projects1">
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.4 }}
-          >
-            <ProjectCard project={project} />
-          </motion.div>
-        ))}
-      </div>
-    </div>
-    </section>
+        </div>   
+      </section>
     </ClientLayout>
   );
 };

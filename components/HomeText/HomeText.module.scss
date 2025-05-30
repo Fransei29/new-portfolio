@@ -1,0 +1,86 @@
+.homeTextContainer {
+  padding: 4rem 0;
+  margin: 0 auto;
+  color: var(--text-color-dark);
+}
+
+.greeting {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+  margin: 0 0 1.4rem 0;
+  font-weight: 500;
+ 
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+.nameHighlight {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.mainTitle {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin: 0 0 1.4rem 0;
+  line-height: 1.1;
+ 
+  @media (max-width: 768px) {
+    margin: 0;
+    padding: 1.5rem 0;
+    font-size: 2.2rem;
+    text-align: left;
+  }
+}
+
+.subTitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-color-light); 
+  margin: 0 0 1.4rem 0;
+   
+   @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.description {
+  width: 70%;
+  font-size: 1.4rem;
+  color: #8f8f9e;
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+  margin-bottom: 2.5rem;
+}
+
+.techIcons {
+  display: flex;
+  gap: 25px;
+}
+
+.icon {
+  color: rgb(110, 110, 110, 0.8);
+  transition: color 0.3s ease;
+}
+
+:global(html.dark) .icon {
+  color: rgb(226, 224, 224);
+}
+
+  @media (max-width: 768px) {
+  .homeTextContainer{
+    padding: 0.5rem;
+  }
+
+  .techIcons {
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .description {
+    width: 100%;
+    font-size: 1rem;
+  }
+}

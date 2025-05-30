@@ -36,8 +36,10 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+
 export default function Testimonials() {
   return (
+    <div className={styles.testimonialsContainer}>
     <section className={styles.testimonials}>
       <p className={styles.highlight}>Testimonials</p>
       <p className={styles.testimonialsSubtitle}>
@@ -70,5 +72,6 @@ export default function Testimonials() {
         ))}
       </div>
     </section>
+    </div>
   );
 }

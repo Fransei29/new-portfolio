@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import '../projects/projects.css';
-import ClientLayout from '../../components/clientLayout/ClientLayout';
+import styles from '../projects/projects.module.scss';
+import ClientLayout from '../../components/ClientLayout/ClientLayout';
 
 // Definir los tipos de los proyectos
 interface Projects {
@@ -40,20 +40,16 @@ const Projects = () => {
 
   return (
     <ClientLayout>
-    <section className="containerProjects">
-    <div className="titlepro">
-      <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-        <div className="tit2">
-          <p className="tit-project">
-            Welcome to <span style={{ color: 'rgb(236, 3, 119)' }}>Tutorials Section</span>
+      <section className={styles.containerProjects}>
+        <div className={styles.projectsContent}>        
+          <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
+          <p className={styles.highlight}>
+            Tutorials
           </p>
-          <p className="tit-project1">
-            Discover a collection of tutorials to help you learn new technologies and enhance your skills.
+          <p className={styles.projectsSubtitle}>
+          From theory to implementation — focused tutorials for real development
           </p>
-          <p className="tit-project2">Feel free to dive in!</p>
-        </div>
-      </div>
-      <div className="projects1">
+      <div className={styles.projectsGrid}>
         {projects
           .filter((project) => project.isTutorial) // Filtrar solo los tutoriales
           .map((project, index) => (
@@ -65,12 +61,13 @@ const Projects = () => {
             >
               <ProjectCard project={project} />
             </motion.div>
-        ))}
-      </div>
-    </div>
-    </section>
-    </ClientLayout>
-  );
-};
+            ))}
+           </div>
+         </div>
+         </div>   
+       </section>
+     </ClientLayout>
+   );
+ };
 
 export default Projects;

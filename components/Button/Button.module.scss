@@ -1,0 +1,83 @@
+@import '../../app/styles/utilities.scss'; 
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+   padding: 0  0.5rem;
+};
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 12px 50px;
+  font-size: 20px;
+  background-color: transparent;
+  border: 1px solid rgba(151, 0, 76, 0.2);
+  border-radius: var(--br);
+  color: var(--text-color-light);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background-color: rgba(241, 194, 218, 0.7);
+  }
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(228, 227, 227);
+    border: 1px solid rgba(248, 248, 248, 0.3);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05); 
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 7px 24px;
+    font-size: 16px;
+  }
+}
+
+.icon {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  color: var(--text-color-light);
+
+  :global(html.dark) & {
+    color: rgb(226, 224, 224);
+  }
+}
+
+.buttonSmall {
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end
+}
+
+.title {
+    display: inline-block;
+    position: relative;
+    font-size: 22px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    padding:0;
+    margin: 1rem 0rem;
+  
+    @media (max-width: 600px) {
+      font-size: 1rem;
+      padding: 0 0.5rem
+    }
+}

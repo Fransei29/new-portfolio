@@ -19,14 +19,18 @@
   :global(html.dark) & {
     background-color: #181c33;
     color: rgb(226, 226, 226);
-    border: 1px solid rgba(248, 248, 248, 0.3); /* fucsia translúcido */
-    box-shadow: 0 4px 8px rgba(250, 81, 166, 0.5);
+    border: 1px solid rgba(248, 248, 248, 0.3);
+    box-shadow: 0 4px 8px rgba(250, 81, 166, 0.2);
   }
   
   &:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     border: 1px solid rgba(240, 4, 122, 0.3);
+  }
+
+  &:hover .projectPreview img {
+    transform: scale(1.05);
   }
 
   &.active .infoWrapper {
@@ -91,10 +95,6 @@
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-
-  &:hover img {
-    transform: scale(1.05);
-  }
 }
 
 .projectTitle {
@@ -102,6 +102,11 @@
   flex-direction: row;
   align-items: center;
   gap: 25px;
+  font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 }
 
 .projectImage {
@@ -161,6 +166,10 @@
   padding: 0;
   opacity: 0; /* Initially hidden */
   transition: opacity 0.5s ease;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 }
 
 .projectCard.active .infoText  {
@@ -266,11 +275,6 @@
   .projectIcon {
     width: 28px;
     height: 28px;
-  }
-
-  .infoText {
-    font-size: 1rem;
-    margin: 0;
   }
 
   .fa-file-alt, .fa-github, .fa-external-link-alt {

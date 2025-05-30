@@ -2,7 +2,7 @@
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
-import Footer from '../components/footer/Footer'; 
+import Footer from '../components/Footer/Footer'; 
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';

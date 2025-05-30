@@ -1,0 +1,23 @@
+.container {
+  background-color: var(--background-colorA)  ;
+  min-height: 100vh;
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+}
+}
+
+.containerContent {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-bottom: 3rem;
+}
+
+.buttonContainer {
+  max-width: 1100px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}

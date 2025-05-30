@@ -2,17 +2,15 @@
 
 import React from 'react';
 
-import ClientLayout from '../components/clientLayout/ClientLayout';
+import ClientLayout from '../components/ClientLayout/ClientLayout';
 import './globals.css';
-import Experience from '../components/experience/Experience';
-import Skills from '../components/skills/Skills';
-import SocialMedia from '../components/socialMedia/SocialMedia';
-import ContactSection from '../components/contact/Contact';
+import Experience from '../components/Experience/Experience';
+import Skills from '../components/Skills/Skills';
+import SocialMedia from '../components/SocialMedia/SocialMedia';
 import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
-import HomeText from '../components/homeText/HomeText';
-import ProjectsSection from '../components/projectsSection/ProjectsSection';
-import Testimonials from '../components/Testimonials/TestimonialsComponent';
+import HomeText from '../components/HomeText/HomeText';
+import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -67,14 +65,8 @@ export default function Home() {
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
             <Skills />
           </div>
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left">
-            <Testimonials />
-          </div>
       </section>
 
-      <section ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-right">
-        <ContactSection/>
-      </section>
     </div>
     </ClientLayout>
   );
