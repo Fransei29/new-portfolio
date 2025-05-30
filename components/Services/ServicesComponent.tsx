@@ -17,6 +17,8 @@ export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const ref = servicesRef.current; // ✅ esta es la clave
+  
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -27,14 +29,14 @@ export const Services = () => {
       },
       { threshold: 0.1 }
     );
-
-    if (servicesRef.current) observer.observe(servicesRef.current);
-
+  
+    if (ref) observer.observe(ref);
+  
     return () => {
-      if (servicesRef.current) observer.unobserve(servicesRef.current);
+      if (ref) observer.unobserve(ref); // ✅ usar la variable local
     };
   }, []);
-
+  
   const services: Service[] = [
     {
       key: "webDevelopment",

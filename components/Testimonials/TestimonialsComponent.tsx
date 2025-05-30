@@ -1,5 +1,7 @@
 import styles from "./TestimonialsComponent.module.scss";
 import { FaLinkedin } from "react-icons/fa";
+import Image from 'next/image';
+
 
 type Testimonial = {
   name: string;
@@ -48,8 +50,17 @@ export default function Testimonials() {
       <div className={styles.grid}>
         {testimonials.map((t, index) => (
           <div key={index} className={styles.card}>
-            {t.image && <img src={t.image} alt={t.name} className={styles.avatar} />}
-            <p className={styles.message}>"{t.message}"</p>
+            {t.image && (
+              <Image
+                src={t.image}
+                alt={t.name}
+                width={100}  // ⬅️ poné un valor real
+                height={100} // ⬅️ igual acá
+                className={styles.avatar}
+              />
+            )}
+
+           <p className={styles.message}>&quot;{t.message}&quot;</p>
             <div className={styles.author}>
               <strong>{t.name}</strong>
               <span>{t.role}</span>
