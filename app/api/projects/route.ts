@@ -8,7 +8,7 @@ export async function GET() {
       description: `A comprehensive full-stack e-commerce platform featuring user authentication, product management, shopping cart functionality, and integration with Mercado Pago for payments.\nBuilt with React and Next.js for the frontend, TypeScript for type safety, and Prisma as the ORM for database interactions.\nThe application is containerized using Docker, ensuring consistent development and deployment environments.\nStyling is managed with Sass, providing modular and maintainable CSS.`,
       link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
       link3: 'https://sport-ecommerce-58pi.vercel.app/',
-      previewImage: '/img/ecommerce.jpg',
+      previewImage: '/img/quiero.webp',
       technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
     },
     {
