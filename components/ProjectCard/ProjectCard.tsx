@@ -157,7 +157,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
 
             <div className={styles.infoWrapper}>
               <div className={styles.infoText}>
-                <p style={{ whiteSpace: 'pre-line' }}>{project.description}</p>
+                <p className={styles.infoTextDescription} style={{ whiteSpace: 'pre-line' }}>{project.description}</p>
               </div>
             </div>
           </footer>

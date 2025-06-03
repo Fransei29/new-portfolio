@@ -172,25 +172,32 @@
   }
 }
 
+.infoTextDescription{
+  white-space: pre-line; /* Para que se respete \n como salto de línea */
+  line-height: 1.45;      /* Ajustá según tu diseño (1.5–1.8 suele ir bien) */
+  letter-spacing: 0.3px; 
+}
+
 .projectCard.active .infoText  {
   opacity: 1; /* Visible when .active class is added */
 }
 
 .technologiesContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, max-content); 
   gap: 7px;
-  justify-content: flex-end; 
-  flex:1;
+  justify-content: end; 
+  flex: 1;
 }
+
 
 .technology {
   background-color: transparent;
   color: var(--text-color-light);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 400;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0.5rem;
   border: 1px solid rgba(252, 0, 126, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
 
