@@ -46,7 +46,7 @@
     z-index: 100;
 
     button {
-      background: #fff; 
+      background: #e9e8e8; 
       border: 1px solid #ccc;
       border-radius: var(--br);
       color: var(--primary-color);
@@ -75,17 +75,17 @@
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     background-color: #fff;
-    padding: 4rem 1.5rem;
+    padding: 4rem 3rem;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
-    width: 70%; 
+    width: 25%; 
     z-index: 999;
     gap: 0.7rem;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%); 

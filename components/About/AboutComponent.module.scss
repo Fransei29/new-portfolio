@@ -52,9 +52,9 @@
     letter-spacing: 0.03em;
 
     @media (max-width: 768px) {
-        font-size: 1rem;
-        width: 100%
-    }
+      font-size: 1rem;
+      width: 100%
+  }
    }
 
   
@@ -63,6 +63,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 768px) {
+     margin-top: 2rem;
+   }  
   }
   
   .imageWrapper {
