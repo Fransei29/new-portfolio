@@ -39,6 +39,15 @@ export async function GET() {
       technologies: ['Node.js', 'Express', 'Redis', 'Tailwind CSS'],
     },
     {
+      title: 'Trip Planner',
+      isTutorial: false,
+      description: `An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.`,
+      link2: 'https://github.com/Fransei29/trip-planner-c',
+      link3: 'https://trip-planner-c.vercel.app/',
+      previewImage: '/img/trip.webp',
+      technologies: ['Node.js', 'Express', 'React', 'Axios', 'MongoDB'],
+    },
+    {
       title: 'Dynamic Blog',
       isTutorial: false,
       description: `A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable.\nFeatures include dynamic routing, user blog management, and a clean, responsive design.\nBuilt with Next.js for server-side rendering and Tailwind CSS for styling.\nThe application parses RSS feeds and integrates with Airtable's API to manage content.`,
@@ -47,15 +56,7 @@ export async function GET() {
       previewImage: '/img/next.png',
       technologies: ['Next.js', 'Tailwind CSS', 'Parser'],
     },
-    {
-      title: 'Trip Planner',
-      isTutorial: false,
-      description: `An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.`,
-      link2: 'https://github.com/Fransei29/tripplanner.git',
-      link3: 'https://trip-planner-c.vercel.app/',
-      previewImage: '/img/trip.png',
-      technologies: ['Node.js', 'Express', 'React', 'Axios', 'MongoDB'],
-    },
+    
     {
       title: 'Holistic Portal',
       isTutorial: false,
