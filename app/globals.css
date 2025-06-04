@@ -130,12 +130,16 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-a {
+  width: 130px;
+  height: 170px;
   top: 100px;
   left: 40px;
   z-index: 1;
 }
 
 .shape-b {
+  width: 130px;
+  height: 170px;
   top: 80px;
   left: 150px;
   z-index: 2;
@@ -222,12 +226,41 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .home-text {
     display: flex;
     flex-direction: column;
-    padding: 1.5rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     height: auto;
   }
 
+  .home-textB {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .svg-duo {
-    display: none;
+    padding-top: 0.5rem;
+    width: 190px; 
+    height: 170px;
+  }
+
+  .shape-a {
+    top: 20px;
+    left: 85px;
+    width: 110px;
+    height: 130px;
+  }
+  
+  .shape-b {
+    top: 0px;
+    left: 190px;
+    width: 110px;
+    height: 130px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .containerGeneral, .home-text {
+   padding:0 0.5rem;
   }
 }
 

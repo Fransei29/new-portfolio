@@ -53,6 +53,10 @@
   line-height: 1.4;
   letter-spacing: 0.4px;
   margin-bottom: 2.5rem;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .techIcons {
@@ -76,7 +80,7 @@
 
   .techIcons {
     justify-content: center;
-    padding: 1rem 0;
+    margin-bottom: 0.5rem;
   }
 
   .description {
