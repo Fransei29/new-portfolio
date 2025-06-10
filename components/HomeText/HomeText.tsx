@@ -13,14 +13,14 @@ const HomeText: React.FC = () => {
   <section className={styles.homeTextContainer}>
     <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
         <p className={styles.greeting}>Hi, I&apos;m <span className={styles.nameHighlight}>Franco</span></p>
-        <h1 className={styles.mainTitle}>Full Stack Developer.</h1>
+        <h1 className={styles.mainTitle}>Front End Developer.</h1>
     </section>
     <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">
        <h2 className={styles.subTitle}>I build impactful digital experiences.</h2>
     </section>
     <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-right">
         <p className={styles.description}>
-        2+ years engineering scalable apps with a frontend focus, using clean code, modern tools, and a strong focus on UX and performance.
+        Fullstack developer with 2+ years of experience and a strong frontend focus, engineering scalable web apps with modern technologies.
         </p>
         <div className={styles.techIcons}>
           <FaReact size={28} className={styles.icon} />

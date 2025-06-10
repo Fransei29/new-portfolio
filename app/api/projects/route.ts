@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
+import { projects } from '../../data/projects';
+
 
 export async function GET() {
   const projects = [
     {
+      slug: 'ecommerce',
       title: 'Ecommerce',
       isTutorial: false,
       description: `A comprehensive full-stack e-commerce platform featuring user authentication, product management, shopping cart functionality, and integration with Mercado Pago for payments.\nBuilt with React and Next.js for the frontend, TypeScript for type safety, and Prisma as the ORM for database interactions.\nThe application is containerized using Docker, ensuring consistent development and deployment environments.\nStyling is managed with Sass, providing modular and maintainable CSS.`,
@@ -12,15 +15,17 @@ export async function GET() {
       technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
     },
     {
+      slug: 'taskmanager',
       title: 'Task Manager',
       isTutorial: false,
       description: `An efficient task management application that allows users to create, edit, and delete tasks.\nIt includes user authentication to ensure personalized task management.\nThe frontend is developed with React and Next.js, utilizing Axios for API requests.\nThe backend leverages PostgreSQL as the relational database, interfaced through Sequelize ORM.\nStyling is handled with Sass for a clean and responsive UI.`,
-      link2: 'https://github.com/Fransei29/task-manager.git',
+      link2: 'https://github.com/Fransei29/task-manager-b',
       link3: 'https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/',
       previewImage: '/img/task.webp',
       technologies: ['React', 'Next.js', 'Axios', 'PostgreSQL', 'Sequelize', 'Sass'],
     },
     {
+      slug: 'vestire',
       title: 'Vestiré',
       isTutorial: false,
       description: `An e-commerce platform specializing in clothing, offering a wide selection of products with intuitive navigation and a seamless checkout process.\nThe frontend is built with React, while the backend utilizes Node.js and Express for server-side operations.\nAxios is used for handling HTTP requests, and PostgreSQL serves as the database.\nThe application includes user authentication to manage user sessions and orders.`,
@@ -30,6 +35,7 @@ export async function GET() {
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'PostgreSQL'],
     },
     {
+      slug: 'flipper',
       title: 'Flipper',
       isTutorial: false,
       description: `A Twitter-inspired social media application supporting functionalities like tweeting, following, and live updates.\nReal-time interactions are powered by WebSockets, ensuring responsiveness and high user engagement.\nThe backend is developed with Node.js and Express, utilizing Redis for efficient data storage and retrieval.\nThe frontend employs Tailwind CSS for rapid UI development.`,

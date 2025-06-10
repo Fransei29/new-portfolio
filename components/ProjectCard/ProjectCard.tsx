@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FileText, Github, ExternalLink } from 'lucide-react';
@@ -59,6 +60,7 @@ const technologyIcons: { [key: string]: JSX.Element } = {
 
 // Definir tipos para el proyecto
 interface Project {
+  slug?: string;
   title: string;
   isTutorial?: boolean;
   description: string;
@@ -74,22 +76,33 @@ interface ProjectCardProps {
   project: Project;
   showDocumentation?: boolean;
 }
-
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = true }) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleDescription = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
     setIsActive((prev) => !prev);
+  };
+
+  // Este onClick se usará solo si NO hay slug
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (!project.slug) {
+      toggleDescription(e);
+    }
   };
 
   return (
     <section className={styles.firstCardSection}>
       <article
-        className={`${styles.projectCard} ${isActive ? styles.active : ''}`}
-        id={project.title.toLowerCase().replace(/\s/g, '')}
-        onClick={toggleDescription}
-      >
+            className={`
+              ${styles.projectCard} 
+              ${isActive ? styles.active : ''} 
+              ${!project.slug ? styles.clickable : ''}
+            `}
+            id={project.title.toLowerCase().replace(/\s/g, '')}
+            onClick={handleCardClick}
+          >
+
         <section className={styles.firstCardSection}>
           {project.previewImage && (
             <div className={styles.projectPreview}>
@@ -123,18 +136,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 <p className={styles.projectTitleX}>{project.title}</p>
               </div>
             </div>
-            {!project.isTutorial && project.technologies && project.technologies.length > 0 && (
-            <div className={styles.technologiesContainer}>
-              {project.technologies.map((tech, index) => (
-                <span key={index} className={styles.technology} title={tech}>
-                  {technologyIcons[tech] ? technologyIcons[tech] : <span style={{ fontSize: 12 }}>{tech}</span>}
 
-                </span>
-              ))}
+            {!project.isTutorial && project.technologies && project.technologies.length > 0 && (
+              <div className={styles.technologiesContainer}>
+                {project.technologies.map((tech, index) => (
+                  <span key={index} className={styles.technology} title={tech}>
+                    {technologyIcons[tech] ? technologyIcons[tech] : <span style={{ fontSize: 12 }}>{tech}</span>}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          {/* Mostrar botón solo si hay slug */}
+          {project.slug && (
+            <div className={styles.buttonContainer}>
+              <Link
+                href={`/projects/${project.slug}`}
+                className={styles.viewMoreButton}
+                onClick={(e) => e.stopPropagation()} 
+              >
+                Learn more
+              </Link>
             </div>
           )}
-
-          </header>
 
           <footer className={styles.projectFooter}>
             <div className={styles.projectLinks}>
@@ -157,7 +182,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
 
             <div className={styles.infoWrapper}>
               <div className={styles.infoText}>
-                <p className={styles.infoTextDescription} style={{ whiteSpace: 'pre-line' }}>{project.description}</p>
+                <p className={styles.infoTextDescription} style={{ whiteSpace: 'pre-line' }}>
+                  {project.description}
+                </p>
               </div>
             </div>
           </footer>

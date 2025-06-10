@@ -14,7 +14,6 @@
   width: 100%;
   max-width: 600px;
   overflow: hidden;
-  cursor: pointer;
 
   :global(html.dark) & {
     background-color: #181c33;
@@ -128,7 +127,7 @@
   width: 100%;
 }
 
-.projectCard a {
+.projectCard a:not(.viewMoreButton) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,13 +172,13 @@
 }
 
 .infoTextDescription{
-  white-space: pre-line; /* Para que se respete \n como salto de línea */
-  line-height: 1.45;      /* Ajustá según tu diseño (1.5–1.8 suele ir bien) */
+  white-space: pre-line; 
+  line-height: 1.45;     
   letter-spacing: 0.3px; 
 }
 
 .projectCard.active .infoText  {
-  opacity: 1; /* Visible when .active class is added */
+  opacity: 1; 
 }
 
 .technologiesContainer {
@@ -198,7 +197,6 @@
   font-weight: 400;
   border-radius: 12px;
   padding: 0.5rem;
-  border: 1px solid rgba(252, 0, 126, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
 
   :global(html.dark) & {
@@ -216,7 +214,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px; // ajustá este valor a gusto
+  width: 20px; 
   height: 20px;
 
   svg {
@@ -227,8 +225,8 @@
 .technology svg {
   width: 18px;
   height: 18px;
-  fill: currentColor;      // Hace que el SVG tome el color del texto
-  stroke: none;            // Opcional, elimina contornos si los tienen
+  fill: currentColor;     
+  stroke: none;            
   color: #686868;    
   
   :global(html.dark) & {
@@ -239,6 +237,37 @@
     width: 15px;
     height: 15px;
   }
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  z-index: 2;
+}
+
+.viewMoreButton {
+  font-size: 1rem;
+  display:flex;
+  color: var(--text-color-light);
+  border-bottom: 1px solid rgb(116, 116, 116, 0.6);
+  padding-bottom: 2px;
+  text-decoration: none;
+  font-weight: 400;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  :global(html.dark) & {
+    color: rgb(223, 222, 222);
+  }
+  
+  &:hover {
+    color: #d6237f;
+    border-bottom: 1px solid #f54ca3;
+  }
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
