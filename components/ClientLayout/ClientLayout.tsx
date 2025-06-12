@@ -35,15 +35,17 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <div className={styles.logoContainer}>
-              <Image
-                src="/dev3.png"
-                alt="Logo"
-                width={90}
-                height={90}
-                className={styles.logo}
-              />
-            </div>
+            <Link href="/" passHref className={styles.logoLink}>
+              <div className={styles.logoContainer}>
+                <Image
+                  src="/dev3.png"
+                  alt="Logo"
+                  width={90}
+                  height={90}
+                  className={styles.logo}
+                />
+              </div>
+            </Link>
           </motion.section>
 
           {/* Botón hamburguesa */}

@@ -29,7 +29,7 @@
   }
 
   &:hover .projectPreview img {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 
   &.active .infoWrapper {
@@ -149,6 +149,11 @@
   &:hover {
     background-color:rgba(245, 84, 165, 0.9);
   }
+
+  @media (max-width: 768px) {
+    width: 16%;
+    height: 2.7rem;
+  }
 }
 
 .infoWrapper {
@@ -163,7 +168,7 @@
   margin:0;
   letter-spacing: 0.3px;
   padding: 0;
-  opacity: 0; /* Initially hidden */
+  opacity: 0; 
   transition: opacity 0.5s ease;
   
   @media (max-width: 768px) {
@@ -206,7 +211,7 @@
   }
   
   @media (max-width: 768px) {
-    padding: 0.5rem;
+    padding: 0.2rem;
   }
 }
 
@@ -244,6 +249,11 @@
   bottom: 1rem;
   right: 2rem;
   z-index: 2;
+  
+  @media (max-width: 768px) {
+    bottom: 0rem;
+    right: 1rem;
+  }
 }
 
 .viewMoreButton {
@@ -263,6 +273,12 @@
   &:hover {
     color: #d6237f;
     border-bottom: 1px solid #f54ca3;
+  }
+
+  @media (max-width: 768px) {
+    padding-bottom: 0;
+    font-size: 0.9rem;
+    border-bottom: none
   }
 }
 

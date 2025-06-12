@@ -1,4 +1,3 @@
-
 .nav {
   display: flex;
   position: relative;
@@ -166,10 +165,65 @@
   color: var(--text-color);
 }
 
+.nav > section > a {
+  font-size: 1.15rem;
+  color: var(--text-color-light);
+  margin: 0;
+  padding-top: 5px;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.nav > section > a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color-light);
+  transition: width 0.4s ease;
+}
+
+.nav > section > a:hover::after {
+  color:var(--text-color-light);
+  width: 100%;
+}
+
+.nav > section > a:hover {
+  color: var(--text-color);
+}
+
+.logoLink {
+  text-decoration: none !important;
+  &:hover {
+    text-decoration: none !important;
+  }
+  &::after {
+    display: none !important;
+  }
+}
+
 .logoContainer {
   display: flex;
-  flex-direction: row;
-  left:0; 
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logoContainer a {
+  text-decoration: none !important;
+  &:hover {
+    text-decoration: none !important;
+  }
+  &::after {
+    display: none !important;
+  }
 }
 
 .logo {

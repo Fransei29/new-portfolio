@@ -97,7 +97,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   align-content: center;
   align-items: flex-start;
   padding-top: 2rem;
-  padding-bottom: 6rem;
 }
 
 .home-textA{
@@ -118,7 +117,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   display: flex;
   position: relative;
   width: 290px; 
-  height: 400px;
+  height: 380px;
   margin: 0 auto;
   opacity: 0.8;
   
