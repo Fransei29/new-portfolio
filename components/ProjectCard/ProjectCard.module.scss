@@ -6,9 +6,8 @@
   border-radius: var(--br);
   background-color: #ffffff;
   margin: 20px auto;
-  box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
+  box-shadow: 0 4px 8px rgba(56, 56, 56, 0.1);
   color: var(--text-color);
-  border: 1px solid rgba(75, 1, 38, 0.1);
   transition: transform 0.5s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
   width: 100%;
@@ -23,9 +22,7 @@
   }
   
   &:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    border: 1px solid rgba(240, 4, 122, 0.3);
+    box-shadow: 0 4px 8px rgba(56, 56, 56, 0.3);
   }
 
   &:hover .projectPreview img {
@@ -75,7 +72,13 @@
 }
 
 .secondCardSection {
-  padding: 1rem 1.7rem;
+  padding: 1rem 1.5rem;
+}
+
+.projectTitleX {
+  margin-top: 0rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
 }
 
 .projectPreview {
@@ -94,6 +97,18 @@
     object-fit: cover;
     transition: transform 0.3s ease;
   }
+}
+
+.projectPreview::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%; 
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.0));
+  pointer-events: none;
+  z-index: 2;
 }
 
 .projectTitle {
@@ -123,7 +138,7 @@
 .projectLinks {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 5px;
   width: 100%;
 }
 
@@ -135,10 +150,8 @@
   height: 2.8rem;
   color: var(--text-color-light);
   background-color: transparent;
-  box-shadow: 0 2px 4px rgba(88, 1, 45, 0.2);
   border-radius: var(--br); 
   text-decoration: none;
-  border: 1px solid rgba(226, 4, 115, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   :global(html.dark) & {
@@ -186,67 +199,10 @@
   opacity: 1; 
 }
 
-.technologiesContainer {
-  display: grid;
-  grid-template-columns: repeat(3, max-content); 
-  gap: 7px;
-  justify-content: end; 
-  flex: 1;
-}
-
-
-.technology {
-  background-color: transparent;
-  color: var(--text-color-light);
-  font-size: 0.9rem;
-  font-weight: 400;
-  border-radius: 12px;
-  padding: 0.5rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  :global(html.dark) & {
-    background-color: rgba(252, 68, 160, 0.2);
-    color: rgb(223, 222, 222);
-    border: 1px solid rgba(252, 68, 160, 0.5);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 0.2rem;
-  }
-}
-
-.technology {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px; 
-  height: 20px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-.technology svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;     
-  stroke: none;            
-  color: #686868;    
-  
-  :global(html.dark) & {
-    color: rgb(223, 222, 222);
-  }
-
-  @media (max-width: 768px) {
-    width: 15px;
-    height: 15px;
-  }
-}
 
 .buttonContainer {
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.5rem;
   right: 2rem;
   z-index: 2;
   

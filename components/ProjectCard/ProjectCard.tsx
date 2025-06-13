@@ -137,15 +137,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
               </div>
             </div>
 
-            {!project.isTutorial && project.technologies && project.technologies.length > 0 && (
-              <div className={styles.technologiesContainer}>
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className={styles.technology} title={tech}>
-                    {technologyIcons[tech] ? technologyIcons[tech] : <span style={{ fontSize: 12 }}>{tech}</span>}
-                  </span>
-                ))}
-              </div>
-            )}
+
           </header>
 
           {/* Mostrar botón solo si hay slug */}
