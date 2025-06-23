@@ -20,7 +20,7 @@ const HomeText: React.FC = () => {
     </section>
     <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-right">
         <p className={styles.description}>
-        Fullstack developer with 2+ years of experience and a strong frontend focus, engineering scalable web apps with modern technologies.
+        Full Stack Developer with 3 years of experience and a strong frontend focus, engineering scalable web apps with modern technologies.
         </p>
         <div className={styles.techIcons}>
           <FaReact size={28} className={styles.icon} />
