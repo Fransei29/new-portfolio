@@ -1,12 +1,14 @@
 /* LoadingSpinner.css */
 .loadingOverlay {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     inset: 0;
-    background: rgba(255, 255, 255, 0.9); /* o transparente si querés */
-    display: flex;
+    background: transparent; 
     align-items: center;
     justify-content: center;
     z-index: 99999;
+    gap: 3rem;
   }
   
   .spinner {
@@ -16,6 +18,11 @@
     color: var(--primary-color);
   }
   
+
+  .logo{
+    opacity: 0.8;
+  }
+
   @keyframes spin {
     to {
       transform: rotate(360deg);
