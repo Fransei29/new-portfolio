@@ -10,6 +10,7 @@ import styles from './ClientLayout.module.scss';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import { Menu, X } from 'lucide-react';
 import { ReactNode } from 'react';
+import ChatWidget from '../ChatWidget/ChatWidget';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const elementsRef = useScrollAnimation();
@@ -118,6 +119,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         <div />
         {children}
       </main>
+      
+      {/* Chat Widget */}
+      <ChatWidget />
     </>
   );
 }

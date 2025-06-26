@@ -45,7 +45,7 @@
     z-index: 100;
 
     button {
-      background: #e9e8e8; 
+      background: #ffffff; 
       border: 1px solid #ccc;
       border-radius: var(--br);
       color: var(--primary-color);
@@ -56,6 +56,10 @@
       justify-content: center;
       transition: border-color 0.3s ease;
       font-size: 1.4rem;
+
+      :global(html.dark) & {
+        background-color: rgba(245, 245, 245, 0.945);
+      }
 
       &:hover,
       &:focus {
