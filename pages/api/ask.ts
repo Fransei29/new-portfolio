@@ -1,6 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-import path from 'path';
 
 interface Knowledge {
   name: string;
@@ -17,6 +15,7 @@ interface Knowledge {
   projects: Array<{
     name: string;
     description: string;
+    impact?: string;
     technologies: string[];
     url?: string;
   }>;
@@ -45,30 +44,70 @@ interface Knowledge {
   };
 }
 
-// Fallback knowledge data in case file is not available
-const fallbackKnowledge: Knowledge = {
+// Complete knowledge data embedded in the code
+const knowledge: Knowledge = {
   name: "Franco Seiler",
   role: "Full Stack Developer",
-  bio: "I'm Franco Seiler, a Full Stack Developer from Córdoba, Argentina.",
+  bio: "I'm Franco Seiler, a Full Stack Developer from Córdoba, Argentina. I have over 3 years of experience building scalable web applications with React, Node.js, TypeScript and modern tools. I'm passionate about clean code, performance, user experience and integrating AI into real-world products.",
   location: "Córdoba, Argentina",
   availability: "Open to remote or hybrid roles in Europe or globally",
   languages: ["Spanish (native)", "English (advanced)", "Italian (advanced)", "Dutch (basic)"],
   technologies: ["React", "TypeScript", "Node.js", "Next.js", "Python", "PostgreSQL"],
   experience: "3+ years developing modern and scalable web applications",
   technologyExperiences: {
-    "React": "Built multiple interactive user interfaces with React",
-    "TypeScript": "Applied TypeScript across all frontend and backend layers",
-    "Node.js": "Built RESTful and GraphQL APIs with Node.js and Express"
+    "React": "I've built multiple interactive user interfaces with React, including an e‑commerce platform and a task management app. I leveraged hooks, state management (Redux, Zustand), and performance optimizations to improve load times and responsiveness.",
+    "Next.js": "I used Next.js for my portfolio and freelance projects to enable server‑side rendering, static site generation, and seamless routing. I integrated dynamic API routes and optimized the initial load with image and script optimization.",
+    "TypeScript": "I applied TypeScript across all frontend and backend layers, reducing runtime errors by around 20% and enhancing code quality and developer experience.",
+    "Node.js": "I built RESTful and GraphQL APIs with Node.js and Express, handling database connections, authentication, and business logic for various apps including e‑commerce and collaboration tools.",
+    "Express": "In combination with Node.js, I used Express to structure scalable backends, define middleware, and handle routing and error management for production‑ready applications.",
+    "Python": "I worked on backend utilities and scripts using Python and FastAPI/Django for specific freelance tasks, including data processing and small web services.",
+    "FastAPI": "I used FastAPI to quickly spin up performant REST APIs, benefiting from its built‑in validation, documentation, and async capabilities.",
+    "Django": "I built traditional web apps and admin interfaces with Django for internal tools, taking advantage of its ORM, authentication system and rapid scaffolding.",
+    "PostgreSQL": "I used PostgreSQL extensively in my task manager and e‑commerce projects to model relational data with Prisma/Sequelize, write optimized SQL queries, and ensure data integrity.",
+    "MongoDB": "I used MongoDB with Mongoose in my e‑commerce platform to model product catalogs, orders, and user sessions in a flexible document‑based structure.",
+    "MySQL": "I applied MySQL in freelance projects requiring relational databases, creating schemas, relations and integrating with ORMs like Sequelize.",
+    "Redis": "Implemented Redis for caching session data and improving performance in high‑traffic apps like task collaboration tools.",
+    "SQLite": "Used lightweight SQLite databases for quick prototypes and small utilities where simplified storage was sufficient.",
+    "GraphQL": "Built GraphQL APIs using Node.js and Express with Apollo Server, enabling flexible client queries in production apps.",
+    "Docker": "Containerized applications end‑to‑end with Docker, defining Dockerfiles and docker‑compose for development and CI setups.",
+    "Git/GitHub/GitLab": "I use Git daily with CI/CD pipelines, code reviews and branching strategies to ensure clean and collaborative development.",
+    "AWS": "Deployed apps to AWS, managing CPU/storage with EC2 or Lambda, databases with RDS and S3 for static asset hosting.",
+    "Vercel/Netlify": "Used Vercel and Netlify for deploying React/Next.js frontends with serverless functions and instant rollbacks.",
+    "Jest": "Wrote unit tests for frontend components and backend endpoints to safeguard functionality and reduce regressions.",
+    "React Testing Library": "Utilized RTL for testing UI components, ensuring accessibility compliance and component behavior.",
+    "Cypress/Playwright": "Set up end‑to‑end tests with Cypress/Playwright to validate user flows like checkout or drag‑and‑drop.",
+    "OAuth/NextAuth.js/JWT": "Implemented secure authentication flows using OAuth providers and JWT sessions in Next.js apps.",
+    "Tailwind CSS/Sass/Bootstrap": "Styled UIs using Tailwind, Sass or Bootstrap, focusing on responsive design and consistency across devices.",
+    "Framer Motion": "Added polished animations and transitions using Framer Motion to improve UX and polish interfaces.",
+    "Postman": "Used Postman to test and document APIs during development and backend integrations.",
+    "Figma/Adobe XD": "Created UI/UX mockups and prototypes in Figma and Adobe XD before implementation.",
+    "SEO": "Optimized page structure, metadata, and performance to improve search visibility and Lighthouse scores.",
+    "Accessibility (WCAG)": "Ensured ARIA labels, proper semantic HTML and keyboard navigation to meet WCAG accessibility standards."
   },
   projects: [
     {
       name: "E-commerce Platform",
       description: "Complete e-commerce platform with shopping cart, payments and admin panel",
+      impact: "Handled product management, cart logic, Stripe integration and full admin control.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
       url: "https://github.com/francoseiler/ecommerce-platform"
+    },
+    {
+      name: "Task Management App",
+      description: "Task management application with drag & drop, notifications and real-time collaboration",
+      impact: "Built real-time collaboration features with Socket.io and organized task workflow logic.",
+      technologies: ["React", "TypeScript", "Socket.io", "PostgreSQL", "Tailwind CSS"],
+      url: "https://github.com/francoseiler/task-manager"
+    },
+    {
+      name: "Personal Portfolio",
+      description: "Professional portfolio with modern design, animations and integrated AI assistant",
+      impact: "Includes 3D interactions, performance optimization and OpenAI integration",
+      technologies: ["Next.js", "TypeScript", "Framer Motion", "OpenAI API", "Tailwind CSS"],
+      url: "https://github.com/francoseiler/portfolio"
     }
   ],
-  education: "Information Systems Engineering",
+  education: "Information Systems Engineering - National University",
   skills: {
     frontend: "Frontend Development",
     backend: "Backend Development",
@@ -79,12 +118,15 @@ const fallbackKnowledge: Knowledge = {
     devops: "CI/CD and DevOps"
   },
   detailedTechnologies: {
-    frontend: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
-    backend: ["Node.js", "Express", "Python", "FastAPI"],
-    databases: ["PostgreSQL", "MongoDB", "MySQL"],
-    devops: ["Docker", "Git", "GitHub", "CI/CD"],
-    testing: ["Jest", "React Testing Library", "Cypress"],
-    tools: ["VS Code", "Postman", "Figma"]
+    frontend: [
+      "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "CSS3", "HTML5", "Framer Motion",
+      "Redux", "Zustand", "Material UI", "Bootstrap", "Responsive Design", "Sass"
+    ],
+    backend: ["Node.js", "Express", "Python", "FastAPI", "Django", "REST APIs", "GraphQL"],
+    databases: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Airtable", "Sequelize"],
+    devops: ["Docker", "Git", "GitHub", "GitLab", "CI/CD", "AWS", "Vercel", "Netlify"],
+    testing: ["Jest", "React Testing Library", "Cypress", "Playwright"],
+    tools: ["VS Code", "Postman", "Figma", "Adobe XD", "Webpack", "Vite"]
   },
   contact: {
     email: "seilerfranco317@gmail.com",
@@ -115,25 +157,6 @@ export default async function handler(
     const cacheKey = message.toLowerCase().trim();
     if (responseCache.has(cacheKey)) {
       return res.status(200).json({ response: responseCache.get(cacheKey) });
-    }
-
-    // Try to read knowledge base, fallback to default if not available
-    let knowledge: Knowledge = fallbackKnowledge;
-    
-    try {
-      const knowledgePath = path.join(process.cwd(), 'knowledge.json');
-      
-      if (fs.existsSync(knowledgePath)) {
-        const knowledgeData = fs.readFileSync(knowledgePath, 'utf8');
-        const parsedKnowledge = JSON.parse(knowledgeData);
-        
-        // Validate structure
-        if (parsedKnowledge.name && parsedKnowledge.skills && parsedKnowledge.languages) {
-          knowledge = parsedKnowledge;
-        }
-      }
-    } catch (fileError) {
-      console.warn('Using fallback knowledge data:', fileError);
     }
 
     // Build prompt with knowledge base
