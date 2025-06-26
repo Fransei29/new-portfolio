@@ -45,6 +45,54 @@ interface Knowledge {
   };
 }
 
+// Fallback knowledge data in case file is not available
+const fallbackKnowledge: Knowledge = {
+  name: "Franco Seiler",
+  role: "Full Stack Developer",
+  bio: "I'm Franco Seiler, a Full Stack Developer from Córdoba, Argentina.",
+  location: "Córdoba, Argentina",
+  availability: "Open to remote or hybrid roles in Europe or globally",
+  languages: ["Spanish (native)", "English (advanced)", "Italian (advanced)", "Dutch (basic)"],
+  technologies: ["React", "TypeScript", "Node.js", "Next.js", "Python", "PostgreSQL"],
+  experience: "3+ years developing modern and scalable web applications",
+  technologyExperiences: {
+    "React": "Built multiple interactive user interfaces with React",
+    "TypeScript": "Applied TypeScript across all frontend and backend layers",
+    "Node.js": "Built RESTful and GraphQL APIs with Node.js and Express"
+  },
+  projects: [
+    {
+      name: "E-commerce Platform",
+      description: "Complete e-commerce platform with shopping cart, payments and admin panel",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
+      url: "https://github.com/francoseiler/ecommerce-platform"
+    }
+  ],
+  education: "Information Systems Engineering",
+  skills: {
+    frontend: "Frontend Development",
+    backend: "Backend Development",
+    databases: "Database Design",
+    uiux: "UI/UX Design",
+    performance: "Performance Optimization",
+    testing: "Testing and Quality Assurance",
+    devops: "CI/CD and DevOps"
+  },
+  detailedTechnologies: {
+    frontend: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
+    backend: ["Node.js", "Express", "Python", "FastAPI"],
+    databases: ["PostgreSQL", "MongoDB", "MySQL"],
+    devops: ["Docker", "Git", "GitHub", "CI/CD"],
+    testing: ["Jest", "React Testing Library", "Cypress"],
+    tools: ["VS Code", "Postman", "Figma"]
+  },
+  contact: {
+    email: "seilerfranco317@gmail.com",
+    linkedin: "https://www.linkedin.com/in/franco-seiler/",
+    github: "https://github.com/Fransei29"
+  }
+};
+
 // Simple cache for common questions
 const responseCache = new Map<string, string>();
 
@@ -69,10 +117,24 @@ export default async function handler(
       return res.status(200).json({ response: responseCache.get(cacheKey) });
     }
 
-    // Read knowledge base
-    const knowledgePath = path.join(process.cwd(), 'knowledge.json');
-    const knowledgeData = fs.readFileSync(knowledgePath, 'utf8');
-    const knowledge: Knowledge = JSON.parse(knowledgeData);
+    // Try to read knowledge base, fallback to default if not available
+    let knowledge: Knowledge = fallbackKnowledge;
+    
+    try {
+      const knowledgePath = path.join(process.cwd(), 'knowledge.json');
+      
+      if (fs.existsSync(knowledgePath)) {
+        const knowledgeData = fs.readFileSync(knowledgePath, 'utf8');
+        const parsedKnowledge = JSON.parse(knowledgeData);
+        
+        // Validate structure
+        if (parsedKnowledge.name && parsedKnowledge.skills && parsedKnowledge.languages) {
+          knowledge = parsedKnowledge;
+        }
+      }
+    } catch (fileError) {
+      console.warn('Using fallback knowledge data:', fileError);
+    }
 
     // Build prompt with knowledge base
     const systemPrompt = `You are ${knowledge.name}'s AI assistant. Help visitors learn about his skills and experience.
