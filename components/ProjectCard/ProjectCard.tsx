@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FileText, Github, ExternalLink } from 'lucide-react';
+import { FileText, Github, ExternalLink, ArrowRight } from 'lucide-react';
 import styles from './ProjectCard.module.scss';
 import React, { JSX, useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import JavascriptIcon from '../icons/javascript.svg';
 import TypescriptIcon from '../icons/typescript.svg';
 import ReactIcon from '../icons/react.svg';
@@ -78,6 +79,7 @@ interface ProjectCardProps {
 }
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = true }) => {
   const [isActive, setIsActive] = useState(false);
+  const { t } = useLanguage();
 
   const toggleDescription = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -148,7 +150,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 className={styles.viewMoreButton}
                 onClick={(e) => e.stopPropagation()} 
               >
-                Learn more
+                <span>{t('projects.learnMore')}</span>
+                <ArrowRight className={styles.arrowIcon} size={16} />
               </Link>
             </div>
           )}

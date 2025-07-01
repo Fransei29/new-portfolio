@@ -3,6 +3,7 @@
 import { JSX, useEffect, useRef } from "react";
 import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiUsers, FiPenTool, FiSettings } from "react-icons/fi";
 import styles from "./ServicesComponent.module.scss";
+import { useLanguage } from '../../contexts/LanguageContext';
 
  
 interface Service {
@@ -10,11 +11,11 @@ interface Service {
   icon: JSX.Element;
   title: string;
   description: string;
-  features: string[];
 }
 
 export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const ref = servicesRef.current; // ✅ esta es la clave
@@ -41,80 +42,39 @@ export const Services = () => {
     {
       key: "webDevelopment",
       icon: <FiCode className={styles.icon} />,
-      title: "Web Development",
-      description:
-        "Clean, responsive websites with SEO and accessibility in mind.",
-      features: [
-        "Responsive layouts",
-        "Semantic HTML5 & CSS3",
-        "Modern JavaScript (ES6+)",
-        "SEO optimization",
-      ],
+      title: t('services.webDevelopment.title'),
+      description: t('services.webDevelopment.description'),
     },
     {
       key: "backendDevelopment",
       icon: <FiServer className={styles.icon} />,
-      title: "Backend & Support",
-      description: "APIs, databases y mantenimiento continuo.",
-      features: [
-        "REST & GraphQL con Express.js",
-        "Bases de datos relacionales y no relacionales",
-        "Cacheo con Redis y ORM Sequelize",
-        "Soporte, seguridad y optimización",
-      ],
+      title: t('services.backendDevelopment.title'),
+      description: t('services.backendDevelopment.description'),
     },
     
     {
       key: "webApplications",
       icon: <FiGlobe className={styles.icon} />,
-      title: "Web Applications",
-      description:
-        "Scalable apps with smooth client-server rendering and API integration.",
-      features: [
-        "React & Next.js",
-        "State management",
-        "REST & GraphQL APIs",
-        "Server-side rendering",
-      ],
+      title: t('services.webApplications.title'),
+      description: t('services.webApplications.description'),
     },
     {
       key: "ecommerceSolutions",
       icon: <FiShoppingCart className={styles.icon} />,
-      title: "E-commerce Solutions",
-      description:
-        "Custom stores with secure payments and inventory control.",
-      features: [
-        "Payment gateway integration",
-        "User authentication",
-        "Cart & order management",
-        "Performance optimization",
-      ],
+      title: t('services.ecommerceSolutions.title'),
+      description: t('services.ecommerceSolutions.description'),
     },
     {
       key: "technicalConsulting",
       icon: <FiUsers className={styles.icon} />,
-      title: "Technical Consulting",
-      description:
-        "Guidance on architecture, best practices, and agile workflows.",
-      features: [
-        "Architecture & code reviews",
-        "Agile planning & mentoring",
-        "Version control with Git",
-        "Containerization with Docker",
-      ],
+      title: t('services.technicalConsulting.title'),
+      description: t('services.technicalConsulting.description'),
     },
     {
       key: "uiuxDesign",
       icon: <FiPenTool className={styles.icon} />,
-      title: "UI/UX Collaboration",
-      description:
-        "Turning wireframes into responsive, accessible interfaces.",
-      features: [
-        "Responsive UI with Tailwind CSS or Sass",
-        "Accessibility standards",
-        "User-focused design",
-        "Cross-browser testing",
-      ],
+      title: t('services.uiuxDesign.title'),
+      description: t('services.uiuxDesign.description'),
     },
   ];
   
@@ -123,10 +83,10 @@ export const Services = () => {
     <section ref={servicesRef} className={styles.services}>
       <div className={styles.container}>
        <p className={styles.highlight}>
-            Services
+            {t('services.title')}
           </p>
         <p className={styles.servicesSubtitle}>
-          Customized development services to boost your online presence and streamline your business operations.
+          {t('services.subtitle')}
         </p>
         <div className={styles.grid}>
           {services.map((service) => (
@@ -134,13 +94,6 @@ export const Services = () => {
               <div className={styles.icon}>{service.icon}</div>
               <h3 className={styles.cardTitle}>{service.title}</h3>
               <p className={styles.cardDescription}>{service.description}</p>
-              <ul className={styles.features}>
-                {service.features.map((feature, i) => (
-                  <li key={i} className={styles.feature}>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>

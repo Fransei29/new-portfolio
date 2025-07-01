@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Send, MessageCircle, X } from 'lucide-react';
 import styles from './ChatWidget.module.scss';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface Message {
   id: string;
@@ -18,6 +19,7 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { t } = useLanguage();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -83,7 +85,7 @@ export default function ChatWidget() {
     } catch (error) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Sorry, there was an error processing your message. Please try again.',
+        text: t('ai.error'),
         isUser: false,
         timestamp: new Date(),
       };
@@ -132,7 +134,7 @@ export default function ChatWidget() {
           <div className={styles.messagesContainer}>
             {messages.length === 0 && (
               <div className={styles.welcomeMessage}>
-                Hi, I&apos;m Franco&apos;s AI assistant. Ask me anything about his projects, experience or tech stack.
+                {t('ai.placeholder')}
               </div>
             )}
             
@@ -169,7 +171,7 @@ export default function ChatWidget() {
               value={inputValue}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
+              placeholder={t('ai.placeholder')}
               className={styles.input}
               rows={1}
               disabled={isLoading}
@@ -178,7 +180,7 @@ export default function ChatWidget() {
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isLoading}
               className={styles.sendButton}
-              aria-label="Send message"
+              aria-label={t('ai.send')}
             >
               <Send size={20} />
             </button>

@@ -214,9 +214,11 @@
 
 .viewMoreButton {
   font-size: 1rem;
-  display:flex;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--text-color-light);
-  border-bottom: 1px solid rgb(116, 116, 116, 0.6);
+  border-bottom: 1px solid rgb(116, 116, 116, 0.3);
   padding-bottom: 2px;
   text-decoration: none;
   font-weight: 400;
@@ -234,8 +236,19 @@
   @media (max-width: 768px) {
     padding-bottom: 0;
     font-size: 0.9rem;
-    border-bottom: none
+    border-bottom: none;
+    gap: 6px;
   }
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+.projectCard:hover .arrowIcon {
+  transform: translateX(0px) rotate(-55deg);
+  opacity: 1;
 }
 
 .clickable {

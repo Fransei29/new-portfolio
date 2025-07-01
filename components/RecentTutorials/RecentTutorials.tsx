@@ -1,7 +1,10 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import styles from './RecentTutorials.module.scss';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import Button from '../Button/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 type Project = {
   title: string;
@@ -16,6 +19,7 @@ type Project = {
 
 const RecentProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -34,14 +38,14 @@ const RecentProjects = () => {
 
   return (
     <section className={styles.recentProjects}>
-      <p className={styles.title}>Tutorials</p>
+      <p className={styles.title}>{t('projects.tutorials')}</p>
       <div className={styles.projectsContainer}>
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
       </div>
       <div className={styles.projectsButtonContainer}>
-       <Button href="/tutorials" label="Go to Tutorials" />
+       <Button href="/tutorials" label={t('projects.goToTutorials')} />
       </div>
     </section>
   );

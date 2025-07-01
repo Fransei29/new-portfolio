@@ -1,36 +1,58 @@
 import styles from './Contact.module.scss';
 import ContactForm from '../ContactForm/ContactForm';
 import { MdEmail } from 'react-icons/md';
-import { FaWhatsapp } from 'react-icons/fa';
+import { Copy, Check } from 'lucide-react';
+import { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import '../../app/globals.css'
 
 const ContactSection = () => {
+  const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('seilerfranco317@gmail.com');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <div className={styles.contactSectionContainer}> 
       <div className={styles.contactSection}>
         <div className={styles.contactFirst}>
           <p className={styles.highlight}>
-            Get in Touch
+            {t('contact.title')}
           </p>
           <p className={styles.contactSubtitle}>
-            I am always open to hearing about new ideas and work opportunities.
+            {t('contact.subtitle')}
           </p>
           <p className={styles.contactSubtitle}>
-            If you are looking for a developer passionate about building effective solutions,
-            <strong> reach out.</strong>
+            {t('contact.description')}
+            <strong> {t('contact.reachOut')}</strong>
           </p>
 
           <div className={styles.contactSecond}>
           {/* CONTACT METHODS */}
           <div className={styles.contactMethods}>
             <div className={styles.methods}>
-             <div className={styles.method}>
-                <MdEmail className={styles.icon} />
-                <span className={styles.info} >seilerfranco317@gmail.com</span>
-              </div>
               <div className={styles.method}>
-                <FaWhatsapp className={styles.icon} />
-                <span className={styles.info} >+31620375952</span>
+                <MdEmail className={styles.icon} />
+                <span className={styles.info} >{t('contact.email')}</span>
+                <button 
+                  className={styles.copyButton}
+                  onClick={copyToClipboard}
+                  title={t('contact.copyEmail')}
+                >
+                  {copied ? (
+                    <Check className={styles.copyIcon} size={16} />
+                  ) : (
+                    <Copy className={styles.copyIcon} size={16} />
+                  )}
+                </button>
               </div>
             </div>
           </div>

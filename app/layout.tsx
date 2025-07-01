@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
-
+import { LanguageProvider } from '../contexts/LanguageContext';
 
 export const metadata = {
   title: 'Franco Seiler',
@@ -36,13 +36,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-        <LoadingWrapper>
-          <div id="banner"></div>
-          {children}
-          <Footer />
-          <ThemeTransitionOverlay />
-          <ScrollToTop />
-        </LoadingWrapper>
+        <LanguageProvider>
+          <LoadingWrapper>
+            <div id="banner"></div>
+            {children}
+            <Footer />
+            <ThemeTransitionOverlay />
+            <ScrollToTop />
+          </LoadingWrapper>
+        </LanguageProvider>
       </ThemeProvider>
       </body>
     </html>

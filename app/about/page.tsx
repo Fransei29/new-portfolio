@@ -6,11 +6,12 @@ import About from '../../components/About/AboutComponent';
 import Testimonials from '../../components/Testimonials/TestimonialsComponent';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import '../../app/styles/utilities.scss';
-import { Services } from '../../components/Services/ServicesComponent';
 import Button from '../../components/Button/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function AboutPage() {
   const elementsRef = useScrollAnimation();
+  const { t } = useLanguage();
 
   return (
     <ClientLayout>
@@ -21,21 +22,16 @@ export default function AboutPage() {
           <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
             <About />
           </div>
-
-          <div ref={(el) => { elementsRef.current[1] = el; }} className="fade-in-left">
-           <Services />
-          </div>
-
           {/* Testimonials section */}
-          <div ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-right">
+          <div ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-left">
             <Testimonials />
           </div>
 
           <div className={styles.buttonContainer}>
           <Button
-            text="Would you like to know more about me?"
+            text={t('aboutPage.buttonText')}
             href="/contact"
-            label="Let’s connect"
+            label={t('aboutPage.buttonLabel')}
           />
           </div>
         </div>

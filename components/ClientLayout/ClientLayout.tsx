@@ -8,15 +8,18 @@ import { useRef, useState, useEffect } from 'react';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import styles from './ClientLayout.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { Menu, X } from 'lucide-react';
 import { ReactNode } from 'react';
 import ChatWidget from '../ChatWidget/ChatWidget';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const elementsRef = useScrollAnimation();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const { t } = useLanguage();
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   useEffect(() => {
@@ -35,18 +38,18 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <Link href="/" passHref className={styles.logoLink}>
-              <div className={styles.logoContainer}>
-                <Image
-                  src="/dev3.png"
-                  alt="Logo"
-                  width={90}
-                  height={90}
-                  className={styles.logo}
-                />
-              </div>
-            </Link>
+            >
+              <Link href="/" passHref className={styles.logoLink}>
+                <div className={styles.logoContainer}>
+                  <Image
+                    src="/dev3.png"
+                    alt="Logo"
+                    width={90}
+                    height={90}
+                    className={styles.logo}
+                  />
+                </div>
+              </Link>
           </motion.section>
 
           {/* Botón hamburguesa */}
@@ -59,25 +62,26 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
           {/* Menú desktop */}
           <section className={`${styles.centerMenu} ${styles.desktopOnly}`}>
             <Link href="/" passHref>
-              <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>Home</p>
+              <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>{t('nav.home')}</p>
             </Link>
             <Link href="/projects" passHref>
-              <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>Projects</p>
+              <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>{t('nav.projects')}</p>
             </Link>
             <Link href="/tutorials" passHref>
-              <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>Tutorials</p>
+              <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>{t('nav.tutorials')}</p>
             </Link>
             <Link href="/about" passHref>
-              <p className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>About</p>
+              <p className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>{t('nav.about')}</p>
             </Link>
             <Link href="/contact" passHref>
-              <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>Contact</p>
+              <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>{t('nav.contact')}</p>
             </Link>
           </section>
 
-          {/* Toggle theme */}
+          {/* Toggle theme y Language selector */}
           <section className={styles.desktopOnly}>
             <div className={styles.rightContainer}>
+              <LanguageSelector />
               <ThemeToggleButton />
             </div>
           </section>
@@ -93,21 +97,22 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
             transition={{ duration: 0.3 }}
           >
             <Link href="/" passHref>
-              <p className={styles.mobileNavLink}>Home</p>
+              <p className={styles.mobileNavLink}>{t('nav.home')}</p>
             </Link>
             <Link href="/projects" passHref>
-              <p className={styles.mobileNavLink}>Projects</p>
+              <p className={styles.mobileNavLink}>{t('nav.projects')}</p>
             </Link>
             <Link href="/tutorials" passHref>
               <p className={styles.mobileNavLink}>Tutorials</p>
             </Link>
             <Link href="/about" passHref>
-              <p className={styles.mobileNavLink}>About</p>
+              <p className={styles.mobileNavLink}>{t('nav.about')}</p>
             </Link>
             <Link href="/contact" passHref>
-              <p className={styles.mobileNavLink}>Contact</p>
+              <p className={styles.mobileNavLink}>{t('nav.contact')}</p>
             </Link>
             <div className={styles.mobileThemeToggle}>
+              <LanguageSelector />
               <ThemeToggleButton />
             </div>
           </motion.div>

@@ -1,0 +1,344 @@
+{
+  "es": {
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "tutorials": "Tutoriales",
+      "contact": "Contacto"
+    },
+    "hero": {
+      "title": "Hola, soy Franco",
+      "subtitle": "Front End Developer.",
+      "description": "Construyo experiencias digitales que generan impacto.",
+      "cta": "Ver mis proyectos",
+      "scrollDown": "Desliza hacia abajo"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "description": "Desarrollador Full Stack con 3 años de experiencia y un fuerte enfoque en frontend, creando aplicaciones web escalables con tecnologías modernas.",
+      "experience": "Años de experiencia",
+      "projects": "Proyectos completados",
+      "technologies": "Tecnologías dominadas",
+      "whoIAm": "Quién Soy",
+       "personalStory": "Desarrollador de software de 27 años, con inicio en 2022 en Ámsterdam.",
+        "newChapter": "Me enfoco en aplicaciones web escalables y código mantenible.",
+        "dedication": "Busco claridad, rendimiento y buen diseño.",
+        "interests": "Interesado en diseño digital y aprendizaje continuo."
+      },
+    "experience": {
+      "title": "Experiencia",
+      "intelligentApps": {
+        "title": "Desarrollador Full Stack",
+        "company": "Intelligent Apps Sweden",
+        "period": "Octubre 2024 - Presente",
+        "responsibilities": [
+          "Desarrollé páginas front-end responsivas con Next.js y React.",
+          "Integré una API de pagos para transacciones fluidas.",
+          "Poblé y consumí APIs para comunicación cliente-servidor.",
+          "Colaboré en optimizaciones de rendimiento y escalabilidad."
+        ]
+      },
+      "freelance": {
+        "title": "Desarrollador Front End",
+        "company": "Freelance",
+        "period": "Marzo 2024 - Octubre 2024",
+        "responsibilities": [
+          "Construí aplicaciones web responsivas usando React y Next.js.",
+          "Optimicé el rendimiento, mejorando los tiempos de carga en un 30%.",
+          "Integré Redux para gestión de estado en plataformas de e-commerce.",
+          "Apliqué TypeScript para mejorar la calidad del código y reducir errores en tiempo de ejecución."
+        ]
+      },
+      "digitalInnovators": {
+        "title": "Desarrollador Front End",
+        "company": "Digital Innovators",
+        "period": "Mayo 2023 - Febrero 2024",
+        "responsibilities": [
+          "Construí y mantuve SPAs usando React y Redux.",
+          "Aumenté la retención de usuarios en un 15% y mejoré las tasas de conversión en un 20%.",
+          "Contribuí a una biblioteca de componentes interna, reduciendo el tiempo de desarrollo en un 30%.",
+          "Desarrollé hooks personalizados de React para mejorar la modularidad del código."
+        ]
+      }
+    },
+    "projects": {
+      "title": "Mis Proyectos",
+      "subtitle": "Algunos de los proyectos en los que he trabajado",
+      "learnMore": "Ver más",
+      "viewProject": "Ver proyecto",
+      "viewCode": "Ver código",
+      "viewDemo": "Ver demo",
+      "recentWork": "Trabajo Reciente",
+      "projects": "Proyectos",
+      "tutorials": "Tutoriales",
+      "goToProjects": "Ver Proyectos",
+      "goToTutorials": "Ver Tutoriales"
+    },
+    "contact": {
+      "title": "Ponte en contacto",
+      "subtitle": "Siempre estoy abierto a escuchar nuevas ideas y oportunidades de trabajo.",
+      "description": "Si buscas un desarrollador apasionado por construir soluciones efectivas,",
+      "reachOut": "contáctame.",
+      "email": "seilerfranco317@gmail.com",
+      "copyEmail": "Copiar email",
+      "form": {
+        "name": "Nombre",
+        "email": "Email",
+        "message": "Mensaje",
+        "send": "Enviar mensaje",
+        "sending": "Enviando...",
+        "sent": "¡Mensaje enviado!",
+        "error": "Error al enviar"
+      }
+    },
+    "footer": {
+      "madeWith": "Hecho con",
+      "by": "por Franco Seiler"
+    },
+    "ai": {
+      "placeholder": "Pregúntame sobre Franco...",
+      "send": "Enviar",
+      "thinking": "Pensando...",
+      "error": "Lo siento, estoy teniendo problemas técnicos. Puedes contactar a Franco directamente en seilerfranco317@gmail.com"
+    },
+    "skills": {
+      "title": "Habilidades",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Herramientas"
+    },
+    "pages": {
+      "projects": {
+        "title": "Proyectos",
+        "subtitle": "Trabajos seleccionados que reflejan cómo pienso, construyo y resuelvo problemas"
+      },
+      "tutorials": {
+        "title": "Tutoriales",
+        "subtitle": "De la teoría a la implementación — tutoriales enfocados para desarrollo real"
+      }
+    },
+    "services": {
+      "title": "Soluciones",
+      "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
+      "webDevelopment": {
+        "title": "Desarrollo de Software",
+        "description": "Código limpio, mantenible y escalable, con foco en buenas prácticas, rendimiento y arquitectura robusta."
+      },
+      "backendDevelopment": {
+        "title": "Backend y Soporte",
+        "description": "APIs, bases de datos y mantenimiento continuo."
+      },
+      "webApplications": {
+        "title": "Aplicaciones Web",
+        "description": "Interfaces responsivas y accesibles con renderizado eficiente y experiencias optimizadas para el usuario."
+      },
+      "ecommerceSolutions": {
+        "title": "Soluciones E-commerce",
+        "description": "Tiendas personalizadas con pagos seguros y control de inventario."
+      },
+      "technicalConsulting": {
+        "title": "Consultoría Técnica",
+        "description": "Orientación en arquitectura, mejores prácticas y flujos de trabajo ágiles."
+      },
+      "uiuxDesign": {
+        "title": "Colaboración UI/UX",
+        "description": "Transformando wireframes en interfaces responsivas y accesibles."
+      }
+    },
+    "testimonials": {
+      "title": "Testimonios",
+      "subtitle": "Lo que dicen las personas sobre trabajar conmigo.",
+      "matias": {
+        "name": "Matias Rivarola",
+        "role": "Desarrollador Front End",
+        "message": "Trabajar con Franco fue una experiencia fantástica. \nSiempre entregó código de alta calidad y siempre estuvo dispuesto a ayudar a sus compañeros cuando era necesario. \nSu confiabilidad y dedicación tuvieron un impacto real en el éxito de nuestro último proyecto. Todavía seguimos trabajando juntos."
+      },
+      "edison": {
+        "name": "Edison Lamar",
+        "role": "Ingeniero DevOps",
+        "message": "Franco tiene una gran vision para los detalles y una sólida comprensión de cómo el diseño y el desarrollo van de la mano. \nDurante nuestra colaboración, siempre estuvo abierto a recibir feedback y se comunicó de manera clara y respetuosa. \nSus habilidades de front-end realmente dieron vida a nuestros diseños de UI."
+      },
+      "adrian": {
+        "name": "Adrian Rodriguez",
+        "role": "Estudiante de Desarrollo Web",
+        "message": "Franco es el tipo de desarrollador que todo equipo quiere — proactivo, reflexivo y confiable. \nNo solo cumplió con los plazos sino que también contribuyó con valiosas sugerencias que mejoraron la calidad de nuestro flujo de trabajo. \nSu pasión por aprender y mejorar fue evidente en cada sprint."
+      }
+    },
+    "aboutPage": {
+      "buttonText": "¿Te gustaría saber más sobre mí?",
+      "buttonLabel": "Conectemos"
+    }
+  },
+  "en": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "tutorials": "Tutorials",
+      "contact": "Contact"
+    },
+    "hero": {
+      "title": "Hi, I'm Franco",
+      "subtitle": "Front End Developer.",
+      "description": "I build impactful digital experiences.",
+      "cta": "View my projects",
+      "scrollDown": "Scroll down"
+    },
+    "about": {
+      "title": "About me",
+      "description": "Full Stack Developer with 3 years of experience and a strong frontend focus, engineering scalable web apps with modern technologies.",
+      "experience": "Years of experience",
+      "projects": "Completed projects",
+      "technologies": "Technologies mastered",
+      "whoIAm": "Who I Am",
+      "personalStory": "27-year-old software developer, started in 2022 in Amsterdam.",
+      "newChapter": "Focused on scalable web applications and maintainable code.",
+      "dedication": "Committed to clarity, performance, and good design.",
+      "interests": "Interested in digital design and continuous learning."
+    },
+    "experience": {
+      "title": "Experience",
+      "intelligentApps": {
+        "title": "Full Stack Developer",
+        "company": "Intelligent Apps Sweden",
+        "period": "October 2024 - Present",
+        "responsibilities": [
+          "Developed responsive front-end pages with Next.js and React.",
+          "Integrated a payment API for seamless transactions.",
+          "Populated and consumed APIs for client-server communication.",
+          "Collaborated on performance and scalability optimizations."
+        ]
+      },
+      "freelance": {
+        "title": "Front End Developer",
+        "company": "Freelance",
+        "period": "March 2024 - October 2024",
+        "responsibilities": [
+          "Built responsive web applications using React and Next.js.",
+          "Optimized performance, improving loading times by 30%.",
+          "Integrated Redux for state management in e-commerce platforms.",
+          "Applied TypeScript for improved code quality and reduced runtime errors."
+        ]
+      },
+      "digitalInnovators": {
+        "title": "Front End Developer",
+        "company": "Digital Innovators",
+        "period": "May 2023 - February 2024",
+        "responsibilities": [
+          "Built and maintained SPAs using React and Redux.",
+          "Increased user retention by 15% and improved conversion rates by 20%.",
+          "Contributed to an internal component library, reducing development time by 30%.",
+          "Developed custom React hooks to enhance code modularity."
+        ]
+      }
+    },
+    "projects": {
+      "title": "My Projects",
+      "subtitle": "Some of the projects I've worked on",
+      "learnMore": "Learn more",
+      "viewProject": "View project",
+      "viewCode": "View code",
+      "viewDemo": "View demo",
+      "recentWork": "Recent Work",
+      "projects": "Projects",
+      "tutorials": "Tutorials",
+      "goToProjects": "Go to Projects",
+      "goToTutorials": "Go to Tutorials"
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "subtitle": "I am always open to hearing about new ideas and work opportunities.",
+      "description": "If you are looking for a developer passionate about building effective solutions,",
+      "reachOut": "reach out.",
+      "email": "seilerfranco317@gmail.com",
+      "copyEmail": "Copy email",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send message",
+        "sending": "Sending...",
+        "sent": "Message sent!",
+        "error": "Error sending"
+      }
+    },
+    "footer": {
+      "madeWith": "Made with",
+      "by": "by Franco Seiler"
+    },
+    "ai": {
+      "placeholder": "Ask me about Franco...",
+      "send": "Send",
+      "thinking": "Thinking...",
+      "error": "Sorry, I'm having technical issues. You can contact Franco directly at seilerfranco317@gmail.com"
+    },
+    "skills": {
+      "title": "Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools"
+    },
+    "pages": {
+      "projects": {
+        "title": "Projects",
+        "subtitle": "Selected works that reflect how I think, build, and solve problems"
+      },
+      "tutorials": {
+        "title": "Tutorials",
+        "subtitle": "From theory to implementation — focused tutorials for real development"
+      }
+    },
+    "services": {
+      "title": "Solutions",
+      "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
+      "webDevelopment": {
+        "title": "Software Development",
+        "description": "Clean, maintainable and scalable code with a focus on best practices, performance, and robust architecture."
+      },
+      "backendDevelopment": {
+        "title": "Backend and Support",
+        "description": "APIs, databases, and continuous maintenance."
+      },
+      "webApplications": {
+        "title": "Web Applications",
+        "description": "Responsive and accessible interfaces with efficient rendering and user-optimized experiences."
+      },
+      "ecommerceSolutions": {
+        "title": "E-commerce Solutions",
+        "description": "Customized stores with secure payments and inventory control."
+      },
+      "technicalConsulting": {
+        "title": "Technical Consulting",
+        "description": "Architecture guidance, best practices, and agile workflow optimization."
+      },
+      "uiuxDesign": {
+        "title": "UI/UX Collaboration",
+        "description": "Transforming wireframes into responsive and accessible interfaces."
+      }
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "subtitle": "What people say about working with me.",
+      "matias": {
+        "name": "Matias Rivarola",
+        "role": "Front End Developer",
+        "message": "Working with Franco was a fantastic experience. \nHe always delivered high-quality code and was always willing to help his colleagues when needed. \nHis reliability and dedication had a real impact on the success of our last project. We're still working together."
+      },
+      "edison": {
+        "name": "Edison Lamar",
+        "role": "DevOps Engineer",
+        "message": "Franco has a keen eye for details and a solid understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to receiving feedback and communicated clearly and respectfully. \nHis front-end skills really brought our UI designs to life."
+      },
+      "adrian": {
+        "name": "Adrian Rodriguez",
+        "role": "Web Development Student",
+        "message": "Franco is the kind of developer every team wants — proactive, reflective, and reliable. \nNot only did he meet deadlines but he also contributed valuable suggestions that improved the quality of our workflow. \nHis passion for learning and improving was evident in every sprint."
+      }
+    },
+    "aboutPage": {
+      "buttonText": "Would you like to know more about me?",
+      "buttonLabel": "Let's connect"
+    }
+  }
+} 

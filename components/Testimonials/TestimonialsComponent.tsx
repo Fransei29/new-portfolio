@@ -1,6 +1,9 @@
+'use client';
+
 import styles from "./TestimonialsComponent.module.scss";
 import { FaLinkedin } from "react-icons/fa";
 import Image from 'next/image';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 
 type Testimonial = {
@@ -11,41 +14,39 @@ type Testimonial = {
   linkedin?: string;
 };
 
-const testimonials: Testimonial[] = [
-  {
-    name: "Matias Rivarola",
-    role: "Front End Developer",
-    message:
-      "Working with Franco was a fantastic experience. \nHe consistently delivered high-quality code and was always willing to lend a hand to teammates when needed. \nHis reliability and dedication made a real impact on the success of our latest project. We are still working together.",
-    image: "/img/Mati.webp",
-    linkedin: "https://www.linkedin.com/in/matirivarola1/",
-  },
-  {
-    name: "Edison Lamar",
-    role: "DevOps Engineer",
-    message:
-      "Franco has a great eye for detail and a strong understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to feedback and communicated clearly and respectfully. \nHis front-end skills truly brought our UI designs to life.",
-    image: "/img/Edi.webp",
-    linkedin: "https://www.linkedin.com/in/edisonlamar/",
-  },
-  {
-    name: "Adrian Rodriguez",
-    role: "Web Developer Student",
-    message:
-      "Franco is the kind of developer every team wants — proactive, thoughtful, and dependable. \nHe not only met deadlines but also contributed valuable suggestions that improved our workflow quality. \nHis passion for learning and improving was evident in every sprint.",
-    image: "/img/Adrian.webp",
-    linkedin: "https://www.linkedin.com/in/adrian-rodriguez-053020304/",
-  },
-];
-
-
 export default function Testimonials() {
+  const { t } = useLanguage();
+
+  const testimonials: Testimonial[] = [
+    {
+      name: t('testimonials.matias.name'),
+      role: t('testimonials.matias.role'),
+      message: t('testimonials.matias.message'),
+      image: "/img/Mati.webp",
+      linkedin: "https://www.linkedin.com/in/matirivarola1/",
+    },
+    {
+      name: t('testimonials.edison.name'),
+      role: t('testimonials.edison.role'),
+      message: t('testimonials.edison.message'),
+      image: "/img/Edi.webp",
+      linkedin: "https://www.linkedin.com/in/edisonlamar/",
+    },
+    {
+      name: t('testimonials.adrian.name'),
+      role: t('testimonials.adrian.role'),
+      message: t('testimonials.adrian.message'),
+      image: "/img/Adrian.webp",
+      linkedin: "https://www.linkedin.com/in/adrian-rodriguez-053020304/",
+    },
+  ];
+
   return (
     <div className={styles.testimonialsContainer}>
     <section className={styles.testimonials}>
-      <p className={styles.highlight}>Testimonials</p>
+      <p className={styles.highlight}>{t('testimonials.title')}</p>
       <p className={styles.testimonialsSubtitle}>
-      What people say about working with me.
+        {t('testimonials.subtitle')}
         </p>
       <div className={styles.grid}>
         {testimonials.map((t, index) => (
@@ -54,8 +55,8 @@ export default function Testimonials() {
               <Image
                 src={t.image}
                 alt={t.name}
-                width={100}  // ⬅️ poné un valor real
-                height={100} // ⬅️ igual acá
+                width={100}  
+                height={100} 
                 className={styles.avatar}
               />
             )}

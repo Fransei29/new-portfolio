@@ -42,6 +42,44 @@ export const projects = [
     liveDemoLink: 'https://sport-ecommerce-58pi.vercel.app/',
   },
   {
+    slug: 'property-recommender',
+    title: 'Property Recommender',
+    subtitle: 'Property Recommendation System',
+    whatIs: `
+      A web application that recommends real estate properties based on user preferences and similarity algorithms.
+      It allows users to filter, sort, and discover properties that match their needs through a clean and responsive interface.
+      Built with Next.js 15 and TypeScript, featuring modular SCSS for scalable styling and optimized for fast loading and user experience.
+    `,
+    problemSolved: `
+      Many real estate platforms overwhelm users with too many listings without effective filtering or personalized suggestions.
+      This app solves that by providing targeted recommendations, improving user satisfaction and decision-making efficiency.
+    `,
+    techStack: [
+      'Next.js 15',
+      'React',
+      'TypeScript',
+      'SCSS (Modular)',
+      'Vercel'
+    ],
+    learnings: [
+      'Implemented recommendation logic using JSON data and client-side algorithms.',
+      'Built a scalable and maintainable frontend architecture with Next.js and TypeScript.',
+      'Applied modular SCSS for clean, reusable styling.',
+      'Optimized app performance and user experience through efficient data handling and UI design.'
+    ],
+    screenshots: [
+      '/img/Pro.webp',
+      '/img/Pro4.webp',
+      '/img/Pro5.webp',
+      '/img/Pro3.webp',
+      '/img/Pro2.webp',
+      '/img/Pro1.webp',
+      
+    ],
+    githubLink: 'https://github.com/Fransei29/property-recommender',
+    liveDemoLink: 'https://property-recommender-v2sk.vercel.app/'
+  },  
+  {
     slug: 'taskmanager',
     title: 'Task Manager',
     subtitle: 'Full Stack Task Management App',

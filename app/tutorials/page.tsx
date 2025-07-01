@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import styles from '../projects/projects.module.scss';
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 // Definir los tipos de los proyectos
 interface Projects {
@@ -23,6 +24,7 @@ interface Projects {
 const Projects = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
   const elementsRef = useScrollAnimation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -44,10 +46,10 @@ const Projects = () => {
         <div className={styles.projectsContent}>        
           <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
           <p className={styles.highlight}>
-            Tutorials
+            {t('pages.tutorials.title')}
           </p>
           <p className={styles.projectsSubtitle}>
-          From theory to implementation — focused tutorials for real development
+            {t('pages.tutorials.subtitle')}
           </p>
       <div className={styles.projectsGrid}>
         {projects

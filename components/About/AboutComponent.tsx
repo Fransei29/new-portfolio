@@ -1,10 +1,14 @@
+'use client';
+
 import React from 'react';
 import styles from './AboutComponent.module.scss';
 import Image from 'next/image';
 import { useScrollAnimation } from '../../hooks/Scroll';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const About = () => {
   const elementsRef = useScrollAnimation();
+  const { t } = useLanguage();
 
   return (
     <section className={styles.aboutContainer}>
@@ -13,7 +17,7 @@ const About = () => {
        <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
           <div className={styles.firstPart}>
               <p className={styles.highlight}>
-              Who I Am
+              {t('about.whoIAm')}
               </p>
           </div>   
         </section>
@@ -22,19 +26,16 @@ const About = () => {
           <div className={styles.secondPart}>
               <div className={styles.aboutSubtitle}>
                 <p>
-                I was born in Argentina 27 years ago, and my journey into tech truly began in Amsterdam, where I started studying programming three years ago. 
+                {t('about.personalStory')}
                 </p>
                 <p>
-                It was the start of a whole new chapter.
+                {t('about.newChapter')}
                 </p>
                 <p>
-                Since then, I have dedicated myself to building clean, thoughtful web experiences—always balancing logic with design. 
+                {t('about.dedication')}
                 </p>
                 <p>
-                I care about how things work, but also about how they feel.
-                </p>
-                <p>
-                Outside of coding, I am passionate about design, sports, and learning from everything around me.
+                {t('about.interests')}
                 </p>
               </div>
             <div className={styles.imageSection}>

@@ -1,11 +1,12 @@
+'use client';
+
 import React, { useState } from "react";
 import styles from "./Experience.module.scss";
 import "../../app/globals.css";
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-
-
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface IsOpenState {
   [key: string]: boolean;
@@ -14,6 +15,7 @@ interface IsOpenState {
 const Experience: React.FC = () => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
   const elementsRef = useScrollAnimation();
+  const { t } = useLanguage();
 
   const toggleDetail = (id: string): void => {
     setIsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -36,24 +38,24 @@ const Experience: React.FC = () => {
   return (
     <section className={styles.experienceContainer}>
       <div className={styles.experienceSection}>
-        <p className={styles.highlight}>Experience</p>
+        <p className={styles.highlight}>{t('experience.title')}</p>
         <ol className={styles.timeline}>
           <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
             <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>Full Stack Developer</span>
-                  <span className={styles.companyName}>Intelligent Apps Sweden</span>
+                  <span className={styles.jobTitle}>{t('experience.intelligentApps.title')}</span>
+                  <span className={styles.companyName}>{t('experience.intelligentApps.company')}</span>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.coursfy ? styles.iconOpen : ''}`} />
                 </h3>
-                <time className={styles.experienceDate}>October 2024 - Present</time>
+                <time className={styles.experienceDate}>{t('experience.intelligentApps.period')}</time>
                 {isOpen.coursfy && (
                   <ul className={styles.experienceList}>
-                    <li>Developed responsive front-end pages with <strong>Next.js</strong> and <strong>React</strong>.</li>
-                    <li>Integrated a payment API for seamless transactions.</li>
-                    <li>Populated and consumed APIs for client-server communication.</li>
-                    <li>Collaborated on performance and scalability optimizations.</li>
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.0') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.1') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.2') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.3') }} />
                   </ul>
                 )}
               </div>
@@ -65,17 +67,17 @@ const Experience: React.FC = () => {
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>Front End Developer</span>
-                  <span className={styles.companyName}>Freelance</span>
+                  <span className={styles.jobTitle}>{t('experience.freelance.title')}</span>
+                  <span className={styles.companyName}>{t('experience.freelance.company')}</span>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.freelance ? styles.iconOpen : ''}`} />
                 </h3>
-                <time className={styles.experienceDate}>March 2024 - October 2024</time>
+                <time className={styles.experienceDate}>{t('experience.freelance.period')}</time>
                 {isOpen.freelance && (
                   <ul className={styles.experienceList}>
-                    <li>Built responsive web applications using <strong>React</strong> and <strong>Next.js</strong>.</li>
-                    <li>Optimized performance, improving loading times by 30%.</li>
-                    <li>Integrated <strong>Redux</strong> for state management in e-commerce platforms.</li>
-                    <li>Applied <strong>TypeScript</strong> for improved code quality and reduced runtime errors.</li>
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.0') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.1') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.2') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.3') }} />
                   </ul>
                 )}
               </div>
@@ -87,17 +89,17 @@ const Experience: React.FC = () => {
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>Front End Developer</span>
-                  <span className={styles.companyName}>Digital Innovators</span>
+                  <span className={styles.jobTitle}>{t('experience.digitalInnovators.title')}</span>
+                  <span className={styles.companyName}>{t('experience.digitalInnovators.company')}</span>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.digitalInnovators ? styles.iconOpen : ''}`} />
                 </h3>
-                <time className={styles.experienceDate}>May 2023 - February 2024</time>
+                <time className={styles.experienceDate}>{t('experience.digitalInnovators.period')}</time>
                 {isOpen.digitalInnovators && (
                   <ul className={styles.experienceList}>
-                    <li>Built and maintained SPAs using <strong>React</strong> and <strong>Redux</strong>.</li>
-                    <li>Increased user retention by 15% and improved conversion rates by 20%.</li>
-                    <li>Contributed to an internal component library, reducing development time by 30%.</li>
-                    <li>Developed custom <strong>React</strong> hooks to enhance code modularity.</li>
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.0') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.1') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.2') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.3') }} />
                   </ul>
                 )}
               </div>

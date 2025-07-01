@@ -121,8 +121,21 @@
 
 .mobileThemeToggle {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
+.rightContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
+}
 
 .centerMenu {
   display: flex;

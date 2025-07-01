@@ -1,6 +1,9 @@
+'use client';
+
 import { useScrollAnimation } from '../../hooks/Scroll';
 import Image from 'next/image';
 import styles from './Skills.module.scss';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 // SVG importados como componentes
 import JavascriptIcon from '../icons/javascript.svg';
@@ -103,25 +106,26 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills }) => (
 // Componente principal
 const Skills: React.FC = () => {
   const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
+  const { t } = useLanguage();
 
   return (
     <section className={styles.skillsSectionContainer}>
       <div className={styles.skillsSection}>
         <p className={`${styles.highlight} ${styles.skillsTitle}`}>
-          Skills
+          {t('skills.title')}
         </p>
 
         <div className={styles.skillsCards}>
           <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
-              <SkillsSection title="Frontend" skills={frontEndSkills} />
+              <SkillsSection title={t('skills.frontend')} skills={frontEndSkills} />
             </div>
 
             <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
-              <SkillsSection title="Backend" skills={backEndSkills} />
+              <SkillsSection title={t('skills.backend')} skills={backEndSkills} />
             </div>
 
             <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
-              <SkillsSection title="Tools" skills={toolsSkills} />
+              <SkillsSection title={t('skills.tools')} skills={toolsSkills} />
             </div>
         </div>
       </div>
