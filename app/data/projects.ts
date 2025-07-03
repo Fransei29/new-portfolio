@@ -49,10 +49,12 @@ export const projects = [
       A web application that recommends real estate properties based on user preferences and similarity algorithms.
       It allows users to filter, sort, and discover properties that match their needs through a clean and responsive interface.
       Built with Next.js 15 and TypeScript, featuring modular SCSS for scalable styling and optimized for fast loading and user experience.
+      Includes an admin panel where users can view and manage their favorite properties.
     `,
     problemSolved: `
       Many real estate platforms overwhelm users with too many listings without effective filtering or personalized suggestions.
       This app solves that by providing targeted recommendations, improving user satisfaction and decision-making efficiency.
+      The admin panel allows users to easily track and manage their favorite properties in one centralized location.
     `,
     techStack: [
       'Next.js 15',
@@ -65,19 +67,20 @@ export const projects = [
       'Implemented recommendation logic using JSON data and client-side algorithms.',
       'Built a scalable and maintainable frontend architecture with Next.js and TypeScript.',
       'Applied modular SCSS for clean, reusable styling.',
-      'Optimized app performance and user experience through efficient data handling and UI design.'
+      'Optimized app performance and user experience through efficient data handling and UI design.',
+      'Created an admin panel for user property management and favorites tracking.'
     ],
     screenshots: [
-      '/img/Pro.webp',
-      '/img/Pro4.webp',
-      '/img/Pro5.webp',
-      '/img/Pro3.webp',
-      '/img/Pro2.webp',
-      '/img/Pro1.webp',
+      '/img/prope.jpg',
+      '/img/prop1.webp',
+      '/img/prop2.webp',
+      '/img/prop3.webp',
+      '/img/prop4.webp',
+      '/img/prop5.webp',
       
     ],
-    githubLink: 'https://github.com/Fransei29/property-recommender',
-    liveDemoLink: 'https://property-recommender-v2sk.vercel.app/'
+    githubLink: 'https://github.com/Fransei29/property-recommenderv2',
+    liveDemoLink: 'https://property-recommenderv2.vercel.app/'
   },  
   {
     slug: 'taskmanager',
