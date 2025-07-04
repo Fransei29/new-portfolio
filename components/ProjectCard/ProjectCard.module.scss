@@ -17,8 +17,13 @@
   :global(html.dark) & {
     background-color: #181c33;
     color: rgb(226, 226, 226);
-    border: 1px solid rgba(248, 248, 248, 0.3);
-    box-shadow: 0 4px 8px rgba(250, 81, 166, 0.2);
+    border: 1px solid rgba(248, 248, 248, 0.05);
+    box-shadow: 0 4px 8px rgba(121, 121, 121, 0.2);
+  }
+
+   :global(html.dark) &:hover {
+    border: 1px solid rgba(248, 248, 248, 0.2);
+    box-shadow: 0 4px 8px rgba(117, 117, 117, 0.3);
   }
   
   &:hover {
@@ -153,14 +158,19 @@
   border-radius: var(--br); 
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 1px solid rgba(248, 248, 248, 0.05);
 
-  :global(html.dark) & {
-    background-color: rgba(252, 68, 160, 0.63);
+  :global(html.dark) & { 
     color: rgb(223, 222, 222);
+    border: 1px solid rgba(248, 248, 248, 0.05);
+  }
+
+  :global(html.dark) &:hover {
+    border: 1px solid rgba(248, 248, 248, 0.2);
   }
   
   &:hover {
-    background-color:rgba(245, 84, 165, 0.9);
+    border: 1px solid rgba(75, 75, 75, 0.3);
   }
 
   @media (max-width: 768px) {
