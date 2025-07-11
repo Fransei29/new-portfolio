@@ -117,7 +117,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   display: flex;
   position: relative;
   width: 290px; 
-  height: 380px;
+  height: 400px;
   margin: 0 auto;
   opacity: 0.8;
   
@@ -167,6 +167,20 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   padding: 0 1rem;
 }
 
+.techIcons {
+  display: flex;
+  gap: 25px;
+}
+
+.icon {
+  color: rgb(110, 110, 110, 0.8);
+  transition: color 0.3s ease;
+}
+
+:global(html.dark) .icon {
+  color: rgb(226, 224, 224);
+}
+
 /* --- SCROLL BAR --- */
 /* Estilo base para navegadores WebKit */
 ::-webkit-scrollbar {
@@ -179,7 +193,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 ::-webkit-scrollbar-thumb {
-  background:var(--primary-color); /* color de la "manija" */
+  background: var(--primary-color); /* color de la "manija" */
   border-radius: 3px;
 }
 
@@ -274,6 +288,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     left: 190px;
     width: 110px;
     height: 130px;
+  }
+
+  .techIcons {
+    display: none;
   }
 }
 

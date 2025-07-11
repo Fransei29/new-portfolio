@@ -1,7 +1,7 @@
 "use client";
 
 import { JSX, useEffect, useRef } from "react";
-import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiUsers, FiPenTool, FiSettings } from "react-icons/fi";
+import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiDatabase, FiCpu } from "react-icons/fi";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -46,6 +46,12 @@ export const Services = () => {
       description: t('services.webDevelopment.description'),
     },
     {
+      key: "aiIntegration",
+      icon: <FiCpu className={styles.icon} />,
+      title: t('services.aiIntegration.title'),
+      description: t('services.aiIntegration.description'),
+    },
+    {
       key: "backendDevelopment",
       icon: <FiServer className={styles.icon} />,
       title: t('services.backendDevelopment.title'),
@@ -65,14 +71,8 @@ export const Services = () => {
       description: t('services.ecommerceSolutions.description'),
     },
     {
-      key: "technicalConsulting",
-      icon: <FiUsers className={styles.icon} />,
-      title: t('services.technicalConsulting.title'),
-      description: t('services.technicalConsulting.description'),
-    },
-    {
       key: "uiuxDesign",
-      icon: <FiPenTool className={styles.icon} />,
+      icon: <FiDatabase className={styles.icon} />,
       title: t('services.uiuxDesign.title'),
       description: t('services.uiuxDesign.description'),
     },

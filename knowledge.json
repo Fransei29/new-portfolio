@@ -12,47 +12,50 @@
     "Increased user retention by 15% with SPA implementation",
     "Improved page load times by 30% using React and performance tweaks"
   ],
-  "workExperience": [
-    {
-      "title": "Full Stack Developer",
-      "company": "Intelligent Apps Sweden",
-      "location": "Stockholm, Sweden",
-      "date": "Oct 2024 - Apr 2025",
-      "description": [
-        "Developed responsive front-end pages using Next.js and React",
-        "Integrated payment APIs to enhance platform functionality",
-        "Built and consumed RESTful and GraphQL APIs with Node.js and Express",
-        "Collaborated with cross-functional teams to improve app scalability and performance by 20%",
-        "Used Git for version control, ensuring collaboration and code integrity"
-      ]
-    },
-    {
-      "title": "Software Developer",
-      "company": "Freelance",
-      "location": "Remote",
-      "date": "Mar 2024 - Oct 2024",
-      "description": [
-        "Built and launched responsive web apps with React and Next.js",
-        "Improved performance and loading time by 30%",
-        "Led front-end architecture for e-commerce platforms using Redux",
-        "Developed robust backend services with Node.js and Express",
-        "Used TypeScript to reduce runtime errors by 20%"
-      ]
-    },
-    {
-      "title": "Front-End Developer",
-      "company": "Digital Innovators",
-      "location": "Amsterdam, Netherlands",
-      "date": "May 2023 - Feb 2024",
-      "description": [
-        "Built SPAs with React and Redux, increasing user retention by 15%",
-        "Improved conversion rates by 20% through A/B testing and performance optimization",
-        "Created internal UI component libraries, reducing development time by 30%",
-        "Integrated RESTful and GraphQL APIs",
-        "Developed custom React hooks for reusable, modular code"
-      ]
-    }
-  ],
+ "workExperience": [
+  {
+    "title": "Full Stack Developer",
+    "company": "Intelligent Apps Sweden",
+    "location": "Stockholm, Sweden",
+    "date": "Oct 2024 - Apr 2025",
+    "description": [
+      "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL",
+      "Integrated OpenAI APIs to add generative AI features like smart property descriptions",
+      "Designed backend services with Prisma ORM and REST/GraphQL APIs",
+      "Worked with microservice architectures and containerized environments (Docker)",
+      "Implemented automated tests and participated in architectural decisions",
+      "Used Tailwind and TypeScript across the full stack for maintainability and consistency",
+      "Deployed projects to Vercel and Linux-based servers with CI/CD pipelines"
+    ]
+  },
+  {
+    "title": "Software Developer",
+    "company": "Freelance",
+    "location": "Remote",
+    "date": "Mar 2024 - Oct 2024",
+    "description": [
+      "Developed custom platforms and MVPs for small businesses and real estate clients",
+      "Created full-stack solutions with React, Node.js, MySQL, and Sequelize",
+      "Implemented REST APIs and responsive UIs using Tailwind CSS",
+      "Used TypeScript across all projects to ensure type safety and reduce bugs",
+      "Managed deployments on VPS and cloud servers using Linux and Git",
+      "Maintained client communication and handled project scoping and delivery"
+    ]
+  },
+  {
+    "title": "Front-End Developer",
+    "company": "Digital Innovators",
+    "location": "Amsterdam, Netherlands",
+    "date": "May 2023 - Feb 2024",
+    "description": [
+      "Built SPAs with React and Redux, increasing user retention by 15%",
+      "Improved conversion rates by 20% through A/B testing and performance optimization",
+      "Created internal UI component libraries, reducing development time by 30%",
+      "Integrated RESTful and GraphQL APIs",
+      "Developed custom React hooks and reusable components"
+    ]
+  }
+],
   "technologyExperiences": {
   "React": "I've built multiple interactive user interfaces with React, including an e‑commerce platform and a task management app. I leveraged hooks, state management (Redux, Zustand), and performance optimizations to improve load times and responsiveness.",
   "Next.js": "I used Next.js for my portfolio and freelance projects to enable server‑side rendering, static site generation, and seamless routing. I integrated dynamic API routes and optimized the initial load with image and script optimization.",

@@ -10,9 +10,11 @@
     "hero": {
       "title": "Hola, soy Franco",
       "subtitle": "Front End Developer.",
-      "description": "Construyo experiencias digitales que generan impacto.",
-      "cta": "Ver mis proyectos",
-      "scrollDown": "Desliza hacia abajo"
+      "description": "Desarrollo productos digitales y soluciones a medida.",
+      "cta": {
+        "projects": "Ver proyectos",
+        "contact": "Contactame"
+      }
     },
     "about": {
       "title": "Sobre mí",
@@ -33,21 +35,25 @@
         "company": "Intelligent Apps Sweden",
         "period": "Octubre 2024 - Presente",
         "responsibilities": [
-          "Desarrollé páginas front-end responsivas con Next.js y React.",
-          "Integré una API de pagos para transacciones fluidas.",
-          "Poblé y consumí APIs para comunicación cliente-servidor.",
-          "Colaboré en optimizaciones de rendimiento y escalabilidad."
+          "Desarrollé aplicaciones full-stack utilizando React, Next.js, Node.js y PostgreSQL.",
+          "Integré funcionalidades de inteligencia artificial con APIs de OpenAI (descripciones generativas, filtros inteligentes).",
+          "Construí APIs REST y GraphQL con Prisma ORM y validaciones robustas.",
+          "Participé en el diseño de arquitecturas escalables basadas en microservicios.",
+          "Implementé testing automatizado (unitario e integración).",
+          "Apliqué TypeScript y Tailwind CSS en todo el stack para mayor consistencia y productividad.",
+          "Desplegué aplicaciones con Docker y pipelines CI/CD en entornos Linux (Vercel y VPS)."
         ]
       },
       "freelance": {
-        "title": "Desarrollador Front End",
+        "title": "Desarrollador Full Stack",
         "company": "Freelance",
         "period": "Marzo 2024 - Octubre 2024",
         "responsibilities": [
-          "Construí aplicaciones web responsivas usando React y Next.js.",
-          "Optimicé el rendimiento, mejorando los tiempos de carga en un 30%.",
-          "Integré Redux para gestión de estado en plataformas de e-commerce.",
-          "Apliqué TypeScript para mejorar la calidad del código y reducir errores en tiempo de ejecución."
+          "Diseñé y desarrollé plataformas web personalizadas para startups y pymes.",
+          "Trabajé con React, Node.js, MySQL y Sequelize para construir soluciones full-stack.",
+          "Creé APIs RESTful y componentes reutilizables con Tailwind y TypeScript.",
+          "Me encargué del despliegue y mantenimiento en servidores Linux usando Git y VPS.",
+          "Establecí buenas prácticas de arquitectura y planificación técnica con los clientes."
         ]
       },
       "digitalInnovators": {
@@ -126,24 +132,24 @@
         "description": "Código limpio, mantenible y escalable, con foco en buenas prácticas, rendimiento y arquitectura robusta."
       },
       "backendDevelopment": {
-        "title": "Backend y Soporte",
-        "description": "APIs, bases de datos y mantenimiento continuo."
+        "title": "Backend y APIs",
+        "description": "APIs RESTful y GraphQL, bases de datos optimizadas, autenticación segura y microservicios escalables."
+      },
+      "aiIntegration": {
+        "title": "Integración de IA",
+        "description": "Implementación de APIs de OpenAI, chatbots inteligentes y funcionalidades de machine learning."
       },
       "webApplications": {
         "title": "Aplicaciones Web",
-        "description": "Interfaces responsivas y accesibles con renderizado eficiente y experiencias optimizadas para el usuario."
+        "description": "SPAs con React/Next.js, renderizado eficiente, SEO optimizado y experiencias de usuario fluidas."
       },
       "ecommerceSolutions": {
-        "title": "Soluciones E-commerce",
-        "description": "Tiendas personalizadas con pagos seguros y control de inventario."
-      },
-      "technicalConsulting": {
-        "title": "Consultoría Técnica",
-        "description": "Orientación en arquitectura, mejores prácticas y flujos de trabajo ágiles."
+        "title": "E-commerce Completo",
+        "description": "Tiendas online personalizadas con gestión de productos, carrito de compras y pagos seguros integrados."
       },
       "uiuxDesign": {
-        "title": "Colaboración UI/UX",
-        "description": "Transformando wireframes en interfaces responsivas y accesibles."
+        "title": "Bases de Datos",
+        "description": "PostgreSQL, MySQL, MongoDB con Sequelize y Prisma ORM. Optimización de consultas y arquitectura de datos."
       }
     },
     "testimonials": {
@@ -181,9 +187,11 @@
     "hero": {
       "title": "Hi, I'm Franco",
       "subtitle": "Front End Developer.",
-      "description": "I build impactful digital experiences.",
-      "cta": "View my projects",
-      "scrollDown": "Scroll down"
+      "description": "I build digital products and custom solutions.",
+      "cta": {
+        "projects": "See projects",
+        "contact": "Get in touch"
+      }
     },
     "about": {
       "title": "About me",
@@ -204,21 +212,25 @@
         "company": "Intelligent Apps Sweden",
         "period": "October 2024 - Present",
         "responsibilities": [
-          "Developed responsive front-end pages with Next.js and React.",
-          "Integrated a payment API for seamless transactions.",
-          "Populated and consumed APIs for client-server communication.",
-          "Collaborated on performance and scalability optimizations."
+          "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL.",
+          "Integrated AI features using OpenAI APIs (generative descriptions, smart filters).",
+          "Developed REST and GraphQL APIs with Prisma ORM and strong validation layers.",
+          "Participated in designing scalable architectures with microservices.",
+          "Implemented automated testing (unit and integration).",
+          "Used TypeScript and Tailwind CSS across the stack for consistency and productivity.",
+          "Deployed apps with Docker and CI/CD pipelines on Linux servers (Vercel and VPS)."
         ]
       },
       "freelance": {
-        "title": "Front End Developer",
+        "title": "Full Stack Developer",
         "company": "Freelance",
         "period": "March 2024 - October 2024",
         "responsibilities": [
-          "Built responsive web applications using React and Next.js.",
-          "Optimized performance, improving loading times by 30%.",
-          "Integrated Redux for state management in e-commerce platforms.",
-          "Applied TypeScript for improved code quality and reduced runtime errors."
+          "Designed and developed custom web platforms for startups and small businesses.",
+          "Built full-stack solutions using React, Node.js, MySQL, and Sequelize.",
+          "Created RESTful APIs and reusable components with Tailwind and TypeScript.",
+          "Handled deployment and maintenance on Linux servers using Git and VPS.",
+          "Led technical planning and architecture with clients."
         ]
       },
       "digitalInnovators": {
@@ -300,21 +312,21 @@
         "title": "Backend and Support",
         "description": "APIs, databases, and continuous maintenance."
       },
+      "aiIntegration": {
+        "title": "AI Integration",
+        "description": "Implementation of OpenAI APIs, intelligent chatbots, and machine learning features."
+      },
       "webApplications": {
         "title": "Web Applications",
-        "description": "Responsive and accessible interfaces with efficient rendering and user-optimized experiences."
+        "description": "SPAs with React/Next.js, efficient rendering, SEO optimized and smooth user experiences."
       },
       "ecommerceSolutions": {
-        "title": "E-commerce Solutions",
-        "description": "Customized stores with secure payments and inventory control."
-      },
-      "technicalConsulting": {
-        "title": "Technical Consulting",
-        "description": "Architecture guidance, best practices, and agile workflow optimization."
+        "title": "Complete E-commerce",
+        "description": "Custom online stores with product management, shopping cart and integrated secure payments."
       },
       "uiuxDesign": {
-        "title": "UI/UX Collaboration",
-        "description": "Transforming wireframes into responsive and accessible interfaces."
+        "title": "Databases",
+        "description": "PostgreSQL, MySQL, MongoDB with Sequelize and Prisma ORM. Query optimization and data architecture."
       }
     },
     "testimonials": {

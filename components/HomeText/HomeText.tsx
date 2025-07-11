@@ -1,8 +1,5 @@
 import React from 'react';
-import { FaReact } from "react-icons/fa";
-import { TbBrandNextjs } from "react-icons/tb";
-import { FaNodeJs } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
+import Link from 'next/link';
 import styles from './HomeText.module.scss'; 
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -24,11 +21,13 @@ const HomeText: React.FC = () => {
         <p className={styles.description}>
         {t('about.description')}
         </p>
-        <div className={styles.techIcons}>
-          <FaReact size={28} className={styles.icon} />
-          <TbBrandNextjs size={28} className={styles.icon} />
-          <FaNodeJs size={28} className={styles.icon} />
-          <SiTypescript size={28} className={styles.icon} />
+        <div className={styles.ctaButtons}>
+          <Link href="/projects" className={styles.btnPrimary}>
+            {t('hero.cta.projects')}
+          </Link>
+          <Link href="/contact" className={styles.btnSecondary}>
+            {t('hero.cta.contact')}
+          </Link>
         </div>
     </section>
   </section>

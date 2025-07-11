@@ -1,12 +1,14 @@
 'use client';
 
 import React from 'react';
-
+import { FaReact } from "react-icons/fa";
+import { TbBrandNextjs } from "react-icons/tb";
+import { FaNodeJs } from "react-icons/fa";
+import { SiTypescript } from "react-icons/si";
 import ClientLayout from '../components/ClientLayout/ClientLayout';
 import './globals.css';
 import Experience from '../components/Experience/Experience';
 import Skills from '../components/Skills/Skills';
-import SocialMedia from '../components/SocialMedia/SocialMedia';
 import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/HomeText/HomeText';
@@ -50,7 +52,13 @@ export default function Home() {
               />
             </section>
           </div>
-          <SocialMedia />
+          
+        <div className='techIcons'>
+          <FaReact size={28} className='icon' />
+          <TbBrandNextjs size={28} className='icon' />
+          <FaNodeJs size={28} className='icon'  />
+          <SiTypescript size={28} className='icon' />
+        </div>
         </div>
         
       </div>
@@ -70,12 +78,12 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
-            <Skills />
+           <Services />
           </div>
 
 
           <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
-            <Services />
+            <Skills />
           </div>
 
           <div className='containerButton'>

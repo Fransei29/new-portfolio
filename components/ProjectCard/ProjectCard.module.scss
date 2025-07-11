@@ -254,11 +254,13 @@
 .arrowIcon {
   transition: transform 0.3s ease;
   opacity: 0.8;
+  color: var(--text-color-light);
 }
 
 .projectCard:hover .arrowIcon {
   transform: translateX(0px) rotate(-55deg);
   opacity: 1;
+  color: var(--primary-color);
 }
 
 .clickable {

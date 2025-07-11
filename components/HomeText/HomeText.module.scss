@@ -59,18 +59,41 @@
   }
 }
 
-.techIcons {
+.ctaButtons {
   display: flex;
-  gap: 25px;
+  gap: 1.2rem;
+  margin: 1rem 0 2.5rem 0;
+
+  a {
+    text-decoration: none;
+    padding: 1rem 2.2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--br);
+    transition: all 0.3s ease-in-out;
+  }
 }
 
-.icon {
-  color: rgb(110, 110, 110, 0.8);
-  transition: color 0.3s ease;
+.btnPrimary {
+  background-color: var(--primary-color);
+  color: white;
+  border: 1px solid rgba(151, 0, 76, 0.2);
+
+  &:hover {
+    background-color: white;
+    color: #cc0267;
+    border: 1px solid rgb(204, 2, 103, 0.5);
+  }
 }
 
-:global(html.dark) .icon {
-  color: rgb(226, 224, 224);
+.btnSecondary {
+  border: 1px solid rgb(204, 2, 103, 0.5);
+  color: var(--primary-color);
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
 }
 
   @media (max-width: 768px) {
@@ -86,5 +109,15 @@
   .description {
     width: 100%;
     font-size: 1rem;
+  }
+
+  .ctaButtons {
+    gap: 0.8rem;
+    margin: 0.8rem 0 1.5rem 0;
+
+    a {
+      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+    }
   }
 }

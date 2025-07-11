@@ -1,6 +1,7 @@
 import styles from './Contact.module.scss';
 import ContactForm from '../ContactForm/ContactForm';
 import { MdEmail } from 'react-icons/md';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -53,6 +54,16 @@ const ContactSection = () => {
                     <Copy className={styles.copyIcon} size={16} />
                   )}
                 </button>
+              </div>
+              
+              <div className={styles.method} onClick={() => window.open('https://github.com/Fransei29', '_blank')}>
+                <FaGithub className={styles.icon} />
+                <span className={styles.info}>GitHub</span>
+              </div>
+
+              <div className={styles.method} onClick={() => window.open('https://www.linkedin.com/in/franco-seiler/', '_blank')}>
+                <FaLinkedin className={styles.icon} />
+                <span className={styles.info}>LinkedIn</span>
               </div>
             </div>
           </div>

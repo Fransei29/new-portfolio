@@ -38,6 +38,12 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding-top: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; 
+      gap: 1.2rem
+    }
+
   }
   
   .card {
@@ -172,9 +178,5 @@
     }
   }
   
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
+
   
