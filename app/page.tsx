@@ -16,6 +16,7 @@ import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
 import { Services } from '../components/Services/ServicesComponent';
 import Button from '../components/Button/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import Testimonials from '../components/Testimonials/TestimonialsComponent';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -85,6 +86,10 @@ export default function Home() {
           <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
             <Skills />
           </div>
+
+          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-right">
+            <Testimonials />
+          </div>\
 
           <div className='containerButton'>
             <div className='buttonContainer'>

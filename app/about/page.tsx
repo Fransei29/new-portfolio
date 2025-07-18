@@ -3,7 +3,6 @@
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
 import styles from './AboutPage.module.scss';
 import About from '../../components/About/AboutComponent';
-import Testimonials from '../../components/Testimonials/TestimonialsComponent';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import '../../app/styles/utilities.scss';
 import Button from '../../components/Button/Button';
@@ -22,11 +21,6 @@ export default function AboutPage() {
           <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
             <About />
           </div>
-          {/* Testimonials section */}
-          <div ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-left">
-            <Testimonials />
-          </div>
-
           <div className={styles.buttonContainer}>
           <Button
             text={t('aboutPage.buttonText')}
