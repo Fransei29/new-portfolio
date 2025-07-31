@@ -45,9 +45,6 @@ export default function Testimonials() {
     <div className={styles.testimonialsContainer}>
     <section className={styles.testimonials}>
       <p className={styles.highlight}>{t('testimonials.title')}</p>
-      <p className={styles.testimonialsSubtitle}>
-        {t('testimonials.subtitle')}
-        </p>
       <div className={styles.grid}>
         {testimonials.map((t, index) => (
           <div key={index} className={styles.card}>

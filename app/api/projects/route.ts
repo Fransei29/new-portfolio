@@ -25,6 +25,16 @@ export async function GET() {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
     },
     {
+      slug: 'healthcare-crm',
+      title: 'Medicare',
+      isTutorial: false,
+      description: `Mini CRM de salud para gestionar pacientes, medicamentos y tratamientos con asignaciones dinámicas.\nFrontend en Next.js con dark mode, validación, diseño responsive y componentes reutilizables.\nBackend robusto en NestJS con tests unitarios e integración, y base de datos relacional en Turso.`,
+      link2: 'https://github.com/fransei29/interview-challenge',
+      link3: 'https://interview-challenge-ecru.vercel.app',
+      previewImage: '/img/Medi.webp',
+      technologies: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS', 'Turso', 'TypeORM'],
+    },    
+    {
       slug: 'taskmanager',
       title: 'Task Manager',
       isTutorial: false,

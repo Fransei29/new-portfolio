@@ -85,9 +85,6 @@ export const Services = () => {
        <p className={styles.highlight}>
             {t('services.title')}
           </p>
-        <p className={styles.servicesSubtitle}>
-          {t('services.subtitle')}
-        </p>
         <div className={styles.grid}>
           {services.map((service) => (
             <div key={service.key} className={styles.card}>

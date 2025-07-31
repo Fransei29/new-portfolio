@@ -83,6 +83,52 @@ export const projects = [
     liveDemoLink: 'https://property-recommenderv2.vercel.app/'
   },  
   {
+    slug: 'healthcare-crm',
+    title: 'Medicare ',
+    subtitle: 'Healthcare Treatment Management',
+    whatIs: `
+      A full-stack web application to manage patients, medications, and treatment assignments in a digital healthcare workflow.
+      Includes dashboard views, reusable forms, input validation, dark mode, and a fully tested NestJS backend.
+      Built with type safety, API integration, and modern UI/UX standards.
+    `,
+    problemSolved: `
+      Managing healthcare treatments manually is error-prone and inefficient.
+      This app simplifies the process by offering structured CRUD operations, assignment tracking, and automatic remaining days calculation for active treatments.
+      Ensures reliability with full-stack validation and high test coverage.
+    `,
+    techStack: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS v4',
+      'NestJS',
+      'TypeORM',
+      'Turso (SQLite)',
+      'Jest',
+      'Render',
+      'Vercel'
+    ],
+    learnings: [
+      'Developed a full-stack TypeScript app with decoupled frontend (Next.js) and backend (NestJS).',
+      'Designed relational DB schema with entities and foreign key relationships.',
+      'Built RESTful APIs with full validation and error handling using class-validator and NestJS pipes.',
+      'Used Turso SQLite with authentication tokens for cloud-hosted persistence.',
+      'Implemented client-side and server-side form validation with reusable components.',
+      'Tested core services and edge cases with unit and integration tests.',
+      'Designed a responsive, accessible UI with Tailwind and dark mode toggle.',
+      'Managed environment configuration for deployment across Render and Vercel.'
+    ],
+    screenshots: [
+      '/img/Medi.webp',
+      '/img/Medi6.webp',
+      '/img/Medi2.webp',
+      '/img/Medi10.webp',
+      '/img/Medi3.webp',
+    ],
+    githubLink: 'https://github.com/fransei29/interview-challenge',
+    liveDemoLink: 'https://interview-challenge-ecru.vercel.app'
+  },  
+  {
     slug: 'taskmanager',
     title: 'Task Manager',
     subtitle: 'Full Stack Task Management App',

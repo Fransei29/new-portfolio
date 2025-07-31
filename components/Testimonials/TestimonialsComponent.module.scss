@@ -13,7 +13,7 @@
 .testimonials {
     max-width: 1100px;
     margin-inline: auto;
-    padding: 3rem 0;
+    padding: 4rem 0;
 
     @media (max-width: 768px) {
         padding: 0rem 0.5rem;
@@ -23,21 +23,21 @@
   
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: 1.8rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     justify-items: center;
-    padding: 2rem 0;
+    padding-top: 1rem;
 
     @media (max-width: 768px) {
         padding: 0.5rem 0;
-        gap: 0.5rem;
+        gap: 1rem;
       }
   }
 
   .card {
     background: #fff;
     border: 1px solid rgba(75, 1, 38, 0.1);
-    padding: 2rem 1rem;
+    padding: 1rem;
     border-radius: var(--br);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     max-width: 350px;
@@ -62,7 +62,7 @@
     }
   
     @media (max-width: 768px) {
-      padding: 1rem 0.5rem;
+      padding: 1rem;
       margin: 0;
       width: 90%;
     }
@@ -70,16 +70,16 @@
   
   
   .avatar {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     
     @media (max-width: 768px) {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         margin-bottom: 0
     }
   }
@@ -97,18 +97,25 @@
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 0.8rem;
+        margin-bottom: 0.7rem;
     }
     }
   
   .author {
     strong {
       display: block;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #111;
+      font-weight: 500;
       
       :global(html.dark) & {
         color: rgb(226, 226, 226);
       }
+
+      @media (max-width: 768px) {
+      font-weight: 500;
+       font-size: 0.9rem;
+    }
     
     }
   
@@ -116,25 +123,20 @@
       font-size: 0.9rem;
       white-space: pre-line;
       color: #aaa;
+
+      @media (max-width: 768px) {
+        font-size: 0.8rem;
+      }
     }
   }
   
-  .testimonialsSubtitle{
-    font-size: 1.4rem;
-    color: var(--text-color-light);
-
-    @media (max-width: 768px) {
-        font-size: 1rem;
-    }
-}
-
   .secondSection{
     display: flex;
     justify-content: flex-end;
   }
 
   .linkedinButton {
-    margin-top: 0.75rem;
+    margin-top: 0rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
