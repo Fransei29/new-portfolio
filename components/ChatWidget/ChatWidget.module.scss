@@ -1,14 +1,14 @@
 .chatWidget {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 5px;
   z-index: 1000;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .chatButton {
-  width: 60px;
-  height: 60px;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--button-color-hover) 100%);
   border: 1px solid rgba(151, 0, 76, 0.2);

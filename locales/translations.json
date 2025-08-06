@@ -9,7 +9,7 @@
     },
     "hero": {
       "title": "Hola, soy Franco",
-      "subtitle": "Front End Developer.",
+      "subtitle": "Full Stack Developer.",
       "description": "Desarrollo productos digitales y soluciones a medida.",
       "cta": {
         "projects": "Ver proyectos",
@@ -186,7 +186,7 @@
     },
     "hero": {
       "title": "Hi, I'm Franco",
-      "subtitle": "Front End Developer.",
+      "subtitle": "Full Stack Developer.",
       "description": "I build digital products and custom solutions.",
       "cta": {
         "projects": "See projects",
@@ -200,10 +200,10 @@
       "projects": "Completed projects",
       "technologies": "Technologies mastered",
       "whoIAm": "Who I Am",
-      "personalStory": "27-year-old software developer, started in 2022 in Amsterdam.",
-      "newChapter": "Focused on scalable web applications and maintainable code.",
-      "dedication": "Committed to clarity, performance, and good design.",
-      "interests": "Interested in digital design and continuous learning."
+        "personalStory": "I'm a 27-year-old software developer who started working professionally in 2022, based in Amsterdam.",
+        "newChapter": "Currently focused on developing scalable web applications with a strong emphasis on clean and maintainable code.",
+        "dedication": "I care deeply about clarity, performance, and creating consistent, user-friendly designs.",
+        "interests": "I'm especially interested in digital product design and always looking for ways to keep learning and improving."
     },
     "experience": {
       "title": "Experience",

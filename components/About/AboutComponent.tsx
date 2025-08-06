@@ -23,34 +23,32 @@ const About = () => {
         </section>
        
         <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-right">
-          <div className={styles.secondPart}>
-              <div className={styles.aboutSubtitle}>
-                <p>
-                {t('about.personalStory')}
-                </p>
-                <p>
-                {t('about.newChapter')}
-                </p>
-                <p>
-                {t('about.dedication')}
-                </p>
-                <p>
-                {t('about.interests')}
-                </p>
-              </div>
-            <div className={styles.imageSection}>
-              
-                <div className={styles.imageWrapper}>
-                    <Image
-                        src='/img/franco.jpg'
-                        alt="Franco Seiler"
-                        width={200}
-                        height={200}
-                        className={styles.image}
-                    />
-                </div>
-            </div>       
-        </div>
+          <div className={styles.aboutSubtitle}>
+            <p>
+            {t('about.personalStory')}
+            </p>
+            <p>
+            {t('about.newChapter')}
+            </p>
+            <p>
+            {t('about.dedication')}
+            </p>
+            <p>
+            {t('about.interests')}
+            </p>
+          </div>
+        </section>
+
+        <section className={styles.imageSection}>
+          <div className={styles.imageWrapper}>
+              <Image
+                  src='/img/franco.jpg'
+                  alt="Franco Seiler"
+                  width={200}
+                  height={200}
+                  className={styles.image}
+              />
+          </div>
         </section>
       </div>
     </section>
