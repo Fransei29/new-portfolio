@@ -8,6 +8,7 @@
   --dark:#090a16;
   --dark-light:#111320;
   --text-color:rgb(46, 46, 46);
+  --text-color-B:rgb(75, 74, 74);
   --text-color-light: #747474;
   --text-color-dark:rgb(27, 27, 27);
   --text-color-dark-mode:rgb(237, 236, 236);
@@ -126,6 +127,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .svg-overlap {
   position: absolute;
   transition: transform 0.3s ease;
+  
 }
 
 .shape-a {
@@ -134,6 +136,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   top: 100px;
   left: 40px;
   z-index: 1;
+
 }
 
 .shape-b {
@@ -167,19 +170,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   padding: 0 1rem;
 }
 
-.techIcons {
-  display: flex;
-  gap: 25px;
-}
-
-.icon {
-  color: rgb(110, 110, 110, 0.8);
-  transition: color 0.3s ease;
-}
-
-:global(html.dark) .icon {
-  color: rgb(226, 224, 224);
-}
 
 /* --- SCROLL BAR --- */
 /* Estilo base para navegadores WebKit */

@@ -26,7 +26,7 @@ const Button: React.FC<ReusableButtonProps> = ({
       <div className={styles.buttonContainer}>
         <Link href={href} legacyBehavior>
           <p className={`${styles.button} ${small ? styles.buttonSmall : ''}`}>
-            {label} {icon && <span className={styles.icon}>{icon}</span>}
+            {label} 
           </p>
         </Link>
       </div>

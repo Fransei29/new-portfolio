@@ -1,6 +1,6 @@
 .projectContainer {
-  padding: 2rem;
-  max-width: 1100px;
+  padding: 2rem 0;
+  max-width: 1300px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
@@ -182,7 +182,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 6rem;
 
   @media (max-width: 768px) {
     margin-top: 0;
@@ -193,11 +193,11 @@
     align-items: center;
     padding: 12px 30px;
     font-size: 1rem;
-    background-color: transparent;
-    border: 1px solid rgba(151, 0, 76, 0.2);
     border-radius: var(--br);
-    color: var(--text-color-light);
-    box-shadow: var(--box-shadow);
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid rgba(151, 0, 76, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     text-decoration: none !important;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -209,7 +209,8 @@
     }
   
     &:hover {
-      background-color: rgba(241, 194, 218, 0.7);
+      background-color: white;
+      color: #cc0267;
     }
   
     :global(html.dark) & {

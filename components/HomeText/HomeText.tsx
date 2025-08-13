@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from './HomeText.module.scss'; 
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { HiArrowRight } from 'react-icons/hi';
 
 const HomeText: React.FC = () => {
   const elementsRef = useScrollAnimation();
@@ -24,9 +25,11 @@ const HomeText: React.FC = () => {
         <div className={styles.ctaButtons}>
           <Link href="/projects" className={styles.btnPrimary}>
             {t('hero.cta.projects')}
+            <HiArrowRight className={styles.arrow} />
           </Link>
           <Link href="/contact" className={styles.btnSecondary}>
             {t('hero.cta.contact')}
+            <HiArrowRight className={styles.arrow} />
           </Link>
         </div>
     </section>

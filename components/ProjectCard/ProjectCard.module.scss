@@ -28,6 +28,10 @@
   
   &:hover {
     box-shadow: 0 4px 8px rgba(56, 56, 56, 0.3);
+    
+    .arrow {
+      transform: rotate(-45deg);
+    }
   }
 
   &:hover .projectPreview img {
@@ -223,15 +227,15 @@
 }
 
 .viewMoreButton {
-  font-size: 1rem;
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--text-color-light);
-  border-bottom: 1px solid rgb(116, 116, 116, 0.3);
+  border-bottom: 1px solid rgba(43, 42, 42, 0.3);
   padding-bottom: 2px;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   :global(html.dark) & {
@@ -251,10 +255,18 @@
   }
 }
 
+.arrow {
+  font-size: 1.1rem;
+  margin-left: 0.2rem;
+  font-weight: 500;
+  transition: transform 0.15s ease-in-out;
+  transform: rotate(0deg);
+}
+
 .arrowIcon {
   transition: transform 0.3s ease;
   opacity: 0.8;
-  color: var(--text-color-light);
+  color: var(--text-color);
 }
 
 .projectCard:hover .arrowIcon {

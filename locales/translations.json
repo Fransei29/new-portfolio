@@ -10,15 +10,15 @@
     "hero": {
       "title": "Hola, soy Franco",
       "subtitle": "Full Stack Developer.",
-      "description": "Desarrollo productos digitales y soluciones a medida.",
+      "description": "Ayudo a startups y equipos a lanzar productos en los que la gente confía.",
       "cta": {
-        "projects": "Ver proyectos",
-        "contact": "Contactame"
+        "projects": "Explora mi trabajo",
+        "contact": "Comienza un proyecto"
       }
     },
     "about": {
       "title": "Sobre mí",
-      "description": "Desarrollador Full Stack con 3 años de experiencia y un fuerte enfoque en frontend, creando aplicaciones web escalables con tecnologías modernas.",
+      "description": "Con más de 3 años de experiencia, desarrollo soluciones seguras y escalables que crecen junto a tu negocio.",
       "experience": "Años de experiencia",
       "projects": "Proyectos completados",
       "technologies": "Tecnologías dominadas",
@@ -30,6 +30,17 @@
       },
     "experience": {
       "title": "Experiencia",
+        "morseVerse": {
+        "title": "Co-Fundador & Desarrollador Full Stack",
+        "company": "Morse Verse",
+        "period": "Noviembre 2024 - Presente",
+        "responsibilities": [
+          "Desarrollo con Python, Next.js, React y TypeScript, asegurando código limpio y escalable.",
+          "Participo en decisiones de diseño y funcionamiento, mejorando la experiencia del usuario.",
+          "Organizo estructuras y arquitecturas del proyecto, garantizando mantenibilidad y escalabilidad.",
+          "Colaboro en integraciones de bases de datos y APIs, optimizando la comunicación frontend-backend."
+        ]
+      },
       "intelligentApps": {
         "title": "Desarrollador Full Stack",
         "company": "Intelligent Apps Sweden",
@@ -187,15 +198,15 @@
     "hero": {
       "title": "Hi, I'm Franco",
       "subtitle": "Full Stack Developer.",
-      "description": "I build digital products and custom solutions.",
+      "description": "I help startups and teams launch products people truly trust.",
       "cta": {
-        "projects": "See projects",
-        "contact": "Get in touch"
+        "projects": "Explore my work",
+        "contact": "Start a project"
       }
     },
     "about": {
       "title": "About me",
-      "description": "Full Stack Developer with 3 years of experience and a strong frontend focus, engineering scalable web apps with modern technologies.",
+      "description": "With 3+ years of experience, I build secure, scalable solutions that grow with your business.",
       "experience": "Years of experience",
       "projects": "Completed projects",
       "technologies": "Technologies mastered",
@@ -207,10 +218,21 @@
     },
     "experience": {
       "title": "Experience",
+      "morseVerse": {
+        "title": "Co-Founder & Full Stack Developer",
+        "company": "Morse Verse",
+        "period": "November 2024 - Present",
+        "responsibilities": [
+          "Develop using Python, Next.js, React, and TypeScript, ensuring clean and scalable code.",
+          "Contribute to design and functionality decisions, improving user experience.",
+          "Organize architecture and project structures, ensuring maintainability and scalability.",
+          "Collaborate on database and API integrations, optimizing frontend-backend communication."
+        ]
+      },
       "intelligentApps": {
         "title": "Full Stack Developer",
         "company": "Intelligent Apps Sweden",
-        "period": "October 2024 - Present",
+        "period": "October 2024 - March 2025",
         "responsibilities": [
           "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL.",
           "Integrated AI features using OpenAI APIs (generative descriptions, smart filters).",
@@ -224,7 +246,7 @@
       "freelance": {
         "title": "Full Stack Developer",
         "company": "Freelance",
-        "period": "March 2024 - October 2024",
+        "period": "March 2024 - Present",
         "responsibilities": [
           "Designed and developed custom web platforms for startups and small businesses.",
           "Built full-stack solutions using React, Node.js, MySQL, and Sequelize.",
@@ -255,8 +277,8 @@
       "recentWork": "Recent Work",
       "projects": "Projects",
       "tutorials": "Tutorials",
-      "goToProjects": "Go to Projects",
-      "goToTutorials": "Go to Tutorials"
+      "goToProjects": "View All Projects",
+      "goToTutorials": "View All Tutorials"
     },
     "contact": {
       "title": "Get in Touch",

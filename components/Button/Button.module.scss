@@ -14,21 +14,20 @@
   align-items: center;
   padding: 12px 50px;
   font-size: 20px;
-  font-weight: 500;
-  background-color: transparent;
-  border: 1px solid rgba(151, 0, 76, 0.2);
+  font-weight: 400;
+  background-color: var(--primary-color);
+  color: white;
   border-radius: var(--br);
-  color: var(--text-color-light);
-  box-shadow: var(--box-shadow);
+  border: 1px solid rgba(151, 0, 76, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   text-decoration: none !important;
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    background-color: rgba(247, 191, 219, 0.2);
-    border: 1px solid rgba(151, 0, 76, 0.2);
-    color: var(--text-color-light);
-    box-shadow: 0 2px 4px rgba(87, 3, 45, 0.3);
+    background-color: white;
+    color: #cc0267;
+    border: 1px solid rgb(204, 2, 103, 0.5);
   }
 
   :global(html.dark) & {
@@ -60,7 +59,7 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
-  color: var(--text-color-light);
+  color:white;
 
   svg {
     stroke: currentColor;

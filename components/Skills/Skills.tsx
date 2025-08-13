@@ -30,6 +30,16 @@ import DockerIcon from '../icons/docker.svg';
 import WordpressIcon from '../icons/wordpress.svg';
 import FigmaIcon from '../icons/figma.svg';
 import JestIcon from '../icons/jest.svg';
+import PyIcon from '../../public/icons/py.svg';
+import N8nIcon from '../icons/n8n.svg';
+import TailwindIcon from '../../public/icons/tai.svg';
+import NestIcon from '../../public/icons/nest.svg';
+import FastApiIcon from '../../public/icons/fast.svg';
+import MySqlIcon from '../../public/icons/mysql.svg';
+import CypressIcon from '../../public/icons/cyy.svg';
+import AwsIcon from '../../public/icons/aws.svg';
+import ReactQueryIcon from '../../public/icons/rq.svg';
+import FramerMotionIcon from '../../public/icons/fm.svg';
 
 // Definir tipos para las habilidades
 interface Skill {
@@ -44,19 +54,26 @@ const frontEndSkills: Skill[] = [
   { name: "React", icon: ReactIcon },
   { name: "Next.js", icon: NextIcon },
   { name: "Redux", icon: ReduxIcon },
+  { name: "Sass", icon: SassIcon },
+  { name: "Tailwind CSS", icon: TailwindIcon },
+  { name: "React Query", icon: ReactQueryIcon },
+  { name: "Framer Motion", icon: FramerMotionIcon },
   { name: "HTML5", icon: HtmlIcon },
   { name: "CSS3", icon: CssIcon },
   { name: "Bootstrap", icon: BootstrapIcon },
-  { name: "Sass", icon: SassIcon }
 ];
 
 const backEndSkills: Skill[] = [
+  { name: "Python", icon: PyIcon },
   { name: "Node.js", icon: NodeIcon },
   { name: "Express", icon: ExpressIcon },
+  { name: "Nest.js", icon: NestIcon },
+  { name: "FastAPI", icon: FastApiIcon },
   { name: "GraphQL", icon: GraphqlIcon },
   { name: "Sequelize", icon: SequelizeIcon },
   { name: "MongoDB", icon: MongoIcon },
   { name: "PostgreSQL", icon: PostgresIcon },
+  { name: "MySQL", icon: MySqlIcon },
   { name: "Redis", icon: RedisIcon },
   { name: "Airtable", icon: AirtableIcon },
 ];
@@ -67,6 +84,9 @@ const toolsSkills: Skill[] = [
   { name: "Wordpress", icon: WordpressIcon },
   { name: "Figma", icon: FigmaIcon },
   { name: "Jest", icon: JestIcon },
+  { name: "N8N", icon: N8nIcon },
+  { name: "Cypress", icon: CypressIcon },
+  { name: "AWS", icon: AwsIcon },
 ];
 
 // Componente de sección

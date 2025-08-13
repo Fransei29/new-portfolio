@@ -53,13 +53,6 @@ export default function Home() {
               />
             </section>
           </div>
-          
-        <div className='techIcons'>
-          <FaReact size={28} className='icon' />
-          <TbBrandNextjs size={28} className='icon' />
-          <FaNodeJs size={28} className='icon'  />
-          <SiTypescript size={28} className='icon' />
-        </div>
         </div>
         
       </div>

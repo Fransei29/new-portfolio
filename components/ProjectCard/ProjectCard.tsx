@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FileText, Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { FileText, Github, ExternalLink } from 'lucide-react';
+import { HiArrowRight } from 'react-icons/hi';
 import styles from './ProjectCard.module.scss';
 import React, { JSX, useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -151,7 +152,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 onClick={(e) => e.stopPropagation()} 
               >
                 <span>{t('projects.learnMore')}</span>
-                <ArrowRight className={styles.arrowIcon} size={16} />
+                <HiArrowRight className={styles.arrow} />
               </Link>
             </div>
           )}

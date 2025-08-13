@@ -40,6 +40,29 @@ const Experience: React.FC = () => {
       <div className={styles.experienceSection}>
         <p className={styles.highlight}>{t('experience.title')}</p>
         <ol className={styles.timeline}>
+
+        <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
+            <li className={styles.timelineItem} onClick={() => toggleDetail("morseVerse")}>
+              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
+              <div className={styles.timelineRight}>
+                <h3 className={styles.titleExperience}>
+                  <span className={styles.jobTitle}>{t('experience.morseVerse.title')}</span>
+                  <span className={styles.companyName}>{t('experience.morseVerse.company')}</span>
+                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.morseVerse ? styles.iconOpen : ''}`} />
+                </h3>
+                <time className={styles.experienceDate}>{t('experience.morseVerse.period')}</time>
+                {isOpen.morseVerse && (
+                  <ul className={styles.experienceList}>
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.0') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.1') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.2') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.3') }} />
+                  </ul>
+                )}
+              </div>
+            </li>
+          </section>
+
           <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
             <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
