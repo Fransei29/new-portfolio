@@ -170,4 +170,39 @@
   }
   
 
+  // Estilos para SortableJS
+.sortableGhost {
+  opacity: 0.4;
+  transform: rotate(3deg) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sortableChosen {
+  transform: scale(1.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 10;
+}
+
+.sortableDrag {
+  opacity: 0.9;
+  transform: scale(1.15);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+// Hover effect para indicar que es arrastrable
+.grid {
+  &:hover .card {
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+  
+
   

@@ -66,23 +66,24 @@ export default function Home() {
          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
             <ProjectsSection />
           </div>
-          
-          <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
-            <Experience />
-          </div>
 
-          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
            <Services />
           </div>
 
 
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
             <Skills />
           </div>
+          
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
+            <Experience />
+          </div>
 
-          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-right">
+          
+          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-left">
             <Testimonials />
-          </div>\
+          </div>
 
           <div className='containerButton'>
             <div className='buttonContainer'>

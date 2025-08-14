@@ -4,6 +4,8 @@ import { useScrollAnimation } from '../../hooks/Scroll';
 import Image from 'next/image';
 import styles from './Skills.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useEffect, useRef } from 'react';
+import Sortable from 'sortablejs';
 
 // SVG importados como componentes
 import JavascriptIcon from '../icons/javascript.svg';
@@ -93,12 +95,13 @@ const toolsSkills: Skill[] = [
 interface SkillsSectionProps {
   title: string;
   skills: Skill[];
+  gridRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills }) => (
+const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills, gridRef }) => (
   <div className={styles.skillsCategory}>
     <p className={styles.skillsTitleDivide}>{title}</p>
-    <div className={styles.skillsGrid}>
+    <div className={styles.skillsGrid} ref={gridRef}>
       {skills.map((skill, index) => {
         const isComponent = typeof skill.icon !== 'string';
 
@@ -127,6 +130,46 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills }) => (
 const Skills: React.FC = () => {
   const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
   const { t } = useLanguage();
+  
+  // Refs para los grids de cada sección
+  const frontendGridRef = useRef<HTMLDivElement>(null);
+  const backendGridRef = useRef<HTMLDivElement>(null);
+  const toolsGridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Configurar Sortable para Frontend
+    if (frontendGridRef.current) {
+      Sortable.create(frontendGridRef.current, {
+        group: 'frontend',
+        animation: 150,
+        ghostClass: styles.sortableGhost,
+        chosenClass: styles.sortableChosen,
+        dragClass: styles.sortableDrag,
+      });
+    }
+
+    // Configurar Sortable para Backend
+    if (backendGridRef.current) {
+      Sortable.create(backendGridRef.current, {
+        group: 'backend',
+        animation: 150,
+        ghostClass: styles.sortableGhost,
+        chosenClass: styles.sortableChosen,
+        dragClass: styles.sortableDrag,
+      });
+    }
+
+    // Configurar Sortable para Tools
+    if (toolsGridRef.current) {
+      Sortable.create(toolsGridRef.current, {
+        group: 'tools',
+        animation: 150,
+        ghostClass: styles.sortableGhost,
+        chosenClass: styles.sortableChosen,
+        dragClass: styles.sortableDrag,
+      });
+    }
+  }, []);
 
   return (
     <section className={styles.skillsSectionContainer}>
@@ -137,15 +180,15 @@ const Skills: React.FC = () => {
 
         <div className={styles.skillsCards}>
           <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
-              <SkillsSection title={t('skills.frontend')} skills={frontEndSkills} />
+              <SkillsSection title={t('skills.frontend')} skills={frontEndSkills} gridRef={frontendGridRef} />
             </div>
 
             <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
-              <SkillsSection title={t('skills.backend')} skills={backEndSkills} />
+              <SkillsSection title={t('skills.backend')} skills={backEndSkills} gridRef={backendGridRef} />
             </div>
 
             <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
-              <SkillsSection title={t('skills.tools')} skills={toolsSkills} />
+              <SkillsSection title={t('skills.tools')} skills={toolsSkills} gridRef={toolsGridRef} />
             </div>
         </div>
       </div>

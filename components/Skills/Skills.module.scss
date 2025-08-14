@@ -125,3 +125,34 @@
     padding: 1rem 0rem;
   }
 }
+
+// Estilos para SortableJS
+.sortableGhost {
+  opacity: 0.5;
+  transform: rotate(5deg);
+  transition: all 0.2s ease;
+}
+
+.sortableChosen {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.sortableDrag {
+  opacity: 0.8;
+  transform: scale(1.1);
+  z-index: 1000;
+  transition: all 0.2s ease;
+}
+
+// Hover effect para indicar que es arrastrable
+.skillsGrid {
+  &:hover .skillsCard {
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
