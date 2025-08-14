@@ -4,9 +4,7 @@ import { JSX, useEffect, useRef } from "react";
 import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiDatabase, FiCpu } from "react-icons/fi";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
-import Sortable from 'sortablejs';
 
- 
 interface Service {
   key: string;
   icon: JSX.Element;
@@ -16,7 +14,6 @@ interface Service {
 
 export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
-  const servicesGridRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -38,20 +35,6 @@ export const Services = () => {
     return () => {
       if (ref) observer.unobserve(ref); // ✅ usar la variable local
     };
-  }, []);
-
-  // Configurar SortableJS para los servicios
-  useEffect(() => {
-    if (servicesGridRef.current) {
-      Sortable.create(servicesGridRef.current, {
-        group: 'services',
-        animation: 200,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-        easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-      });
-    }
   }, []);
   
   const services: Service[] = [
@@ -101,7 +84,7 @@ export const Services = () => {
        <p className={styles.highlight}>
             {t('services.title')}
           </p>
-        <div className={styles.grid} ref={servicesGridRef}>
+        <div className={styles.grid}>
           {services.map((service) => (
             <div key={service.key} className={styles.card}>
               <div className={styles.icon}>{service.icon}</div>

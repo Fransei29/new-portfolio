@@ -11,6 +11,7 @@ import Experience from '../components/Experience/Experience';
 import Skills from '../components/Skills/Skills';
 import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
+import { useParallax } from '../hooks/useParallax';
 import HomeText from '../components/HomeText/HomeText';
 import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
 import { Services } from '../components/Services/ServicesComponent';
@@ -21,11 +22,13 @@ import Testimonials from '../components/Testimonials/TestimonialsComponent';
 export default function Home() {  
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
+  const shapeARef = useParallax({ speed: 0.2, direction: 'down' });          
+  const shapeBRef = useParallax({ speed: 0.4, direction: 'down' });            
 
   return (
     <ClientLayout>
     <div className='ContainerGeneralComplete'>
-    <section ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right">
+    <section ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right hero-section">
       <div className="home-text">
         <div className="home-textA">
           <HomeText />
@@ -33,7 +36,7 @@ export default function Home() {
 
         <div className="home-textB">
           <div className="svg-duo">
-            <section ref={(el) => {elementsRef.current[1] = el;}}className="fade-in-left">
+            <section ref={shapeARef} className="parallax-shape">
               <Image
                 src="/img/shapeA.svg"
                 alt="Figura geométrica 1"
@@ -43,7 +46,7 @@ export default function Home() {
               />
             </section>
 
-            <section ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-right">
+            <section ref={shapeBRef} className="parallax-shape">
               <Image
                 src="/img/shapeB.svg"
                 alt="Figura geométrica 2"
