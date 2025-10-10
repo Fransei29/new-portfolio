@@ -3,7 +3,8 @@
 
 :root {
   /* Paleta de colores */
-  --primary-color:#cc0267;
+  --primary-color:rgb(204, 2, 103);
+  --primary-colorA:#f51b88;
   --primary-color-light:#fdb6da;
   --dark:#090a16;
   --dark-light:#111320;

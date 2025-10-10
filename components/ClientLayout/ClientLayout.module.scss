@@ -1,3 +1,25 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0px);
+  
+  &.scrolled {
+    background: rgba(255, 255, 255);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(204, 2, 103, 0.1);
+    
+    :global(html.dark) & {
+      background: rgba(24, 28, 51, 0.95);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(204, 2, 103, 0.2);
+    }
+  }
+}
+
 .nav {
   display: flex;
   position: relative;
@@ -115,9 +137,7 @@
   &:hover {
     color: #000;
   }
-
 }
-
 
 .mobileThemeToggle {
   margin-top: 1rem;
@@ -150,7 +170,7 @@
 
 .nav a {
   font-size: 1.15rem;
-  color: var(--text-color-light);
+  color: var(--text-color);
   margin: 0;
   padding-top: 5px;
   text-decoration: none;
@@ -184,9 +204,10 @@
 
 .nav > section > a {
   font-size: 1.15rem;
-  color: var(--text-color-light);
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 1.1rem;
   margin: 0;
-  padding-top: 5px;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;
@@ -199,17 +220,17 @@
 .nav > section > a::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: 15px;
+  left: 2px;
+  bottom: 10px;
   width: 0;
   height: 2px;
-  background-color: var(--primary-color-light);
+  background-color: var(--primary-colorA);
   transition: width 0.4s ease;
 }
 
 .nav > section > a:hover::after {
-  color:var(--text-color-light);
-  width: 100%;
+  color:var(--text-color);
+  width: 110%;
 }
 
 .nav > section > a:hover {
@@ -244,18 +265,41 @@
 }
 
 .logo {
-  opacity: 0.8;
-  width: 40px;
-  height: 40px;
-  padding-top: 0.2rem;
+  width: 45px;
+  height: 45px;
+  padding: 1.3rem 0;
 
   @media (max-width: 768px) {
     padding: 0;
+    width: 40px;
+    height: 40px;
   }
 }
 
 .iconNav{
   padding: 0rem 1.7rem;
+}
+
+.mainContent {
+  padding-top: 80px; 
+  
+  @media (max-width: 768px) {
+    padding-top: 70px;
+  }
+}
+
+// Estilos para iconos de navegación
+.navIcon {
+  margin-right: 0.7rem;
+  color: rgb(121, 121, 121);
+  vertical-align: middle;
+  transition: color 0.3s ease;
+}
+
+.mobileNavIcon {
+  margin-right: 0.7rem;
+  vertical-align: middle;
+  transition: color 0.3s ease;
 }
 
 

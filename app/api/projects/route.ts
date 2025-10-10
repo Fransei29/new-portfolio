@@ -5,14 +5,14 @@ import { projects } from '../../data/projects';
 export async function GET() {
   const projects = [
     {
-      slug: 'ecommerce',
-      title: 'Ecommerce',
+      slug: 'starton',
+      title: 'StartOn ',
       isTutorial: false,
-      description: `A comprehensive full-stack e-commerce platform featuring user authentication, product management, shopping cart functionality, and integration with Mercado Pago for payments.\nBuilt with React and Next.js for the frontend, TypeScript for type safety, and Prisma as the ORM for database interactions.\nThe application is containerized using Docker, ensuring consistent development and deployment environments.\nStyling is managed with Sass, providing modular and maintainable CSS.`,
-      link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
-      link3: 'https://sport-ecommerce-58pi.vercel.app/',
-      previewImage: '/img/quiero.webp',
-      technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
+      description: `A comprehensive talent-startup connection platform featuring multi-role dashboards, internal messaging, and advanced networking capabilities.\nBuilt with Next.js 15 and React 19 for optimal performance, TypeScript for type safety, and SCSS modules for scalable styling.\nIncludes Google OAuth authentication, Supabase backend with Edge Functions, and responsive design optimized for all devices.\nPerfect for connecting developers, designers, and tech professionals with innovative startups and companies.`,
+      link2: 'https://github.com/Fransei29/starton',
+      link3: 'https://starton.vercel.app/',
+      previewImage: '/img/Start1.webp',
+      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Supabase', 'Google OAuth'],
     },
     {
       slug: 'property-recommender',
@@ -23,6 +23,16 @@ export async function GET() {
       link3: 'https://property-recommenderv2.vercel.app/',
       previewImage: '/img/prope.jpg',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
+    },
+    {
+      slug: 'ecommerce',
+      title: 'Ecommerce',
+      isTutorial: false,
+      description: `A comprehensive full-stack e-commerce platform featuring user authentication, product management, shopping cart functionality, and integration with Mercado Pago for payments.\nBuilt with React and Next.js for the frontend, TypeScript for type safety, and Prisma as the ORM for database interactions.\nThe application is containerized using Docker, ensuring consistent development and deployment environments.\nStyling is managed with Sass, providing modular and maintainable CSS.`,
+      link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
+      link3: 'https://sport-ecommerce-58pi.vercel.app/',
+      previewImage: '/img/quiero.webp',
+      technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
     },
     {
       slug: 'healthcare-crm',

@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import knowledge from '../../knowledge.json';
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,82 +18,211 @@ export default async function handler(
 
     const userMessage = message.toLowerCase().trim();
 
-    // Predefined responses for common questions
-    const responses: { [key: string]: string } = {
-      'hello': "Hello! I'm Franco's AI assistant. How can I help you learn about his skills and experience?",
-      'hi': "Hi there! I'm here to help you learn about Franco Seiler's background and technical skills.",
-      'who are you': "I'm Franco's AI assistant, designed to help visitors learn about his skills, projects, and experience as a Full Stack Developer.",
-      'what does franco do': "Franco is a Full Stack Developer with 3+ years of experience building scalable web applications. He specializes in React, Node.js, TypeScript, and modern web technologies.",
-      'react': "Yes! Franco has extensive experience with React. He's built multiple interactive user interfaces including an e-commerce platform and task management app using React hooks, state management, and performance optimizations.",
-      'typescript': "Absolutely! Franco applies TypeScript across all frontend and backend layers, which has helped reduce runtime errors by around 20% and enhanced code quality significantly.",
-      'node.js': "Yes, Franco has built RESTful and GraphQL APIs with Node.js and Express, handling database connections, authentication, and business logic for various applications.",
-      'next.js': "Franco uses Next.js for server-side rendering, static site generation, and seamless routing. He's integrated dynamic API routes and optimized initial load performance.",
-      'python': "Franco has worked with Python for backend utilities and scripts, using FastAPI and Django for specific freelance tasks including data processing and web services.",
-      'postgresql': "Franco has used PostgreSQL extensively in his task manager and e-commerce projects, modeling relational data and writing optimized SQL queries.",
-      'mongodb': "Yes, Franco has experience with MongoDB, using it with Mongoose in his e-commerce platform to model product catalogs and user sessions.",
-      'languages': "Franco speaks Spanish (native), English (advanced), Italian (advanced), and Dutch (basic). He's comfortable working in international teams.",
-      'projects': "Franco has built several key projects: 1) E-commerce Platform with React, Node.js, and MongoDB, 2) Task Management App with React, TypeScript, and PostgreSQL, 3) This Portfolio with Next.js and AI integration.",
-      'contact': "You can reach Franco at seilerfranco317@gmail.com, connect on LinkedIn at https://www.linkedin.com/in/franco-seiler/, or check out his code at https://github.com/Fransei29",
-      'experience': "Franco has 3+ years of experience developing modern and scalable web applications. He's worked on e-commerce platforms, task management systems, and various freelance projects.",
-      'skills': "Franco's skills include Frontend (React, Next.js, TypeScript), Backend (Node.js, Express, Python), Databases (PostgreSQL, MongoDB), and DevOps (Docker, Git, AWS, Vercel).",
-      'location': "Franco is based in Córdoba, Argentina, but is open to remote or hybrid roles in Europe or globally.",
-      'availability': "Franco is currently open to new opportunities, particularly remote or hybrid roles in Europe or globally.",
-      'education': "Franco studied Information Systems Engineering at the National University.",
-      'github': "You can find Franco's projects and code at https://github.com/Fransei29",
-      'linkedin': "Connect with Franco on LinkedIn at https://www.linkedin.com/in/franco-seiler/",
-      'email': "You can reach Franco directly at seilerfranco317@gmail.com"
+    // Helper function to find best matching response
+    const findBestMatch = (query: string, data: any): string | null => {
+      const queryWords = query.split(' ').filter(word => word.length > 2); // Filter out short words like 'o', 'a', 'the'
+      
+      // Check for exact matches first
+      for (const [key, value] of Object.entries(data)) {
+        if (query.includes(key.toLowerCase()) || key.toLowerCase().includes(query)) {
+          return typeof value === 'string' ? value : JSON.stringify(value);
+        }
+      }
+      
+      // Check for partial word matches (more flexible)
+      for (const [key, value] of Object.entries(data)) {
+        const keyWords = key.toLowerCase().split(' ');
+        if (queryWords.some(word => keyWords.some(keyWord => keyWord.includes(word) || word.includes(keyWord)))) {
+          return typeof value === 'string' ? value : JSON.stringify(value);
+        }
+      }
+      
+      return null;
+    };
+
+    // Check basic greetings and questions
+    const basicResponses: { [key: string]: string } = {
+      'hello': `Hello! I'm Franco's AI assistant. How can I help you learn about his skills and experience?`,
+      'hi': `Hi there! I'm here to help you learn about Franco Seiler's background and technical skills.`,
+      'who are you': `I'm Franco's AI assistant, designed to help visitors learn about his skills, projects, and experience as a Full Stack Developer.`,
+      'what does franco do': `Franco is a Full Stack Developer with ${knowledge.experience}. He specializes in React, Node.js, TypeScript, and modern web technologies.`,
+      'who is franco': `Franco Seiler is a ${knowledge.role} from ${knowledge.location}. ${knowledge.bio}`,
+      'is franco a good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
+      'is he a good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
+      'good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
+      'where is franco': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}`,
+      'where is he': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}`,
+      'where he is': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}`,
+      'where he is now': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}`,
+      'where he is located': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}`,
+      'what is franco doing now': `Franco is currently ${knowledge.availability.toLowerCase()}. He's actively working on new projects and is open to new opportunities, particularly remote or hybrid roles in Europe or globally.`,
+      'what is he doing now': `Franco is currently ${knowledge.availability.toLowerCase()}. He's actively working on new projects and is open to new opportunities, particularly remote or hybrid roles in Europe or globally.`,
+      'what is he doing': `Franco is currently ${knowledge.availability.toLowerCase()}. He's actively working on new projects and is open to new opportunities, particularly remote or hybrid roles in Europe or globally.`,
+      'current status': `Franco is currently ${knowledge.availability.toLowerCase()}. He's actively working on new projects and is open to new opportunities, particularly remote or hybrid roles in Europe or globally.`,
+      'status': `Franco is currently ${knowledge.availability.toLowerCase()}. He's actively working on new projects and is open to new opportunities, particularly remote or hybrid roles in Europe or globally.`,
+      'email': `Franco's email is ${knowledge.contact.email}`,
+      'his email': `Franco's email is ${knowledge.contact.email}`,
+      'franco email': `Franco's email is ${knowledge.contact.email}`,
+      'give me his email': `Franco's email is ${knowledge.contact.email}`,
+      'contact email': `Franco's email is ${knowledge.contact.email}`,
+      'github': `Franco's GitHub profile is ${knowledge.contact.github}`,
+      'his github': `Franco's GitHub profile is ${knowledge.contact.github}`,
+      'franco github': `Franco's GitHub profile is ${knowledge.contact.github}`,
+      'linkedin': `Franco's LinkedIn profile is ${knowledge.contact.linkedin}`,
+      'his linkedin': `Franco's LinkedIn profile is ${knowledge.contact.linkedin}`,
+      'franco linkedin': `Franco's LinkedIn profile is ${knowledge.contact.linkedin}`,
+      'give me his email o contact': `Franco's email is ${knowledge.contact.email}`,
+      'give me his email or contact': `Franco's email is ${knowledge.contact.email}`,
+      'where is he now give me his email': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}\n\nHis email is ${knowledge.contact.email}`,
+      'where is he give me his email': `Franco is currently based in ${knowledge.location}. ${knowledge.availability}\n\nHis email is ${knowledge.contact.email}`,
+      'how is franco gmail': `Franco's Gmail is ${knowledge.contact.email}`,
+      'franco gmail': `Franco's Gmail is ${knowledge.contact.email}`,
+      'his gmail': `Franco's Gmail is ${knowledge.contact.email}`,
+      'gmail': `Franco's Gmail is ${knowledge.contact.email}`,
+      'how is franco email': `Franco's email is ${knowledge.contact.email}`,
+      'franco email address': `Franco's email address is ${knowledge.contact.email}`,
+      'email address': `Franco's email address is ${knowledge.contact.email}`,
     };
 
     // Check for exact matches first
-    if (responses[userMessage]) {
-      return res.status(200).json({ response: responses[userMessage] });
+    if (basicResponses[userMessage]) {
+      return res.status(200).json({ response: basicResponses[userMessage] });
     }
 
-    // Check for partial matches
-    for (const [key, response] of Object.entries(responses)) {
+    // Check for partial matches in basic responses
+    for (const [key, response] of Object.entries(basicResponses)) {
       if (userMessage.includes(key) || key.includes(userMessage)) {
         return res.status(200).json({ response });
       }
     }
 
-    // Check for technology keywords
-    const techKeywords: { [key: string]: string } = {
-      'javascript': responses['react'],
-      'js': responses['react'],
-      'frontend': responses['react'],
-      'backend': responses['node.js'],
-      'api': responses['node.js'],
-      'database': responses['postgresql'],
-      'sql': responses['postgresql'],
-      'nosql': responses['mongodb'],
-      'devops': "Franco has experience with Docker, Git, AWS, Vercel, and CI/CD pipelines for deployment and development workflows.",
-      'testing': "Franco uses Jest, React Testing Library, and Cypress for unit testing, component testing, and end-to-end testing.",
-      'css': "Franco is proficient with Tailwind CSS, Sass, and responsive design principles for creating modern, accessible user interfaces.",
-      'html': "Franco has strong HTML5 skills and focuses on semantic markup and accessibility standards.",
-      'git': "Franco uses Git daily with CI/CD pipelines, code reviews, and branching strategies to ensure clean and collaborative development.",
-      'docker': "Franco has containerized applications end-to-end with Docker, defining Dockerfiles and docker-compose for development and CI setups.",
-      'aws': "Franco has deployed apps to AWS, managing EC2, Lambda, RDS databases, and S3 for static asset hosting.",
-      'vercel': "Franco uses Vercel for deploying React/Next.js frontends with serverless functions and instant rollbacks.",
-      'tailwind': "Franco is proficient with Tailwind CSS for rapid UI development and responsive design.",
-      'framer': "Franco uses Framer Motion for polished animations and transitions to improve user experience.",
-      'stripe': "Franco has integrated Stripe payments in his e-commerce platform for secure payment processing.",
-      'graphql': "Franco has built GraphQL APIs using Node.js and Express with Apollo Server for flexible client queries."
-    };
+    // Check for combined questions (location + contact)
+    const locationKeywords = ['where', 'location', 'based', 'live', 'reside', 'currently', 'now', 'doing', 'status'];
+    const contactKeywords = ['email', 'gmail', 'github', 'linkedin', 'contact', 'reach', 'get in touch', 'give me', 'his email', 'franco email', 'email address'];
+    
+    const hasLocationKeyword = locationKeywords.some(keyword => userMessage.includes(keyword));
+    const hasContactKeyword = contactKeywords.some(keyword => userMessage.includes(keyword));
+    
+    // Handle combined questions
+    if (hasLocationKeyword && hasContactKeyword) {
+      return res.status(200).json({ 
+        response: `Franco is currently based in ${knowledge.location}. ${knowledge.availability}\n\nYou can reach him at:\n• Email: ${knowledge.contact.email}\n• LinkedIn: ${knowledge.contact.linkedin}\n• GitHub: ${knowledge.contact.github}` 
+      });
+    }
+    
+    // Handle contact-only questions
+    if (hasContactKeyword) {
+      // Check if it's specifically asking for email
+      if (userMessage.includes('email') || userMessage.includes('give me his email')) {
+        return res.status(200).json({ 
+          response: `Franco's email is ${knowledge.contact.email}` 
+        });
+      }
+      // Otherwise provide full contact info
+      return res.status(200).json({ 
+        response: `You can reach Franco at:\n• Email: ${knowledge.contact.email}\n• LinkedIn: ${knowledge.contact.linkedin}\n• GitHub: ${knowledge.contact.github}` 
+      });
+    }
 
-    for (const [keyword, response] of Object.entries(techKeywords)) {
-      if (userMessage.includes(keyword)) {
+    // Handle location-only questions
+    if (hasLocationKeyword) {
+      return res.status(200).json({ 
+        response: `Franco is currently based in ${knowledge.location}. ${knowledge.availability}` 
+      });
+    }
+
+    // Check technology experiences
+    const techMatch = findBestMatch(userMessage, knowledge.technologyExperiences);
+    if (techMatch) {
+      return res.status(200).json({ response: techMatch });
+    }
+
+    // Check projects
+    if (userMessage.includes('project') || userMessage.includes('starton') || userMessage.includes('ecommerce') || userMessage.includes('property') || userMessage.includes('medicare') || userMessage.includes('task')) {
+      const projectNames = knowledge.projects.map(p => p.name.toLowerCase());
+      const matchingProject = knowledge.projects.find(p => 
+        userMessage.includes(p.name.toLowerCase()) || 
+        p.name.toLowerCase().includes(userMessage)
+      );
+      
+      if (matchingProject) {
+        const response = `${matchingProject.name}: ${matchingProject.description}\n\nImpact: ${matchingProject.impact}\n\nTechnologies: ${matchingProject.technologies.join(', ')}\n\nGitHub: ${matchingProject.url}${matchingProject.liveDemo ? `\nLive Demo: ${matchingProject.liveDemo}` : ''}`;
         return res.status(200).json({ response });
+      } else {
+        const projectsList = knowledge.projects.map(p => `• ${p.name}: ${p.description}`).join('\n');
+        return res.status(200).json({ 
+          response: `Franco has built several key projects:\n\n${projectsList}\n\nWould you like to know more about any specific project?` 
+        });
       }
     }
 
+    // Check work experience
+    if (userMessage.includes('experience') || userMessage.includes('work') || userMessage.includes('job') || userMessage.includes('career')) {
+      const experienceList = knowledge.workExperience.map(exp => 
+        `${exp.title} at ${exp.company} (${exp.date})\n${exp.description.join('\n')}`
+      ).join('\n\n');
+      return res.status(200).json({ 
+        response: `Franco's work experience:\n\n${experienceList}` 
+      });
+    }
+
+    // Check skills
+    if (userMessage.includes('skill') || userMessage.includes('technology') || userMessage.includes('tech')) {
+      const skillsList = Object.entries(knowledge.skills).map(([key, value]) => 
+        `• ${value}: ${knowledge.detailedTechnologies[key as keyof typeof knowledge.detailedTechnologies]?.join(', ') || 'Various technologies'}`
+      ).join('\n');
+      return res.status(200).json({ 
+        response: `Franco's technical skills:\n\n${skillsList}` 
+      });
+    }
+
+    // Check contact information
+    if (userMessage.includes('contact') || userMessage.includes('email') || userMessage.includes('linkedin') || userMessage.includes('github')) {
+      return res.status(200).json({ 
+        response: `You can reach Franco at:\n• Email: ${knowledge.contact.email}\n• LinkedIn: ${knowledge.contact.linkedin}\n• GitHub: ${knowledge.contact.github}` 
+      });
+    }
+
+    // Check location and availability
+    if (userMessage.includes('location') || userMessage.includes('where') || userMessage.includes('based')) {
+      return res.status(200).json({ 
+        response: `Franco is based in ${knowledge.location}. ${knowledge.availability}` 
+      });
+    }
+
+    // Check languages
+    if (userMessage.includes('language') || userMessage.includes('speak')) {
+      return res.status(200).json({ 
+        response: `Franco speaks: ${knowledge.languages.join(', ')}` 
+      });
+    }
+
+    // Check achievements
+    if (userMessage.includes('achievement') || userMessage.includes('accomplish') || userMessage.includes('success')) {
+      const achievementsList = knowledge.achievements.map(achievement => `• ${achievement}`).join('\n');
+      return res.status(200).json({ 
+        response: `Franco's key achievements:\n\n${achievementsList}` 
+      });
+    }
+
+    // Check education
+    if (userMessage.includes('education') || userMessage.includes('study') || userMessage.includes('degree')) {
+      const educationList = knowledge.education.map(edu => 
+        `${edu.degree} - ${edu.institution}${edu.location ? ` (${edu.location})` : ''} - ${edu.date}`
+      ).join('\n');
+      return res.status(200).json({ 
+        response: `Franco's education:\n\n${educationList}` 
+      });
+    }
+
     // Default response for unknown questions
-    const defaultResponse = "I'm not sure about that specific question, but I can tell you about Franco's skills, projects, experience, or contact information. What would you like to know?";
+    const defaultResponse = `I'm not sure about that specific question, but I can tell you about Franco's skills, projects, experience, or contact information. What would you like to know?\n\nYou can ask about:\n• His projects (StartOn, Quiero Sport, Property Recommender, etc.)\n• His technical skills (React, TypeScript, Node.js, etc.)\n• His work experience\n• His contact information\n• His location and availability`;
     
     res.status(200).json({ response: defaultResponse });
   } catch (error) {
     console.error('API Error:', error);
     res.status(200).json({ 
-      response: "Hi! I'm Franco's AI assistant. I'm having trouble right now, but you can reach Franco directly at seilerfranco317@gmail.com or check out his projects at https://github.com/Fransei29"
+      response: `Hi! I'm Franco's AI assistant. I'm having trouble right now, but you can reach Franco directly at ${knowledge.contact.email} or check out his projects at ${knowledge.contact.github}`
     });
   }
 }

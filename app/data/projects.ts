@@ -1,45 +1,50 @@
 // src/data/projects.ts
 export const projects = [
   {
-    slug: 'ecommerce',
-    title: 'Quiero Sport',
-    subtitle: 'Modern E-Commerce Platform',
+    slug: 'starton',
+    title: 'StartOn ',
+    subtitle: 'Talent-Startup Connection Platform',
     whatIs: `
-      A full e-commerce platform for sports gear with product browsing, cart management, and secure checkout.
-      Features include user authentication (NextAuth.js), order storage (PostgreSQL & Prisma), backend API routes (Next.js 13), Dockerized local setup, and deployment on Vercel.
+      StartOn is an innovative platform that connects developers, designers, and technology professionals with companies and startups seeking exceptional talent.
+      The platform democratizes access to quality job opportunities, facilitating professional growth and the development of innovative companies.
+      Features include differentiated role-based dashboards, internal messaging system, founder networking, blogs, advanced filters, and responsive panels.
     `,
     problemSolved: `
-      Users struggled with slow, insecure, and inconsistent sports gear e-commerce sites.
-      This app delivers a fast, modern UX with secure authentication, reliable data handling (Prisma), and streamlined development (Docker).
+      The technology sector lacks reliable platforms that efficiently connect emerging talent with startups and companies.
+      StartOn solves this problem by enabling students, founders, and companies to meet in a segmented, secure, and fast manner, fostering collaboration and professional growth.
     `,
     techStack: [
-      'React',
-      'Next.js',
+      'Next.js 15.4.2',
+      'React 19.1.0',
       'TypeScript',
-      'Prisma ORM',
-      'PostgreSQL',
-      'Sass (SCSS)',
-      'NextAuth.js',
-      'Docker',
+      'SCSS Modules',
+      'Lucide React',
+      'Node.js',
+      'Express',
+      'PostgreSQL (Supabase)',
+      'Google OAuth 2.0',
+      'JWT',
+      'Supabase Edge Functions',
       'Vercel'
     ],
     learnings: [
-      'Built a full-stack Next.js app using server and client components.',
-      'Designed a relational database schema for e-commerce.',
-      'Implemented authentication with NextAuth.js.',
-      'Managed state and side effects with React hooks.',
-      'Used Prisma ORM for database operations.',
-      'Set up Docker for local development and deployed on Vercel.'
+      'Implemented a multi-role system (students, founders, recruiters, startup workers) with differentiated authorization.',
+      'Google OAuth 2.0 and advanced JWT handling with automatic refresh.',
+      'Backend development in Supabase Edge Functions for efficiency and scalability.',
+      'Modular UI/UX component design with SCSS and reusable architecture in Next.js.',
+      'Persistent private messaging system and advanced filters by city, technology, and company type.',
+      'UX/UI optimization: mobile-first, smooth animations, scalable typography, and consistent color palette.',
+      'Implementation of blogs, service pages, and founder networking system.'
     ],
     screenshots: [
-      '/img/quiero.webp',
-      '/img/eco3.webp',
-      '/img/eco2.webp',
-      '/img/eco1.webp',
-      '/img/eco6.webp',
+      '/img/Start1.webp',
+      '/img/Start2.webp',
+      '/img/Start3.webp',
+      '/img/Start4.webp',
+      '/img/Start5.webp',
     ],
-    githubLink: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
-    liveDemoLink: 'https://sport-ecommerce-58pi.vercel.app/',
+    githubLink: 'https://github.com/Fransei29/starton',
+    liveDemoLink: 'https://starton.vercel.app/',
   },
   {
     slug: 'property-recommender',
@@ -82,6 +87,47 @@ export const projects = [
     githubLink: 'https://github.com/Fransei29/property-recommenderv2',
     liveDemoLink: 'https://property-recommenderv2.vercel.app/'
   },  
+  {
+    slug: 'ecommerce',
+    title: 'Quiero Sport',
+    subtitle: 'Modern E-Commerce Platform',
+    whatIs: `
+      A full e-commerce platform for sports gear with product browsing, cart management, and secure checkout.
+      Features include user authentication (NextAuth.js), order storage (PostgreSQL & Prisma), backend API routes (Next.js 13), Dockerized local setup, and deployment on Vercel.
+    `,
+    problemSolved: `
+      Users struggled with slow, insecure, and inconsistent sports gear e-commerce sites.
+      This app delivers a fast, modern UX with secure authentication, reliable data handling (Prisma), and streamlined development (Docker).
+    `,
+    techStack: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Prisma ORM',
+      'PostgreSQL',
+      'Sass (SCSS)',
+      'NextAuth.js',
+      'Docker',
+      'Vercel'
+    ],
+    learnings: [
+      'Built a full-stack Next.js app using server and client components.',
+      'Designed a relational database schema for e-commerce.',
+      'Implemented authentication with NextAuth.js.',
+      'Managed state and side effects with React hooks.',
+      'Used Prisma ORM for database operations.',
+      'Set up Docker for local development and deployed on Vercel.'
+    ],
+    screenshots: [
+      '/img/quiero.webp',
+      '/img/eco3.webp',
+      '/img/eco2.webp',
+      '/img/eco1.webp',
+      '/img/eco6.webp',
+    ],
+    githubLink: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
+    liveDemoLink: 'https://sport-ecommerce-58pi.vercel.app/',
+  },
   {
     slug: 'healthcare-crm',
     title: 'Medicare ',
@@ -255,4 +301,3 @@ export const projects = [
     liveDemoLink: 'https://vestire-front-s196.vercel.app/',
   }
 ];
-  
