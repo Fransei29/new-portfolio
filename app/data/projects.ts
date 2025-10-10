@@ -43,8 +43,8 @@ export const projects = [
       '/img/Start4.webp',
       '/img/Start5.webp',
     ],
-    githubLink: 'https://github.com/Fransei29/starton',
-    liveDemoLink: 'https://starton.vercel.app/',
+    githubLink: 'https://github.com/Fransei29/StartOn',
+    liveDemoLink: 'https://starton.it.com/',
   },
   {
     slug: 'property-recommender',
