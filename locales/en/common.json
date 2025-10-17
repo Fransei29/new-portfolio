@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "tutorials": "Tutorials",
+    "contact": "Contact"
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "by": "by Franco Seiler"
+  },
+  "ai": {
+    "placeholder": "Ask me about Franco...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "error": "Sorry, I'm having technical issues. You can contact Franco directly at seilerfranco317@gmail.com"
+  },
+  "skills": {
+    "title": "Skills",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Tools"
+  }
+}

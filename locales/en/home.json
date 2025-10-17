@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "title": "Hi, I'm Franco",
+    "subtitle": "Full Stack Developer.",
+    "description": "I help startups and teams launch products people truly trust.",
+    "cta": {
+      "projects": "Explore my work",
+      "contact": "Start a project"
+    }
+  },
+  "about": {
+    "title": "About me",
+    "description": "3+ years designing and building secure, scalable solutions that grow with your business.",
+    "experience": "Years of experience",
+    "projects": "Completed projects",
+    "technologies": "Technologies mastered",
+    "whoIAm": "Who I Am",
+    "personalStory": "I'm a 27-year-old software developer who started working professionally in 2022, based in Amsterdam.",
+    "newChapter": "Currently focused on developing scalable web applications with a strong emphasis on clean and maintainable code.",
+    "dedication": "I care deeply about clarity, performance, and creating consistent, user-friendly designs.",
+    "interests": "I'm especially interested in digital product design and always looking for ways to keep learning and improving."
+  },
+  "aboutPage": {
+    "buttonText": "Would you like to know more about me?",
+    "buttonLabel": "Let's connect"
+  }
+}

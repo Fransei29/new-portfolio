@@ -1,0 +1,70 @@
+{
+  "bootcamp": {
+    "title": "Full Stack Bootcamp",
+    "subtitle": "From Zero to Hero",
+    "description": "A comprehensive bootcamp covering everything from frontend fundamentals to advanced backend development.",
+    "modules": [
+      {
+        "id": "frontend-fundamentals",
+        "title": "Frontend Fundamentals",
+        "duration": "2 weeks",
+        "level": "Beginner",
+        "conceptual": {
+          "title": "Theory & Concepts",
+          "topics": [
+            "HTML5 Semantic Elements",
+            "CSS3 Flexbox & Grid",
+            "JavaScript ES6+ Features",
+            "DOM Manipulation",
+            "Event Handling"
+          ]
+        },
+        "practical": {
+          "title": "Hands-on Project",
+          "description": "Build a responsive portfolio website",
+          "technologies": ["HTML5", "CSS3", "JavaScript"],
+          "githubLink": "https://github.com/Fransei29/portfolio-bootcamp"
+        },
+        "video": {
+          "title": "Video Tutorial",
+          "description": "Step-by-step walkthrough of the project",
+          "youtubeLink": "https://youtube.com/watch?v=example",
+          "duration": "45 minutes"
+        }
+      },
+      {
+        "id": "react-basics",
+        "title": "React Basics",
+        "duration": "3 weeks",
+        "level": "Intermediate",
+        "conceptual": {
+          "title": "Theory & Concepts",
+          "topics": [
+            "Component Architecture",
+            "Props & State",
+            "Hooks (useState, useEffect)",
+            "Event Handling in React",
+            "Conditional Rendering"
+          ]
+        },
+        "practical": {
+          "title": "Hands-on Project",
+          "description": "Build a task management app",
+          "technologies": ["React", "CSS Modules"],
+          "githubLink": "https://github.com/Fransei29/task-app-bootcamp"
+        },
+        "video": {
+          "title": "Video Tutorial",
+          "description": "Complete React tutorial with best practices",
+          "youtubeLink": "https://youtube.com/watch?v=example2",
+          "duration": "1 hour 30 minutes"
+        }
+      }
+    ],
+    "cta": {
+      "startBootcamp": "Start Bootcamp",
+      "viewAllModules": "View All Modules",
+      "enrollNow": "Enroll Now"
+    }
+  }
+}

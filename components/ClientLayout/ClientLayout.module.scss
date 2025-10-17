@@ -67,9 +67,9 @@
     z-index: 100;
 
     button {
-      background: #ffffff; 
-      border: 1px solid #ccc;
-      border-radius: var(--br);
+      background-color: transparent;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
       color: var(--primary-color);
       padding: 0.4rem 0.6rem;
       cursor: pointer;
@@ -80,7 +80,8 @@
       font-size: 1.4rem;
 
       :global(html.dark) & {
-        background-color: rgba(245, 245, 245, 0.945);
+        border: 1px solid #424242;
+        background-color: transparent;
       }
 
       &:hover,
@@ -100,7 +101,7 @@
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     background-color: #fff;
     padding: 4rem 3rem;
     position: fixed;
@@ -127,6 +128,8 @@
 }
 
 .mobileNavLink {
+  display: flex;
+  flex-direction: row;
   color: #333; 
   font-size: 1.1rem;
   font-weight: 500;
@@ -290,8 +293,8 @@
 
 // Estilos para iconos de navegación
 .navIcon {
-  margin-right: 0.7rem;
-  color: rgb(121, 121, 121);
+  margin-right: 0.67rem;
+  color: rgb(78, 78, 78);
   vertical-align: middle;
   transition: color 0.3s ease;
 }

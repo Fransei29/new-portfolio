@@ -1,0 +1,25 @@
+{
+  "projects": {
+    "title": "Mis Proyectos",
+    "subtitle": "Algunos de los proyectos en los que he trabajado",
+    "learnMore": "Ver más",
+    "viewProject": "Ver proyecto",
+    "viewCode": "Ver código",
+    "viewDemo": "Ver demo",
+    "recentWork": "Trabajo Reciente",
+    "projects": "Proyectos",
+    "tutorials": "Tutoriales",
+    "goToProjects": "Ver Proyectos",
+    "goToTutorials": "Ver Tutoriales"
+  },
+  "pages": {
+    "projects": {
+      "title": "Proyectos",
+      "subtitle": "Trabajos seleccionados que reflejan cómo pienso, construyo y resuelvo problemas"
+    },
+    "tutorials": {
+      "title": "Tutoriales",
+      "subtitle": "De la teoría a la implementación — tutoriales enfocados para desarrollo real"
+    }
+  }
+}
