@@ -14,6 +14,7 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
   isLoading: boolean;
+  isHydrated: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -41,10 +42,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [language, setLanguageState] = useState<Language>('en');
   const [translations, setTranslations] = useState<Translations>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load translations for a specific language
-  const loadTranslations = async (lang: string) => {
-    setIsLoading(true);
+  // Load translations synchronously for initial render
+  const loadTranslationsSync = (lang: string) => {
     try {
       const modules = [
         'common',
@@ -58,44 +60,62 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
       const loadedTranslations: Translations = {};
 
-      // Load all translation modules
+      // Load all translation modules synchronously
       for (const module of modules) {
         try {
-          const moduleTranslations = await import(`../locales/${lang}/${module}.json`);
-          Object.assign(loadedTranslations, moduleTranslations.default || moduleTranslations);
+          // Use require for synchronous loading
+          const moduleTranslations = require(`../locales/${lang}/${module}.json`);
+          Object.assign(loadedTranslations, moduleTranslations);
         } catch (error) {
           console.warn(`Failed to load ${lang}/${module}.json:`, error);
         }
       }
 
-      setTranslations(loadedTranslations);
+      return loadedTranslations;
     } catch (error) {
       console.error('Error loading translations:', error);
-    } finally {
-      setIsLoading(false);
+      return {};
     }
   };
 
+  // Initialize with default language translations immediately
   useEffect(() => {
-    // Intentar obtener el idioma guardado en localStorage
-    const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-      setLanguageState(savedLanguage);
-    } else {
-      // Detectar idioma del navegador
-      const browserLanguage = navigator.language.split('-')[0];
-      setLanguageState(browserLanguage === 'es' ? 'es' : 'en');
+    if (!isInitialized) {
+      const defaultLang = 'en';
+      const initialTranslations = loadTranslationsSync(defaultLang);
+      setTranslations(initialTranslations);
+      setLanguageState(defaultLang);
+      setIsInitialized(true);
+      setIsLoading(false);
     }
-  }, []);
+  }, [isInitialized]);
 
-  // Load translations when language changes
+  // Load user's preferred language after initialization
   useEffect(() => {
-    loadTranslations(language);
-  }, [language]);
+    if (isInitialized) {
+      // Intentar obtener el idioma guardado en localStorage
+      const savedLanguage = localStorage.getItem('language') as Language;
+      if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
+        setLanguageState(savedLanguage);
+        const userTranslations = loadTranslationsSync(savedLanguage);
+        setTranslations(userTranslations);
+      } else {
+        // Detectar idioma del navegador
+        const browserLanguage = navigator.language.split('-')[0];
+        const detectedLang = browserLanguage === 'es' ? 'es' : 'en';
+        setLanguageState(detectedLang);
+        const browserTranslations = loadTranslationsSync(detectedLang);
+        setTranslations(browserTranslations);
+      }
+      setIsHydrated(true);
+    }
+  }, [isInitialized]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
+    const newTranslations = loadTranslationsSync(lang);
+    setTranslations(newTranslations);
   };
 
   const t = (key: string): string => {
@@ -110,7 +130,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isLoading }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, isLoading, isHydrated }}>
       {children}
     </LanguageContext.Provider>
   );
