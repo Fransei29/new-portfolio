@@ -1,0 +1,53 @@
+{
+  "experience": {
+    "title": "Experience",
+    "morseVerse": {
+      "title": "Co-Founder & Full Stack Developer",
+      "company": "Morse Verse",
+      "period": "November 2024 - Present",
+      "responsibilities": [
+        "Develop using Python, Next.js, React, and TypeScript, ensuring clean and scalable code.",
+        "Contribute to design and functionality decisions, improving user experience.",
+        "Organize architecture and project structures, ensuring maintainability and scalability.",
+        "Collaborate on database and API integrations, optimizing frontend-backend communication."
+      ]
+    },
+    "intelligentApps": {
+      "title": "Full Stack Developer",
+      "company": "Intelligent Apps Sweden",
+      "period": "October 2024 - March 2025",
+      "responsibilities": [
+        "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL.",
+        "Integrated AI features using OpenAI APIs (generative descriptions, smart filters).",
+        "Developed REST and GraphQL APIs with Prisma ORM and strong validation layers.",
+        "Participated in designing scalable architectures with microservices.",
+        "Implemented automated testing (unit and integration).",
+        "Used TypeScript and Tailwind CSS across the stack for consistency and productivity.",
+        "Deployed apps with Docker and CI/CD pipelines on Linux servers (Vercel and VPS)."
+      ]
+    },
+    "freelance": {
+      "title": "Full Stack Developer",
+      "company": "Freelance",
+      "period": "March 2024 - Present",
+      "responsibilities": [
+        "Designed and developed custom web platforms for startups and small businesses.",
+        "Built full-stack solutions using React, Node.js, MySQL, and Sequelize.",
+        "Created RESTful APIs and reusable components with Tailwind and TypeScript.",
+        "Handled deployment and maintenance on Linux servers using Git and VPS.",
+        "Led technical planning and architecture with clients."
+      ]
+    },
+    "digitalInnovators": {
+      "title": "Front End Developer",
+      "company": "Digital Innovators",
+      "period": "May 2023 - February 2024",
+      "responsibilities": [
+        "Built and maintained SPAs using React and Redux.",
+        "Increased user retention by 15% and improved conversion rates by 20%.",
+        "Contributed to an internal component library, reducing development time by 30%.",
+        "Developed custom React hooks to enhance code modularity."
+      ]
+    }
+  }
+}

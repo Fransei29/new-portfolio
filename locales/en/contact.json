@@ -1,0 +1,19 @@
+{
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "I am always open to hearing about new ideas and work opportunities.",
+    "description": "If you are looking for a developer passionate about building effective solutions,",
+    "reachOut": "reach out.",
+    "email": "seilerfranco317@gmail.com",
+    "copyEmail": "Copy email",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message",
+      "sending": "Sending...",
+      "sent": "Message sent!",
+      "error": "Error sending"
+    }
+  }
+}

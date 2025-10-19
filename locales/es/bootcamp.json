@@ -1,0 +1,70 @@
+{
+  "bootcamp": {
+    "title": "Bootcamp Full Stack",
+    "subtitle": "De Cero a Héroe",
+    "description": "Un bootcamp completo que cubre desde fundamentos de frontend hasta desarrollo backend avanzado.",
+    "modules": [
+      {
+        "id": "frontend-fundamentals",
+        "title": "Fundamentos Frontend",
+        "duration": "2 semanas",
+        "level": "Principiante",
+        "conceptual": {
+          "title": "Teoría y Conceptos",
+          "topics": [
+            "Elementos Semánticos HTML5",
+            "CSS3 Flexbox y Grid",
+            "Características JavaScript ES6+",
+            "Manipulación del DOM",
+            "Manejo de Eventos"
+          ]
+        },
+        "practical": {
+          "title": "Proyecto Práctico",
+          "description": "Construye un sitio web de portafolio responsivo",
+          "technologies": ["HTML5", "CSS3", "JavaScript"],
+          "githubLink": "https://github.com/Fransei29/portfolio-bootcamp"
+        },
+        "video": {
+          "title": "Video Tutorial",
+          "description": "Explicación paso a paso del proyecto",
+          "youtubeLink": "https://youtube.com/watch?v=example",
+          "duration": "45 minutos"
+        }
+      },
+      {
+        "id": "react-basics",
+        "title": "Fundamentos de React",
+        "duration": "3 semanas",
+        "level": "Intermedio",
+        "conceptual": {
+          "title": "Teoría y Conceptos",
+          "topics": [
+            "Arquitectura de Componentes",
+            "Props y State",
+            "Hooks (useState, useEffect)",
+            "Manejo de Eventos en React",
+            "Renderizado Condicional"
+          ]
+        },
+        "practical": {
+          "title": "Proyecto Práctico",
+          "description": "Construye una aplicación de gestión de tareas",
+          "technologies": ["React", "CSS Modules"],
+          "githubLink": "https://github.com/Fransei29/task-app-bootcamp"
+        },
+        "video": {
+          "title": "Video Tutorial",
+          "description": "Tutorial completo de React con mejores prácticas",
+          "youtubeLink": "https://youtube.com/watch?v=example2",
+          "duration": "1 hora 30 minutos"
+        }
+      }
+    ],
+    "cta": {
+      "startBootcamp": "Comenzar Bootcamp",
+      "viewAllModules": "Ver Todos los Módulos",
+      "enrollNow": "Inscribirse Ahora"
+    }
+  }
+}

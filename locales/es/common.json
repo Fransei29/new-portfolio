@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "tutorials": "Tutoriales",
+    "contact": "Contacto"
+  },
+  "footer": {
+    "madeWith": "Hecho con",
+    "by": "por Franco Seiler"
+  },
+  "ai": {
+    "placeholder": "Pregúntame sobre Franco...",
+    "send": "Enviar",
+    "thinking": "Pensando...",
+    "error": "Lo siento, estoy teniendo problemas técnicos. Puedes contactar a Franco directamente en seilerfranco317@gmail.com"
+  },
+  "skills": {
+    "title": "Habilidades",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Herramientas"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "services": {
+    "title": "Soluciones",
+    "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
+    "webDevelopment": {
+      "title": "Desarrollo de Software",
+      "description": "Código limpio, mantenible y escalable, con foco en buenas prácticas, rendimiento y arquitectura robusta."
+    },
+    "backendDevelopment": {
+      "title": "Backend y APIs",
+      "description": "APIs RESTful y GraphQL, bases de datos optimizadas, autenticación segura y microservicios escalables."
+    },
+    "aiIntegration": {
+      "title": "Integración de IA",
+      "description": "Implementación de APIs de OpenAI, chatbots inteligentes y funcionalidades de machine learning."
+    },
+    "webApplications": {
+      "title": "Aplicaciones Web",
+      "description": "SPAs con React/Next.js, renderizado eficiente, SEO optimizado y experiencias de usuario fluidas."
+    },
+    "ecommerceSolutions": {
+      "title": "E-commerce Completo",
+      "description": "Tiendas online personalizadas con gestión de productos, carrito de compras y pagos seguros integrados."
+    },
+    "uiuxDesign": {
+      "title": "Bases de Datos",
+      "description": "PostgreSQL, MySQL, MongoDB con Sequelize y Prisma ORM. Optimización de consultas y arquitectura de datos."
+    }
+  },
+  "testimonials": {
+    "title": "Testimonios",
+    "subtitle": "Lo que dicen las personas sobre trabajar conmigo.",
+    "matias": {
+      "name": "Matias Rivarola",
+      "role": "Desarrollador Front End",
+      "message": "Trabajar con Franco fue una experiencia fantástica. \nSiempre entregó código de alta calidad y siempre estuvo dispuesto a ayudar a sus compañeros cuando era necesario. \nSu confiabilidad y dedicación tuvieron un impacto real en el éxito de nuestro último proyecto. Todavía seguimos trabajando juntos."
+    },
+    "edison": {
+      "name": "Edison Lamar",
+      "role": "Ingeniero DevOps",
+      "message": "Franco tiene una gran vision para los detalles y una sólida comprensión de cómo el diseño y el desarrollo van de la mano. \nDurante nuestra colaboración, siempre estuvo abierto a recibir feedback y se comunicó de manera clara y respetuosa. \nSus habilidades de front-end realmente dieron vida a nuestros diseños de UI."
+    },
+    "adrian": {
+      "name": "Adrian Rodriguez",
+      "role": "Estudiante de Desarrollo Web",
+      "message": "Franco es el tipo de desarrollador que todo equipo quiere — proactivo, reflexivo y confiable. \nNo solo cumplió con los plazos sino que también contribuyó con valiosas sugerencias que mejoraron la calidad de nuestro flujo de trabajo. \nSu pasión por aprender y mejorar fue evidente en cada sprint."
+    }
+  }
+}

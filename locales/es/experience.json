@@ -1,0 +1,53 @@
+{
+  "experience": {
+    "title": "Experiencia",
+    "morseVerse": {
+      "title": "Co-Fundador & Desarrollador Full Stack",
+      "company": "Morse Verse",
+      "period": "Noviembre 2024 - Presente",
+      "responsibilities": [
+        "Desarrollo con Python, Next.js, React y TypeScript, asegurando código limpio y escalable.",
+        "Participo en decisiones de diseño y funcionamiento, mejorando la experiencia del usuario.",
+        "Organizo estructuras y arquitecturas del proyecto, garantizando mantenibilidad y escalabilidad.",
+        "Colaboro en integraciones de bases de datos y APIs, optimizando la comunicación frontend-backend."
+      ]
+    },
+    "intelligentApps": {
+      "title": "Desarrollador Full Stack",
+      "company": "Intelligent Apps Sweden",
+      "period": "Octubre 2024 - Presente",
+      "responsibilities": [
+        "Desarrollé aplicaciones full-stack utilizando React, Next.js, Node.js y PostgreSQL.",
+        "Integré funcionalidades de inteligencia artificial con APIs de OpenAI (descripciones generativas, filtros inteligentes).",
+        "Construí APIs REST y GraphQL con Prisma ORM y validaciones robustas.",
+        "Participé en el diseño de arquitecturas escalables basadas en microservicios.",
+        "Implementé testing automatizado (unitario e integración).",
+        "Apliqué TypeScript y Tailwind CSS en todo el stack para mayor consistencia y productividad.",
+        "Desplegué aplicaciones con Docker y pipelines CI/CD en entornos Linux (Vercel y VPS)."
+      ]
+    },
+    "freelance": {
+      "title": "Desarrollador Full Stack",
+      "company": "Freelance",
+      "period": "Marzo 2024 - Octubre 2024",
+      "responsibilities": [
+        "Diseñé y desarrollé plataformas web personalizadas para startups y pymes.",
+        "Trabajé con React, Node.js, MySQL y Sequelize para construir soluciones full-stack.",
+        "Creé APIs RESTful y componentes reutilizables con Tailwind y TypeScript.",
+        "Me encargué del despliegue y mantenimiento en servidores Linux usando Git y VPS.",
+        "Establecí buenas prácticas de arquitectura y planificación técnica con los clientes."
+      ]
+    },
+    "digitalInnovators": {
+      "title": "Desarrollador Front End",
+      "company": "Digital Innovators",
+      "period": "Mayo 2023 - Febrero 2024",
+      "responsibilities": [
+        "Construí y mantuve SPAs usando React y Redux.",
+        "Aumenté la retención de usuarios en un 15% y mejoré las tasas de conversión en un 20%.",
+        "Contribuí a una biblioteca de componentes interna, reduciendo el tiempo de desarrollo en un 30%.",
+        "Desarrollé hooks personalizados de React para mejorar la modularidad del código."
+      ]
+    }
+  }
+}

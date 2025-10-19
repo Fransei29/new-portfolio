@@ -1,0 +1,49 @@
+{
+  "services": {
+    "title": "Solutions",
+    "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
+    "webDevelopment": {
+      "title": "Software Development",
+      "description": "Clean, maintainable and scalable code with a focus on best practices, performance, and robust architecture."
+    },
+    "backendDevelopment": {
+      "title": "Backend and Support",
+      "description": "APIs, databases, and continuous maintenance."
+    },
+    "aiIntegration": {
+      "title": "AI Integration",
+      "description": "Implementation of OpenAI APIs, intelligent chatbots, and machine learning features."
+    },
+    "webApplications": {
+      "title": "Web Applications",
+      "description": "SPAs with React/Next.js, efficient rendering, SEO optimized and smooth user experiences."
+    },
+    "ecommerceSolutions": {
+      "title": "Complete E-commerce",
+      "description": "Custom online stores with product management, shopping cart and integrated secure payments."
+    },
+    "uiuxDesign": {
+      "title": "Databases",
+      "description": "PostgreSQL, MySQL, MongoDB with Sequelize and Prisma ORM. Query optimization and data architecture."
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "What people say about working with me.",
+    "matias": {
+      "name": "Matias Rivarola",
+      "role": "Front End Developer",
+      "message": "Working with Franco was a fantastic experience. \nHe always delivered high-quality code and was always willing to help his colleagues when needed. \nHis reliability and dedication had a real impact on the success of our last project. We're still working together."
+    },
+    "edison": {
+      "name": "Edison Lamar",
+      "role": "DevOps Engineer",
+      "message": "Franco has a keen eye for details and a solid understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to receiving feedback and communicated clearly and respectfully. \nHis front-end skills really brought our UI designs to life."
+    },
+    "adrian": {
+      "name": "Adrian Rodriguez",
+      "role": "Web Development Student",
+      "message": "Franco is the kind of developer every team wants.. He isproactive, reflective, and reliable guy. \nNot only did he meet deadlines but he also contributed valuable suggestions that improved the quality of our workflow. \nHis passion for learning and improving was evident in every sprint."
+    }
+  }
+}

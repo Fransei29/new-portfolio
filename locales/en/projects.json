@@ -1,0 +1,25 @@
+{
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "Some of the projects I've worked on",
+    "learnMore": "Learn more",
+    "viewProject": "View project",
+    "viewCode": "View code",
+    "viewDemo": "View demo",
+    "recentWork": "Recent Work",
+    "projects": "Projects",
+    "tutorials": "Tutorials",
+    "goToProjects": "View All Projects",
+    "goToTutorials": "View All Tutorials"
+  },
+  "pages": {
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Selected works that reflect how I think, build, and solve problems"
+    },
+    "tutorials": {
+      "title": "Tutorials",
+      "subtitle": "From theory to implementation — focused tutorials for real development"
+    }
+  }
+}

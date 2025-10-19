@@ -1,5 +1,3 @@
-'use client';
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Types
@@ -7,21 +5,21 @@ interface Translations {
   [key: string]: any;
 }
 
-type Language = 'es' | 'en';
-
 interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  language: string;
+  setLanguage: (lang: string) => void;
+  t: (key: string, fallback?: string) => string;
   isLoading: boolean;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+// Context
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined) as React.Context<LanguageContextType | undefined>;
 
-export const useLanguage = () => {
+// Hook to use translations
+export const useTranslation = () => {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+  if (!context) {
+    throw new Error('useTranslation must be used within a LanguageProvider');
   }
   return context;
 };
@@ -33,12 +31,17 @@ const getNestedValue = (obj: any, path: string): string => {
   }, obj);
 };
 
+// Language Provider Component
 interface LanguageProviderProps {
   children: ReactNode;
+  defaultLanguage?: string;
 }
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('en');
+export const LanguageProvider = ({ 
+  children, 
+  defaultLanguage = 'en' 
+}: LanguageProviderProps) => {
+  const [language, setLanguage] = useState(defaultLanguage);
   const [translations, setTranslations] = useState<Translations>({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -61,7 +64,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       // Load all translation modules
       for (const module of modules) {
         try {
-          const moduleTranslations = await import(`../locales/${lang}/${module}.json`);
+          const moduleTranslations = await import(`./${lang}/${module}.json`);
           Object.assign(loadedTranslations, moduleTranslations.default || moduleTranslations);
         } catch (error) {
           console.warn(`Failed to load ${lang}/${module}.json:`, error);
@@ -76,42 +79,35 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
   };
 
-  useEffect(() => {
-    // Intentar obtener el idioma guardado en localStorage
-    const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-      setLanguageState(savedLanguage);
-    } else {
-      // Detectar idioma del navegador
-      const browserLanguage = navigator.language.split('-')[0];
-      setLanguageState(browserLanguage === 'es' ? 'es' : 'en');
-    }
-  }, []);
-
   // Load translations when language changes
   useEffect(() => {
     loadTranslations(language);
   }, [language]);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem('language', lang);
-  };
-
-  const t = (key: string): string => {
+  // Translation function
+  const t = (key: string, fallback?: string): string => {
     const value = getNestedValue(translations, key);
     
     if (value !== undefined) {
       return typeof value === 'string' ? value : JSON.stringify(value);
     }
     
-    // Return key if not found
-    return key;
+    // Return fallback or key if not found
+    return fallback || key;
   };
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isLoading }}>
-      {children}
-    </LanguageContext.Provider>
+  const value: LanguageContextType = {
+    language,
+    setLanguage,
+    t,
+    isLoading
+  };
+
+  return React.createElement(
+    LanguageContext.Provider,
+    { value },
+    children
   );
 };
+
+export default LanguageProvider;
