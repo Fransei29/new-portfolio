@@ -255,6 +255,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 1rem 0;
 }
 
 .logoContainer a {
@@ -270,7 +271,14 @@
 .logo {
   width: 45px;
   height: 45px;
-  padding: 1.3rem 0;
+  background-color: rgba(0, 0, 0) !important;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media (max-width: 768px) {
     padding: 0;

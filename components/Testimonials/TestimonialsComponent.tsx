@@ -48,34 +48,40 @@ export default function Testimonials() {
       <div className={styles.grid}>
         {testimonials.map((t, index) => (
           <div key={index} className={styles.card}>
-            {t.image && (
-              <Image
-                src={t.image}
-                alt={t.name}
-                width={100}  
-                height={100} 
-                className={styles.avatar}
-              />
-            )}
-
-           <p className={styles.message}>&quot;{t.message}&quot;</p>
-            <div className={styles.author}>
-              <strong>{t.name}</strong>
-              <span>{t.role}</span>
-            </div>
-            <div className={styles.secondSection}>
-                {t.linkedin && (
+            <p className={styles.message}>&quot;{t.message}&quot;</p>
+            
+            <div className={styles.authorSection}>
+              {t.image && (
+                <Image
+                  src={t.image}
+                  alt={t.name}
+                  width={100}  
+                  height={100} 
+                  className={styles.avatar}
+                />
+              )}
+              
+              <div className={styles.authorInfo}>
+                <div className={styles.author}>
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </div>
+                
+                <div className={styles.secondSection}>
+                  {t.linkedin && (
                     <a
-                    href={t.linkedin}
-                    className={styles.linkedinButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${t.name}'s LinkedIn profile`}
-                    title={`View ${t.name} on LinkedIn`}
+                      href={t.linkedin}
+                      className={styles.linkedinButton}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${t.name}'s LinkedIn profile`}
+                      title={`View ${t.name} on LinkedIn`}
                     >
-                    <FaLinkedin size={22} />
+                      <FaLinkedin size={22} />
                     </a>
-                )}
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         ))}
