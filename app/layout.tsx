@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
 import Footer from '../components/Footer/Footer'; 
+import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <LanguageProvider>
           <LoadingWrapper>
+            <Header />
             <div id="banner"></div>
             {children}
             <Footer />
