@@ -42,18 +42,18 @@
     },
     "adrian": {
       "name": "Adrian Rodriguez",
-      "role": "Estudiante de Desarrollo Web",
+      "role": "Desarrollo Web",
       "message": "Franco es el tipo de desarrollador que todo equipo quiere — proactivo, reflexivo y confiable. \nNo solo cumplió con los plazos sino que también contribuyó con valiosas sugerencias que mejoraron la calidad de nuestro flujo de trabajo."
     },
     "franklin": {
-      "name": "Franklin Gomez Pacoricona",
+      "name": "Franklin Gomez",
       "role": "Full Stack Developer",
-      "message": "Tuve la oportunidad de trabajar con Franco en el diseño y desarrollo de mi web de academia, y fue una experiencia excelente. \nFranco demostró un gran dominio en React, TypeScript, CSS y SCSS, aportando ideas creativas y soluciones eficientes. Es un profesional confiable."
+      "message": "Tuve la oportunidad de trabajar con Franco en el diseño y desarrollo de mi web de academia. \nFranco demostró gran dominio en React, TypeScript, CSS y SCSS. Es un profesional confiable."
     },
     "ismael": {
       "name": "Ismael Rivarola",
       "role": "Software Developer",
-      "message": "Tuve la oportunidad de trabajar con Franco y puedo decir con total confianza que es un desarrollador full stack excepcional. \nNo solo domina varias tecnologías, tanto en frontend como en backend, sino que también tiene una gran capacidad para comunicarse en diferentes idiomas."
+      "message": "Franco es un desarrollador full stack excepcional. \nDomina varias tecnologías en frontend y backend, y tiene gran capacidad para comunicarse en diferentes idiomas."
     },
     "valentin": {
       "name": "Valentin Carniel",

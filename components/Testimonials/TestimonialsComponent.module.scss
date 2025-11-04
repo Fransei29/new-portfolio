@@ -25,42 +25,119 @@
     width: 100%;
     position: relative;
     padding: 2rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
     min-height: 360px;
+    overflow: hidden;
+
+    // Gradientes en los bordes - más fuertes donde están los botones
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 180px;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(
+        to right,
+        #ffffff 0%,
+        #ffffff 25%,
+        rgba(255, 255, 255, 0.95) 40%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0.6) 65%,
+        transparent 100%
+      );
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(
+        to left,
+        #ffffff 0%,
+        #ffffff 25%,
+        rgba(255, 255, 255, 0.95) 40%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0.6) 65%,
+        transparent 100%
+      );
+    }
+
+    :global(html.dark) & {
+      &::before {
+        background: linear-gradient(
+          to right,
+          #181c33 0%,
+          #181c33 25%,
+          rgba(24, 28, 51, 0.95) 40%,
+          rgba(24, 28, 51, 0.85) 50%,
+          rgba(24, 28, 51, 0.6) 65%,
+          transparent 100%
+        );
+      }
+
+      &::after {
+        background: linear-gradient(
+          to left,
+          #181c33 0%,
+          #181c33 25%,
+          rgba(24, 28, 51, 0.95) 40%,
+          rgba(24, 28, 51, 0.85) 50%,
+          rgba(24, 28, 51, 0.6) 65%,
+          transparent 100%
+        );
+      }
+    }
 
     @media (max-width: 768px) {
       padding: 1.5rem 0;
-      min-height: 280px;
+      min-height: 300px;
+
+      &::before,
+      &::after {
+        width: 80px; // Degradados más pequeños en mobile
+      }
     }
   }
 
   .carousel {
+    max-width: 1400px;
+    margin-inline: auto;
     display: flex;
-    gap: 2rem;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
-    }
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    padding: 0;
 
     @media (max-width: 768px) {
-      gap: 1.5rem;
+      gap: 1.25rem;
+      padding: 0 65px; // Espacio para los botones y que se vea la tarjeta completa
+    }
+  }
+
+  .carouselInner {
+    display: flex;
+    gap: 1.5rem;
+    width: fit-content;
+    will-change: transform;
+
+    @media (max-width: 768px) {
+      gap: 0.5rem;
     }
   }
 
   .navButton {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 10;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(253, 3, 128, 0.3);
-    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: none;
     width: 48px;
     height: 48px;
     display: flex;
@@ -68,33 +145,48 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--primary-color);
 
     &:hover {
-      background: rgba(253, 3, 128, 0.1);
-      border-color: rgba(253, 3, 128, 0.5);
-      transform: scale(1.1);
+      color: var(--primary-colorA);
     }
 
     &:active {
-      transform: scale(0.95);
+      transform: translateY(-50%) scale(0.95);
     }
 
     :global(html.dark) & {
       background: rgba(24, 28, 51, 0.9);
-      border-color: rgba(253, 3, 128, 0.4);
+      border-color: rgba(253, 3, 128, 0.5);
       color: rgb(226, 226, 226);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 
       &:hover {
-        background: rgba(253, 3, 128, 0.2);
+        background: rgba(24, 28, 51, 0.95);
+        border-color: rgba(253, 3, 128, 0.7);
+        box-shadow: 0 6px 16px rgba(253, 3, 128, 0.4);
       }
     }
 
     @media (max-width: 768px) {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  .navButtonLeft {
+    left: 10px;
+
+    @media (max-width: 768px) {
+      left: -10px;
+    }
+  }
+
+  .navButtonRight {
+    right: 10px;
+
+    @media (max-width: 768px) {
+      right: -10px;
     }
   }
 
@@ -149,13 +241,12 @@
     }
   
     @media (max-width: 768px) {
-      padding: 0.625rem 0.875rem;
-      width: 280px;
-      min-width: 280px;
-      max-width: 280px;
-      min-height: 240px;
-      max-height: 240px;
-      height: 240px;
+      padding: 0.75rem 1rem;
+      width: 260px;
+      min-width: 200px;
+      max-width: 200px;
+      min-height: 280px;
+      max-height: 280px;
     }
   }
 
@@ -171,9 +262,15 @@
     font-size: 1rem;
 
     @media (max-width: 768px) {
-      font-size: 0.8rem;
-      margin-bottom: 0.625rem;
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
       line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
     }
   }
 
@@ -212,23 +309,6 @@
     }
   }
   
-  .message {
-    font-style: italic;
-    margin-bottom: 1.2rem;
-    color: var(--text-color-light)  ;
-    white-space: pre-line;
-
-    @media (max-width: 768px) {
-        display: -webkit-box;
-        -webkit-line-clamp: 4; 
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.75rem;
-        letter-spacing: 0.1px;
-        margin-bottom: 0.5rem;
-    }
-    }
   
   .author {
     strong {
@@ -293,10 +373,10 @@
     }
 
     @media (max-width: 768px) {
-        width: 18px;
-        height: 18px;
-        padding: 0.5rem;
-        margin-top: -1rem;
+        width: 12px;
+        height: 12px;
+        padding: 0.25rem;
+        margin-top: 0rem;
     }
   }
   
