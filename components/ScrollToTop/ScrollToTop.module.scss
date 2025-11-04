@@ -3,6 +3,7 @@
   bottom: 1.5rem;
   right: 5rem;
   border: 1px solid var(--primary-color-light);
+  background-color: rgba(255, 255, 255, 0.9);
   color: var(--primary-color);
   border-radius: var(--br);
   width: 2.7rem;
@@ -12,19 +13,36 @@
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  z-index: 20000000;
+  z-index: 2000;
+  transition: all 0.3s ease;
+  padding: 0;
+  outline: none;
+
+  :global(html.dark) & {
+    background-color: rgba(24, 28, 51, 0.9);
+    border-color: rgba(253, 3, 128, 0.5);
+    color: rgb(226, 226, 226);
+  }
 
   @media (max-width: 768px) {
-    background-color: rgba(199, 199, 199, 0.1);
     left: 1rem;
+    right: auto;
     bottom: 1.4rem;
     width: 3rem;
     height: 3rem;
   }
 
   &:hover {
-    background-color: rgba(253, 184, 219, 0.7); 
+    background-color: rgba(253, 184, 219, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+    :global(html.dark) & {
+      background-color: rgba(253, 3, 128, 0.2);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }

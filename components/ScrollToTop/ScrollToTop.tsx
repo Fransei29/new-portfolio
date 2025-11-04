@@ -2,39 +2,43 @@
 
 import { useEffect, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
-import styles from './ScrollToTop.module.scss'; // Ensure this file exists and is correctly imported
+import styles from './ScrollToTop.module.scss';
 
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    console.log('ScrollToTop component mounted'); // Log to confirm component is mounted
-
     const handleScroll = () => {
-      console.log('Scroll event triggered'); // Log to confirm the event is firing
-      const scrollTop = window.scrollY;
-      console.log('handleScroll executed, Scroll position:', scrollTop); // Log to confirm execution
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       setIsVisible(scrollTop > 200);
     };
 
-    console.log('Adding scroll event listener'); // Log to confirm listener is added
     window.addEventListener('scroll', handleScroll);
+    // Verificar posición inicial
+    handleScroll();
 
     return () => {
-      console.log('Removing scroll event listener'); // Log to confirm listener is removed
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   if (!isVisible) return null;
 
   return (
-    <a
-      href="#banner"
+    <button
+      onClick={scrollToTop}
       className={styles.scrollToTop} 
       aria-label="Volver arriba"
+      type="button"
     >
       <ChevronUp size={24} />
-    </a>
+    </button>
   );
 };
