@@ -14,7 +14,7 @@ const Footer = () => {
       <div className={styles.container}>
 
       <div className={styles.brand}>
-          <Image src='/dev3.png' alt="Franco Seiler Logo" width={40} height={40} />
+          <Image src='/dev3.png' alt="Franco Seiler Logo" width={40} height={40} className={styles.logo} />
         </div>
 
         <p>&copy; 2025 {t('footer.by')}</p>

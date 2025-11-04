@@ -6,6 +6,8 @@
   z-index: 50;
   transition: all 0.3s ease;
   backdrop-filter: blur(0px);
+  overflow: visible;
+  box-shadow: none;
   
   &.scrolled {
     background: rgba(255, 255, 255);
@@ -24,6 +26,7 @@
   display: flex;
   position: relative;
   overflow-x: hidden;
+  overflow-y: visible;
   background: rgb(0, 0, 0, 0);
   border-radius: 10px;
   color: #fff;
@@ -34,13 +37,19 @@
   margin-inline: auto;
   z-index: 1000;
   top: 0;
+  width: 100%;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
     display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0rem 1rem;
-      height: 9vh;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+    height: 9vh;
+    overflow-x: hidden;
+    overflow-y: visible;
+    max-width: 100%;
   }
 }
 
@@ -61,23 +70,23 @@
 
   @media (max-width: 768px) {
     display: block;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    position: relative;
     z-index: 100;
+    flex-shrink: 0;
 
     button {
       background-color: transparent;
       border: 1px solid #f0f0f0;
       border-radius: 8px;
       color: var(--primary-color);
-      padding: 0.4rem 0.6rem;
+      padding: 0.5rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: border-color 0.3s ease;
-      font-size: 1.4rem;
+      width: 40px;
+      height: 40px;
 
       :global(html.dark) & {
         border: 1px solid #424242;
@@ -87,43 +96,139 @@
       &:hover,
       &:focus {
         outline: none;
-      }
-
-      svg {
-        pointer-events: none; 
+        border-color: var(--primary-color);
       }
     }
   }
 }
 
+.hamburgerIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20px;
+  height: 16px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+    transform-origin: center;
+  }
+
+  :global(html.dark) & {
+    span {
+      background-color: rgb(226, 226, 226);
+    }
+  }
+}
+
+.mobileMenuButton button.open .hamburgerIcon {
+  span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+}
+
+
+.menuOverlay {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+}
 
 .mobileMenu {
+  display: none;
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     background-color: #fff;
-    padding: 4rem 3rem;
+    padding: 2rem 1.5rem;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
-    width: 25%; 
-    z-index: 999;
-    gap: 0.7rem;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+    width: 50%; 
+    z-index: 1001;
+    gap: 1rem;
+    box-shadow: none;
     backdrop-filter: blur(6px);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     transform: translateX(100%); 
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &.open {
-      transform: translateX(0); 
+      transform: translateX(0);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
     }
 
-
-   :global(html.dark) & {
-    background-color: #181c33;
+    :global(html.dark) & {
+      background-color: #181c33;
+    }
   }
+}
+
+.closeButton {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: var(--primary-color);
+    }
+
+    :global(html.dark) & {
+      border: 1px solid #424242;
+      color: rgb(226, 226, 226);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
   }
 }
 
@@ -256,6 +361,12 @@
   justify-content: center;
   cursor: pointer;
   padding: 1rem 0;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    padding: 0.5rem 0;
+    flex-shrink: 0;
+  }
 }
 
 .logoContainer a {
@@ -291,14 +402,6 @@
   padding: 0rem 1.7rem;
 }
 
-.mainContent {
-  padding-top: 80px; 
-  
-  @media (max-width: 768px) {
-    padding-top: 70px;
-  }
-}
-
 // Estilos para iconos de navegación
 .navIcon {
   margin-right: 0.67rem;
@@ -312,5 +415,4 @@
   vertical-align: middle;
   transition: color 0.3s ease;
 }
-
 

@@ -19,6 +19,17 @@
   opacity: 0.9;
 }
 
+.logo {
+  background-color: rgba(0, 0, 0) !important;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
 .container {
   font-size: 1rem;
   color: var(--text-muted);

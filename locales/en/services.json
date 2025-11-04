@@ -33,17 +33,37 @@
     "matias": {
       "name": "Matias Rivarola",
       "role": "Front End Developer",
-      "message": "Working with Franco was a fantastic experience. \nHe always delivered high-quality code and was always willing to help his colleagues when needed. \nHis reliability and dedication had a real impact on the success of our last project. We're still working together."
+      "message": "Working with Franco was a fantastic experience. He always delivered high-quality code and was willing to help his colleagues when needed. \nHis reliability and dedication had a real impact on the success of our last project."
     },
     "edison": {
       "name": "Edison Lamar",
       "role": "DevOps Engineer",
-      "message": "Franco has a keen eye for details and a solid understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to receiving feedback and communicated clearly and respectfully. \nHis front-end skills really brought our UI designs to life."
+      "message": "Franco demonstrates exceptional attention to detail and a solid understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to receiving feedback and communicated clearly and respectfully."
     },
     "adrian": {
       "name": "Adrian Rodriguez",
-      "role": "Web Development Student",
-      "message": "Franco is the kind of developer every team wants.. He isproactive, reflective, and reliable guy. \nNot only did he meet deadlines but he also contributed valuable suggestions that improved the quality of our workflow. \nHis passion for learning and improving was evident in every sprint."
+      "role": "Web Development",
+      "message": "Franco is the kind of developer every team wants — proactive, reflective, and reliable. \nNot only did he meet deadlines but he also contributed valuable suggestions that improved the quality of our workflow."
+    },
+    "franklin": {
+      "name": "Franklin Gomez",
+      "role": "Full Stack Developer",
+      "message": "I had the opportunity to work with Franco on the design and development of my academy website. \nFranco demonstrated great mastery in React, TypeScript, CSS and SCSS. He is a reliable professional."
+    },
+    "ismael": {
+      "name": "Ismael Rivarola",
+      "role": "Software Developer",
+      "message": "Franco is an exceptional full stack developer. \nHe masters various technologies in frontend and backend, and has great ability to communicate in different languages."
+    },
+    "valentin": {
+      "name": "Valentin Carniel",
+      "role": "Backend Developer",
+      "message": "I totally recommend Franco. He is very capable at solving the problems that arise and handles the languages he uses very well, he is proactive and efficient."
+    },
+    "tomas": {
+      "name": "Tomas Del Pino",
+      "role": "Web Developer",
+      "message": "I highly recommend Franco. We worked together building a high-availability multi-sector appointment system. \nHe proved to be a key developer; his contributions with Next.js and Node.js were fundamental to ensure that the product could scale."
     }
   }
 }
