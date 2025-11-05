@@ -264,14 +264,14 @@ export default function Testimonials() {
             onClick={scrollLeft}
             aria-label="Scroll left"
           >
-            <ChevronLeft size={32} />
+            <ChevronLeft size={24} />
           </button>
           <button 
             className={`${styles.navButton} ${styles.navButtonRight}`}
             onClick={scrollRight}
             aria-label="Scroll right"
           >
-            <ChevronRight size={32} />
+            <ChevronRight size={24} />
           </button>
         </div>
       </section>

@@ -85,8 +85,8 @@
       align-items: center;
       justify-content: center;
       transition: border-color 0.3s ease;
-      width: 40px;
-      height: 40px;
+      width: 33px;
+      height: 33px;
 
       :global(html.dark) & {
         border: 1px solid #424242;
@@ -107,7 +107,7 @@
   flex-direction: column;
   justify-content: space-around;
   width: 20px;
-  height: 16px;
+  height: 17px;
   position: relative;
   transition: all 0.3s ease;
 
@@ -393,8 +393,8 @@
 
   @media (max-width: 768px) {
     padding: 0;
-    width: 40px;
-    height: 40px;
+    width: 33px;
+    height: 33px;
   }
 }
 

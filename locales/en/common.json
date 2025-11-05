@@ -8,7 +8,9 @@
   },
   "footer": {
     "madeWith": "Made with",
-    "by": "by Franco Seiler"
+    "by": "by Franco Seiler",
+    "navigation": "Navigation",
+    "contact": "Contact"
   },
   "ai": {
     "placeholder": "Ask me about Franco...",
