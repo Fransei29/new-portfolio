@@ -171,8 +171,8 @@ export default function Testimonials() {
       const currentPos = x.get();
       const targetX = -totalWidth;
       
-      // Duración más lenta en mobile (pero no tanto)
-      const animationDuration = isMobile ? 95 : 70;
+      // Duración más lenta - carrusel más pausado
+      const animationDuration = isMobile ? 120 : 95;
       
       animationRef.current = animate(x, targetX, {
         duration: animationDuration,
@@ -208,7 +208,9 @@ export default function Testimonials() {
   return (
     <div className={styles.testimonialsContainer}>
       <section className={styles.testimonials}>
-        <p className={styles.highlight}>{t('testimonials.title')}</p>
+        <div className={styles.titleWrapper}>
+          <p className={styles.highlight}>{t('testimonials.title')}</p>
+        </div>
         <div className={styles.carouselWrapper}>
           <div 
             className={styles.carousel}

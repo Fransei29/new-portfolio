@@ -39,16 +39,51 @@
   
   .card {
     background: #ffffff; 
-    border: 1px solid rgba(247, 86, 166, 0.2);
+    border: 1px solid transparent;
     border-radius: 1rem;
     padding: 1.5rem; 
     box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
     opacity: 0;
     transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.15s ease;
+    position: relative;
+    background-clip: padding-box;
 
     @media (max-width: 768px) {
       padding: 0.7rem 0.5rem;
       margin: 0 0rem;
+    }
+
+    // Borde con gradiente animado
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 1rem;
+      padding: 1px;
+      background: linear-gradient(
+        90deg,
+        rgba(247, 86, 166, 0.2) 0%,
+        rgba(247, 86, 166, 0.2) 30%,
+        rgba(247, 86, 166, 0.4) 50%,
+        rgba(247, 86, 166, 0.2) 70%,
+        rgba(247, 86, 166, 0.2) 100%
+      );
+      background-size: 200% 100%;
+      background-position: -200% 0;
+      animation: borderGradient 8s ease-in-out infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    // Asegurar que el contenido esté encima
+    > * {
+      position: relative;
+      z-index: 1;
     }
   
     &:nth-child(1) {
@@ -90,19 +125,45 @@
       color: rgb(226, 226, 226);
       border: 1px solid rgba(248, 248, 248, 0.3);
       box-shadow: 0 4px 8px rgba(250, 81, 166, 0.2);
+
+      &::before {
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          transparent 30%,
+          rgba(250, 81, 166, 0.4) 50%,
+          transparent 70%,
+          transparent 100%
+        );
+      }
     }
 
     &:hover .cardTitle {
       opacity: 1;
     }
   }
+
+  // Animación del gradiente del borde
+  @keyframes borderGradient {
+    0% {
+      background-position: -200% 0;
+    }
+    50% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
   
   .icon {
-    font-size: 2.3rem;
+    font-size: 2.15rem;
     display: inline-block;
     color: var(--primary-color) ;
-    transition: transform 0.3s ease;
-    opacity: 0.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.875;
+    animation: iconFloat 6s ease-in-out infinite;
+    transform-origin: center;
 
     @media (max-width: 768px) {
       font-size: 1.7rem;
@@ -114,13 +175,23 @@
       transform: translateX(10px);
     }
   }
+
+  // Animación sutil del icono
+  @keyframes iconFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
   
   .cardTitle {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #333333;
     margin-bottom: 1rem;
-    opacity: 0.8;
+    opacity: 0.9;
     transition: opacity 0.3s ease;
 
     @media (max-width: 768px) {

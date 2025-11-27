@@ -27,6 +27,35 @@
     width: 23px;
     height: 23px;
     fill: currentColor;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: iconFloatSkills 7s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  // Animación sutil del icono en Skills
+  @keyframes iconFloatSkills {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .skillsCard:hover .skillIcon,
+  .skillsCard:hover .skillsIconA {
+    transform: translateY(-3px) scale(1.1);
+    animation: iconFloatSkillsHover 2s ease-in-out infinite;
+  }
+
+  // Animación del icono al hover
+  @keyframes iconFloatSkillsHover {
+    0%, 100% {
+      transform: translateY(-3px) scale(1.1);
+    }
+    50% {
+      transform: translateY(-5px) scale(1.1);
+    }
   }
 
   .projectIcon{
@@ -79,17 +108,79 @@
     text-align: center;
     border-radius: var(--br);
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(75, 1, 38, 0.1);
+    border: 1px solid transparent;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    background-clip: padding-box;
+    overflow: visible;
+
+    // Borde con gradiente animado
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--br);
+      padding: 1px;
+      background: linear-gradient(
+        90deg,
+        rgba(247, 86, 166, 0.1) 0%,
+        rgba(247, 86, 166, 0.1) 30%,
+        rgba(247, 86, 166, 0.3) 50%,
+        rgba(247, 86, 166, 0.1) 70%,
+        rgba(247, 86, 166, 0.1) 100%
+      );
+      background-size: 200% 100%;
+      background-position: -200% 0;
+      animation: borderGradientSkills 10s ease-in-out infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    // Asegurar que el contenido esté encima
+    > * {
+      position: relative;
+      z-index: 1;
+    }
       
      :global(html.dark) & {
         background-color: #181c33;
         color: white;
+
+        &::before {
+          background: linear-gradient(
+            90deg,
+            rgba(248, 248, 248, 0.1) 0%,
+            rgba(248, 248, 248, 0.1) 30%,
+            rgba(250, 81, 166, 0.3) 50%,
+            rgba(248, 248, 248, 0.1) 70%,
+            rgba(248, 248, 248, 0.1) 100%
+          );
+        }
       }
   }
 
+  // Animación del gradiente del borde para Skills
+  @keyframes borderGradientSkills {
+    0% {
+      background-position: -200% 0;
+    }
+    50% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
   .skillsCard:hover {
-    background-color: rgb(241, 194, 218, 0.7); 
+    background-color: rgb(241, 194, 218, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
   }
   
   @media (max-width: 768px) {
