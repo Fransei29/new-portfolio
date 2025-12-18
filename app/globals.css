@@ -22,7 +22,7 @@
     box-shadow: 0 3px 4px rgba(192, 4, 98, 0.6);
   --background-colorA: rgb(255, 255, 255);
   --bg-hover: rgba(245, 84, 165, 0.9);
-  --br:16px;
+  --br: 12px;
   
   /* Variables para títulos de sección */
   --section-title-font-size: 1.75rem;
@@ -147,8 +147,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-a {
-  width: 100px;
-  height: 150px;
+  width: 110px;
+  height: 160px;
   top: 100px;
   left: 40px;
   z-index: 1;
@@ -156,10 +156,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-b {
-  width: 100px;
-  height: 150px;
+  width: 110px;
+  height: 160px;
   top: 80px;
-  left: 130px;
+  left: 140px;
   z-index: 2;
   filter: drop-shadow(0 20px 15px rgba(204, 2, 103, 0.4));
 }

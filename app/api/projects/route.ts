@@ -16,7 +16,7 @@ export async function GET() {
     },
     {
       slug: 'property-recommender',
-      title: 'Property Recommender',
+      title: 'Habita',
       isTutorial: false,
       description: `Sistema de recomendación de propiedades desarrollado con Next.js 15 y TypeScript.\nUtiliza SCSS modular para un diseño limpio y escalable.\nOptimizado para rendimiento y experiencia de usuario.\nIdeal para inmobiliarias, startups de real estate o como base para productos de recomendación personalizados.`,
       link2: 'https://github.com/Fransei29/property-recommenderv2',

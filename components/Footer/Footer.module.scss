@@ -51,7 +51,7 @@
 .logo {
   background-color: rgba(0, 0, 0) !important;
   border-radius: 50%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 
   :global(html.dark) & {
@@ -78,9 +78,9 @@
   font-size: 1.2rem;
 
   &:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(253, 3, 128, 0.3);
+    background-color: rgba(0, 0, 0, 0.075);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(253, 3, 128, 0.2);
   }
 
   :global(html.dark) & {
@@ -102,8 +102,8 @@
 }
 
 .sectionTitle {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-color);
   margin: 0 0 0.5rem 0;
 

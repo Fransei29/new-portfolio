@@ -1,6 +1,6 @@
 @import '../../app/styles/utilities.scss'; 
 
-.title{
+.title {
     font-size: 1.5rem;
     color: var(--text-color-light);
     margin: 0;
@@ -15,7 +15,7 @@
 .projectsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 50px;
+    gap: 2rem;
 }
 
 .projectsButtonContainer{

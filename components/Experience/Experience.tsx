@@ -41,13 +41,39 @@ const Experience: React.FC = () => {
         <p className={styles.highlight}>{t('experience.title')}</p>
         <ol className={styles.timeline}>
 
+        <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">
+            <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
+              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
+              <div className={styles.timelineRight}>
+                <h3 className={styles.titleExperience}>
+                  <div className={styles.titleExperienceContent}>
+                    <span className={styles.jobTitle}>{t('experience.freelance.title')}</span>
+                    <span className={styles.companyName}>{t('experience.freelance.company')}</span>
+                  </div>
+                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.freelance ? styles.iconOpen : ''}`} />
+                </h3>
+                <time className={styles.experienceDate}>{t('experience.freelance.period')}</time>
+                {isOpen.freelance && (
+                  <ul className={styles.experienceList}>
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.0') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.1') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.2') }} />
+                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.3') }} />
+                  </ul>
+                )}
+              </div>
+            </li>
+          </section>
+
         <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
             <li className={styles.timelineItem} onClick={() => toggleDetail("morseVerse")}>
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>{t('experience.morseVerse.title')}</span>
-                  <span className={styles.companyName}>{t('experience.morseVerse.company')}</span>
+                  <div className={styles.titleExperienceContent}>
+                    <span className={styles.jobTitle}>{t('experience.morseVerse.title')}</span>
+                    <span className={styles.companyName}>{t('experience.morseVerse.company')}</span>
+                  </div>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.morseVerse ? styles.iconOpen : ''}`} />
                 </h3>
                 <time className={styles.experienceDate}>{t('experience.morseVerse.period')}</time>
@@ -68,8 +94,10 @@ const Experience: React.FC = () => {
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>{t('experience.intelligentApps.title')}</span>
-                  <span className={styles.companyName}>{t('experience.intelligentApps.company')}</span>
+                  <div className={styles.titleExperienceContent}>
+                    <span className={styles.jobTitle}>{t('experience.intelligentApps.title')}</span>
+                    <span className={styles.companyName}>{t('experience.intelligentApps.company')}</span>
+                  </div>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.coursfy ? styles.iconOpen : ''}`} />
                 </h3>
                 <time className={styles.experienceDate}>{t('experience.intelligentApps.period')}</time>
@@ -85,35 +113,16 @@ const Experience: React.FC = () => {
             </li>
           </section>
   
-          <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">
-            <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
-              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
-              <div className={styles.timelineRight}>
-                <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>{t('experience.freelance.title')}</span>
-                  <span className={styles.companyName}>{t('experience.freelance.company')}</span>
-                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.freelance ? styles.iconOpen : ''}`} />
-                </h3>
-                <time className={styles.experienceDate}>{t('experience.freelance.period')}</time>
-                {isOpen.freelance && (
-                  <ul className={styles.experienceList}>
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.0') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.1') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.2') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.3') }} />
-                  </ul>
-                )}
-              </div>
-            </li>
-          </section>
   
           <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-right">
             <li className={styles.timelineItem} onClick={() => toggleDetail("digitalInnovators")}>
               <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
               <div className={styles.timelineRight}>
                 <h3 className={styles.titleExperience}>
-                  <span className={styles.jobTitle}>{t('experience.digitalInnovators.title')}</span>
-                  <span className={styles.companyName}>{t('experience.digitalInnovators.company')}</span>
+                  <div className={styles.titleExperienceContent}>
+                    <span className={styles.jobTitle}>{t('experience.digitalInnovators.title')}</span>
+                    <span className={styles.companyName}>{t('experience.digitalInnovators.company')}</span>
+                  </div>
                   <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.digitalInnovators ? styles.iconOpen : ''}`} />
                 </h3>
                 <time className={styles.experienceDate}>{t('experience.digitalInnovators.period')}</time>

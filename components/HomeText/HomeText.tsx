@@ -31,6 +31,10 @@ const HomeText: React.FC = () => {
             {t('hero.cta.contact')}
             <HiArrowRight className={styles.arrow} />
           </Link>
+          <Link href="/bootcamp" className={styles.btnTertiary}>
+            {t('hero.cta.bootcamp')}
+            <HiArrowRight className={styles.arrow} />
+          </Link>
         </div>
     </section>
   </section>

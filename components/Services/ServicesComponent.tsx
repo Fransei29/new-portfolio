@@ -87,8 +87,10 @@ export const Services = () => {
         <div className={styles.grid}>
           {services.map((service) => (
             <div key={service.key} className={styles.card}>
-              <div className={styles.icon}>{service.icon}</div>
-              <h3 className={styles.cardTitle}>{service.title}</h3>
+              <div className={styles.titleContainer}>
+                <div className={styles.icon}>{service.icon}</div>
+                <h3 className={styles.cardTitle}>{service.title}</h3>
+              </div>
               <p className={styles.cardDescription}>{service.description}</p>
             </div>
           ))}

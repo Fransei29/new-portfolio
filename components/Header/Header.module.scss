@@ -326,10 +326,9 @@
 }
 
 .nav > section > a {
-  font-size: 1.15rem;
-  color: rgb(82, 82, 82);
+  color: rgb(73, 73, 73);
   font-weight: 400 !important;
-  font-size: 1rem;
+  font-size: 0.975rem;
   margin: 0;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -402,7 +401,7 @@
   height: 38px;
   background-color: rgba(0, 0, 0) !important;
   border-radius: 50%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 
   &:hover {
@@ -425,20 +424,20 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  min-width: 90px; // Ancho mínimo basado en el texto más largo (Tutoriales/Contacto)
+  min-width: 0; // Ancho mínimo basado en el texto más largo (Tutoriales/Contacto)
   text-align: left;
   position: relative;
 }
 
 // Estilos para iconos de navegación
 .navIcon {
-  margin-right: 0.75rem;
+  margin-right: 0.5rem;
   color: rgb(129, 129, 129);
   vertical-align: middle;
   transition: color 0.3s ease;
   flex-shrink: 0; // El icono no se encoge
-  width: 20px; // Ancho fijo para el icono
-  height: 20px; // Altura fija para el icono
+  width: 18px; // Ancho fijo para el icono
+  height: 18px; // Altura fija para el icono
 }
 
 .mobileNavIcon {

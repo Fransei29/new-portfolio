@@ -41,8 +41,8 @@ export default function Home() {
                 src="/img/shapeA.svg"
                 alt="Figura geométrica 1"
                 className="svg-overlap shape-a"
-                width={100}
-                height={150}
+                width={120}
+                height={170}
               />
             </section>
 
@@ -51,8 +51,8 @@ export default function Home() {
                 src="/img/shapeB.svg"
                 alt="Figura geométrica 2"
                 className="svg-overlap shape-b"
-                width={100}
-                height={150}
+                width={120}
+                height={170}
               />
             </section>
           </div>
