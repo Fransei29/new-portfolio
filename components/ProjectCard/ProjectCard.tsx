@@ -95,57 +95,69 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
   };
 
   return (
-    <section className={styles.firstCardSection}>
-      <article
-            className={`
-              ${styles.projectCard} 
-              ${isActive ? styles.active : ''} 
-              ${!project.slug ? styles.clickable : ''}
-            `}
-            id={project.title.toLowerCase().replace(/\s/g, '')}
-            onClick={handleCardClick}
-          >
+    <article
+      className={`
+        ${styles.projectCard} 
+        ${isActive ? styles.active : ''} 
+        ${!project.slug ? styles.clickable : ''}
+      `}
+      id={project.title.toLowerCase().replace(/\s/g, '')}
+      onClick={handleCardClick}
+    >
+      {project.previewImage && (
+        <div className={styles.projectPreview}>
+          <Image
+            src={project.previewImage}
+            alt={`${project.title} Preview`}
+            quality={100}
+            fill
+            className={styles.projectImage}
+          />
+        </div>
+      )}
 
-        <section className={styles.firstCardSection}>
-          {project.previewImage && (
-            <div className={styles.projectPreview}>
-              <Image
-                src={project.previewImage}
-                alt={`${project.title} Preview`}
-                quality={100}
-                fill
-                className={styles.projectImage}
-              />
+      {/* Contenido sobre el degradado */}
+      <div className={styles.contentOverlay}>
+        <div className={styles.contentContainer}>
+          {/* Título a la izquierda */}
+          <div className={styles.projectTitleContainer}>
+            <div className={styles.projectTitle}>
+              {project.icon &&
+                (typeof project.icon === 'string' ? (
+                  <Image
+                    src={project.icon}
+                    alt={`${project.title} Icon`}
+                    width={28}
+                    height={28}
+                    className={styles.projectIcon}
+                  />
+                ) : (
+                  React.createElement(project.icon, { className: styles.projectIcon })
+                ))}
+              <p className={styles.projectTitleX}>{project.title}</p>
             </div>
-          )}
-        </section>
+          </div>
 
-        <section className={styles.secondCardSection}>
-          <header className={styles.projectHeader}>
-            <div className={styles.projectTitleContainerCard}>
-              <div className={styles.projectTitle}>
-                {project.icon &&
-                  (typeof project.icon === 'string' ? (
-                    <Image
-                      src={project.icon}
-                      alt={`${project.title} Icon`}
-                      width={28}
-                      height={28}
-                      className={styles.projectIcon}
-                    />
-                  ) : (
-                    React.createElement(project.icon, { className: styles.projectIcon })
-                  ))}
-                <p className={styles.projectTitleX}>{project.title}</p>
-              </div>
+          {/* Botones a la derecha */}
+          <div className={styles.buttonsContainer}>
+            <div className={styles.projectLinks}>
+              {showDocumentation && project.link1 && (
+                <a href={project.link1} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <FileText className={styles.iconSmall} size={18} />
+                </a>
+              )}
+              {project.link2 && (
+                <a href={project.link2} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <Github className={styles.iconSmall} size={18} />
+                </a>
+              )}
+              {project.link3 && (
+                <a href={project.link3} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <ExternalLink className={styles.iconSmall} size={18} />
+                </a>
+              )}
             </div>
-
-
-          </header>
-
-          {/* Mostrar botón solo si hay slug */}
-          {project.slug && (
-            <div className={styles.buttonContainer}>
+            {project.slug && (
               <Link
                 href={`/projects/${project.slug}`}
                 className={styles.viewMoreButton}
@@ -154,39 +166,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 <span>{t('projects.learnMore')}</span>
                 <HiArrowRight className={styles.arrow} />
               </Link>
-            </div>
-          )}
+            )}
+          </div>
+        </div>
 
-          <footer className={styles.projectFooter}>
-            <div className={styles.projectLinks}>
-              {showDocumentation && project.link1 && (
-                <a href={project.link1} target="_blank" rel="noopener noreferrer">
-                  <FileText className={styles.iconSmall} size={18} />
-                </a>
-              )}
-              {project.link2 && (
-                <a href={project.link2} target="_blank" rel="noopener noreferrer">
-                  <Github className={styles.iconSmall} size={18} />
-                </a>
-              )}
-              {project.link3 && (
-                <a href={project.link3} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className={styles.iconSmall} size={18} />
-                </a>
-              )}
-            </div>
-
-            <div className={styles.infoWrapper}>
-              <div className={styles.infoText}>
-                <p className={styles.infoTextDescription} style={{ whiteSpace: 'pre-line' }}>
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          </footer>
-        </section>
-      </article>
-    </section>
+        {/* Descripción expandible */}
+        <div className={styles.infoWrapper}>
+          <div className={styles.infoText}>
+            <p className={styles.infoTextDescription} style={{ whiteSpace: 'pre-line' }}>
+              {project.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 };
 
