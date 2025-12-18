@@ -16,7 +16,6 @@ const LanguageSelector: React.FC = () => {
       >
         ES
       </button>
-      <span className={styles.separator}>|</span>
       <button
         className={`${styles.languageButton} ${language === 'en' ? styles.active : ''}`}
         onClick={() => setLanguage('en')}

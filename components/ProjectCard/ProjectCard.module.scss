@@ -12,6 +12,7 @@
   position: relative;
   width: 100%;
   max-width: 600px;
+  border: 1px solid rgb(236, 236, 236);
   overflow: hidden;
 
   :global(html.dark) & {
@@ -24,6 +25,12 @@
    :global(html.dark) &:hover {
     border: 1px solid rgba(248, 248, 248, 0.2);
     box-shadow: 0 4px 8px rgba(117, 117, 117, 0.3);
+
+    // Cambiar el botón "Learn more" a rosado al hacer hover en toda la tarjeta (modo oscuro)
+    .viewMoreButton {
+      color: #d6237f;
+      border-bottom: 1px solid #f54ca3;
+    }
   }
   
   &:hover {
@@ -31,6 +38,12 @@
     
     .arrow {
       transform: rotate(-45deg);
+    }
+
+    // Cambiar el botón "Learn more" a rosado al hacer hover en toda la tarjeta
+    .viewMoreButton {
+      color: #d6237f;
+      border-bottom: 1px solid #f54ca3;
     }
   }
 
@@ -58,7 +71,7 @@
   align-items: center;
   width: 100%;
   position: relative;
-  padding: 0;
+  padding: 0.25rem 1rem;
 }
 
 .projectTitleContainerCard {
@@ -93,7 +106,7 @@
 .projectPreview {
   position: relative;
   width: 100%; 
-  height: 270px;
+  height: 240px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   overflow: hidden;
@@ -115,7 +128,7 @@
   left: 0;
   width: 100%;
   height: 35%; 
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+  background: linear-gradient(to top, rgba(20, 20, 20, 0.35), rgba(0, 0, 0, 0));
   pointer-events: none;
   z-index: 2;
 }
@@ -227,15 +240,16 @@
 }
 
 .viewMoreButton {
-  font-size: 1.15rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--text-color-light);
-  border-bottom: 1px solid rgba(43, 42, 42, 0.3);
-  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.2);
+  padding-bottom: 4px;
   text-decoration: none;
   font-weight: 500;
+  letter-spacing: 0.01em;
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   :global(html.dark) & {
@@ -256,8 +270,9 @@
 }
 
 .arrow {
-  font-size: 1.1rem;
-  margin-left: 0.2rem;
+  font-size: 0.875rem;
+  margin-left: 0rem;
+  margin-right: 2.5rem;
   font-weight: 500;
   transition: transform 0.15s ease-in-out;
   transform: rotate(0deg);
@@ -265,7 +280,7 @@
 
 .arrowIcon {
   transition: transform 0.3s ease;
-  opacity: 0.8;
+  opacity: 1;
   color: var(--text-color);
 }
 

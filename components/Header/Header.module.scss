@@ -8,6 +8,7 @@
   backdrop-filter: blur(0px);
   overflow: visible;
   box-shadow: none;
+  min-height: 10vh;
   
   &.scrolled {
     background: rgba(255, 255, 255);
@@ -54,7 +55,19 @@
 }
 
 .active {
-  color: rgb(24, 24, 24);
+  color: #000000 !important;// Más negrita para la sección actual
+}
+
+.active .navIcon {
+  color: #000000 !important; // Icono más negro en la sección actual
+}
+
+:global(html.dark) .active {
+  color: #ffffff !important;
+}
+
+:global(html.dark) .active .navIcon {
+  color: #ffffff !important; // Icono blanco en modo oscuro
 }
 
 .desktopOnly {
@@ -268,8 +281,9 @@
 .centerMenu {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center; // Centrar el menú
   gap: 3rem;
+  flex: 1;
   
   @media (max-width: 768px) {
     display: none;
@@ -290,51 +304,43 @@
   }
 }
 
-.nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 15px;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary-color-light);
-  transition: width 0.4s ease;
-}
-
 .nav a:hover::after {
   color:var(--text-color-light);
   width: 100%;
 }
 
 .nav a:hover {
-  color: var(--text-color);
+  color: #000000 !important; // Más negro para que se note el hover
+}
+
+.nav a:hover .navIcon {
+  color: #000000; // Icono más negro al hacer hover
+}
+
+:global(html.dark) .nav a:hover {
+  color: #ffffff; // Blanco en modo oscuro
+}
+
+:global(html.dark) .nav a:hover .navIcon {
+  color: #ffffff; // Icono blanco en modo oscuro
 }
 
 .nav > section > a {
   font-size: 1.15rem;
-  color: var(--text-color);
-  font-weight: 400;
-  font-size: 1.1rem;
+  color: rgb(82, 82, 82);
+  font-weight: 400 !important;
+  font-size: 1rem;
   margin: 0;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;
+  letter-spacing: 0.015em;
 
   @media (max-width: 768px) {
     font-size: 1rem;
   }
 }
 
-.nav > section > a::after {
-  content: '';
-  position: absolute;
-  left: 2px;
-  bottom: 10px;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary-colorA);
-  transition: width 0.4s ease;
-}
 
 .nav > section > a:hover::after {
   color:var(--text-color);
@@ -342,7 +348,19 @@
 }
 
 .nav > section > a:hover {
-  color: var(--text-color);
+  color: #000000; // Más negro para que se note el hover
+}
+
+.nav > section > a:hover .navIcon {
+  color: #000000; // Icono más negro al hacer hover
+}
+
+:global(html.dark) .nav > section > a:hover {
+  color: #ffffff; // Blanco en modo oscuro
+}
+
+:global(html.dark) .nav > section > a:hover .navIcon {
+  color: #ffffff; // Icono blanco en modo oscuro
 }
 
 .logoLink {
@@ -360,7 +378,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   flex-shrink: 0;
   
   @media (max-width: 768px) {
@@ -380,8 +398,8 @@
 }
 
 .logo {
-  width: 45px;
-  height: 45px;
+  width: 38px;
+  height: 38px;
   background-color: rgba(0, 0, 0) !important;
   border-radius: 50%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
@@ -402,12 +420,25 @@
   padding: 0rem 1.7rem;
 }
 
+// Estilos para navLink (contenedor del icono y texto)
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 90px; // Ancho mínimo basado en el texto más largo (Tutoriales/Contacto)
+  text-align: left;
+  position: relative;
+}
+
 // Estilos para iconos de navegación
 .navIcon {
-  margin-right: 0.67rem;
-  color: rgb(78, 78, 78);
+  margin-right: 0.75rem;
+  color: rgb(129, 129, 129);
   vertical-align: middle;
   transition: color 0.3s ease;
+  flex-shrink: 0; // El icono no se encoge
+  width: 20px; // Ancho fijo para el icono
+  height: 20px; // Altura fija para el icono
 }
 
 .mobileNavIcon {

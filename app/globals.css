@@ -22,7 +22,17 @@
     box-shadow: 0 3px 4px rgba(192, 4, 98, 0.6);
   --background-colorA: rgb(255, 255, 255);
   --bg-hover: rgba(245, 84, 165, 0.9);
-  --br:16px
+  --br:16px;
+  
+  /* Variables para títulos de sección */
+  --section-title-font-size: 1.75rem;
+  --section-title-font-weight: 400;
+  --section-title-color: var(--text-color);
+  --section-title-spacing: 0rem; /* Espacio entre el título y el contenido */
+  
+  /* Variables para títulos de sección en mobile */
+  --section-title-font-size-mobile: 1.5rem;
+  --section-title-spacing-mobile: 0.5rem;
 }
 
 a,
@@ -137,21 +147,21 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 }
 
 .shape-a {
-  width: 130px;
-  height: 170px;
+  width: 100px;
+  height: 150px;
   top: 100px;
   left: 40px;
   z-index: 1;
-  filter: drop-shadow(0 10px 20px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 20px 15px rgba(204, 2, 103, 0.4));
 }
 
 .shape-b {
-  width: 130px;
-  height: 170px;
+  width: 100px;
+  height: 150px;
   top: 80px;
-  left: 150px;
+  left: 130px;
   z-index: 2;
-  filter: drop-shadow(0 10px 20px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 20px 15px rgba(204, 2, 103, 0.4));
 }
 
 .projects-section h2 {
@@ -231,25 +241,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   opacity: 1;
   transform: translateX(0);
 }
-
-/* --- PARALLAX EFFECTS --- */
-.parallax-shape {
-  transition: transform 0.1s ease-out;
-}
-
-.parallax-shape:hover {
-  transition: transform 0.3s ease;
-}
-
-/* Efecto de profundidad para las formas */
-.shape-a, .shape-b {
-  transition: all 0.3s ease;
-}
-
-.shape-a:hover, .shape-b:hover {
-  filter: drop-shadow(0 10px 20px rgba(204, 2, 103, 0.5));
-}
-
 
 /* --- MEDIA QUERIES --- */
 

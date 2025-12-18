@@ -1,13 +1,15 @@
 .highlight {
   display: inline-block;
   position: relative;
-  font-size: 2.7rem;
-  color: var(--text-color);
+  font-size: var(--section-title-font-size);
+  font-weight: var(--section-title-font-weight);
+  color: var(--section-title-color);
   text-decoration: none;
   padding:0;
-  margin: 1rem 0rem;
+  margin: 1rem 0 var(--section-title-spacing) 0;
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: var(--section-title-font-size-mobile);
+    margin-bottom: var(--section-title-spacing-mobile);
   }
 }

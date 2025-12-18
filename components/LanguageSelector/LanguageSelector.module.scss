@@ -1,21 +1,33 @@
 .languageSelector {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  gap: 0;
+  border: 1px solid rgb(226, 225, 225);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 12px
 }
 
 .languageButton {
   background: none;
   border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
   transition: all 0.3s ease;
   color: var(--text-color-light);
-  font-weight: 500;
-  opacity: 0.7;
+  font-weight: 400;
+  font-size: 0.75rem;
+  opacity: 1;
+
+  // Primer botón (ES) - border-radius solo a la izquierda
+  &:first-child {
+    border-radius: 12px 0 0 12px;
+  }
+
+  // Último botón (EN) - border-radius solo a la derecha
+  &:last-child {
+    border-radius: 0 12px 12px 0;
+  }
 
   &:hover {
     opacity: 1;
@@ -39,16 +51,6 @@
       color: #fa51a6;
       background-color: rgba(250, 81, 166, 0.25);
     }
-  }
-}
-
-.separator {
-  color: var(--text-color-light);
-  opacity: 0.5;
-  font-weight: 300;
-  
-  :global(html.dark) & {
-    color: rgb(223, 222, 222);
   }
 }
 

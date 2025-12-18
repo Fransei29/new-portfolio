@@ -28,8 +28,14 @@
 }
 
 .contactSubtitle{
-  font-size: 1.4rem;
-    color: var(--text-color-light);
+  font-size: 1.2rem;
+  color: var(--text-color-light);
+  margin-bottom: 0rem; // Menos espacio entre los textos
+  font-weight: 400;
+  
+  &:last-of-type {
+    margin-bottom: 0; // Sin margen en el último
+  }
 }
 
 .contactMethods{
@@ -122,6 +128,14 @@
   }
 }
 
+.highlight {
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    margin-top: 0
+  }
+}
+
 .copyIcon {
   transition: all 0.3s ease;
 }
@@ -135,13 +149,14 @@
 .contactSectionContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 0;
     height: auto;
   }
 
   .contactSubtitle{
-    font-size: 1rem;
-}
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
 
   .contactFirst {
     width: 100%;
