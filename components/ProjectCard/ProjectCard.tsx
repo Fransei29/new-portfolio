@@ -129,10 +129,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                     alt={`${project.title} Icon`}
                     width={28}
                     height={28}
-                    className={styles.projectIcon}
+                    className={`${styles.projectIcon} ${project.isTutorial ? styles.tutorialIcon : ''}`}
                   />
                 ) : (
-                  React.createElement(project.icon, { className: styles.projectIcon })
+                  React.createElement(project.icon, { className: `${styles.projectIcon} ${project.isTutorial ? styles.tutorialIcon : ''}` })
                 ))}
               <p className={styles.projectTitleX}>{project.title}</p>
             </div>

@@ -24,7 +24,6 @@ export const projects = [
       'PostgreSQL (Supabase)',
       'Google OAuth 2.0',
       'JWT',
-      'Supabase Edge Functions',
       'Vercel'
     ],
     learnings: [
@@ -85,6 +84,7 @@ export const projects = [
       '/img/prop5.webp',
       
     ],
+    videoUrl: '/videos/HABITA.mp4',
     githubLink: 'https://github.com/Fransei29/property-recommenderv2',
     liveDemoLink: 'https://property-recommenderv2.vercel.app/'
   },  

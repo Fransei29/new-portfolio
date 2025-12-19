@@ -7,6 +7,22 @@ import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft } from 'luci
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
+// SVG iconos importados como componentes
+import JavascriptIcon from '../icons/javascript.svg';
+import TypescriptIcon from '../icons/typescript.svg';
+import ReactIcon from '../icons/react.svg';
+import NextIcon from '../icons/nextdotjs.svg';
+import SassIcon from '../icons/sass.svg';
+import CssIcon from '../icons/css.svg';
+import NodeIcon from '../icons/nodedotjs.svg';
+import ExpressIcon from '../icons/express.svg';
+import SequelizeIcon from '../icons/sequelize.svg';
+import PostgresIcon from '../icons/postgresql.svg';
+import DockerIcon from '../icons/docker.svg';
+import JestIcon from '../icons/jest.svg';
+import TailwindIcon from '../../public/icons/tai.svg';
+import NestIcon from '../../public/icons/nest.svg';
+
 interface ProjectProps {
   title: string;
   subtitle?:string;
@@ -18,6 +34,63 @@ interface ProjectProps {
   githubLink?: string;
   liveDemoLink?: string;
 }
+
+interface TechIcon {
+  name: string;
+  icon: React.ElementType | string;
+}
+
+// Función para mapear nombres de tecnologías a iconos
+const getTechIcon = (techName: string): TechIcon | null => {
+  // Normalizar: remover versiones, paréntesis, espacios extra, etc.
+  const normalized = techName
+    .toLowerCase()
+    .trim()
+    .replace(/\s*\([^)]*\)/g, '') // Remover contenido entre paréntesis
+    .replace(/\s*v?\d+\.?\d*\.?\d*/g, '') // Remover versiones (v4, 15.4.2, etc.)
+    .replace(/\s*modules?/gi, '') // Remover "modules" o "module"
+    .replace(/\s*\(modular\)/gi, '') // Remover "(modular)"
+    .trim();
+  
+  // Mapeo de tecnologías a iconos (ordenado por especificidad)
+  const techMap: { [key: string]: TechIcon } = {
+    'next.js': { name: 'Next.js', icon: NextIcon },
+    'nextjs': { name: 'Next.js', icon: NextIcon },
+    'react': { name: 'React', icon: ReactIcon },
+    'typescript': { name: 'TypeScript', icon: TypescriptIcon },
+    'javascript': { name: 'JavaScript', icon: JavascriptIcon },
+    'node.js': { name: 'Node.js', icon: NodeIcon },
+    'nodejs': { name: 'Node.js', icon: NodeIcon },
+    'express': { name: 'Express', icon: ExpressIcon },
+    'postgresql': { name: 'PostgreSQL', icon: PostgresIcon },
+    'postgres': { name: 'PostgreSQL', icon: PostgresIcon },
+    'sequelize': { name: 'Sequelize', icon: SequelizeIcon },
+    'docker': { name: 'Docker', icon: DockerIcon },
+    'jest': { name: 'Jest', icon: JestIcon },
+    'tailwind css': { name: 'Tailwind CSS', icon: TailwindIcon },
+    'tailwind': { name: 'Tailwind CSS', icon: TailwindIcon },
+    'nestjs': { name: 'NestJS', icon: NestIcon },
+    'nest.js': { name: 'NestJS', icon: NestIcon },
+    'sass': { name: 'Sass', icon: SassIcon },
+    'scss': { name: 'SCSS', icon: SassIcon },
+    'css': { name: 'CSS', icon: CssIcon },
+  };
+
+  // Buscar coincidencias exactas primero
+  if (techMap[normalized]) {
+    return techMap[normalized];
+  }
+
+  // Buscar coincidencias parciales (el nombre normalizado contiene la clave o viceversa)
+  for (const [key, value] of Object.entries(techMap)) {
+    if (normalized.includes(key) || key.includes(normalized)) {
+      return value;
+    }
+  }
+
+  // Si no hay coincidencia, retornar null para mostrar solo texto
+  return null;
+};
 
 export default function ProjectDetailComponent({
   title,
@@ -61,8 +134,10 @@ export default function ProjectDetailComponent({
         {/* Columna izquierda: Info */}
         <div className={styles.leftColumn}>
           <div className={styles.textContent}>
-            <h1>{title}</h1>
-            <p className={styles.subtitle}>{subtitle}</p>
+            <div className={styles.titleHeader}>
+              <h1>{title}</h1>
+              <p className={styles.subtitle}>{subtitle}</p>
+            </div>
             <div className={styles.overviewSection}>
               <h2>Overview</h2>
               <p>{whatIs}</p>
@@ -74,11 +149,31 @@ export default function ProjectDetailComponent({
             <div className={styles.builtWithSection}>
               <h2>Built With</h2>
               {techStack && techStack.length > 0 ? (
-                <ul className={styles.techList}>
-                  {techStack.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
+                <div className={styles.techStackGrid}>
+                  {techStack.map((tech, index) => {
+                    const techIcon = getTechIcon(tech);
+                    const isComponent = techIcon && typeof techIcon.icon !== 'string';
+                    
+                    return (
+                      <div key={index} className={styles.techCard}>
+                        {techIcon ? (
+                          isComponent ? (
+                            <techIcon.icon className={styles.techIcon} />
+                          ) : (
+                            <Image
+                              src={typeof techIcon.icon === 'string' ? techIcon.icon : ''}
+                              alt={`${techIcon.name} Icon`}
+                              width={22}
+                              height={22}
+                              className={styles.techIconImage}
+                            />
+                          )
+                        ) : null}
+                        <span className={styles.techName}>{techIcon?.name || tech}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               ) : (
                 <p>No tech stack information provided.</p>
               )}
