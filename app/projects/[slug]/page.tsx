@@ -26,8 +26,8 @@ export default async function ProjectPage({ params }: Props) {
           whatIs={project.whatIs}
           problemSolved={project.problemSolved}
           techStack={project.techStack}
-          learnings={project.learnings}
           screenshots={project.screenshots}
+          videoUrl={project.videoUrl}
           githubLink={project.githubLink}
           liveDemoLink={project.liveDemoLink}
         />

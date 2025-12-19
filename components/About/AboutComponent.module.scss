@@ -16,7 +16,8 @@
   .aboutSection {
     max-width: 1300px;
     margin-inline: auto;
-    padding: 2rem 0rem;
+    padding-top: 2rem;
+    padding-bottom: 0rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -49,11 +50,12 @@
   }
   
   .aboutSubtitle{
-    font-size: 1.3rem;
+    font-size: 1.15rem;
+    font-weight: 400;
     color: var(--text-color-light);
     line-height: 1.3;
     letter-spacing: 0.03em;
-    width: 60%;
+    width: 70%;
 
     @media (max-width: 768px) {
       font-size: 1rem;
@@ -64,8 +66,8 @@
   
    .imageSection {
     position: absolute;
-    top: 50%;
-    right: 2rem;
+    top: 60%;
+    right: 8rem;
     transform: translateY(-50%);
     display: flex;
     justify-content: center;
@@ -84,8 +86,8 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     transition: transform 0.4s ease;
-    width: 250px;
-    height: 250px; 
+    width: 220px;
+    height: 220px; 
    
     @media (max-width: 768px) {
       width: 170px;

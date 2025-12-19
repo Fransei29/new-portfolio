@@ -43,6 +43,7 @@ export const projects = [
       '/img/Start4.webp',
       '/img/Start5.webp',
     ],
+    videoUrl: '/videos/Start On.mp4',
     githubLink: 'https://github.com/Fransei29/StartOn',
     liveDemoLink: 'https://starton.it.com/',
   },

@@ -10,7 +10,8 @@
     "projects": "Projects",
     "tutorials": "Tutorials",
     "goToProjects": "View All Projects",
-    "goToTutorials": "View All Tutorials"
+    "goToTutorials": "View All Tutorials",
+    "back": "Back"
   },
   "pages": {
     "projects": {
