@@ -61,9 +61,6 @@ const Footer = () => {
             <Link href="/about" className={styles.navLink}>
               <span>{t('nav.about')}</span>
             </Link>
-            <Link href="/contact" className={styles.navLink}>
-              <span>{t('nav.contact')}</span>
-            </Link>
           </nav>
         </div>
 

@@ -7,6 +7,11 @@
       background-color: var(--dark-light);
       color: rgb(235, 235, 235);
   }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    height: auto;
+  }
   }
 
   .projectsContent{
@@ -34,6 +39,7 @@
     @media (max-width: 600px) {
       font-size: var(--section-title-font-size-mobile);
       margin-bottom: var(--section-title-spacing-mobile);
+      margin-top: 0;
     }
   }
 
@@ -55,6 +61,7 @@
     scroll-behavior: smooth;
     padding-top: 1rem;
     gap: 4rem;
+    box-sizing: border-box;
   }
 
   
@@ -62,15 +69,33 @@
 @media (max-width: 768px) {
 
   .containerProjects {
-    padding-top: 0.5rem;
+    padding-top: 0rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
+    position: relative;
+  }
+
+  .projectsContent {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .projectsGrid {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin-left: 0.8rem;
+    margin: 0;
     gap: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
+    min-height: auto;
   }
 
 }

@@ -57,9 +57,13 @@ const Projects = () => {
           .map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              style={{ 
+                willChange: 'opacity',
+                minHeight: 'inherit'
+              }}
             >
               <ProjectCard project={project} />
             </motion.div>

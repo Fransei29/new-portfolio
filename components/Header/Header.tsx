@@ -114,12 +114,6 @@ export default function Header() {
               {t('nav.about')}
             </p>
           </Link>
-          <Link href="/contact" passHref>
-            <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>
-              <Mail size={20} className={styles.navIcon} />
-              {t('nav.contact')}
-            </p>
-          </Link>
         </section>
 
         {/* Toggle theme y Language selector */}
@@ -173,12 +167,6 @@ export default function Header() {
           <p className={styles.mobileNavLink}>
             <User size={18} className={styles.mobileNavIcon} />
             {t('nav.about')}
-          </p>
-        </Link>
-        <Link href="/contact" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <Mail size={18} className={styles.mobileNavIcon} />
-            {t('nav.contact')}
           </p>
         </Link>
         <div className={styles.mobileThemeToggle}>

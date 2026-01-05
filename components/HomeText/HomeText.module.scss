@@ -220,3 +220,14 @@
     margin-left: 0.4rem;
   }
 }
+
+.calendlyContainer {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+  }
+}

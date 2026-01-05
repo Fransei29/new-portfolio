@@ -1,113 +1,197 @@
 @import '../../app/styles/utilities.scss'; 
 
-.contactSectionContainer{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: var(--background-colorB);
-}
-
-.contactSection{
-    display: flex;
-    flex-direction:column;
-    height: auto;
-    max-width: 1350px;
-    margin-inline: auto;
-}
-  
-  .contactFirst {
-    font-size: 20px;
-    width: 100%;
-  }
-
-.contactSecond {
+.contactSectionContainer {
+  width: 100%;
+  background-color: var(--background-colorB);
+  color: #1f1f1f;
   display: flex;
-  flex-direction: row ;
-  margin-bottom: 1rem;
-  padding-top: 2rem;
-}
+  justify-content: center;
 
-.contactSubtitle{
-  font-size: 1.2rem;
-  color: var(--text-color-light);
-  margin-bottom: 0rem; // Menos espacio entre los textos
-  font-weight: 400;
-  
-  &:last-of-type {
-    margin-bottom: 0; // Sin margen en el último
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
   }
 }
 
-.contactMethods{
+.contactSection {
+  max-width: 1300px;
+  margin-inline: auto;
+  padding: 0;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+.contactFirst {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 50%;
+  text-align: left;
+  width: 100%;
 }
 
-.method {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
-    border: 1px solid rgba(75, 1, 38, 0.1);
-    border-radius: var(--br);
-    padding: 1rem 0.8rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.contactSubtitle {
+  margin: 1rem 0 0.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-color-light);
+  line-height: 1;
+  letter-spacing: 0.01em;
 
-    @media (max-width: 768px) {
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    :global(html.dark) & {
-      background-color: #181c33;
-      color: rgb(226, 226, 226);
-      border: 1px solid rgba(248, 248, 248, 0.3);
-      box-shadow: 0 4px 8px rgba(250, 81, 166, 0.2);
-    }
-    
-  .info {
-    color: var(--text-color-light);
-    font-size: 1.1rem;
-    flex: 1;
-
-    @media (max-width: 768px) {
-      font-size: 1rem;
-    }
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
+}
 
-  .icon {
-    width: 22px;
-    height: 22px;
-    margin-right: 10px;
-    color: var(--primary-color);
+.contactDescription {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-color-light);
+  line-height: 1;
+  letter-spacing: 0.01em;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1rem 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    padding:  0;
+  }
+}
+
+.contactMethods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.contactCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: var(--borderC);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+
+  :global(html.dark) & {
+    border-color: rgba(235, 145, 220, 0.15);
   }
 
   &:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    border: 1px solid rgba(240, 4, 122, 0.3);
+    border: var(--borderA);
+
+    :global(html.dark) & {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .cardIcon {
+      color: var(--primary-color);
+
+      :global(html.dark) & {
+        color: #ccc;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.cardIcon {
+  color: var(--primary-color);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+  stroke-width: 1.5;
+
+  :global(html.dark) & {
+    color: #aaa;
+  }
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  line-height: 1.4;
+
+  :global(html.dark) & {
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+}
+
+.cardSubtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-color-light);
+  line-height: 1.4;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
   }
 }
 
 .copyButton {
   background: none;
   border: none;
-  padding: 8px;
+  padding: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 8px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-color-light);
   opacity: 0.7;
+  flex-shrink: 0;
 
   &:hover {
     background-color: rgba(245, 84, 165, 0.1);
@@ -128,43 +212,6 @@
   }
 }
 
-.highlight {
-  margin-top: 3rem;
-
-  @media (max-width: 768px) {
-    margin-top: 0
-  }
-}
-
 .copyIcon {
-  transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-
-.contactSection{
-  padding: 0rem 0.5rem;
-}
-
-.contactSectionContainer {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0;
-    height: auto;
-  }
-
-  .contactSubtitle{
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .contactFirst {
-    width: 100%;
-  }
-
-  .contactSecond {
-    display: flex;
-    flex-direction: column;
-  }
-
+  transition: all 0.2s ease;
 }

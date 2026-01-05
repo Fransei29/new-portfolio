@@ -1,15 +1,14 @@
 import styles from './Contact.module.scss';
-import ContactForm from '../ContactForm/ContactForm';
-import { MdEmail } from 'react-icons/md';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Copy, Check } from 'lucide-react';
+import { Mail, Github, Linkedin, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useScrollAnimation } from '../../hooks/Scroll';
 import '../../app/globals.css'
 
 const ContactSection = () => {
   const [copied, setCopied] = useState(false);
   const { t } = useLanguage();
+  const elementsRef = useScrollAnimation();
 
   const copyToClipboard = async () => {
     try {
@@ -21,58 +20,82 @@ const ContactSection = () => {
     }
   };
 
+  const openEmail = () => {
+    window.location.href = 'mailto:seilerfranco317@gmail.com';
+  };
+
   return (
     <div className={styles.contactSectionContainer}> 
       <div className={styles.contactSection}>
-        <div className={styles.contactFirst}>
-          <p className={styles.highlight}>
-            {t('contact.title')}
-          </p>
-          <p className={styles.contactSubtitle}>
-            {t('contact.subtitle')}
-          </p>
-          <p className={styles.contactSubtitle}>
-            {t('contact.description')}
-            <strong> {t('contact.reachOut')}</strong>
-          </p>
+        <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
+          <div className={styles.contactFirst}>
+            <p className={styles.contactSubtitle}>
+              {t('contact.subtitle')}
+            </p>
+            <p className={styles.contactDescription}>
+              {t('contact.description')}
+              <strong> {t('contact.reachOut')}</strong>
+            </p>
+          </div>
+        </section>
 
-          <div className={styles.contactSecond}>
-          {/* CONTACT METHODS */}
-          <div className={styles.contactMethods}>
-            <div className={styles.methods}>
-              <div className={styles.method}>
-                <MdEmail className={styles.icon} />
-                <span className={styles.info} >{t('contact.email')}</span>
+        <div className={styles.contactGrid}>
+          <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-right">
+            <div className={styles.contactMethods}>
+              <div 
+                className={styles.contactCard}
+                onClick={openEmail}
+              >
+                <div className={styles.cardContent}>
+                  <Mail className={styles.cardIcon} size={24} />
+                  <div className={styles.cardInfo}>
+                    <h3 className={styles.cardTitle}>{t('contact.email')}</h3>
+                    <p className={styles.cardSubtitle}>seilerfranco317@gmail.com</p>
+                  </div>
+                </div>
                 <button 
                   className={styles.copyButton}
-                  onClick={copyToClipboard}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    copyToClipboard();
+                  }}
                   title={t('contact.copyEmail')}
                 >
                   {copied ? (
-                    <Check className={styles.copyIcon} size={16} />
+                    <Check className={styles.copyIcon} size={18} />
                   ) : (
-                    <Copy className={styles.copyIcon} size={16} />
+                    <Copy className={styles.copyIcon} size={18} />
                   )}
                 </button>
               </div>
               
-              <div className={styles.method} onClick={() => window.open('https://github.com/Fransei29', '_blank')}>
-                <FaGithub className={styles.icon} />
-                <span className={styles.info}>GitHub</span>
+              <div 
+                className={styles.contactCard}
+                onClick={() => window.open('https://github.com/Fransei29', '_blank')}
+              >
+                <div className={styles.cardContent}>
+                  <Github className={styles.cardIcon} size={24} />
+                  <div className={styles.cardInfo}>
+                    <h3 className={styles.cardTitle}>GitHub</h3>
+                    <p className={styles.cardSubtitle}>@Fransei29</p>
+                  </div>
+                </div>
               </div>
 
-              <div className={styles.method} onClick={() => window.open('https://www.linkedin.com/in/franco-seiler/', '_blank')}>
-                <FaLinkedin className={styles.icon} />
-                <span className={styles.info}>LinkedIn</span>
+              <div 
+                className={styles.contactCard}
+                onClick={() => window.open('https://www.linkedin.com/in/franco-seiler/', '_blank')}
+              >
+                <div className={styles.cardContent}>
+                  <Linkedin className={styles.cardIcon} size={24} />
+                  <div className={styles.cardInfo}>
+                    <h3 className={styles.cardTitle}>LinkedIn</h3>
+                    <p className={styles.cardSubtitle}>franco-seiler</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className={styles.contactForm}>
-            <ContactForm />
-          </div>
-          
-          </div> 
+          </section>
         </div>
       </div>
     </div>

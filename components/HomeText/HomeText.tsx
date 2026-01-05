@@ -27,14 +27,19 @@ const HomeText: React.FC = () => {
             {t('hero.cta.projects')}
             <HiArrowRight className={styles.arrow} />
           </Link>
-          <Link href="/contact" className={styles.btnSecondary}>
+          <a 
+            href="https://calendly.com/seilerfranco317/30min" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.btnSecondary}
+          >
             {t('hero.cta.contact')}
             <HiArrowRight className={styles.arrow} />
-          </Link>
-          <Link href="/bootcamp" className={styles.btnTertiary}>
+          </a>
+          {/* <Link href="/bootcamp" className={styles.btnTertiary}>
             {t('hero.cta.bootcamp')}
             <HiArrowRight className={styles.arrow} />
-          </Link>
+          </Link> */}
         </div>
     </section>
   </section>

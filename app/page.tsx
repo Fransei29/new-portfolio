@@ -62,8 +62,6 @@ export default function Home() {
     </section>
 
 
-      
-
       <section className="containerGeneral">
          
          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
@@ -92,7 +90,7 @@ export default function Home() {
             <div className='buttonContainer'>
               <Button
                 text={t('aboutPage.buttonText') ?? ''}
-                href="/contact"
+                href="/about"
                 label={t('aboutPage.buttonLabel') ?? ''}
               />
             </div>

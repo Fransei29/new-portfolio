@@ -17,17 +17,31 @@
 }
 
 @media (max-width: 768px) {
+    .projectsSectionContainer{
+        background-color: transparent;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
     .projectsSection{
         background-color: transparent;
         width: 100%;
+        max-width: 100%;
         display: flex;
         flex-direction: column;
-        padding: 0rem 0.5rem;
+        padding: 0;
         margin: 0;
         height: auto;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
-    .projectsSectionContainer{
-        background-color: transparent;
+    .highlight {
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
     }
 }
