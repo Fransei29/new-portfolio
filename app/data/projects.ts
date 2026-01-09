@@ -137,6 +137,67 @@ export const projects = [
     liveDemoLink: 'https://property-recommenderv2.vercel.app/'
   },
   {
+    slug: 'event-scheduler',
+    title: 'Event Scheduler',
+    subtitle: 'Event Booking & Venue Management Platform',
+    whatIs: `
+      Event Scheduler is a full-stack platform that connects event organizers with venues (event spaces).
+      The platform includes two interfaces: an administration portal for venues to configure their spaces through a 13-step onboarding process with validation and auto-save, and a public website where users can discover, configure, and book spaces for their events.
+      Features include space and amenities management, real-time price calculation, interactive map integration with Leaflet, image galleries with Google Cloud Storage, customizable catering packages, preferred vendor management, policy and restrictions system, contract management and visualization (PDF, Word, SVG) with terms acceptance, payment processing with Stripe and credit/debit cards, auto-save with data loss protection, real-time validation on all forms, accessibility system (ADA/ACA compliance), schedule and availability management, event coordination, complete preview before finalizing, and fully responsive design.
+    `,
+    problemSolved: `
+      The event space booking market lacks comprehensive platforms that facilitate both venue management and booking experience for clients.
+      Event Scheduler solves this problem by offering a dual system that allows venue owners to completely configure their spaces through a guided step-by-step process with validation and auto-save, while event organizers can discover and book spaces intuitively, with detailed information about capacity, amenities, prices, availability, policies, and contracts, all in a single platform with secure payment processing.
+    `,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'SCSS',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'TypeORM',
+      'Framer Motion',
+      'Leaflet',
+      'Google Cloud Storage',
+      'Stripe',
+      'Jest',
+      'React Testing Library',
+      'Playwright',
+      'Vercel'
+    ],
+    learnings: [
+      'Built a full-stack platform with Next.js, React, and TypeScript for type safety and optimal performance.',
+      'Developed a complex 13-step onboarding process with real-time validation and auto-save functionality.',
+      'Integrated Stripe for secure payment processing with credit and debit cards.',
+      'Implemented interactive maps with Leaflet for venue location visualization.',
+      'Created a comprehensive contract management system supporting PDF, Word, and SVG formats.',
+      'Developed real-time price calculation based on space, amenities, and catering packages.',
+      'Implemented Google Cloud Storage for efficient image and document management.',
+      'Built accessibility features ensuring ADA/ACA compliance throughout the platform.',
+      'Created comprehensive testing suite with Jest, React Testing Library, and Playwright.',
+      'Designed a dual-interface system (admin portal and public website) with shared components.',
+      'Implemented auto-save functionality to prevent data loss during form completion.',
+      'Developed a complete event coordination system with availability management.'
+    ],
+    screenshots: [
+      '/img/EventA.webp',
+      '/img/EventB.webp',
+      '/img/EventC.webp',
+      '/img/EventD.webp',
+      '/img/EventE.webp',
+      '/img/EventF.webp',
+      '/img/EventG.webp',
+      '/img/EventH.webp',
+      '/img/EventI.webp',
+      '/img/EventJ.webp',
+      '/img/EventK.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: '',
+  },
+  {
     slug: 'the-club-northfield',
     title: 'The Club at Northfield',
     subtitle: 'Corporate Website for Sports & Fitness Club - Ontario, Canada',

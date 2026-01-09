@@ -58,6 +58,16 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
     },
     {
+      slug: 'event-scheduler',
+      title: t('projects.items.event-scheduler.title'),
+      isTutorial: false,
+      description: t('projects.items.event-scheduler.description'),
+      link2: null,
+      link3: '',
+      previewImage: '/img/EventA.webp',
+      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
+    },
+    {
       slug: 'the-club-northfield',
       title: t('projects.items.the-club-northfield.title'),
       isTutorial: false,

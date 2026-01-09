@@ -235,6 +235,27 @@
           "Diseñé componentes modulares para fácil mantenimiento.",
           "Creé un sistema de navegación intuitivo para mejor experiencia de usuario."
         ]
+      },
+      "event-scheduler": {
+        "title": "Event Scheduler",
+        "subtitle": "Plataforma de Reserva de Eventos y Gestión de Venues",
+        "description": "Event Scheduler es una plataforma full-stack que conecta organizadores de eventos con venues (espacios para eventos).\nLa plataforma incluye dos interfaces: un portal de administración para que los venues configuren sus espacios mediante un proceso de onboarding de 13 pasos, y un sitio web público donde los usuarios pueden descubrir, configurar y reservar espacios para sus eventos.\nLas características incluyen gestión de espacios y amenidades, cálculo de precios en tiempo real, integración de mapas interactivos, galerías de imágenes, paquetes de catering personalizables, gestión de proveedores preferidos, sistema de políticas y restricciones, gestión y visualización de contratos (PDF, Word, SVG) con aceptación de términos, procesamiento de pagos con Stripe y tarjetas de crédito/débito, auto-guardado con protección contra pérdida de datos, validación en tiempo real en todos los formularios, sistema de accesibilidad (ADA/ACA compliance), gestión de horarios y disponibilidad, coordinación de eventos, preview completo antes de finalizar, y diseño responsivo.",
+        "whatIs": "Event Scheduler es una plataforma full-stack que conecta organizadores de eventos con venues (espacios para eventos).\nLa plataforma incluye dos interfaces: un portal de administración para que los venues configuren sus espacios mediante un proceso de onboarding de 13 pasos con validación y auto-guardado, y un sitio web público donde los usuarios pueden descubrir, configurar y reservar espacios para sus eventos.\nLas características incluyen gestión de espacios y amenidades, cálculo de precios en tiempo real, integración de mapas interactivos con Leaflet, galerías de imágenes con Google Cloud Storage, paquetes de catering personalizables, gestión de proveedores preferidos, sistema de políticas y restricciones, gestión y visualización de contratos (PDF, Word, SVG) con aceptación de términos, procesamiento de pagos con Stripe y tarjetas de crédito/débito, auto-guardado con protección contra pérdida de datos, validación en tiempo real en todos los formularios, sistema de accesibilidad (ADA/ACA compliance), gestión de horarios y disponibilidad, coordinación de eventos, preview completo antes de finalizar, y diseño completamente responsivo.",
+        "problemSolved": "El mercado de reserva de espacios para eventos carece de plataformas integrales que faciliten tanto la gestión de venues como la experiencia de reserva para clientes.\nEvent Scheduler resuelve este problema al ofrecer un sistema dual que permite a los propietarios de venues configurar completamente sus espacios mediante un proceso guiado paso a paso con validación y auto-guardado, mientras que los organizadores de eventos pueden descubrir y reservar espacios de manera intuitiva, con información detallada sobre capacidad, amenidades, precios, disponibilidad, políticas y contratos, todo en una sola plataforma con procesamiento de pagos seguro.",
+        "learnings": [
+          "Construí una plataforma full-stack con Next.js, React y TypeScript para seguridad de tipos y rendimiento óptimo.",
+          "Desarrollé un proceso de onboarding complejo de 13 pasos con validación en tiempo real y funcionalidad de auto-guardado.",
+          "Integré Stripe para procesamiento seguro de pagos con tarjetas de crédito y débito.",
+          "Implementé mapas interactivos con Leaflet para visualización de ubicación de venues.",
+          "Creé un sistema integral de gestión de contratos que soporta formatos PDF, Word y SVG.",
+          "Desarrollé cálculo de precios en tiempo real basado en espacio, amenidades y paquetes de catering.",
+          "Implementé Google Cloud Storage para gestión eficiente de imágenes y documentos.",
+          "Construí características de accesibilidad asegurando cumplimiento ADA/ACA en toda la plataforma.",
+          "Creé una suite completa de pruebas con Jest, React Testing Library y Playwright.",
+          "Diseñé un sistema de doble interfaz (portal de administración y sitio web público) con componentes compartidos.",
+          "Implementé funcionalidad de auto-guardado para prevenir pérdida de datos durante la completación de formularios.",
+          "Desarrollé un sistema completo de coordinación de eventos con gestión de disponibilidad."
+        ]
       }
     }
   },
