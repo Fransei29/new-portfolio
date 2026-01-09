@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss'; 
 
 // Definir tipos para el formulario
