@@ -184,6 +184,57 @@
           "Estilicé la aplicación con Tailwind CSS.",
           "Me enfoqué en la experiencia del usuario y optimización de conversión."
         ]
+      },
+      "lexmax": {
+        "title": "LexMax",
+        "subtitle": "Plataforma de Gestión Judicial",
+        "description": "Una plataforma web para la gestión de expedientes judiciales que automatiza tareas y mejora la productividad de estudios jurídicos.\nIncluye gestión de expedientes, cédulas y operaciones, seguimiento de eventos con IA, gestión de escritos, notificaciones por Gmail y Telegram, filtros avanzados, dashboard con estadísticas y gráficos, y un sistema de autenticación seguro.\nLa plataforma centraliza la información judicial y facilita el seguimiento de casos.",
+        "whatIs": "LEXMAX es una plataforma web para la gestión de expedientes judiciales que automatiza tareas y mejora la productividad de estudios jurídicos.\nIncluye gestión integral de expedientes, seguimiento de cédulas y operaciones, monitoreo de eventos con IA que detecta eventos relevantes y sugiere acciones, gestión de escritos, notificaciones automatizadas vía Gmail y Telegram, filtros avanzados y capacidades de búsqueda, un dashboard con estadísticas y gráficos, y un sistema de autenticación seguro.\nLa plataforma centraliza toda la información judicial y facilita el seguimiento eficiente de casos.",
+        "problemSolved": "Los estudios jurídicos enfrentan dificultades para organizar y seguir expedientes, cédulas y operaciones.\nLEXMAX resuelve esto centralizando la información, automatizando notificaciones, usando IA para detectar eventos relevantes y proponer acciones, y ofreciendo filtros avanzados y búsquedas para encontrar información rápidamente, mejorando la eficiencia y reduciendo errores.",
+        "learnings": [
+          "Construí una aplicación full-stack con React y Vite para un rendimiento óptimo.",
+          "Implementé autenticación segura usando tokens JWT.",
+          "Integré capacidades de IA para detección inteligente de eventos y sugerencias de acciones.",
+          "Desarrollé sistemas de notificación automatizados con Google OAuth y API de Telegram.",
+          "Creé funcionalidad avanzada de filtrado y búsqueda para recuperación eficiente de datos.",
+          "Construí un dashboard integral con estadísticas y visualización de datos.",
+          "Diseñé una arquitectura escalable con Node.js y Express en el backend.",
+          "Implementé diseño responsive con SCSS para una experiencia de usuario óptima."
+        ]
+      },
+      "lexmax-landing": {
+        "title": "LexMax Landing",
+        "subtitle": "Landing Page de Automatización Legal",
+        "description": "LEXMAX es una landing page profesional para una plataforma de automatización jurídica que conecta despachos legales con soluciones tecnológicas inteligentes.\nLa página presenta servicios de automatización legal, incluyendo gestión de expedientes, bots inteligentes, generación de escritos masivos y análisis con IA.\nLas características incluyen sección hero con estadísticas de impacto, presentación de 6 servicios principales, sección sobre la empresa con propósito y visión, formulario de contacto interactivo con funcionalidad de copiar datos, navegación responsive con menú hamburguesa, diseño moderno con efectos visuales y componentes modulares reutilizables.",
+        "whatIs": "LEXMAX es una landing page profesional para una plataforma de automatización jurídica que conecta despachos legales con soluciones tecnológicas inteligentes.\nLa página presenta servicios de automatización legal, incluyendo gestión de expedientes, bots inteligentes, generación de escritos masivos y análisis con IA.\nLas características incluyen sección hero con estadísticas de impacto, presentación de 6 servicios principales, sección sobre la empresa con propósito y visión, formulario de contacto interactivo con funcionalidad de copiar datos, navegación responsive con menú hamburguesa, diseño moderno con efectos visuales y componentes modulares reutilizables.",
+        "problemSolved": "El sector legal tradicional carece de presencia digital efectiva para comunicar soluciones tecnológicas innovadoras.\nLEXMAX resuelve este problema al proporcionar una landing page que presenta de manera clara y profesional las capacidades de automatización legal, facilitando la conversión de visitantes en clientes potenciales mediante un diseño atractivo, información estructurada y call-to-actions estratégicos que destacan los beneficios de la plataforma.",
+        "learnings": [
+          "Construí una landing page moderna con Next.js para SEO y rendimiento óptimos.",
+          "Implementé diseño responsive con Tailwind CSS y SCSS para estilos flexibles.",
+          "Creé un formulario de contacto interactivo con funcionalidad de copiar al portapapeles.",
+          "Diseñé una sección hero con estadísticas animadas e impacto visual.",
+          "Desarrollé componentes modulares reutilizables para una estructura de código mantenible.",
+          "Implementé navegación responsive con menú hamburguesa para dispositivos móviles.",
+          "Creé efectos visuales y animaciones para mejorar la participación del usuario.",
+          "Optimicé el rendimiento de la página y tiempos de carga con optimizaciones de Next.js."
+        ]
+      },
+      "the-club-northfield": {
+        "title": "The Club at Northfield",
+        "subtitle": "Sitio Web Corporativo para Club Deportivo - Ontario, Canada",
+        "description": "Sitio web corporativo para The Club at Northfield, un club de deportes de raqueta y fitness en Kitchener-Waterloo, Ontario, Canadá.\nIncluye integración con CMS para gestión de contenido, sistema de eventos dinámico, secciones de servicios y atletismo, planes de membresía, FAQ interactiva y diseño responsivo.\nEl sitio está optimizado para exportación estática y ofrece una experiencia de usuario fluida con carruseles de banners, navegación intuitiva y componentes modulares.",
+        "whatIs": "Sitio web corporativo para The Club at Northfield, un club de deportes de raqueta y fitness en Kitchener-Waterloo, Ontario, Canadá.\nIncluye integración con CMS Strapi para gestión de contenido, sistema de eventos dinámico, secciones de servicios y atletismo, planes de membresía, FAQ interactiva y diseño completamente responsivo.\nEl sitio está optimizado para exportación estática y ofrece una experiencia de usuario fluida con carruseles de banners, navegación intuitiva y componentes modulares que aseguran actualizaciones de contenido fáciles sin intervención técnica.",
+        "problemSolved": "Crear una presencia web que muestre las instalaciones, servicios y eventos del club, facilitando la información a miembros y visitantes.\nEl sitio integra un CMS para que el equipo actualice contenido sin intervención técnica, manteniendo la información actualizada sobre eventos, servicios, planes de membresía y el equipo.",
+        "learnings": [
+          "Construí un sitio web corporativo con Next.js para rendimiento y SEO óptimos.",
+          "Integré Strapi CMS para gestión de contenido headless.",
+          "Creé un sistema de eventos dinámico con actualizaciones automáticas.",
+          "Desarrollé diseño responsive con Tailwind CSS y SCSS.",
+          "Implementé carruseles de banners y componentes interactivos.",
+          "Optimicé para exportación estática y tiempos de carga rápidos.",
+          "Diseñé componentes modulares para fácil mantenimiento.",
+          "Creé un sistema de navegación intuitivo para mejor experiencia de usuario."
+        ]
       }
     }
   },

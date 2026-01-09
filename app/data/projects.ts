@@ -47,6 +47,54 @@ export const projects = [
     liveDemoLink: 'https://starton.it.com/',
   },
   {
+    slug: 'lexmax',
+    title: 'LexMax',
+    subtitle: 'Judicial Case Management Platform',
+    whatIs: `
+      LEXMAX is a web platform for managing judicial case files that automates tasks and improves productivity for law firms.
+      It includes comprehensive case file management, legal notices and operations tracking, AI-powered event monitoring that detects relevant events and suggests actions, document management, automated notifications via Gmail and Telegram, advanced filters and search capabilities, a dashboard with statistics and charts, and a secure authentication system.
+      The platform centralizes all judicial information and facilitates efficient case tracking.
+    `,
+    problemSolved: `
+      Law firms face difficulties organizing and tracking case files, legal notices, and operations.
+      LEXMAX solves this by centralizing information, automating notifications, using AI to detect relevant events and suggest actions, and offering advanced filters and search capabilities to quickly find information, improving efficiency and reducing errors.
+    `,
+    techStack: [
+      'React',
+      'Vite',
+      'SCSS',
+      'React Router',
+      'Axios',
+      'Node.js',
+      'Express',
+      'JWT',
+      'AI Integration',
+      'Google OAuth (Gmail)',
+      'Telegram API'
+    ],
+    learnings: [
+      'Built a full-stack application with React and Vite for optimal performance.',
+      'Implemented secure authentication using JWT tokens.',
+      'Integrated AI capabilities for intelligent event detection and action suggestions.',
+      'Developed automated notification systems with Gmail OAuth and Telegram API.',
+      'Created advanced filtering and search functionality for efficient data retrieval.',
+      'Built a comprehensive dashboard with statistics and data visualization.',
+      'Designed a scalable architecture with Node.js and Express backend.',
+      'Implemented responsive design with SCSS for optimal user experience.'
+    ],
+    screenshots: [
+      '/img/LexA.webp',
+      '/img/LexB.webp',
+      '/img/LexC.webp',
+      '/img/LexD.webp',
+      '/img/LexE.webp',
+      '/img/LexF.webp',
+      '/img/LexG.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: '',
+  },
+  {
     slug: 'property-recommender',
     title: 'Property Recommender',
     subtitle: 'Property Recommendation System',
@@ -87,6 +135,90 @@ export const projects = [
     videoUrl: '/videos/HABITA.mp4',
     githubLink: 'https://github.com/Fransei29/property-recommenderv2',
     liveDemoLink: 'https://property-recommenderv2.vercel.app/'
+  },
+  {
+    slug: 'the-club-northfield',
+    title: 'The Club at Northfield',
+    subtitle: 'Corporate Website for Sports & Fitness Club - Ontario, Canada',
+    whatIs: `
+      Corporate website for The Club at Northfield, a racquet sports and fitness club in Kitchener-Waterloo, Ontario, Canada.
+      Includes CMS integration with Strapi for content management, dynamic event system, services and athletics sections, membership plans, interactive FAQ, and fully responsive design.
+      The site is optimized for static export and offers a smooth user experience with banner carousels, intuitive navigation, and modular components that ensure easy content updates without technical intervention.
+    `,
+    problemSolved: `
+      Create a web presence that showcases the club's facilities, services, and events, making information easily accessible to members and visitors.
+      The site integrates a CMS so the team can update content without technical intervention, keeping information current about events, services, membership plans, and the team.
+    `,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'SCSS',
+      'Tailwind CSS',
+      'Strapi CMS',
+      'Vercel'
+    ],
+    learnings: [
+      'Built a corporate website with Next.js for optimal performance and SEO.',
+      'Integrated Strapi CMS for headless content management.',
+      'Created a dynamic event system with automatic updates.',
+      'Developed responsive design with Tailwind CSS and SCSS.',
+      'Implemented banner carousels and interactive components.',
+      'Optimized for static export and fast loading times.',
+      'Designed modular components for easy maintenance.',
+      'Created an intuitive navigation system for better user experience.'
+    ],
+    screenshots: [
+      '/img/GymA.webp',
+      '/img/GymB.webp',
+      '/img/GymC.webp',
+      '/img/GymD.webp',
+      '/img/GymE.webp',
+      '/img/GymF.webp',
+      '/img/GymG.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://www.theclubatnorthfield.com/',
+  },
+  {
+    slug: 'lexmax-landing',
+    title: 'LexMax Landing',
+    subtitle: 'Legal Automation Landing Page',
+    whatIs: `
+      LEXMAX is a professional landing page for a legal automation platform that connects law firms with intelligent technological solutions.
+      The page presents legal automation services, including case file management, intelligent bots, massive document generation, and AI-powered analysis.
+      Features include a hero section with impact statistics, presentation of 6 main services, company section with purpose and vision, interactive contact form with copy functionality, responsive navigation with hamburger menu, modern design with visual effects, and reusable modular components.
+    `,
+    problemSolved: `
+      The traditional legal sector lacks effective digital presence to communicate innovative technological solutions.
+      LEXMAX solves this problem by providing a landing page that clearly and professionally presents legal automation capabilities, facilitating the conversion of visitors into potential clients through an attractive design, structured information, and strategic call-to-actions that highlight the platform's benefits.
+    `,
+    techStack: [
+      'Next.js',
+      'React',
+      'SCSS',
+      'Tailwind CSS',
+      'React Icons'
+    ],
+    learnings: [
+      'Built a modern landing page with Next.js for optimal SEO and performance.',
+      'Implemented responsive design with Tailwind CSS and SCSS for flexible styling.',
+      'Created an interactive contact form with copy-to-clipboard functionality.',
+      'Designed a hero section with animated statistics and visual impact.',
+      'Developed reusable modular components for maintainable code structure.',
+      'Implemented responsive navigation with hamburger menu for mobile devices.',
+      'Created visual effects and animations to enhance user engagement.',
+      'Optimized page performance and loading times with Next.js optimizations.'
+    ],
+    screenshots: [
+      '/img/WebA.webp',
+      '/img/WebB.webp',
+      '/img/WebC.webp',
+      '/img/WebE.webp',
+      '/img/WebF.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://lexmaxsoluciones.com/',
   },  
   {
     slug: 'ecommerce',

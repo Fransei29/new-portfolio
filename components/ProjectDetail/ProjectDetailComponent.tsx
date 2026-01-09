@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ProjectDetailComponent.module.scss';
-import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -179,11 +179,15 @@ export default function ProjectDetailComponent({
               )}
             </div>
             <div className={styles.links}>
-              {githubLink && (
+              {githubLink ? (
                 <a href={githubLink} target="_blank" rel="noopener noreferrer">
                   {t('projects.githubRepository')}  <Github className={styles.iconSmall}  />
                 </a>
-              )}
+              ) : githubLink === null || githubLink === '' ? (
+                <div className={styles.privateLink} title="Código privado">
+                  {t('projects.githubRepository')}  <Lock className={styles.iconSmall} />
+                </div>
+              ) : null}
               {liveDemoLink && (
                 <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
                   {t('projects.liveDemo')}  <ExternalLink className={styles.iconSmall} />

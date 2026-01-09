@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FileText, Github, ExternalLink } from 'lucide-react';
+import { FileText, Github, ExternalLink, Lock } from 'lucide-react';
 import { HiArrowRight } from 'react-icons/hi';
 import styles from './ProjectCard.module.scss';
 import React, { JSX, useState } from 'react';
@@ -69,7 +69,7 @@ interface Project {
   icon?: string;
   previewImage?: string;
   link1?: string;
-  link2?: string;
+  link2?: string | null;
   link3?: string;
   technologies?: string[];
 }
@@ -146,11 +146,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                   <FileText className={styles.iconSmall} size={18} />
                 </a>
               )}
-              {project.link2 && (
+              {project.link2 ? (
                 <a href={project.link2} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                   <Github className={styles.iconSmall} size={18} />
                 </a>
-              )}
+              ) : project.link2 === null ? (
+                <div className={styles.privateButton} title="Código privado">
+                  <Lock className={styles.iconSmall} size={18} />
+                </div>
+              ) : null}
               {project.link3 && (
                 <a href={project.link3} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                   <ExternalLink className={styles.iconSmall} size={18} />
