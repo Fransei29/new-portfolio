@@ -11,7 +11,181 @@
     "tutorials": "Tutorials",
     "goToProjects": "View All Projects",
     "goToTutorials": "View All Tutorials",
-    "back": "Back"
+    "back": "Back",
+    "overview": "Overview",
+    "goal": "Goal",
+    "builtWith": "Built With",
+    "githubRepository": "GitHub Repository",
+    "liveDemo": "Live Demo",
+    "items": {
+      "starton": {
+        "title": "StartOn ",
+        "subtitle": "Talent-Startup Connection Platform",
+        "description": "A comprehensive talent-startup connection platform featuring multi-role dashboards, internal messaging, and advanced networking capabilities.\nBuilt with Next.js 15 and React 19 for optimal performance, TypeScript for type safety, and SCSS modules for scalable styling.\nIncludes Google OAuth authentication, Supabase backend with Edge Functions, and responsive design optimized for all devices.\nPerfect for connecting developers, designers, and tech professionals with innovative startups and companies.",
+        "whatIs": "StartOn is an innovative platform that connects developers, designers, and technology professionals with companies and startups seeking exceptional talent.\nThe platform democratizes access to quality job opportunities, facilitating professional growth and the development of innovative companies.\nFeatures include differentiated role-based dashboards, internal messaging system, founder networking, blogs, advanced filters, and responsive panels.",
+        "problemSolved": "The technology sector lacks reliable platforms that efficiently connect emerging talent with startups and companies.\nStartOn solves this problem by enabling students, founders, and companies to meet in a segmented, secure, and fast manner, fostering collaboration and professional growth.",
+        "learnings": [
+          "Implemented a multi-role system (students, founders, recruiters, startup workers) with differentiated authorization.",
+          "Google OAuth 2.0 and advanced JWT handling with automatic refresh.",
+          "Backend development in Supabase Edge Functions for efficiency and scalability.",
+          "Modular UI/UX component design with SCSS and reusable architecture in Next.js.",
+          "Persistent private messaging system and advanced filters by city, technology, and company type.",
+          "UX/UI optimization: mobile-first, smooth animations, scalable typography, and consistent color palette.",
+          "Implementation of blogs, service pages, and founder networking system."
+        ]
+      },
+      "property-recommender": {
+        "title": "Habita",
+        "subtitle": "Property Recommendation System",
+        "description": "A property recommendation system developed with Next.js 15 and TypeScript.\nUses modular SCSS for clean and scalable design.\nOptimized for performance and user experience.\nIdeal for real estate agencies, real estate startups, or as a base for customized recommendation products.",
+        "whatIs": "A web application that recommends real estate properties based on user preferences and similarity algorithms.\nIt allows users to filter, sort, and discover properties that match their needs through a clean and responsive interface.\nBuilt with Next.js 15 and TypeScript, featuring modular SCSS for scalable styling and optimized for fast loading and user experience.\nIncludes an admin panel where users can view and manage their favorite properties.",
+        "problemSolved": "Many real estate platforms overwhelm users with too many listings without effective filtering or personalized suggestions.\nThis app solves that by providing targeted recommendations, improving user satisfaction and decision-making efficiency.\nThe admin panel allows users to easily track and manage their favorite properties in one centralized location.",
+        "learnings": [
+          "Implemented recommendation logic using JSON data and client-side algorithms.",
+          "Built a scalable and maintainable frontend architecture with Next.js and TypeScript.",
+          "Applied modular SCSS for clean, reusable styling.",
+          "Optimized app performance and user experience through efficient data handling and UI design.",
+          "Created an admin panel for user property management and favorites tracking."
+        ]
+      },
+      "ecommerce": {
+        "title": "Quiero Sport",
+        "subtitle": "Modern E-Commerce Platform",
+        "description": "A comprehensive full-stack e-commerce platform featuring user authentication, product management, shopping cart functionality, and integration with Mercado Pago for payments.\nBuilt with React and Next.js for the frontend, TypeScript for type safety, and Prisma as the ORM for database interactions.\nThe application is containerized using Docker, ensuring consistent development and deployment environments.\nStyling is managed with Sass, providing modular and maintainable CSS.",
+        "whatIs": "A full e-commerce platform for sports gear with product browsing, cart management, and secure checkout.\nFeatures include user authentication (NextAuth.js), order storage (PostgreSQL & Prisma), backend API routes (Next.js 13), Dockerized local setup, and deployment on Vercel.",
+        "problemSolved": "Users struggled with slow, insecure, and inconsistent sports gear e-commerce sites.\nThis app delivers a fast, modern UX with secure authentication, reliable data handling (Prisma), and streamlined development (Docker).",
+        "learnings": [
+          "Built a full-stack Next.js app using server and client components.",
+          "Designed a relational database schema for e-commerce.",
+          "Implemented authentication with NextAuth.js.",
+          "Managed state and side effects with React hooks.",
+          "Used Prisma ORM for database operations.",
+          "Set up Docker for local development and deployed on Vercel."
+        ]
+      },
+      "healthcare-crm": {
+        "title": "Medicare ",
+        "subtitle": "Healthcare Treatment Management",
+        "description": "A mini healthcare CRM to manage patients, medications, and treatments with dynamic assignments.\nFrontend in Next.js with dark mode, validation, responsive design, and reusable components.\nRobust backend in NestJS with unit and integration tests, and relational database in Turso.",
+        "whatIs": "A full-stack web application to manage patients, medications, and treatment assignments in a digital healthcare workflow.\nIncludes dashboard views, reusable forms, input validation, dark mode, and a fully tested NestJS backend.\nBuilt with type safety, API integration, and modern UI/UX standards.",
+        "problemSolved": "Managing healthcare treatments manually is error-prone and inefficient.\nThis app simplifies the process by offering structured CRUD operations, assignment tracking, and automatic remaining days calculation for active treatments.\nEnsures reliability with full-stack validation and high test coverage.",
+        "learnings": [
+          "Developed a full-stack TypeScript app with decoupled frontend (Next.js) and backend (NestJS).",
+          "Designed relational DB schema with entities and foreign key relationships.",
+          "Built RESTful APIs with full validation and error handling using class-validator and NestJS pipes.",
+          "Used Turso SQLite with authentication tokens for cloud-hosted persistence.",
+          "Implemented client-side and server-side form validation with reusable components.",
+          "Tested core services and edge cases with unit and integration tests.",
+          "Designed a responsive, accessible UI with Tailwind and dark mode toggle.",
+          "Managed environment configuration for deployment across Render and Vercel."
+        ]
+      },
+      "taskmanager": {
+        "title": "Task Manager",
+        "subtitle": "Full Stack Task Management App",
+        "description": "An efficient task management application that allows users to create, edit, and delete tasks.\nIt includes user authentication to ensure personalized task management.\nThe frontend is developed with React and Next.js, utilizing Axios for API requests.\nThe backend leverages PostgreSQL as the relational database, interfaced through Sequelize ORM.\nStyling is handled with Sass for a clean and responsive UI.",
+        "whatIs": "A comprehensive task management application built with Next.js and PostgreSQL.\nFeatures include user authentication, CRUD operations for tasks, and a clean, intuitive interface.\nThe app uses NextAuth.js for secure authentication and Sequelize ORM for database operations.",
+        "problemSolved": "Users needed a simple yet powerful way to manage their tasks with secure authentication.\nThis app provides a reliable solution with user-specific task management, secure data storage,\nand a responsive design that works across all devices.",
+        "learnings": [
+          "Implemented user authentication with NextAuth.js.",
+          "Created a relational database schema for users and tasks.",
+          "Built RESTful API endpoints for CRUD operations.",
+          "Set up Docker for local development environment.",
+          "Implemented responsive design with CSS Modules.",
+          "Managed state and API calls with Axios."
+        ]
+      },
+      "flipper": {
+        "title": "Flipper",
+        "subtitle": "Twitter Clone Platform",
+        "description": "A Twitter-inspired social media application supporting functionalities like tweeting, following, and live updates.\nReal-time interactions are powered by WebSockets, ensuring responsiveness and high user engagement.\nThe backend is developed with Node.js and Express, utilizing Redis for efficient data storage and retrieval.\nThe frontend employs Tailwind CSS for rapid UI development.",
+        "whatIs": "A full-featured Twitter clone built with Node.js and Pug templates, styled with Tailwind CSS.\nFeatures include user authentication, real-time posts, likes, and comments.\nThe application uses a modern tech stack with Docker for containerization and Vercel for deployment.",
+        "problemSolved": "Users needed a social platform to share thoughts and interact with others.\nThis app provides a familiar Twitter-like experience with essential features\nlike posting, liking, and commenting, all wrapped in a clean, responsive interface.",
+        "learnings": [
+          "Built a full-stack application using Node.js and Express.",
+          "Implemented server-side rendering with Pug templates.",
+          "Created a responsive and interactive user interface.",
+          "Set up Docker for containerization and deployment.",
+          "Implemented real-time features for social interaction.",
+          "Deployed the application on Vercel."
+        ]
+      },
+      "vestire": {
+        "title": "Vestiré",
+        "subtitle": "Fashion E-Commerce Platform",
+        "description": "An e-commerce platform specializing in clothing, offering a wide selection of products with intuitive navigation and a seamless checkout process.\nThe frontend is built with React, while the backend utilizes Node.js and Express for server-side operations.\nAxios is used for handling HTTP requests, and PostgreSQL serves as the database.\nThe application includes user authentication to manage user sessions and orders.",
+        "whatIs": "A sleek and modern e-commerce platform for fashion and accessories, built with React and styled with CSS.\nFeatures include user authentication, product browsing, shopping cart functionality, and a clean, responsive design.\nThe application showcases a collection of clothing items, sneakers, and accessories with detailed product information.\nIncludes secure user authentication and session management for a personalized shopping experience.",
+        "problemSolved": "Local fashion retailers needed a modern online presence to reach customers.\nThis app provides an elegant solution with an intuitive shopping experience,\nshowcasing products with high-quality images and detailed descriptions.\nSecure authentication ensures users can safely manage their accounts and orders.",
+        "learnings": [
+          "Built a responsive e-commerce interface with React.",
+          "Implemented secure user authentication with JWT.",
+          "Created an intuitive product browsing experience.",
+          "Developed RESTful APIs with Node.js and Express.",
+          "Managed database operations with PostgreSQL.",
+          "Deployed the application on Vercel.",
+          "Implemented modern UI/UX practices."
+        ]
+      },
+      "trip-planner": {
+        "title": "Trip Planner",
+        "subtitle": "Travel Planning Application",
+        "description": "An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.",
+        "whatIs": "An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.",
+        "problemSolved": "Planning trips can be overwhelming with multiple tools and scattered information.\nThis app centralizes trip planning, making it easy to organize itineraries, manage travel details,\nand access everything in one convenient location.",
+        "learnings": [
+          "Built a full-stack application with React and Node.js.",
+          "Implemented MongoDB for flexible data storage.",
+          "Created intuitive trip management features.",
+          "Developed RESTful APIs with Express.",
+          "Managed HTTP requests with Axios.",
+          "Designed a user-friendly interface for travel planning."
+        ]
+      },
+      "dynamic-blog": {
+        "title": "Dynamic Blog",
+        "subtitle": "RSS Feed Blog Application",
+        "description": "A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable.\nFeatures include dynamic routing, user blog management, and a clean, responsive design.\nBuilt with Next.js for server-side rendering and Tailwind CSS for styling.\nThe application parses RSS feeds and integrates with Airtable's API to manage content.",
+        "whatIs": "A responsive blog application that fetches posts from an RSS feed (TechCrunch) and user-generated content from Airtable.\nFeatures include dynamic routing, user blog management, and a clean, responsive design.\nBuilt with Next.js for server-side rendering and Tailwind CSS for styling.\nThe application parses RSS feeds and integrates with Airtable's API to manage content.",
+        "problemSolved": "Content creators and readers needed a unified platform to access both external RSS feeds and custom blog content.\nThis app provides a seamless experience by combining RSS feed parsing with Airtable integration,\nallowing users to manage and display content from multiple sources in one place.",
+        "learnings": [
+          "Implemented RSS feed parsing and integration.",
+          "Integrated Airtable API for content management.",
+          "Built dynamic routing with Next.js.",
+          "Created a responsive design with Tailwind CSS.",
+          "Managed server-side rendering for optimal performance.",
+          "Developed a clean and intuitive user interface."
+        ]
+      },
+      "holistic-portal": {
+        "title": "Holistic Portal",
+        "subtitle": "Alternative Therapies Website",
+        "description": "An informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options.\nIt focuses on user interaction and professional presentation.\nThe site is built with HTML and CSS, utilizing Sass for enhanced styling capabilities.",
+        "whatIs": "An informative website showcasing alternative therapies, offering descriptions, client testimonials, and booking options.\nIt focuses on user interaction and professional presentation.\nThe site is built with HTML and CSS, utilizing Sass for enhanced styling capabilities.",
+        "problemSolved": "Alternative therapy practitioners needed a professional online presence to showcase their services and connect with clients.\nThis website provides an elegant solution with clear service descriptions, client testimonials,\nand easy booking options, all presented in a clean and professional design.",
+        "learnings": [
+          "Built a static website with HTML and CSS.",
+          "Utilized Sass for enhanced styling capabilities.",
+          "Created a professional and informative design.",
+          "Implemented client testimonials and booking features.",
+          "Focused on user experience and professional presentation."
+        ]
+      },
+      "greengrocery": {
+        "title": "Greengrocery",
+        "subtitle": "Fresh Groceries Online Store",
+        "description": "An online store specializing in fresh groceries with a shopping cart and an optimized shopping experience.\nIt incorporates testing with Jest, ensuring smooth functionality and higher conversion rates for users.\nThe frontend is developed with React, utilizing Axios for API interactions and Tailwind CSS for styling.",
+        "whatIs": "An online store specializing in fresh groceries with a shopping cart and an optimized shopping experience.\nIt incorporates testing with Jest, ensuring smooth functionality and higher conversion rates for users.\nThe frontend is developed with React, utilizing Axios for API interactions and Tailwind CSS for styling.",
+        "problemSolved": "Customers needed a reliable and user-friendly platform to purchase fresh groceries online.\nThis app provides a seamless shopping experience with an intuitive interface, efficient cart management,\nand comprehensive testing to ensure reliability and user satisfaction.",
+        "learnings": [
+          "Built a responsive e-commerce interface with React.",
+          "Implemented comprehensive testing with Jest.",
+          "Created an optimized shopping cart experience.",
+          "Developed API interactions with Axios.",
+          "Styled the application with Tailwind CSS.",
+          "Focused on user experience and conversion optimization."
+        ]
+      }
+    }
   },
   "pages": {
     "projects": {

@@ -24,12 +24,12 @@ interface Projects {
 const Projects = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
   const elementsRef = useScrollAnimation();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('/api/projects');
+        const res = await fetch(`/api/projects?lang=${language}`);
         const data = await res.json();
         setProjects(data);
       } catch (error) {
@@ -38,7 +38,7 @@ const Projects = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [language]);
 
   return (
     <ClientLayout>

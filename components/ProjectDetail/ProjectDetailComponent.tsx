@@ -139,15 +139,15 @@ export default function ProjectDetailComponent({
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
             <div className={styles.overviewSection}>
-              <h2>Overview</h2>
+              <h2>{t('projects.overview')}</h2>
               <p>{whatIs}</p>
             </div>
             <div className={styles.goalSection}>
-              <h2>Goal</h2>
+              <h2>{t('projects.goal')}</h2>
               <p>{problemSolved}</p>
             </div>
             <div className={styles.builtWithSection}>
-              <h2>Built With</h2>
+              <h2>{t('projects.builtWith')}</h2>
               {techStack && techStack.length > 0 ? (
                 <div className={styles.techStackGrid}>
                   {techStack.map((tech, index) => {
@@ -181,12 +181,12 @@ export default function ProjectDetailComponent({
             <div className={styles.links}>
               {githubLink && (
                 <a href={githubLink} target="_blank" rel="noopener noreferrer">
-                  GitHub Repository  <Github className={styles.iconSmall}  />
+                  {t('projects.githubRepository')}  <Github className={styles.iconSmall}  />
                 </a>
               )}
               {liveDemoLink && (
                 <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
-                  Live Demo  <ExternalLink className={styles.iconSmall} />
+                  {t('projects.liveDemo')}  <ExternalLink className={styles.iconSmall} />
                 </a>
               )}
             </div>

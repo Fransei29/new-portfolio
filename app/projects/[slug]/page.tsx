@@ -1,6 +1,6 @@
 // app/projects/[slug]/page.tsx
 
-import ProjectDetailComponent from '../../../components/ProjectDetail/ProjectDetailComponent';
+import ProjectDetailWrapper from '../../../components/ProjectDetail/ProjectDetailWrapper';
 import { projects } from '../../data/projects';
 import { notFound } from 'next/navigation';
 import ClientLayout from '../../../components/ClientLayout/ClientLayout';
@@ -20,17 +20,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <ClientLayout>
       <LoadingWrapper>
-        <ProjectDetailComponent
-          title={project.title}
-          subtitle={project.subtitle}
-          whatIs={project.whatIs}
-          problemSolved={project.problemSolved}
-          techStack={project.techStack}
-          screenshots={project.screenshots}
-          videoUrl={project.videoUrl}
-          githubLink={project.githubLink}
-          liveDemoLink={project.liveDemoLink}
-        />
+        <ProjectDetailWrapper slug={slug} />
       </LoadingWrapper>
     </ClientLayout>
   );
