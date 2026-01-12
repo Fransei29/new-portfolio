@@ -13,15 +13,21 @@ const HomeText: React.FC = () => {
   <section className={styles.homeTextContainer}>
     <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
         <p className={styles.greeting}>{t('hero.title')}</p>
-        <h1 className={styles.mainTitle}>{t('hero.subtitle')}</h1>
+        <h1 className={styles.mainTitle}>
+          {t('hero.subtitle.before')}
+          <span className={styles.highlight}>{t('hero.subtitle.highlight')}</span>
+          {t('hero.subtitle.after')}
+        </h1>
     </section>
     <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">
        <h2 className={styles.subTitle}>{t('hero.description')}</h2>
     </section>
     <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-right">
-        <p className={styles.description}>
-        {t('about.description')}
-        </p>
+        {t('about.description') && (
+          <p className={styles.description}>
+            {t('about.description')}
+          </p>
+        )}
         <div className={styles.ctaButtons}>
           <Link href="/projects" className={styles.btnPrimary}>
             {t('hero.cta.projects')}

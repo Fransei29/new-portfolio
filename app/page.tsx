@@ -43,6 +43,13 @@ export default function Home() {
                 className="svg-overlap shape-a"
                 width={120}
                 height={170}
+                priority
+                loading="eager"
+                style={{ 
+                  willChange: 'transform',
+                  transform: 'translateZ(0)',
+                  WebkitTransform: 'translateZ(0)'
+                }}
               />
             </section>
 
@@ -53,6 +60,13 @@ export default function Home() {
                 className="svg-overlap shape-b"
                 width={120}
                 height={170}
+                priority
+                loading="eager"
+                style={{ 
+                  willChange: 'transform',
+                  transform: 'translateZ(0)',
+                  WebkitTransform: 'translateZ(0)'
+                }}
               />
             </section>
           </div>

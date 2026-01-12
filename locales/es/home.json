@@ -1,8 +1,12 @@
 {
   "hero": {
     "title": "Hola, soy Franco",
-    "subtitle": "Full Stack Developer.",
-    "description": "Ayudo a startups y equipos a lanzar productos en los que la gente confía.",
+    "subtitle": {
+      "before": "Construyo ",
+      "highlight": "productos digitales",
+      "after": " listos para crecer."
+    },
+    "description": "Con más de 3 años de experiencia, ayudo a startups y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
     "cta": {
       "projects": "Explora mi trabajo",
       "contact": "Agenda una llamada",
@@ -11,7 +15,7 @@
   },
   "about": {
     "title": "Sobre mí",
-    "description": "Con más de 3 años de experiencia, desarrollo soluciones seguras y escalables que crecen junto a tu negocio.",
+    "description": "",
     "experience": "Años de experiencia",
     "projects": "Proyectos completados",
     "technologies": "Tecnologías dominadas",

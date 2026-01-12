@@ -9,13 +9,15 @@
 }
 
 .greeting {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--text-color-light);
-  margin: 0 0 1rem 0;
-  font-weight: 500;
+  margin: 0 0 0.75rem 0;
+  font-weight: 400;
  
   @media (max-width: 768px) {
     margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
   }
 }
 
@@ -25,32 +27,41 @@
   color: var(--primary-color);
 }
 
+.highlight {
+  color: var(--primary-color);
+}
+
 .mainTitle {
   font-size: 3.875rem;
   font-weight: 700;
-  margin: 0 0 1.4rem 0;
+  margin: 0 0 1.25rem 0;
   line-height: 1.1;
+  max-width: 1000px;
+  white-space: pre-line;
  
   @media (max-width: 768px) {
     margin: 0;
     padding: 1.5rem 0;
-    font-size: 2.2rem;
+    font-size: 2rem;
     text-align: left;
   }
 }
 
 .subTitle {
   font-size: 1.5rem;
-  font-weight: 500;
-  min-width: 900px;
+  font-weight: 400;
+  max-width: 800px;
   color: var(--text-color-light); 
-  margin: 0 12rem 1.4rem 0;
+  margin-bottom: 2rem;
   width: 100%;       
   text-align: left;
   box-sizing: border-box;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+
 
    @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0 0 1rem 0;
     min-width: 0 !important;
     max-width: 100%;
@@ -81,7 +92,7 @@
 
 .ctaButtons {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   margin: 0 0 1rem 0;
   flex-wrap: wrap;
   width: 100%;
@@ -90,9 +101,9 @@
 
   a {
     text-decoration: none;
-    padding: 0.975rem 1.25rem;
+    padding: 0.975rem 1.75rem;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.15rem;
     border-radius: var(--br);
     transition: all 0.15s ease-in-out;
     display: flex;
@@ -154,8 +165,8 @@
 }
 
 .arrow {
-  font-size: 0.9rem;
-  margin-left: 0.4rem;
+  font-size: 1.125rem;
+  margin-left: 0.75rem;
   font-weight: 500;
   transition: transform 0.15s ease-in-out;
   transform: rotate(0deg);
@@ -164,11 +175,13 @@
 
   @media (max-width: 768px) {
   .homeTextContainer{
-    padding: 1rem 0.5rem;
+    padding: 0.25rem;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .homeTextContainer > section {
@@ -178,7 +191,16 @@
     overflow-x: hidden;
   }
 
+  .homeTextContainer > section:first-child {
+    order: 1; /* H1 primero */
+  }
+
+  .homeTextContainer > section:nth-child(2) {
+    order: 2; /* H2 description después del H1 */
+  }
+
   .homeTextContainer > section:last-child {
+    order: 4; /* Botones después de las figuras (order 3) */
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -191,8 +213,9 @@
   }
 
   .mainTitle {
-    font-size: 2rem;
+    font-size: 1.75rem;
     margin-bottom: 1rem;
+    max-width: 100%;
     padding: 0;
   }
 

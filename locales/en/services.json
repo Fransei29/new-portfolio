@@ -3,27 +3,27 @@
     "title": "Solutions",
     "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
     "webDevelopment": {
-      "title": "Software Development",
+      "title": "Software\nDevelopment",
       "description": "Clean, maintainable and scalable code with a focus on best practices, performance, and robust architecture."
     },
     "backendDevelopment": {
-      "title": "Backend and Support",
+      "title": "Backend and\nSupport",
       "description": "APIs, databases, and continuous maintenance."
     },
     "aiIntegration": {
-      "title": "AI Integration",
+      "title": "AI\nIntegration",
       "description": "Implementation of OpenAI APIs, intelligent chatbots, and machine learning features."
     },
     "webApplications": {
-      "title": "Web Applications",
+      "title": "Web\nApplications",
       "description": "SPAs with React/Next.js, efficient rendering, SEO optimized and smooth user experiences."
     },
     "ecommerceSolutions": {
-      "title": "Complete E-commerce",
+      "title": "Complete\nE-commerce",
       "description": "Custom online stores with product management, shopping cart and integrated secure payments."
     },
     "uiuxDesign": {
-      "title": "Databases",
+      "title": "Databases\n& Data",
       "description": "PostgreSQL, MySQL, MongoDB with Sequelize and Prisma ORM. Query optimization and data architecture."
     }
   },

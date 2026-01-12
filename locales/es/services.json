@@ -3,27 +3,27 @@
     "title": "Soluciones",
     "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
     "webDevelopment": {
-      "title": "Desarrollo de Software",
+      "title": "Desarrollo de\nSoftware",
       "description": "Código limpio, mantenible y escalable, con foco en buenas prácticas, rendimiento y arquitectura robusta."
     },
     "backendDevelopment": {
-      "title": "Backend y APIs",
+      "title": "Backend\ny APIs",
       "description": "APIs RESTful y GraphQL, bases de datos optimizadas, autenticación segura y microservicios escalables."
     },
     "aiIntegration": {
-      "title": "Integración de IA",
+      "title": "Integración\nde IA",
       "description": "Implementación de APIs de OpenAI, chatbots inteligentes y funcionalidades de machine learning."
     },
     "webApplications": {
-      "title": "Aplicaciones Web",
+      "title": "Aplicaciones\nWeb",
       "description": "SPAs con React/Next.js, renderizado eficiente, SEO optimizado y experiencias de usuario fluidas."
     },
     "ecommerceSolutions": {
-      "title": "E-commerce Completo",
+      "title": "E-commerce\nCompleto",
       "description": "Tiendas online personalizadas con gestión de productos, carrito de compras y pagos seguros integrados."
     },
     "uiuxDesign": {
-      "title": "Bases de Datos",
+      "title": "Bases de\nDatos",
       "description": "PostgreSQL, MySQL, MongoDB con Sequelize y Prisma ORM. Optimización de consultas y arquitectura de datos."
     }
   },
