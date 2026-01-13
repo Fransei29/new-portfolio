@@ -4,6 +4,11 @@
   right: 5px;
   z-index: 1000;
   font-family: 'IBM Plex Sans', sans-serif;
+
+  @media (max-width: 768px) {
+    bottom: 5px;
+    right: 15px;
+  }
 }
 
 .chatButton {
@@ -149,8 +154,62 @@
   padding: 20px;
   background: rgba(248, 152, 200, 0.1);
   border-radius: var(--br);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   border: 1px solid rgba(192, 4, 98, 0.2);
+}
+
+.suggestedQuestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.suggestedTitle {
+  font-size: 12px;
+  color: var(--text-color-light);
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.suggestedQuestion {
+  background: rgba(248, 152, 200, 0.08);
+  border: 1px solid rgba(192, 4, 98, 0.15);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: 'IBM Plex Sans', sans-serif;
+  
+  &:hover:not(:disabled) {
+    background: rgba(248, 152, 200, 0.15);
+    border-color: rgba(192, 4, 98, 0.3);
+    transform: translateX(4px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateX(2px);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  :global(html.dark) & {
+    background: rgba(192, 4, 98, 0.1);
+    border-color: rgba(192, 4, 98, 0.25);
+    color: var(--text-color-dark-mode);
+    
+    &:hover:not(:disabled) {
+      background: rgba(192, 4, 98, 0.15);
+      border-color: rgba(192, 4, 98, 0.35);
+    }
+  }
 }
 
 .message {
@@ -162,9 +221,10 @@
     padding: 12px 16px;
     border-radius: 18px;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.5;
     word-wrap: break-word;
     font-family: 'IBM Plex Sans', sans-serif;
+    white-space: pre-wrap;
   }
   
   .messageTime {

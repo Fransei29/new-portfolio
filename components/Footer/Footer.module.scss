@@ -4,10 +4,11 @@
   background-color: var(--background-colorA);
   margin-top: 2rem;
   width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
 
   :global(html.dark) & {
     background-color: var(--dark-light);
-    border-top: 1px solid rgba(116, 115, 115, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: rgb(230, 230, 230);
   }
 
@@ -121,26 +122,30 @@
 }
 
 .navLink {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
   color: var(--text-color-light);
   text-decoration: none;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   padding: 0.25rem 0;
   width: fit-content;
+  position: relative;
 
-  svg {
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
   }
 
   &:hover {
     color: var(--primary-color);
 
-    svg {
-      opacity: 1;
+    &::after {
+      width: 100%;
     }
   }
 
@@ -156,30 +161,37 @@
 .contactInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .contactLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
   color: var(--text-color-light);
   text-decoration: none;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   width: fit-content;
+  position: relative;
+  cursor: pointer;
 
-  svg {
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.25rem;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
   }
 
   &:hover {
     color: var(--primary-color);
 
-    svg {
-      opacity: 1;
+    &::before {
+      width: 100%;
     }
   }
 
@@ -190,6 +202,11 @@
       color: var(--primary-color);
     }
   }
+}
+
+.emailText {
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 .bottomBar {

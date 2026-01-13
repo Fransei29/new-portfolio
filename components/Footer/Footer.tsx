@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Mail } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -58,8 +57,17 @@ const Footer = () => {
         <div className={styles.navSection}>
           <h3 className={styles.sectionTitle}>{t('footer.navigation')}</h3>
           <nav className={styles.navLinks}>
+            <Link href="/" className={styles.navLink}>
+              {t('nav.home')}
+            </Link>
+            <Link href="/projects" className={styles.navLink}>
+              {t('nav.projects')}
+            </Link>
+            <Link href="/tutorials" className={styles.navLink}>
+              {t('nav.tutorials')}
+            </Link>
             <Link href="/about" className={styles.navLink}>
-              <span>{t('nav.about')}</span>
+              {t('nav.about')}
             </Link>
           </nav>
         </div>
@@ -74,8 +82,7 @@ const Footer = () => {
               onClick={copyEmail}
               title={copied ? 'Copied!' : 'Click to copy email'}
             >
-              <Mail size={16} />
-              <span>{copied ? 'Copied!' : 'seilerfranco317@gmail.com'}</span>
+              <span className={styles.emailText}>{copied ? 'Copied!' : 'seilerfranco317@gmail.com'}</span>
             </a>
           </div>
         </div>

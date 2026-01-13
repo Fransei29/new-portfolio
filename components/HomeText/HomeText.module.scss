@@ -1,5 +1,5 @@
 .homeTextContainer {
-  padding: 3rem 0;
+  padding: 1rem 0;
   margin: 0 auto;
   color: var(--text-color-dark);
   width: 100%;
@@ -9,9 +9,9 @@
 }
 
 .greeting {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--text-color-light);
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.5rem 0;
   font-weight: 400;
  
   @media (max-width: 768px) {
@@ -29,26 +29,40 @@
 
 .highlight {
   color: var(--primary-color);
+  font-size: 4.5rem;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+
+  @media (max-width: 768px) {
+    font-size: 3.75rem;
+  }
 }
 
 .mainTitle {
-  font-size: 3.875rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 500;
   margin: 0 0 1.25rem 0;
   line-height: 1.1;
   max-width: 1000px;
+
+  letter-spacing: -0.01em;
   white-space: pre-line;
  
   @media (max-width: 768px) {
     margin: 0;
     padding: 1.5rem 0;
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     text-align: left;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    padding: 0;
   }
 }
 
 .subTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400;
   max-width: 800px;
   color: var(--text-color-light); 
@@ -212,13 +226,6 @@
   .greeting {
     font-size: 1.125rem;
     margin-bottom: 0.25rem;
-  }
-
-  .mainTitle {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-    max-width: 100%;
-    padding: 0;
   }
 
   .techIcons {

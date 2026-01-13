@@ -30,9 +30,9 @@ const HomeText: React.FC = () => {
         <p className={styles.greeting}>{t('hero.title')}</p>
         <h1 className={styles.mainTitle}>
           {subtitleBefore}
-          {isMobile && <br />}
+          <br />
           <span className={styles.highlight}>{subtitleHighlight}</span>
-          {isMobile && <br />}
+          <br />
           {subtitleAfter}
         </h1>
     </section>

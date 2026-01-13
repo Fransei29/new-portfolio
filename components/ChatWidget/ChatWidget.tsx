@@ -12,6 +12,13 @@ interface Message {
   timestamp: Date;
 }
 
+const SUGGESTED_QUESTIONS = [
+  { en: "What are Franco's main skills?", es: "¿Cuáles son las principales habilidades de Franco?" },
+  { en: "Tell me about his projects", es: "Cuéntame sobre sus proyectos" },
+  { en: "What's his work experience?", es: "¿Cuál es su experiencia laboral?" },
+  { en: "How can I contact him?", es: "¿Cómo puedo contactarlo?" },
+];
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -19,7 +26,7 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -40,12 +47,13 @@ export default function ChatWidget() {
     autoResizeTextarea();
   }, [inputValue]);
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim() || isLoading) return;
+  const handleSendMessage = async (suggestedQuestion?: string) => {
+    const messageText = suggestedQuestion || inputValue.trim();
+    if (!messageText || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue.trim(),
+      text: messageText,
       isUser: true,
       timestamp: new Date(),
     };
@@ -95,7 +103,7 @@ export default function ChatWidget() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -133,9 +141,26 @@ export default function ChatWidget() {
 
           <div className={styles.messagesContainer}>
             {messages.length === 0 && (
-              <div className={styles.welcomeMessage}>
-                {t('ai.placeholder')}
-              </div>
+              <>
+                <div className={styles.welcomeMessage}>
+                  {t('ai.placeholder')}
+                </div>
+                <div className={styles.suggestedQuestions}>
+                  <p className={styles.suggestedTitle}>
+                    {language === 'es' ? 'Preguntas sugeridas:' : 'Suggested questions:'}
+                  </p>
+                  {SUGGESTED_QUESTIONS.map((question, index) => (
+                    <button
+                      key={index}
+                      className={styles.suggestedQuestion}
+                      onClick={() => handleSendMessage(question[language as 'en' | 'es'])}
+                      disabled={isLoading}
+                    >
+                      {question[language as 'en' | 'es']}
+                    </button>
+                  ))}
+                </div>
+              </>
             )}
             
             {messages.map((message) => (
@@ -144,7 +169,12 @@ export default function ChatWidget() {
                 className={`${styles.message} ${message.isUser ? styles.userMessage : styles.assistantMessage}`}
               >
                 <div className={styles.messageContent}>
-                  {message.text}
+                  {message.text.split('\n').map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i < message.text.split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
                 </div>
                 <div className={styles.messageTime}>
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -170,14 +200,14 @@ export default function ChatWidget() {
               ref={textareaRef}
               value={inputValue}
               onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               placeholder={t('ai.placeholder')}
               className={styles.input}
               rows={1}
               disabled={isLoading}
             />
             <button
-              onClick={handleSendMessage}
+              onClick={() => handleSendMessage()}
               disabled={!inputValue.trim() || isLoading}
               className={styles.sendButton}
               aria-label={t('ai.send')}

@@ -40,13 +40,17 @@ export default async function handler(
       return null;
     };
 
-    // Check basic greetings and questions
+    // Check basic greetings and questions (English and Spanish)
     const basicResponses: { [key: string]: string } = {
       'hello': `Hello! I'm Franco's AI assistant. How can I help you learn about his skills and experience?`,
       'hi': `Hi there! I'm here to help you learn about Franco Seiler's background and technical skills.`,
+      'hola': `¡Hola! Soy el asistente de IA de Franco. ¿Cómo puedo ayudarte a conocer sus habilidades y experiencia?`,
       'who are you': `I'm Franco's AI assistant, designed to help visitors learn about his skills, projects, and experience as a Full Stack Developer.`,
+      'quien eres': `Soy el asistente de IA de Franco, diseñado para ayudar a los visitantes a conocer sus habilidades, proyectos y experiencia como Desarrollador Full Stack.`,
       'what does franco do': `Franco is a Full Stack Developer with ${knowledge.experience}. He specializes in React, Node.js, TypeScript, and modern web technologies.`,
+      'que hace franco': `Franco es un Desarrollador Full Stack con ${knowledge.experience}. Se especializa en React, Node.js, TypeScript y tecnologías web modernas.`,
       'who is franco': `Franco Seiler is a ${knowledge.role} from ${knowledge.location}. ${knowledge.bio}`,
+      'quien es franco': `Franco Seiler es un ${knowledge.role} de ${knowledge.location}. ${knowledge.bio}`,
       'is franco a good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
       'is he a good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
       'good developer': `Yes! Franco is an excellent developer with ${knowledge.experience}. He has built multiple successful projects including StartOn, Quiero Sport e-commerce, and Property Recommender. His technical skills span React, TypeScript, Node.js, and modern web technologies.`,
@@ -96,9 +100,40 @@ export default async function handler(
       }
     }
 
+    // Check projects FIRST (English and Spanish keywords) - before other checks
+    const projectKeywords = [
+      'project', 'projects', 'proyecto', 'proyectos', 
+      'starton', 'ecommerce', 'property', 'medicare', 'task',
+      'cuéntame sobre', 'tell me about', 'hablame de', 'hablame sobre',
+      'cuentame sobre', 'cuéntame de', 'cuentame de',
+      'sus proyectos', 'his projects', 'trabajos', 'works',
+      'que proyectos', 'qué proyectos', 'what projects'
+    ];
+    
+    // Check if message contains project-related keywords
+    const hasProjectKeyword = projectKeywords.some(keyword => userMessage.includes(keyword));
+    
+    if (hasProjectKeyword) {
+      const projectNames = knowledge.projects.map(p => p.name.toLowerCase());
+      const matchingProject = knowledge.projects.find(p => 
+        userMessage.includes(p.name.toLowerCase()) || 
+        p.name.toLowerCase().includes(userMessage)
+      );
+      
+      if (matchingProject) {
+        const response = `${matchingProject.name}: ${matchingProject.description}\n\nImpact: ${matchingProject.impact}\n\nTechnologies: ${matchingProject.technologies.join(', ')}\n\nGitHub: ${matchingProject.url}${matchingProject.liveDemo ? `\nLive Demo: ${matchingProject.liveDemo}` : ''}`;
+        return res.status(200).json({ response });
+      } else {
+        const projectsList = knowledge.projects.map(p => `• ${p.name}: ${p.description}`).join('\n');
+        return res.status(200).json({ 
+          response: `Franco has built several key projects:\n\n${projectsList}\n\nWould you like to know more about any specific project?` 
+        });
+      }
+    }
+
     // Check for combined questions (location + contact)
-    const locationKeywords = ['where', 'location', 'based', 'live', 'reside', 'currently', 'now', 'doing', 'status'];
-    const contactKeywords = ['email', 'gmail', 'github', 'linkedin', 'contact', 'reach', 'get in touch', 'give me', 'his email', 'franco email', 'email address'];
+    const locationKeywords = ['where', 'location', 'based', 'live', 'reside', 'currently', 'now', 'doing', 'status', 'donde', 'ubicacion', 'ubicación'];
+    const contactKeywords = ['email', 'gmail', 'github', 'linkedin', 'contact', 'reach', 'get in touch', 'give me', 'his email', 'franco email', 'email address', 'correo', 'contacto'];
     
     const hasLocationKeyword = locationKeywords.some(keyword => userMessage.includes(keyword));
     const hasContactKeyword = contactKeywords.some(keyword => userMessage.includes(keyword));
@@ -113,7 +148,7 @@ export default async function handler(
     // Handle contact-only questions
     if (hasContactKeyword) {
       // Check if it's specifically asking for email
-      if (userMessage.includes('email') || userMessage.includes('give me his email')) {
+      if (userMessage.includes('email') || userMessage.includes('give me his email') || userMessage.includes('correo')) {
         return res.status(200).json({ 
           response: `Franco's email is ${knowledge.contact.email}` 
         });
@@ -137,27 +172,13 @@ export default async function handler(
       return res.status(200).json({ response: techMatch });
     }
 
-    // Check projects
-    if (userMessage.includes('project') || userMessage.includes('starton') || userMessage.includes('ecommerce') || userMessage.includes('property') || userMessage.includes('medicare') || userMessage.includes('task')) {
-      const projectNames = knowledge.projects.map(p => p.name.toLowerCase());
-      const matchingProject = knowledge.projects.find(p => 
-        userMessage.includes(p.name.toLowerCase()) || 
-        p.name.toLowerCase().includes(userMessage)
-      );
-      
-      if (matchingProject) {
-        const response = `${matchingProject.name}: ${matchingProject.description}\n\nImpact: ${matchingProject.impact}\n\nTechnologies: ${matchingProject.technologies.join(', ')}\n\nGitHub: ${matchingProject.url}${matchingProject.liveDemo ? `\nLive Demo: ${matchingProject.liveDemo}` : ''}`;
-        return res.status(200).json({ response });
-      } else {
-        const projectsList = knowledge.projects.map(p => `• ${p.name}: ${p.description}`).join('\n');
-        return res.status(200).json({ 
-          response: `Franco has built several key projects:\n\n${projectsList}\n\nWould you like to know more about any specific project?` 
-        });
-      }
-    }
-
-    // Check work experience
-    if (userMessage.includes('experience') || userMessage.includes('work') || userMessage.includes('job') || userMessage.includes('career')) {
+    // Check work experience (English and Spanish keywords)
+    const experienceKeywords = [
+      'experience', 'work', 'job', 'career', 'trabajo', 'experiencia',
+      'trabajos', 'empleo', 'carrera', 'laboral'
+    ];
+    
+    if (experienceKeywords.some(keyword => userMessage.includes(keyword))) {
       const experienceList = knowledge.workExperience.map(exp => 
         `${exp.title} at ${exp.company} (${exp.date})\n${exp.description.join('\n')}`
       ).join('\n\n');
@@ -166,8 +187,14 @@ export default async function handler(
       });
     }
 
-    // Check skills
-    if (userMessage.includes('skill') || userMessage.includes('technology') || userMessage.includes('tech')) {
+    // Check skills (English and Spanish keywords)
+    const skillsKeywords = [
+      'skill', 'skills', 'technology', 'technologies', 'tech',
+      'habilidad', 'habilidades', 'tecnología', 'tecnologías',
+      'tecnico', 'técnico', 'stack', 'tecnologias'
+    ];
+    
+    if (skillsKeywords.some(keyword => userMessage.includes(keyword))) {
       const skillsList = Object.entries(knowledge.skills).map(([key, value]) => 
         `• ${value}: ${knowledge.detailedTechnologies[key as keyof typeof knowledge.detailedTechnologies]?.join(', ') || 'Various technologies'}`
       ).join('\n');
