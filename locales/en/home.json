@@ -4,7 +4,12 @@
     "subtitle": {
       "before": "I build powerful ",
       "highlight": "digital products",
-      "after": "\nready to scale."
+      "after": "\nready to scale.",
+      "mobile": {
+        "before": "I build powerful",
+        "highlight": "digital products",
+        "after": "ready to scale."
+      }
     },
     "description": "With more than 3 years of experience, I help startups and teams launch reliable platforms that adapt to business growth.",
     "cta": {
@@ -20,10 +25,10 @@
     "projects": "Completed projects",
     "technologies": "Technologies mastered",
     "whoIAm": "Who I Am",
-    "personalStory": "I'm a 27-year-old software developer who started working professionally in 2022, based in Amsterdam.",
-    "newChapter": "Currently focused on developing scalable web applications with a strong emphasis on clean and maintainable code.",
-    "dedication": "I care deeply about clarity, performance, and creating consistent, user-friendly designs.",
-    "interests": "I'm especially interested in digital product design and always looking for ways to keep learning and improving."
+    "personalStory": "Full-stack developer with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, I work with modern technologies to create products that generate real impact.",
+    "newChapter": "Specialized in scalable architectures and quality code. I develop web applications that grow with the business, prioritizing maintainability and performance.",
+    "dedication": "Committed to technical excellence: clean code, solid architectures, and exceptional user experiences. Every project is an opportunity to exceed expectations.",
+    "interests": "Passionate about digital product design and technological innovation. Continuously learning to stay current with industry best practices and tools."
   },
   "aboutPage": {
     "buttonText": "Would you like to know more about me?",

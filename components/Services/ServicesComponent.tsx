@@ -40,38 +40,38 @@ export const Services = () => {
   const services: Service[] = [
     {
       key: "webDevelopment",
-      icon: <FiCode className={styles.icon} />,
+      icon: <FiCode />,
       title: t('services.webDevelopment.title'),
       description: t('services.webDevelopment.description'),
     },
     {
       key: "aiIntegration",
-      icon: <FiCpu className={styles.icon} />,
+      icon: <FiCpu />,
       title: t('services.aiIntegration.title'),
       description: t('services.aiIntegration.description'),
     },
     {
       key: "backendDevelopment",
-      icon: <FiServer className={styles.icon} />,
+      icon: <FiServer />,
       title: t('services.backendDevelopment.title'),
       description: t('services.backendDevelopment.description'),
     },
     
     {
       key: "webApplications",
-      icon: <FiGlobe className={styles.icon} />,
+      icon: <FiGlobe />,
       title: t('services.webApplications.title'),
       description: t('services.webApplications.description'),
     },
     {
       key: "ecommerceSolutions",
-      icon: <FiShoppingCart className={styles.icon} />,
+      icon: <FiShoppingCart />,
       title: t('services.ecommerceSolutions.title'),
       description: t('services.ecommerceSolutions.description'),
     },
     {
       key: "uiuxDesign",
-      icon: <FiDatabase className={styles.icon} />,
+      icon: <FiDatabase />,
       title: t('services.uiuxDesign.title'),
       description: t('services.uiuxDesign.description'),
     },
@@ -84,13 +84,18 @@ export const Services = () => {
        <p className={styles.highlight}>
             {t('services.title')}
           </p>
+        <p className={styles.subtitle}>
+          {t('services.subtitle')}
+        </p>
         <div className={styles.grid}>
           {services.map((service) => (
             <div key={service.key} className={styles.card}>
-              <div className={styles.titleContainer}>
-                <div className={styles.icon}>{service.icon}</div>
-                <h3 className={styles.cardTitle}>{service.title}</h3>
+              <div className={styles.iconContainer}>
+                <div className={styles.iconWrapper}>
+                  {service.icon}
+                </div>
               </div>
+              <h3 className={styles.cardTitle}>{service.title}</h3>
               <p className={styles.cardDescription}>{service.description}</p>
             </div>
           ))}

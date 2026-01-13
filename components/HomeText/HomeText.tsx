@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './HomeText.module.scss'; 
 import { useScrollAnimation } from '../../hooks/Scroll';
@@ -8,15 +8,32 @@ import { HiArrowRight } from 'react-icons/hi';
 const HomeText: React.FC = () => {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const subtitleBefore = isMobile ? t('hero.subtitle.mobile.before') : t('hero.subtitle.before');
+  const subtitleHighlight = t('hero.subtitle.highlight');
+  const subtitleAfter = isMobile ? t('hero.subtitle.mobile.after') : t('hero.subtitle.after');
 
   return (
   <section className={styles.homeTextContainer}>
     <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
         <p className={styles.greeting}>{t('hero.title')}</p>
         <h1 className={styles.mainTitle}>
-          {t('hero.subtitle.before')}
-          <span className={styles.highlight}>{t('hero.subtitle.highlight')}</span>
-          {t('hero.subtitle.after')}
+          {subtitleBefore}
+          {isMobile && <br />}
+          <span className={styles.highlight}>{subtitleHighlight}</span>
+          {isMobile && <br />}
+          {subtitleAfter}
         </h1>
     </section>
     <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">

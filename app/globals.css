@@ -338,6 +338,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     align-items: center;
     margin: 0;
     width: 100%;
+    position: relative;
+    z-index: 1; /* Figuras por debajo de los botones */
   }
 
   .svg-duo {

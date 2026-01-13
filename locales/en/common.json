@@ -22,6 +22,8 @@
     "title": "Skills",
     "frontend": "Frontend",
     "backend": "Backend",
-    "tools": "Tools"
+    "tools": "Tools",
+    "summarySubtitle": "Technologies I work with to build scalable solutions",
+    "viewFullStack": "View full stack"
   }
 }

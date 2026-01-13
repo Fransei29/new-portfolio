@@ -4,7 +4,12 @@
     "subtitle": {
       "before": "Construyo ",
       "highlight": "productos digitales",
-      "after": " listos para crecer."
+      "after": " listos para crecer.",
+      "mobile": {
+        "before": "Construyo",
+        "highlight": "productos digitales",
+        "after": "listos para crecer."
+      }
     },
     "description": "Con más de 3 años de experiencia, ayudo a startups y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
     "cta": {
@@ -20,10 +25,10 @@
     "projects": "Proyectos completados",
     "technologies": "Tecnologías dominadas",
     "whoIAm": "Quién Soy",
-    "personalStory": "Desarrollador de software de 27 años, con inicio en 2022 en Ámsterdam.",
-    "newChapter": "Me enfoco en aplicaciones web escalables y código mantenible.",
-    "dedication": "Busco claridad, rendimiento y buen diseño.",
-    "interests": "Interesado en diseño digital y aprendizaje continuo."
+    "personalStory": "Desarrollador full-stack con más de 3 años de experiencia construyendo soluciones para startups y empresas. Basado en Ámsterdam, trabajo con tecnologías modernas para crear productos que generan impacto real.",
+    "newChapter": "Especializado en arquitecturas escalables y código de calidad. Desarrollo aplicaciones web que crecen con el negocio, priorizando mantenibilidad y rendimiento.",
+    "dedication": "Comprometido con la excelencia técnica: código limpio, arquitecturas sólidas y experiencias de usuario excepcionales. Cada proyecto es una oportunidad de superar expectativas.",
+    "interests": "Apasionado por el diseño de productos digitales y la innovación tecnológica. En constante aprendizaje para estar al día con las mejores prácticas y herramientas del mercado."
   },
   "aboutPage": {
     "buttonText": "¿Te gustaría saber más sobre mí?",

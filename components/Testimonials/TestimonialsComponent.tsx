@@ -2,7 +2,6 @@
 
 import styles from "./TestimonialsComponent.module.scss";
 import { FaLinkedin } from "react-icons/fa";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useRef, useEffect, useState } from 'react';
@@ -91,66 +90,9 @@ export default function Testimonials() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const cardWidth = isMobile ? 200 : 350; // Ancho fijo de cada tarjeta (más pequeño en mobile)
+  const cardWidth = isMobile ? 160 : 300; // Ancho fijo de cada tarjeta (más pequeño en mobile)
   const gap = isMobile ? 8 : 32; // Gap entre tarjetas (mobile: 0.5rem, desktop: 2rem)
-  const scrollAmount = cardWidth + gap;
   const totalWidth = testimonials.length * (cardWidth + gap);
-
-  const scrollLeft = () => {
-    // Pausar animación automática
-    if (animationRef.current) {
-      animationRef.current.stop();
-    }
-    
-    const currentX = x.get();
-    // Mover hacia la izquierda = valores más negativos
-    const newX = currentX - scrollAmount;
-    
-    // Si se sale del límite, resetear al inicio del loop
-    if (newX < -totalWidth) {
-      x.set(0);
-      startAutoScroll();
-      return;
-    }
-    
-    // Mover suavemente
-    animate(x, newX, {
-      duration: 0.3,
-      ease: "easeOut",
-      onComplete: () => {
-        // Reanudar animación automática
-        startAutoScroll();
-      }
-    });
-  };
-
-  const scrollRight = () => {
-    // Pausar animación automática
-    if (animationRef.current) {
-      animationRef.current.stop();
-    }
-    
-    const currentX = x.get();
-    // Mover hacia la derecha = valores menos negativos (hacia 0)
-    const newX = currentX + scrollAmount;
-    
-    // Si se sale del límite, resetear al final del loop
-    if (newX > 0) {
-      x.set(-totalWidth);
-      startAutoScroll();
-      return;
-    }
-    
-    // Mover suavemente
-    animate(x, newX, {
-      duration: 0.3,
-      ease: "easeOut",
-      onComplete: () => {
-        // Reanudar animación automática
-        startAutoScroll();
-      }
-    });
-  };
 
   const startAutoScroll = () => {
     // Detener cualquier animación previa
@@ -171,8 +113,10 @@ export default function Testimonials() {
       const currentPos = x.get();
       const targetX = -totalWidth;
       
-      // Duración más lenta - carrusel más pausado
-      const animationDuration = isMobile ? 120 : 95;
+      // Verificar mobile dentro de la función para obtener el valor actualizado
+      const checkMobile = window.innerWidth <= 768;
+      // Duración ajustada - carrusel un poco más rápido en mobile
+      const animationDuration = checkMobile ? 65 : 70;
       
       animationRef.current = animate(x, targetX, {
         duration: animationDuration,
@@ -236,12 +180,11 @@ export default function Testimonials() {
                     )}
                     
                     <div className={styles.authorInfo}>
-                      <div className={styles.author}>
-                        <strong>{t.name}</strong>
-                        <span>{t.role}</span>
-                      </div>
-                      
-                      <div className={styles.secondSection}>
+                      <div className={styles.authorRow}>
+                        <div className={styles.author}>
+                          <strong>{t.name}</strong>
+                          <span>{t.role}</span>
+                        </div>
                         {t.linkedin && (
                           <a
                             href={t.linkedin}
@@ -251,7 +194,7 @@ export default function Testimonials() {
                             aria-label={`View ${t.name}'s LinkedIn profile`}
                             title={`View ${t.name} on LinkedIn`}
                           >
-                            <FaLinkedin size={isMobile ? 16 : 22} />
+                            <FaLinkedin size={isMobile ? 14 : 18} />
                           </a>
                         )}
                       </div>
@@ -261,20 +204,6 @@ export default function Testimonials() {
               ))}
             </motion.div>
           </div>
-          <button 
-            className={`${styles.navButton} ${styles.navButtonLeft}`}
-            onClick={scrollLeft}
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button 
-            className={`${styles.navButton} ${styles.navButtonRight}`}
-            onClick={scrollRight}
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={24} />
-          </button>
         </div>
       </section>
     </div>

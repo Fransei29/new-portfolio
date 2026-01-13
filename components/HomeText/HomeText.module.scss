@@ -205,6 +205,8 @@
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+    position: relative;
+    z-index: 10; /* Botones por encima de las figuras */
   }
 
   .greeting {

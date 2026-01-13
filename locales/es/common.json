@@ -22,6 +22,8 @@
     "title": "Habilidades",
     "frontend": "Frontend",
     "backend": "Backend",
-    "tools": "Herramientas"
+    "tools": "Herramientas",
+    "summarySubtitle": "Tecnologías con las que trabajo para construir soluciones escalables",
+    "viewFullStack": "Ver stack completo"
   }
 }

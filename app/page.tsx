@@ -8,7 +8,7 @@ import { SiTypescript } from "react-icons/si";
 import ClientLayout from '../components/ClientLayout/ClientLayout';
 import './globals.css';
 import Experience from '../components/Experience/Experience';
-import Skills from '../components/Skills/Skills';
+import SkillsSummary from '../components/Skills/SkillsSummary';
 import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
 import { useParallax } from '../hooks/useParallax';
@@ -88,7 +88,7 @@ export default function Home() {
 
 
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
-            <Skills />
+            <SkillsSummary />
           </div>
           
           <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
