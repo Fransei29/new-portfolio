@@ -1,7 +1,6 @@
 // app/layout.tsx
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import Head from 'next/head';
 import Footer from '../components/Footer/Footer'; 
 import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
@@ -9,10 +8,55 @@ import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransiti
 import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Franco Seiler',
-  description: 'Franco Seiler Web',
+const siteUrl = 'https://www.francoseiler.com';
+
+export const metadata: Metadata = {
+  title: 'Franco Seiler | Full-Stack Developer',
+  description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience helping startups and companies launch reliable platforms.',
+  keywords: ['Franco Seiler', 'Full-Stack Developer', 'Web Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
+  authors: [{ name: 'Franco Seiler' }],
+  creator: 'Franco Seiler',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName: 'Franco Seiler',
+    title: 'Franco Seiler | Full-Stack Developer',
+    description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience helping startups and companies launch reliable platforms.',
+    images: [
+      {
+        url: `${siteUrl}/share.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Franco Seiler - Full-Stack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Franco Seiler | Full-Stack Developer',
+    description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience.',
+    images: [`${siteUrl}/share.png`],
+    creator: '@francoseiler',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 import { ReactNode } from 'react';
@@ -22,19 +66,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <Head>
-          <link 
-            rel="stylesheet" 
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
-          />
-          <link rel="stylesheet" href="https://geisthub.vercel.app/font.css" />
-          <link rel="icon" href="/new.ico" />
-          <meta name="description" content="Portfolio de desarrollador frontend." />
-          <meta property="og:title" content="Franco Seiler" />
-          <meta property="og:description" content="Portfolio de desarrollador frontend." />
-          
-          <meta property="og:image" content="/new.ico" />
-        </Head>
+        <link 
+          rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
+        />
+        <link rel="stylesheet" href="https://geisthub.vercel.app/font.css" />
       </head>
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
