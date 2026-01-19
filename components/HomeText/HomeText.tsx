@@ -7,7 +7,7 @@ import { HiArrowRight } from 'react-icons/hi';
 
 const HomeText: React.FC = () => {
   const elementsRef = useScrollAnimation();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -59,10 +59,15 @@ const HomeText: React.FC = () => {
             {t('hero.cta.contact')}
             <HiArrowRight className={styles.arrow} />
           </a>
-          {/* <Link href="/bootcamp" className={styles.btnTertiary}>
+          <a 
+            href={`https://bootcamp.francoseiler.com/${language}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnTertiary}
+          >
             {t('hero.cta.bootcamp')}
             <HiArrowRight className={styles.arrow} />
-          </Link> */}
+          </a>
         </div>
     </section>
   </section>
