@@ -122,7 +122,7 @@ export default function ChatWidget() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Open chat"
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <X size={24} className={styles.chatIcon} /> : <MessageCircle size={24} className={styles.chatIcon} />}
       </button>
 
       {/* Chat window */}

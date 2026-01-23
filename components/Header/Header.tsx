@@ -73,6 +73,14 @@ export default function Header() {
             </Link>
         </motion.section>
 
+        {/* Selectores mobile (idioma y tema) */}
+        <section className={styles.mobileOnly}>
+          <div className={styles.mobileControls}>
+            <LanguageSelector />
+            <ThemeToggleButton />
+          </div>
+        </section>
+
         {/* Botón hamburguesa */}
         <div className={styles.mobileMenuButton}>
           <button 
@@ -169,10 +177,6 @@ export default function Header() {
             {t('nav.about')}
           </p>
         </Link>
-        <div className={styles.mobileThemeToggle}>
-          <LanguageSelector />
-          <ThemeToggleButton />
-        </div>
       </div>
     </header>
   );

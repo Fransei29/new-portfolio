@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 1.5rem;
   right: 5rem;
-  border: 1px solid var(--primary-color-light);
-  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  background-color: transparent;
   color: var(--primary-color);
   border-radius: var(--br);
   width: 2.7rem;
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   z-index: 2000;
   transition: all 0.3s ease;
@@ -25,17 +25,16 @@
   }
 
   @media (max-width: 768px) {
-    left: 1rem;
+    left: 0.5rem;
     right: auto;
-    bottom: 1.4rem;
+    bottom: 0.5rem;
     width: 3rem;
     height: 3rem;
   }
 
   &:hover {
-    background-color: rgba(253, 184, 219, 0.7);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: rgba(253, 184, 219, 0.25);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 
     :global(html.dark) & {
       background-color: rgba(253, 3, 128, 0.2);

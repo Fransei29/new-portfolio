@@ -56,11 +56,13 @@
 
 @media (max-width: 768px) {
   .languageSelector {
-    font-size: 0.8rem;
-    gap: 6px;
+    gap: 0;
+    padding: 0rem;
+    margin-top: 0.25rem;
   }
   
   .languageButton {
-    padding: 3px 6px;
+    padding: 0.5rem;
+    font-size: 0.75rem;
   }
 } 
