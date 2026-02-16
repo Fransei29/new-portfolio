@@ -38,7 +38,7 @@ export default function Home() {
           <div className="svg-duo">
             <section ref={shapeARef} className="parallax-shape">
               <Image
-                src="/img/shapeA.svg"
+                src="/img/img/Shapes/shapeA.svg"
                 alt="Figura geométrica 1"
                 className="svg-overlap shape-a"
                 width={120}
@@ -55,7 +55,7 @@ export default function Home() {
 
             <section ref={shapeBRef} className="parallax-shape">
               <Image
-                src="/img/shapeB.svg"
+                src="/img/img/Shapes/shapeB.svg"
                 alt="Figura geométrica 2"
                 className="svg-overlap shape-b"
                 width={120}

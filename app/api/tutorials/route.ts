@@ -66,7 +66,7 @@ export async function GET() {
           link1: 'https://nextjs.org/docs',
           link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
           link3: 'https://sport-ecommerce-58pi.vercel.app/',
-          previewImage: '/img/ecommerce.jpg',
+          previewImage: '/img/img/ecommerce/ecoA.webp',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/Ecommerce-Tutorial.git',

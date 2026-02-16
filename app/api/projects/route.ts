@@ -34,7 +34,7 @@ export async function GET(request: Request) {
       description: t('projects.items.starton.description'),
       link2: 'https://github.com/Fransei29/starton',
       link3: 'https://starton.vercel.app/',
-      previewImage: '/img/Start1.webp',
+      previewImage: '/img/img/StartOn/StartA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Supabase', 'Google OAuth'],
     },
     {
@@ -44,7 +44,7 @@ export async function GET(request: Request) {
       description: t('projects.items.lexmax.description'),
       link2: null,
       link3: '',
-      previewImage: '/img/LexA.webp',
+      previewImage: '/img/img/Lex/LexA.webp',
       technologies: ['React', 'Vite', 'SCSS', 'React Router', 'Axios', 'Node.js', 'Express', 'JWT', 'Google OAuth', 'Telegram API'],
     },
     {
@@ -54,7 +54,7 @@ export async function GET(request: Request) {
       description: t('projects.items.property-recommender.description'),
       link2: 'https://github.com/Fransei29/property-recommenderv2',
       link3: 'https://property-recommenderv2.vercel.app/',
-      previewImage: '/img/prope.jpg',
+      previewImage: '/img/img/Habita/habitaA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
     },
     {
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
       description: t('projects.items.event-scheduler.description'),
       link2: null,
       link3: '',
-      previewImage: '/img/EventA.webp',
+      previewImage: '/img/img/Event/eventA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
     },
     {
@@ -74,7 +74,7 @@ export async function GET(request: Request) {
       description: t('projects.items.the-club-northfield.description'),
       link2: null,
       link3: 'https://www.theclubatnorthfield.com/',
-      previewImage: '/img/GymA.webp',
+      previewImage: '/img/img/Club/GymA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Tailwind CSS', 'Strapi CMS', 'Vercel'],
     },
     {
@@ -84,7 +84,7 @@ export async function GET(request: Request) {
       description: t('projects.items.lexmax-landing.description'),
       link2: null,
       link3: 'https://lexmaxsoluciones.com/',
-      previewImage: '/img/WebA.webp',
+      previewImage: '/img/img/WebLex/WebA.webp',
       technologies: ['Next.js', 'React', 'SCSS', 'Tailwind CSS', 'React Icons'],
     },
     {
@@ -94,7 +94,7 @@ export async function GET(request: Request) {
       description: t('projects.items.ecommerce.description'),
       link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
       link3: 'https://sport-ecommerce-58pi.vercel.app/',
-      previewImage: '/img/quiero.webp',
+      previewImage: '/img/img/ecommerce/ecoA.webp',
       technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
     },
     {
@@ -104,7 +104,7 @@ export async function GET(request: Request) {
       description: t('projects.items.healthcare-crm.description'),
       link2: 'https://github.com/fransei29/interview-challenge',
       link3: 'https://interview-challenge-ecru.vercel.app',
-      previewImage: '/img/Medi.webp',
+      previewImage: '/img/img/Medicare/mediA.webp',
       technologies: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS', 'Turso', 'TypeORM'],
     },    
     {
@@ -114,7 +114,7 @@ export async function GET(request: Request) {
       description: t('projects.items.taskmanager.description'),
       link2: 'https://github.com/Fransei29/task-manager-b',
       link3: 'https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/',
-      previewImage: '/img/task.webp',
+      previewImage: '/img/img/Task/taskA.webp',
       technologies: ['React', 'Next.js', 'Axios', 'PostgreSQL', 'Sequelize', 'Sass'],
     },
     {
@@ -124,7 +124,7 @@ export async function GET(request: Request) {
       description: t('projects.items.vestire.description'),
       link2: 'https://github.com/Fransei29/vestire_front.git',
       link3: 'https://vestire-front-s196.vercel.app/',
-      previewImage: '/img/vestire.webp',
+      previewImage: '/img/img/Vestire/vestireA.webp',
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'PostgreSQL'],
     },
     {
@@ -134,7 +134,7 @@ export async function GET(request: Request) {
       description: t('projects.items.flipper.description'),
       link2: 'https://github.com/Fransei29/clonetwitter.git',
       link3: 'https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/',
-      previewImage: '/img/flipper.webp',
+      previewImage: '/img/img/Flipper/flipperA.webp',
       technologies: ['Node.js', 'Express', 'Redis', 'Tailwind CSS'],
     },
     {
@@ -144,7 +144,7 @@ export async function GET(request: Request) {
       description: t('projects.items.trip-planner.description'),
       link2: 'https://github.com/Fransei29/trip-planner-c',
       link3: 'https://trip-planner-c.vercel.app/',
-      previewImage: '/img/trip.webp',
+      previewImage: '/img/img/Trip/trip.webp',
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'MongoDB'],
     },
     {
