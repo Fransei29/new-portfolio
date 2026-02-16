@@ -11,7 +11,7 @@ export async function GET() {
         link1: 'https://redis.io/docs/latest/',
         link2: 'https://github.com/Fransei29/Redis/blob/main/index.js',
         link3: 'https://vestire-front-s196.vercel.app/',
-        previewImage: '/img/vestire.webp',
+        previewImage: '/img/img/Tutorials/redis.svg',
         logs: [
           'git init',
           'git clone https://github.com/Fransei29/Redis.git',
@@ -29,7 +29,7 @@ export async function GET() {
         link1: 'https://www.typescriptlang.org/docs/',
         link2: 'https://github.com/Fransei29/react-typescript/blob/main/src/App.tsx',
         link3: 'https://react-typescript-oqzgk3zxt-francos-projects-94304a5e.vercel.app/',
-        previewImage: '/img/Type.webp',
+        previewImage: '/img/img/Tutorials/typescript.svg',
         logs: [
           'git init',
           'git clone https://github.com/Fransei29/react-typescript.git',
@@ -48,7 +48,7 @@ export async function GET() {
           link1: 'https://nodejs.org/docs/latest/api/',
           link2: 'https://github.com/Fransei29/NodeJS/blob/main/hello.js',
           link3: 'https://verdufront-zbzb.vercel.app/', 
-          previewImage: '/img/verdu3.jpg',
+          previewImage: '/img/img/Tutorials/node.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/NodeJS.git',
@@ -66,7 +66,7 @@ export async function GET() {
           link1: 'https://nextjs.org/docs',
           link2: 'https://github.com/Fransei29/sport-ecommerce/blob/main/README.md',
           link3: 'https://sport-ecommerce-58pi.vercel.app/',
-          previewImage: '/img/img/ecommerce/ecoA.webp',
+          previewImage: '/img/img/Tutorials/ecommerce.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/Ecommerce-Tutorial.git',
@@ -84,7 +84,7 @@ export async function GET() {
           link1: 'https://www.mongodb.com/docs/',
           link2: 'https://github.com/Fransei29/tripplanner/blob/master/index.js',
           link3: 'https://tripplanner-beryl.vercel.app/',
-          previewImage: '/img/trip.png',
+          previewImage: '/img/img/Tutorials/mongo.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/tripplanner.git',
@@ -102,7 +102,7 @@ export async function GET() {
           link1: 'https://react.dev/learn',
           link2: 'https://github.com/Fransei29/react-github-users.git',
           link3: 'https://react-github-users.vercel.app/',
-          previewImage: '/img/gitreact.png',
+          previewImage: '/img/img/Tutorials/react.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/react-github-users.git',
@@ -120,7 +120,7 @@ export async function GET() {
           link1: 'https://nextjs.org/docs',
           link2: 'https://github.com/Fransei29/next-blogs-post/blob/main/app/page.js',
           link3: 'https://next-blogs-post-ahua.vercel.app/',
-          previewImage: '/img/next.png',
+          previewImage: '/img/img/Tutorials/next.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/next-blogs-post.git',
@@ -137,7 +137,7 @@ export async function GET() {
           icon: '/icons/graphql.svg',
           link1: 'https://graphql.org/learn/',
           link2: 'https://github.com/Fransei29/graphql-app/blob/master/backend/index.js',
-          previewImage: '/img/gra.png',
+          previewImage: '/img/img/Tutorials/graphql.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/graphql-app.git',
@@ -155,7 +155,7 @@ export async function GET() {
           icon: '/icons/airtable.svg',
           link1: 'https://support.airtable.com/docs/introduction-to-airtable-basics',
           link2: 'https://github.com/Fransei29/airtable/blob/master/app.js',
-          previewImage: '/img/air.png',
+          previewImage: '/img/img/Tutorials/airtable.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/airtable.git',
@@ -172,7 +172,7 @@ export async function GET() {
           icon: '/icons/axios.svg',
           link1: 'https://axios-http.com/docs/intro',
           link2: 'https://github.com/Fransei29/axios/blob/master/index.js',
-          previewImage: '/img/axios.png',
+          previewImage: '/img/img/Tutorials/axios.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/axios.git',
@@ -190,7 +190,7 @@ export async function GET() {
           icon: '/icons/sequelize.svg',
           link1: 'https://sequelize.org/docs/v6/getting-started/',
           link2: 'https://github.com/Fransei29/SEQUELIZE/blob/main/index.js',
-          previewImage: '/img/vestire.webp',
+          previewImage: '/img/img/Tutorials/sequelize.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/SEQUELIZE.git',
@@ -207,7 +207,7 @@ export async function GET() {
           icon: '/icons/nextdotjs.svg',
           link1: 'https://www.ibm.com/docs/en/intelligent-promising?topic=reference-rest-api-documentation',
           link2: 'https://github.com/Fransei29/rest/blob/main/app.js',
-          previewImage: '/img/rest.png',
+          previewImage: '/img/img/Tutorials/rest.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/rest.git',
@@ -225,7 +225,7 @@ export async function GET() {
           link1: 'https://expressjs.com/es/starter/installing.html',
           link2: 'https://github.com/Fransei29/NodeJS/blob/main/index.js',
           link3: 'https://verdufront-zbzb.vercel.app/',
-          previewImage: '/img/verdu.png',
+          previewImage: '/img/img/Tutorials/express.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/NodeJS.git',
@@ -243,7 +243,7 @@ export async function GET() {
           link1: 'https://www.w3schools.com/html/html_intro.asp',
           link2: 'https://github.com/Fransei29/Portfolio/blob/main/index.html',
           link3:'https://portfolio-gamma-green-78.vercel.app/',
-          previewImage: '/img/port2.png',
+          previewImage: '/img/img/Tutorials/html.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/Portfolio.git',
@@ -260,7 +260,7 @@ export async function GET() {
           link1: 'https://www.w3schools.com/css/css_intro.asp',
           link2: 'https://github.com/Fransei29/Portfolio/blob/main/style.css',
           link3:'https://portfolio-gamma-green-78.vercel.app/',
-          previewImage: '/img/port3.png',
+          previewImage: '/img/img/Tutorials/css.svg',
           logs: [
             'git init',
             'git clone https://github.com/Fransei29/Portfolio.git',
