@@ -378,8 +378,8 @@ export default function ProjectDetailComponent({
             </div>
           )}
 
-          {/* Video (solo si existe y no hay suficientes imágenes para dos carruseles) */}
-          {videoUrl && validScreenshots.length <= 1 && (
+          {/* Video (si existe) */}
+          {videoUrl && (
             <div className={styles.videoContainer}>
               <video
                 src={videoUrl}
