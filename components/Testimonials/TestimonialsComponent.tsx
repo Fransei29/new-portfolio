@@ -20,7 +20,9 @@ export default function Testimonials() {
   const { t } = useLanguage();
   const carouselRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+  const x2 = useMotionValue(0); // Segunda fila para mobile
   const animationRef = useRef<any>(null);
+  const animationRef2 = useRef<any>(null); // Animación para segunda fila
 
   const testimonials: Testimonial[] = [
     {
@@ -74,11 +76,17 @@ export default function Testimonials() {
     },
   ];
 
-  // Duplicar testimonios para crear un loop infinito
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  // Duplicar testimonios múltiples veces para crear un loop infinito sin gaps
+  // En mobile necesitamos más duplicaciones para la segunda fila
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
 
-  // Detectar si es mobile
-  const [isMobile, setIsMobile] = useState(false);
+  // Detectar si es mobile - inicializar correctamente desde el inicio
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth <= 768;
+    }
+    return false;
+  });
   
   useEffect(() => {
     const checkMobile = () => {
@@ -92,12 +100,16 @@ export default function Testimonials() {
 
   const cardWidth = isMobile ? 160 : 300; // Ancho fijo de cada tarjeta (más pequeño en mobile)
   const gap = isMobile ? 8 : 32; // Gap entre tarjetas (mobile: 0.5rem, desktop: 2rem)
+  // Calcular el ancho total basado en testimonios originales para la animación
   const totalWidth = testimonials.length * (cardWidth + gap);
 
   const startAutoScroll = () => {
     // Detener cualquier animación previa
     if (animationRef.current) {
       animationRef.current.stop();
+    }
+    if (animationRef2.current) {
+      animationRef2.current.stop();
     }
     
     // Obtener la posición actual y asegurar que estamos dentro de los límites
@@ -130,8 +142,43 @@ export default function Testimonials() {
       });
     };
     
-    // Iniciar el loop
+    // Iniciar el loop para la primera fila
     animateLoop();
+  };
+
+  const startAutoScroll2 = () => {
+    // Detener cualquier animación previa
+    if (animationRef2.current) {
+      animationRef2.current.stop();
+    }
+    
+    // Iniciar desde una posición que ya muestre contenido visible
+    // Usamos un offset negativo para que el contenido esté visible desde el inicio
+    // pero se mueva hacia la derecha (valores positivos)
+    const initialOffset = -totalWidth;
+    x2.set(initialOffset);
+    
+    // Animación para la segunda fila (dirección opuesta - hacia la derecha)
+    const animateLoop2 = () => {
+      const targetX2 = 0; // Mover desde negativo hacia 0 (hacia la derecha)
+      const animationDuration2 = 65;
+      
+      animationRef2.current = animate(x2, targetX2, {
+        duration: animationDuration2,
+        ease: "linear",
+        onComplete: () => {
+          // Cuando llegamos a 0, resetear a -totalWidth instantáneamente
+          // Como tenemos contenido duplicado 4 veces, el reset es imperceptible
+          // porque el contenido se repite exactamente
+          x2.set(-totalWidth);
+          // Llamar recursivamente para continuar el loop
+          animateLoop2();
+        }
+      });
+    };
+    
+    // Iniciar el loop inmediatamente
+    animateLoop2();
   };
 
   // Iniciar la animación automática al montar
@@ -139,12 +186,19 @@ export default function Testimonials() {
     // Esperar un momento para asegurar que todo esté montado
     const timer = setTimeout(() => {
       startAutoScroll();
+      if (isMobile) {
+        // Iniciar la segunda fila inmediatamente en mobile
+        startAutoScroll2();
+      }
     }, 100);
     
     return () => {
       clearTimeout(timer);
       if (animationRef.current) {
         animationRef.current.stop();
+      }
+      if (animationRef2.current) {
+        animationRef2.current.stop();
       }
     };
   }, [totalWidth, isMobile]);
@@ -154,18 +208,20 @@ export default function Testimonials() {
       <section className={styles.testimonials}>
         <div className={styles.titleWrapper}>
           <p className={styles.highlight}>{t('testimonials.title')}</p>
+          <p className={styles.subtitle}>{t('testimonials.subtitle')}</p>
         </div>
         <div className={styles.carouselWrapper}>
           <div 
             className={styles.carousel}
             ref={carouselRef}
           >
+            {/* Primera fila */}
             <motion.div
               className={styles.carouselInner}
               style={{ x }}
             >
               {duplicatedTestimonials.map((t, index) => (
-                <div key={index} className={styles.card}>
+                <div key={`row1-${index}`} className={styles.card}>
                   <p className={styles.message}>&quot;{t.message}&quot;</p>
                   
                   <div className={styles.authorSection}>
@@ -203,6 +259,52 @@ export default function Testimonials() {
                 </div>
               ))}
             </motion.div>
+            {/* Segunda fila solo en mobile */}
+            {isMobile && (
+              <motion.div
+                className={styles.carouselInner}
+                style={{ x: x2 }}
+              >
+                {duplicatedTestimonials.map((t, index) => (
+                  <div key={`row2-${index}`} className={styles.card}>
+                    <p className={styles.message}>&quot;{t.message}&quot;</p>
+                    
+                    <div className={styles.authorSection}>
+                      {t.image && (
+                        <Image
+                          src={t.image}
+                          alt={t.name}
+                          width={100}  
+                          height={100} 
+                          className={styles.avatar}
+                        />
+                      )}
+                      
+                      <div className={styles.authorInfo}>
+                        <div className={styles.authorRow}>
+                          <div className={styles.author}>
+                            <strong>{t.name}</strong>
+                            <span>{t.role}</span>
+                          </div>
+                          {t.linkedin && (
+                            <a
+                              href={t.linkedin}
+                              className={styles.linkedinButton}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`View ${t.name}'s LinkedIn profile`}
+                              title={`View ${t.name} on LinkedIn`}
+                            >
+                              <FaLinkedin size={14} />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
           </div>
         </div>
       </section>

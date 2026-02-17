@@ -41,7 +41,7 @@ const mainSkills: Skill[] = [
   { name: "Node.js", icon: NodeIcon },
   { name: "Python", icon: PyIcon },
   { name: "PostgreSQL", icon: PostgresIcon },
-  { name: "Tailwind CSS", icon: TailwindIcon },
+  { name: "Tailwind", icon: TailwindIcon },
   { name: "Express", icon: ExpressIcon },
   { name: "MongoDB", icon: MongoIcon },
   { name: "Git", icon: GitIcon },

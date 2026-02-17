@@ -42,7 +42,7 @@ const Button: React.FC<ReusableButtonProps> = ({
             {buttonContent}
           </a>
         ) : (
-          <Link href={href} legacyBehavior>
+          <Link href={href} className={styles.buttonLink}>
             {buttonContent}
           </Link>
         )}

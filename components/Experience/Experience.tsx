@@ -39,6 +39,7 @@ const Experience: React.FC = () => {
     <section className={styles.experienceContainer}>
       <div className={styles.experienceSection}>
         <p className={styles.highlight}>{t('experience.title')}</p>
+        <p className={styles.subtitle}>{t('experience.subtitle')}</p>
         <ol className={styles.timeline}>
 
         <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">

@@ -57,7 +57,7 @@ const frontEndSkills: Skill[] = [
   { name: "Next.js", icon: NextIcon },
   { name: "Redux", icon: ReduxIcon },
   { name: "Sass", icon: SassIcon },
-  { name: "Tailwind CSS", icon: TailwindIcon },
+  { name: "Tailwind", icon: TailwindIcon },
   { name: "React Query", icon: ReactQueryIcon },
   { name: "Framer M", icon: FramerMotionIcon },
   { name: "HTML5", icon: HtmlIcon },

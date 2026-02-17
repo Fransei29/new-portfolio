@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ProjectDetailComponent.module.scss';
-import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock } from 'lucide-react';
-import { useState } from 'react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock, X } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 // SVG iconos importados como componentes
@@ -104,20 +104,89 @@ export default function ProjectDetailComponent({
   liveDemoLink,
 }: ProjectProps) {
   const { t } = useLanguage();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const validScreenshots = screenshots?.filter(Boolean) || [];
-  const hasMultipleImages = validScreenshots.length > 1;
+  const midPoint = Math.ceil(validScreenshots.length / 2);
+  const firstHalf = validScreenshots.slice(0, midPoint);
+  const secondHalf = validScreenshots.slice(midPoint);
+  
+  const [currentImageIndex1, setCurrentImageIndex1] = useState(0);
+  const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
+  
+  const hasMultipleImages1 = firstHalf.length > 1;
+  const hasMultipleImages2 = secondHalf.length > 1;
 
-  const goToPrevious = () => {
-    setCurrentImageIndex((prev) => 
+  // Navegar en el lightbox
+  const goToPreviousLightbox = useCallback(() => {
+    setLightboxImageIndex((prev) => 
       prev === 0 ? validScreenshots.length - 1 : prev - 1
+    );
+  }, [validScreenshots.length]);
+
+  const goToNextLightbox = useCallback(() => {
+    setLightboxImageIndex((prev) => 
+      prev === validScreenshots.length - 1 ? 0 : prev + 1
+    );
+  }, [validScreenshots.length]);
+
+  // Cerrar lightbox con ESC y navegar con flechas
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isLightboxOpen) return;
+
+      if (e.key === 'Escape') {
+        setIsLightboxOpen(false);
+      } else if (e.key === 'ArrowLeft') {
+        goToPreviousLightbox();
+      } else if (e.key === 'ArrowRight') {
+        goToNextLightbox();
+      }
+    };
+
+    if (isLightboxOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isLightboxOpen, goToPreviousLightbox, goToNextLightbox]);
+
+  // Abrir lightbox con la imagen seleccionada
+  const openLightbox = (imageIndex: number, carousel: 'first' | 'second') => {
+    if (carousel === 'first') {
+      setLightboxImageIndex(imageIndex);
+    } else {
+      setLightboxImageIndex(midPoint + imageIndex);
+    }
+    setIsLightboxOpen(true);
+  };
+
+  const goToPrevious1 = () => {
+    setCurrentImageIndex1((prev) => 
+      prev === 0 ? firstHalf.length - 1 : prev - 1
     );
   };
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) => 
-      prev === validScreenshots.length - 1 ? 0 : prev + 1
+  const goToNext1 = () => {
+    setCurrentImageIndex1((prev) => 
+      prev === firstHalf.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const goToPrevious2 = () => {
+    setCurrentImageIndex2((prev) => 
+      prev === 0 ? secondHalf.length - 1 : prev - 1
+    );
+  };
+
+  const goToNext2 = () => {
+    setCurrentImageIndex2((prev) => 
+      prev === secondHalf.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -140,11 +209,15 @@ export default function ProjectDetailComponent({
             </div>
             <div className={styles.overviewSection}>
               <h2>{t('projects.overview')}</h2>
-              <p>{whatIs}</p>
+              <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                {whatIs}
+              </div>
             </div>
             <div className={styles.goalSection}>
               <h2>{t('projects.goal')}</h2>
-              <p>{problemSolved}</p>
+              <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                {problemSolved}
+              </div>
             </div>
             <div className={styles.builtWithSection}>
               <h2>{t('projects.builtWith')}</h2>
@@ -197,16 +270,17 @@ export default function ProjectDetailComponent({
           </div>
         </div>
 
-        {/* Columna derecha: Contenido (Carrusel + Video) */}
+        {/* Columna derecha: Contenido (Dos carruseles de imágenes) */}
         <div className={styles.rightColumn}>
-          {/* Carrusel de imágenes */}
-          {validScreenshots.length > 0 && (
+          {/* Primer carrusel - Primera mitad de imágenes */}
+          {firstHalf.length > 0 && (
             <div className={styles.imageCarouselContainer}>
               <div className={styles.imageCarousel}>
-                {validScreenshots.map((screenshot, index) => (
+                {firstHalf.map((screenshot, index) => (
                   <div
                     key={index}
-                    className={`${styles.carouselImage} ${index === currentImageIndex ? styles.active : ''}`}
+                    className={`${styles.carouselImage} ${index === currentImageIndex1 ? styles.active : ''}`}
+                    onClick={() => openLightbox(index, 'first')}
                   >
                     <Image
                       src={screenshot}
@@ -219,29 +293,29 @@ export default function ProjectDetailComponent({
                 ))}
               </div>
               
-              {hasMultipleImages && (
+              {hasMultipleImages1 && (
                 <>
                   <button
                     className={`${styles.carouselNavButton} ${styles.carouselNavButtonLeft}`}
-                    onClick={goToPrevious}
+                    onClick={goToPrevious1}
                     aria-label="Previous image"
                   >
                     <ChevronLeft size={24} />
                   </button>
                   <button
                     className={`${styles.carouselNavButton} ${styles.carouselNavButtonRight}`}
-                    onClick={goToNext}
+                    onClick={goToNext1}
                     aria-label="Next image"
                   >
                     <ChevronRight size={24} />
                   </button>
                   
                   <div className={styles.carouselIndicators}>
-                    {validScreenshots.map((_, index) => (
+                    {firstHalf.map((_, index) => (
                       <button
                         key={index}
-                        className={`${styles.indicator} ${index === currentImageIndex ? styles.active : ''}`}
-                        onClick={() => setCurrentImageIndex(index)}
+                        className={`${styles.indicator} ${index === currentImageIndex1 ? styles.active : ''}`}
+                        onClick={() => setCurrentImageIndex1(index)}
                         aria-label={`Go to image ${index + 1}`}
                       />
                     ))}
@@ -251,8 +325,61 @@ export default function ProjectDetailComponent({
             </div>
           )}
 
-          {/* Video */}
-          {videoUrl && (
+          {/* Segundo carrusel - Segunda mitad de imágenes */}
+          {secondHalf.length > 0 && (
+            <div className={styles.imageCarouselContainer}>
+              <div className={styles.imageCarousel}>
+                {secondHalf.map((screenshot, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.carouselImage} ${index === currentImageIndex2 ? styles.active : ''}`}
+                    onClick={() => openLightbox(index, 'second')}
+                  >
+                    <Image
+                      src={screenshot}
+                      alt={`${title} screenshot ${midPoint + index + 1}`}
+                      fill
+                      className={styles.carouselImg}
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {hasMultipleImages2 && (
+                <>
+                  <button
+                    className={`${styles.carouselNavButton} ${styles.carouselNavButtonLeft}`}
+                    onClick={goToPrevious2}
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    className={`${styles.carouselNavButton} ${styles.carouselNavButtonRight}`}
+                    onClick={goToNext2}
+                    aria-label="Next image"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                  
+                  <div className={styles.carouselIndicators}>
+                    {secondHalf.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`${styles.indicator} ${index === currentImageIndex2 ? styles.active : ''}`}
+                        onClick={() => setCurrentImageIndex2(index)}
+                        aria-label={`Go to image ${midPoint + index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Video (solo si existe y no hay suficientes imágenes para dos carruseles) */}
+          {videoUrl && validScreenshots.length <= 1 && (
             <div className={styles.videoContainer}>
               <video
                 src={videoUrl}
@@ -269,6 +396,68 @@ export default function ProjectDetailComponent({
           )}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <div className={styles.lightboxOverlay} onClick={() => setIsLightboxOpen(false)}>
+          <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
+            <button
+              className={styles.lightboxClose}
+              onClick={() => setIsLightboxOpen(false)}
+              aria-label="Close lightbox"
+            >
+              <X size={28} />
+            </button>
+            
+            {validScreenshots.length > 1 && (
+              <>
+                <button
+                  className={`${styles.lightboxNavButton} ${styles.lightboxNavButtonLeft}`}
+                  onClick={goToPreviousLightbox}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={32} />
+                </button>
+                <button
+                  className={`${styles.lightboxNavButton} ${styles.lightboxNavButtonRight}`}
+                  onClick={goToNextLightbox}
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={32} />
+                </button>
+              </>
+            )}
+
+            <div className={styles.lightboxImageContainer}>
+              <Image
+                src={validScreenshots[lightboxImageIndex]}
+                alt={`${title} screenshot ${lightboxImageIndex + 1}`}
+                fill
+                className={styles.lightboxImage}
+                priority
+                sizes="100vw"
+              />
+            </div>
+
+            {validScreenshots.length > 1 && (
+              <div className={styles.lightboxIndicators}>
+                {validScreenshots.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`${styles.lightboxIndicator} ${index === lightboxImageIndex ? styles.active : ''}`}
+                    onClick={() => setLightboxImageIndex(index)}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className={styles.lightboxCounter}>
+              {lightboxImageIndex + 1} / {validScreenshots.length}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -14,6 +14,33 @@
   max-width: 1300px;
   margin-inline: auto;
   padding: 2.5rem 0;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+.highlight {
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin-bottom: 1.5rem;
+  text-align: left;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
 }
 
 .timeline {
@@ -232,7 +259,7 @@
     margin: 7px 0px;
 
     @media (max-width: 768px) {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
     }
   }
   
@@ -286,7 +313,7 @@
   }
 
   .experienceList li {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 0.2rem;
     padding-left: 1rem; 
@@ -314,7 +341,7 @@
   .timelineItem {
     width: 100%;
     margin:0;
-    padding: 0.35rem 0;
+    padding: 0.6rem 0;
   }
 
   .titleExperience {
@@ -329,12 +356,12 @@
   }
 
   .jobTitle{
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-align: left;
   }
 
   .companyName{
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     text-align: left;
   }
 

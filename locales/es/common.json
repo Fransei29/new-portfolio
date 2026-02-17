@@ -19,11 +19,11 @@
     "error": "Lo siento, estoy teniendo problemas técnicos. Puedes contactar a Franco directamente en seilerfranco317@gmail.com"
   },
   "skills": {
-    "title": "Habilidades",
+    "title": "Tecnologías",
     "frontend": "Frontend",
     "backend": "Backend",
     "tools": "Herramientas",
-    "summarySubtitle": "Tecnologías con las que trabajo para construir soluciones escalables",
+    "summarySubtitle": "Herramientas y frameworks con los que trabajo para construir soluciones escalables",
     "viewFullStack": "Ver stack completo"
   }
 }

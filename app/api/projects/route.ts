@@ -23,7 +23,12 @@ export async function GET(request: Request) {
     for (const k of keys) {
       value = value?.[k];
     }
-    return typeof value === 'string' ? value : key;
+    // If value is found and is a string, return it
+    if (typeof value === 'string' && value.length > 0) {
+      return value;
+    }
+    // If not found, return the key (which will be used as fallback)
+    return key;
   };
 
   const projects = [
@@ -36,6 +41,16 @@ export async function GET(request: Request) {
       link3: 'https://starton.vercel.app/',
       previewImage: '/img/img/StartOn/StartA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Supabase', 'Google OAuth'],
+    },
+    {
+      slug: 'ateevo-wholesale',
+      title: 'Ateevo Wholesale',
+      isTutorial: false,
+      description: t('projects.items.ateevo-wholesale.description'),
+      link2: null,
+      link3: '',
+      previewImage: '/atevo/A.webp',
+      technologies: ['React', 'TypeScript', 'Vite', 'SCSS Modules', 'Tailwind CSS', 'shadcn/ui', 'React Router', 'Node.js', 'Express', 'TypeORM', 'PostgreSQL', 'JWT', 'bcrypt', 'Google Cloud Storage', 'jsPDF', 'Resend', 'React Email'],
     },
     {
       slug: 'lexmax',
@@ -146,37 +161,6 @@ export async function GET(request: Request) {
       link3: 'https://trip-planner-c.vercel.app/',
       previewImage: '/img/img/Trip/trip.webp',
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'MongoDB'],
-    },
-    {
-      slug: 'dynamic-blog',
-      title: t('projects.items.dynamic-blog.title'),
-      isTutorial: false,
-      description: t('projects.items.dynamic-blog.description'),
-      link2: 'https://github.com/Fransei29/next-blogs-post/blob/main/app/page.js',
-      link3: 'https://next-blogs-post-ahua.vercel.app/',
-      previewImage: '/img/next.png',
-      technologies: ['Next.js', 'Tailwind CSS', 'Parser'],
-    },
-    
-    {
-      slug: 'holistic-portal',
-      title: t('projects.items.holistic-portal.title'),
-      isTutorial: false,
-      description: t('projects.items.holistic-portal.description'),
-      link2: 'https://github.com/Fransei29/AmnerisWeb.git',
-      link3: 'https://amneris-web.vercel.app/',
-      previewImage: '/img/holis.png',
-      technologies: ['HTML', 'CSS', 'Sass'],
-    },
-    {
-      slug: 'greengrocery',
-      title: t('projects.items.greengrocery.title'),
-      isTutorial: false,
-      description: t('projects.items.greengrocery.description'),
-      link2: 'https://github.com/Fransei29/Verdufront.git',
-      link3: 'https://verdufront-zbzb.vercel.app/',
-      previewImage: '/img/verdu.png',
-      technologies: ['React', 'Jest', 'Axios', 'Tailwind CSS'],
     },
   ];
 

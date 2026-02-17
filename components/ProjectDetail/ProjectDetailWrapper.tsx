@@ -21,22 +21,22 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
   const getTranslatedField = (field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved'): string => {
     const key = `projects.items.${slug}.${field}`;
     const translated = t(key);
-    // If translation exists and is different from the key, use it
-    if (translated && translated !== key) {
+    // If translation exists and is different from the key (meaning it was found), use it
+    // Check that it doesn't start with 'projects.items.' which means it wasn't found
+    if (translated && translated !== key && !translated.startsWith('projects.items.') && translated.length > 0) {
       return translated;
     }
-    // Otherwise, return the original English value
+    // Otherwise, return the original English value from the project data
     return (project as any)[field] || '';
   };
 
-  const translatedTitle = getTranslatedField('title');
   const translatedSubtitle = getTranslatedField('subtitle');
   const translatedWhatIs = getTranslatedField('whatIs');
   const translatedProblemSolved = getTranslatedField('problemSolved');
 
   return (
     <ProjectDetailComponent
-      title={translatedTitle || project.title}
+      title={project.title}
       subtitle={translatedSubtitle || project.subtitle}
       whatIs={translatedWhatIs || project.whatIs}
       problemSolved={translatedProblemSolved || project.problemSolved}

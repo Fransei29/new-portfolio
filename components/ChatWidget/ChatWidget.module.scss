@@ -15,55 +15,45 @@
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--button-color-hover) 100%);
-  border: 1px solid rgba(151, 0, 76, 0.2);
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border: 1px solid rgba(204, 2, 103, 0.3);
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(204, 2, 103, 0.4);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
   position: relative;
+  text-decoration: none;
 
   @media (max-width: 768px) {
     width: 3rem;
     height: 3rem;
+    border: 1px solid rgba(204, 2, 103, 0.25);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+    border-color: rgba(204, 2, 103, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 
-.chatIcon {
+.whatsappIcon {
+  width: 26px;
+  height: 26px;
+  color: white;
+  
   @media (max-width: 768px) {
-    width: 18px !important;
-    height: 18px !important;
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, var(--primary-color), var(--button-color-hover));
-    border-radius: 50%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(204, 2, 103, 0.6);
-    background: linear-gradient(135deg, var(--button-color-hover) 0%, var(--primary-color) 100%);
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-  
-  &:active {
-    transform: scale(0.95);
+    width: 22px;
+    height: 22px;
   }
 }
 

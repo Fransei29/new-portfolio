@@ -51,23 +51,23 @@
   /* H3 - Título de sección */
   --h3-font-size: 2rem;
   --h3-font-size-mobile: 1.75rem;
-  --h3-font-weight: 400;
+  --h3-font-weight: 500;
   --h3-color: var(--text-color);
   --h3-spacing: 0rem;
   --h3-spacing-mobile: 0.5rem;
   
   /* Subtítulo de sección */
   --subtitle-font-size: 1.25rem;
-  --subtitle-font-size-mobile: 1rem;
+  --subtitle-font-size-mobile: 1.175rem;
   --subtitle-font-weight: 400;
   --subtitle-color: var(--text-color-light);
   --subtitle-line-height: 1.5;
   
   /* Título de tarjeta/card */
   --card-title-font-size: 1.25rem;
-  --card-title-font-size-mobile: 0.875rem;
+  --card-title-font-size-mobile: 0.95rem;
   --card-title-font-weight: 500;
-  --card-title-line-height: 1.3;
+  --card-title-line-height: 1;
   
   /* Título de proyecto */
   --project-title-font-size: 1.5rem;
@@ -86,12 +86,12 @@
   
   /* Greeting/Saludo */
   --greeting-font-size: 1.25rem;
-  --greeting-font-size-mobile: 1rem;
+  --greeting-font-size-mobile: 1.25rem;
   --greeting-font-weight: 400;
   
   /* Descripción */
   --description-font-size: 1.25rem;
-  --description-font-size-mobile: 1rem;
+  --description-font-size-mobile: 1.25rem;
   --description-line-height: 1.4;
 }
 

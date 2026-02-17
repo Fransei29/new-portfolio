@@ -16,8 +16,9 @@
  
   @media (max-width: 768px) {
     margin: 0;
-    font-size: var(--greeting-font-size-mobile);
+    font-size: 1.25rem;
     font-weight: var(--greeting-font-weight);
+    color: var(--text-color-light);
   }
 }
 
@@ -74,7 +75,7 @@
 
 
    @media (max-width: 768px) {
-    font-size: var(--h2-font-size-mobile);
+    font-size: 1.25rem;
     margin: 0 0 0.25rem 0;
     min-width: 0 !important;
     max-width: 100%;
@@ -96,7 +97,8 @@
   @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;
-    font-size: var(--description-font-size-mobile);
+    font-size: 1.25rem;
+    color: #818080;
     margin-bottom: 1.5rem;
     padding: 0;
     box-sizing: border-box;
@@ -223,7 +225,7 @@
   }
 
   .greeting {
-    font-size: var(--greeting-font-size-mobile);
+    font-size: 1.25rem;
     margin-bottom: 0.25rem;
   }
 
@@ -234,13 +236,16 @@
 
   .ctaButtons {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.25rem;
     margin: 0.25rem 0;
     width: 100%;
+    max-width: 100%;
     padding-bottom: 1rem;
+    align-items: center;
 
     a {
-      width: 100%;
+      width: 95%;
+      max-width: 95%;
       padding: 0.85rem 1.2rem;
       font-size: 1.075rem;
       justify-content: center;

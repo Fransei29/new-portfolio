@@ -155,7 +155,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                   <Lock className={styles.iconSmall} size={18} />
                 </div>
               ) : null}
-              {project.link3 && (
+              {project.link3 && !project.isTutorial && (
                 <a href={project.link3} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                   <ExternalLink className={styles.iconSmall} size={18} />
                 </a>

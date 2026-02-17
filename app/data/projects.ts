@@ -48,6 +48,93 @@ export const projects = [
     liveDemoLink: 'https://starton.it.com/',
   },
   {
+    slug: 'ateevo-wholesale',
+    title: 'Ateevo Wholesale',
+    subtitle: 'B2B E-Commerce Platform for Fashion',
+    whatIs: `Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.
+
+The platform enables wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.
+
+Multi-tenant SaaS architecture supporting multiple independent brands with complete data isolation and customizable white-label branding.
+
+Key Features:
+
+• Multi-Tenant Architecture with isolated PostgreSQL databases and customizable branding
+• Digital Contract Signing with canvas-captured signatures and automatic PDF generation
+• Real-Time Notifications with alert center and persistent notifications
+• Advanced Reporting: Availability and Margin Reports with multi-currency support (USD, CAD, MXN)
+• Seasonal Management with availability dates, pre-orders, and estimated shipping dates
+• Multi-Currency Pricing (USD, CAD, MXN) with MSRP and automatic conversion
+• Complete Order Management workflow from New to Invoice Paid with PDF export
+• Advanced Inventory System with multiple metrics (On Hand, Available to Sell, Available to Ship)
+• Product Catalog with multiple images, automatic variants, and SKU/MFC codes
+• Customer Management with multiple addresses, billing info, and order history
+• Dashboard & Analytics with configurable metrics and trend charts
+• Super Admin Panel for managing multiple tenants and database creation
+• Enterprise Security with JWT authentication, bcrypt-hashed passwords, and role-based permissions`,
+    problemSolved: `The wholesale fashion sector lacks modern platforms that efficiently connect brands with their wholesale customers.
+
+Ateevo Wholesale solves this problem by allowing brands to manage their catalog, inventory, and orders centrally, while customers can browse, order, and track their purchases intuitively, all with digitally signed contracts and advanced margin and availability reports.
+
+The multi-tenant architecture allows scaling the business by supporting multiple brands on a single platform with complete security and customization.
+
+This platform delivers a complete B2B e-commerce solution for the fashion industry. Brands can manage their wholesale business end-to-end, from catalog to invoicing, while customers enjoy a modern, intuitive, and fully personalized shopping experience. The digital contract system, advanced reports, and multi-tenant architecture make Ateevo Wholesale an enterprise-ready solution that scales with business growth.`,
+    techStack: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'SCSS Modules',
+      'Tailwind CSS',
+      'shadcn/ui',
+      'React Router',
+      'Node.js',
+      'Express',
+      'TypeORM',
+      'PostgreSQL',
+      'JWT',
+      'bcrypt',
+      'Google Cloud Storage',
+      'jsPDF',
+      '@react-pdf/renderer',
+      'Resend',
+      'React Email',
+      'Lucide React'
+    ],
+    learnings: [
+      'Multi-tenant architecture with isolated PostgreSQL databases per tenant and customizable white-label branding (custom logo, primary/secondary colors, contact info, dynamic storefront color adaptation without page reload).',
+      'Digital contract signing system with canvas-captured hand signatures, timestamps, IP addresses, automatic PDF generation, contract states (pending, signed_by_customer, signed_by_admin, fully_signed, cancelled), and support for multiple contracts per order (complete and partial invoices).',
+      'Real-time notification system with alert center bell icon, automatic notifications for contract signature requirements, unique floating notification when admin requests signature, persistent notifications until read, and direct navigation to order from notification.',
+      'Advanced Availability Report showing available products for sale, identifying which customers ordered each product, allowing "stealing" items from existing orders for new orders, with filters for products with orders vs available products.',
+      'Advanced Margin Report calculating profit margins per product based on costs and sale prices, multi-currency support (USD, CAD), identifying products without cost data with direct action buttons, automatic calculations of revenue, cost, margin and margin percentage, counting only "Shipped" or "Invoice Paid" orders as completed sales.',
+      'Seasonal product management with products organized by seasons (Spring 2025, Fall/Winter, etc.), availability dates and estimated shipping dates, products marked as "Pre-order" for future seasons, current season highlighting, splash images per season, and customers seeing estimated shipping dates based on product seasons.',
+      'Complete multi-currency pricing system with prices in USD, CAD, and MXN, customers seeing prices in their base currency by country, MSRP (Manufacturer Suggested Retail Price) per currency, costs per currency for accurate margin calculations, and automatic conversion and display.',
+      'Comprehensive order management with full state workflow (New, Draft, Submitted, Confirmed, Booked, Shipped, Invoice Sent, Invoice Pending, Invoice Overdue, Invoice Paid, Cancel), customers creating orders from storefront, admins creating orders manually, full order editing by admins (add/remove/adjust items), optional customer PO numbers, internal notes for admins only, PDF export of orders, and complete state change history.',
+      'Advanced inventory system with multiple metrics: On Hand (physical stock available), Available to Sell (stock minus pending orders), Available to Ship (stock available for immediate shipping), Pending Orders (quantity committed in orders), Supplier Orders Pending (incoming stock from suppliers), with advanced filters, search, quick quantity editing, and variant view (colors/sizes) with individual stock.',
+      'Product catalog management with multiple images per product (up to 5) with featured image, automatic variants (colors × sizes = complete matrix), prices and costs per variant, customizable categories, assignment to multiple seasons, SKU and MFC (Manufacturer Code), descriptions and materials, and advanced search and filtering.',
+      'Customer management panel with account creation and editing, multiple shipping addresses per customer, billing information, account activation/deactivation, complete order history per customer, and password reset functionality.',
+      'Administrative dashboard with configurable total sales (by period), total number of orders, number of active customers, sales trend charts, recent orders list, best-selling products, and real-time updates.',
+      'Super admin panel for platform administration with management of multiple tenants, creation of new tenants with automatic databases, tenant impersonation for support, tenant activation/deactivation, and view of all tenants and their status.',
+      'Fully responsive design optimized for desktop, tablet, and mobile with adaptive navigation, touch-optimized forms and tables, and consistent experience across all devices.',
+      'Enterprise security with JWT authentication, bcrypt-hashed passwords, role-based permission validation (Customer, Admin, Super Admin), tenant headers for correct routing, and complete data isolation ensuring privacy and data compliance.'
+    ],
+    screenshots: [
+      '/atevo/A.webp',
+      '/atevo/120shots_so.webp',
+      '/atevo/257shots_so.webp',
+      '/atevo/289shots_so.webp',
+      '/atevo/316shots_so.webp',
+      '/atevo/446shots_so.webp',
+      '/atevo/453shots_so.webp',
+      '/atevo/600shots_so.webp',
+      '/atevo/622shots_so.webp',
+      '/atevo/697shots_so.webp',
+      '/atevo/742shots_so.webp',
+      '/atevo/910shots_so.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: '',
+  },
+  {
     slug: 'lexmax',
     title: 'LexMax',
     subtitle: 'Judicial Case Management Platform',
