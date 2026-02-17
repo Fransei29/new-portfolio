@@ -49,16 +49,16 @@
   --h2-letter-spacing: 0.01em;
   
   /* H3 - Título de sección */
-  --h3-font-size: 1.75rem;
-  --h3-font-size-mobile: 1.5rem;
+  --h3-font-size: 2rem;
+  --h3-font-size-mobile: 1.75rem;
   --h3-font-weight: 400;
   --h3-color: var(--text-color);
   --h3-spacing: 0rem;
   --h3-spacing-mobile: 0.5rem;
   
   /* Subtítulo de sección */
-  --subtitle-font-size: 1rem;
-  --subtitle-font-size-mobile: 0.9rem;
+  --subtitle-font-size: 1.25rem;
+  --subtitle-font-size-mobile: 1rem;
   --subtitle-font-weight: 400;
   --subtitle-color: var(--text-color-light);
   --subtitle-line-height: 1.5;

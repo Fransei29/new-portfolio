@@ -20,15 +20,32 @@ const Button: React.FC<ReusableButtonProps> = ({
   small = false,
   text,
 }) => {
+  const isExternalLink = href.startsWith('http://') || href.startsWith('https://');
+  
+  const buttonContent = (
+    <p className={`${styles.button} ${small ? styles.buttonSmall : ''}`}>
+      {label} 
+    </p>
+  );
+
   return (
     <div className={styles.buttonWrapper}>
       {text && <p className={styles.title}>{text}</p>}
       <div className={styles.buttonContainer}>
-        <Link href={href} legacyBehavior>
-          <p className={`${styles.button} ${small ? styles.buttonSmall : ''}`}>
-            {label} 
-          </p>
-        </Link>
+        {isExternalLink ? (
+          <a 
+            href={href} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.buttonLink}
+          >
+            {buttonContent}
+          </a>
+        ) : (
+          <Link href={href} legacyBehavior>
+            {buttonContent}
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { JSX, useEffect, useRef } from "react";
 import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiDatabase, FiCpu } from "react-icons/fi";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
+import Button from '../Button/Button';
 
 interface Service {
   key: string;
@@ -95,10 +96,18 @@ export const Services = () => {
                   {service.icon}
                 </div>
               </div>
-              <h3 className={styles.cardTitle}>{service.title}</h3>
-              <p className={styles.cardDescription}>{service.description}</p>
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{service.title}</h3>
+                <p className={styles.cardDescription}>{service.description}</p>
+              </div>
             </div>
           ))}
+        </div>
+        <div className={styles.ctaContainer}>
+          <Button
+            href="/about"
+            label={t('services.cta')}
+          />
         </div>
       </div>
     </section>

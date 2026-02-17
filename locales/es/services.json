@@ -1,30 +1,31 @@
 {
   "services": {
-    "title": "Soluciones",
+    "title": "Servicios",
     "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
+    "cta": "Consultar",
     "webDevelopment": {
       "title": "Desarrollo de\nSoftware",
-      "description": "Código limpio, mantenible y escalable, con foco en buenas prácticas, rendimiento y arquitectura robusta."
+      "description": "Software robusto y escalable que crece con tu negocio. Código limpio y mantenible."
     },
     "backendDevelopment": {
       "title": "Backend\ny APIs",
-      "description": "APIs RESTful y GraphQL, bases de datos optimizadas, autenticación segura y microservicios escalables."
+      "description": "Infraestructura sólida que potencia tu aplicación. Sistemas seguros y escalables."
     },
     "aiIntegration": {
       "title": "Integración\nde IA",
-      "description": "Implementación de APIs de OpenAI, chatbots inteligentes y funcionalidades de machine learning."
+      "description": "Automatiza procesos y mejora la experiencia de tus usuarios con inteligencia artificial."
     },
     "webApplications": {
       "title": "Aplicaciones\nWeb",
-      "description": "SPAs con React/Next.js, renderizado eficiente, SEO optimizado y experiencias de usuario fluidas."
+      "description": "Aplicaciones modernas y rápidas que tus usuarios amarán usar."
     },
     "ecommerceSolutions": {
       "title": "E-commerce\nCompleto",
-      "description": "Tiendas online personalizadas con gestión de productos, carrito de compras y pagos seguros integrados."
+      "description": "Tiendas online que convierten visitantes en clientes. Pagos seguros integrados."
     },
     "uiuxDesign": {
       "title": "Bases de\nDatos",
-      "description": "PostgreSQL, MySQL, MongoDB con Sequelize y Prisma ORM. Optimización de consultas y arquitectura de datos."
+      "description": "Gestiona tus datos de forma eficiente y segura. Sistemas optimizados y escalables."
     }
   },
   "testimonials": {

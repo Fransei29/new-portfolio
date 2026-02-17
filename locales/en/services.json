@@ -1,30 +1,31 @@
 {
   "services": {
-    "title": "Solutions",
+    "title": "Services",
     "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
+    "cta": "Learn More",
     "webDevelopment": {
       "title": "Software\nDevelopment",
-      "description": "Clean, maintainable and scalable code with a focus on best practices, performance, and robust architecture."
+      "description": "Robust, scalable software that grows with your business. Clean, maintainable code."
     },
     "backendDevelopment": {
-      "title": "Backend and\nSupport",
-      "description": "APIs, databases, and continuous maintenance."
+      "title": "Backend and\nAPIs",
+      "description": "Solid infrastructure that powers your application. Secure and scalable systems."
     },
     "aiIntegration": {
       "title": "AI\nIntegration",
-      "description": "Implementation of OpenAI APIs, intelligent chatbots, and machine learning features."
+      "description": "Automate processes and enhance user experience with artificial intelligence."
     },
     "webApplications": {
       "title": "Web\nApplications",
-      "description": "SPAs with React/Next.js, efficient rendering, SEO optimized and smooth user experiences."
+      "description": "Modern, fast applications your users will love to use."
     },
     "ecommerceSolutions": {
       "title": "Complete\nE-commerce",
-      "description": "Custom online stores with product management, shopping cart and integrated secure payments."
+      "description": "Online stores that convert visitors into customers. Secure payments integrated."
     },
     "uiuxDesign": {
       "title": "Databases\n& Data",
-      "description": "PostgreSQL, MySQL, MongoDB with Sequelize and Prisma ORM. Query optimization and data architecture."
+      "description": "Manage your data efficiently and securely. Optimized and scalable systems."
     }
   },
   "testimonials": {
