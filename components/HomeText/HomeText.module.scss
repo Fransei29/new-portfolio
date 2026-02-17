@@ -9,15 +9,15 @@
 }
 
 .greeting {
-  font-size: 1.25rem;
+  font-size: var(--greeting-font-size);
   color: var(--text-color-light);
   margin: 0 0 0.5rem 0;
-  font-weight: 400;
+  font-weight: var(--greeting-font-weight);
  
   @media (max-width: 768px) {
     margin: 0;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: var(--greeting-font-size-mobile);
+    font-weight: var(--greeting-font-weight);
   }
 }
 
@@ -29,31 +29,30 @@
 
 .highlight {
   color: var(--primary-color);
-  font-size: 4.5rem;
-  letter-spacing: -0.02em;
+  font-size: var(--h1-highlight-font-size);
+  letter-spacing: var(--h1-highlight-letter-spacing);
   margin: 0;
   padding: 0;
-  font-weight: 700;
+  font-weight: var(--h1-highlight-font-weight);
 
   @media (max-width: 768px) {
-    font-size: 3.75rem;
+    font-size: var(--h1-highlight-font-size-mobile);
   }
 }
 
 .mainTitle {
-  font-size: 3.5rem;
-  font-weight: 500;
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
   margin: 0 0 1.25rem 0;
-  line-height: 1.1;
+  line-height: var(--h1-line-height);
   max-width: 1000px;
-
-  letter-spacing: -0.01em;
+  letter-spacing: var(--h1-letter-spacing);
   white-space: pre-line;
  
   @media (max-width: 768px) {
     margin: 0;
     padding: 1.5rem 0;
-    font-size: 2.5rem;
+    font-size: var(--h1-font-size-mobile);
     text-align: left;
     margin-bottom: 1rem;
     max-width: 100%;
@@ -62,20 +61,20 @@
 }
 
 .subTitle {
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
   max-width: 800px;
   color: var(--text-color-light); 
   margin-bottom: 2rem;
   width: 100%;       
   text-align: left;
   box-sizing: border-box;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  line-height: var(--h2-line-height);
+  letter-spacing: var(--h2-letter-spacing);
 
 
    @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: var(--h2-font-size-mobile);
     margin: 0 0 0.25rem 0;
     min-width: 0 !important;
     max-width: 100%;
@@ -87,9 +86,9 @@
 
 .description {
   width: 100%;
-  font-size: 1.25rem;
+  font-size: var(--description-font-size);
   color: #818080;
-  line-height: 1.4;
+  line-height: var(--description-line-height);
   letter-spacing: 0.2px;
   margin-bottom: 2.5rem;
   box-sizing: border-box;
@@ -97,7 +96,7 @@
   @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;
-    font-size: 1rem;
+    font-size: var(--description-font-size-mobile);
     margin-bottom: 1.5rem;
     padding: 0;
     box-sizing: border-box;
@@ -224,7 +223,7 @@
   }
 
   .greeting {
-    font-size: 1.125rem;
+    font-size: var(--greeting-font-size-mobile);
     margin-bottom: 0.25rem;
   }
 

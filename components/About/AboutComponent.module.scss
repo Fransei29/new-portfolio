@@ -73,10 +73,10 @@
   }
   
   .aboutSubtitle{
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--text-color-light);
-    line-height: 1.5;
+    font-size: var(--subtitle-font-size);
+    font-weight: var(--subtitle-font-weight);
+    color: var(--subtitle-color);
+    line-height: var(--subtitle-line-height);
     letter-spacing: 0.01em;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -85,7 +85,7 @@
     width: 100%;
 
     @media (max-width: 768px) {
-      font-size: 0.9rem;
+      font-size: var(--subtitle-font-size-mobile);
       grid-template-columns: 1fr;
       grid-template-rows: auto;
       gap: 1.25rem;

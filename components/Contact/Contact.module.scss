@@ -35,14 +35,14 @@
 
 .contactSubtitle {
   margin: 1rem 0 0.25rem 0;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: var(--text-color-light);
+  font-size: var(--subtitle-font-size);
+  font-weight: var(--subtitle-font-weight);
+  color: var(--subtitle-color);
   line-height: 1;
   letter-spacing: 0.01em;
 
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    font-size: var(--subtitle-font-size-mobile);
   }
 }
 
@@ -153,17 +153,17 @@
 
 .cardTitle {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--card-title-font-size);
+  font-weight: var(--card-title-font-weight);
   color: var(--text-color);
-  line-height: 1.4;
+  line-height: var(--card-title-line-height);
 
   :global(html.dark) & {
     color: rgb(235, 235, 235);
   }
 
   @media (max-width: 768px) {
-    font-size: 0.85rem;
+    font-size: var(--card-title-font-size-mobile);
   }
 }
 

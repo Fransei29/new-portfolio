@@ -55,7 +55,7 @@ const About = () => {
           <section className={styles.imageSection}>
             <div className={styles.imageWrapper}>
               <Image
-                src='/img/franco.jpg'
+                src='/yo.jpg'
                 alt="Franco Seiler"
                 width={200}
                 height={200}

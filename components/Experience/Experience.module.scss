@@ -211,14 +211,14 @@
 }
 
 .jobTitle {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: var(--card-title-font-size);
+  font-weight: var(--card-title-font-weight);
   color: var(--primary-color);
 }
 
 .companyName {
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: var(--subtitle-font-size);
+  font-weight: var(--subtitle-font-weight);
   color: var(--text-color-light);
   
   :global(html.dark) & {

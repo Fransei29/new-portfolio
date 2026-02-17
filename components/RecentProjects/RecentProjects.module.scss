@@ -1,10 +1,11 @@
 @import '../../app/styles/utilities.scss'; 
 
 .title {
-    font-size: 1.5rem;
+    font-size: var(--h3-font-size);
     color: var(--text-color-light);
     margin: 0;
     padding-bottom: 0.5rem;
+    font-weight: var(--h3-font-weight);
 }
 
 .recentProjects {
@@ -67,7 +68,7 @@
     }
 
     .title{
-        font-size: 1.2rem;
+        font-size: var(--h3-font-size-mobile);
         padding: 0 0.5rem;
         box-sizing: border-box;
         width: 100%;
