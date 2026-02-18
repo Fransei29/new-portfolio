@@ -132,12 +132,13 @@ export default function Header() {
             href={`https://bootcamp.francoseiler.com/${language}`}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.navLink}
+            className={`${styles.navLink} ${styles.bootcampLink}`}
           >
             <p className={styles.navLinkContent}>
               <GraduationCap size={24} className={styles.navIcon} />
               {t('nav.bootcamp')}
               <ArrowUp size={16} className={styles.bootcampArrow} />
+              <span className={styles.bootcampBadge}>{t('nav.bootcampBadge')}</span>
             </p>
           </a>
         </section>
@@ -206,11 +207,12 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={toggleMobileMenu}
-          className={styles.mobileNavLink}
+          className={`${styles.mobileNavLink} ${styles.bootcampLink}`}
         >
           <GraduationCap size={22} className={styles.mobileNavIcon} />
           {t('nav.bootcamp')}
           <ArrowUp size={14} className={styles.bootcampArrow} />
+          <span className={styles.bootcampBadge}>{t('nav.bootcampBadge')}</span>
         </a>
       </div>
     </header>

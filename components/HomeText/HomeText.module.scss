@@ -29,12 +29,13 @@
 }
 
 .highlight {
+  font-family: 'Space Grotesk', sans-serif;
   color: var(--primary-color);
   font-size: var(--h1-highlight-font-size);
-  letter-spacing: var(--h1-highlight-letter-spacing);
+  letter-spacing: -0.04em;
   margin: 0;
   padding: 0;
-  font-weight: var(--h1-highlight-font-weight);
+  font-weight: 700;
 
   @media (max-width: 768px) {
     font-size: 3.75rem;
@@ -42,13 +43,13 @@
 }
 
 .mainTitle {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--h1-font-size);
-  font-weight: var(--h1-font-weight);
+  font-weight: 600;
   margin: 0 0 1.25rem 0;
   line-height: 1.15;
   max-width: 1000px;
-  font-weight: 600;
-  letter-spacing: var(--h1-letter-spacing);
+  letter-spacing: -0.03em;
   white-space: pre-line;
  
   @media (max-width: 768px) {
@@ -137,12 +138,19 @@
   background-color: var(--primary-color);
   color: white;
   border: 1px solid rgba(151, 0, 76, 0.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(204, 2, 103, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     background-color: white;
     color: #cc0267;
     border: 1px solid rgb(204, 2, 103, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 20px rgba(204, 2, 103, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.15);
     
     .arrow {
       transform: rotate(-45deg);
@@ -153,10 +161,18 @@
 .btnSecondary {
   border: 1px solid rgb(204, 2, 103, 0.5);
   color: var(--primary-color);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(204, 2, 103, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
   &:hover {
     background-color: var(--primary-color);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 20px rgba(204, 2, 103, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.15);
     
     .arrow {
       transform: rotate(-45deg);
@@ -168,12 +184,19 @@
   background-color: var(--primary-color);
   color: white;
   border: 1px solid rgba(151, 0, 76, 0.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(204, 2, 103, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     background-color: white;
     color: #cc0267;
     border: 1px solid rgb(204, 2, 103, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 20px rgba(204, 2, 103, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.15);
     
     .arrow {
       transform: rotate(-45deg);

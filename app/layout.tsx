@@ -13,31 +13,31 @@ import type { Metadata } from 'next';
 const siteUrl = 'https://www.francoseiler.com';
 
 export const metadata: Metadata = {
-  title: 'Franco Seiler | Full-Stack Developer',
-  description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience helping startups and companies launch reliable platforms.',
+  title: 'Franco Seiler | Soluciones de Software',
+  description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
   keywords: ['Franco Seiler', 'Full-Stack Developer', 'Web Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
   authors: [{ name: 'Franco Seiler' }],
   creator: 'Franco Seiler',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'es_ES',
     url: siteUrl,
     siteName: 'Franco Seiler',
-    title: 'Franco Seiler | Full-Stack Developer',
-    description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience helping startups and companies launch reliable platforms.',
+    title: 'Franco Seiler | Soluciones de Software',
+    description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
     images: [
       {
         url: `${siteUrl}/share.png`,
         width: 1200,
         height: 630,
-        alt: 'Franco Seiler - Full-Stack Developer',
+        alt: 'Franco Seiler - Soluciones de Software',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Franco Seiler | Full-Stack Developer',
-    description: 'I build powerful digital products ready to scale. Full-stack developer with 3+ years of experience.',
+    title: 'Franco Seiler | Soluciones de Software',
+    description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
     images: [`${siteUrl}/share.png`],
     creator: '@francoseiler',
   },

@@ -40,7 +40,7 @@ export default function CallToAction() {
             {t('aboutPage.description')}
           </p>
         )}
-        <Link href="/about" className={styles.ctaButton}>
+        <Link href="/contact" className={styles.ctaButton}>
           {t('aboutPage.buttonLabel') ?? ''}
           <HiArrowRight className={styles.arrow} />
         </Link>

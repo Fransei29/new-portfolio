@@ -59,15 +59,6 @@ const HomeText: React.FC = () => {
             {t('hero.cta.contact')}
             <HiArrowRight className={styles.arrow} />
           </a>
-          <a 
-            href={`https://bootcamp.francoseiler.com/${language}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.btnTertiary}
-          >
-            {t('hero.cta.bootcamp')}
-            <HiArrowRight className={styles.arrow} />
-          </a>
         </div>
     </section>
   </section>

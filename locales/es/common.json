@@ -5,7 +5,8 @@
     "projects": "Proyectos",
     "tutorials": "Tutoriales",
     "contact": "Contacto",
-    "bootcamp": "Bootcamp"
+    "bootcamp": "Bootcamp",
+    "bootcampBadge": "Nuevo"
   },
   "footer": {
     "madeWith": "Hecho con",

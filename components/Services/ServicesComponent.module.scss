@@ -7,6 +7,19 @@
     background-image: var(--background-colorB-gradient);
     background-color: var(--background-colorB); /* Fallback */
     padding: 1.75rem 0;
+    position: relative;
+    
+    // Efecto de textura sutil
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.015) 1px, transparent 0);
+      background-size: 24px 24px;
+      pointer-events: none;
+      opacity: 0.4;
+    }
 
     :global(html.dark) & {
       background-image: none;
@@ -61,15 +74,33 @@
   .card {
     background: #ffffff; 
     border: 1px solid transparent;
-    border-radius: var(--br);
-    padding: 2rem 1.5rem; 
-    box-shadow: 0 4px 6px rgba(41, 0, 21, 0.1);
-    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.15s ease;
+    border-radius: calc(var(--br) + 4px);
+    padding: 2.25rem 1.75rem; 
+    box-shadow: 
+      0 4px 6px rgba(41, 0, 21, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     background-clip: padding-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    
+    // Efecto de brillo sutil en el fondo
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
 
     @media (max-width: 768px) {
       padding: 1.25rem 1rem;
@@ -137,12 +168,22 @@
     }
   
     &:hover {
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 
+        0 12px 24px rgba(204, 2, 103, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
       transition-delay: 0s;
-      border: 1px solid rgba(247, 86, 166, 0.4);
+      border: 1px solid rgba(247, 86, 166, 0.5);
+      
+      &::after {
+        opacity: 1;
+      }
 
       :global(html.dark) & {
-        box-shadow: 0 8px 12px rgba(150, 150, 150, 0.1);
+        box-shadow: 
+          0 12px 24px rgba(250, 81, 166, 0.2),
+          0 4px 8px rgba(0, 0, 0, 0.3);
       }
     }
   
@@ -211,11 +252,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: rgba(250, 152, 217, 0.15);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(250, 152, 217, 0.2) 0%, rgba(247, 86, 166, 0.15) 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(247, 86, 166, 0.3), rgba(250, 152, 217, 0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
     :global(html.dark) & {
       background-color: rgba(255, 255, 255, 0.04);
@@ -239,11 +296,15 @@
     }
   
     .card:hover & {
-      transform: scale(1.05);
-      background-color: rgba(250, 152, 217, 0.25);
+      transform: scale(1.08) rotate(2deg);
+      background: linear-gradient(135deg, rgba(250, 152, 217, 0.3) 0%, rgba(247, 86, 166, 0.25) 100%);
+      
+      &::before {
+        opacity: 1;
+      }
 
       :global(html.dark) & {
-        background-color: rgba(255, 255, 255, 0.06);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 100%);
       }
     }
   }
@@ -259,14 +320,16 @@
   }
   
   .cardTitle {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: var(--card-title-font-size);
-    font-weight: var(--card-title-font-weight);
+    font-weight: 600;
     color: var(--text-color);
     margin: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     line-height: var(--card-title-line-height);
     white-space: normal;
     text-align: center;
+    letter-spacing: -0.01em;
 
     @media (max-width: 768px) {
       font-size: calc(var(--card-title-font-size-mobile) * 1.3);
