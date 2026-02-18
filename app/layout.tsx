@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
     images: [
       {
-        url: `${siteUrl}/share.png`,
+        url: `${siteUrl}/share123.png`,
         width: 1200,
         height: 630,
         alt: 'Franco Seiler - Soluciones de Software',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Franco Seiler | Soluciones de Software',
     description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
-    images: [`${siteUrl}/share.png`],
+    images: [`${siteUrl}/share123.png`],
     creator: '@francoseiler',
   },
   robots: {
