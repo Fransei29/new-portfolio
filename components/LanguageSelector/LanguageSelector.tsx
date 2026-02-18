@@ -7,21 +7,18 @@ import styles from './LanguageSelector.module.scss';
 const LanguageSelector: React.FC = () => {
   const { language, setLanguage } = useLanguage();
 
+  const toggleLanguage = () => {
+    setLanguage(language === 'es' ? 'en' : 'es');
+  };
+
   return (
     <div className={styles.languageSelector}>
       <button
-        className={`${styles.languageButton} ${language === 'es' ? styles.active : ''}`}
-        onClick={() => setLanguage('es')}
-        title="Español"
+        className={`${styles.languageButton} ${styles.active}`}
+        onClick={toggleLanguage}
+        title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
       >
-        ES
-      </button>
-      <button
-        className={`${styles.languageButton} ${language === 'en' ? styles.active : ''}`}
-        onClick={() => setLanguage('en')}
-        title="English"
-      >
-        EN
+        {language === 'es' ? 'ES' : 'EN'}
       </button>
     </div>
   );

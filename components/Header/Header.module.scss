@@ -51,7 +51,7 @@
     overflow-x: hidden;
     overflow-y: visible;
     max-width: 100%;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 }
 
@@ -85,7 +85,7 @@
   @media (max-width: 768px) {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     order: 2;
     margin-left: auto;
   }
@@ -94,8 +94,90 @@
 .mobileControls {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-shrink: 0;
+}
+
+
+.mobileBootcampButton {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(204, 2, 103, 0.25);
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.15);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(204, 2, 103, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+      border-color: rgba(204, 2, 103, 0.4);
+      color: var(--primary-color);
+      box-shadow: 0 4px 12px rgba(204, 2, 103, 0.25);
+      transform: translateY(-1px);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    :global(html.dark) & {
+      background-color: rgba(24, 28, 51, 0.8);
+      border-color: rgba(204, 2, 103, 0.3);
+      color: rgb(226, 226, 226);
+      box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2);
+
+      &:hover {
+        background-color: rgba(24, 28, 51, 0.95);
+        border-color: rgba(204, 2, 103, 0.5);
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(204, 2, 103, 0.3);
+      }
+    }
+  }
+}
+
+.mobileBootcampIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.mobileBootcampArrow {
+  flex-shrink: 0;
+  opacity: 1;
+  transform: translateY(0) rotate(45deg);
+  transition: transform 0.15s ease-in-out;
+  color: inherit;
+}
+
+.mobileBootcampButton:hover .mobileBootcampArrow {
+  transform: translateY(0) rotate(35deg);
 }
 
 .mobileMenuButton {
@@ -107,6 +189,7 @@
     z-index: 100;
     flex-shrink: 0;
     order: 3;
+    margin-left: 0;
 
     button {
       background-color: transparent;
@@ -486,72 +569,5 @@
 
 .mobileNavLink:hover .bootcampArrow {
   transform: translateY(0) rotate(35deg);
-}
-
-// Link de Bootcamp con badge integrado
-.bootcampLink {
-  position: relative;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(204, 2, 103, 0.08) 0%, rgba(247, 86, 166, 0.06) 100%);
-  border: 1px solid rgba(204, 2, 103, 0.15);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  :global(html.dark) & {
-    background: linear-gradient(135deg, rgba(250, 81, 166, 0.12) 0%, rgba(247, 86, 166, 0.08) 100%);
-    border-color: rgba(250, 81, 166, 0.2);
-  }
-  
-  &:hover {
-    background: linear-gradient(135deg, rgba(204, 2, 103, 0.15) 0%, rgba(247, 86, 166, 0.12) 100%);
-    border-color: rgba(204, 2, 103, 0.3);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(204, 2, 103, 0.15);
-    
-    :global(html.dark) & {
-      background: linear-gradient(135deg, rgba(250, 81, 166, 0.18) 0%, rgba(247, 86, 166, 0.14) 100%);
-      border-color: rgba(250, 81, 166, 0.35);
-      box-shadow: 0 4px 12px rgba(250, 81, 166, 0.2);
-    }
-  }
-  
-  .navLinkContent {
-    gap: 0.5rem;
-  }
-}
-
-// Badge para Bootcamp (ahora integrado dentro del contenedor)
-.bootcampBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(204, 2, 103, 0.2) 0%, rgba(247, 86, 166, 0.18) 100%);
-  color: var(--primary-color);
-  border: 1px solid rgba(204, 2, 103, 0.25);
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-  
-  :global(html.dark) & {
-    background: linear-gradient(135deg, rgba(250, 81, 166, 0.25) 0%, rgba(247, 86, 166, 0.2) 100%);
-    border-color: rgba(250, 81, 166, 0.35);
-    color: #fa51a6;
-  }
-  
-  .bootcampLink:hover & {
-    background: linear-gradient(135deg, rgba(204, 2, 103, 0.3) 0%, rgba(247, 86, 166, 0.25) 100%);
-    transform: scale(1.05);
-    border-color: rgba(204, 2, 103, 0.4);
-    
-    :global(html.dark) & {
-      background: linear-gradient(135deg, rgba(250, 81, 166, 0.35) 0%, rgba(247, 86, 166, 0.3) 100%);
-      border-color: rgba(250, 81, 166, 0.45);
-    }
-  }
 }
 

@@ -17,102 +17,59 @@
 .button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.875rem 2.5rem;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1.15rem;
-  letter-spacing: -0.01em;
-  background: linear-gradient(135deg, var(--primary-color) 0%, rgba(247, 86, 166, 0.95) 100%);
-  color: white;
-  border-radius: 14px;
-  border: 1.5px solid rgba(151, 0, 76, 0.25);
-  box-shadow: 
-    0 4px 12px rgba(204, 2, 103, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 2.25rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: 0.01em;
+  background-color: var(--primary-color);
+  color: rgb(247, 247, 247);
+  border-radius: var(--br);
+  border: 1px solid rgba(151, 0, 76, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   text-decoration: none !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-  }
+  transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.98) 100%);
+    background-color: white;
     color: #cc0267;
-    border: 1.5px solid rgba(204, 2, 103, 0.5);
-    box-shadow: 
-      0 8px 20px rgba(204, 2, 103, 0.4),
-      0 4px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    
-    &::before {
-      left: 100%;
-    }
+    border: 1px solid rgb(204, 2, 103, 0.5);
   }
 
   :global(html.dark) & {
-    background: linear-gradient(135deg, rgba(24, 28, 51, 0.9) 0%, rgba(30, 35, 60, 0.85) 100%);
+    background-color: var(--dark-light);
     color: rgb(228, 227, 227);
-    border: 1.5px solid rgba(250, 81, 166, 0.3);
-    box-shadow: 
-      0 4px 12px rgba(250, 81, 166, 0.2),
-      0 2px 4px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(248, 248, 248, 0.3);
 
     &:hover {
-      background: linear-gradient(135deg, rgba(250, 81, 166, 0.15) 0%, rgba(247, 86, 166, 0.12) 100%);
-      border-color: rgba(250, 81, 166, 0.5);
-      color: #fa51a6;
-      box-shadow: 
-        0 8px 20px rgba(250, 81, 166, 0.3),
-        0 4px 8px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05); 
+      border-color: rgba(255, 255, 255, 0.2);
       
       .icon {
-        color: #fa51a6;
+        color: rgb(238, 237, 237);
         
         svg {
-          stroke: #fa51a6;
+          stroke: rgb(238, 237, 237);
         }
       }
     }
   }
 
   @media (max-width: 768px) {
-    padding: 0.75rem 2rem;
-    font-size: 1.05rem;
-    border-radius: 12px;
+    padding: 0.7rem 2rem;
+    font-size: 1.125rem;
   }
 }
 
 .icon {
-  margin-left: 0.75rem;
+  margin-left: 20px;
   display: flex;
   align-items: center;
-  color: white;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color:white;
 
   svg {
     stroke: currentColor;
-    transition: all 0.3s ease;
-    width: 18px;
-    height: 18px;
-  }
-
-  .button:hover & {
-    transform: translateX(2px);
+    transition: color 0.3s ease;
   }
 
   :global(html.dark) & {

@@ -73,9 +73,19 @@ export default function Header() {
             </Link>
         </motion.section>
 
-        {/* Selectores mobile (idioma y tema) */}
+        {/* Selectores mobile (bootcamp, idioma y tema) */}
         <section className={styles.mobileOnly}>
           <div className={styles.mobileControls}>
+            <a 
+              href={`https://bootcamp.francoseiler.com/${language}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mobileBootcampButton}
+            >
+              <GraduationCap size={18} className={styles.mobileBootcampIcon} />
+              {t('nav.bootcamp')}
+              <ArrowUp size={12} className={styles.mobileBootcampArrow} />
+            </a>
             <LanguageSelector />
             <ThemeToggleButton />
           </div>
@@ -132,13 +142,12 @@ export default function Header() {
             href={`https://bootcamp.francoseiler.com/${language}`}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${styles.navLink} ${styles.bootcampLink}`}
+            className={styles.navLink}
           >
             <p className={styles.navLinkContent}>
               <GraduationCap size={24} className={styles.navIcon} />
               {t('nav.bootcamp')}
               <ArrowUp size={16} className={styles.bootcampArrow} />
-              <span className={styles.bootcampBadge}>{t('nav.bootcampBadge')}</span>
             </p>
           </a>
         </section>
@@ -202,18 +211,6 @@ export default function Header() {
             {t('nav.contact')}
           </p>
         </Link>
-        <a 
-          href={`https://bootcamp.francoseiler.com/${language}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={toggleMobileMenu}
-          className={`${styles.mobileNavLink} ${styles.bootcampLink}`}
-        >
-          <GraduationCap size={22} className={styles.mobileNavIcon} />
-          {t('nav.bootcamp')}
-          <ArrowUp size={14} className={styles.bootcampArrow} />
-          <span className={styles.bootcampBadge}>{t('nav.bootcampBadge')}</span>
-        </a>
       </div>
     </header>
   );
