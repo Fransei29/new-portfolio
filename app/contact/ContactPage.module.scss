@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  min-height: auto;
+  background-color: var(--background-colorA);
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+  }
+}
+

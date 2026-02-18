@@ -1,7 +1,7 @@
 "use client";
 
 import { JSX, useEffect, useRef } from "react";
-import { FiCode,FiServer, FiGlobe, FiShoppingCart, FiDatabase, FiCpu } from "react-icons/fi";
+import { FiCode, FiGlobe, FiShoppingCart, FiCpu, FiZap, FiLayers } from "react-icons/fi";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
@@ -40,24 +40,29 @@ export const Services = () => {
   
   const services: Service[] = [
     {
-      key: "webDevelopment",
-      icon: <FiCode />,
-      title: t('services.webDevelopment.title'),
-      description: t('services.webDevelopment.description'),
-    },
-    {
       key: "aiIntegration",
       icon: <FiCpu />,
       title: t('services.aiIntegration.title'),
       description: t('services.aiIntegration.description'),
     },
     {
-      key: "backendDevelopment",
-      icon: <FiServer />,
-      title: t('services.backendDevelopment.title'),
-      description: t('services.backendDevelopment.description'),
+      key: "businessAutomation",
+      icon: <FiZap />,
+      title: t('services.businessAutomation.title'),
+      description: t('services.businessAutomation.description'),
     },
-    
+    {
+      key: "scalableArchitecture",
+      icon: <FiLayers />,
+      title: t('services.scalableArchitecture.title'),
+      description: t('services.scalableArchitecture.description'),
+    },
+    {
+      key: "webDevelopment",
+      icon: <FiCode />,
+      title: t('services.webDevelopment.title'),
+      description: t('services.webDevelopment.description'),
+    },
     {
       key: "webApplications",
       icon: <FiGlobe />,
@@ -69,12 +74,6 @@ export const Services = () => {
       icon: <FiShoppingCart />,
       title: t('services.ecommerceSolutions.title'),
       description: t('services.ecommerceSolutions.description'),
-    },
-    {
-      key: "uiuxDesign",
-      icon: <FiDatabase />,
-      title: t('services.uiuxDesign.title'),
-      description: t('services.uiuxDesign.description'),
     },
   ];
   

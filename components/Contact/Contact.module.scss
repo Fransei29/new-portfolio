@@ -2,12 +2,14 @@
 
 .contactSectionContainer {
   width: 100%;
-  background-color: var(--background-colorB);
+  background-image: var(--background-colorB-gradient);
+  background-color: var(--background-colorB); /* Fallback */
   color: #1f1f1f;
   display: flex;
   justify-content: center;
 
   :global(html.dark) & {
+    background-image: none;
     background-color: var(--dark-light);
     color: rgb(235, 235, 235);
   }

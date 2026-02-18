@@ -15,9 +15,9 @@ import { useParallax } from '../hooks/useParallax';
 import HomeText from '../components/HomeText/HomeText';
 import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
 import { Services } from '../components/Services/ServicesComponent';
-import Button from '../components/Button/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import Testimonials from '../components/Testimonials/TestimonialsComponent';
+import CallToAction from '../components/CallToAction/CallToAction';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -79,11 +79,11 @@ export default function Home() {
       <section className="containerGeneral">
          
          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
-            <ProjectsSection />
+           <Services />
           </div>
 
           <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
-           <Services />
+            <ProjectsSection />
           </div>
 
 
@@ -100,14 +100,8 @@ export default function Home() {
             <Testimonials />
           </div>
 
-          <div className='containerButton'>
-            <div className='buttonContainer'>
-              <Button
-                text={t('aboutPage.buttonText') ?? ''}
-                href="/about"
-                label={t('aboutPage.buttonLabel') ?? ''}
-              />
-            </div>
+          <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-right">
+            <CallToAction />
           </div>
       </section>
 

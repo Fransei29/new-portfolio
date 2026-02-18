@@ -2,8 +2,14 @@
 
 .experienceContainer{
   width: 100%;
-  background-color: var(--background-colorB);
-  
+  background-color: var(--background-colorA);
+  padding: 1.75rem 0;
+
+
+  @media (max-width: 768px) {
+    padding: 1rem 0rem;
+  }
+
   :global(html.dark) & {
     background-color: var(--dark-light);
     color: rgb(238, 236, 236);

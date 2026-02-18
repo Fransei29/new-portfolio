@@ -9,15 +9,19 @@
 }
 
 .recentProjects {
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     width: 100%;
+
+    @media (max-width: 768px) {
+        padding: 1rem 0.5rem;
+    }
 }
 
 .projectsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0;
     box-sizing: border-box;
     width: 100%;
 }

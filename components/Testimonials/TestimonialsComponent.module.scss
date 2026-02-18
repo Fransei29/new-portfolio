@@ -2,9 +2,16 @@
 
 .testimonialsContainer{
     width: 100%;
-    background-color: var(--background-colorA);
+    background-image: var(--background-colorB-gradient);
+    background-color: var(--background-colorB); /* Fallback */
+    padding: 1.75rem 0;
+
+    @media (max-width: 768px) {
+      padding: 1rem 0rem;
+    }
     
     :global(html.dark) & {
+      background-image: none;
       background-color: var(--dark-light);
       color: rgb(235, 235, 235);
   }
@@ -77,9 +84,11 @@
     padding-right: 0;
     min-height: 360px;
     overflow: hidden;
-    background-color: var(--background-colorA);
+    background-image: var(--background-colorB-gradient);
+    background-color: var(--background-colorB); /* Fallback */
 
     :global(html.dark) & {
+      background-image: none;
       background-color: var(--dark-light);
     }
 

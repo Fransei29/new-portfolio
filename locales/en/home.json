@@ -31,7 +31,9 @@
     "interests": "Passionate about digital product design and technological innovation. Continuously learning to stay current with industry best practices and tools."
   },
   "aboutPage": {
-    "buttonText": "Would you like to know more about me?",
+    "buttonText": "Ready to start your project?",
+    "buttonTextMobile": "Ready to\nstart your project?",
+    "description": "Let's work together to bring your idea to life. From concept to launch, I'm here to help you.",
     "buttonLabel": "Let's connect"
   }
 }

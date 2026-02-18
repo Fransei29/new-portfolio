@@ -269,6 +269,7 @@
 .mobileNavLink {
   display: flex;
   flex-direction: row;
+  align-items: center;
   color: #333; 
   font-size: 0.875rem;
   font-weight: 400;
@@ -459,5 +460,31 @@
   margin-right: 0.7rem;
   vertical-align: middle;
   transition: color 0.3s ease;
+}
+
+// Estilos para navLinkContent (contenedor del icono, texto y flecha)
+.navLinkContent {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+// Estilos para la flecha del bootcamp
+.bootcampArrow {
+  margin-left: 0.5rem;
+  opacity: 1;
+  transform: translateY(0) rotate(45deg);
+  transition: transform 0.15s ease-in-out;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+// Rotar la flecha al hacer hover en el navLink
+.navLink:hover .bootcampArrow {
+  transform: translateY(0) rotate(35deg);
+}
+
+.mobileNavLink:hover .bootcampArrow {
+  transform: translateY(0) rotate(35deg);
 }
 

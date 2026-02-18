@@ -15,5 +15,11 @@
       "sent": "Message sent!",
       "error": "Error sending"
     }
+  },
+  "contactPage": {
+    "title": "Contact",
+    "subtitle": "Open to strategic collaborations and projects that generate real impact.",
+    "description": "If you are looking for a developer passionate about building effective solutions, reach out.",
+    "email": "Email"
   }
 }

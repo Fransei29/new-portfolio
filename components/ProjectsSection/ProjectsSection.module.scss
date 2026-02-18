@@ -3,7 +3,12 @@
 .projectsSectionContainer{
     width: 100%;
     background-color: var(--background-colorA);
-    
+    padding: 1.75rem 0;
+
+    @media (max-width: 768px) {
+        padding: 1rem 0rem;
+    }
+
     :global(html.dark) & {
         background-color: var(--dark-light);
         color: rgb(235, 235, 235);
@@ -18,7 +23,7 @@
 
 @media (max-width: 768px) {
     .projectsSectionContainer{
-        background-color: transparent;
+        background-color: var(--background-colorA);
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
@@ -26,7 +31,6 @@
     }
 
     .projectsSection{
-        background-color: transparent;
         width: 100%;
         max-width: 100%;
         display: flex;

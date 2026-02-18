@@ -63,16 +63,6 @@ export async function GET(request: Request) {
       technologies: ['React', 'Vite', 'SCSS', 'React Router', 'Axios', 'Node.js', 'Express', 'JWT', 'Google OAuth', 'Telegram API'],
     },
     {
-      slug: 'event-scheduler',
-      title: t('projects.items.event-scheduler.title'),
-      isTutorial: false,
-      description: t('projects.items.event-scheduler.description'),
-      link2: null,
-      link3: '',
-      previewImage: '/img/img/Event/eventA.webp',
-      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
-    },
-    {
       slug: 'property-recommender',
       title: t('projects.items.property-recommender.title'),
       isTutorial: false,
@@ -81,6 +71,16 @@ export async function GET(request: Request) {
       link3: 'https://property-recommenderv2.vercel.app/',
       previewImage: '/img/img/Habita/habitaA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
+    },
+    {
+      slug: 'event-scheduler',
+      title: t('projects.items.event-scheduler.title'),
+      isTutorial: false,
+      description: t('projects.items.event-scheduler.description'),
+      link2: null,
+      link3: '',
+      previewImage: '/img/img/Event/eventA.webp',
+      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
     },
     {
       slug: 'the-club-northfield',

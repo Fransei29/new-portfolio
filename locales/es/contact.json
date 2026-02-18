@@ -15,5 +15,11 @@
       "sent": "¡Mensaje enviado!",
       "error": "Error al enviar"
     }
+  },
+  "contactPage": {
+    "title": "Contacto",
+    "subtitle": "Abierto a colaboraciones estratégicas y proyectos que generen impacto real.",
+    "description": "Si buscas un desarrollador apasionado por construir soluciones efectivas, contáctame.",
+    "email": "Email"
   }
 }

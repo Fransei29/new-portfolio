@@ -5,27 +5,27 @@
     "cta": "Consultar",
     "webDevelopment": {
       "title": "Desarrollo de\nSoftware",
-      "description": "Software robusto y escalable que crece con tu negocio. Código limpio y mantenible."
-    },
-    "backendDevelopment": {
-      "title": "Backend\ny APIs",
-      "description": "Infraestructura sólida que potencia tu aplicación. Sistemas seguros y escalables."
-    },
-    "aiIntegration": {
-      "title": "Integración\nde IA",
-      "description": "Automatiza procesos y mejora la experiencia de tus usuarios con inteligencia artificial."
+      "description": "Plataformas que crecen con tu negocio. Código robusto, escalable y mantenible que se adapta a tus necesidades."
     },
     "webApplications": {
       "title": "Aplicaciones\nWeb",
-      "description": "Aplicaciones modernas y rápidas que tus usuarios amarán usar."
+      "description": "Aplicaciones modernas que tus usuarios aman. Rápidas, intuitivas y optimizadas para convertir visitantes en clientes."
     },
     "ecommerceSolutions": {
       "title": "E-commerce\nCompleto",
-      "description": "Tiendas online que convierten visitantes en clientes. Pagos seguros integrados."
+      "description": "Tiendas online que venden. Desde la configuración hasta la optimización de conversión, todo para que tu negocio crezca online."
     },
-    "uiuxDesign": {
-      "title": "Bases de\nDatos",
-      "description": "Gestiona tus datos de forma eficiente y segura. Sistemas optimizados y escalables."
+    "aiIntegration": {
+      "title": "Estrategia e\nIntegración de IA",
+      "description": "La IA como habilitador de crecimiento. Definimos estrategias e integramos soluciones de IA que impactan en ventas, margen y escalabilidad."
+    },
+    "businessAutomation": {
+      "title": "Automatizaciones\nde Negocio",
+      "description": "Procesos que trabajan por ti. Automatizamos tareas repetitivas y flujos completos para que tu equipo se enfoque en lo que genera valor."
+    },
+    "scalableArchitecture": {
+      "title": "Arquitectura y\nSistemas Escalables",
+      "description": "Infraestructura que crece sin complicaciones. Diseñamos sistemas seguros, escalables y mantenibles que soportan el crecimiento de tu negocio."
     }
   },
   "testimonials": {

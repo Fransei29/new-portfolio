@@ -31,7 +31,9 @@
     "interests": "Apasionado por el diseño de productos digitales y la innovación tecnológica. En constante aprendizaje para estar al día con las mejores prácticas y herramientas del mercado."
   },
   "aboutPage": {
-    "buttonText": "¿Te gustaría saber más sobre mí?",
+    "buttonText": "¿Estás listo para empezar tu proyecto?",
+    "buttonTextMobile": "¿Estás listo para\nempezar tu proyecto?",
+    "description": "Desde el concepto hasta el lanzamiento, estoy aquí para ayudarte.",
     "buttonLabel": "Conectemos"
   }
 }

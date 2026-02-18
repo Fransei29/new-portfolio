@@ -10,7 +10,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, Home, FolderOpen, BookOpen, User, Mail } from 'lucide-react';
+import { X, Home, FolderOpen, BookOpen, User, Mail, ArrowUp, GraduationCap } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function Header() {
@@ -19,7 +19,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const isScrolled = useScrollDetection();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   useEffect(() => {
@@ -122,6 +122,24 @@ export default function Header() {
               {t('nav.about')}
             </p>
           </Link>
+          <Link href="/contact" passHref>
+            <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>
+              <Mail size={20} className={styles.navIcon} />
+              {t('nav.contact')}
+            </p>
+          </Link>
+          <a 
+            href={`https://bootcamp.francoseiler.com/${language}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.navLink}
+          >
+            <p className={styles.navLinkContent}>
+              <GraduationCap size={24} className={styles.navIcon} />
+              {t('nav.bootcamp')}
+              <ArrowUp size={16} className={styles.bootcampArrow} />
+            </p>
+          </a>
         </section>
 
         {/* Toggle theme y Language selector */}
@@ -177,6 +195,23 @@ export default function Header() {
             {t('nav.about')}
           </p>
         </Link>
+        <Link href="/contact" passHref onClick={toggleMobileMenu}>
+          <p className={styles.mobileNavLink}>
+            <Mail size={18} className={styles.mobileNavIcon} />
+            {t('nav.contact')}
+          </p>
+        </Link>
+        <a 
+          href={`https://bootcamp.francoseiler.com/${language}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMobileMenu}
+          className={styles.mobileNavLink}
+        >
+          <GraduationCap size={22} className={styles.mobileNavIcon} />
+          {t('nav.bootcamp')}
+          <ArrowUp size={14} className={styles.bootcampArrow} />
+        </a>
       </div>
     </header>
   );

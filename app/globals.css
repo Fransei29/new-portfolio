@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   /* Paleta de colores */
@@ -7,7 +8,7 @@
   --primary-colorA:#f51b88;
   --primary-color-light:#fdb6da;
   --dark:#090a16;
-  --dark-light:#111320;
+  --dark-light:#0a0a0f;
   --text-color:rgb(46, 46, 46);
   --text-color-B:rgb(75, 74, 74);
   --text-color-light: #747474;
@@ -23,7 +24,13 @@
   --box-shadow: 0 2px 4px rgba(87, 3, 45, 0.2);
     box-shadow: 0 3px 4px rgba(192, 4, 98, 0.6);
   --background-colorA: rgb(255, 255, 255);
+  --background-colorB: rgb(243, 244, 246);
+  --background-colorB-gradient: linear-gradient(135deg, rgb(246, 247, 248) 0%, rgb(249, 250, 251) 50%, rgb(247, 249, 252) 100%);
   --bg-hover: rgba(245, 84, 165, 0.9);
+  --cta-bg: #032e8b;
+  --cta-bg-hover: #1D4ED8;
+  --cta-bg-gradient: linear-gradient(135deg, #032e8b 0%, #0a3fa3 50%, #032e8b 100%);
+  --cta-text: #ffffff;
   --br: 12px;
   
   /* Variables para títulos y subtítulos - Sistema global */
@@ -85,7 +92,7 @@
   --h3-content-font-weight: 500;
   
   /* Greeting/Saludo */
-  --greeting-font-size: 1.25rem;
+  --greeting-font-size: 1.5rem;
   --greeting-font-size-mobile: 1.25rem;
   --greeting-font-weight: 400;
   
@@ -172,7 +179,11 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   flex-wrap: wrap;
   align-content: center;
   align-items: flex-start;
-  padding-top: 2rem;
+  padding: 4rem 0;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 0.5rem;
+  }
 }
 
 .home-textA {
@@ -362,7 +373,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .home-text {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
     height: auto;
   }
 

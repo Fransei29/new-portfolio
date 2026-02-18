@@ -5,27 +5,27 @@
     "cta": "Learn More",
     "webDevelopment": {
       "title": "Software\nDevelopment",
-      "description": "Robust, scalable software that grows with your business. Clean, maintainable code."
-    },
-    "backendDevelopment": {
-      "title": "Backend and\nAPIs",
-      "description": "Solid infrastructure that powers your application. Secure and scalable systems."
-    },
-    "aiIntegration": {
-      "title": "AI\nIntegration",
-      "description": "Automate processes and enhance user experience with artificial intelligence."
+      "description": "Platforms that grow with your business. Robust, scalable, and maintainable code that adapts to your needs."
     },
     "webApplications": {
       "title": "Web\nApplications",
-      "description": "Modern, fast applications your users will love to use."
+      "description": "Modern applications your users love. Fast, intuitive, and optimized to convert visitors into customers."
     },
     "ecommerceSolutions": {
       "title": "Complete\nE-commerce",
-      "description": "Online stores that convert visitors into customers. Secure payments integrated."
+      "description": "Online stores that sell. From setup to conversion optimization, everything to grow your business online."
     },
-    "uiuxDesign": {
-      "title": "Databases\n& Data",
-      "description": "Manage your data efficiently and securely. Optimized and scalable systems."
+    "aiIntegration": {
+      "title": "AI Strategy &\nIntegration",
+      "description": "AI as a growth enabler. We define strategies and integrate AI solutions that impact sales, margin, and scalability."
+    },
+    "businessAutomation": {
+      "title": "Business\nAutomation",
+      "description": "Processes that work for you. We automate repetitive tasks and complete workflows so your team focuses on what generates value."
+    },
+    "scalableArchitecture": {
+      "title": "Scalable\nArchitecture & Systems",
+      "description": "Infrastructure that grows without complications. We design secure, scalable, and maintainable systems that support your business growth."
     }
   },
   "testimonials": {

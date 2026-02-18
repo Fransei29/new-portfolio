@@ -1,0 +1,224 @@
+@import '../../app/styles/utilities.scss';
+
+.contactPageContainer {
+  width: 100%;
+  background-color: var(--background-colorA);
+  padding: 1rem 0;
+  padding-bottom: 2rem;
+  
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0rem 0;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.contactPageContent {
+  max-width: 1300px;
+  margin-inline: auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+    gap: 1.25rem;
+  }
+}
+
+.contactHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.highlight {
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin-bottom: 1.5rem;
+  text-align: left;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+}
+
+.contactMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--br);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(204, 2, 103, 0.2);
+  }
+
+  :global(html.dark) & {
+    background-color: #181c33;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgb(235, 235, 235);
+
+    &:hover {
+      border-color: rgba(204, 2, 103, 0.4);
+      box-shadow: 0 4px 16px rgba(204, 2, 103, 0.2);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+}
+
+.cardIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background-color: rgba(204, 2, 103, 0.08);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+
+  .contactCard:hover & {
+    background-color: rgba(204, 2, 103, 0.15);
+    transform: scale(1.05);
+  }
+
+  :global(html.dark) & {
+    background-color: rgba(204, 2, 103, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.cardIcon {
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+
+  .contactCard:hover & {
+    transform: scale(1.1);
+  }
+
+  :global(html.dark) & {
+    color: rgb(253, 182, 215);
+  }
+}
+
+.cardInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: var(--card-title-font-size);
+  font-weight: var(--card-title-font-weight);
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+
+  :global(html.dark) & {
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--card-title-font-size-mobile);
+  }
+}
+
+.cardSubtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color-light);
+  margin: 0;
+  line-height: 1.4;
+
+  :global(html.dark) & {
+    color: rgb(200, 200, 200);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-light);
+  opacity: 0.7;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba(204, 2, 103, 0.1);
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  :global(html.dark) & {
+    color: rgb(200, 200, 200);
+    
+    &:hover {
+      background-color: rgba(204, 2, 103, 0.2);
+    }
+  }
+}
+
+.copyIcon {
+  transition: all 0.2s ease;
+}
+

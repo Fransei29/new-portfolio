@@ -5,13 +5,10 @@ import styles from './AboutPage.module.scss';
 import About from '../../components/About/AboutComponent';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import '../../app/styles/utilities.scss';
-import { useLanguage } from '../../contexts/LanguageContext';
-import ContactSection from '../../components/Contact/Contact';
 import Skills from '../../components/Skills/Skills';
 
 export default function AboutPage() {
   const elementsRef = useScrollAnimation();
-  const { t } = useLanguage();
 
   return (
     <ClientLayout>
@@ -26,11 +23,6 @@ export default function AboutPage() {
           {/* Skills section */}
           <div ref={(el) => { elementsRef.current[1] = el; }} className="fade-in-left">
             <Skills />
-          </div>
-
-          {/* Contact section */}
-          <div ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-right">
-            <ContactSection />
           </div>
         </div>
       </main>
