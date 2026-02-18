@@ -121,6 +121,8 @@
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    align-self: flex-start;
+    margin-top: 0.25rem !important;
 
     &::before {
       content: '';
