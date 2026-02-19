@@ -60,10 +60,10 @@ export default function Header() {
             <Link href="/" passHref className={styles.logoLink}>
               <div className={styles.logoContainer}>
                 <Image
-                  src="/dev3.png"
+                  src="/Logo.svg"
                   alt="Logo"
-                  width={60}
-                  height={60}
+                  width={70}
+                  height={70}
                   className={styles.logo}
                   priority
                   unoptimized

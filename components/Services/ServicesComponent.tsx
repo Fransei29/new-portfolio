@@ -1,14 +1,14 @@
 "use client";
 
 import { JSX, useEffect, useRef } from "react";
-import { FiCode, FiGlobe, FiShoppingCart, FiCpu, FiZap, FiLayers } from "react-icons/fi";
+import Image from "next/image";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
 
 interface Service {
   key: string;
-  icon: JSX.Element;
+  icon: string;
   title: string;
   description: string;
 }
@@ -41,37 +41,37 @@ export const Services = () => {
   const services: Service[] = [
     {
       key: "aiIntegration",
-      icon: <FiCpu />,
+      icon: "/services/ai.svg",
       title: t('services.aiIntegration.title'),
       description: t('services.aiIntegration.description'),
     },
     {
       key: "businessAutomation",
-      icon: <FiZap />,
+      icon: "/services/api.svg",
       title: t('services.businessAutomation.title'),
       description: t('services.businessAutomation.description'),
     },
     {
       key: "scalableArchitecture",
-      icon: <FiLayers />,
+      icon: "/services/database.svg",
       title: t('services.scalableArchitecture.title'),
       description: t('services.scalableArchitecture.description'),
     },
     {
       key: "webDevelopment",
-      icon: <FiCode />,
+      icon: "/services/website.svg",
       title: t('services.webDevelopment.title'),
       description: t('services.webDevelopment.description'),
     },
     {
       key: "webApplications",
-      icon: <FiGlobe />,
+      icon: "/services/app.svg",
       title: t('services.webApplications.title'),
       description: t('services.webApplications.description'),
     },
     {
       key: "ecommerceSolutions",
-      icon: <FiShoppingCart />,
+      icon: "/services/e-commerce.svg",
       title: t('services.ecommerceSolutions.title'),
       description: t('services.ecommerceSolutions.description'),
     },
@@ -92,7 +92,13 @@ export const Services = () => {
             <div key={service.key} className={styles.card}>
               <div className={styles.iconContainer}>
                 <div className={styles.iconWrapper}>
-                  {service.icon}
+                  <Image
+                    src={service.icon}
+                    alt={service.title}
+                    width={36}
+                    height={36}
+                    className={styles.serviceIcon}
+                  />
                 </div>
               </div>
               <div className={styles.cardContent}>

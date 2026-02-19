@@ -42,27 +42,27 @@
   
   /* H1 - Título principal (Hero) */
   --h1-font-size: 3.5rem;
-  --h1-font-size-mobile: 2.5rem;
+  --h1-font-size-mobile: 2.25rem;
   --h1-font-weight: 500;
   --h1-line-height: 1.1;
   --h1-letter-spacing: -0.01em;
   
   /* H1 Highlight - Título destacado (nombre, etc.) */
   --h1-highlight-font-size: 4.5rem;
-  --h1-highlight-font-size-mobile: 3.75rem;
+  --h1-highlight-font-size-mobile: 3.25rem;
   --h1-highlight-font-weight: 700;
   --h1-highlight-letter-spacing: -0.02em;
   
   /* H2 - Subtítulo principal */
   --h2-font-size: 1.25rem;
-  --h2-font-size-mobile: 1rem;
+  --h2-font-size-mobile: 0.975rem;
   --h2-font-weight: 400;
   --h2-line-height: 1.4;
   --h2-letter-spacing: 0.01em;
   
   /* H3 - Título de sección */
   --h3-font-size: 2rem;
-  --h3-font-size-mobile: 1.75rem;
+  --h3-font-size-mobile: 1.5rem;
   --h3-font-weight: 500;
   --h3-color: var(--text-color);
   --h3-spacing: 0rem;
@@ -70,25 +70,25 @@
   
   /* Subtítulo de sección */
   --subtitle-font-size: 1.25rem;
-  --subtitle-font-size-mobile: 1.175rem;
+  --subtitle-font-size-mobile: 0.975rem;
   --subtitle-font-weight: 400;
   --subtitle-color: var(--text-color-light);
   --subtitle-line-height: 1.5;
   
   /* Título de tarjeta/card */
   --card-title-font-size: 1.25rem;
-  --card-title-font-size-mobile: 0.95rem;
+  --card-title-font-size-mobile: 0.875rem;
   --card-title-font-weight: 500;
   --card-title-line-height: 1;
   
   /* Título de proyecto */
   --project-title-font-size: 1.5rem;
-  --project-title-font-size-mobile: 1.25rem;
+  --project-title-font-size-mobile: 1rem;
   --project-title-font-weight: 500;
   
   /* Título secundario (h2 dentro de contenido) */
   --h2-content-font-size: 1.15rem;
-  --h2-content-font-size-mobile: 1rem;
+  --h2-content-font-size-mobile: 0.975rem;
   --h2-content-font-weight: 500;
   
   /* Título terciario (h3 dentro de contenido) */
@@ -98,12 +98,12 @@
   
   /* Greeting/Saludo */
   --greeting-font-size: 1.5rem;
-  --greeting-font-size-mobile: 1.25rem;
+  --greeting-font-size-mobile: 1.125rem;
   --greeting-font-weight: 400;
   
   /* Descripción */
   --description-font-size: 1.25rem;
-  --description-font-size-mobile: 1.25rem;
+  --description-font-size-mobile: 0.975rem;
   --description-line-height: 1.4;
 }
 

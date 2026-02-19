@@ -11,10 +11,10 @@ export default function LoadingSpinner() {
         <div className={styles.circle}></div>
       </div>
       <Image
-          src="/dev3.png"
+          src="/Logo.svg"
           alt="Logo"
-          width={50}
-          height={50}
+          width={55}
+          height={55}
           className={styles.logo}
         />
     </div>
