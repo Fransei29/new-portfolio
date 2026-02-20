@@ -35,5 +35,35 @@
     "buttonTextMobile": "¿Estás listo para\nempezar tu proyecto?",
     "description": "Desde el concepto hasta el lanzamiento, estoy aquí para ayudarte.",
     "buttonLabel": "Conectemos"
+  },
+  "whyChooseUs": {
+    "title": "Por qué elegirme",
+    "subtitle": "Valor agregado que aporto a cada proyecto para alcanzar resultados excepcionales.",
+    "expertise": {
+      "title": "Experiencia Técnica",
+      "description": "Más de 3 años desarrollando soluciones escalables con tecnologías modernas y mejores prácticas de la industria."
+    },
+    "delivery": {
+      "title": "Entrega Eficiente",
+      "description": "Comprometido con plazos realistas y comunicación clara. Cada proyecto se entrega con código limpio y documentación."
+    },
+    "collaboration": {
+      "title": "Enfoque Colaborativo",
+      "description": "Trabajo cercano con equipos y clientes, priorizando la comprensión de necesidades y objetivos del negocio."
+    }
+  },
+  "statsNumbers": {
+    "projects": {
+      "label": "Proyectos completados"
+    },
+    "experience": {
+      "label": "Años de experiencia"
+    },
+    "technologies": {
+      "label": "Tecnologías dominadas"
+    },
+    "commitment": {
+      "label": "Compromiso"
+    }
   }
 }

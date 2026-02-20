@@ -18,6 +18,7 @@ import { Services } from '../components/Services/ServicesComponent';
 import { useLanguage } from '../contexts/LanguageContext';
 import Testimonials from '../components/Testimonials/TestimonialsComponent';
 import CallToAction from '../components/CallToAction/CallToAction';
+import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -83,24 +84,28 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
+            <WhyChooseUs />
+          </div>
+
+          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
             <ProjectsSection />
           </div>
 
 
-          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
             <SkillsSummary />
           </div>
           
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-left">
             <Experience />
           </div>
 
           
-          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-right">
             <Testimonials />
           </div>
 
-          <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
             <CallToAction />
           </div>
       </section>

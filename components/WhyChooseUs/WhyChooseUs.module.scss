@@ -1,0 +1,343 @@
+@import '../../app/styles/utilities.scss';
+
+.whyChooseUs {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 4.5rem 0;
+  background-color: var(--background-colorA);
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
+}
+
+// Header Section - Left Aligned
+.headerSection {
+  margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.highlight {
+  display: inline-block;
+  position: relative;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--h3-color);
+  text-decoration: none;
+  padding: 0;
+  margin: 1rem 0 var(--h3-spacing) 0;
+
+  @media (max-width: 768px) {
+    font-size: var(--h3-font-size-mobile);
+    margin-bottom: var(--h3-spacing-mobile);
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: 1.5rem 0 0 0;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  text-align: left;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-top: 0rem;
+    text-align: left;
+  }
+}
+
+// Stats Bar - Horizontal Style
+.statsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  margin-bottom: 2.5rem;
+  border-top: 1px solid rgba(247, 86, 166, 0.15);
+  border-bottom: 1px solid rgba(247, 86, 166, 0.15);
+
+  :global(html.dark) & {
+    border-color: rgba(250, 81, 166, 0.2);
+  }
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.25rem 0;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid rgba(247, 86, 166, 0.15);
+    border-bottom: 1px solid rgba(247, 86, 166, 0.15);
+    border-left: none;
+    padding-left: 0;
+
+    :global(html.dark) & {
+      border-color: rgba(250, 81, 166, 0.2);
+    }
+  }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.statValue {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.statNumber {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1;
+  font-family: 'IBM Plex Sans', sans-serif;
+
+  :global(html.dark) & {
+    color: #fa51a6;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+  }
+}
+
+.statSuffix {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  opacity: 0.9;
+  line-height: 1;
+
+  :global(html.dark) & {
+    color: #fa51a6;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+.statLabel {
+  color: var(--text-color-light);
+  line-height: 1.4;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+}
+
+// Benefits Section - Grid Layout
+.benefitsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+  margin-top: 2rem;
+  grid-auto-flow: row;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 0rem;
+  }
+}
+
+.benefitCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(248, 248, 248, 0.918);
+  border:var(--borderB);
+  border-radius: var(--br);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  opacity: 1;
+  visibility: visible;
+  box-sizing: border-box;
+
+  :global(html.dark) & {
+    background: linear-gradient(135deg, rgba(250, 81, 166, 0.06) 0%, rgba(250, 81, 166, 0.02) 100%);
+    border: 1px solid rgba(248, 248, 248, 0.3);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(97, 86, 247, 0.12);
+
+    :global(html.dark) & {
+      box-shadow: 0 6px 20px rgba(250, 81, 166, 0.18);
+    }
+
+    .benefitIconWrapper {
+      transform: scale(1.1) rotate(5deg);
+      background-color: var(--icon-container-bg-hover);
+    }
+    
+    :global(html.dark) & {
+      .benefitIconWrapper {
+        background-color: var(--icon-container-bg-hover-dark);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.875rem 0.75rem;
+    gap: 0.75rem;
+  }
+}
+
+.benefitIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: var(--icon-container-bg);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  :global(html.dark) & {
+    background: var(--icon-container-bg-dark);
+  }
+
+  svg {
+    color: var(--primary-color);
+    stroke-width: 2.5;
+    width: 28px;
+    height: 28px;
+  }
+
+  .benefitIcon {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-color);
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .benefitIcon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.benefitText {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.benefitTitle {
+  font-size: var(--card-title-font-size);
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.35rem;
+  }
+}
+
+.benefitDescription {
+  color: var(--text-color-light);
+  line-height: 1.5;
+  margin: 0;
+  font-size: var(--card-description-font-size);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.75);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+}

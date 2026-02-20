@@ -35,5 +35,35 @@
     "buttonTextMobile": "Ready to\nstart your project?",
     "description": "Let's work together to bring your idea to life. From concept to launch, I'm here to help you.",
     "buttonLabel": "Let's connect"
+  },
+  "whyChooseUs": {
+    "title": "Why choose me",
+    "subtitle": "Added value I bring to every project to achieve exceptional results.",
+    "expertise": {
+      "title": "Technical Expertise",
+      "description": "Over 3 years developing scalable solutions with modern technologies and industry best practices."
+    },
+    "delivery": {
+      "title": "Efficient Delivery",
+      "description": "Committed to realistic timelines and clear communication. Every project is delivered with clean code and documentation."
+    },
+    "collaboration": {
+      "title": "Collaborative Approach",
+      "description": "I work closely with teams and clients, prioritizing understanding of business needs and objectives."
+    }
+  },
+  "statsNumbers": {
+    "projects": {
+      "label": "Completed projects"
+    },
+    "experience": {
+      "label": "Years of experience"
+    },
+    "technologies": {
+      "label": "Technologies mastered"
+    },
+    "commitment": {
+      "label": "Commitment"
+    }
   }
 }
