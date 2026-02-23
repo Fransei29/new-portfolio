@@ -251,8 +251,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
 @media (min-width: 1400px) {
   .svg-duo {
-    width: 360px;
-    height: 500px;
+    width: 340px;
+    height: 480px;
   }
 }
 
@@ -309,14 +309,14 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   .shape-a {
     width: 130px;
     height: 200px;
-    top: 120px;
-    left: 40px;
+    top: 100px;
+    left: 50px;
   }
   .shape-b {
     width: 130px;
     height: 200px;
-    top: 100px;
-    left: 165px;
+    top: 80px;
+    left: 150px;
   }
 }
 
