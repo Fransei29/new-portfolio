@@ -6,9 +6,9 @@
   z-index: 50;
   transition: all 0.3s ease;
   backdrop-filter: blur(0px);
-  overflow: visible;
   box-shadow: none;
   min-height: 10vh;
+  box-sizing: border-box;
   
   &.scrolled {
     background: rgba(255, 255, 255);
@@ -26,8 +26,6 @@
 .nav {
   display: flex;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: visible;
   background: rgb(0, 0, 0, 0);
   border-radius: 10px;
   color: #fff;
@@ -40,6 +38,7 @@
   top: 0;
   width: 100%;
   box-sizing: border-box;
+  min-width: 0;
   
   @media (max-width: 768px) {
     display: flex;
@@ -48,8 +47,6 @@
     justify-content: space-between;
     padding: 0rem 1rem;
     height: 9vh;
-    overflow-x: hidden;
-    overflow-y: visible;
     max-width: 100%;
     gap: 0.75rem;
   }

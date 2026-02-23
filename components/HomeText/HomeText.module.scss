@@ -5,7 +5,6 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 .greeting {
@@ -15,8 +14,8 @@
   font-weight: var(--greeting-font-weight);
  
   @media (max-width: 768px) {
-    margin: 0 0 0.75rem 0;
-    font-size: 1.25rem;
+    margin: 0 0 0.1rem 0;
+    font-size: 1.15rem;
     font-weight: var(--greeting-font-weight);
     color: var(--text-color-light);
   }
@@ -37,7 +36,7 @@
   font-weight: var(--h1-highlight-font-weight);
 
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.35rem;
   }
 }
 
@@ -50,16 +49,19 @@
   font-weight: 600;
   letter-spacing: var(--h1-letter-spacing);
   white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
  
   @media (max-width: 768px) {
-    margin: 0 0 1.75rem 0;
-    padding: 1.5rem 0;
-    line-height: 1.1;
-    font-size: 2.25rem;
-    text-align: left;
-    margin-bottom: 0.75rem;
-    max-width: 100%;
+    margin: 0 0 0.15rem 0;
     padding: 0;
+    line-height: 1.08;
+    font-size: 2.35rem;
+    text-align: left;
+    max-width: 100%;
   }
 }
 
@@ -77,8 +79,10 @@
 
 
    @media (max-width: 768px) {
-    font-size: 1.125rem;
-    margin: 0 0 0.25rem 0;
+    font-size: 1.05rem;
+    margin: 0;
+    margin-top: 0.1rem;
+    line-height: 1.35;
     min-width: 0 !important;
     max-width: 100%;
     width: 100%;
@@ -109,7 +113,7 @@
 
 .ctaButtons {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin: 0 0 1rem 0;
   flex-wrap: wrap;
   width: 100%;
@@ -192,11 +196,10 @@
 
   @media (max-width: 768px) {
   .homeTextContainer{
-    padding: 0.25rem;
+    padding: 0 0.25rem 0.2rem;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -204,8 +207,8 @@
   .homeTextContainer > section {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
   }
 
   .homeTextContainer > section:first-child {
@@ -221,7 +224,6 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
     position: relative;
     z-index: 10; /* Botones por encima de las figuras */
   }
@@ -233,11 +235,11 @@
 
   .ctaButtons {
     flex-direction: column;
-    gap: 1rem;
-    margin: 0.25rem 0;
+    gap: 0.85rem;
+    margin: 0.15rem 0 0;
     width: 100%;
     max-width: 100%;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     align-items: center;
 
     a {

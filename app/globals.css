@@ -194,6 +194,14 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: auto;
+    padding: 0.25rem 0 1rem;
+    align-items: flex-start;
+  }
+}
+
 .hero-section > .home-text {
   width: 100%;
   max-width: var(--container-max-width);
@@ -215,7 +223,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   gap: 2rem;
 
   @media (max-width: 768px) {
-    padding: 1.5rem 0.5rem;
+    padding: 0.2rem 0.5rem 0.5rem;
+    gap: 0.5rem;
   }
 }
 
@@ -456,6 +465,10 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
     display: flex;
     flex-direction: column;
     height: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.2rem 0 0.5rem;
   }
 
   .home-textA {
