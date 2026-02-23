@@ -16,7 +16,7 @@
   }
 
 .skillsSection {
-  max-width: 1300px;
+  max-width: var(--container-max-width);
   margin-inline: auto;
   padding: 2.5rem 0;
 }

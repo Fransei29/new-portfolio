@@ -2,7 +2,8 @@
 
 .experienceContainer{
   width: 100%;
-  background-color: var(--background-colorA);
+  background-image: var(--background-colorB-gradient);
+  background-color: var(--background-colorB);
   padding: 1.75rem 0;
 
 
@@ -11,13 +12,14 @@
   }
 
   :global(html.dark) & {
+    background-image: none;
     background-color: var(--dark-light);
     color: rgb(238, 236, 236);
   }
 }
 
 .experienceSection{
-  max-width: 1300px;
+  max-width: var(--container-max-width);
   margin-inline: auto;
   padding: 2.5rem 0;
 

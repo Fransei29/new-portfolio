@@ -32,7 +32,7 @@
 
   // Wrapper para el título que respeta el max-width
   .titleWrapper {
-    max-width: 1300px;
+    max-width: var(--container-max-width);
     margin-inline: auto;
     padding: 0 2rem;
     box-sizing: border-box;

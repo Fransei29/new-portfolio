@@ -9,12 +9,12 @@
 }
 
 .containerContent {
-  max-width: 1300px;
+  max-width: var(--container-max-width);
   margin-inline: auto;
 }
 
 .buttonContainer {
-  max-width: 1300px;
+  max-width: var(--container-max-width);
   margin-inline: auto;
   display: flex;
   justify-content: flex-end;

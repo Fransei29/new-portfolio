@@ -16,7 +16,7 @@
 }
 
 .contactSection {
-  max-width: 1300px;
+  max-width: var(--container-max-width);
   margin-inline: auto;
   padding: 0;
   flex-direction: column;

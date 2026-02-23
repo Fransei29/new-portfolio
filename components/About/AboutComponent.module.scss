@@ -14,7 +14,7 @@
   }
   
   .aboutSection {
-    max-width: 1300px;
+    max-width: var(--container-max-width);
     margin-inline: auto;
     padding-top: 2rem;
     padding-bottom: 0rem;
