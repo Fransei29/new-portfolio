@@ -37,7 +37,7 @@
   --cta-bg-gradient: linear-gradient(135deg, #032e8b 0%, #0a3fa3 50%, #032e8b 100%);
   --cta-text: #ffffff;
   --br: 12px;
-  --container-max-width: 1300px;
+  --container-max-width: 1400px;
 
   /* Variables para títulos y subtítulos - Sistema global */
   
@@ -116,7 +116,7 @@
 
 @media (min-width: 1800px) {
   :root {
-    --container-max-width: 1600px;
+    --container-max-width: 1450px;
   }
 }
 
@@ -252,25 +252,12 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .svg-duo {
   display: flex;
   position: relative;
-  width: 290px;
-  height: 400px;
+  width: 320px;
+  height: 480px;
   margin: 0 auto;
   opacity: 0.8;
 }
 
-@media (min-width: 1400px) {
-  .svg-duo {
-    width: 340px;
-    height: 480px;
-  }
-}
-
-@media (min-width: 1800px) {
-  .svg-duo {
-    width: 420px;
-    height: 580px;
-  }
-}
 
 .svg-overlap {
   position: absolute;
@@ -314,33 +301,19 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   -webkit-transform: translateZ(0);
 }
 
-@media (min-width: 1400px) {
-  .shape-a {
-    width: 130px;
-    height: 200px;
-    top: 100px;
-    left: 50px;
-  }
-  .shape-b {
-    width: 130px;
-    height: 200px;
-    top: 80px;
-    left: 150px;
-  }
-}
 
 @media (min-width: 1800px) {
   .shape-a {
-    width: 180px;
-    height: 270px;
+    width: 140px;
+    height: 200px;
     top: 140px;
     left: 50px;
   }
   .shape-b {
-    width: 180px;
-    height: 270px;
+    width: 140px;
+    height: 200px;
     top: 120px;
-    left: 200px;
+    left: 180px;
   }
 }
 
