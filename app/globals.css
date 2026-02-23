@@ -239,7 +239,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   flex-wrap: wrap;
   align-content: center;
   align-items: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
   gap: 2rem;
 
   @media (max-width: 768px) {
