@@ -580,5 +580,20 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     ],
     githubLink: 'https://github.com/Fransei29/vestire_front.git',
     liveDemoLink: 'https://vestire-front-s196.vercel.app/',
-  }
+  },
+  {
+    slug: 'trip-planner',
+    title: 'Trip Planner',
+    subtitle: 'Simple Trip Planning App',
+    whatIs: `Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.`,
+    problemSolved: `Quick side project to try Next.js App Router and keep the scope small—focused on a simple trip-planning flow.`,
+    techStack: ['Next.js', 'JavaScript', 'CSS'],
+    learnings: [
+      'Next.js App Router and create-next-app setup.',
+      'Deployed on Vercel (trip-planner-c.vercel.app).',
+    ],
+    screenshots: ['/img/img/Trip/trip.webp'],
+    githubLink: 'https://github.com/Fransei29/trip-planner-c',
+    liveDemoLink: 'https://trip-planner-c.vercel.app/',
+  },
 ];

@@ -109,9 +109,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
           <Image
             src={project.previewImage}
             alt={`${project.title} Preview`}
-            quality={100}
             fill
             className={styles.projectImage}
+            sizes="(max-width: 768px) 100vw, 900px"
+            unoptimized
           />
         </div>
       )}

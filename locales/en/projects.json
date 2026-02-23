@@ -13,8 +13,11 @@
     "goToTutorials": "View All Tutorials",
     "back": "Back",
     "overview": "Overview",
+    "challenge": "The challenge",
     "goal": "Goal",
     "builtWith": "Built With",
+    "learnings": "Key deliverables",
+    "links": "Links",
     "githubRepository": "GitHub Repository",
     "liveDemo": "Live Demo",
     "items": {
@@ -128,17 +131,13 @@
       },
       "trip-planner": {
         "title": "Trip Planner",
-        "subtitle": "Travel Planning Application",
-        "description": "An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.",
-        "whatIs": "An application designed to simplify trip planning with itinerary management and other travel tools.\nIts effective navigation and smooth design enhance the user experience significantly.\nThe frontend is developed with React, while the backend uses Node.js and Express.\nAxios handles HTTP requests, and MongoDB serves as the database for storing trip data.",
-        "problemSolved": "Planning trips can be overwhelming with multiple tools and scattered information.\nThis app centralizes trip planning, making it easy to organize itineraries, manage travel details,\nand access everything in one convenient location.",
+        "subtitle": "Simple Trip Planning App",
+        "description": "Small Next.js app for planning trips. Minimal UI, Geist font, deployed on Vercel.",
+        "whatIs": "Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.",
+        "problemSolved": "Quick side project to try Next.js App Router and keep the scope small—focused on a simple trip-planning flow.",
         "learnings": [
-          "Built a full-stack application with React and Node.js.",
-          "Implemented MongoDB for flexible data storage.",
-          "Created intuitive trip management features.",
-          "Developed RESTful APIs with Express.",
-          "Managed HTTP requests with Axios.",
-          "Designed a user-friendly interface for travel planning."
+          "Next.js App Router and create-next-app setup.",
+          "Deployed on Vercel (trip-planner-c.vercel.app)."
         ]
       },
       "dynamic-blog": {
@@ -264,21 +263,21 @@
       "whatIs": "Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.\n\nThe platform enables wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.\n\nMulti-tenant SaaS architecture supporting multiple independent brands with complete data isolation and customizable white-label branding.\n\nKey Features:\n\n• Multi-Tenant Architecture with isolated PostgreSQL databases and customizable branding\n• Digital Contract Signing with canvas-captured signatures and automatic PDF generation\n• Real-Time Notifications with alert center and persistent notifications\n• Advanced Reporting: Availability and Margin Reports with multi-currency support (USD, CAD, MXN)\n• Seasonal Management with availability dates, pre-orders, and estimated shipping dates\n• Multi-Currency Pricing (USD, CAD, MXN) with MSRP and automatic conversion\n• Complete Order Management workflow from New to Invoice Paid with PDF export\n• Advanced Inventory System with multiple metrics (On Hand, Available to Sell, Available to Ship)\n• Product Catalog with multiple images, automatic variants, and SKU/MFC codes\n• Customer Management with multiple addresses, billing info, and order history\n• Dashboard & Analytics with configurable metrics and trend charts\n• Super Admin Panel for managing multiple tenants and database creation\n• Enterprise Security with JWT authentication, bcrypt-hashed passwords, and role-based permissions",
       "problemSolved": "The wholesale fashion sector lacks modern platforms that efficiently connect brands with their wholesale customers.\nAteevo Wholesale solves this problem by allowing brands to manage their catalog, inventory, and orders centrally, while customers can browse, order, and track their purchases intuitively, all with digitally signed contracts and advanced margin and availability reports.\nThe multi-tenant architecture allows scaling the business by supporting multiple brands on a single platform with complete security and customization.",
       "learnings": [
-        "Multi-tenant architecture with isolated PostgreSQL databases per tenant and customizable white-label branding (custom logo, primary/secondary colors, contact information, dynamic storefront color adaptation without page reload).",
-        "Digital contract signing system with canvas-captured hand signatures, timestamps, IP addresses, automatic PDF generation, contract states (pending, signed_by_customer, signed_by_admin, fully_signed, cancelled), and support for multiple contracts per order (complete and partial invoices).",
-        "Real-time notification system with alert center bell icon, automatic notifications for contract signature requirements, unique floating notification when admin requests signature, persistent notifications until read, and direct navigation to order from notification.",
-        "Advanced Availability Report showing available products for sale, identifying which customers ordered each product, allowing \"stealing\" items from existing orders for new orders, with filters for products with orders vs available products.",
-        "Advanced Margin Report calculating profit margins per product based on costs and sale prices, multi-currency support (USD, CAD), identifying products without cost data with direct action buttons, automatic calculations of revenue, cost, margin and margin percentage, counting only \"Shipped\" or \"Invoice Paid\" orders as completed sales.",
-        "Seasonal product management with products organized by seasons (Spring 2025, Fall/Winter, etc.), availability dates and estimated shipping dates, products marked as \"Pre-order\" for future seasons, current season highlighting, splash images per season, and customers seeing estimated shipping dates based on product seasons.",
-        "Complete multi-currency pricing system with prices in USD, CAD, and MXN, customers seeing prices in their base currency by country, MSRP (Manufacturer Suggested Retail Price) per currency, costs per currency for accurate margin calculations, and automatic conversion and display.",
-        "Comprehensive order management with full state workflow (New, Draft, Submitted, Confirmed, Booked, Shipped, Invoice Sent, Invoice Pending, Invoice Overdue, Invoice Paid, Cancel), customers creating orders from storefront, admins creating orders manually, full order editing by admins (add/remove/adjust items), optional customer PO numbers, internal notes for admins only, PDF export of orders, and complete state change history.",
-        "Advanced inventory system with multiple metrics: On Hand (physical stock available), Available to Sell (stock minus pending orders), Available to Ship (stock available for immediate shipping), Pending Orders (quantity committed in orders), Supplier Orders Pending (incoming stock from suppliers), with advanced filters, search, quick quantity editing, and variant view (colors/sizes) with individual stock.",
-        "Product catalog management with multiple images per product (up to 5) with featured image, automatic variants (colors × sizes = complete matrix), prices and costs per variant, customizable categories, assignment to multiple seasons, SKU and MFC (Manufacturer Code), descriptions and materials, and advanced search and filtering.",
-        "Customer management panel with account creation and editing, multiple shipping addresses per customer, billing information, account activation/deactivation, complete order history per customer, and password reset functionality.",
-        "Administrative dashboard with configurable total sales (by period), total number of orders, number of active customers, sales trend charts, recent orders list, best-selling products, and real-time updates.",
-        "Super admin panel for platform administration with management of multiple tenants, creation of new tenants with automatic databases, tenant impersonation for support, tenant activation/deactivation, and view of all tenants and their status.",
-        "Fully responsive design optimized for desktop, tablet, and mobile with adaptive navigation, touch-optimized forms and tables, and consistent experience across all devices.",
-        "Enterprise security with secure architecture and complete isolation: each tenant has its own PostgreSQL database, JWT authentication with secure tokens, bcrypt-hashed passwords, role-based permission validation (Customer, Admin, Super Admin), tenant headers for correct routing, ensuring privacy and data compliance."
+        "Multi-tenant architecture with isolated PostgreSQL per tenant and white-label branding (logo, colors, dynamic storefront).",
+        "Digital contract signing with canvas signatures, automatic PDF generation, and states (pending → fully_signed); multiple contracts per order.",
+        "Real-time notifications, alert center, and contract signature alerts with direct navigation to order.",
+        "Availability Report: products available for sale, which customers ordered each product, reallocation of items between orders.",
+        "Margin Report: profit margins per product, multi-currency (USD/CAD), identification of products without cost data.",
+        "Seasonal management: availability dates, pre-order, and estimated shipping dates per season.",
+        "Multi-currency (USD, CAD, MXN), MSRP per currency, and automatic conversion by customer country.",
+        "Full order workflow (New → Invoice Paid), admin editing, optional PO, PDF export, and state history.",
+        "Inventory: On Hand, Available to Sell, Available to Ship, color/size variants, and advanced filters.",
+        "Product catalog: multiple images, automatic variants, SKU/MFC, categories, and season assignment.",
+        "Customer panel: addresses, billing, account activation, order history, and password reset.",
+        "Dashboard with sales, orders, active customers, trend charts, and best-selling products.",
+        "Super admin: multiple tenants, automatic DB creation, impersonation, and activation/deactivation.",
+        "Fully responsive design for desktop, tablet, and mobile.",
+        "Security: JWT, bcrypt, roles (Customer/Admin/Super Admin), isolated database per tenant."
       ]
       }
     }

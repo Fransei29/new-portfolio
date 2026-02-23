@@ -25,6 +25,7 @@
     "backend": "Backend",
     "tools": "Herramientas",
     "summarySubtitle": "Herramientas y frameworks con los que trabajo para construir soluciones escalables",
+    "dragHint": "Puedes arrastrar las tarjetas para ordenarlas a tu gusto",
     "viewFullStack": "Ver stack completo"
   }
 }

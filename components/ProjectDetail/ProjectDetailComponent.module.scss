@@ -143,11 +143,93 @@
   white-space: pre-line;
   line-height: 1.8;
   font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 
   @media (max-width: 768px) {
     font-size: 0.85rem;
     line-height: 1.7;
+  }
+}
+
+.detailSection {
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+
+    &:nth-of-type(1) { order: 3; }
+    &:nth-of-type(2) { order: 4; }
+    &:nth-of-type(3) { order: 5; }
+    &:nth-of-type(4) { order: 6; }
+    &:nth-of-type(5) { order: 7; }
+    &:nth-of-type(6) { order: 8; }
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  min-height: 1.5em;
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-color);
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+
+    :global(html.dark) & {
+      color: var(--text-color-dark-mode);
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+.sectionIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  line-height: 0;
+  margin-bottom: 0.5rem;
+
+  :global(html.dark) & {
+    color: #fa51a6;
+  }
+}
+
+.learningsList {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-color-light);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.85);
+  }
+
+  li {
+    margin-bottom: 0.4rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    padding-left: 1rem;
   }
 }
 
@@ -362,9 +444,12 @@
 }
 
 .carouselImg {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: var(--br);
+  display: block;
 }
 
 .carouselNavButton {
@@ -583,13 +668,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 0.25rem;
 
   @media (max-width: 768px) {
-    margin-top: 0;
-    padding-top: 0;
-    order: 8;
+    margin-top: 0.25rem;
     margin-bottom: 0;
   }
 

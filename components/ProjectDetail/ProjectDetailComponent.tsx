@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ProjectDetailComponent.module.scss';
-import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock, X } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock, X, FileText, Target, Code2, GraduationCap, Link2 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -25,10 +25,11 @@ import NestIcon from '../../public/icons/nest.svg';
 
 interface ProjectProps {
   title: string;
-  subtitle?:string;
+  subtitle?: string;
   whatIs?: string;
   problemSolved?: string;
   techStack?: string[];
+  learnings?: string[];
   screenshots?: string[];
   videoUrl?: string;
   githubLink?: string;
@@ -98,6 +99,7 @@ export default function ProjectDetailComponent({
   whatIs,
   problemSolved,
   techStack,
+  learnings,
   screenshots,
   videoUrl,
   githubLink,
@@ -106,9 +108,10 @@ export default function ProjectDetailComponent({
   const { t } = useLanguage();
   
   const validScreenshots = screenshots?.filter(Boolean) || [];
+  const hasVideo = Boolean(videoUrl);
   const midPoint = Math.ceil(validScreenshots.length / 2);
-  const firstHalf = validScreenshots.slice(0, midPoint);
-  const secondHalf = validScreenshots.slice(midPoint);
+  const firstHalf = hasVideo ? validScreenshots : validScreenshots.slice(0, midPoint);
+  const secondHalf = hasVideo ? [] : validScreenshots.slice(midPoint);
   
   const [currentImageIndex1, setCurrentImageIndex1] = useState(0);
   const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
@@ -207,26 +210,55 @@ export default function ProjectDetailComponent({
               <h1>{title}</h1>
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
-            <div className={styles.overviewSection}>
-              <h2>{t('projects.overview')}</h2>
-              <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
-                {whatIs}
-              </div>
-            </div>
-            <div className={styles.goalSection}>
-              <h2>{t('projects.goal')}</h2>
-              <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
-                {problemSolved}
-              </div>
-            </div>
-            <div className={styles.builtWithSection}>
-              <h2>{t('projects.builtWith')}</h2>
-              {techStack && techStack.length > 0 ? (
+
+            {whatIs && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <FileText className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.overview')}</h2>
+                </div>
+                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                  {whatIs}
+                </div>
+              </section>
+            )}
+
+            {problemSolved && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <Target className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.challenge')}</h2>
+                </div>
+                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                  {problemSolved}
+                </div>
+              </section>
+            )}
+
+            {learnings && learnings.length > 0 && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <GraduationCap className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.learnings')}</h2>
+                </div>
+                <ul className={styles.learningsList}>
+                  {learnings.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {techStack && techStack.length > 0 && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <Code2 className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.builtWith')}</h2>
+                </div>
                 <div className={styles.techStackGrid}>
                   {techStack.map((tech, index) => {
                     const techIcon = getTechIcon(tech);
                     const isComponent = techIcon && typeof techIcon.icon !== 'string';
-                    
                     return (
                       <div key={index} className={styles.techCard}>
                         {techIcon ? (
@@ -247,26 +279,31 @@ export default function ProjectDetailComponent({
                     );
                   })}
                 </div>
-              ) : (
-                <p>No tech stack information provided.</p>
-              )}
-            </div>
-            <div className={styles.links}>
-              {githubLink ? (
-                <a href={githubLink} target="_blank" rel="noopener noreferrer">
-                  {t('projects.githubRepository')}  <Github className={styles.iconSmall}  />
-                </a>
-              ) : githubLink === null || githubLink === '' ? (
-                <div className={styles.privateLink} title="Código privado">
-                  {t('projects.githubRepository')}  <Lock className={styles.iconSmall} />
-                </div>
-              ) : null}
-              {liveDemoLink && (
-                <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
-                  {t('projects.liveDemo')}  <ExternalLink className={styles.iconSmall} />
-                </a>
-              )}
-            </div>
+              </section>
+            )}
+
+            <section className={styles.detailSection}>
+              <div className={styles.sectionHeader}>
+                <Link2 className={styles.sectionIcon} size={22} aria-hidden />
+                <h2>{t('projects.links')}</h2>
+              </div>
+              <div className={styles.links}>
+                {githubLink ? (
+                  <a href={githubLink} target="_blank" rel="noopener noreferrer">
+                    {t('projects.githubRepository')} <Github className={styles.iconSmall} />
+                  </a>
+                ) : githubLink === null || githubLink === '' ? (
+                  <div className={styles.privateLink} title="Código privado">
+                    {t('projects.githubRepository')} <Lock className={styles.iconSmall} />
+                  </div>
+                ) : null}
+                {liveDemoLink && (
+                  <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
+                    {t('projects.liveDemo')} <ExternalLink className={styles.iconSmall} />
+                  </a>
+                )}
+              </div>
+            </section>
           </div>
         </div>
 
@@ -287,7 +324,8 @@ export default function ProjectDetailComponent({
                       alt={`${title} screenshot ${index + 1}`}
                       fill
                       className={styles.carouselImg}
-                      priority={index === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
                     />
                   </div>
                 ))}
@@ -325,8 +363,8 @@ export default function ProjectDetailComponent({
             </div>
           )}
 
-          {/* Segundo carrusel - Segunda mitad de imágenes */}
-          {secondHalf.length > 0 && (
+          {/* Segundo carrusel - solo cuando NO hay video (para ocupar espacio) */}
+          {!hasVideo && secondHalf.length > 0 && (
             <div className={styles.imageCarouselContainer}>
               <div className={styles.imageCarousel}>
                 {secondHalf.map((screenshot, index) => (
@@ -340,7 +378,8 @@ export default function ProjectDetailComponent({
                       alt={`${title} screenshot ${midPoint + index + 1}`}
                       fill
                       className={styles.carouselImg}
-                      priority={index === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
                     />
                   </div>
                 ))}
@@ -378,8 +417,8 @@ export default function ProjectDetailComponent({
             </div>
           )}
 
-          {/* Video (solo si existe y no hay suficientes imágenes para dos carruseles) */}
-          {videoUrl && validScreenshots.length <= 1 && (
+          {/* Video debajo del carrusel cuando hay video */}
+          {hasVideo && videoUrl && (
             <div className={styles.videoContainer}>
               <video
                 src={videoUrl}
@@ -434,8 +473,8 @@ export default function ProjectDetailComponent({
                 alt={`${title} screenshot ${lightboxImageIndex + 1}`}
                 fill
                 className={styles.lightboxImage}
-                priority
                 sizes="100vw"
+                unoptimized
               />
             </div>
 

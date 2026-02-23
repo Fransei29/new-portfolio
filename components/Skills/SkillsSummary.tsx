@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styles from './SkillsSummary.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
+import { Hand } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import Sortable from 'sortablejs';
 
@@ -78,6 +79,10 @@ const SkillsSummary: React.FC = () => {
         </p>
         <p className={styles.subtitle}>
           {t('skills.summarySubtitle')}
+        </p>
+        <p className={styles.dragHint}>
+          <Hand className={styles.dragHintIcon} size={18} aria-hidden />
+          {t('skills.dragHint')}
         </p>
 
         <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">

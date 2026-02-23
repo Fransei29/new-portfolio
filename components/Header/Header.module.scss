@@ -378,7 +378,8 @@
 .centerMenu {
   display: flex;
   flex-direction: row;
-  justify-content: center; // Centrar el menú
+  align-items: center;
+  justify-content: center;
   gap: 3rem;
   flex: 1;
   
@@ -425,7 +426,7 @@
 .nav > section > a {
   color: rgb(73, 73, 73);
   font-weight: 400 !important;
-  font-size: 0.975rem;
+  font-size: 1.1rem;
   margin: 0;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -551,7 +552,75 @@
   white-space: nowrap;
 }
 
-// Estilos para la flecha del bootcamp
+// Badge Bootcamp (solo desktop, estilo como mobile: fondo claro + borde primary)
+.bootcampBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.25rem !important;
+  border-radius: var(--br);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(204, 2, 103, 0.4);
+  color: var(--text-color) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  box-shadow: 0 1px 4px rgba(204, 2, 103, 0.12);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  vertical-align: middle;
+  backdrop-filter: blur(8px);
+  gap: 0.75rem;
+
+  &:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2);
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .bootcampBadgeInner {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .bootcampBadgeIcon {
+    margin-right: 0.5rem;
+    color: var(--primary-color) !important;
+    flex-shrink: 0;
+  }
+
+  .bootcampArrow {
+    margin-left: 0.5rem;
+    color: var(--text-color) !important;
+  }
+
+  &:hover .bootcampArrow {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  :global(html.dark) & {
+    background-color: rgba(24, 28, 51, 0.8);
+    border-color: rgba(204, 2, 103, 0.35);
+    color: rgb(226, 226, 226) !important;
+
+    .bootcampBadgeIcon,
+    .bootcampArrow {
+      color: rgb(226, 226, 226) !important;
+    }
+
+    &:hover {
+      background-color: rgba(24, 28, 51, 0.95);
+      border-color: rgba(204, 2, 103, 0.55);
+      color: #fff !important;
+
+      .bootcampBadgeIcon,
+      .bootcampArrow {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+// Estilos para la flecha del bootcamp (links normales)
 .bootcampArrow {
   margin-left: 0.5rem;
   opacity: 1;
@@ -561,8 +630,8 @@
   color: inherit;
 }
 
-// Rotar la flecha al hacer hover en el navLink
-.navLink:hover .bootcampArrow {
+// Rotar la flecha al hacer hover en el navLink (no en el badge)
+.navLink:not(.bootcampBadge):hover .bootcampArrow {
   transform: translateY(0) rotate(35deg);
 }
 

@@ -160,7 +160,7 @@ export async function GET(request: Request) {
       link2: 'https://github.com/Fransei29/trip-planner-c',
       link3: 'https://trip-planner-c.vercel.app/',
       previewImage: '/img/img/Trip/trip.webp',
-      technologies: ['Node.js', 'Express', 'React', 'Axios', 'MongoDB'],
+      technologies: ['Next.js', 'JavaScript', 'CSS'],
     },
   ];
 

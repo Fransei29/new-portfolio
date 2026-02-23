@@ -39,6 +39,33 @@
   }
 }
 
+.dragHint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--subtitle-color);
+  margin: -0.5rem 0 1.5rem 0;
+  font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.dragHintIcon {
+  flex-shrink: 0;
+  color: var(--primary-color);
+  animation: handShake 1.5s ease-in-out infinite;
+}
+
+@keyframes handShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(14deg); }
+  75% { transform: rotate(-14deg); }
+}
+
 .skillsTitle {
   margin-bottom: 0.5rem;
 }

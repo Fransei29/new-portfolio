@@ -142,13 +142,13 @@ export default function Header() {
             href={`https://bootcamp.francoseiler.com/${language}`}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.navLink}
+            className={`${styles.navLink} ${styles.bootcampBadge}`}
           >
-            <p className={styles.navLinkContent}>
-              <GraduationCap size={24} className={styles.navIcon} />
+            <span className={styles.bootcampBadgeInner}>
+              <GraduationCap size={20} className={styles.bootcampBadgeIcon} />
               {t('nav.bootcamp')}
-              <ArrowUp size={16} className={styles.bootcampArrow} />
-            </p>
+              <ArrowUp size={14} className={styles.bootcampArrow} />
+            </span>
           </a>
         </section>
 

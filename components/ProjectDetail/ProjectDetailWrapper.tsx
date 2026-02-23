@@ -41,6 +41,7 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
       whatIs={translatedWhatIs || project.whatIs}
       problemSolved={translatedProblemSolved || project.problemSolved}
       techStack={project.techStack}
+      learnings={(project as { learnings?: string[] }).learnings}
       screenshots={project.screenshots}
       videoUrl={project.videoUrl}
       githubLink={project.githubLink}
