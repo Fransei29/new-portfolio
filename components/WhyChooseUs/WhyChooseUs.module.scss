@@ -35,22 +35,6 @@
   }
 }
 
-.highlight {
-  display: inline-block;
-  position: relative;
-  font-size: var(--h3-font-size);
-  font-weight: var(--h3-font-weight);
-  color: var(--h3-color);
-  text-decoration: none;
-  padding: 0;
-  margin: 1rem 0 var(--h3-spacing) 0;
-
-  @media (max-width: 768px) {
-    font-size: var(--h3-font-size-mobile);
-    margin-bottom: var(--h3-spacing-mobile);
-  }
-}
-
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);

@@ -81,7 +81,7 @@ export const Services = () => {
   return (
     <section ref={servicesRef} className={styles.services}>
       <div className={styles.container}>
-       <p className={styles.highlight}>
+       <p className="highlight">
             {t('services.title')}
           </p>
         <p className={styles.subtitle}>
