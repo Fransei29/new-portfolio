@@ -25,10 +25,12 @@
   padding: 0;
   margin: 0;
   color: var(--primary-color);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .highlight {
   color: var(--primary-color);
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--h1-highlight-font-size);
   letter-spacing: var(--h1-highlight-letter-spacing);
   margin: 0;
@@ -41,6 +43,7 @@
 }
 
 .mainTitle {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--h1-font-size);
   font-weight: var(--h1-font-weight);
   margin: 0 0 1.25rem 0;
@@ -124,7 +127,7 @@
     text-decoration: none;
     padding: 0.975rem 1.75rem;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.2 rem;
     border-radius: var(--br);
     transition: all 0.15s ease-in-out;
     display: flex;

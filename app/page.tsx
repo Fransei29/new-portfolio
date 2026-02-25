@@ -7,7 +7,6 @@ import { FaNodeJs } from "react-icons/fa";
 import { SiTypescript } from "react-icons/si";
 import ClientLayout from '../components/ClientLayout/ClientLayout';
 import './globals.css';
-import Experience from '../components/Experience/Experience';
 import SkillsSummary from '../components/Skills/SkillsSummary';
 import Image from 'next/image';
 import { useScrollAnimation } from '../hooks/Scroll';
@@ -19,6 +18,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import Testimonials from '../components/Testimonials/TestimonialsComponent';
 import CallToAction from '../components/CallToAction/CallToAction';
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
+import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
 
 export default function Home() {  
   const elementsRef = useScrollAnimation();
@@ -84,22 +84,21 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
-            <WhyChooseUs />
+            <AutomationComparison />
           </div>
 
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-left">
             <ProjectsSection />
           </div>
 
-
           <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-right">
+            <WhyChooseUs />
+          </div>
+
+
+          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-left">
             <SkillsSummary />
           </div>
-          
-          <div ref={(el) => {elementsRef.current[7] = el;}} className="fade-in-left">
-            <Experience />
-          </div>
-
           
           <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-right">
             <Testimonials />

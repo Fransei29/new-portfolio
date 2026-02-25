@@ -1,0 +1,64 @@
+{
+  "automation": {
+    "title": "Arquitectura operativa",
+    "subtitle": "Los procesos manuales consumen tiempo y no escalan. El software y las automatizaciones correctas te dan claridad, velocidad y margen para crecer.",
+    "subtitleLine1": "Los procesos manuales consumen tiempo y no escalan.",
+    "subtitleLine2": "El software y las automatizaciones correctas te dan claridad, velocidad y margen para crecer.",
+    "withoutTitle": "Cuando todo es manual",
+    "withTitle": "Cuando tenés las herramientas adecuadas",
+    "without": {
+      "0": {
+        "title": "Horas perdidas en lo repetitivo",
+        "description": "Tareas repetitivas y copy-paste se llevan tu tiempo y foco.",
+        "badge": "Tu productividad se fragmenta"
+      },
+      "1": {
+        "title": "Errores y retrabajo",
+        "description": "La carga manual de datos genera fallos y trabajo extra para corregir.",
+        "badge": "Tiempo y recursos desperdiciados"
+      },
+      "2": {
+        "title": "Un solo responsable",
+        "description": "Cuando una persona no está, los procesos se traban.",
+        "badge": "Cuellos de botella constantes"
+      },
+      "3": {
+        "title": "Datos por todos lados",
+        "description": "Sin una única fuente de verdad — dispersos en hojas y correos.",
+        "badge": "Cuesta ver el panorama"
+      },
+      "4": {
+        "title": "Escalar = más gente",
+        "description": "Crecer suele implicar sumar personas en lugar de aprovechar mejor lo que hay.",
+        "badge": "Los costos crecen con el volumen"
+      }
+    },
+    "with": {
+      "0": {
+        "title": "Lo repetitivo en segundo plano",
+        "description": "Los flujos automatizados corren mientras vos te enfocás en lo importante.",
+        "badge": "Recuperás horas de foco"
+      },
+      "1": {
+        "title": "Resultados consistentes",
+        "description": "Menos errores y resultados predecibles.",
+        "badge": "Menos retrabajo, más entrega"
+      },
+      "2": {
+        "title": "Los procesos siguen solos",
+        "description": "Menos dependencia de una persona; los sistemas no se toman vacaciones.",
+        "badge": "Sin punto único de falla"
+      },
+      "3": {
+        "title": "Un solo lugar para tus datos",
+        "description": "Reportes y dashboards cuando los necesitás.",
+        "badge": "Decisiones con datos reales"
+      },
+      "4": {
+        "title": "Escalar sin sumar horas en la misma proporción",
+        "description": "Mayor volumen sin que el esfuerzo crezca igual.",
+        "badge": "Crecer sin quemarse"
+      }
+    }
+  }
+}

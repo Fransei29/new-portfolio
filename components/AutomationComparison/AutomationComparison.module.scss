@@ -1,0 +1,255 @@
+@import '../../app/styles/utilities.scss';
+
+.container {
+  width: 100%;
+  background-color: var(--background-colorA);
+  padding: 1.75rem 0;
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+  }
+}
+
+.section {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding: 2.5rem 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 0.75rem;
+  }
+}
+
+.highlight {
+  display: inline-block;
+  position: relative;
+  font-size: var(--h3-font-size);
+  font-weight: var(--h3-font-weight);
+  color: var(--h3-color);
+  text-decoration: none;
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: var(--h3-font-size-mobile);
+    margin-bottom: var(--h3-spacing-mobile);
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin-bottom: 3rem;
+  text-align: left;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-bottom: 2rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.iconWithout {
+  flex-shrink: 0;
+  color: #c94c5c;
+
+  :global(html.dark) & {
+    color: #e57382;
+  }
+}
+
+.iconWith {
+  flex-shrink: 0;
+  color: #2d8f6e;
+
+  :global(html.dark) & {
+    color: #4db896;
+  }
+}
+
+.columnTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+  line-height: 1.2;
+
+  :global(html.dark) & {
+    color: rgb(235, 235, 235);
+  }
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+
+  @media (max-width: 768px) {
+    gap: 1.25rem;
+    .card:nth-child(n + 4) {
+      display: none;
+    }
+  }
+}
+
+.card {
+  border-radius: var(--br);
+  padding: 1.75rem 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  @media (max-width: 768px) {
+    padding: 1.35rem 1.35rem;
+    gap: 0.85rem;
+  }
+}
+
+.cardBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-color);
+
+  :global(html.dark) & {
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-color);
+  font-weight: 400;
+  opacity: 0.9;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.88);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  margin-top: 0.2rem;
+}
+
+.cardWithout .badge {
+  background: rgba(201, 76, 92, 0.15);
+  color: #a83d4a;
+  border: 1px solid rgba(201, 76, 92, 0.25);
+
+  :global(html.dark) & {
+    background: rgba(201, 76, 92, 0.2);
+    color: #e57382;
+    border-color: rgba(201, 76, 92, 0.35);
+  }
+}
+
+.cardWith .badge {
+  background: rgba(45, 143, 110, 0.15);
+  color: #1e6b4d;
+  border: 1px solid rgba(45, 143, 110, 0.25);
+
+  :global(html.dark) & {
+    background: rgba(45, 143, 110, 0.2);
+    color: #4db896;
+    border-color: rgba(45, 143, 110, 0.35);
+  }
+}
+
+.cardWithout {
+  background: rgba(201, 76, 92, 0.08);
+  border: 1px solid rgba(201, 76, 92, 0.22);
+
+  :global(html.dark) & {
+    background: rgba(201, 76, 92, 0.12);
+    border-color: rgba(201, 76, 92, 0.3);
+  }
+}
+
+.cardWith {
+  background: rgba(45, 143, 110, 0.08);
+  border: 1px solid rgba(45, 143, 110, 0.25);
+
+  :global(html.dark) & {
+    background: rgba(45, 143, 110, 0.12);
+    border-color: rgba(45, 143, 110, 0.35);
+  }
+}
+
+.cardIconWithout {
+  flex-shrink: 0;
+  color: #c94c5c;
+  margin-top: 0.1rem;
+
+  :global(html.dark) & {
+    color: #e57382;
+  }
+}
+
+.cardIconWith {
+  flex-shrink: 0;
+  color: #2d8f6e;
+  margin-top: 0.1rem;
+
+  :global(html.dark) & {
+    color: #4db896;
+  }
+}

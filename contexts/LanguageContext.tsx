@@ -50,12 +50,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     try {
       const modules = [
         'common',
-        'home', 
+        'home',
         'experience',
         'projects',
         'contact',
         'services',
-        'bootcamp'
+        'bootcamp',
+        'automation'
       ];
 
       const loadedTranslations: Translations = {};
