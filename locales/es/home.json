@@ -36,6 +36,29 @@
     "description": "Desde el concepto hasta el lanzamiento, estoy aquí para ayudarte.",
     "buttonLabel": "Conectemos"
   },
+  "howWeWork": {
+    "title": "Cómo trabajo",
+    "subtitle": "Un proceso claro y colaborativo para llevar tu idea desde el concepto hasta el lanzamiento.",
+    "discovery": {
+      "title": "Descubrimiento",
+      "description": "Entendemos tu negocio, objetivos y usuarios. Definimos alcance, prioridades y un plan de trabajo alineado contigo."
+    },
+    "design": {
+      "title": "Diseño y planificación",
+      "description": "Estructuramos la solución: arquitectura, flujos y UX. Validamos contigo antes de escribir código para evitar sorpresas."
+    },
+    "development": {
+      "title": "Desarrollo",
+      "description": "Construcción iterativa con código de calidad. Comunicación constante y entregas parciales para que puedas seguir el avance."
+    },
+    "launch": {
+      "title": "Lanzamiento y soporte",
+      "description": "Despliegue, documentación y acompañamiento post-lanzamiento. Te dejo todo listo para que mantengas o escales el producto."
+    },
+    "cta": {
+      "text": "Hablemos de tu proyecto"
+    }
+  },
   "whyChooseUs": {
     "title": "Por qué elegirme",
     "subtitle": "Valor agregado que aporto a cada proyecto para alcanzar resultados excepcionales.",

@@ -36,6 +36,29 @@
     "description": "Let's work together to bring your idea to life. From concept to launch, I'm here to help you.",
     "buttonLabel": "Let's connect"
   },
+  "howWeWork": {
+    "title": "How I work",
+    "subtitle": "A clear, collaborative process to take your idea from concept to launch.",
+    "discovery": {
+      "title": "Discovery",
+      "description": "We align on your business, goals, and users. We define scope, priorities, and a plan that works for you."
+    },
+    "design": {
+      "title": "Design & planning",
+      "description": "We structure the solution: architecture, flows, and UX. We validate with you before writing code so there are no surprises."
+    },
+    "development": {
+      "title": "Development",
+      "description": "Iterative build with quality code. Regular updates and incremental deliveries so you can track progress."
+    },
+    "launch": {
+      "title": "Launch & support",
+      "description": "Deploy, documentation, and post-launch support. You get everything you need to maintain or scale the product."
+    },
+    "cta": {
+      "text": "Discuss your project"
+    }
+  },
   "whyChooseUs": {
     "title": "Why choose me",
     "subtitle": "Added value I bring to every project to achieve exceptional results.",

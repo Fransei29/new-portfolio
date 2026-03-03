@@ -1,0 +1,476 @@
+@import '../../app/styles/utilities.scss';
+
+.howWeWork {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 4rem 0;
+  background: var(--background-ivory);
+
+  :global(html.dark) & {
+    background-color: var(--background-colorA-dark);
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
+}
+
+.mainTitle {
+  font-size: var(--main-section-title-font-size);
+  font-weight: var(--main-section-title-font-weight);
+  color: var(--text-color-title);
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-align: center;
+  width: 100%;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--main-section-title-mobile-size);
+    margin-bottom: 0.75rem;
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin-bottom: 1.5rem;
+  text-align: left;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    text-align: center;
+  }
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 1rem;
+  position: relative;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+    padding: 0.25rem 1.75rem;
+    position: relative;
+
+    // Línea conectora vertical en mobile
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4rem;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 2, 114, 0.2) 0%,
+        rgba(7, 10, 145, 0.6) 20%,
+        rgba(10, 12, 136, 0.8) 50%,
+        rgba(17, 20, 158, 0.6) 80%,
+        rgba(2, 4, 121, 0.2) 100%
+      );
+      z-index: 0;
+      animation: timelinePulse 3s ease-in-out infinite;
+    }
+
+    :global(html.dark) & {
+      &::after {
+        background: linear-gradient(
+          180deg,
+          rgba(81, 84, 250, 0.3) 0%,
+          rgba(81, 84, 250, 0.7) 20%,
+          rgba(81, 84, 250, 0.9) 50%,
+          rgba(81, 84, 250, 0.7) 80%,
+          rgba(81, 84, 250, 0.3) 100%
+        );
+      }
+    }
+  }
+
+  // Timeline connector line (desktop only)
+  @media (min-width: 1025px) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(81, 84, 250, 0.3) 20%,
+        rgba(81, 84, 250, 0.5) 50%,
+        rgba(81, 84, 250, 0.3) 80%,
+        transparent 100%
+      );
+      transform: translateY(-50%);
+      z-index: 0;
+      animation: timelinePulse 3s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes timelinePulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.stepCard {
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: var(--br);
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 3, 41, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  background-clip: padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+    position: relative;
+    overflow: visible;
+  }
+
+  // Borde con gradiente animado
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--br);
+    padding: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--card-border-gradient-start) 0%,
+      var(--card-border-gradient-start) 30%,
+      var(--card-border-gradient-middle) 50%,
+      var(--card-border-gradient-start) 70%,
+      var(--card-border-gradient-start) 100%
+    );
+    background-size: 200% 100%;
+    background-position: -200% 0;
+    animation: borderGradient 8s ease-in-out infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    border: 1px solid var(--card-border-hover-color);
+
+    :global(html.dark) & {
+      box-shadow: 0 8px 16px rgba(150, 150, 150, 0.15);
+      border: 1px solid var(--card-border-hover-color-dark);
+    }
+
+    .stepNumber {
+      opacity: 0.25;
+      transform: scale(1.05);
+    }
+  }
+
+  :global(html.dark) & {
+    background-color: #181c33;
+    color: rgb(226, 226, 226);
+    border: 1px solid var(--card-border-color-dark);
+    box-shadow: 0 4px 8px rgba(250, 81, 166, 0.15);
+
+    &::before {
+      background: linear-gradient(
+        90deg,
+        var(--card-border-gradient-start-dark) 0%,
+        var(--card-border-gradient-start-dark) 30%,
+        var(--card-border-gradient-middle-dark) 50%,
+        var(--card-border-gradient-start-dark) 70%,
+        var(--card-border-gradient-start-dark) 100%
+      );
+    }
+  }
+}
+
+@keyframes borderGradient {
+  0% {
+    background-position: -200% 0;
+  }
+  50% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.75rem;
+    padding-left: 0;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+.stepNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  opacity: 0.4;
+  line-height: 1;
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: all 0.3s ease;
+
+  :global(html.dark) & {
+    opacity: 0.5;
+    color: #5e6efc;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    opacity: 1;
+    position: absolute;
+    left: 0rem;
+    top: 1rem;
+    transform: none;
+    z-index: 2;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--icon-container-bg);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+
+  :global(html.dark) & {
+    background-color: var(--icon-container-bg-dark);
+  }
+
+  svg {
+    color: var(--primary-color);
+    stroke-width: 2;
+    transition: all 0.3s ease;
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+
+  .stepIcon {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-color);
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  // Pulse effect on icon
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(5deg);
+  }
+}
+
+.stepCard:hover .iconWrapper {
+  transform: scale(1.15) rotate(5deg);
+  background-color: var(--icon-container-bg-hover);
+  
+  :global(html.dark) & {
+    background-color: var(--icon-container-bg-hover-dark);
+  }
+
+  &::before {
+    opacity: 0.3;
+    animation: iconPulse 1.5s ease-in-out infinite;
+  }
+
+  svg {
+    transform: scale(1.1);
+    animation: iconFloat 1s ease-in-out infinite;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+.stepTitle {
+  font-size: var(--card-title-font-size);
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--card-title-font-size-mobile);
+    margin-bottom: 0.4rem;
+  }
+}
+
+.stepDescription {
+  color: var(--text-color-light);
+  line-height: 1.6;
+  margin: 0;
+  font-size: var(--card-description-font-size);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--card-description-font-size-mobile);
+    line-height: 1.4;
+  }
+}
+
+// CTA Button Section
+.ctaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    padding: 0 0.5rem;
+  }
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.975rem 1.75rem;
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  background-color: var(--primary-color);
+  color: rgb(247, 247, 247);
+  border-radius: var(--br);
+  border: 1px solid rgba(151, 0, 76, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: all 0.15s ease-in-out;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+
+  :global(html.dark) & {
+    background-color: transparent;
+    color: var(--text-color-dark-mode);
+    border-color: var(--borderA);
+
+    &:hover {
+      background-color: var(--bg-hover-dark) !important;
+      color: var(--text-color-dark-mode);
+      border: var(--borderB);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.9rem;
+    width: 50%;
+    max-width: 50%;
+  }
+}
+

@@ -18,6 +18,7 @@
     font-size: 1.15rem;
     font-weight: var(--greeting-font-weight);
     color: var(--text-color-light);
+    text-align: center;
   }
 }
 
@@ -63,7 +64,7 @@
     padding: 0;
     line-height: 1.08;
     font-size: 2.35rem;
-    text-align: left;
+    text-align: center;
     max-width: 100%;
   }
 }
@@ -80,7 +81,6 @@
   line-height: var(--h2-line-height);
   letter-spacing: var(--h2-letter-spacing);
 
-
    @media (max-width: 768px) {
     font-size: 1.05rem;
     margin: 0;
@@ -91,6 +91,7 @@
     width: 100%;
     padding: 0;
     box-sizing: border-box;
+    text-align: center;
   }
 }
 
@@ -127,7 +128,7 @@
     text-decoration: none;
     padding: 0.975rem 1.75rem;
     font-weight: 500;
-    font-size: 1.2 rem;
+    font-size: 1.1rem;
     border-radius: var(--br);
     transition: all 0.15s ease-in-out;
     display: flex;
@@ -246,11 +247,12 @@
     align-items: center;
 
     a {
-      width: 93%;
-      max-width: 93%;
+      width: 85%;
+      max-width: 85%;
       padding: 0.85rem 1.2rem;
       font-size: 0.975rem;
       justify-content: center;
+      margin: 0.15rem 0;
     }
   }
 
