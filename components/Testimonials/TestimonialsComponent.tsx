@@ -207,7 +207,7 @@ export default function Testimonials() {
     <div className={styles.testimonialsContainer}>
       <section className={styles.testimonials}>
         <div className={styles.titleWrapper}>
-          <p className={styles.highlight}>{t('testimonials.title')}</p>
+          <p className="highlight">{t('testimonials.title')}</p>
           <p className={styles.subtitle}>{t('testimonials.subtitle')}</p>
         </div>
         <div className={styles.carouselWrapper}>

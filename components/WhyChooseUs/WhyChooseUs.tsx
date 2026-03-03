@@ -149,7 +149,7 @@ const WhyChooseUs = () => {
         {/* Header Section - Left Aligned */}
         <div className={styles.headerSection}>
           <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
-            <p className={styles.highlight}>
+            <p className="highlight">
               {t('whyChooseUs.title')}
             </p>
             <p className={styles.subtitle}>

@@ -44,7 +44,7 @@
   }
 
   @media (max-width: 768px) {
-    padding: 6rem 0;
+    padding: 4rem 0;
   }
 }
 
@@ -63,12 +63,12 @@
 
   @media (max-width: 768px) {
     padding: 0 0.5rem;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 }
 
 .ctaText {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2.75rem;
   font-weight: 600;
   color: var(--cta-text);
@@ -78,10 +78,10 @@
   letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 2.25rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 1.4;
+    line-height: 1.2;
   }
 }
 
@@ -95,8 +95,9 @@
   opacity: 0.9;
 
   @media (max-width: 768px) {
-    font-size: 1.25rem;
-    line-height: 1.5;
+    font-size: 0.975rem;
+    line-height: 1.4;
+    padding: 0 1.75rem;
   }
 }
 

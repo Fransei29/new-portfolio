@@ -74,7 +74,7 @@ const SkillsSummary: React.FC = () => {
   return (
     <section className={styles.skillsSummaryContainer}>
       <div className={styles.skillsSummarySection}>
-        <p className={`${styles.highlight} ${styles.skillsTitle}`}>
+        <p className="highlight">
           {t('skills.title')}
         </p>
         <p className={styles.subtitle}>

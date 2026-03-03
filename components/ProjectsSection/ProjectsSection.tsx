@@ -13,7 +13,7 @@ const ProjectsSection = () => {
   return (
     <section className={styles.projectsSectionContainer}>
         <div className={styles.projectsSection}>
-            <p className={styles.highlight}>
+            <p className="highlight">
                 {t('projects.recentWork')}
             </p>
             <section id="banner" ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right">

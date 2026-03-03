@@ -28,13 +28,13 @@
   --background-colorA: rgb(255, 255, 255);
   --background-colorB: rgb(243, 244, 246);
   --background-colorB-gradient: 
-    linear-gradient(135deg, rgb(246, 247, 248) 0%, rgb(249, 250, 251) 50%, rgb(247, 249, 252) 100%),
+    linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(249, 250, 251) 50%, rgb(247, 249, 252) 100%),
     radial-gradient(circle at 20% 30%, rgba(250, 152, 217, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(204, 2, 103, 0.02) 0%, transparent 50%);
   --bg-hover: rgba(245, 84, 165, 0.9);
   --cta-bg: #032e8b;
   --cta-bg-hover: #1D4ED8;
-  --cta-bg-gradient: linear-gradient(135deg, #032e8b 0%, #0a3fa3 50%, #032e8b 100%);
+  --cta-bg-gradient: linear-gradient(135deg, #000b1f 0%, #011642 50%, #001136 100%);
   --cta-text: #ffffff;
   --br: 12px;
   --container-max-width: 1350px;
@@ -71,14 +71,14 @@
   
   /* Subtítulo de sección */
   --subtitle-font-size: 1.4rem;
-  --subtitle-font-size-mobile: 0.975rem;
+  --subtitle-font-size-mobile: 0.875rem;
   --subtitle-font-weight: 400;
   --subtitle-color: var(--text-color-light);
   --subtitle-line-height: 1.5;
   
   /* Título de tarjeta/card */
   --card-title-font-size: 1.25rem;
-  --card-title-font-size-mobile: 0.875rem;
+  --card-title-font-size-mobile: 0.95rem;
   --card-title-font-weight: 500;
   --card-title-line-height: 1;
   
@@ -89,12 +89,12 @@
   
   /* Título secundario (h2 dentro de contenido) */
   --h2-content-font-size: 1.15rem;
-  --h2-content-font-size-mobile: 0.975rem;
+  --h2-content-font-size-mobile: 0.95rem;
   --h2-content-font-weight: 500;
   
   /* Título terciario (h3 dentro de contenido) */
   --h3-content-font-size: 1rem;
-  --h3-content-font-size-mobile: 1rem;
+  --h3-content-font-size-mobile: 0.975rem;
   --h3-content-font-weight: 500;
   
   /* Greeting/Saludo */
@@ -198,6 +198,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 
 @media (max-width: 768px) {
   .highlight {
+    display: flex;
+    justify-content: center;
     font-size: var(--h3-font-size-mobile);
     margin-bottom: var(--h3-spacing-mobile);
   }

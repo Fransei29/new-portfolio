@@ -1,7 +1,7 @@
 @import '../../app/styles/utilities.scss'; 
 
 .title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: var(--text-color-light);
     margin: 0;
     padding-bottom: 0.5rem;
@@ -59,7 +59,7 @@
         width: 100%;
         max-width: 100%;
         gap: 0;
-        padding: 1rem;
+        padding: 0.25rem 1.75rem;
         margin: 0;
         box-sizing: border-box;
         overflow-x: hidden;
@@ -72,6 +72,7 @@
     }
 
     .title{
+        text-align: center;
         font-size: 1.25rem;
         padding: 0 0.5rem;
         box-sizing: border-box;

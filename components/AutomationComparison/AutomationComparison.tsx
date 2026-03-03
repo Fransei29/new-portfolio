@@ -15,7 +15,7 @@ const AutomationComparison = () => {
   return (
     <section className={styles.container}>
       <div className={styles.section}>
-        <p className={styles.highlight}>{t('automation.title')}</p>
+        <p className="highlight">{t('automation.title')}</p>
         <p className={styles.subtitle}>
           {t('automation.subtitleLine1')}
           <br />
