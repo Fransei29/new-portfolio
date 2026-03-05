@@ -37,6 +37,41 @@
           "Implementation of blogs, service pages, and founder networking system."
         ]
       },
+      "mi-agenda": {
+        "title": "Mi Agenda",
+        "subtitle": "Online Booking & Appointments Platform",
+        "description": "Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and clients book appointments online. It includes a public booking flow by service, Google Calendar integration, MercadoPago payments, notifications (email, push, optionally SMS/WhatsApp), and an installable PWA with reminders and offline access.",
+        "whatIs": "Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with MercadoPago (one-time and subscriptions), notifications (email, push, and optionally SMS/WhatsApp), and an installable PWA («Mi agenda») with reminders and offline access.\nThe solution centralizes recurring and one-off availability, payments, reminders, and admin panel in a single product, improving the experience for both the provider and the client.",
+        "problemSolved": "Many professionals and businesses still rely on messages, calls, or spreadsheets to manage appointments, leading to errors, no-shows, and lack of traceability. Turnero addresses this by offering self-service web booking, clear availability, calendar integration, online payments, and automatic notifications, reducing operational load and lost bookings.",
+        "learnings": [
+          "Public booking flow by service slug: day and time selection, client details, confirmation with optional MercadoPago payment.",
+          "Admin panel for providers: services, recurring and specific availability, booking management, clients, statistics, profile, templates, subscription and payments.",
+          "Client portal: registration, profile and list of bookings with states (pending, confirmed, cancelled, completed, no-show).",
+          "REST API with NestJS: JWT auth (access + refresh, httpOnly cookies), users, bookings, availability, services, dashboard, clients, statistics, payments, webhooks and Swagger documentation.",
+          "MercadoPago payment integration: preferences, webhooks, deposits and full payments, and subscription support.",
+          "Google Calendar sync to mark busy blocks and prevent booking overlap.",
+          "Real-time updates via WebSockets (Socket.io with Redis adapter) for bookings and notifications.",
+          "PWA «Mi agenda»: installable, offline page, push notifications and app shortcuts."
+        ]
+      },
+      "augusto-fit-program": {
+        "title": "Augusto Fit Program",
+        "subtitle": "Personal Trainer Corporate Website",
+        "description": "Corporate website for a personal trainer with custom training plans, transformation stories, and direct contact. Includes services, testimonials with infinite carousel on mobile, habits and statistics section, plans, and contact form with EmailJS. Dark design with GSAP animations and mobile-first responsive experience. Architecture is ready to scale into a shop.",
+        "whatIs": "Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training plans, and a contact form integrated with EmailJS. Dark design with GSAP animations, next/font typography and mobile-first responsive experience.\nThe architecture is ready to be scaled into a shop (e.g. plans purchase, members area) if the client decides to grow the product.",
+        "problemSolved": "A personal trainer needed a professional web presence that conveyed trust, showed real results (testimonials and transformation photos), and made it easy for potential clients to get in touch or learn about plans, without relying only on social media.\nAugusto Fit Program addresses this with a clear landing, value sections (habits, statistics), testimonials in a continuous carousel that on mobile keeps content visible in two rows with opposite directions, and CTAs to plans and contact (including a floating WhatsApp button).",
+        "learnings": [
+          "Full design and development with Next.js (App Router), TypeScript and SCSS Modules.",
+          "Hero with video/background image, GSAP-animated title and CTAs to plans and about.",
+          "Testimonials and transformation photos section with infinite carousel; on mobile, two rows with opposite-direction animations to avoid blank screens.",
+          "Habits, Statistics and Plans sections with responsive layout and consistent styling.",
+          "Font integration with next/font/google (Plus Jakarta Sans, Merriweather) for optimized production loading.",
+          "Contact form with EmailJS and floating WhatsApp button.",
+          "Viewport and meta configured for consistency between development and production on mobile.",
+          "Deployment on Vercel with a single project connected to the repository.",
+          "Architecture ready to scale into a shop (plans purchase, members area) if the client grows the product."
+        ]
+      },
       "property-recommender": {
         "title": "Habita",
         "subtitle": "Property Recommendation System",

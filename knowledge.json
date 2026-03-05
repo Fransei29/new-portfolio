@@ -148,7 +148,7 @@
       "impact": "Built a comprehensive platform connecting developers, designers, and tech professionals with innovative startups and companies. Features include differentiated role-based dashboards, Google OAuth authentication, and Supabase backend with Edge Functions.",
       "technologies": ["Next.js 15.4.2", "React 19.1.0", "TypeScript", "SCSS Modules", "Supabase", "Google OAuth 2.0", "JWT", "Lucide React"],
       "url": "https://github.com/Fransei29/starton",
-      "liveDemo": "https://starton.vercel.app/"
+      "liveDemo": "https://www.starton.it.com/"
     },
     {
       "name": "Quiero Sport E-commerce",

@@ -37,6 +37,41 @@
           "Implementación de blogs, páginas de servicios y sistema de networking de fundadores."
         ]
       },
+      "mi-agenda": {
+        "title": "Mi Agenda",
+        "subtitle": "Plataforma de Reservas y Turnos Online",
+        "description": "Turnero (Mi Agenda) es una plataforma que permite a proveedores de servicios gestionar su agenda y a los clientes reservar turnos online. Incluye flujo público de reserva por servicio, integración con Google Calendar, pagos con MercadoPago, notificaciones (email, push, opcionalmente SMS/WhatsApp) y PWA instalable con recordatorios y acceso offline.",
+        "whatIs": "Turnero es una plataforma que permite a proveedores de servicios gestionar su agenda y a sus clientes reservar turnos online. Incluye flujo público de reserva por servicio, integración con Google Calendar para evitar conflictos, pagos con MercadoPago (pago único y suscripciones), notificaciones (email, push y opcionalmente SMS/WhatsApp) y una PWA instalable («Mi agenda») con recordatorios y acceso offline.\nLa solución centraliza disponibilidad recurrente y puntual, pagos, recordatorios y panel de administración en un solo producto, mejorando la experiencia tanto del proveedor como del cliente.",
+        "problemSolved": "Muchos profesionales y negocios siguen dependiendo de mensajes, llamadas o planillas para gestionar turnos, lo que genera errores, no-shows y falta de trazabilidad. Turnero aborda esto ofreciendo reserva autoservicio por web, disponibilidad clara, integración con calendario, pagos online y notificaciones automáticas, reduciendo la carga operativa y las reservas perdidas.",
+        "learnings": [
+          "Flujo público de reserva por slug de servicio: selección de día, horario, datos del cliente y confirmación con opción de pago (MercadoPago).",
+          "Panel de administración para proveedores: servicios, disponibilidad recurrente y específica, gestión de reservas, clientes, estadísticas, perfil, plantillas, suscripción y pagos.",
+          "Portal del cliente: registro, perfil y listado de reservas con estados (pendiente, confirmada, cancelada, completada, no-show).",
+          "API REST con NestJS: autenticación JWT (access + refresh, cookies httpOnly), usuarios, reservas, disponibilidad, servicios, dashboard, clientes, estadísticas, pagos, webhooks y documentación Swagger.",
+          "Integración de pagos con MercadoPago: preferencias, webhooks, depósitos y pagos completos, y soporte para suscripciones.",
+          "Sincronización con Google Calendar para marcar bloques ocupados y evitar solapamiento de turnos.",
+          "Actualizaciones en tiempo real mediante WebSockets (Socket.io con adaptador Redis) para reservas y notificaciones.",
+          "PWA «Mi agenda»: instalable, página offline, notificaciones push y atajos de app."
+        ]
+      },
+      "augusto-fit-program": {
+        "title": "Augusto Fit Program",
+        "subtitle": "Sitio web para entrenador personal",
+        "description": "Sitio web corporativo para un entrenador personal con planes de entrenamiento personalizados, historias de transformación y contacto directo. Incluye servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes y formulario de contacto con EmailJS. Diseño oscuro con animaciones GSAP y experiencia responsive mobile-first. La arquitectura está preparada para escalar en un shop.",
+        "whatIs": "Sitio web corporativo para un entrenador personal que ofrece planes de entrenamiento personalizados, historias de transformación y contacto directo. La plataforma presenta servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes de entrenamiento y formulario de contacto integrado con EmailJS. El diseño es oscuro, con animaciones (GSAP), tipografía con next/font y experiencia responsive mobile-first.\nLa arquitectura está lista para ser escalada en un shop (por ejemplo compra de planes, área de miembros) si el cliente decide hacer crecer el producto.",
+        "problemSolved": "Un entrenador personal necesitaba una presencia web profesional que transmitiera confianza, mostrara resultados reales (testimonios y fotos de transformación) y facilitara que potenciales clientes se contacten o conozcan los planes, sin depender solo de redes sociales.\nAugusto Fit Program resuelve esto con una landing clara, secciones de valor (hábitos, estadísticas), testimonios en carrusel continuo que en mobile mantienen siempre contenido visible en dos filas con direcciones opuestas, y CTA hacia planes y contacto (incluido botón flotante de WhatsApp).",
+        "learnings": [
+          "Diseño y desarrollo completo del sitio con Next.js (App Router), TypeScript y SCSS Modules.",
+          "Hero con video/imagen de fondo, título animado con GSAP y CTAs hacia planes y sobre mí.",
+          "Sección de testimonios y fotos de transformación con carrusel infinito; en mobile, dos filas con animaciones en direcciones opuestas para evitar pantallas en blanco.",
+          "Secciones Hábitos, Estadísticas y Planes con layout responsive y estilos consistentes.",
+          "Integración de fuentes con next/font/google (Plus Jakarta Sans, Merriweather) para carga optimizada en producción.",
+          "Formulario de contacto con EmailJS y botón flotante de WhatsApp.",
+          "Viewport y meta configurados para consistencia entre desarrollo y producción en móviles.",
+          "Despliegue en Vercel con un único proyecto conectado al repositorio.",
+          "Arquitectura preparada para escalar en un shop (compra de planes, área de miembros) si el cliente amplía el producto."
+        ]
+      },
       "property-recommender": {
         "title": "Habita",
         "subtitle": "Sistema de Recomendación de Propiedades",

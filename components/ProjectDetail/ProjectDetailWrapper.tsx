@@ -34,14 +34,27 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
   const translatedWhatIs = getTranslatedField('whatIs');
   const translatedProblemSolved = getTranslatedField('problemSolved');
 
+  // Use translated learnings array when available (locale has projects.items.<slug>.learnings)
+  let learningsToShow: string[] | undefined = (project as { learnings?: string[] }).learnings;
+  const learningsKey = `projects.items.${slug}.learnings`;
+  const learningsTranslated = t(learningsKey);
+  if (learningsTranslated && learningsTranslated !== learningsKey && !learningsTranslated.startsWith('projects.items.')) {
+    try {
+      const parsed = JSON.parse(learningsTranslated);
+      if (Array.isArray(parsed) && parsed.length > 0) learningsToShow = parsed;
+    } catch {
+      // keep learningsToShow from project
+    }
+  }
+
   return (
     <ProjectDetailComponent
-      title={project.title}
+      title={getTranslatedField('title') || project.title}
       subtitle={translatedSubtitle || project.subtitle}
       whatIs={translatedWhatIs || project.whatIs}
       problemSolved={translatedProblemSolved || project.problemSolved}
       techStack={project.techStack}
-      learnings={(project as { learnings?: string[] }).learnings}
+      learnings={learningsToShow}
       screenshots={project.screenshots}
       videoUrl={project.videoUrl}
       githubLink={project.githubLink}

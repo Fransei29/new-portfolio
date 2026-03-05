@@ -23,8 +23,7 @@ export const projects = [
       'Express',
       'PostgreSQL (Supabase)',
       'Google OAuth 2.0',
-      'JWT',
-      'Vercel'
+      'JWT'
     ],
     learnings: [
       'Implemented a multi-role system (students, founders, recruiters, startup workers) with differentiated authorization.',
@@ -45,7 +44,112 @@ export const projects = [
     ],
     videoUrl: '/videos/Start On.mp4',
     githubLink: 'https://github.com/Fransei29/StartOn',
-    liveDemoLink: 'https://starton.it.com/',
+    liveDemoLink: 'https://www.starton.it.com/',
+  },
+  {
+    slug: 'mi-agenda',
+    title: 'Mi Agenda',
+    subtitle: 'Online Booking & Appointments Platform',
+    whatIs: `Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with MercadoPago (one-time and subscriptions), notifications (email, push, and optionally SMS/WhatsApp), and an installable PWA ("Mi agenda") with reminders and offline access.
+
+The solution centralizes recurring and one-off availability, payments, reminders, and admin panel in a single product, improving the experience for both the provider and the client.`,
+    problemSolved: `Many professionals and businesses still rely on messages, calls, or spreadsheets to manage appointments, leading to errors, no-shows, and lack of traceability. Turnero addresses this by offering self-service web booking, clear availability, calendar integration, online payments, and automatic notifications, reducing operational load and lost bookings.`,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Redux Toolkit',
+      'SCSS',
+      'Tailwind CSS',
+      'MUI',
+      'React Hook Form',
+      'Framer Motion',
+      'Recharts',
+      'Socket.io-client',
+      'NestJS',
+      'Node.js',
+      'Prisma',
+      'MySQL',
+      'Redis',
+      'JWT',
+      'Swagger',
+      'MercadoPago',
+      'Google Calendar API',
+      'Nodemailer',
+      'Twilio (SMS/WhatsApp)',
+      'Docker'
+    ],
+    learnings: [
+      'Public booking flow by service slug: day and time selection, client details, confirmation with optional MercadoPago payment.',
+      'Admin panel for providers: services, recurring and specific availability, booking management, clients, statistics, profile, templates, subscription and payments.',
+      'Client portal: registration, profile and list of bookings with states (pending, confirmed, cancelled, completed, no-show).',
+      'REST API with NestJS: JWT auth (access + refresh, httpOnly cookies), users, bookings, availability, services, dashboard, clients, statistics, payments, webhooks and Swagger documentation.',
+      'MercadoPago payment integration: preferences, webhooks, deposits and full payments, and subscription support.',
+      'Google Calendar sync to mark busy blocks and prevent booking overlap.',
+      'Real-time updates via WebSockets (Socket.io with Redis adapter) for bookings and notifications.',
+      'PWA "Mi agenda": installable, offline page, push notifications and app shortcuts.'
+    ],
+    screenshots: [
+      '/img/img/Miagenda/A.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-03.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-09.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-14.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-21.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-27.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-44.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-39-49.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-40-00.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-40-10.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-40-16.webp',
+      '/img/img/Miagenda/Screenshot from 2026-03-04 14-40-23.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://miagenda.site/',
+  },
+  {
+    slug: 'augusto-fit-program',
+    title: 'Augusto Fit Program',
+    subtitle: 'Personal Trainer Corporate Website',
+    whatIs: `Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training plans, and a contact form integrated with EmailJS. Dark design with GSAP animations, next/font typography and mobile-first responsive experience.
+
+The architecture is ready to be scaled into a shop (e.g. plans purchase, members area) if the client decides to grow the product.`,
+    problemSolved: `A personal trainer needed a professional web presence that conveyed trust, showed real results (testimonials and transformation photos), and made it easy for potential clients to get in touch or learn about plans, without relying only on social media.
+
+Augusto Fit Program addresses this with a clear landing, value sections (habits, statistics), testimonials in a continuous carousel that on mobile keeps content visible in two rows with opposite directions, and CTAs to plans and contact (including a floating WhatsApp button).`,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'SCSS Modules',
+      'GSAP',
+      'next/font (Google Fonts)',
+      'EmailJS',
+      'Vercel'
+    ],
+    learnings: [
+      'Full design and development with Next.js (App Router), TypeScript and SCSS Modules.',
+      'Hero with video/background image, GSAP-animated title and CTAs to plans and about.',
+      'Testimonials and transformation photos section with infinite carousel; on mobile, two rows with opposite-direction animations to avoid blank screens.',
+      'Habits, Statistics and Plans sections with responsive layout and consistent styling.',
+      'Font integration with next/font/google (Plus Jakarta Sans, Merriweather) for optimized production loading.',
+      'Contact form with EmailJS and floating WhatsApp button.',
+      'Viewport and meta configured for consistency between development and production on mobile.',
+      'Deployment on Vercel with a single project connected to the repository.',
+      'Architecture ready to scale into a shop (plans purchase, members area) if the client grows the product.'
+    ],
+    screenshots: [
+      '/img/img/Augusto/A.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-34-50.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-34-58.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-35-05.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-35-11.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-35-19.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-35-48.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-35-57.webp',
+      '/img/img/Augusto/Screenshot from 2026-03-04 14-36-03.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://www.augustoluque.com/',
   },
   {
     slug: 'ateevo-wholesale',
