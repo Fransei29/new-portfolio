@@ -380,7 +380,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
   flex: 1;
   
   @media (max-width: 768px) {
@@ -637,5 +637,23 @@
 
 .mobileNavLink:hover .bootcampArrow {
   transform: translateY(0) rotate(35deg);
+}
+
+// Sin borde para el botón YouTube (queda a la izquierda de Bootcamp)
+.badgeNoBorder {
+  border: none !important;
+  box-shadow: none !important;
+
+  &:hover {
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2) !important;
+  }
+
+  :global(html.dark) & {
+    border: none !important;
+    &:hover {
+      border: none !important;
+    }
+  }
 }
 

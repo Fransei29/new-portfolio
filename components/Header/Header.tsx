@@ -11,6 +11,7 @@ import styles from './Header.module.scss';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { X, Home, FolderOpen, BookOpen, User, Mail, ArrowUp, GraduationCap } from 'lucide-react';
+import { SiYoutube } from 'react-icons/si';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function Header() {
@@ -138,6 +139,16 @@ export default function Header() {
               {t('nav.contact')}
             </p>
           </Link>
+          <a
+            href="https://www.youtube.com/@francoseiler1710"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.navLink}
+            aria-label={t('nav.youtube')}
+          >
+            <SiYoutube size={20} className={styles.navIcon} />
+            {t('nav.youtube')}
+          </a>
           <a 
             href={`https://bootcamp.francoseiler.com/${language}`}
             target="_blank"
@@ -211,6 +222,17 @@ export default function Header() {
             {t('nav.contact')}
           </p>
         </Link>
+        <a
+          href="https://www.youtube.com/@francoseiler1710"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMobileMenu}
+          className={styles.mobileNavLink}
+          aria-label={t('nav.youtube')}
+        >
+          <SiYoutube size={18} className={styles.mobileNavIcon} />
+          {t('nav.youtube')}
+        </a>
       </div>
     </header>
   );
