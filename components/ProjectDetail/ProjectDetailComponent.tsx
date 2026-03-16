@@ -201,113 +201,9 @@ export default function ProjectDetailComponent({
         <span>{t('projects.back')}</span>
       </Link>
 
-      {/* Grid principal: Info izquierda, Contenido derecha */}
+      {/* Grid principal: Contenido izquierda, Info derecha */}
       <div className={styles.mainGrid}>
-        {/* Columna izquierda: Info */}
-        <div className={styles.leftColumn}>
-          <div className={styles.textContent}>
-            <div className={styles.titleHeader}>
-              <h1>{title}</h1>
-              <p className={styles.subtitle}>{subtitle}</p>
-            </div>
-
-            {whatIs && (
-              <section className={styles.detailSection}>
-                <div className={styles.sectionHeader}>
-                  <FileText className={styles.sectionIcon} size={22} aria-hidden />
-                  <h2>{t('projects.overview')}</h2>
-                </div>
-                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
-                  {whatIs}
-                </div>
-              </section>
-            )}
-
-            {problemSolved && (
-              <section className={styles.detailSection}>
-                <div className={styles.sectionHeader}>
-                  <Target className={styles.sectionIcon} size={22} aria-hidden />
-                  <h2>{t('projects.challenge')}</h2>
-                </div>
-                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
-                  {problemSolved}
-                </div>
-              </section>
-            )}
-
-            {learnings && learnings.length > 0 && (
-              <section className={styles.detailSection}>
-                <div className={styles.sectionHeader}>
-                  <GraduationCap className={styles.sectionIcon} size={22} aria-hidden />
-                  <h2>{t('projects.learnings')}</h2>
-                </div>
-                <ul className={styles.learningsList}>
-                  {learnings.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {techStack && techStack.length > 0 && (
-              <section className={styles.detailSection}>
-                <div className={styles.sectionHeader}>
-                  <Code2 className={styles.sectionIcon} size={22} aria-hidden />
-                  <h2>{t('projects.builtWith')}</h2>
-                </div>
-                <div className={styles.techStackGrid}>
-                  {techStack.map((tech, index) => {
-                    const techIcon = getTechIcon(tech);
-                    const isComponent = techIcon && typeof techIcon.icon !== 'string';
-                    return (
-                      <div key={index} className={styles.techCard}>
-                        {techIcon ? (
-                          isComponent ? (
-                            <techIcon.icon className={styles.techIcon} />
-                          ) : (
-                            <Image
-                              src={typeof techIcon.icon === 'string' ? techIcon.icon : ''}
-                              alt={`${techIcon.name} Icon`}
-                              width={22}
-                              height={22}
-                              className={styles.techIconImage}
-                            />
-                          )
-                        ) : null}
-                        <span className={styles.techName}>{techIcon?.name || tech}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
-
-            <section className={styles.detailSection}>
-              <div className={styles.sectionHeader}>
-                <Link2 className={styles.sectionIcon} size={22} aria-hidden />
-                <h2>{t('projects.links')}</h2>
-              </div>
-              <div className={styles.links}>
-                {githubLink ? (
-                  <a href={githubLink} target="_blank" rel="noopener noreferrer">
-                    {t('projects.githubRepository')} <Github className={styles.iconSmall} />
-                  </a>
-                ) : githubLink === null || githubLink === '' ? (
-                  <div className={styles.privateLink} title="Código privado">
-                    {t('projects.githubRepository')} <Lock className={styles.iconSmall} />
-                  </div>
-                ) : null}
-                {liveDemoLink && (
-                  <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
-                    {t('projects.liveDemo')} <ExternalLink className={styles.iconSmall} />
-                  </a>
-                )}
-              </div>
-            </section>
-          </div>
-        </div>
-
-        {/* Columna derecha: Contenido (Dos carruseles de imágenes) */}
+        {/* Columna izquierda: Contenido (carruseles / video) */}
         <div className={styles.rightColumn}>
           {/* Primer carrusel - Primera mitad de imágenes */}
           {firstHalf.length > 0 && (
@@ -433,6 +329,110 @@ export default function ProjectDetailComponent({
               </video>
             </div>
           )}
+        </div>
+
+        {/* Columna derecha: Info */}
+        <div className={styles.leftColumn}>
+          <div className={styles.textContent}>
+            <div className={styles.titleHeader}>
+              <h1>{title}</h1>
+              <p className={styles.subtitle}>{subtitle}</p>
+            </div>
+
+            {whatIs && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <FileText className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.overview')}</h2>
+                </div>
+                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                  {whatIs}
+                </div>
+              </section>
+            )}
+
+            {problemSolved && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <Target className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.challenge')}</h2>
+                </div>
+                <div className={styles.formattedText} style={{ whiteSpace: 'pre-line' }}>
+                  {problemSolved}
+                </div>
+              </section>
+            )}
+
+            {learnings && learnings.length > 0 && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <GraduationCap className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.learnings')}</h2>
+                </div>
+                <ul className={styles.learningsList}>
+                  {learnings.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {techStack && techStack.length > 0 && (
+              <section className={styles.detailSection}>
+                <div className={styles.sectionHeader}>
+                  <Code2 className={styles.sectionIcon} size={22} aria-hidden />
+                  <h2>{t('projects.builtWith')}</h2>
+                </div>
+                <div className={styles.techStackGrid}>
+                  {techStack.map((tech, index) => {
+                    const techIcon = getTechIcon(tech);
+                    const isComponent = techIcon && typeof techIcon.icon !== 'string';
+                    return (
+                      <div key={index} className={styles.techCard}>
+                        {techIcon ? (
+                          isComponent ? (
+                            <techIcon.icon className={styles.techIcon} />
+                          ) : (
+                            <Image
+                              src={typeof techIcon.icon === 'string' ? techIcon.icon : ''}
+                              alt={`${techIcon.name} Icon`}
+                              width={22}
+                              height={22}
+                              className={styles.techIconImage}
+                            />
+                          )
+                        ) : null}
+                        <span className={styles.techName}>{techIcon?.name || tech}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+
+            <section className={styles.detailSection}>
+              <div className={styles.sectionHeader}>
+                <Link2 className={styles.sectionIcon} size={22} aria-hidden />
+                <h2>{t('projects.links')}</h2>
+              </div>
+              <div className={styles.links}>
+                {githubLink ? (
+                  <a href={githubLink} target="_blank" rel="noopener noreferrer">
+                    {t('projects.githubRepository')} <Github className={styles.iconSmall} />
+                  </a>
+                ) : githubLink === null || githubLink === '' ? (
+                  <div className={styles.privateLink} title="Código privado">
+                    {t('projects.githubRepository')} <Lock className={styles.iconSmall} />
+                  </div>
+                ) : null}
+                {liveDemoLink && (
+                  <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
+                    {t('projects.liveDemo')} <ExternalLink className={styles.iconSmall} />
+                  </a>
+                )}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
 
