@@ -63,6 +63,16 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'GSAP', 'next/font (Google Fonts)', 'EmailJS', 'Vercel'],
     },
     {
+      slug: 'tecnomar',
+      title: t('projects.items.tecnomar.title'),
+      isTutorial: false,
+      description: t('projects.items.tecnomar.description'),
+      link2: null,
+      link3: 'https://www.tecno-mar.com.ar/',
+      previewImage: '/img/img/Tecnomar/A.webp',
+      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'CSS Variables', 'Next/Image'],
+    },
+    {
       slug: 'ateevo-wholesale',
       title: 'Ateevo Wholesale',
       isTutorial: false,

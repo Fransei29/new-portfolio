@@ -54,6 +54,21 @@
           "PWA «Mi agenda»: instalable, página offline, notificaciones push y atajos de app."
         ]
       },
+      "tecnomar": {
+        "title": "TecnoMar",
+        "subtitle": "Sitio web corporativo – Bombas industriales",
+        "description": "Sitio corporativo para TecnoMar, empresa especializada en diagnóstico, reparación y reacondicionamiento de bombas sanitarias e industriales. La web presenta servicios, metodología de trabajo y proceso técnico, y acerca a clientes y empresas mediante CTAs claros (cotizador online y contacto). Incluye secciones de enfoque, clientes con logos en marquesina y mapa de contacto, con diseño responsive y alineado a la identidad de marca.",
+        "whatIs": "Sitio corporativo para TecnoMar, empresa especializada en diagnóstico, reparación y reacondicionamiento de bombas sanitarias e industriales. La web presenta servicios, metodología de trabajo y proceso técnico, y acerca a clientes y empresas mediante CTAs claros (cotizador online y contacto). Incluye secciones de enfoque, clientes con logos en marquesina y mapa de contacto, con diseño responsive y alineado a la identidad de marca.",
+        "problemSolved": "El sector industrial necesita sitios que transmitan solidez técnica y permitan solicitar cotización o contacto de forma directa. TecnoMar necesitaba una presencia digital clara: explicar servicios y proceso, mostrar experiencia (+20 años, +50 clientes activos, +2000 productos) y ofrecer un cotizador y vías de contacto sin fricciones.",
+        "learnings": [
+          "Landing con hero a pantalla completa, overlay y tipografía con acento de marca («corazón técnico», TECNOMAR).",
+          "Secciones: Servicios, Nuestro Enfoque (cards con imagen de fondo y overlay), Metodología / Proceso Técnico (pasos con imágenes), Por qué elegirnos (métricas animadas), Cotización, Contacto (tarjetas copiables + mapa) y Clientes (doble fila de marquesina en mobile).",
+          "Variables globales de diseño (padding de secciones, sombras, radius, colores de marca) y componentes reutilizables (botones primaryLight / primaryBlue, divisor con clip-path entre secciones).",
+          "Cotizador online en ruta dedicada y enlaces a Contacto; CTAs diferenciados (cotizador vs contacto) en Approach y Process.",
+          "Diseño mobile-first: hamburger animado (líneas → X), tarjetas de contacto alineadas, logos de clientes con tamaños desktop/mobile por archivo y carga prioritaria en la primera fila.",
+          "Loading overlay con logo fijo y spinner; integración de mapa en la sección de contacto."
+        ]
+      },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
         "subtitle": "Sitio web para entrenador personal",

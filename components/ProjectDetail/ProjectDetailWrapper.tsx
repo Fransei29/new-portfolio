@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ProjectDetailComponent from './ProjectDetailComponent';
 import { projects } from '../../app/data/projects';
@@ -10,6 +11,12 @@ interface ProjectDetailWrapperProps {
 
 export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps) {
   const { t } = useLanguage();
+
+  // scroll-snap-type en html/body rompe position:sticky en producción; lo desactivamos en esta página
+  useEffect(() => {
+    document.documentElement.classList.add('project-detail-page');
+    return () => document.documentElement.classList.remove('project-detail-page');
+  }, []);
   
   const project = projects.find((proj) => proj.slug === slug);
   

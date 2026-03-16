@@ -54,6 +54,21 @@
           "PWA «Mi agenda»: installable, offline page, push notifications and app shortcuts."
         ]
       },
+      "tecnomar": {
+        "title": "TecnoMar",
+        "subtitle": "Industrial Pumps Corporate Website",
+        "description": "Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
+        "whatIs": "Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
+        "problemSolved": "The industrial sector needs sites that convey technical solidity and allow direct quotation or contact requests. TecnoMar needed a clear digital presence: explain services and process, showcase experience (+20 years, +50 active clients, +2000 products), and offer a quote form and contact channels without friction.",
+        "learnings": [
+          "Landing with full-screen hero, overlay, and brand-accent typography («corazón técnico», TECNOMAR).",
+          "Sections: Services, Our Approach (cards with background image and overlay), Methodology / Technical Process (steps with images), Why Choose Us (animated metrics), Quote, Contact (copyable cards + map), and Clients (double-row marquee on mobile).",
+          "Global design variables (section padding, shadows, radius, brand colors) and reusable components (primaryLight / primaryBlue buttons, clip-path divider between sections).",
+          "Online quote form on dedicated route and links to Contact; differentiated CTAs (quote vs contact) in Approach and Process.",
+          "Mobile-first design: animated hamburger (lines → X), aligned contact cards, client logos with desktop/mobile sizes and priority load for first row.",
+          "Loading overlay with fixed logo and spinner; map integration in contact section."
+        ]
+      },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
         "subtitle": "Personal Trainer Corporate Website",

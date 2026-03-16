@@ -148,6 +148,12 @@ html, body {
   }
 }
 
+/* En página de detalle de proyecto: sin scroll-snap para que position:sticky funcione en producción */
+html.project-detail-page,
+html.project-detail-page body {
+  scroll-snap-type: none !important;
+}
+
 * {
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
