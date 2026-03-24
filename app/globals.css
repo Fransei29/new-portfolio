@@ -32,10 +32,25 @@
   --bg-hover: rgba(245, 84, 165, 0.9);
   --cta-bg: #032e8b;
   --cta-bg-hover: #1D4ED8;
-  --cta-bg-gradient: linear-gradient(180deg, #000b1f 0%, #011540 55%, #000b1f 100%);
+  /* CTA: mismo token en gradiente, wave y fallback */
+  --cta-gradient-top: #000b1f;
+  --cta-gradient-mid: #011540;
+  --cta-bg-gradient: linear-gradient(
+    180deg,
+    var(--cta-gradient-top) 0%,
+    var(--cta-gradient-mid) 55%,
+    var(--cta-gradient-top) 100%
+  );
+  /* Wave CTA: curva + franja inferior que entra 2px sobre el bloque (evita línea SVG/CSS) */
+  --wave-cta-bleed: 2px;
+  --wave-cta-height: 30px;
   --cta-text: #ffffff;
   --br: 12px;
   --container-max-width: 1350px;
+
+  /* Wave dividers (home): deben alinear con --background-colorA / B y CTA */
+  --wave-a: rgb(255, 255, 255);
+  --wave-b: #faf9f7;
 
   /* Variables para títulos y subtítulos - Sistema global */
   
@@ -163,7 +178,15 @@ h1, .highlight, .socialmedia {
 }
 
 html.dark {
-  background-color: var(--dark-light)
+  background-color: var(--dark-light);
+  /* Alias usado por secciones con gradiente claro en light; evita fondos inválidos si se referencia sin definir */
+  --background-colorA-dark: var(--dark-light);
+  /* Mismo token que las secciones; el match en dark fallaba sobre todo por el drop-shadow del SVG (ver WaveDivider) */
+  --wave-a: var(--dark-light);
+  --wave-b: var(--dark-light);
+  /* Mismos valores que :root: el wave CTA usa var(--cta-gradient-top) en CSS; re-declarar evita cascadas raras en SVG */
+  --cta-gradient-top: #000b1f;
+  --cta-gradient-mid: #011540;
 }
 
 html.dark .svg-duo {

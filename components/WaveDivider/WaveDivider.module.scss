@@ -1,0 +1,60 @@
+.root {
+  line-height: 0;
+  margin-top: -1px;
+}
+
+.svg {
+  width: 100%;
+  height: 52px;
+  display: block;
+  overflow: hidden;
+}
+
+.svgCta {
+  width: 100%;
+  height: var(--wave-cta-height);
+  display: block;
+  overflow: hidden;
+}
+
+/* Colores vía variables en globals.css (:root / html.dark) */
+.aToB {
+  background: var(--wave-a);
+
+  path {
+    fill: var(--wave-b);
+  }
+}
+
+.bToA {
+  background: var(--wave-b);
+
+  path {
+    fill: var(--wave-a);
+  }
+}
+
+.aToCta {
+  background: var(--wave-a);
+
+  .pathCta {
+    fill: var(--cta-gradient-top);
+    shape-rendering: geometricPrecision;
+  }
+}
+
+.waveDrop {
+  flood-color: rgba(0, 0, 0, 0.22);
+}
+
+/* Sin sombra en oscuro: el drop-shadow dibuja un halo más oscuro que el fondo (#0a0a0f) y “rompe” el match */
+:global(html.dark) {
+  .aToB path,
+  .bToA path {
+    filter: none !important;
+  }
+
+  .waveDrop {
+    flood-color: rgba(0, 0, 0, 0.35);
+  }
+}

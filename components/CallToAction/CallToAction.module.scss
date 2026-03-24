@@ -4,15 +4,17 @@
   width: 100%;
   position: relative;
   padding: 8rem 0;
+  margin-top: calc(-1 * var(--wave-cta-bleed));
   background-image: var(--cta-bg-gradient);
-  background-color: var(--cta-bg); /* Fallback */
+  /* Mismo tono que el 0% del gradiente (no --cta-bg #032e8b, desentonaba con la ola) */
+  background-color: var(--cta-gradient-top);
   overflow: hidden;
   
-  // Patrones decorativos minimalistas
+  // Patrones decorativos: solo debajo del wave CTA (altura = --wave-cta-height)
   &::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: var(--wave-cta-height);
     left: 0;
     right: 0;
     bottom: 0;
@@ -27,7 +29,7 @@
   &::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: var(--wave-cta-height);
     left: 0;
     right: 0;
     bottom: 0;
@@ -39,7 +41,7 @@
   
   :global(html.dark) & {
     background-image: var(--cta-bg-gradient);
-    background-color: var(--cta-bg);
+    background-color: var(--cta-gradient-top);
     color: var(--cta-text);
   }
 

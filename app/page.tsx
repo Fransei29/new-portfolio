@@ -124,18 +124,18 @@ export default function Home() {
       <section className="containerGeneral">
          
          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
-            <WaveDivider from="rgb(255,255,255)" to="#faf9f7" />
+            <WaveDivider variant="aToB" />
            <Services />
           </div>
 
-          <WaveDivider from="#faf9f7" to="rgb(255,255,255)" />
+          <WaveDivider variant="bToA" />
 
           <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
             <AutomationComparison />
           </div>
 
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-right">
-            <WaveDivider from="rgb(255,255,255)" to="#faf9f7" />
+            <WaveDivider variant="aToB" />
             <ProjectsSection />
           </div>
 
@@ -144,22 +144,22 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left">
-            <WaveDivider from="#faf9f7" to="rgb(255,255,255)" />
+            <WaveDivider variant="bToA" />
             <WhyChooseUs />
           </div>
 
           <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
-            <WaveDivider from="rgb(255,255,255)" to="#faf9f7" />
+            <WaveDivider variant="aToB" />
             <SkillsSummary />
           </div>
 
           <div ref={(el) => {elementsRef.current[10] = el;}} className="fade-in-right">
-            <WaveDivider from="#faf9f7" to="rgb(255,255,255)" />
+            <WaveDivider variant="bToA" />
             <Testimonials />
           </div>
 
           <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-left">
-            <WaveDivider from="rgb(255,255,255)" to="#000b1f" />
+            <WaveDivider variant="aToCta" />
             <CallToAction />
           </div>
       </section>

@@ -67,7 +67,7 @@
   border-bottom: 1px solid rgba(247, 86, 166, 0.15);
 
   :global(html.dark) & {
-    border-color: rgba(250, 81, 166, 0.2);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 
   @media (max-width: 1024px) {
@@ -87,7 +87,7 @@
     border-left: none;
 
     :global(html.dark) & {
-      border-color: rgba(250, 81, 166, 0.2);
+      border-color: rgba(255, 255, 255, 0.12);
     }
   }
 }
@@ -121,7 +121,7 @@
   font-family: 'IBM Plex Sans', sans-serif;
 
   :global(html.dark) & {
-    color: #fa51a6;
+    color: rgba(240, 240, 245, 0.92);
   }
 
   @media (max-width: 768px) {
@@ -137,7 +137,7 @@
   line-height: 1;
 
   :global(html.dark) & {
-    color: #fa51a6;
+    color: rgba(230, 230, 236, 0.88);
   }
 
   @media (max-width: 768px) {
