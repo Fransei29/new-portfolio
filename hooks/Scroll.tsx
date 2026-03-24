@@ -5,25 +5,26 @@ export const useScrollAnimation = () => {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1 } // Se activa cuando el 20% del elemento está en pantalla
-    );
+    const timeout = setTimeout(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-    // Observamos todos los elementos referenciados
-    elementsRef.current.forEach((el) => {
-      if (el) {
-        observer.observe(el);
-      }
-    });
+      elementsRef.current.forEach((el) => {
+        if (el) observer.observe(el);
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }, 120);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return elementsRef;

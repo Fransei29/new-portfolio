@@ -201,22 +201,22 @@
 }
 
 .cardWithout {
-  background: rgba(201, 76, 92, 0.08);
-  border: 1px solid rgba(201, 76, 92, 0.22);
+  background: rgba(201, 76, 92, 0.04);
+  border: 1px solid rgba(201, 76, 92, 0.14);
 
   :global(html.dark) & {
-    background: rgba(201, 76, 92, 0.12);
-    border-color: rgba(201, 76, 92, 0.3);
+    background: rgba(201, 76, 92, 0.08);
+    border-color: rgba(201, 76, 92, 0.22);
   }
 }
 
 .cardWith {
-  background: rgba(45, 143, 110, 0.08);
-  border: 1px solid rgba(45, 143, 110, 0.25);
+  background: rgba(45, 143, 110, 0.04);
+  border: 1px solid rgba(45, 143, 110, 0.15);
 
   :global(html.dark) & {
-    background: rgba(45, 143, 110, 0.12);
-    border-color: rgba(45, 143, 110, 0.35);
+    background: rgba(45, 143, 110, 0.08);
+    border-color: rgba(45, 143, 110, 0.25);
   }
 }
 

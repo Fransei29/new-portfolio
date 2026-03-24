@@ -12,33 +12,31 @@
 }
 
 .chatButton {
-  width: 4rem;
-  height: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  border: 1px solid rgba(204, 2, 103, 0.3);
+  border: none;
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   transition: all 0.3s ease;
   position: relative;
   text-decoration: none;
 
   @media (max-width: 768px) {
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid rgba(204, 2, 103, 0.25);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    width: 2rem;
+    height: 2rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   }
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.25);
     background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
-    border-color: rgba(204, 2, 103, 0.4);
   }
 
   &:active {
@@ -47,13 +45,13 @@
 }
 
 .whatsappIcon {
-  width: 26px;
-  height: 26px;
+  width: 18px;
+  height: 18px;
   color: white;
-  
+
   @media (max-width: 768px) {
-    width: 22px;
-    height: 22px;
+    width: 15px;
+    height: 15px;
   }
 }
 

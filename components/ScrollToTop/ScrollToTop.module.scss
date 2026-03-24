@@ -1,7 +1,7 @@
 .scrollToTop {
   position: fixed;
-  bottom: 1.5rem;
-  right: 5rem;
+  bottom: 20px;
+  right: calc(5px + 2.5rem + 0.5rem);
   border: none;
   background-color: transparent;
   color: var(--primary-color);

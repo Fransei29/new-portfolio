@@ -6,6 +6,7 @@ import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
+import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <Footer />
             <ThemeTransitionOverlay />
+            <NavigationLoader />
             <ScrollToTop />
           </LoadingWrapper>
         </LanguageProvider>

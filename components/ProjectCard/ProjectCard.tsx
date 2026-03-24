@@ -97,9 +97,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
   return (
     <article
       className={`
-        ${styles.projectCard} 
-        ${isActive ? styles.active : ''} 
+        ${styles.projectCard}
+        ${isActive ? styles.active : ''}
         ${!project.slug ? styles.clickable : ''}
+        ${project.isTutorial ? styles.tutorialCard : ''}
       `}
       id={project.title.toLowerCase().replace(/\s/g, '')}
       onClick={handleCardClick}

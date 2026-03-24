@@ -2,8 +2,7 @@
 
 .testimonialsContainer{
     width: 100%;
-    background-image: var(--background-colorB-gradient);
-    background-color: var(--background-colorB); /* Fallback */
+    background-color: var(--background-colorA);
     padding: 1.75rem 0;
 
     @media (max-width: 768px) {
@@ -71,11 +70,9 @@
     padding-right: 0;
     min-height: 360px;
     overflow: hidden;
-    background-image: var(--background-colorB-gradient);
-    background-color: var(--background-colorB); /* Fallback */
+    background-color: var(--background-colorA);
 
     :global(html.dark) & {
-      background-image: none;
       background-color: var(--dark-light);
     }
 
