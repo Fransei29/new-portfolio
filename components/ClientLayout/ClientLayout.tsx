@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode } from 'react';
-import ChatWidget from '../ChatWidget/ChatWidget';
 import styles from './ClientLayout.module.scss';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
@@ -12,9 +11,6 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         <div />
         {children}
       </main>
-      
-      {/* Chat Widget */}
-      <ChatWidget />
     </>
   );
 }

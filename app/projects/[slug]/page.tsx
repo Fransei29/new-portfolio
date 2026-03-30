@@ -4,7 +4,6 @@ import ProjectDetailWrapper from '../../../components/ProjectDetail/ProjectDetai
 import { projects } from '../../data/projects';
 import { notFound } from 'next/navigation';
 import ClientLayout from '../../../components/ClientLayout/ClientLayout';
-import LoadingWrapper from '../../../components/LoadingWrapper/LoadingWrapper';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,11 +20,13 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) return notFound();
 
   return (
-    <ClientLayout>
-      <LoadingWrapper>
+    <>
+      {/* Disable scroll-snap server-side so position:sticky works from the first paint */}
+      <style>{`html, html body { scroll-snap-type: none !important; }`}</style>
+      <ClientLayout>
         <ProjectDetailWrapper slug={slug} />
-      </LoadingWrapper>
-    </ClientLayout>
+      </ClientLayout>
+    </>
   );
 }
 

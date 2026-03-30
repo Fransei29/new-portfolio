@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ProjectDetailComponent from './ProjectDetailComponent';
 import { projects } from '../../app/data/projects';
+
+// useLayoutEffect runs synchronously before paint (client-only); falls back to useEffect on SSR
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 interface ProjectDetailWrapperProps {
   slug: string;
@@ -12,8 +15,8 @@ interface ProjectDetailWrapperProps {
 export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps) {
   const { t } = useLanguage();
 
-  // scroll-snap-type en html/body rompe position:sticky en producción; lo desactivamos en esta página
-  useEffect(() => {
+  // scroll-snap-type en html/body rompe position:sticky; aplicar ANTES del primer paint
+  useIsomorphicLayoutEffect(() => {
     document.documentElement.classList.add('project-detail-page');
     return () => document.documentElement.classList.remove('project-detail-page');
   }, []);

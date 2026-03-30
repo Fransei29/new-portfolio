@@ -100,14 +100,10 @@
 .textContent {
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-left: 2.5rem;
-  overflow-y: auto;
 
   @media (max-width: 768px) {
     padding: 0;
-    overflow-y: visible;
-    height: auto;
     display: contents;
   }
 }

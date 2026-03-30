@@ -161,6 +161,11 @@ html, body {
   }
 }
 
+/* Reservar espacio del scrollbar y evitar layout shift */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* En página de detalle de proyecto: sin scroll-snap para que position:sticky funcione en producción */
 html.project-detail-page,
 html.project-detail-page body {
