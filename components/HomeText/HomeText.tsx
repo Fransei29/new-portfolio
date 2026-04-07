@@ -50,9 +50,9 @@ const HomeText: React.FC = () => {
             {t('hero.cta.projects')}
             <HiArrowRight className={styles.arrow} />
           </Link>
-          <a 
-            href="https://calendly.com/seilerfranco317/30min" 
-            target="_blank" 
+          <a
+            href="https://calendly.com/seilerfranco317/30min"
+            target="_blank"
             rel="noopener noreferrer"
             className={styles.btnSecondary}
           >
@@ -60,6 +60,13 @@ const HomeText: React.FC = () => {
             <HiArrowRight className={styles.arrow} />
           </a>
         </div>
+        <ul className={styles.heroStats} aria-label="Stats">
+          <li><strong>20+</strong> {t('statsNumbers.projects.label')}</li>
+          <li aria-hidden className={styles.heroStatsDot}>·</li>
+          <li><strong>3+</strong> {t('statsNumbers.experience.label')}</li>
+          <li aria-hidden className={styles.heroStatsDot}>·</li>
+          <li><strong>15+</strong> {t('statsNumbers.technologies.label')}</li>
+        </ul>
     </section>
   </section>
 

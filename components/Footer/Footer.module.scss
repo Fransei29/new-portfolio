@@ -85,7 +85,7 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.075);
     color: var(--text-color);
-    box-shadow: 0 2px 4px rgba(253, 3, 128, 0.2);
+    box-shadow: var(--shadow-sm);
   }
 
   :global(html.dark) & {

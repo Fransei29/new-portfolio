@@ -31,6 +31,7 @@
   "testimonials": {
     "title": "Testimonios",
     "subtitle": "Colaboradores, clientes y líderes de equipo comparten su experiencia trabajando conmigo.",
+    "featured": "Top recomendado",
     "matias": {
       "name": "Matias Rivarola",
       "role": "Desarrollador Front End",

@@ -2,6 +2,7 @@
 
 import styles from "./TestimonialsComponent.module.scss";
 import { FaLinkedin } from "react-icons/fa";
+import { Star, Sparkles } from "lucide-react";
 import Image from 'next/image';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useRef, useEffect, useState } from 'react';
@@ -14,6 +15,8 @@ type Testimonial = {
   message: string;
   image?: string;
   linkedin?: string;
+  rating?: number;
+  featured?: boolean;
 };
 
 export default function Testimonials() {
@@ -31,6 +34,8 @@ export default function Testimonials() {
       message: t('testimonials.matias.message'),
       image: "/img/img/Testimonials/tomi.webp",
       linkedin: "https://www.linkedin.com/in/matirivarola1/",
+      rating: 5,
+      featured: true,
     },
     {
       name: t('testimonials.edison.name'),
@@ -38,6 +43,7 @@ export default function Testimonials() {
       message: t('testimonials.edison.message'),
       image: "/img/img/Testimonials/Edi.webp",
       linkedin: "https://www.linkedin.com/in/edisonlamar/",
+      rating: 5,
     },
     {
       name: t('testimonials.adrian.name'),
@@ -45,6 +51,8 @@ export default function Testimonials() {
       message: t('testimonials.adrian.message'),
       image: "/img/img/Testimonials/Adrian.webp",
       linkedin: "https://www.linkedin.com/in/adrian-rodriguez-053020304/",
+      rating: 5,
+      featured: true,
     },
     {
       name: t('testimonials.franklin.name'),
@@ -52,6 +60,7 @@ export default function Testimonials() {
       message: t('testimonials.franklin.message'),
       image: "/img/img/Testimonials/frank.webp",
       linkedin: "https://www.linkedin.com/in/franklingp/",
+      rating: 5,
     },
     {
       name: t('testimonials.ismael.name'),
@@ -59,6 +68,7 @@ export default function Testimonials() {
       message: t('testimonials.ismael.message'),
       image: "/img/img/Testimonials/isma.webp",
       linkedin: "https://www.linkedin.com/in/ismaelrivarola/",
+      rating: 5,
     },
     {
       name: t('testimonials.valentin.name'),
@@ -66,6 +76,7 @@ export default function Testimonials() {
       message: t('testimonials.valentin.message'),
       image: "/img/img/Testimonials/vale.webp",
       linkedin: "https://www.linkedin.com/in/valentin-carniel-139043300/",
+      rating: 5,
     },
     {
       name: t('testimonials.tomas.name'),
@@ -73,6 +84,8 @@ export default function Testimonials() {
       message: t('testimonials.tomas.message'),
       image: "/img/img/Testimonials/tomi.webp",
       linkedin: "https://www.linkedin.com/in/tomas-del-pino-0234932a7/",
+      rating: 5,
+      featured: true,
     },
   ];
 
@@ -203,6 +216,71 @@ export default function Testimonials() {
     };
   }, [totalWidth, isMobile]);
 
+  const renderCard = (testimonial: Testimonial, key: string) => {
+    const rating = testimonial.rating ?? 5;
+    return (
+      <div
+        key={key}
+        className={`${styles.card} ${testimonial.featured ? styles.cardFeatured : ''}`}
+      >
+        {testimonial.featured && (
+          <div className={styles.featuredBadge}>
+            <Sparkles size={isMobile ? 10 : 12} strokeWidth={2.5} />
+            <span>{t('testimonials.featured')}</span>
+          </div>
+        )}
+
+        <div className={styles.cardHeader}>
+          <div className={styles.rating} aria-label={`${rating} out of 5 stars`}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                size={isMobile ? 11 : 14}
+                strokeWidth={2}
+                className={i < rating ? styles.starFilled : styles.starEmpty}
+              />
+            ))}
+          </div>
+        </div>
+
+        <p className={styles.message}>&quot;{testimonial.message}&quot;</p>
+
+        <div className={styles.authorSection}>
+          {testimonial.image && (
+            <Image
+              src={testimonial.image}
+              alt={testimonial.name}
+              width={100}
+              height={100}
+              className={styles.avatar}
+            />
+          )}
+
+          <div className={styles.authorInfo}>
+            <div className={styles.authorRow}>
+              <div className={styles.author}>
+                <strong>{testimonial.name}</strong>
+                <span>{testimonial.role}</span>
+              </div>
+              {testimonial.linkedin && (
+                <a
+                  href={testimonial.linkedin}
+                  className={styles.linkedinButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${testimonial.name}'s LinkedIn profile`}
+                  title={`View ${testimonial.name} on LinkedIn`}
+                >
+                  <FaLinkedin size={isMobile ? 14 : 16} />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.testimonialsContainer}>
       <section className={styles.testimonials}>
@@ -211,7 +289,7 @@ export default function Testimonials() {
           <p className={styles.subtitle}>{t('testimonials.subtitle')}</p>
         </div>
         <div className={styles.carouselWrapper}>
-          <div 
+          <div
             className={styles.carousel}
             ref={carouselRef}
           >
@@ -220,44 +298,9 @@ export default function Testimonials() {
               className={styles.carouselInner}
               style={{ x }}
             >
-              {duplicatedTestimonials.map((t, index) => (
-                <div key={`row1-${index}`} className={styles.card}>
-                  <p className={styles.message}>&quot;{t.message}&quot;</p>
-                  
-                  <div className={styles.authorSection}>
-                    {t.image && (
-                      <Image
-                        src={t.image}
-                        alt={t.name}
-                        width={100}  
-                        height={100} 
-                        className={styles.avatar}
-                      />
-                    )}
-                    
-                    <div className={styles.authorInfo}>
-                      <div className={styles.authorRow}>
-                        <div className={styles.author}>
-                          <strong>{t.name}</strong>
-                          <span>{t.role}</span>
-                        </div>
-                        {t.linkedin && (
-                          <a
-                            href={t.linkedin}
-                            className={styles.linkedinButton}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`View ${t.name}'s LinkedIn profile`}
-                            title={`View ${t.name} on LinkedIn`}
-                          >
-                            <FaLinkedin size={isMobile ? 14 : 18} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {duplicatedTestimonials.map((testimonial, index) =>
+                renderCard(testimonial, `row1-${index}`)
+              )}
             </motion.div>
             {/* Segunda fila solo en mobile */}
             {isMobile && (
@@ -265,44 +308,9 @@ export default function Testimonials() {
                 className={styles.carouselInner}
                 style={{ x: x2 }}
               >
-                {duplicatedTestimonials.map((t, index) => (
-                  <div key={`row2-${index}`} className={styles.card}>
-                    <p className={styles.message}>&quot;{t.message}&quot;</p>
-                    
-                    <div className={styles.authorSection}>
-                      {t.image && (
-                        <Image
-                          src={t.image}
-                          alt={t.name}
-                          width={100}  
-                          height={100} 
-                          className={styles.avatar}
-                        />
-                      )}
-                      
-                      <div className={styles.authorInfo}>
-                        <div className={styles.authorRow}>
-                          <div className={styles.author}>
-                            <strong>{t.name}</strong>
-                            <span>{t.role}</span>
-                          </div>
-                          {t.linkedin && (
-                            <a
-                              href={t.linkedin}
-                              className={styles.linkedinButton}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`View ${t.name}'s LinkedIn profile`}
-                              title={`View ${t.name} on LinkedIn`}
-                            >
-                              <FaLinkedin size={14} />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {duplicatedTestimonials.map((testimonial, index) =>
+                  renderCard(testimonial, `row2-${index}`)
+                )}
               </motion.div>
             )}
           </div>

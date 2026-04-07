@@ -77,6 +77,7 @@
     }
   },
   "statsNumbers": {
+    "heading": "Results that back the work",
     "projects": {
       "label": "Completed projects"
     },

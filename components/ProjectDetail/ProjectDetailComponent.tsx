@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ProjectDetailComponent.module.scss';
 import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock, X, FileText, Target, Code2, GraduationCap, Link2 } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { gsap } from '../../animations/gsap.config';
+import { FADE_UP } from '../../animations/presets';
 
 // SVG iconos importados como componentes
 import JavascriptIcon from '../icons/javascript.svg';
@@ -117,9 +119,39 @@ export default function ProjectDetailComponent({
   const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   
   const hasMultipleImages1 = firstHalf.length > 1;
   const hasMultipleImages2 = secondHalf.length > 1;
+
+  // GSAP staggered entrance animations
+  const textContentRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!textContentRef.current) return;
+    const sections = textContentRef.current.querySelectorAll(
+      `.${styles.titleHeader}, .${styles.detailSection}`
+    );
+
+    gsap.set(sections, { opacity: 0, y: 30 });
+    gsap.to(sections, {
+      ...FADE_UP,
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.12,
+      delay: 0.15,
+    });
+
+    if (mediaRef.current) {
+      gsap.fromTo(
+        mediaRef.current.children,
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 0.7, stagger: 0.15, ease: 'power2.out' }
+      );
+    }
+  }, []);
 
   // Navegar en el lightbox
   const goToPreviousLightbox = useCallback(() => {
@@ -204,10 +236,11 @@ export default function ProjectDetailComponent({
       {/* Grid principal: Contenido izquierda, Info derecha */}
       <div className={styles.mainGrid}>
         {/* Columna izquierda: Contenido (carruseles / video) */}
-        <div className={styles.rightColumn}>
+        <div className={styles.rightColumn} ref={mediaRef}>
           {/* Primer carrusel - Primera mitad de imágenes */}
           {firstHalf.length > 0 && (
             <div className={styles.imageCarouselContainer}>
+              {!loadedImages.has(firstHalf[0]) && <div className={styles.skeleton} />}
               <div className={styles.imageCarousel}>
                 {firstHalf.map((screenshot, index) => (
                   <div
@@ -222,6 +255,7 @@ export default function ProjectDetailComponent({
                       className={styles.carouselImg}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       unoptimized
+                      onLoad={() => setLoadedImages(prev => new Set(prev).add(screenshot))}
                     />
                   </div>
                 ))}
@@ -262,6 +296,7 @@ export default function ProjectDetailComponent({
           {/* Segundo carrusel - solo cuando NO hay video (para ocupar espacio) */}
           {!hasVideo && secondHalf.length > 0 && (
             <div className={styles.imageCarouselContainer}>
+              {!loadedImages.has(secondHalf[0]) && <div className={styles.skeleton} />}
               <div className={styles.imageCarousel}>
                 {secondHalf.map((screenshot, index) => (
                   <div
@@ -276,6 +311,7 @@ export default function ProjectDetailComponent({
                       className={styles.carouselImg}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       unoptimized
+                      onLoad={() => setLoadedImages(prev => new Set(prev).add(screenshot))}
                     />
                   </div>
                 ))}
@@ -333,7 +369,7 @@ export default function ProjectDetailComponent({
 
         {/* Columna derecha: Info */}
         <div className={styles.leftColumn}>
-          <div className={styles.textContent}>
+          <div className={styles.textContent} ref={textContentRef}>
             <div className={styles.titleHeader}>
               <h1>{title}</h1>
               <p className={styles.subtitle}>{subtitle}</p>

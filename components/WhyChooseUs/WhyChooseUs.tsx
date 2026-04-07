@@ -158,29 +158,7 @@ const WhyChooseUs = () => {
           </section>
         </div>
 
-        {/* Stats Section - Horizontal Bar Style */}
-        <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-left">
-          <div className={styles.statsBar}>
-            {stats.map((stat, index) => {
-              return (
-                <div
-                  key={stat.key}
-                  className={styles.statItem}
-                >
-                  <div className={styles.statValue}>
-                    <span className={styles.statNumber}>
-                      {counters[stat.key] || 0}
-                    </span>
-                    <span className={styles.statSuffix}>{stat.suffix}</span>
-                  </div>
-                  <p className={styles.statLabel}>{stat.label}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Benefits Section - Grid Layout */}
+        {/* Benefits Section - Grid Layout (TOP) */}
         <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
           <div className={styles.benefitsSection}>
             {benefits.map((benefit) => {
@@ -196,6 +174,29 @@ const WhyChooseUs = () => {
                     <h3 className={styles.benefitTitle}>{benefit.title}</h3>
                     <p className={styles.benefitDescription}>{benefit.description}</p>
                   </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Stats Section - Floating numbers integrated with section bg */}
+        <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-left">
+          <div className={styles.statsBar} aria-label="Stats">
+            <div className={styles.statsGlow} aria-hidden />
+            {stats.map((stat) => {
+              return (
+                <div
+                  key={stat.key}
+                  className={styles.statItem}
+                >
+                  <div className={styles.statValue}>
+                    <span className={styles.statNumber}>
+                      {counters[stat.key] || 0}
+                    </span>
+                    <span className={styles.statSuffix}>{stat.suffix}</span>
+                  </div>
+                  <p className={styles.statLabel}>{stat.label}</p>
                 </div>
               );
             })}

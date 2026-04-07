@@ -1,12 +1,12 @@
-@import '../../app/styles/utilities.scss'; 
+@import '../../app/styles/utilities.scss';
 
 .buttonContainer {
   display: flex;
   justify-content: flex-start;
 
   @media (max-width: 768px) {
-   padding: 0  0.5rem;
-};
+    padding: 0 0.5rem;
+  }
 }
 
 .buttonLink {
@@ -14,97 +14,111 @@
   display: inline-block;
 }
 
+/* Base shared by all variants */
 .button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  padding: 0.75rem 2.25rem;
+  justify-content: center;
+  height: 2.75rem;
+  padding: 0 1.5rem;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 0.95rem;
   letter-spacing: 0.01em;
-  background-color: var(--primary-color);
-  color: rgb(247, 247, 247);
   border-radius: var(--br);
-  border: 1px solid rgba(151, 0, 76, 0.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   text-decoration: none !important;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  @media (max-width: 768px) {
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Variant: primary (solid brand color) */
+.primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
 
   &:hover {
-    background-color: white;
-    color: #cc0267;
-    border: 1px solid rgb(204, 2, 103, 0.5);
+    background-color: var(--primary-colorA);
   }
 
   :global(html.dark) & {
-    background-color: var(--dark-light);
-    color: rgb(228, 227, 227);
-    border: 1px solid rgba(248, 248, 248, 0.3);
+    background-color: var(--primary-color);
+    color: #ffffff;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.05); 
-      border-color: rgba(255, 255, 255, 0.2);
-      
-      .icon {
-        color: rgb(238, 237, 237);
-        
-        svg {
-          stroke: rgb(238, 237, 237);
-        }
-      }
+      background-color: var(--primary-colorA);
     }
   }
+}
 
-  @media (max-width: 768px) {
-    padding: 0.7rem 2rem;
-    font-size: 0.975rem;
+/* Variant: secondary (ghost / outline) */
+.secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border-color: rgba(0, 0, 0, 0.14);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.22);
+  }
+
+  :global(html.dark) & {
+    color: rgb(228, 227, 227);
+    border-color: rgba(255, 255, 255, 0.16);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.26);
+    }
   }
 }
 
 .icon {
-  margin-left: 20px;
-  display: flex;
+  margin-left: 0.6rem;
+  display: inline-flex;
   align-items: center;
-  color:white;
+  color: currentColor;
 
   svg {
     stroke: currentColor;
-    transition: color 0.3s ease;
-  }
-
-  :global(html.dark) & {
-    color: rgb(226, 224, 224);
-    
-    svg {
-      stroke: currentColor;
-    }
+    width: 1rem;
+    height: 1rem;
+    transition: color 0.2s ease;
   }
 
   @media (max-width: 768px) {
-    font-size: 14px !important;
-    width: 16px;
-    height: 16px;
     margin-left: 0.5rem;
-  
+
     svg {
-      stroke: currentColor;
-      transition: color 0.3s ease;
-      width: 100%;
-      height: 100%;
+      width: 0.9rem;
+      height: 0.9rem;
     }
   }
 }
 
 .buttonSmall {
-  padding: 8px 20px;
-  font-size: 16px;
+  height: 2.25rem;
+  padding: 0 1.1rem;
+  font-size: 0.825rem;
+
+  @media (max-width: 768px) {
+    height: 2.1rem;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
 }
 
 .buttonWrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: flex-end
+  align-items: flex-end;
 }
 
 .title {
@@ -113,12 +127,12 @@
   font-size: var(--h2-content-font-size);
   color: var(--text-color-light);
   text-decoration: none;
-  padding:0;
+  padding: 0;
   margin: 0;
   font-weight: var(--h2-content-font-weight);
 
   @media (max-width: 768px) {
     font-size: var(--h2-content-font-size-mobile);
-    padding: 0 0.5rem
+    padding: 0 0.5rem;
   }
 }

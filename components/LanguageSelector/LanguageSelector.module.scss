@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   gap: 0;
-  border: 1px solid rgb(226, 225, 225);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   padding: 0;
-  border-radius: 12px
+  border-radius: var(--br);
 }
 
 .languageButton {
@@ -18,7 +18,7 @@
   font-weight: 400;
   font-size: 0.75rem;
   opacity: 1;
-  border-radius: 12px;
+  border-radius: var(--br);
   width: 100%;
 
   &:hover {

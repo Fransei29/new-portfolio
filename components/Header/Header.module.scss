@@ -27,7 +27,7 @@
   display: flex;
   position: relative;
   background: rgb(0, 0, 0, 0);
-  border-radius: 10px;
+  border-radius: var(--br);
   color: #fff;
   padding: 0;
   justify-content: space-between;
@@ -104,17 +104,17 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.5rem 0.85rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(204, 2, 103, 0.25);
-    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--br);
     color: var(--text-color);
     font-size: 0.75rem;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     white-space: nowrap;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.15);
+    box-shadow: var(--shadow-sm);
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
@@ -134,9 +134,9 @@
 
     &:hover {
       background-color: rgba(255, 255, 255, 1);
-      border-color: rgba(204, 2, 103, 0.4);
+      border-color: rgba(0, 0, 0, 0.16);
       color: var(--primary-color);
-      box-shadow: 0 4px 12px rgba(204, 2, 103, 0.25);
+      box-shadow: var(--shadow-md);
       transform: translateY(-1px);
 
       &::before {
@@ -146,15 +146,15 @@
 
     :global(html.dark) & {
       background-color: rgba(24, 28, 51, 0.8);
-      border-color: rgba(204, 2, 103, 0.3);
+      border-color: rgba(255, 255, 255, 0.1);
       color: rgb(226, 226, 226);
-      box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2);
+      box-shadow: var(--shadow-sm);
 
       &:hover {
         background-color: rgba(24, 28, 51, 0.95);
-        border-color: rgba(204, 2, 103, 0.5);
+        border-color: rgba(255, 255, 255, 0.2);
         color: #ffffff;
-        box-shadow: 0 4px 12px rgba(204, 2, 103, 0.3);
+        box-shadow: var(--shadow-md);
       }
     }
   }
@@ -559,28 +559,25 @@
   white-space: nowrap;
 }
 
-// Badge Bootcamp (solo desktop, estilo como mobile: fondo claro + borde primary)
+// Badge Bootcamp (solo desktop, estilo alineado con nav links)
 .bootcampBadge {
   display: inline-flex;
   align-items: center;
-  padding: 0.65rem 1.25rem !important;
-  border-radius: var(--br);
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(204, 2, 103, 0.4);
+  padding: 0 !important;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
   color: var(--text-color) !important;
-  font-weight: 600;
-  font-size: 0.9rem;
-  line-height: 1.2;
-  box-shadow: 0 1px 4px rgba(204, 2, 103, 0.12);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  vertical-align: middle;
-  backdrop-filter: blur(8px);
-  gap: 0.75rem;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  box-shadow: none;
+  transition: color 0.2s ease;
+  vertical-align: baseline;
+  gap: 0;
 
   &:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2);
-    background-color: rgba(255, 255, 255, 1);
+    color: var(--primary-color) !important;
   }
 
   .bootcampBadgeInner {
@@ -591,37 +588,43 @@
 
   .bootcampBadgeIcon {
     margin-right: 0.5rem;
-    color: var(--primary-color) !important;
+    color: rgb(129, 129, 129);
     flex-shrink: 0;
+    transition: color 0.3s ease;
   }
 
   .bootcampArrow {
-    margin-left: 0.5rem;
-    color: var(--text-color) !important;
+    margin-left: 0.4rem;
+    color: inherit !important;
   }
 
   &:hover .bootcampArrow {
     transform: translateY(0) rotate(45deg);
   }
 
-  :global(html.dark) & {
-    background-color: rgba(24, 28, 51, 0.8);
-    border-color: rgba(204, 2, 103, 0.35);
-    color: rgb(226, 226, 226) !important;
+  &:hover .bootcampBadgeIcon {
+    color: var(--primary-color) !important;
+  }
 
-    .bootcampBadgeIcon,
+  :global(html.dark) & {
+    background-color: transparent;
+    border: none;
+    color: rgb(210, 210, 210) !important;
+
+    .bootcampBadgeIcon {
+      color: rgb(210, 210, 210) !important;
+    }
+
     .bootcampArrow {
-      color: rgb(226, 226, 226) !important;
+      color: rgb(210, 210, 210) !important;
     }
 
     &:hover {
-      background-color: rgba(24, 28, 51, 0.95);
-      border-color: rgba(204, 2, 103, 0.55);
-      color: #fff !important;
+      color: var(--primary-color) !important;
 
       .bootcampBadgeIcon,
       .bootcampArrow {
-        color: #fff !important;
+        color: var(--primary-color) !important;
       }
     }
   }
@@ -653,7 +656,7 @@
 
   &:hover {
     border: none !important;
-    box-shadow: 0 2px 8px rgba(204, 2, 103, 0.2) !important;
+    box-shadow: var(--shadow-md) !important;
   }
 
   :global(html.dark) & {

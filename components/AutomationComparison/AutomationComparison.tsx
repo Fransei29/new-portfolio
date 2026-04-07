@@ -28,18 +28,17 @@ const AutomationComparison = () => {
               <XCircle size={24} className={styles.iconWithout} aria-hidden />
               <h3 className={styles.columnTitle}>{t('automation.withoutTitle')}</h3>
             </div>
-            <div className={styles.cardList}>
+            <ul className={styles.list}>
               {INDICES.map((index) => (
-                <div key={index} className={`${styles.card} ${styles.cardWithout}`}>
-                  <XCircle size={20} className={styles.cardIconWithout} aria-hidden />
-                  <div className={styles.cardBody}>
-                    <h4 className={styles.cardTitle}>{t(`automation.without.${index}.title`)}</h4>
-                    <p className={styles.cardDescription}>{t(`automation.without.${index}.description`)}</p>
-                    <span className={styles.badge}>{t(`automation.without.${index}.badge`)}</span>
+                <li key={index} className={styles.listItem}>
+                  <XCircle size={18} className={styles.cardIconWithout} aria-hidden />
+                  <div className={styles.listText}>
+                    <span className={styles.listTitle}>{t(`automation.without.${index}.title`)}</span>
+                    <span className={styles.listDescription}>{t(`automation.without.${index}.description`)}</span>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           <div className={styles.column}>
@@ -47,18 +46,17 @@ const AutomationComparison = () => {
               <CheckCircle2 size={24} className={styles.iconWith} aria-hidden />
               <h3 className={styles.columnTitle}>{t('automation.withTitle')}</h3>
             </div>
-            <div className={styles.cardList}>
+            <ul className={styles.list}>
               {INDICES.map((index) => (
-                <div key={index} className={`${styles.card} ${styles.cardWith}`}>
-                  <CheckCircle2 size={20} className={styles.cardIconWith} aria-hidden />
-                  <div className={styles.cardBody}>
-                    <h4 className={styles.cardTitle}>{t(`automation.with.${index}.title`)}</h4>
-                    <p className={styles.cardDescription}>{t(`automation.with.${index}.description`)}</p>
-                    <span className={styles.badge}>{t(`automation.with.${index}.badge`)}</span>
+                <li key={index} className={styles.listItem}>
+                  <CheckCircle2 size={18} className={styles.cardIconWith} aria-hidden />
+                  <div className={styles.listText}>
+                    <span className={styles.listTitle}>{t(`automation.with.${index}.title`)}</span>
+                    <span className={styles.listDescription}>{t(`automation.with.${index}.description`)}</span>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

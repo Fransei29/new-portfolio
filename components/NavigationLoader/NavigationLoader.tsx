@@ -22,7 +22,9 @@ export default function NavigationLoader() {
   useEffect(() => {
     if (loading) {
       setVisible(true);
+      document.documentElement.classList.add('page-transitioning');
     } else {
+      document.documentElement.classList.remove('page-transitioning');
       const t = setTimeout(() => setVisible(false), 350);
       return () => clearTimeout(t);
     }

@@ -8,17 +8,27 @@
 }
 
 .greeting {
-  font-size: var(--greeting-font-size);
+  display: inline-block;
+  font-size: 0.8rem;
   color: var(--text-color-light);
-  margin: 0 0 0.75rem 0;
-  font-weight: var(--greeting-font-weight);
- 
+  margin: 0 0 1.25rem 0;
+  padding: 0.3rem 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  background: var(--card-bg);
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
   @media (max-width: 768px) {
-    margin: 0 0 0.1rem 0;
-    font-size: 1.15rem;
-    font-weight: var(--greeting-font-weight);
-    color: var(--text-color-light);
+    margin: 0 auto 0.75rem;
+    font-size: 0.7rem;
     text-align: center;
+    display: inline-block;
   }
 }
 
@@ -29,6 +39,7 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Solo el span "productos digitales" mantiene Space Grotesk como tipografía display */
 .highlight {
   color: var(--primary-color);
   font-family: 'Space Grotesk', sans-serif;
@@ -44,21 +55,24 @@
 }
 
 .mainTitle {
-  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--h1-font-size);
-  font-weight: var(--h1-font-weight);
-  margin: 0 0 1.25rem 0;
-  line-height: 1.15;
-  max-width: 1000px;
   font-weight: 600;
-  letter-spacing: var(--h1-letter-spacing);
+  margin: 0 0 1.25rem 0;
+  line-height: 1.12;
+  max-width: 900px;
+  letter-spacing: -0.025em;
+  color: var(--text-color);
   white-space: pre-line;
   overflow-wrap: break-word;
   word-break: break-word;
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
- 
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
   @media (max-width: 768px) {
     margin: 0 0 0.15rem 0;
     padding: 0;
@@ -70,22 +84,22 @@
 }
 
 .subTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: var(--h2-font-weight);
-  max-width: 800px;
-  color: var(--text-color-light); 
-  margin-bottom: 2rem;
-  width: 100%;       
+  max-width: 640px;
+  color: var(--text-color-light);
+  margin: 0 0 1.5rem 0;
+  width: 100%;
   text-align: left;
   box-sizing: border-box;
-  line-height: var(--h2-line-height);
-  letter-spacing: var(--h2-letter-spacing);
+  line-height: 1.55;
+  letter-spacing: 0;
 
    @media (max-width: 768px) {
     font-size: 1.05rem;
     margin: 0;
     margin-top: 0.1rem;
-    line-height: 1.35;
+    line-height: 1.45;
     min-width: 0 !important;
     max-width: 100%;
     width: 100%;
@@ -97,18 +111,18 @@
 
 .description {
   width: 100%;
-  font-size: var(--description-font-size);
-  color: #818080;
-  line-height: var(--description-line-height);
-  letter-spacing: 0.2px;
-  margin-bottom: 2.5rem;
+  max-width: 640px;
+  font-size: 1rem;
+  color: var(--text-color-light);
+  line-height: 1.6;
+  letter-spacing: 0;
+  margin: 0 0 2rem 0;
   box-sizing: border-box;
-  
+
   @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;
-    font-size: 1.25rem;
-    color: #818080;
+    font-size: 0.95rem;
     margin-bottom: 1.5rem;
     padding: 0;
     box-sizing: border-box;
@@ -117,8 +131,8 @@
 
 .ctaButtons {
   display: flex;
-  gap: 1.5rem;
-  margin: 0 0 1rem 0;
+  gap: 0.85rem;
+  margin: 0 0 1.75rem 0;
   flex-wrap: wrap;
   width: 100%;
   max-width: 100%;
@@ -126,67 +140,95 @@
 
   a {
     text-decoration: none;
-    padding: 0.975rem 1.75rem;
+    height: 2.875rem;
+    padding: 0 1.5rem;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.005em;
     border-radius: var(--br);
-    transition: all 0.15s ease-in-out;
-    display: flex;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
     flex-shrink: 1;
     min-width: 0;
     box-sizing: border-box;
+    border: 1px solid transparent;
   }
 }
 
 .btnPrimary {
   background-color: var(--primary-color);
-  color: white;
-  border: 1px solid rgba(151, 0, 76, 0.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
 
   &:hover {
-    background-color: white;
-    color: #cc0267;
-    border: 1px solid rgb(204, 2, 103, 0.5);
-    
+    background-color: var(--primary-colorA);
+
     .arrow {
-      transform: rotate(-45deg);
+      transform: translateX(2px);
     }
   }
 }
 
 .btnSecondary {
-  border: 1px solid rgb(204, 2, 103, 0.5);
-  color: var(--primary-color);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  color: var(--text-color);
+  border-color: rgba(0, 0, 0, 0.14);
+
   &:hover {
-    background-color: var(--primary-color);
-    color: white;
-    
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.22);
+
     .arrow {
-      transform: rotate(-45deg);
+      transform: translateX(2px);
+    }
+  }
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+    border-color: rgba(255, 255, 255, 0.16);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.26);
     }
   }
 }
 
-.btnTertiary {
-  background-color: var(--primary-color);
-  color: white;
-  border: 1px solid rgba(151, 0, 76, 0.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+/* Stats inline — micro proof debajo del CTA */
+.heroStats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+  color: var(--text-color-light);
 
-  &:hover {
-    background-color: white;
-    color: #cc0267;
-    border: 1px solid rgb(204, 2, 103, 0.5);
-    
-    .arrow {
-      transform: rotate(-45deg);
+  li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  strong {
+    color: var(--text-color);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+
+    :global(html.dark) & {
+      color: var(--text-color-dark-mode);
     }
   }
+}
+
+.heroStatsDot {
+  opacity: 0.4;
+  user-select: none;
 }
 
 .arrow {
@@ -239,21 +281,29 @@
 
   .ctaButtons {
     flex-direction: column;
-    gap: 0.85rem;
-    margin: 0.15rem 0 0;
+    gap: 0.65rem;
+    margin: 0.5rem 0 1rem;
     width: 100%;
     max-width: 100%;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0;
     align-items: center;
 
     a {
       width: 85%;
       max-width: 85%;
-      padding: 0.85rem 1.2rem;
-      font-size: 0.975rem;
+      height: 2.75rem;
+      padding: 0 1.2rem;
+      font-size: 0.95rem;
       justify-content: center;
-      margin: 0.15rem 0;
+      margin: 0;
     }
+  }
+
+  .heroStats {
+    justify-content: center;
+    font-size: 0.75rem;
+    gap: 0.4rem 0.7rem;
+    padding: 0 1rem;
   }
 
   .arrow {

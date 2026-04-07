@@ -5,12 +5,15 @@ import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import styles from './Button.module.scss';
 
+type ButtonVariant = 'primary' | 'secondary';
+
 interface ReusableButtonProps {
   href: string;
   label: string;
   icon?: React.ReactNode;
   small?: boolean;
-  text?: string; // ✅ nuevo texto opcional arriba del botón
+  text?: string; // texto opcional arriba del botón
+  variant?: ButtonVariant;
 }
 
 const Button: React.FC<ReusableButtonProps> = ({
@@ -19,12 +22,21 @@ const Button: React.FC<ReusableButtonProps> = ({
   icon = <ExternalLink />,
   small = false,
   text,
+  variant = 'primary',
 }) => {
   const isExternalLink = href.startsWith('http://') || href.startsWith('https://');
-  
+
+  const buttonClass = [
+    styles.button,
+    styles[variant],
+    small ? styles.buttonSmall : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   const buttonContent = (
-    <p className={`${styles.button} ${small ? styles.buttonSmall : ''}`}>
-      {label} 
+    <p className={buttonClass}>
+      {label}
     </p>
   );
 
@@ -33,9 +45,9 @@ const Button: React.FC<ReusableButtonProps> = ({
       {text && <p className={styles.title}>{text}</p>}
       <div className={styles.buttonContainer}>
         {isExternalLink ? (
-          <a 
-            href={href} 
-            target="_blank" 
+          <a
+            href={href}
+            target="_blank"
             rel="noopener noreferrer"
             className={styles.buttonLink}
           >

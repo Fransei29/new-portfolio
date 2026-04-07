@@ -121,7 +121,7 @@
       padding: 1rem;
       flex-direction: row;
       align-items: flex-start;
-      border-radius: 12px;
+      border-radius: var(--br);
       background: rgba(255, 255, 255, 0.02);
       
       :global(html.dark) & {

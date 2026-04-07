@@ -31,6 +31,7 @@
   "testimonials": {
     "title": "Testimonials",
     "subtitle": "Colleagues, clients, and team leaders share their experience working with me.",
+    "featured": "Top pick",
     "matias": {
       "name": "Matias Rivarola",
       "role": "Front End Developer",

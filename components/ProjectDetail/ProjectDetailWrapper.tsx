@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ProjectDetailComponent from './ProjectDetailComponent';
+import ScrollProgress from '../ScrollProgress/ScrollProgress';
 import { projects } from '../../app/data/projects';
 
 // useLayoutEffect runs synchronously before paint (client-only); falls back to useEffect on SSR
@@ -58,6 +59,8 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
   }
 
   return (
+    <>
+    <ScrollProgress />
     <ProjectDetailComponent
       title={getTranslatedField('title') || project.title}
       subtitle={translatedSubtitle || project.subtitle}
@@ -70,6 +73,7 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
       githubLink={project.githubLink}
       liveDemoLink={project.liveDemoLink}
     />
+    </>
   );
 }
 

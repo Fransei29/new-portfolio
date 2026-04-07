@@ -176,7 +176,7 @@
 .suggestedQuestion {
   background: rgba(248, 152, 200, 0.08);
   border: 1px solid rgba(192, 4, 98, 0.15);
-  border-radius: 12px;
+  border-radius: var(--br);
   padding: 10px 14px;
   font-size: 13px;
   color: var(--text-color);
@@ -322,7 +322,7 @@
   
   &:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(192, 4, 98, 0.1);
+    box-shadow: 0 0 0 3px rgba(180, 0, 90, 0.12);
   }
   
   &:disabled {
@@ -339,9 +339,9 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--button-color-hover) 100%);
-  border: var(--borderA);
-  color: white;
+  background: var(--primary-color);
+  border: 1px solid transparent;
+  color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
