@@ -551,6 +551,33 @@ html.dark .hero-section::before {
   transform: translateX(0);
 }
 
+/* --- HERO ENTRANCE ---
+   El hero está siempre en viewport en el primer paint, así que no debería
+   esperar al IntersectionObserver. Arranca invisible y se anima recién
+   cuando html.hydrated se activa (mismo trigger que el header), así
+   header + hero entran exactamente al mismo tiempo. */
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-section,
+.hero-section.fade-in-right,
+.hero-section .fade-in-right,
+.hero-section .fade-in-left {
+  opacity: 0;
+  transform: none;
+  transition: none;
+  will-change: opacity;
+}
+
+html.hydrated .hero-section,
+html.hydrated .hero-section.fade-in-right,
+html.hydrated .hero-section .fade-in-right,
+html.hydrated .hero-section .fade-in-left {
+  animation: heroFadeIn 0.8s ease forwards;
+}
+
 /* Prevenir problemas de scrollbar en mobile durante animaciones */
 @media (max-width: 768px) {
   .fade-in-left,

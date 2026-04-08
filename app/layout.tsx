@@ -5,7 +5,6 @@ import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
-import LoadingWrapper from '../components/LoadingWrapper/LoadingWrapper';
 import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
@@ -76,15 +75,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <LanguageProvider>
-          <LoadingWrapper>
-            <Header />
-            <div id="banner"></div>
-            {children}
-            <Footer />
-            <ThemeTransitionOverlay />
-            <NavigationLoader />
-            <ScrollToTop />
-          </LoadingWrapper>
+          <Header />
+          <div id="banner"></div>
+          {children}
+          <Footer />
+          <ThemeTransitionOverlay />
+          <NavigationLoader />
+          <ScrollToTop />
         </LanguageProvider>
       </ThemeProvider>
       <Analytics />

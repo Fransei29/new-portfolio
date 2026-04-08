@@ -38,15 +38,8 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('en');
-  const [translations, setTranslations] = useState<Translations>({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Load translations synchronously for initial render
-  const loadTranslationsSync = (lang: string) => {
+// Load translations synchronously for initial render
+const loadTranslationsSync = (lang: string): Translations => {
     try {
       const modules = [
         'common',
@@ -72,45 +65,41 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         }
       }
 
-      return loadedTranslations;
-    } catch (error) {
-      console.error('Error loading translations:', error);
-      return {};
-    }
-  };
+    return loadedTranslations;
+  } catch (error) {
+    console.error('Error loading translations:', error);
+    return {};
+  }
+};
 
-  // Initialize with default language translations immediately
-  useEffect(() => {
-    if (!isInitialized) {
-      const defaultLang = 'en';
-      const initialTranslations = loadTranslationsSync(defaultLang);
-      setTranslations(initialTranslations);
-      setLanguageState(defaultLang);
-      setIsInitialized(true);
-      setIsLoading(false);
-    }
-  }, [isInitialized]);
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+  // SSR y primer render de cliente arrancan en 'en' para evitar hydration mismatch
+  // y, sobre todo, para que el primer paint tenga las traducciones cargadas
+  // (no flash de claves "nav.home").
+  const [language, setLanguageState] = useState<Language>('en');
+  const [translations, setTranslations] = useState<Translations>(() => loadTranslationsSync('en'));
+  const [isHydrated, setIsHydrated] = useState(false);
+  const isLoading = false;
 
-  // Load user's preferred language after initialization
+  // Después de hidratar, aplicar idioma del usuario (localStorage o navegador).
   useEffect(() => {
-    if (isInitialized) {
-      // Intentar obtener el idioma guardado en localStorage
-      const savedLanguage = localStorage.getItem('language') as Language;
-      if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-        setLanguageState(savedLanguage);
-        const userTranslations = loadTranslationsSync(savedLanguage);
-        setTranslations(userTranslations);
-      } else {
-        // Detectar idioma del navegador
-        const browserLanguage = navigator.language.split('-')[0];
-        const detectedLang = browserLanguage === 'es' ? 'es' : 'en';
-        setLanguageState(detectedLang);
-        const browserTranslations = loadTranslationsSync(detectedLang);
-        setTranslations(browserTranslations);
-      }
-      setIsHydrated(true);
+    let preferred: Language = 'en';
+    const savedLanguage = localStorage.getItem('language') as Language | null;
+    if (savedLanguage === 'es' || savedLanguage === 'en') {
+      preferred = savedLanguage;
+    } else {
+      const browserLanguage = navigator.language.split('-')[0];
+      preferred = browserLanguage === 'es' ? 'es' : 'en';
     }
-  }, [isInitialized]);
+    if (preferred !== 'en') {
+      setLanguageState(preferred);
+      setTranslations(loadTranslationsSync(preferred));
+    }
+    // Señal global única para que header + hero arranquen su entrada
+    // exactamente en el mismo frame (en vez de depender de re-renders separados).
+    document.documentElement.classList.add('hydrated');
+    setIsHydrated(true);
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useScrollDetection } from '../../hooks/useScrollDetection';
@@ -18,15 +17,9 @@ export default function Header() {
   const elementsRef = useScrollAnimation();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const isScrolled = useScrollDetection();
   const { t, language } = useLanguage();
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setHasAnimated(true), 700);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Cerrar menú al hacer clic fuera
   useEffect(() => {
@@ -50,29 +43,24 @@ export default function Header() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <nav className={styles.nav}>
         {/* Logo */}
-        <motion.section
+        <section
           id="banner"
           ref={(el) => { if (el) elementsRef.current[0] = el; }}
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          key="header-logo"
-          >
-            <Link href="/" passHref className={styles.logoLink}>
-              <div className={styles.logoContainer}>
-                <Image
-                  src="/Logo.svg"
-                  alt="Logo"
-                  width={70}
-                  height={70}
-                  className={styles.logo}
-                  priority
-                  unoptimized
-                  key="logo-image"
-                />
-              </div>
-            </Link>
-        </motion.section>
+        >
+          <Link href="/" passHref className={styles.logoLink}>
+            <div className={styles.logoContainer}>
+              <Image
+                src="/Logo.svg"
+                alt="Logo"
+                width={70}
+                height={70}
+                className={styles.logo}
+                priority
+                unoptimized
+              />
+            </div>
+          </Link>
+        </section>
 
         {/* Selectores mobile (bootcamp, idioma y tema) */}
         <section className={styles.mobileOnly}>
