@@ -8,11 +8,11 @@
 .layer {
   position: absolute;
   inset: 0;
-  /* Más corporativo: base oscura neutra + leve bloom frío (menos magenta) */
+  /* Profesional/maduro: charcoal sólido con vignette sutil, sin tintes de color */
   background:
-    radial-gradient(circle at 50% 45%, rgba(110, 140, 255, 0.07) 0%, transparent 55%),
-    radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.035) 0%, transparent 60%),
-    #09091a;
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.025) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.45) 0%, transparent 65%),
+    #0b0f17;
   clip-path: circle(145% at 50% 50%);
   will-change: clip-path, opacity;
   transition:

@@ -112,6 +112,7 @@ export const Services = () => {
           <Button
             href="/about"
             label={t('services.cta')}
+            variant="secondary"
           />
         </div>
       </div>

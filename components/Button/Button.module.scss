@@ -57,24 +57,25 @@
   }
 }
 
-/* Variant: secondary (ghost / outline) */
+/* Variant: secondary (soft surface — default = old hover) */
 .secondary {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.04);
   color: var(--text-color);
-  border-color: rgba(0, 0, 0, 0.14);
+  border-color: rgba(0, 0, 0, 0.42);
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.22);
+    background-color: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.55);
   }
 
   :global(html.dark) & {
     color: rgb(228, 227, 227);
-    border-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.42);
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.26);
+      background-color: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.55);
     }
   }
 }

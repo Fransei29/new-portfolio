@@ -111,7 +111,7 @@ const SkillsSummary: React.FC = () => {
         </div>
 
         <div className={styles.buttonWrapper}>
-          <Button href="/about" label={t('skills.viewFullStack')} />
+          <Button href="/about" label={t('skills.viewFullStack')} variant="secondary" />
         </div>
       </div>
     </section>
