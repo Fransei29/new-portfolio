@@ -19,7 +19,7 @@ const ProjectsSection = ({ variant = 'projects' }: ProjectsSectionProps) => {
   const subtitleKey = isTutorials ? 'projects.tutorialsSubtitle' : 'projects.projectsSubtitle';
 
   return (
-    <section className={styles.projectsSectionContainer}>
+    <section className={`${styles.projectsSectionContainer} ${isTutorials ? styles.tutorialsVariant : ''}`}>
       <div className={styles.projectsSection}>
         <p className="highlight">
           {t(titleKey)}

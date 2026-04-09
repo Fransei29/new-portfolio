@@ -149,13 +149,13 @@
 }
 
 .arrow {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   margin-left: 0.55rem;
   transition: transform 0.15s ease-in-out;
   flex-shrink: 0;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     margin-left: 0.4rem;
   }
 }

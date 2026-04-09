@@ -17,6 +17,15 @@
   }
 }
 
+.tutorialsVariant {
+  background-image: none;
+  background-color: var(--background-colorA);
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+  }
+}
+
 .projectsSection {
   max-width: var(--container-max-width);
   margin-inline: auto;
@@ -55,6 +64,11 @@
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+  }
+
+  .tutorialsVariant {
+    background-image: none;
+    background-color: var(--background-colorA);
   }
 
   .projectsSection {

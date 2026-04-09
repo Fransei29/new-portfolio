@@ -4,8 +4,7 @@
   margin: 0;
   width: 100%;
   padding: 5.5rem 0;
-  background-image: var(--background-colorB-gradient);
-  background-color: var(--background-colorB);
+  background-color: var(--background-colorA);
 
   :global(html.dark) & {
     background-image: none;

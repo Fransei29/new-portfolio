@@ -29,8 +29,10 @@ const Footer = () => {
         {/* Brand Section */}
         <div className={styles.brandSection}>
           <div className={styles.brand}>
-            <Image src='/Logo.svg' alt="Franco Seiler Logo" width={55} height={55} className={styles.logo} />
+            <Image src='/Logo.svg' alt="Franco Seiler Logo" width={44} height={44} className={styles.logo} />
+            <span className={styles.brandName}>Franco<br />Seiler</span>
           </div>
+          <p className={styles.brandTagline}>{t('footer.tagline')}</p>
           <div className={styles.socials}>
             <a 
               href="https://github.com/francoseiler" 
@@ -90,7 +92,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className={styles.bottomBar}>
-        <p>&copy; 2025 {t('footer.by')}. All rights reserved.</p>
+        <p>&copy; 2026 {t('footer.by')}. All rights reserved.</p>
       </div>
     </footer>
   );

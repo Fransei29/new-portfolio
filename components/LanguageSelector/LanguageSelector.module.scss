@@ -12,7 +12,7 @@
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: var(--text-color-light);
+  color: rgb(73, 73, 73);
   font-weight: 400;
   font-size: 0.75rem;
   opacity: 1;
@@ -27,12 +27,12 @@
 
   &.active {
     opacity: 1;
-    color: var(--text-color-light);
+    color: rgb(73, 73, 73);
     background-color: transparent;
   }
 
   :global(html.dark) & {
-    color: rgb(223, 222, 222);
+    color: rgb(210, 210, 210);
 
     &:hover {
       background-color: transparent;
@@ -40,7 +40,7 @@
     }
 
     &.active {
-      color: rgb(223, 222, 222);
+      color: rgb(210, 210, 210);
       background-color: transparent;
     }
   }

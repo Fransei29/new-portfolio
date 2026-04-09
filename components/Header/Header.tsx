@@ -58,6 +58,7 @@ export default function Header() {
                 priority
                 unoptimized
               />
+              <span className={styles.brandName}>Franco<br />Seiler</span>
             </div>
           </Link>
         </section>
