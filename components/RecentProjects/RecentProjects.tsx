@@ -38,14 +38,13 @@ const RecentProjects = () => {
 
   return (
     <section className={styles.recentProjects}>
-      <p className={styles.title}>{t('projects.projects')}</p>
       <div className={styles.projectsContainer}>
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
       </div>
       <div className={styles.projectsButtonContainer}>
-       <Button href="/projects" label={t('projects.goToProjects')} />
+       <Button href="/projects" label={t('projects.goToProjects')} variant="secondary" />
       </div>
     </section>
   );

@@ -136,7 +136,7 @@ export default function Home() {
 
           <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-right">
             <WaveDivider variant="aToB" />
-            <ProjectsSection />
+            <ProjectsSection variant="projects" />
           </div>
 
           <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left">
@@ -146,6 +146,11 @@ export default function Home() {
           <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left">
             <WaveDivider variant="bToA" />
             <WhyChooseUs />
+          </div>
+
+          <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-right">
+            <WaveDivider variant="aToB" />
+            <ProjectsSection variant="tutorials" />
           </div>
 
           <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
@@ -158,7 +163,7 @@ export default function Home() {
             <Testimonials />
           </div>
 
-          <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[12] = el;}} className="fade-in-left">
             <WaveDivider variant="aToCta" />
             <CallToAction />
           </div>

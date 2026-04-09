@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from './HomeText.module.scss'; 
+import Image from 'next/image';
+import styles from './HomeText.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { HiArrowRight } from 'react-icons/hi';
@@ -60,13 +61,35 @@ const HomeText: React.FC = () => {
             <HiArrowRight className={styles.arrow} />
           </a>
         </div>
-        <ul className={styles.heroStats} aria-label="Stats">
-          <li><strong>20+</strong> {t('statsNumbers.projects.label')}</li>
-          <li aria-hidden className={styles.heroStatsDot}>·</li>
-          <li><strong>3+</strong> {t('statsNumbers.experience.label')}</li>
-          <li aria-hidden className={styles.heroStatsDot}>·</li>
-          <li><strong>15+</strong> {t('statsNumbers.technologies.label')}</li>
-        </ul>
+        <div className={styles.socialProof} aria-label={t('hero.socialProof.label') ?? 'Trusted by clients'}>
+          <div className={styles.avatarStack}>
+            <Image
+              src="/img/img/Testimonials/tomi.webp"
+              alt="Tomás"
+              width={40}
+              height={40}
+              className={styles.avatarCircle}
+            />
+            <Image
+              src="/img/img/Testimonials/Edi.webp"
+              alt="Edison"
+              width={40}
+              height={40}
+              className={styles.avatarCircle}
+            />
+            <Image
+              src="/img/img/Testimonials/isma.webp"
+              alt="Ismael"
+              width={40}
+              height={40}
+              className={styles.avatarCircle}
+            />
+          </div>
+          <p className={styles.socialProofCopy}>
+            <span className={styles.socialProofPlus}>+</span>
+            <span>{t('hero.socialProof.sub')}</span>
+          </p>
+        </div>
     </section>
   </section>
 

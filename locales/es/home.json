@@ -17,6 +17,11 @@
       "contact": "Agenda una llamada",
       "bootcamp": "Ve a Mi bootcamp",
       "youtube": "YouTube"
+    },
+    "socialProof": {
+      "label": "Confían en mí founders y equipos de ingeniería",
+      "headline": "Confían en mí founders y equipos de ingeniería",
+      "sub": "15 clientes confían en mi trabajo"
     }
   },
   "about": {

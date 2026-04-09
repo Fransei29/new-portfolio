@@ -32,7 +32,7 @@ export default function Testimonials() {
       name: t('testimonials.matias.name'),
       role: t('testimonials.matias.role'),
       message: t('testimonials.matias.message'),
-      image: "/img/img/Testimonials/tomi.webp",
+      image: "/img/img/Testimonials/Mati.webp",
       linkedin: "https://www.linkedin.com/in/matirivarola1/",
       rating: 5,
       featured: true,

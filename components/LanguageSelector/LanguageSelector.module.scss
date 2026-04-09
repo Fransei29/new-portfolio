@@ -2,8 +2,6 @@
   display: flex;
   align-items: center;
   gap: 0;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: var(--shadow-sm);
   padding: 0;
   border-radius: var(--br);
 }
@@ -23,25 +21,27 @@
 
   &:hover {
     opacity: 1;
-    background-color: rgba(245, 84, 165, 0.1);
+    background-color: transparent;
+    color: var(--primary-color);
   }
 
   &.active {
     opacity: 1;
-    color: var(--primary-color);
-    background-color: rgba(245, 84, 165, 0.15);
+    color: var(--text-color-light);
+    background-color: transparent;
   }
 
   :global(html.dark) & {
     color: rgb(223, 222, 222);
-    
+
     &:hover {
-      background-color: rgba(250, 81, 166, 0.2);
-    }
-    
-    &.active {
+      background-color: transparent;
       color: #fa51a6;
-      background-color: rgba(250, 81, 166, 0.25);
+    }
+
+    &.active {
+      color: rgb(223, 222, 222);
+      background-color: transparent;
     }
   }
 }

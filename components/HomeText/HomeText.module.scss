@@ -7,21 +7,25 @@
   box-sizing: border-box;
 }
 
-.greeting {
-  display: inline-block;
-  font-size: 0.8rem;
-  color: var(--text-color-light);
-  margin: 0 0 1.25rem 0;
+p.greeting {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  font-size: 1rem !important;
+  color: var(--text-color-light) !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0 !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  font-family: inherit !important;
+  margin: 0 0 1rem 0;
   padding: 0;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
 
   @media (max-width: 768px) {
+    max-width: 100%;
+    font-size: 0.95rem !important;
     margin: 0 0 0.75rem 0;
-    font-size: 0.7rem;
     text-align: center;
-    display: block;
     width: 100%;
   }
 }
@@ -167,7 +171,6 @@
     background-color: var(--primary-colorA);
     border-color: var(--primary-colorA);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
-    transform: translateY(-1px);
 
     .arrow {
       transform: translateX(2px);
@@ -176,14 +179,14 @@
 }
 
 .btnSecondary {
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: rgba(255, 255, 255, 0.85);
   color: var(--text-color);
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 999px;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.11);
-    border-color: rgba(0, 0, 0, 0.62);
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.55);
 
     .arrow {
       transform: translateX(2px);
@@ -203,6 +206,122 @@
 }
 
 /* Stats inline — micro proof debajo del CTA */
+.socialProof {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+
+.socialProof .socialProofCopy {
+  margin-left: -0.25rem;
+}
+
+.avatarStack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: 1.4rem;
+  overflow: visible;
+}
+
+.avatarPlus {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-25%, -50%);
+  z-index: 5;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--text-color-light);
+  opacity: 0.55;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.55);
+    opacity: 1;
+  }
+}
+
+.avatarCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  background-color: #f0f0f0;
+  filter: grayscale(0.55) brightness(0.96);
+
+  &:not(:first-child) {
+    margin-left: -16px;
+  }
+
+  :global(html.dark) & {
+    border-color: var(--background-colorA, #181c33);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    filter: grayscale(0.6) brightness(0.92);
+  }
+}
+
+.socialProofCopy {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-color-light);
+  opacity: 0.9;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.socialProofPlus {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+  color: var(--text-color-light);
+  opacity: 0.45;
+  margin-right: 0.15rem;
+  transform: translateY(-1px);
+}
+
+.socialProofCopy > span:last-child {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .socialProof {
+    justify-content: center;
+    margin-top: 1.25rem;
+    gap: 0.6rem;
+  }
+
+  .avatarCircle {
+    width: 30px;
+    height: 30px;
+
+    &:not(:first-child) {
+      margin-left: -14px;
+    }
+  }
+
+  .avatarPlus {
+    font-size: 0.85rem;
+    top: -0.05rem;
+    left: 0.15rem;
+  }
+
+  .socialProofCopy {
+    font-size: 0.72rem;
+    white-space: normal;
+  }
+}
+
 .heroStats {
   list-style: none;
   margin: 0;
@@ -237,8 +356,8 @@
 }
 
 .arrow {
-  font-size: 1.125rem;
-  margin-left: 0.75rem;
+  font-size: 0.95rem;
+  margin-left: 0.55rem;
   font-weight: 500;
   transition: transform 0.15s ease-in-out;
   transform: rotate(0deg);
@@ -312,7 +431,7 @@
   }
 
   .arrow {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     margin-left: 0.4rem;
   }
 }

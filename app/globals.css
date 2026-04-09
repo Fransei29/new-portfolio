@@ -10,7 +10,7 @@
   --primary-colorA:#b4035c;
   --primary-color-light:#fdb6da;
   --dark:#090a16;
-  --dark-light:#0a0a0f;
+  --dark-light:#0f1326;
   --text-color: #111111;
   --text-color-B: #333333;
   --text-color-light: #6b6b6b;
@@ -376,8 +376,8 @@ html.dark .hero-section::before {
 .svg-duo {
   display: flex;
   position: relative;
-  width: 320px;
-  height: 480px;
+  width: 290px;
+  height: 440px;
   margin: 0 auto;
   opacity: 0.8;
 }
@@ -388,9 +388,9 @@ html.dark .hero-section::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(204, 2, 103, 0.15) 0%, rgba(204, 2, 103, 0.05) 50%, transparent 70%);
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(204, 2, 103, 0.1) 0%, rgba(204, 2, 103, 0.035) 50%, transparent 70%);
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
@@ -424,35 +424,36 @@ html.dark .hero-section::before {
 }
 
 .shape-a {
-  width: 120px;
-  height: 180px;
+  width: 108px;
+  height: 160px;
   top: 100px;
-  left: 30px;
+  left: 40px;
   z-index: 1;
-  filter: drop-shadow(0 20px 25px rgba(204, 2, 103, 0.45)) drop-shadow(0 0 40px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
   animation: floatA 4.5s ease-in-out infinite;
   transition: filter 0.4s ease;
 }
 
 .shape-a:hover {
-  filter: drop-shadow(0 20px 30px rgba(204, 2, 103, 0.6)) drop-shadow(0 0 60px rgba(204, 2, 103, 0.35));
+  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
 }
 
 .shape-b {
-  width: 120px;
-  height: 180px;
+  width: 108px;
+  height: 160px;
   top: 80px;
-  left: 130px;
+  left: 135px;
   z-index: 2;
-  filter: drop-shadow(0 20px 25px rgba(204, 2, 103, 0.45)) drop-shadow(0 0 40px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
   animation: floatB 3.8s ease-in-out infinite;
   animation-delay: -1.8s;
   transition: filter 0.4s ease;
 }
 
 .shape-b:hover {
-  filter: drop-shadow(0 20px 30px rgba(204, 2, 103, 0.6)) drop-shadow(0 0 60px rgba(204, 2, 103, 0.35));
+  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
 }
+
 
 @keyframes floatA {
   0%, 100% { transform: translateY(0px) rotate(0deg) translateZ(0); }
@@ -678,8 +679,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 10px 8px rgba(204, 2, 103, 0.3));
-    -webkit-filter: drop-shadow(0 10px 8px rgba(204, 2, 103, 0.3));
+    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
   }
   
   .shape-b {
@@ -693,8 +694,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 10px 8px rgba(204, 2, 103, 0.3));
-    -webkit-filter: drop-shadow(0 10px 8px rgba(204, 2, 103, 0.3));
+    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
   }
 
   .parallax-shape {

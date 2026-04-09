@@ -65,15 +65,15 @@ export default function Header() {
         {/* Selectores mobile (bootcamp, idioma y tema) */}
         <section className={styles.mobileOnly}>
           <div className={styles.mobileControls}>
-            <a 
+            <a
               href={`https://bootcamp.francoseiler.com/${language}`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.mobileBootcampButton}
+              aria-label={t('nav.bootcamp')}
+              title={t('nav.bootcamp')}
             >
-              <GraduationCap size={18} className={styles.mobileBootcampIcon} />
-              {t('nav.bootcamp')}
-              <ArrowUp size={12} className={styles.mobileBootcampArrow} />
+              <GraduationCap size={16} className={styles.mobileBootcampIcon} />
             </a>
             <LanguageSelector />
             <ThemeToggleButton />
@@ -99,31 +99,31 @@ export default function Header() {
         <section className={`${styles.centerMenu} ${styles.desktopOnly}`}>
           <Link href="/" passHref>
             <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
-              <Home size={20} className={styles.navIcon} />
+              <Home size={17} className={styles.navIcon} />
               {t('nav.home')}
             </p>
           </Link>
           <Link href="/projects" passHref>
             <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
-              <FolderOpen size={20} className={styles.navIcon} />
+              <FolderOpen size={17} className={styles.navIcon} />
               {t('nav.projects')}
             </p>
           </Link>
           <Link href="/tutorials" passHref>
             <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
-              <BookOpen size={20} className={styles.navIcon} />
+              <BookOpen size={17} className={styles.navIcon} />
               {t('nav.tutorials')}
             </p>
           </Link>
           <Link href="/about" passHref>
             <p className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
-              <User size={20} className={styles.navIcon} />
+              <User size={17} className={styles.navIcon} />
               {t('nav.about')}
             </p>
           </Link>
           <Link href="/contact" passHref>
             <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>
-              <Mail size={20} className={styles.navIcon} />
+              <Mail size={17} className={styles.navIcon} />
               {t('nav.contact')}
             </p>
           </Link>
@@ -134,20 +134,17 @@ export default function Header() {
             className={styles.navLink}
             aria-label={t('nav.youtube')}
           >
-            <SiYoutube size={20} className={styles.navIcon} />
+            <SiYoutube size={17} className={styles.navIcon} />
             {t('nav.youtube')}
           </a>
-          <a 
+          <a
             href={`https://bootcamp.francoseiler.com/${language}`}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${styles.navLink} ${styles.bootcampBadge}`}
+            className={styles.navLink}
           >
-            <span className={styles.bootcampBadgeInner}>
-              <GraduationCap size={20} className={styles.bootcampBadgeIcon} />
-              {t('nav.bootcamp')}
-              <ArrowUp size={14} className={styles.bootcampArrow} />
-            </span>
+            <GraduationCap size={17} className={styles.navIcon} />
+            {t('nav.bootcamp')}
           </a>
         </section>
 

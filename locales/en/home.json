@@ -17,6 +17,11 @@
       "contact": "Book a 15 min call",
       "bootcamp": "Go to my Bootcamp",
       "youtube": "YouTube"
+    },
+    "socialProof": {
+      "label": "Trusted by founders and engineering teams",
+      "headline": "Trusted by founders and engineering teams",
+      "sub": "15 clients trust my work"
     }
   },
   "about": {

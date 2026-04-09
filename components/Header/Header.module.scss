@@ -25,9 +25,9 @@
     background: #faf9f8;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(204, 2, 103, 0.1);
-    
+
     :global(html.dark) & {
-      background: rgba(24, 28, 51, 0.95);
+      background: #181c33;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
       border-bottom: 1px solid rgba(204, 2, 103, 0.2);
     }
@@ -81,6 +81,7 @@
 
 .desktopOnly {
   display: flex;
+  align-items: center;
 
   @media (max-width: 768px) {
     display: none;
@@ -102,7 +103,7 @@
 .mobileControls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.25rem;
   flex-shrink: 0;
 }
 
@@ -111,61 +112,29 @@
   display: none;
 
   @media (max-width: 768px) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.85rem;
-    background-color: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
     border-radius: var(--br);
-    color: var(--text-color);
-    font-size: 0.75rem;
-    font-weight: 500;
+    color: var(--text-color-light);
     text-decoration: none;
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    white-space: nowrap;
+    transition: color 0.25s ease;
     flex-shrink: 0;
-    box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-    align-self: flex-start;
-    margin-top: 0.25rem !important;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(204, 2, 103, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
 
     &:hover {
-      background-color: rgba(255, 255, 255, 1);
-      border-color: rgba(0, 0, 0, 0.16);
       color: var(--primary-color);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
-
-      &::before {
-        left: 100%;
-      }
     }
 
     :global(html.dark) & {
-      background-color: rgba(24, 28, 51, 0.8);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: rgb(226, 226, 226);
-      box-shadow: var(--shadow-sm);
+      color: rgb(223, 222, 222);
 
       &:hover {
-        background-color: rgba(24, 28, 51, 0.95);
-        border-color: rgba(255, 255, 255, 0.2);
-        color: #ffffff;
-        box-shadow: var(--shadow-md);
+        color: #fa51a6;
       }
     }
   }
@@ -176,18 +145,6 @@
   width: 16px;
   height: 16px;
   color: inherit;
-}
-
-.mobileBootcampArrow {
-  flex-shrink: 0;
-  opacity: 1;
-  transform: translateY(0) rotate(45deg);
-  transition: transform 0.15s ease-in-out;
-  color: inherit;
-}
-
-.mobileBootcampButton:hover .mobileBootcampArrow {
-  transform: translateY(0) rotate(35deg);
 }
 
 .mobileMenuButton {
@@ -379,21 +336,26 @@
 .rightContainer {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  
+  gap: 0.25rem;
+  margin-left: auto;
+  padding-top: 5px;
+
   @media (max-width: 768px) {
-    gap: 0.5rem;
+    gap: 0.25rem;
+    padding-top: 0;
   }
 }
 
 .centerMenu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2rem;
-  margin-left: auto;
-  margin-right: 1.5rem;
+  justify-content: center;
+  gap: 2.75rem;
 
   @media (max-width: 768px) {
     display: none;
@@ -403,6 +365,7 @@
 
 .nav a {
   font-size: 1.15rem;
+  font-weight: 350;
   color: var(--text-color);
   margin: 0;
   padding-top: 5px;
@@ -509,8 +472,8 @@
 }
 
 .logo {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   background-color: transparent !important;
   border-radius: 50%;
   box-shadow: none !important;
@@ -522,8 +485,8 @@
 
   @media (max-width: 768px) {
     padding: 0;
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
   }
 }
 

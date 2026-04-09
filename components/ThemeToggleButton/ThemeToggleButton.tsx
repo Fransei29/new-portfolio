@@ -32,7 +32,7 @@ export default function ThemeToggleButton() {
       {theme === 'light' ? (
         <Image src="/moon.png" alt="Modo Claro" width={16} height={16} className={styles.icon} />
       ) : (
-        <Image src="/sun.svg" alt="Modo Oscuro" width={20} height={20} className={styles.icon} />
+        <Image src="/sun.svg" alt="Modo Oscuro" width={16} height={16} className={styles.icon} />
       )}
     </button>
   );

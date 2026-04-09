@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styles from './WhyChooseUs.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Award, Users, Briefcase, Code } from 'lucide-react';
 
 interface Benefit {
   key: string;
@@ -13,50 +12,9 @@ interface Benefit {
   description: string;
 }
 
-interface Stat {
-  key: string;
-  icon: React.ReactNode;
-  value: number;
-  suffix: string;
-  label: string;
-}
-
 const WhyChooseUs = () => {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
-  const [counters, setCounters] = useState<{ [key: string]: number }>({});
-  const hasAnimated = useRef<{ [key: string]: boolean }>({});
-
-  const stats: Stat[] = [
-    {
-      key: 'projects',
-      icon: <Briefcase size={28} />,
-      value: 20,
-      suffix: '+',
-      label: t('statsNumbers.projects.label'),
-    },
-    {
-      key: 'experience',
-      icon: <Code size={28} />,
-      value: 3,
-      suffix: '+',
-      label: t('statsNumbers.experience.label'),
-    },
-    {
-      key: 'technologies',
-      icon: <Award size={28} />,
-      value: 15,
-      suffix: '+',
-      label: t('statsNumbers.technologies.label'),
-    },
-    {
-      key: 'commitment',
-      icon: <Users size={28} />,
-      value: 100,
-      suffix: '%',
-      label: t('statsNumbers.commitment.label'),
-    },
-  ];
 
   const benefits: Benefit[] = [
     {
@@ -94,57 +52,14 @@ const WhyChooseUs = () => {
     },
   ];
 
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: '0px',
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          stats.forEach((stat) => {
-            if (!hasAnimated.current[stat.key]) {
-              hasAnimated.current[stat.key] = true;
-              animateCounter(stat.key, stat.value);
-            }
-          });
-        }
-      });
-    }, observerOptions);
-
-    const statsElement = elementsRef.current[2];
-    if (statsElement) {
-      observer.observe(statsElement as Element);
-    }
-
-    return () => {
-      if (statsElement) {
-        observer.unobserve(statsElement as Element);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const animateCounter = (key: string, target: number) => {
-    const duration = 2000;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCounters((prev) => ({ ...prev, [key]: target }));
-        clearInterval(timer);
-      } else {
-        setCounters((prev) => ({ ...prev, [key]: Math.floor(current) }));
-      }
-    }, duration / steps);
-  };
-
   return (
     <section className={styles.whyChooseUs}>
+      <div className={styles.ambientBg} aria-hidden>
+        <span className={`${styles.statGhost} ${styles.statGhostA}`}>BUILD</span>
+        <span className={`${styles.statGhost} ${styles.statGhostB}`}>SHIP</span>
+        <span className={`${styles.statGhost} ${styles.statGhostC}`}>SCALE</span>
+        <span className={`${styles.statGhost} ${styles.statGhostD}`}>TRUST</span>
+      </div>
       <div className={styles.container}>
         {/* Header Section - Left Aligned */}
         <div className={styles.headerSection}>
@@ -158,7 +73,7 @@ const WhyChooseUs = () => {
           </section>
         </div>
 
-        {/* Benefits Section - Grid Layout (TOP) */}
+        {/* Benefits Section - Grid Layout */}
         <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
           <div className={styles.benefitsSection}>
             {benefits.map((benefit) => {
@@ -174,29 +89,6 @@ const WhyChooseUs = () => {
                     <h3 className={styles.benefitTitle}>{benefit.title}</h3>
                     <p className={styles.benefitDescription}>{benefit.description}</p>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Stats Section - Floating numbers integrated with section bg */}
-        <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-left">
-          <div className={styles.statsBar} aria-label="Stats">
-            <div className={styles.statsGlow} aria-hidden />
-            {stats.map((stat) => {
-              return (
-                <div
-                  key={stat.key}
-                  className={styles.statItem}
-                >
-                  <div className={styles.statValue}>
-                    <span className={styles.statNumber}>
-                      {counters[stat.key] || 0}
-                    </span>
-                    <span className={styles.statSuffix}>{stat.suffix}</span>
-                  </div>
-                  <p className={styles.statLabel}>{stat.label}</p>
                 </div>
               );
             })}
