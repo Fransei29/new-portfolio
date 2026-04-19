@@ -10,9 +10,8 @@
     height: 28px;
     padding: 0;
     box-shadow: none;
-    transition: opacity 0.25s ease, color 0.25s ease;
+    transition: color 0.25s ease;
     color: rgb(73, 73, 73);
-    opacity: 1;
   }
 
   .themeToggleButton.dark {
@@ -22,16 +21,19 @@
 
   .themeToggleButton:hover {
     background-color: transparent;
-    opacity: 1;
-    color: var(--primary-color);
+    color: #000000;
+  }
+
+  .icon {
+    transition: color 0.25s ease;
   }
 
   :global(html.dark) .themeToggleButton {
     color: rgb(210, 210, 210);
   }
 
-  :global(html.dark) .themeToggleButton .icon {
-    filter: invert(1) brightness(2);
+  :global(html.dark) .themeToggleButton:hover {
+    color: #ffffff;
   }
   
   .containerSocial {

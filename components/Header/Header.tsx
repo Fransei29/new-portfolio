@@ -9,7 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, Home, FolderOpen, BookOpen, User, Mail, ArrowUp, GraduationCap } from 'lucide-react';
+import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight } from 'lucide-react';
 import { SiYoutube } from 'react-icons/si';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -58,7 +58,10 @@ export default function Header() {
                 priority
                 unoptimized
               />
-              <span className={styles.brandName}>Franco<br />Seiler</span>
+              <span className={styles.brandBlock}>
+                <span className={styles.brandName}>Franco Seiler</span>
+                <span className={styles.brandRole}>Software Engineer</span>
+              </span>
             </div>
           </Link>
         </section>
@@ -100,31 +103,26 @@ export default function Header() {
         <section className={`${styles.centerMenu} ${styles.desktopOnly}`}>
           <Link href="/" passHref>
             <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
-              <Home size={17} className={styles.navIcon} />
               {t('nav.home')}
             </p>
           </Link>
           <Link href="/projects" passHref>
             <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
-              <FolderOpen size={17} className={styles.navIcon} />
               {t('nav.projects')}
             </p>
           </Link>
           <Link href="/tutorials" passHref>
             <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
-              <BookOpen size={17} className={styles.navIcon} />
               {t('nav.tutorials')}
             </p>
           </Link>
           <Link href="/about" passHref>
             <p className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
-              <User size={17} className={styles.navIcon} />
               {t('nav.about')}
             </p>
           </Link>
           <Link href="/contact" passHref>
             <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>
-              <Mail size={17} className={styles.navIcon} />
               {t('nav.contact')}
             </p>
           </Link>
@@ -135,8 +133,8 @@ export default function Header() {
             className={styles.navLink}
             aria-label={t('nav.youtube')}
           >
-            <SiYoutube size={17} className={styles.navIcon} />
             {t('nav.youtube')}
+            <ArrowUpRight size={14} className={styles.externalArrow} />
           </a>
           <a
             href={`https://bootcamp.francoseiler.com/${language}`}
@@ -144,8 +142,8 @@ export default function Header() {
             rel="noopener noreferrer"
             className={styles.navLink}
           >
-            <GraduationCap size={17} className={styles.navIcon} />
             {t('nav.bootcamp')}
+            <ArrowUpRight size={14} className={styles.externalArrow} />
           </a>
         </section>
 

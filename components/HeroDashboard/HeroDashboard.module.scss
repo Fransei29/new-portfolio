@@ -1,0 +1,874 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: 0;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+
+  @media (max-width: 520px) {
+    margin-inline: auto;
+  }
+
+  // Subtle hover — just a tiny Z rotation
+  &:hover .browser {
+    transform: rotate(-0.3deg);
+  }
+
+  :global(html.dark) &:hover .browser {
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.58),
+      0 38px 74px rgba(0, 0, 0, 0.68),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 470px;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 430px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 380px;
+  }
+
+  @media (max-width: 520px) {
+    display: none;
+  }
+}
+
+// ---------- Browser window ----------
+.browser {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 35px 70px rgba(0, 0, 0, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transform: rotate(-1.2deg);
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1s ease;
+  z-index: 1;
+
+  :global(html.dark) & {
+    background: #14172a;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.55),
+      0 35px 70px rgba(0, 0, 0, 0.65),
+      0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+}
+
+.browserChrome {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f7f7f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  :global(html.dark) & {
+    background: #0f1226;
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.browserDots {
+  display: flex;
+  gap: 0.35rem;
+  flex-shrink: 0;
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.14);
+
+    :global(html.dark) & {
+      background: rgba(255, 255, 255, 0.16);
+    }
+  }
+}
+
+.urlBar {
+  flex: 1;
+  min-width: 0;
+  padding: 0.45rem 0.95rem;
+  background: #ffffff;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.82rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+
+  :global(html.dark) & {
+    background: #1a1e36;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+// ---- Typed URL effect ----
+.urlTyped {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.urlTypedSegment {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  vertical-align: bottom;
+  animation: urlType 3.2s steps(30, end) 0.4s forwards;
+}
+
+@keyframes urlType {
+  from { width: 0; }
+  to   { width: 30ch; }
+}
+
+.urlCaret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: var(--primary-color);
+  vertical-align: -2px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(204, 2, 103, 0.55);
+  animation: caretBlink 0.7s steps(2, end) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.urlLight {
+  color: rgba(0, 0, 0, 0.42);
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+.urlAccent {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+// ---------- Content ----------
+.content {
+  padding: 0.95rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 0.9rem 0.95rem;
+    gap: 0.55rem;
+  }
+}
+
+// ---------- Top row ----------
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.projectMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.projectTitle {
+  position: relative;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.1;
+  transition: opacity 0.35s ease, transform 0.35s ease, color 0.5s ease;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.taskText {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+// Animated strike-through line (scales from left)
+.strikeLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+// Phase: enter — task just appeared, full color, no strike
+.task_enter {
+  opacity: 0;
+  transform: translateY(4px);
+  animation: taskEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes taskEnter {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Phase: striking — the line is drawing
+.task_striking .strikeLine {
+  animation: strikeGrow 0.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes strikeGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+// Phase: done — strike completed, text fades
+.task_done {
+  color: rgba(0, 0, 0, 0.42);
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .strikeLine {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+}
+
+// Phase: leave — fade out to make space for next
+.task_leave {
+  color: rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+  .strikeLine {
+    transform: scaleX(1);
+    opacity: 0.35;
+  }
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+.projectSubline {
+  font-size: 0.72rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.liveBadge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0a7a4d;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  flex-shrink: 0;
+  animation: liveGlow 2.4s ease-in-out infinite;
+
+  :global(html.dark) & {
+    color: #6ee7a8;
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+}
+
+@keyframes liveGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    border-color: rgba(16, 185, 129, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.5);
+  }
+}
+
+.liveDot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: #10b981;
+    opacity: 0.45;
+    animation: liveRing 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes liveRing {
+  0%   { transform: scale(0.8); opacity: 0.55; }
+  80%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.85); }
+}
+
+// ---------- Stats ----------
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+// Flash highlight when task changes
+.statsFlash .statCard {
+  animation: statFlash 0.5s ease;
+}
+
+.statsFlash .statCard:nth-child(1) { animation-delay: 0s; }
+.statsFlash .statCard:nth-child(2) { animation-delay: 0.08s; }
+.statsFlash .statCard:nth-child(3) { animation-delay: 0.16s; }
+
+@keyframes statFlash {
+  0%   { background: rgba(204, 2, 103, 0.12); border-color: rgba(204, 2, 103, 0.35); }
+  100% { background: rgba(0, 0, 0, 0.025);   border-color: rgba(0, 0, 0, 0.05); }
+}
+
+:global(html.dark) .statsFlash .statCard {
+  animation: statFlashDark 0.5s ease;
+}
+
+@keyframes statFlashDark {
+  0%   { background: rgba(204, 2, 103, 0.16); border-color: rgba(204, 2, 103, 0.4); }
+  100% { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); }
+}
+
+.statCard {
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.statUnit {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-left: 0.08rem;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+// ---------- Chart ----------
+.chartCard {
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.chartLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.chartLabelLight {
+  color: rgba(0, 0, 0, 0.35);
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.chartSvg {
+  width: 100%;
+  height: 54px;
+  display: block;
+}
+
+.chartLine {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: chartDraw 2.2s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
+}
+
+.chartFill {
+  opacity: 0;
+  animation: chartFadeIn 1.2s ease 1.4s forwards;
+}
+
+.chartDot {
+  opacity: 0;
+  animation: chartDotIn 0.4s ease 2.6s forwards;
+  transform-origin: 398px 8px;
+  filter: drop-shadow(0 0 4px rgba(204, 2, 103, 0.6));
+}
+
+.chartDotOuter {
+  opacity: 0;
+  transform-origin: 398px 8px;
+  transform-box: fill-box;
+  animation: chartDotIn 0.4s ease 2.6s forwards;
+}
+
+@keyframes chartDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes chartFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes chartDotIn {
+  from { opacity: 0; transform: scale(0); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes chartDotPing {
+  0%   { opacity: 0.4; transform: scale(1); transform-origin: center; }
+  80%  { opacity: 0; transform: scale(2.5); }
+  100% { opacity: 0; transform: scale(2.5); }
+}
+
+// ---------- Stack rows ----------
+.stackRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stackRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.stackIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.stackIconFrontend {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
+}
+
+.stackIconBackend {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+
+  :global(html.dark) & {
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  }
+}
+
+.stackIconInfra {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.stackInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.stackTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.stackTitle {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.15;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.88);
+  }
+}
+
+.stackChecks {
+  margin-left: 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.stackChecksCount {
+  color: #10b981;
+  font-weight: 600;
+  animation: checksFlicker 4.5s ease-in-out infinite;
+}
+
+@keyframes checksFlicker {
+  0%, 100% { opacity: 1; }
+  97% { opacity: 1; }
+  98%, 99% { opacity: 0.4; }
+}
+
+.stackPercent {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.45);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.stackPercentLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #0a7a4d;
+  text-transform: uppercase;
+
+  :global(html.dark) & {
+    color: #6ee7a8;
+  }
+}
+
+.pulseDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  animation: livePulse 1.6s ease-in-out infinite;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  transition: width 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+// Desktop progress with CSS var target (used by Frontend / Backend bars)
+.progressFill[style*="--w"] {
+  animation: progressGrow 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.8s forwards;
+  transition: none;
+}
+
+.progressDone {
+  background: linear-gradient(90deg, var(--primary-color) 0%, #f472b6 100%);
+}
+
+.progressLive {
+  background: linear-gradient(90deg, #10b981 0%, #6ee7a8 100%);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40%;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 100%
+    );
+    animation: progressShimmer 2s ease-in-out infinite;
+  }
+}
+
+@keyframes progressGrow {
+  from { width: 0; }
+  to   { width: var(--w, 100%); }
+}
+
+@keyframes progressShimmer {
+  0%   { left: -40%; }
+  100% { left: 100%; }
+}
+
+// ---------- Floating pills (break the frame) ----------
+.floatingPill {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 5;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+// Metric pill (top-left)
+.metricPill {
+  top: 4%;
+  left: -6%;
+  padding: 0.6rem 0.9rem;
+  background: #0b0d12;
+  color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: rotate(-4deg);
+  animation: metricFloat 6s ease-in-out infinite;
+
+  @media (max-width: 768px) {
+    left: -4%;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@keyframes metricFloat {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-4px) rotate(-4deg); }
+}
+
+.metricValue {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.metricLabel {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  display: flex;
+  flex-direction: column;
+}
+
+.metricLabelSub {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+// Testimonial pill (bottom-right)
+.testimonialPill {
+  bottom: 6%;
+  right: -8%;
+  padding: 0.45rem 0.85rem 0.45rem 0.45rem;
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 5;
+  animation: testimonialFloat 6s ease-in-out infinite;
+  animation-delay: -3s;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), filter 0.45s ease;
+
+  &.testimonialFading {
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  :global(html.dark) & {
+    background: #1a1e36;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 768px) {
+    right: -4%;
+    padding: 0.35rem 0.7rem 0.35rem 0.35rem;
+  }
+}
+
+@keyframes testimonialFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+.avatarImg {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.testimonialText {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.68rem;
+    gap: 0.3rem;
+  }
+}
+
+.testimonialName {
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: 600;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.testimonialQuote {
+  color: rgba(0, 0, 0, 0.55);
+  font-style: italic;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}

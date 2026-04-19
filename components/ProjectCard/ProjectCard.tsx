@@ -72,6 +72,8 @@ interface Project {
   link2?: string | null;
   link3?: string;
   technologies?: string[];
+  category?: 'product' | 'platform' | 'landing';
+  status?: 'latest';
 }
 
 interface ProjectCardProps {
@@ -95,6 +97,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
   };
 
   return (
+    <div className={styles.cardWrapper}>
+      {project.status === 'latest' && (
+        <span className={styles.latestPin}>
+          <span className={styles.latestPinDot} />
+          {t('projects.badges.latest')}
+        </span>
+      )}
     <article
       className={`
         ${styles.projectCard}
@@ -115,6 +124,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
             sizes="(max-width: 768px) 100vw, 900px"
             unoptimized
           />
+        </div>
+      )}
+
+      {/* Badge de categoría sobre la imagen */}
+      {project.category && (
+        <div className={styles.badgesRow}>
+          <span className={styles.badgeSpacer} />
+          <span className={`${styles.badge} ${styles[`badge_${project.category}`]}`}>
+            {t(`projects.badges.${project.category}`)}
+          </span>
         </div>
       )}
 
@@ -186,6 +205,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
         </div>
       </div>
     </article>
+    </div>
   );
 };
 

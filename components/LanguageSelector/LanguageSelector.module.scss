@@ -7,22 +7,24 @@
 }
 
 .languageButton {
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: none;
-  padding: 0.5rem 0.75rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.25s ease, color 0.25s ease;
   color: rgb(73, 73, 73);
-  font-weight: 400;
-  font-size: 0.75rem;
   opacity: 1;
   border-radius: var(--br);
-  width: 100%;
+  width: 28px;
+  height: 28px;
+  padding: 0;
 
   &:hover {
     opacity: 1;
     background-color: transparent;
-    color: var(--primary-color);
+    color: #000000;
   }
 
   &.active {
@@ -36,7 +38,7 @@
 
     &:hover {
       background-color: transparent;
-      color: #fa51a6;
+      color: #ffffff;
     }
 
     &.active {
@@ -46,15 +48,21 @@
   }
 }
 
+.globeIcon {
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .languageSelector {
     gap: 0;
     padding: 0rem;
     margin-top: 0.25rem;
   }
-  
+
   .languageButton {
-    padding: 0.5rem;
-    font-size: 0.75rem;
+    width: 32px;
+    height: 32px;
   }
-} 
+}

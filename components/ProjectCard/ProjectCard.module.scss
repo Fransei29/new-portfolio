@@ -1,3 +1,56 @@
+.cardWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.latestPin {
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  height: 2rem;
+  padding: 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #eaf7e2;
+  background: linear-gradient(170deg, #14532d 0%, #0a2e1a 100%);
+  border: 1px solid rgba(190, 242, 140, 0.22);
+  border-radius: var(--br);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(190, 242, 140, 0.12);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+  line-height: 1;
+
+  @media (max-width: 768px) {
+    top: -10px;
+    left: 14px;
+    height: 1.75rem;
+    font-size: 0.62rem;
+    padding: 0 0.8rem;
+    letter-spacing: 0.07em;
+  }
+}
+
+.latestPinDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #bef28c;
+  box-shadow: 0 0 0 2px rgba(190, 242, 140, 0.22), 0 0 10px rgba(190, 242, 140, 0.55);
+  flex-shrink: 0;
+}
+
 .projectCard {
   position: relative;
   width: 100%;
@@ -5,7 +58,7 @@
   max-width: 900px;
   height: 320px;
   margin: 0 auto;
-  border-radius: 1.35rem;
+  border-radius: 0.9rem;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 5px 12px rgba(0, 0, 0, 0.38);
   transition: transform 0.4s ease, box-shadow 0.3s ease;
@@ -22,8 +75,11 @@
     border-radius: inherit;
   }
 
+
   :global(html.dark) & {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 5px 12px rgba(0, 0, 0, 0.8);
+    outline: 1px solid rgba(255, 255, 255, 0.06);
+    outline-offset: -1px;
   }
 
   &:hover {
@@ -37,14 +93,11 @@
       background-color: rgba(255, 255, 255, 0.24);
       border-color: rgba(255, 255, 255, 0.45);
     }
-
-    .projectPreview img {
-      transform: scale(1.02);
-    }
   }
 
   :global(html.dark) &:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 7px 16px rgba(0, 0, 0, 0.88);
+    outline-color: rgba(255, 255, 255, 0.12);
   }
 
   &.active .infoWrapper {
@@ -327,6 +380,68 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.badgesRow {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badgeSpacer {
+  flex: 1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2rem;
+  padding: 0 0.95rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  border-radius: var(--br);
+  background-color: rgba(12, 14, 18, 0.55);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  white-space: nowrap;
+  line-height: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  @media (max-width: 768px) {
+    height: 1.75rem;
+    font-size: 0.62rem;
+    padding: 0 0.75rem;
+    gap: 0.4rem;
+    letter-spacing: 0.07em;
+  }
+}
+
+.badge_product,
+.badge_platform,
+.badge_landing,
+.badgeLatest {
+  // mismo tratamiento translúcido — se apoyan sobre la imagen arriba
+}
+
+.badgeDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35), 0 0 8px rgba(16, 185, 129, 0.5);
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {

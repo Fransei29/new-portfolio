@@ -30,7 +30,10 @@ const Footer = () => {
         <div className={styles.brandSection}>
           <div className={styles.brand}>
             <Image src='/Logo.svg' alt="Franco Seiler Logo" width={44} height={44} className={styles.logo} />
-            <span className={styles.brandName}>Franco<br />Seiler</span>
+            <span className={styles.brandBlock}>
+              <span className={styles.brandName}>Franco Seiler</span>
+              <span className={styles.brandRole}>Software Engineer</span>
+            </span>
           </div>
           <p className={styles.brandTagline}>{t('footer.tagline')}</p>
           <div className={styles.socials}>

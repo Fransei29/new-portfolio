@@ -33,8 +33,10 @@
     "whoIAm": "Quién Soy",
     "personalStory": "Desarrollador full-stack con más de 3 años de experiencia construyendo soluciones para startups y empresas. Basado en Ámsterdam, trabajo con tecnologías modernas para crear productos que generan impacto real.",
     "newChapter": "Especializado en arquitecturas escalables y código de calidad. Desarrollo aplicaciones web que crecen con el negocio, priorizando mantenibilidad y rendimiento.",
-    "dedication": "Comprometido con la excelencia técnica: código limpio, arquitecturas sólidas y experiencias de usuario excepcionales. Cada proyecto es una oportunidad de superar expectativas.",
-    "interests": "Apasionado por el diseño de productos digitales y la innovación tecnológica. En constante aprendizaje para estar al día con las mejores prácticas y herramientas del mercado."
+    "dedicationTitle": "Principios",
+    "dedication": "Entregar en chico, medir, iterar.",
+    "interestsTitle": "Lo que me importa",
+    "interests": "Construir cosas que la gente realmente usa."
   },
   "aboutPage": {
     "buttonText": "¿Estás listo para empezar tu proyecto?",

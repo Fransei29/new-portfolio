@@ -33,8 +33,10 @@
     "whoIAm": "Who I Am",
     "personalStory": "Full-stack developer with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, I work with modern technologies to create products that generate real impact.",
     "newChapter": "Specialized in scalable architectures and quality code. I develop web applications that grow with the business, prioritizing maintainability and performance.",
-    "dedication": "Committed to technical excellence: clean code, solid architectures, and exceptional user experiences. Every project is an opportunity to exceed expectations.",
-    "interests": "Passionate about digital product design and technological innovation. Continuously learning to stay current with industry best practices and tools."
+    "dedicationTitle": "Engineering principles",
+    "dedication": "Ship small, measure, iterate.",
+    "interestsTitle": "What I care about",
+    "interests": "Building things people actually use."
   },
   "aboutPage": {
     "buttonText": "Ready to start your project?",

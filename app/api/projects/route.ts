@@ -41,6 +41,8 @@ export async function GET(request: Request) {
       link3: 'https://www.starton.it.com/',
       previewImage: '/img/img/StartOn/StartA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Supabase', 'Google OAuth'],
+      category: 'platform',
+      status: 'latest',
     },
     {
       slug: 'mi-agenda',
@@ -51,6 +53,8 @@ export async function GET(request: Request) {
       link3: 'https://miagenda.site/',
       previewImage: '/img/img/Miagenda/A.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'Redux Toolkit', 'SCSS', 'Tailwind CSS', 'MUI', 'NestJS', 'Prisma', 'MySQL', 'Redis', 'MercadoPago', 'Google Calendar API', 'Socket.io', 'Docker'],
+      category: 'product',
+      status: 'latest',
     },
     {
       slug: 'augusto-fit-program',
@@ -61,6 +65,8 @@ export async function GET(request: Request) {
       link3: 'https://www.augustoluque.com/',
       previewImage: '/img/img/Augusto/A.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'GSAP', 'next/font (Google Fonts)', 'EmailJS', 'Vercel'],
+      category: 'landing',
+      status: 'latest',
     },
     {
       slug: 'tecnomar',
@@ -71,6 +77,7 @@ export async function GET(request: Request) {
       link3: 'https://www.tecno-mar.com.ar/',
       previewImage: '/img/img/Tecnomar/A.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'CSS Variables', 'Next/Image'],
+      category: 'landing',
     },
     {
       slug: 'ateevo-wholesale',
@@ -81,6 +88,7 @@ export async function GET(request: Request) {
       link3: '',
       previewImage: '/atevo/A.webp',
       technologies: ['React', 'TypeScript', 'Vite', 'SCSS Modules', 'Tailwind CSS', 'shadcn/ui', 'React Router', 'Node.js', 'Express', 'TypeORM', 'PostgreSQL', 'JWT', 'bcrypt', 'Google Cloud Storage', 'jsPDF', 'Resend', 'React Email'],
+      category: 'platform',
     },
     {
       slug: 'lexmax',
@@ -91,6 +99,7 @@ export async function GET(request: Request) {
       link3: '',
       previewImage: '/img/img/Lex/LexA.webp',
       technologies: ['React', 'Vite', 'SCSS', 'React Router', 'Axios', 'Node.js', 'Express', 'JWT', 'Google OAuth', 'Telegram API'],
+      category: 'platform',
     },
     {
       slug: 'property-recommender',
@@ -101,6 +110,7 @@ export async function GET(request: Request) {
       link3: 'https://property-recommenderv2.vercel.app/',
       previewImage: '/img/img/Habita/habitaA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS'],
+      category: 'product',
     },
     {
       slug: 'event-scheduler',
@@ -111,6 +121,7 @@ export async function GET(request: Request) {
       link3: '',
       previewImage: '/img/img/Event/eventA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
+      category: 'platform',
     },
     {
       slug: 'the-club-northfield',
@@ -121,6 +132,7 @@ export async function GET(request: Request) {
       link3: 'https://www.theclubatnorthfield.com/',
       previewImage: '/img/img/Club/GymA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Tailwind CSS', 'Strapi CMS', 'Vercel'],
+      category: 'landing',
     },
     {
       slug: 'lexmax-landing',
@@ -131,6 +143,7 @@ export async function GET(request: Request) {
       link3: 'https://lexmaxsoluciones.com/',
       previewImage: '/img/img/WebLex/WebA.webp',
       technologies: ['Next.js', 'React', 'SCSS', 'Tailwind CSS', 'React Icons'],
+      category: 'landing',
     },
     {
       slug: 'ecommerce',
@@ -141,6 +154,7 @@ export async function GET(request: Request) {
       link3: 'https://sport-ecommerce-58pi.vercel.app/',
       previewImage: '/img/img/ecommerce/ecoA.webp',
       technologies: ['React', 'Next.js', 'TypeScript', 'Prisma', 'Docker', 'Sass'],
+      category: 'product',
     },
     {
       slug: 'healthcare-crm',
@@ -151,7 +165,8 @@ export async function GET(request: Request) {
       link3: 'https://interview-challenge-ecru.vercel.app',
       previewImage: '/img/img/Medicare/mediA.webp',
       technologies: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS', 'Turso', 'TypeORM'],
-    },    
+      category: 'product',
+    },
     {
       slug: 'taskmanager',
       title: t('projects.items.taskmanager.title'),
@@ -161,6 +176,7 @@ export async function GET(request: Request) {
       link3: 'https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/',
       previewImage: '/img/img/Task/taskA.webp',
       technologies: ['React', 'Next.js', 'Axios', 'PostgreSQL', 'Sequelize', 'Sass'],
+      category: 'product',
     },
     {
       slug: 'vestire',
@@ -171,6 +187,7 @@ export async function GET(request: Request) {
       link3: 'https://vestire-front-s196.vercel.app/',
       previewImage: '/img/img/Vestire/vestireA.webp',
       technologies: ['Node.js', 'Express', 'React', 'Axios', 'PostgreSQL'],
+      category: 'product',
     },
     {
       slug: 'flipper',
@@ -181,6 +198,7 @@ export async function GET(request: Request) {
       link3: 'https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/',
       previewImage: '/img/img/Flipper/flipperA.webp',
       technologies: ['Node.js', 'Express', 'Redis', 'Tailwind CSS'],
+      category: 'product',
     },
     {
       slug: 'trip-planner',
@@ -191,6 +209,7 @@ export async function GET(request: Request) {
       link3: 'https://trip-planner-c.vercel.app/',
       previewImage: '/img/img/Trip/trip.webp',
       technologies: ['Next.js', 'JavaScript', 'CSS'],
+      category: 'product',
     },
   ];
 

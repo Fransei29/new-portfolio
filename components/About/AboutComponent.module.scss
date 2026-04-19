@@ -16,15 +16,14 @@
   .aboutSection {
     max-width: var(--container-max-width);
     margin-inline: auto;
-    padding-top: 2rem;
-    padding-bottom: 0rem;
+    padding: 2rem 0 0 0;
     display: flex;
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
 
     @media (max-width: 768px) {
-      padding: 0.5rem;
+      padding: 1rem 0.5rem;
     }
   }
 
@@ -93,6 +92,53 @@
   }
    }
 
+  .leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .introSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 72ch;
+  }
+
+  .introParagraph {
+    margin: 0;
+    font-size: var(--subtitle-font-size);
+    font-weight: var(--subtitle-font-weight);
+    color: var(--subtitle-color);
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+    text-align: left;
+
+    :global(html.dark) & {
+      color: rgba(235, 235, 235, 0.78);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--subtitle-font-size-mobile);
+      line-height: 1.55;
+    }
+  }
+
+  .cardsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
   .paragraphWithIcon {
     display: flex;
     flex-direction: column;
@@ -134,7 +180,6 @@
     color: var(--primary-color);
     flex-shrink: 0;
     transition: color 0.2s ease;
-    margin-bottom: 0.25rem;
     stroke-width: 1.5;
 
     :global(html.dark) & {
@@ -148,22 +193,46 @@
         color: #ccc;
       }
     }
+  }
+
+  .cardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .cardTitle {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+
+    :global(html.dark) & {
+      color: var(--text-color-dark-mode);
+    }
 
     @media (max-width: 768px) {
-      margin-bottom: 0;
-      margin-top: 0.125rem;
+      font-size: 0.9rem;
     }
   }
 
   .paragraphWithIcon p {
     margin: 0;
     width: 100%;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-color-light);
+
+    :global(html.dark) & {
+      color: rgba(235, 235, 235, 0.7);
+    }
 
     @media (max-width: 768px) {
-      font-size: 0.875rem;
-      line-height: 1.5;
+      font-size: 0.85rem;
+      line-height: 1.45;
       flex: 1;
     }
   }
@@ -185,8 +254,8 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     transition: transform 0.4s ease;
-    width: 420px;
-    height: 410px;
+    width: 320px;
+    height: 320px;
     border: 1px solid var(--primary-color);
    
     @media (max-width: 768px) {

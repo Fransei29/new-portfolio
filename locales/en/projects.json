@@ -23,6 +23,15 @@
     "links": "Links",
     "githubRepository": "GitHub Repository",
     "liveDemo": "Live Demo",
+    "badges": {
+      "product": "Product",
+      "platform": "Platform",
+      "landing": "Landing",
+      "latest": "Latest"
+    },
+    "tabs": {
+      "all": "All"
+    },
     "items": {
       "starton": {
         "title": "StartOn ",

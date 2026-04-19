@@ -33,12 +33,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
       linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
     pointer-events: none;
     z-index: 0;
   }
-  
+
   :global(html.dark) & {
     background-image: var(--cta-bg-gradient);
     background-color: var(--cta-gradient-top);
@@ -49,6 +49,7 @@
     padding: 4rem 0;
   }
 }
+
 
 
 .ctaContent {

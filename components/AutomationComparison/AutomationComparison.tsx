@@ -24,8 +24,8 @@ const AutomationComparison = () => {
 
         <div ref={(el) => { elementsRef.current[0] = el; }} className={styles.grid}>
           <div className={styles.column}>
-            <div className={styles.columnHeader}>
-              <XCircle size={24} className={styles.iconWithout} aria-hidden />
+            <div className={`${styles.columnHeader} ${styles.columnHeaderWithout}`}>
+              <XCircle size={22} className={styles.iconWithout} aria-hidden />
               <h3 className={styles.columnTitle}>{t('automation.withoutTitle')}</h3>
             </div>
             <ul className={styles.list}>
@@ -42,8 +42,8 @@ const AutomationComparison = () => {
           </div>
 
           <div className={styles.column}>
-            <div className={styles.columnHeader}>
-              <CheckCircle2 size={24} className={styles.iconWith} aria-hidden />
+            <div className={`${styles.columnHeader} ${styles.columnHeaderWith}`}>
+              <CheckCircle2 size={22} className={styles.iconWith} aria-hidden />
               <h3 className={styles.columnTitle}>{t('automation.withTitle')}</h3>
             </div>
             <ul className={styles.list}>

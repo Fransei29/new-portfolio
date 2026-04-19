@@ -1,26 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';  // Usamos el hook de next-themes
-import styles from './ThemeToggleButton.module.scss';  // Importamos los estilos CSS
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import styles from './ThemeToggleButton.module.scss';
 
 export default function ThemeToggleButton() {
-  const { theme, setTheme } = useTheme();  // Obtenemos el tema actual y la función para cambiarlo
-  const [isMounted, setIsMounted] = useState(false);  // Estado para saber si el componente ya está montado
+  const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Solo después de que el componente esté montado, cambiar el tema
   useEffect(() => {
-    setIsMounted(true);  // Se asegura que el código se ejecute solo en el cliente
+    setIsMounted(true);
   }, []);
 
-  // Asegúrate de que no se renderice nada hasta que el componente esté montado
   if (!isMounted) {
-    return null;  // No renderizamos nada hasta que se haya montado completamente
+    return null;
   }
 
   const toggleTheme = () => {
-    // Cambia entre los temas
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
@@ -28,11 +25,13 @@ export default function ThemeToggleButton() {
     <button
       onClick={toggleTheme}
       className={`${styles.themeToggleButton} ${theme === 'dark' ? styles.dark : ''}`}
+      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
     >
       {theme === 'light' ? (
-        <Image src="/moon.png" alt="Modo Claro" width={16} height={16} className={styles.icon} />
+        <Moon size={16} className={styles.icon} />
       ) : (
-        <Image src="/sun.svg" alt="Modo Oscuro" width={16} height={16} className={styles.icon} />
+        <Sun size={16} className={styles.icon} />
       )}
     </button>
   );

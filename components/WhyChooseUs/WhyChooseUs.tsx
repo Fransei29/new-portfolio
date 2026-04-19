@@ -55,10 +55,12 @@ const WhyChooseUs = () => {
   return (
     <section className={styles.whyChooseUs}>
       <div className={styles.ambientBg} aria-hidden>
-        <span className={`${styles.statGhost} ${styles.statGhostA}`}>BUILD</span>
-        <span className={`${styles.statGhost} ${styles.statGhostB}`}>SHIP</span>
-        <span className={`${styles.statGhost} ${styles.statGhostC}`}>SCALE</span>
-        <span className={`${styles.statGhost} ${styles.statGhostD}`}>TRUST</span>
+        <span className={`${styles.shape} ${styles.shapeCircle} ${styles.shapeA}`} />
+        <span className={`${styles.shape} ${styles.shapeSquare} ${styles.shapeB}`} />
+        <span className={`${styles.shape} ${styles.shapeRing} ${styles.shapeC}`} />
+        <span className={`${styles.shape} ${styles.shapeTriangle} ${styles.shapeD}`} />
+        <span className={`${styles.shape} ${styles.shapeLine} ${styles.shapeE}`} />
+        <span className={`${styles.shape} ${styles.shapePlus} ${styles.shapeF}`} />
       </div>
       <div className={styles.container}>
         {/* Header Section - Left Aligned */}

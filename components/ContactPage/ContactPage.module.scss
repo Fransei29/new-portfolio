@@ -3,30 +3,25 @@
 .contactPageContainer {
   width: 100%;
   background-color: var(--background-colorA);
-  padding: 1rem 0;
-  padding-bottom: 2rem;
-  
+
   :global(html.dark) & {
     background-color: var(--dark-light);
     color: rgb(235, 235, 235);
-  }
-
-  @media (max-width: 768px) {
-    padding: 0rem 0;
-    padding-bottom: 1.5rem;
   }
 }
 
 .contactPageContent {
   max-width: var(--container-max-width);
   margin-inline: auto;
-  padding: 0 2rem;
+  padding: 2rem 0 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
-    padding: 0 0.5rem;
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
     gap: 1.25rem;
   }
 }
@@ -38,10 +33,16 @@
 }
 
 .highlight {
-  margin-bottom: 0.5rem;
+  display: inline-block;
+  position: relative;
+  font-size: var(--h3-font-size);
+  font-weight: var(--h3-font-weight);
+  color: var(--h3-color);
+  margin: 0 0 var(--h3-spacing) 0;
 
   @media (max-width: 768px) {
-    margin-bottom: 0.5rem;
+    font-size: var(--h3-font-size-mobile);
+    margin-bottom: var(--h3-spacing-mobile);
   }
 }
 

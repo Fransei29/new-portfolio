@@ -352,7 +352,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  gap: 2.25rem;
+  gap: 2.75rem;
   margin-left: auto;
 
   @media (max-width: 768px) {
@@ -362,7 +362,7 @@
 }
 
 .nav a {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 350;
   color: var(--text-color);
   margin: 0;
@@ -400,7 +400,7 @@
 .nav > section > a {
   color: rgb(73, 73, 73);
   font-weight: 400 !important;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0;
   text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -408,7 +408,7 @@
   letter-spacing: 0.015em;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -446,9 +446,9 @@
 
 .logoContainer {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.55rem;
   cursor: pointer;
   padding: 1.5rem 0;
   flex-shrink: 0;
@@ -460,20 +460,43 @@
   }
 }
 
-.brandName {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-  color: var(--text-color-light);
-
-  :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.75);
-  }
+.brandBlock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.2rem;
 
   @media (max-width: 768px) {
     display: none;
+  }
+}
+
+.brandName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--text-color);
+  white-space: nowrap;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+}
+
+.brandRole {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--text-color-light);
+  white-space: nowrap;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.55);
   }
 }
 
@@ -519,10 +542,20 @@
   text-align: left;
   position: relative;
   color: rgb(73, 73, 73);
+  transition: color 0.3s ease;
 
   :global(html.dark) & {
     color: rgb(210, 210, 210);
   }
+}
+
+// Parent <a> hover propagates to .navLink child <p>
+.nav a:hover .navLink {
+  color: #000000;
+}
+
+:global(html.dark) .nav a:hover .navLink {
+  color: #ffffff;
 }
 
 // Estilos para iconos de navegación
@@ -540,6 +573,23 @@
   margin-right: 0.7rem;
   vertical-align: middle;
   transition: color 0.3s ease;
+}
+
+.externalArrow {
+  margin-left: 0.2rem;
+  color: rgb(160, 160, 160);
+  vertical-align: middle;
+  transition: transform 0.25s ease, color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.navLink:hover .externalArrow {
+  transform: translate(1px, -1px);
+  color: #000000;
+}
+
+:global(html.dark) .navLink:hover .externalArrow {
+  color: #ffffff;
 }
 
 // Estilos para navLinkContent (contenedor del icono, texto y flecha)

@@ -11,6 +11,7 @@
   isolation: isolate;
 
   :global(html.dark) & {
+    background-image: none;
     background-color: var(--dark-light);
   }
 
@@ -19,83 +20,174 @@
   }
 }
 
-// Animated ghost stats background — big numbers drifting in 3D, barely visible
+// Subtle geometric shapes background — minimalist, barely visible
 .ambientBg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  perspective: 900px;
-  perspective-origin: 50% 50%;
 }
 
-.statGhost {
+$shapeStroke: rgba(50, 50, 60, 0.22);
+$shapeStrokeDark: rgba(255, 255, 255, 0.18);
+
+.shape {
   position: absolute;
-  font-family: inherit;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 0.75px rgba(120, 120, 130, 0.35);
-  text-stroke: 0.75px rgba(120, 120, 130, 0.35);
   user-select: none;
-  will-change: opacity;
-  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+// Filled circle with gradient tint
+.shapeCircle {
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(204, 2, 103, 0.14), transparent 70%);
+  border: 2.5px solid $shapeStroke;
 
   :global(html.dark) & {
-    -webkit-text-stroke: 0.75px rgba(255, 255, 255, 0.22);
-    text-stroke: 0.75px rgba(255, 255, 255, 0.22);
+    background: radial-gradient(circle at 30% 30%, rgba(204, 2, 103, 0.18), transparent 70%);
+    border-color: $shapeStrokeDark;
   }
 }
 
-.statGhostA {
-  top: 6%;
-  left: 4%;
-  font-size: clamp(2rem, 3.8vw, 3.6rem);
-  animation: drift3dA 24s ease-in-out infinite;
+// Outline square rotated
+.shapeSquare {
+  width: 6rem;
+  height: 6rem;
+  border: 2px solid rgba(50, 50, 60, 0.14);
+  transform: rotate(18deg);
+  opacity: 0.7;
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
-.statGhostB {
-  bottom: 8%;
-  left: 5%;
-  font-size: clamp(2rem, 3.5vw, 3.3rem);
-  animation: drift3dB 28s ease-in-out infinite;
+// Ring (thicker outline circle)
+.shapeRing {
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  border: 3px solid $shapeStroke;
+
+  :global(html.dark) & {
+    border-color: $shapeStrokeDark;
+  }
 }
 
-.statGhostC {
+// Triangle (outlined)
+.shapeTriangle {
+  width: 6.5rem;
+  height: 5.8rem;
+  position: absolute;
+  background: transparent;
+  clip-path: polygon(
+    50% 0%, 0% 100%, 100% 100%,
+    100% 94%, 52% 10%, 4% 94%, 100% 94%
+  );
+  background-color: rgba(50, 50, 60, 0.14);
+  opacity: 0.7;
+
+  :global(html.dark) & {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Horizontal line
+.shapeLine {
+  width: 18rem;
+  height: 2.5px;
+  background: $shapeStroke;
+
+  :global(html.dark) & {
+    background: $shapeStrokeDark;
+  }
+}
+
+// Plus/cross sign
+.shapePlus {
+  width: 3rem;
+  height: 3rem;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgba(50, 50, 60, 0.32);
+  }
+
+  &::before {
+    width: 3rem;
+    height: 2.5px;
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    width: 2.5px;
+    height: 3rem;
+    transform: translate(-50%, -50%);
+  }
+
+  :global(html.dark) & {
+    &::before, &::after {
+      background: rgba(255, 255, 255, 0.26);
+    }
+  }
+}
+
+// Positioning — spread across the section corners and mid zones
+.shapeA {
   top: 8%;
-  right: 5%;
-  font-size: clamp(2rem, 3.8vw, 3.6rem);
-  animation: drift3dC 26s ease-in-out infinite;
+  left: -4rem;
+  animation: floatShape 26s ease-in-out infinite;
 }
 
-.statGhostD {
-  bottom: 6%;
-  right: 6%;
-  font-size: clamp(2rem, 3.3vw, 3.1rem);
-  animation: drift3dD 32s ease-in-out infinite;
+.shapeB {
+  top: 12%;
+  right: 8%;
+  animation: floatShape 22s ease-in-out infinite reverse;
 }
 
-@keyframes drift3dA {
-  0%, 100% { transform: rotateX(4deg) rotateY(-6deg); opacity: 0.75; }
-  50%      { transform: rotateX(4deg) rotateY(-6deg); opacity: 0.9; }
+.shapeC {
+  bottom: 10%;
+  left: 10%;
+  animation: floatShape 30s ease-in-out infinite;
 }
 
-@keyframes drift3dB {
-  0%, 100% { transform: rotateX(-3deg) rotateY(5deg); opacity: 0.85; }
-  50%      { transform: rotateX(-3deg) rotateY(5deg); opacity: 0.65; }
+.shapeD {
+  bottom: 18%;
+  right: -3rem;
+  animation: floatShape 28s ease-in-out infinite reverse;
 }
 
-@keyframes drift3dC {
-  0%, 100% { transform: rotateX(3deg) rotateY(7deg); opacity: 0.7; }
-  50%      { transform: rotateX(3deg) rotateY(7deg); opacity: 0.95; }
+.shapeE {
+  display: none;
 }
 
-@keyframes drift3dD {
-  0%, 100% { transform: rotateX(-5deg) rotateY(-4deg); opacity: 0.8; }
-  50%      { transform: rotateX(-5deg) rotateY(-4deg); opacity: 0.6; }
+.shapeF {
+  top: 48%;
+  right: 15%;
+  animation: floatShape 18s ease-in-out infinite;
+}
+
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-12px) rotate(4deg); }
+}
+
+@media (max-width: 768px) {
+  .shapeCircle { width: 9rem; height: 9rem; }
+  .shapeSquare { width: 4.5rem; height: 4.5rem; }
+  .shapeRing   { width: 7rem; height: 7rem; }
+  .shapeLine   { width: 10rem; }
+  .shapeTriangle { width: 4.5rem; height: 4rem; }
+  .shapeA { top: 6%; left: -3rem; }
+  .shapeB { right: 4%; }
+  .shapeD { right: -2rem; }
 }
 
 .container {
@@ -113,6 +205,10 @@
 // Header Section - Left Aligned
 .headerSection {
   margin-bottom: 2.5rem;
+
+  :global(html.dark) & :global(.highlight) {
+    color: var(--text-color-dark-mode);
+  }
 
   @media (max-width: 768px) {
     margin-bottom: 1.25rem;
