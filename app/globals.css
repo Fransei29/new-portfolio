@@ -292,7 +292,6 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   position: relative;
   isolation: isolate;
   min-height: 80vh;
-  max-height: 80dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -319,9 +318,9 @@ html.dark .hero-section::before {
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 85dvh !important;
-    padding: 0.25rem 0 1rem;
-    align-items: center;
+    min-height: auto !important;
+    padding: 1.5rem 0 2rem;
+    align-items: flex-start;
   }
 }
 

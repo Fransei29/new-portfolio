@@ -34,10 +34,11 @@
 
   @media (max-width: 768px) {
     max-width: 380px;
+    margin: 1.5rem auto 1.25rem auto;
   }
 
-  @media (max-width: 520px) {
-    display: none;
+  @media (max-width: 420px) {
+    max-width: 340px;
   }
 }
 
@@ -56,6 +57,10 @@
   transform: rotate(-1.2deg);
   transform-style: preserve-3d;
   transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1s ease;
+
+  @media (max-width: 768px) {
+    transform: rotate(-0.8deg);
+  }
   z-index: 1;
 
   :global(html.dark) & {
@@ -177,8 +182,9 @@
   gap: 0.65rem;
 
   @media (max-width: 768px) {
-    padding: 0.8rem 0.9rem 0.95rem;
-    gap: 0.55rem;
+    padding: 0.55rem 0.65rem 0.65rem;
+    gap: 0.4rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -473,6 +479,10 @@
   width: 100%;
   height: 54px;
   display: block;
+
+  @media (max-width: 768px) {
+    height: 34px;
+  }
 }
 
 .chartLine {
@@ -744,8 +754,10 @@
   animation: metricFloat 6s ease-in-out infinite;
 
   @media (max-width: 768px) {
-    left: -4%;
-    padding: 0.5rem 0.75rem;
+    left: 0%;
+    padding: 0.45rem 0.7rem;
+    transform: rotate(-3deg);
+    animation: none;
   }
 }
 
@@ -805,8 +817,8 @@
   }
 
   @media (max-width: 768px) {
-    right: -4%;
-    padding: 0.35rem 0.7rem 0.35rem 0.35rem;
+    right: 0%;
+    padding: 0.35rem 0.65rem 0.35rem 0.35rem;
   }
 }
 
