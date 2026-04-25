@@ -87,10 +87,8 @@ const WhyChooseUs = () => {
                   <div className={styles.benefitIconWrapper}>
                     {benefit.icon}
                   </div>
-                  <div className={styles.benefitText}>
-                    <h3 className={styles.benefitTitle}>{benefit.title}</h3>
-                    <p className={styles.benefitDescription}>{benefit.description}</p>
-                  </div>
+                  <h3 className={styles.benefitTitle}>{benefit.title}</h3>
+                  <p className={styles.benefitDescription}>{benefit.description}</p>
                 </div>
               );
             })}

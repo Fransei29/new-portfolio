@@ -242,7 +242,7 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   width: 100%;
   margin-top: 0;
   grid-auto-flow: row;
@@ -250,13 +250,13 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
 
   @media (max-width: 768px) {
     padding: 0;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
     margin-top: 0;
   }
 }
@@ -265,9 +265,11 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
   text-align: left;
   gap: 1.25rem;
-  padding: 2rem 1.75rem;
+  padding: 2.75rem 2rem;
+  min-height: 280px;
   background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -302,8 +304,9 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   }
 
   @media (max-width: 768px) {
-    padding: 1.5rem 1.25rem;
-    gap: 1rem;
+    padding: 2rem 1.5rem;
+    gap: 1.25rem;
+    min-height: 0;
   }
 }
 
@@ -385,3 +388,4 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
     line-height: 1.35;
   }
 }
+

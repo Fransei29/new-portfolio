@@ -22,8 +22,6 @@ interface Service {
   slug: string;
 }
 
-const FEATURED_TAGS = ["LLM OPS", "RAG", "WORKFLOWS"];
-
 export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
@@ -110,9 +108,6 @@ export const Services = () => {
               <div className={styles.iconWrapper}>
                 <featured.Icon size={22} className={styles.serviceIcon} />
               </div>
-              <span className={styles.cardNumber}>
-                01 <span className={styles.cardNumberDot}>·</span> {t('services.featuredLabel')}
-              </span>
             </div>
 
             <div className={styles.featuredBody}>
@@ -126,12 +121,6 @@ export const Services = () => {
                 )}
               </h3>
               <p className={styles.featuredDescription}>{featured.description}</p>
-
-              <div className={styles.tags}>
-                {FEATURED_TAGS.map((tag) => (
-                  <span key={tag} className={styles.tag}>{tag}</span>
-                ))}
-              </div>
             </div>
 
             <div className={styles.orbital} aria-hidden="true">
@@ -157,15 +146,12 @@ export const Services = () => {
           </article>
 
           {/* Other cards */}
-          {others.map((service, idx) => (
+          {others.map((service) => (
             <article key={service.key} className={styles.card}>
               <div className={styles.cardTop}>
                 <div className={styles.iconWrapper}>
                   <service.Icon size={20} className={styles.serviceIcon} />
                 </div>
-                <span className={styles.cardNumber}>
-                  {String(idx + 2).padStart(2, '0')}
-                </span>
               </div>
 
               <div className={styles.cardBody}>
@@ -176,7 +162,7 @@ export const Services = () => {
               <div className={styles.cardFooter}>
                 <span className={styles.footerSlug}>{service.slug}</span>
                 <span className={styles.footerDot} aria-hidden="true">
-                  <span className={styles.footerDotLine} />
+                  <ArrowUpRight size={13} strokeWidth={2.25} className={styles.footerDotIcon} />
                 </span>
               </div>
             </article>

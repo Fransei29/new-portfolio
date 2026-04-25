@@ -62,6 +62,7 @@ const technologyIcons: { [key: string]: JSX.Element } = {
 
 // Definir tipos para el proyecto
 interface Project {
+  id?: string;
   slug?: string;
   title: string;
   isTutorial?: boolean;

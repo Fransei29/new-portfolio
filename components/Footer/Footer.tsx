@@ -32,7 +32,7 @@ const Footer = () => {
             <Image src='/Logo.svg' alt="Franco Seiler Logo" width={44} height={44} className={styles.logo} />
             <span className={styles.brandBlock}>
               <span className={styles.brandName}>Franco Seiler</span>
-              <span className={styles.brandRole}>Software Engineer</span>
+              <span className={styles.brandRole}>Software Solutions</span>
             </span>
           </div>
           <p className={styles.brandTagline}>{t('footer.tagline')}</p>

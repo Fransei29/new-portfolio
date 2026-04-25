@@ -60,28 +60,10 @@ export default function Header() {
               />
               <span className={styles.brandBlock}>
                 <span className={styles.brandName}>Franco Seiler</span>
-                <span className={styles.brandRole}>Software Engineer</span>
+                <span className={styles.brandRole}>Software Solutions</span>
               </span>
             </div>
           </Link>
-        </section>
-
-        {/* Selectores mobile (bootcamp, idioma y tema) */}
-        <section className={styles.mobileOnly}>
-          <div className={styles.mobileControls}>
-            <a
-              href={`https://bootcamp.francoseiler.com/${language}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.mobileBootcampButton}
-              aria-label={t('nav.bootcamp')}
-              title={t('nav.bootcamp')}
-            >
-              <GraduationCap size={16} className={styles.mobileBootcampIcon} />
-            </a>
-            <LanguageSelector />
-            <ThemeToggleButton />
-          </div>
         </section>
 
         {/* Botón hamburguesa */}
@@ -217,6 +199,21 @@ export default function Header() {
           <SiYoutube size={18} className={styles.mobileNavIcon} />
           {t('nav.youtube')}
         </a>
+
+        <div className={styles.mobileMenuControls}>
+          <a
+            href={`https://bootcamp.francoseiler.com/${language}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.mobileBootcampButton}
+            aria-label={t('nav.bootcamp')}
+            title={t('nav.bootcamp')}
+          >
+            <GraduationCap size={16} className={styles.mobileBootcampIcon} />
+          </a>
+          <LanguageSelector />
+          <ThemeToggleButton />
+        </div>
       </div>
     </header>
   );

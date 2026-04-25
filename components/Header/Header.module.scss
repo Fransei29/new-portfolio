@@ -199,7 +199,7 @@
     display: block;
     height: 2px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.45);
     border-radius: 2px;
     transition: all 0.3s ease;
     position: relative;
@@ -208,7 +208,7 @@
 
   :global(html.dark) & {
     span {
-      background-color: rgb(226, 226, 226);
+      background-color: rgba(235, 235, 235, 0.55);
     }
   }
 }
@@ -258,7 +258,8 @@
     top: 0;
     right: 0;
     height: 100vh;
-    width: 50%; 
+    width: 70%;
+    max-width: 320px;
     z-index: 1001;
     gap: 1rem;
     box-shadow: none;
@@ -320,7 +321,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #333; 
+  color: #333;
   font-size: 0.875rem;
   font-weight: 400;
   text-align: center;
@@ -329,6 +330,24 @@
 
   &:hover {
     color: #000;
+  }
+}
+
+.mobileMenuControls {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex !important;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+    :global(html.dark) & {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
   }
 }
 
