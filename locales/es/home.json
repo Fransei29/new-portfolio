@@ -45,7 +45,7 @@
     "buttonLabel": "Conectemos"
   },
   "howWeWork": {
-    "title": "Cómo trabajo",
+    "title": "Metodología de trabajo",
     "subtitle": "Un proceso claro y colaborativo para llevar tu idea desde el concepto hasta el lanzamiento.",
     "discovery": {
       "title": "Descubrimiento",
@@ -68,7 +68,7 @@
     }
   },
   "whyChooseUs": {
-    "title": "Por qué elegirme",
+    "title": "Datos que respaldan",
     "subtitle": "Valor agregado que aporto a cada proyecto para alcanzar resultados excepcionales.",
     "expertise": {
       "title": "Experiencia Técnica",

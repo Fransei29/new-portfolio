@@ -3,29 +3,45 @@
     "title": "Servicios",
     "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
     "cta": "Consultar",
+    "featuredLabel": "Destacado",
+    "seeCaseStudies": "Ver casos de estudio",
     "webDevelopment": {
-      "title": "Desarrollo de\nSoftware",
-      "description": "Plataformas que crecen con tu negocio. Código robusto, escalable y mantenible que se adapta a tus necesidades."
+      "title": "Desarrollo de Software",
+      "titleAccent": "",
+      "description": "Plataformas que crecen con tu negocio. Código robusto, escalable y mantenible que se adapta a tus necesidades.",
+      "slug": "Build"
     },
     "webApplications": {
-      "title": "Aplicaciones\nWeb",
-      "description": "Aplicaciones modernas que tus usuarios aman. Rápidas, intuitivas y optimizadas para convertir visitantes en clientes."
+      "title": "Aplicaciones Web",
+      "titleAccent": "",
+      "description": "Apps modernas que tus usuarios aman. Rápidas, intuitivas y optimizadas para convertir visitantes en clientes.",
+      "slug": "Apps"
     },
     "ecommerceSolutions": {
-      "title": "E-commerce\nCompleto",
-      "description": "Tiendas online que venden. Desde la configuración hasta la optimización de conversión, todo para que tu negocio crezca online."
+      "title": "E-commerce Completo",
+      "titleAccent": "",
+      "description": "Tiendas online que venden. Desde el setup hasta la optimización de conversión, todo para que tu negocio crezca online.",
+      "slug": "Commerce"
     },
     "aiIntegration": {
-      "title": "Estrategia e\nIntegración de IA",
-      "description": "La IA como habilitador de crecimiento. Definimos estrategias e integramos soluciones de IA que impactan en ventas, margen y escalabilidad."
+      "title": "Estrategia",
+      "titleAccent": "e Integración de IA",
+      "description": "La IA como palanca de crecimiento — no como buzzword. Definimos una estrategia e integramos soluciones que mueven ventas, margen y escalabilidad, no demos.",
+      "tags": ["LLM OPS", "RAG", "WORKFLOWS"],
+      "slug": "IA"
     },
     "businessAutomation": {
-      "title": "Automatizaciones\nde Negocio",
-      "description": "Procesos que trabajan por ti. Automatizamos tareas repetitivas y flujos completos para que tu equipo se enfoque en lo que genera valor."
+      "title": "Automatización de Negocio",
+      "titleAccent": "",
+      "description": "Procesos que trabajan por vos. Tareas repetitivas y flujos completos automatizados para que tu equipo se enfoque en lo que genera valor.",
+      "tags": [],
+      "slug": "Workflows"
     },
     "scalableArchitecture": {
-      "title": "Arquitectura y\nSistemas Escalables",
-      "description": "Infraestructura que crece sin complicaciones. Diseñamos sistemas seguros, escalables y mantenibles que soportan el crecimiento de tu negocio."
+      "title": "Arquitectura Escalable",
+      "titleAccent": "",
+      "description": "Infraestructura que crece sin complicaciones. Sistemas seguros, escalables y mantenibles que soportan el crecimiento de tu negocio.",
+      "slug": "Sistemas"
     }
   },
   "testimonials": {

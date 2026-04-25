@@ -6,10 +6,13 @@
   margin-right: 0;
   perspective: 1400px;
   transform-style: preserve-3d;
+  transform: scale(0.92);
+  transform-origin: top right;
   font-family: 'Space Grotesk', system-ui, sans-serif;
 
   @media (max-width: 520px) {
     margin-inline: auto;
+    transform-origin: top center;
   }
 
   // Subtle hover — just a tiny Z rotation

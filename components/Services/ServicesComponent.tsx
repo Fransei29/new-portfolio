@@ -1,25 +1,36 @@
 "use client";
 
 import { JSX, useEffect, useRef } from "react";
-import Image from "next/image";
 import styles from "./ServicesComponent.module.scss";
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
+import {
+  Sparkles,
+  Workflow,
+  Code2,
+  Monitor,
+  ShoppingCart,
+  ArrowUpRight,
+} from 'lucide-react';
 
 interface Service {
   key: string;
-  icon: string;
+  Icon: (props: { size?: number; className?: string }) => JSX.Element;
   title: string;
+  titleAccent: string;
   description: string;
+  slug: string;
 }
+
+const FEATURED_TAGS = ["LLM OPS", "RAG", "WORKFLOWS"];
 
 export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
-    const ref = servicesRef.current; // ✅ esta es la clave
-  
+    const ref = servicesRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,84 +41,148 @@ export const Services = () => {
       },
       { threshold: 0.1 }
     );
-  
+
     if (ref) observer.observe(ref);
-  
+
     return () => {
-      if (ref) observer.unobserve(ref); // ✅ usar la variable local
+      if (ref) observer.unobserve(ref);
     };
   }, []);
-  
-  const services: Service[] = [
-    {
-      key: "aiIntegration",
-      icon: "/services/ai.svg",
-      title: t('services.aiIntegration.title'),
-      description: t('services.aiIntegration.description'),
-    },
+
+  const featured: Service = {
+    key: "aiIntegration",
+    Icon: ({ size = 22, className }) => <Sparkles size={size} className={className} />,
+    title: t('services.aiIntegration.title'),
+    titleAccent: t('services.aiIntegration.titleAccent'),
+    description: t('services.aiIntegration.description'),
+    slug: t('services.aiIntegration.slug'),
+  };
+
+  const others: Service[] = [
     {
       key: "businessAutomation",
-      icon: "/services/api.svg",
+      Icon: ({ size = 22, className }) => <Workflow size={size} className={className} />,
       title: t('services.businessAutomation.title'),
+      titleAccent: t('services.businessAutomation.titleAccent'),
       description: t('services.businessAutomation.description'),
-    },
-    {
-      key: "scalableArchitecture",
-      icon: "/services/database.svg",
-      title: t('services.scalableArchitecture.title'),
-      description: t('services.scalableArchitecture.description'),
-    },
-    {
-      key: "webDevelopment",
-      icon: "/services/website.svg",
-      title: t('services.webDevelopment.title'),
-      description: t('services.webDevelopment.description'),
-    },
-    {
-      key: "webApplications",
-      icon: "/services/app.svg",
-      title: t('services.webApplications.title'),
-      description: t('services.webApplications.description'),
+      slug: t('services.businessAutomation.slug'),
     },
     {
       key: "ecommerceSolutions",
-      icon: "/services/e-commerce.svg",
+      Icon: ({ size = 22, className }) => <ShoppingCart size={size} className={className} />,
       title: t('services.ecommerceSolutions.title'),
+      titleAccent: t('services.ecommerceSolutions.titleAccent'),
       description: t('services.ecommerceSolutions.description'),
+      slug: t('services.ecommerceSolutions.slug'),
+    },
+    {
+      key: "webDevelopment",
+      Icon: ({ size = 22, className }) => <Code2 size={size} className={className} />,
+      title: t('services.webDevelopment.title'),
+      titleAccent: t('services.webDevelopment.titleAccent'),
+      description: t('services.webDevelopment.description'),
+      slug: t('services.webDevelopment.slug'),
+    },
+    {
+      key: "webApplications",
+      Icon: ({ size = 22, className }) => <Monitor size={size} className={className} />,
+      title: t('services.webApplications.title'),
+      titleAccent: t('services.webApplications.titleAccent'),
+      description: t('services.webApplications.description'),
+      slug: t('services.webApplications.slug'),
     },
   ];
-  
-  
+
   return (
     <section ref={servicesRef} className={styles.services}>
       <div className={styles.container}>
-       <p className="highlight">
-            {t('services.title')}
-          </p>
+        <p className="highlight">
+          {t('services.title')}
+        </p>
         <p className={styles.subtitle}>
           {t('services.subtitle')}
         </p>
+
         <div className={styles.grid}>
-          {services.map((service) => (
-            <div key={service.key} className={styles.card}>
-              <div className={styles.iconContainer}>
-                <div className={styles.iconWrapper}>
-                  <Image
-                    src={service.icon}
-                    alt={service.title}
-                    width={36}
-                    height={36}
-                    className={styles.serviceIcon}
-                  />
-                </div>
+          {/* Featured card */}
+          <article className={`${styles.card} ${styles.featuredCard}`}>
+            <div className={styles.cardTop}>
+              <div className={styles.iconWrapper}>
+                <featured.Icon size={22} className={styles.serviceIcon} />
               </div>
-              <div className={styles.cardContent}>
+              <span className={styles.cardNumber}>
+                01 <span className={styles.cardNumberDot}>·</span> {t('services.featuredLabel')}
+              </span>
+            </div>
+
+            <div className={styles.featuredBody}>
+              <h3 className={styles.featuredTitle}>
+                {featured.title}
+                {featured.titleAccent && (
+                  <>
+                    {' '}
+                    <em className={styles.titleAccent}>{featured.titleAccent}</em>
+                  </>
+                )}
+              </h3>
+              <p className={styles.featuredDescription}>{featured.description}</p>
+
+              <div className={styles.tags}>
+                {FEATURED_TAGS.map((tag) => (
+                  <span key={tag} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.orbital} aria-hidden="true">
+              <div className={styles.orbitRing} />
+              <div className={`${styles.orbitRing} ${styles.orbitRingOuter}`} />
+              <div className={styles.orbitCenter}>
+                <span>α</span>
+              </div>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeApi}`}>API</span>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeRag}`}>RAG</span>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeDb}`}>DB</span>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeGpt}`}>GPT</span>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeSeo}`}>SEO</span>
+              <span className={`${styles.orbitNode} ${styles.orbitNodeIo}`}>IO</span>
+            </div>
+
+            <a href="/projects" className={styles.featuredCta}>
+              <span className={styles.featuredCtaText}>{t('services.seeCaseStudies')}</span>
+              <span className={styles.featuredCtaArrow}>
+                <ArrowUpRight size={15} />
+              </span>
+            </a>
+          </article>
+
+          {/* Other cards */}
+          {others.map((service, idx) => (
+            <article key={service.key} className={styles.card}>
+              <div className={styles.cardTop}>
+                <div className={styles.iconWrapper}>
+                  <service.Icon size={20} className={styles.serviceIcon} />
+                </div>
+                <span className={styles.cardNumber}>
+                  {String(idx + 2).padStart(2, '0')}
+                </span>
+              </div>
+
+              <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{service.title}</h3>
                 <p className={styles.cardDescription}>{service.description}</p>
               </div>
-            </div>
+
+              <div className={styles.cardFooter}>
+                <span className={styles.footerSlug}>{service.slug}</span>
+                <span className={styles.footerDot} aria-hidden="true">
+                  <span className={styles.footerDotLine} />
+                </span>
+              </div>
+            </article>
           ))}
         </div>
+
         <div className={styles.ctaContainer}>
           <Button
             href="/about"

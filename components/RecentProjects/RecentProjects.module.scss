@@ -1,4 +1,4 @@
-@import '../../app/styles/utilities.scss'; 
+@import '../../app/styles/utilities.scss';
 
 .title {
     font-size: 1.75rem;
@@ -31,7 +31,7 @@
     justify-content: flex-end;
     text-align: right;
     padding: 1rem 0;
-    
+
     @media (max-width: 768px) {
         padding: 0;
         margin-bottom: 1rem;
@@ -81,6 +81,6 @@
         padding-top: 0.25rem;
         margin-bottom: -0.5rem;
     }
-    
-  
+
+
 }

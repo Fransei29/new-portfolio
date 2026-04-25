@@ -6,58 +6,76 @@
     "subtitleLine2": "The right software and automations give you clarity, speed, and room to grow.",
     "withoutTitle": "When everything is manual",
     "withTitle": "When you have the right tools",
+    "withoutHeadline": "Days of work,",
+    "withoutHeadlineStrike": "no traction.",
+    "withHeadline": "A system that",
+    "withHeadlineAccent": "compounds.",
+    "withoutStat": "-42%",
+    "withoutStatLabel": "team velocity",
+    "withStat": "+3.4x",
+    "withStatLabel": "output / month",
     "without": {
       "0": {
         "title": "Hours lost on repetition",
         "description": "Repetitive tasks and copy-paste eat your time and focus.",
-        "badge": "Productivity gets fragmented"
+        "badge": "Productivity gets fragmented",
+        "stat": "-14H / WEEK"
       },
       "1": {
         "title": "Errors and rework",
         "description": "Manual data entry leads to mistakes and extra work to fix them.",
-        "badge": "Time and resources wasted"
+        "badge": "Time and resources wasted",
+        "stat": "12% REWORK"
       },
       "2": {
         "title": "Single points of failure",
-        "description": "When one person is unavailable, processes stall.",
-        "badge": "Bottlenecks everywhere"
+        "description": "When one person is unavailable, the whole process stalls.",
+        "badge": "Bottlenecks everywhere",
+        "stat": "BUS FACTOR: 1"
       },
       "3": {
         "title": "Data everywhere",
         "description": "No single source of truth — scattered across sheets and emails.",
-        "badge": "Hard to see the big picture"
+        "badge": "Hard to see the big picture",
+        "stat": "8+ SOURCES"
       },
       "4": {
         "title": "Scaling = more people",
         "description": "Growing usually means adding headcount instead of leverage.",
-        "badge": "Costs grow with volume"
+        "badge": "Costs grow with volume",
+        "stat": "LINEAR COST"
       }
     },
     "with": {
       "0": {
         "title": "Repetition in the background",
         "description": "Automated workflows run while you focus on what matters.",
-        "badge": "Hours of focus back"
+        "badge": "Hours of focus back",
+        "stat": "24 / 7"
       },
       "1": {
         "title": "Consistent results",
-        "description": "Fewer mistakes and predictable outcomes.",
-        "badge": "Less rework, more delivery"
+        "description": "Fewer mistakes and predictable, auditable outcomes.",
+        "badge": "Less rework, more delivery",
+        "stat": "99.6% PASS"
       },
       "2": {
         "title": "Processes keep running",
-        "description": "Less dependency on one person; systems don’t take days off.",
-        "badge": "No single point of failure"
+        "description": "Less dependency on one person — systems don't take days off.",
+        "badge": "No single point of failure",
+        "stat": "0 SPOF"
       },
       "3": {
         "title": "One place for your data",
-        "description": "Reports and dashboards when you need them.",
-        "badge": "Decisions based on real data"
+        "description": "Reports and dashboards when you need them — single source of truth.",
+        "badge": "Decisions based on real data",
+        "stat": "1 SOURCE"
       },
       "4": {
         "title": "Scale without proportionally adding hours",
         "description": "Handle more volume without the same growth in effort.",
-        "badge": "Grow without burning out"
+        "badge": "Grow without burning out",
+        "stat": "LEVERAGED"
       }
     }
   }

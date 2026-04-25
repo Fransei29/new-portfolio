@@ -3,29 +3,44 @@
     "title": "Services",
     "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
     "cta": "Learn More",
+    "featuredLabel": "Featured",
+    "seeCaseStudies": "See case studies",
     "webDevelopment": {
-      "title": "Software\nDevelopment",
-      "description": "Platforms that grow with your business. Robust, scalable, and maintainable code that adapts to your needs."
+      "title": "Software Development",
+      "titleAccent": "",
+      "description": "Platforms that grow with your business. Robust, scalable, and maintainable code that adapts to your needs.",
+      "slug": "Build"
     },
     "webApplications": {
-      "title": "Web\nApplications",
-      "description": "Modern applications your users love. Fast, intuitive, and optimized to convert visitors into customers."
+      "title": "Web Applications",
+      "titleAccent": "",
+      "description": "Modern apps your users love. Fast, intuitive and optimized to convert visitors into customers.",
+      "slug": "Apps"
     },
     "ecommerceSolutions": {
-      "title": "Complete\nE-commerce",
-      "description": "Online stores that sell. From setup to conversion optimization, everything to grow your business online."
+      "title": "Complete E-commerce",
+      "titleAccent": "",
+      "description": "Online stores that sell. From setup to conversion optimization, everything to grow your business online.",
+      "slug": "Commerce"
     },
     "aiIntegration": {
-      "title": "AI Strategy &\nIntegration",
-      "description": "AI as a growth enabler. We define strategies and integrate AI solutions that impact sales, margin, and scalability."
+      "title": "AI Strategy",
+      "titleAccent": "& Integration",
+      "description": "AI as a growth lever — not a buzzword. We define a strategy and ship integrations that move sales, margin and scalability, not demos.",
+      "tags": ["LLM OPS", "RAG", "WORKFLOWS"],
+      "slug": "AI"
     },
     "businessAutomation": {
-      "title": "Business\nAutomation",
-      "description": "Processes that work for you. We automate repetitive tasks and complete workflows so your team focuses on what generates value."
+      "title": "Business Automation",
+      "titleAccent": "",
+      "description": "Processes that work for you. Repetitive tasks and full workflows automated so your team focuses on what generates value.",
+      "slug": "Workflows"
     },
     "scalableArchitecture": {
-      "title": "Scalable\nArchitecture & Systems",
-      "description": "Infrastructure that grows without complications. We design secure, scalable, and maintainable systems that support your business growth."
+      "title": "Scalable Architecture",
+      "titleAccent": "",
+      "description": "Infrastructure that grows without complications. Secure, scalable, and maintainable systems that support your business growth.",
+      "slug": "Systems"
     }
   },
   "testimonials": {
