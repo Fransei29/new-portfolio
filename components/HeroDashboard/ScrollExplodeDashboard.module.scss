@@ -1,0 +1,81 @@
+// Scroll-driven "explode" wrapper around the HeroDashboard.
+// The dashboard pieces are real DOM nodes from HeroDashboard; the wrapper
+// only adds the pin context, the confetti layer and overflow handling.
+
+.pinHost {
+  position: relative;
+  width: 100%;
+  z-index: 10; // sit above the next section so the explosion overlaps Services
+  // Allow flying pieces / confetti to escape the box visually.
+  // overflow:visible is fine because the pinned section caps the scrollable area.
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; // explosion is decorative — let users click through to Services underneath
+}
+
+.confettiLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.confettiPiece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.confettiPiece.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.confettiPiece.bar {
+  width: 14px;
+  height: 4px;
+  border-radius: 1px;
+}
+
+// Streak — soft trail that emerges from a flying card
+.streak {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(244, 114, 182, 0) 0%, rgba(244, 114, 182, 0.55) 100%);
+  filter: blur(4px);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+  // Mobile: explosion runs with a shorter scroll range (set in JS).
+  .pinHost {
+    min-height: 0 !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .stage {
+    width: auto; // let the dashboard size itself instead of stretching the flex item
+    justify-content: center;
+  }
+}

@@ -144,9 +144,9 @@ const HeroDashboard = () => {
   const checksCount = currentTask.stats.checks;
 
   return (
-    <div className={styles.wrapper} aria-hidden>
+    <div className={styles.wrapper} aria-hidden data-explode-root>
       {/* Floating metric pill (top-left, breaks the frame) */}
-      <div className={`${styles.floatingPill} ${styles.metricPill}`}>
+      <div className={`${styles.floatingPill} ${styles.metricPill}`} data-explode-piece="metric-pill">
         <span className={styles.metricValue}>12+</span>
         <span className={styles.metricLabel}>
           PRODUCTS
@@ -156,15 +156,15 @@ const HeroDashboard = () => {
       </div>
 
       {/* Browser window */}
-      <div className={styles.browser}>
+      <div className={styles.browser} data-explode-piece="browser">
         {/* Browser chrome */}
-        <div className={styles.browserChrome}>
-          <div className={styles.browserDots}>
+        <div className={styles.browserChrome} data-explode-piece="browser-chrome">
+          <div className={styles.browserDots} data-explode-piece="browser-dots">
             <span />
             <span />
             <span />
           </div>
-          <div className={styles.urlBar}>
+          <div className={styles.urlBar} data-explode-piece="url-bar">
             <span className={styles.urlTyped}>
               <span className={styles.urlTypedSegment}>
                 <span className={styles.urlLight}>app.</span>
@@ -189,7 +189,7 @@ const HeroDashboard = () => {
                 {currentTask.week} · {taskPhase === 'done' || taskPhase === 'leave' ? 'shipped' : 'in progress'}
               </span>
             </div>
-            <div className={styles.liveBadge}>
+            <div className={styles.liveBadge} data-explode-piece="live-badge">
               <span className={styles.liveDot} />
               LIVE
             </div>
@@ -197,26 +197,26 @@ const HeroDashboard = () => {
 
           {/* Stats row */}
           <div className={`${styles.statsRow} ${statsFlash ? styles.statsFlash : ''}`}>
-            <div className={styles.statCard}>
+            <div className={styles.statCard} data-explode-piece="stat-card" data-explode-index="0">
               <div className={styles.statValue}>
                 +{Math.round(conversion)}<span className={styles.statUnit}>%</span>
               </div>
               <div className={styles.statLabel}>CONVERSION</div>
             </div>
-            <div className={styles.statCard}>
+            <div className={styles.statCard} data-explode-piece="stat-card" data-explode-index="1">
               <div className={styles.statValue}>
                 −{Math.round(latency)}<span className={styles.statUnit}>ms</span>
               </div>
               <div className={styles.statLabel}>P95 LATENCY</div>
             </div>
-            <div className={styles.statCard}>
+            <div className={styles.statCard} data-explode-piece="stat-card" data-explode-index="2">
               <div className={styles.statValue}>{Math.round(incidents)}</div>
               <div className={styles.statLabel}>INCIDENTS</div>
             </div>
           </div>
 
           {/* Chart */}
-          <div className={styles.chartCard}>
+          <div className={styles.chartCard} data-explode-piece="chart-card">
             <div className={styles.chartLabel}>
               CONVERSION <span className={styles.chartLabelLight}>· LAST 30D</span>
             </div>
@@ -267,7 +267,7 @@ const HeroDashboard = () => {
 
           {/* Work area rows — live progress indicators */}
           <div className={styles.stackRows}>
-            <div className={styles.stackRow}>
+            <div className={styles.stackRow} data-explode-piece="stack-row" data-explode-index="0">
               <div className={`${styles.stackIcon} ${styles.stackIconFrontend}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="3" y="4" width="18" height="14" rx="2" />
@@ -284,7 +284,7 @@ const HeroDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.stackRow}>
+            <div className={styles.stackRow} data-explode-piece="stack-row" data-explode-index="1">
               <div className={`${styles.stackIcon} ${styles.stackIconBackend}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -302,7 +302,7 @@ const HeroDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.stackRow}>
+            <div className={styles.stackRow} data-explode-piece="stack-row" data-explode-index="2">
               <div className={`${styles.stackIcon} ${styles.stackIconInfra}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="2" y="3" width="20" height="6" rx="1" />
@@ -338,6 +338,7 @@ const HeroDashboard = () => {
       {/* Floating testimonial pill (bottom-right, breaks the frame) */}
       <div
         className={`${styles.floatingPill} ${styles.testimonialPill} ${testimonialFading ? styles.testimonialFading : ''}`}
+        data-explode-piece="testimonial-pill"
       >
         <img
           className={styles.avatarImg}

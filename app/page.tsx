@@ -6,7 +6,7 @@ import './globals.css';
 import SkillsSummary from '../components/Skills/SkillsSummary';
 import { useScrollAnimation } from '../hooks/Scroll';
 import HomeText from '../components/HomeText/HomeText';
-import HeroDashboard from '../components/HeroDashboard/HeroDashboard';
+import ScrollExplodeDashboard from '../components/HeroDashboard/ScrollExplodeDashboard';
 import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
 import { Services } from '../components/Services/ServicesComponent';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -31,7 +31,7 @@ export default function Home() {
         </div>
 
         <div className="home-textB">
-          <HeroDashboard />
+          <ScrollExplodeDashboard />
         </div>
 
       </div>
