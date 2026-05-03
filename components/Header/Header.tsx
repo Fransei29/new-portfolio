@@ -52,8 +52,8 @@ export default function Header() {
               <Image
                 src="/Logo.svg"
                 alt="Logo"
-                width={70}
-                height={70}
+                width={92}
+                height={92}
                 className={styles.logo}
                 priority
                 unoptimized

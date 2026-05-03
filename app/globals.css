@@ -320,7 +320,7 @@ html.dark .hero-section::before {
 @media (max-width: 768px) {
   .hero-section {
     min-height: auto !important;
-    padding: 1.5rem 0 2rem;
+    padding: 1.5rem 0 0;
     align-items: flex-start;
   }
 }
@@ -651,7 +651,7 @@ html.hydrated .hero-section .fade-in-left {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1.25rem 0 0 0; /* aire arriba para separarlo del social proof */
+    margin: 0.5rem 0 0 0; /* aire arriba para separarlo del social proof */
     width: 100%;
     position: relative;
     z-index: 1;

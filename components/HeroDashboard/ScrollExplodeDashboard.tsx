@@ -99,7 +99,7 @@ const ScrollExplodeDashboard = () => {
           // dashboard happens to sit in the hero. start:0 guarantees progress=0
           // at page load, no matter where the dashboard is centered.
           start: 0,
-          end: () => window.innerHeight * (isMobile ? 0.95 : 0.55),
+          end: () => window.innerHeight * (isMobile ? 0.95 : 0.65),
           scrub: 0.3,
           // Desktop: pin so the explosion plays IN PLACE while Services scrolls
           // up behind/under it — the dashboard stays visible "over" the next
@@ -133,7 +133,7 @@ const ScrollExplodeDashboard = () => {
         // longer before dissolving so the explosion feels less abrupt.
         const motionStart = 0;
         const motionDuration = isEarly ? 0.35 : 0.7;
-        const fadeStart = isEarly ? 0.4 : (isMobile ? 0.7 : 0.55);
+        const fadeStart = isEarly ? 0.4 : (isMobile ? 0.7 : 0.35);
         const fadeDuration = isEarly ? 0.25 : (isMobile ? 0.3 : 0.3);
 
         // Motion phase: piece tilts/falls/scales while staying visible

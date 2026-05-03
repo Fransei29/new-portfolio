@@ -536,9 +536,15 @@
   border-radius: 50%;
   box-shadow: none !important;
   transition: transform 0.3s ease;
+  // Crisp rendering — keeps the SVG sharp when down-scaled and avoids the
+  // subpixel blur that browsers introduce when an element has any transform.
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
   }
 
   @media (max-width: 768px) {
