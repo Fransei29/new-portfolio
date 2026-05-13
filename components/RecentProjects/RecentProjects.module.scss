@@ -13,17 +13,87 @@
     width: 100%;
 
     @media (max-width: 768px) {
-        padding: 1rem 0.5rem;
+        padding: 1rem 0;
     }
 }
 
-.projectsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 3rem;
-    padding: 0.5rem 0;
+.viewport {
+    --gap: 3rem;
+    --visible-count: 2;
+    --peek: 7%;
+    --container-inset: max(2rem, calc((100vw - var(--container-max-width)) / 2));
+    position: relative;
+    /* Full-bleed: escapa el max-width del contenedor padre y ocupa todo el ancho del viewport */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde */
+    padding: 2rem 0 0.75rem var(--container-inset);
     box-sizing: border-box;
+
+    /* Solo desktop: en mobile usamos el .mobileStack */
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}
+
+.mobileStack {
+    --peek: 10%;
+    display: none;
+
+    @media (max-width: 1024px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+        width: 100%;
+        padding: 1.5rem 0 0.5rem;
+        box-sizing: border-box;
+    }
+}
+
+.mobileViewport {
     width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde */
+    padding-left: 1.25rem;
+}
+
+.mobileTrack {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    will-change: transform;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none !important;
+    }
+}
+
+.mobileSlide {
+    flex: 0 0 calc(100% - var(--peek));
+    min-width: 0;
+    box-sizing: border-box;
+    padding-right: 1.25rem;
+}
+
+
+.track {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    will-change: transform;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none !important;
+    }
+}
+
+.slide {
+    flex: 0 0 calc((100% - var(--peek)) / var(--visible-count));
+    min-width: 0;
+    box-sizing: border-box;
+    padding-right: var(--gap);
 }
 
 .projectsButtonContainer{
@@ -48,27 +118,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        overflow-x: hidden;
         max-width: 100%;
-    }
-
-    .projectsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        max-width: 100%;
-        gap: 1.25rem;
-        padding: 1.5rem 1.75rem 0.5rem;
-        margin: 0;
-        box-sizing: border-box;
-        overflow-x: hidden;
-    }
-
-    .projectsContainer > * {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
     }
 
     .title{
@@ -82,5 +132,12 @@
         margin-bottom: -0.5rem;
     }
 
-
+    .projectsButtonContainer {
+        padding: 0 1.25rem;
+        margin-bottom: 1rem;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 }

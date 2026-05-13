@@ -21,7 +21,8 @@
     "socialProof": {
       "label": "Trusted by founders and engineering teams",
       "headline": "Trusted by founders and engineering teams",
-      "sub": "15 clients trust my work"
+      "sub": "15 clients trust my work",
+      "projects": "Projects shipped"
     }
   },
   "about": {

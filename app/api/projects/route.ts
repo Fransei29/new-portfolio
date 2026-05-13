@@ -43,6 +43,7 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Mercado Pago SDK', 'Google OAuth', 'JWT', 'Docker', 'PM2'],
       category: 'product',
       status: 'latest',
+      featured: true,
     },
     {
       slug: 'bellum',
@@ -55,6 +56,7 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'GSAP', 'Three.js', 'React Three Fiber', 'Resend', 'GitHub Contents API', 'Vitest'],
       category: 'platform',
       status: 'latest',
+      featured: true,
     },
     {
       slug: 'comply-dq',
@@ -67,6 +69,7 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'Redux Toolkit', 'NestJS', 'Prisma', 'PostgreSQL', 'Keycloak', 'JWT', 'Stripe', 'AWS S3', 'Ant Design', 'MUI'],
       category: 'platform',
       status: 'latest',
+      featured: true,
     },
     {
       slug: 'grupo-el-triunfo',
@@ -79,6 +82,7 @@ export async function GET(request: Request) {
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'GSAP', 'ScrollTrigger', 'Radix UI', 'Lucide React'],
       category: 'landing',
       status: 'latest',
+      featured: true,
     },
     {
       slug: 'home-trades-online',
@@ -90,6 +94,7 @@ export async function GET(request: Request) {
       previewImage: '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-21.webp',
       technologies: ['Django', 'PostgreSQL', 'HTMX', 'Alpine.js', 'Tailwind CSS', 'Docker', 'Gunicorn', 'Nginx', 'Playwright', 'GitHub Actions', 'Google Cloud Platform'],
       category: 'platform',
+      featured: true,
     },
     {
       slug: 'salesforpro',
@@ -112,6 +117,7 @@ export async function GET(request: Request) {
       previewImage: '/img/img/StartOn/StartA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Supabase', 'Google OAuth'],
       category: 'platform',
+      featured: true,
     },
     {
       slug: 'mi-agenda',
@@ -156,6 +162,7 @@ export async function GET(request: Request) {
       previewImage: '/atevo/A.webp',
       technologies: ['React', 'TypeScript', 'Vite', 'SCSS Modules', 'Tailwind CSS', 'shadcn/ui', 'React Router', 'Node.js', 'Express', 'TypeORM', 'PostgreSQL', 'JWT', 'bcrypt', 'Google Cloud Storage', 'jsPDF', 'Resend', 'React Email'],
       category: 'platform',
+      featured: true,
     },
     {
       slug: 'lexmax',
@@ -189,6 +196,7 @@ export async function GET(request: Request) {
       previewImage: '/img/img/Event/eventA.webp',
       technologies: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Node.js', 'Express', 'PostgreSQL', 'TypeORM', 'Framer Motion', 'Leaflet', 'Google Cloud Storage', 'Stripe', 'Jest', 'React Testing Library', 'Playwright', 'Vercel'],
       category: 'platform',
+      featured: true,
     },
     {
       slug: 'the-club-northfield',

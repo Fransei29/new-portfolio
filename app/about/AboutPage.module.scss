@@ -11,6 +11,11 @@
 .containerContent {
   max-width: var(--container-max-width);
   margin-inline: auto;
+  padding-bottom: 6rem;
+
+  @media (max-width: 768px) {
+    padding-bottom: 4rem;
+  }
 }
 
 .buttonContainer {

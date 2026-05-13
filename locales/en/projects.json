@@ -30,6 +30,7 @@
       "latest": "Latest"
     },
     "tabs": {
+      "featured": "Featured",
       "all": "All"
     },
     "privateProject": "Private — client project",
@@ -452,7 +453,7 @@
   "pages": {
     "projects": {
       "title": "Projects",
-      "subtitle": "Selected works that reflect how I think, build, and solve problems"
+      "subtitle": "A curated selection of work shipped end-to-end — from architecture to production."
     },
     "tutorials": {
       "title": "Tutorials",

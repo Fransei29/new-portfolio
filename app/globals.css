@@ -43,7 +43,7 @@
   --cta-bg: #032e8b;
   --cta-bg-hover: #1D4ED8;
   /* CTA: mismo token en gradiente, wave y fallback */
-  --cta-gradient-top: #070913;
+  --cta-gradient-top: #0a1230;
   --cta-gradient-mid: #131a2b;
   --cta-bg-gradient: linear-gradient(
     180deg,
@@ -222,7 +222,7 @@ html.dark {
   --wave-a: var(--dark-light);
   --wave-b: var(--dark-light);
   /* Mismos valores que :root: el wave CTA usa var(--cta-gradient-top) en CSS; re-declarar evita cascadas raras en SVG */
-  --cta-gradient-top: #070913;
+  --cta-gradient-top: #070d22;
   --cta-gradient-mid: #131a2b;
   /* Sombras delicadas adaptadas a fondo oscuro */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);

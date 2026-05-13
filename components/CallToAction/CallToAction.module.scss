@@ -2,14 +2,15 @@
 
 .ctaContainer {
   width: 100%;
+  box-sizing: border-box;
   position: relative;
   padding: 8rem 0;
   margin-top: calc(-1 * var(--wave-cta-bleed));
+  /* Usa la misma variable que el wave (--cta-gradient-top) para que ambos queden sincronizados.
+     El color se controla desde globals.css. */
   background-image: var(--cta-bg-gradient);
-  /* Mismo tono que el 0% del gradiente (no --cta-bg #032e8b, desentonaba con la ola) */
   background-color: var(--cta-gradient-top);
   overflow: hidden;
-  
 
   :global(html.dark) & {
     background-image: var(--cta-bg-gradient);
@@ -18,7 +19,7 @@
   }
 
   @media (max-width: 768px) {
-    padding: 4rem 0;
+    padding: 5.5rem 1.5rem;
   }
 }
 
@@ -35,16 +36,20 @@
   text-align: center;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
-    padding: 0 0.5rem;
+    padding: 0;
     gap: 1.25rem;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
 .ctaText {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.75rem;
+  font-size: 2.4rem;
   font-weight: 600;
   color: var(--cta-text);
   margin: 0;
@@ -53,7 +58,7 @@
   letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 1.75rem;
+    font-size: 1.55rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.2;
@@ -61,7 +66,7 @@
 }
 
 .ctaDescription {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--cta-text);
   margin: 0;
@@ -70,9 +75,11 @@
   opacity: 0.9;
 
   @media (max-width: 768px) {
-    font-size: 0.975rem;
+    font-size: 0.925rem;
     line-height: 1.4;
-    padding: 0 1.75rem;
+    padding: 0;
+    width: 100%;
+    text-align: center;
   }
 }
 

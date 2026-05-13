@@ -37,15 +37,15 @@
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 1.5rem;
-  text-align: center;
+  margin: 1.25rem 0 1.5rem;
+  text-align: left;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
   max-width: 60ch;
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1rem;
+    margin: 0.75rem 0 1rem;
   }
 }
 

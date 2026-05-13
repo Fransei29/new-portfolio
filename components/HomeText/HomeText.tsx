@@ -89,6 +89,11 @@ const HomeText: React.FC = () => {
             <span className={styles.socialProofPlus}>+</span>
             <span>{t('hero.socialProof.sub')}</span>
           </p>
+          <span className={styles.socialProofDivider} aria-hidden />
+          <p className={styles.socialProofStat}>
+            <span className={styles.socialProofStatNumber}>22+</span>
+            <span className={styles.socialProofStatLabel}>{t('hero.socialProof.projects')}</span>
+          </p>
         </div>
     </section>
   </section>

@@ -30,6 +30,7 @@
       "latest": "Nuevo"
     },
     "tabs": {
+      "featured": "Destacados",
       "all": "Todos"
     },
     "privateProject": "Privado — proyecto de cliente",
@@ -452,7 +453,7 @@
   "pages": {
     "projects": {
       "title": "Proyectos",
-      "subtitle": "Trabajos seleccionados que reflejan cómo pienso, construyo y resuelvo problemas"
+      "subtitle": "Una selección curada de trabajos entregados de punta a punta — de la arquitectura a producción."
     },
     "tutorials": {
       "title": "Tutoriales",

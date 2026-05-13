@@ -21,13 +21,14 @@ interface Projects {
   logs?: string[];
   category?: 'product' | 'platform' | 'landing';
   status?: 'latest';
+  featured?: boolean;
 }
 
-type TabKey = 'all' | 'product' | 'platform' | 'landing';
+type TabKey = 'featured' | 'all' | 'product' | 'platform' | 'landing';
 
 const Projects = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
-  const [activeTab, setActiveTab] = useState<TabKey>('all');
+  const [activeTab, setActiveTab] = useState<TabKey>('featured');
   const elementsRef = useScrollAnimation();
   const { t, language } = useLanguage();
 
@@ -46,14 +47,23 @@ const Projects = () => {
   }, [language]);
 
   const tabs: { key: TabKey; labelKey: string }[] = [
+    { key: 'featured', labelKey: 'projects.tabs.featured' },
     { key: 'all', labelKey: 'projects.tabs.all' },
     { key: 'product', labelKey: 'projects.badges.product' },
     { key: 'platform', labelKey: 'projects.badges.platform' },
     { key: 'landing', labelKey: 'projects.badges.landing' },
   ];
 
+  const getTabCount = (key: TabKey) => {
+    if (key === 'featured') return projects.filter((p) => p.featured).length;
+    if (key === 'all') return projects.length;
+    return projects.filter((p) => p.category === key).length;
+  };
+
   const filteredProjects =
-    activeTab === 'all'
+    activeTab === 'featured'
+      ? projects.filter((p) => p.featured)
+      : activeTab === 'all'
       ? projects
       : projects.filter((p) => p.category === activeTab);
 
@@ -78,7 +88,8 @@ const Projects = () => {
                   className={`${styles.tab} ${activeTab === tab.key ? styles.tabActive : ''}`}
                   onClick={() => setActiveTab(tab.key)}
                 >
-                  {t(tab.labelKey)}
+                  <span className={styles.tabLabel}>{t(tab.labelKey)}</span>
+                  <span className={styles.tabCount}>{getTabCount(tab.key)}</span>
                 </button>
               ))}
             </div>
