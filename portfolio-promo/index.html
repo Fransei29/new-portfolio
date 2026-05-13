@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0b0b0d;
+        font-family: "Inter", system-ui, sans-serif;
+        color: #f5f5f7;
+        font-feature-settings: "ss01", "cv11";
+      }
+
+      .stage {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        background: #0b0b0d;
+      }
+
+      /* Subtle grain via radial — no harsh gradients */
+      .stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 50%,
+          rgba(255, 255, 255, 0.025) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* ---------- SCENE 1 (0–1.4s): the question ---------- */
+      .q-text {
+        font-size: 64px;
+        font-weight: 300;
+        letter-spacing: -0.025em;
+        line-height: 1.25;
+        color: #f5f5f7;
+        text-align: center;
+        max-width: 1100px;
+      }
+      .q-line {
+        display: block;
+        font-size: 0;
+      }
+      .q-faint {
+        color: #6b6b73;
+      }
+      .q-word {
+        display: inline-block;
+        font-size: 64px;
+        margin-right: 0.22em;
+        will-change: transform, opacity, filter;
+      }
+      .q-word:last-child {
+        margin-right: 0;
+      }
+
+      /* ---------- SCENE 2a (1.4–2.4s): answer ---------- */
+      .answer-line {
+        font-size: 0;
+        font-weight: 300;
+        letter-spacing: -0.025em;
+        text-align: center;
+      }
+      .a-word {
+        display: inline-block;
+        font-size: 72px;
+        color: #f5f5f7;
+        margin-right: 0.18em;
+        will-change: transform, opacity, filter;
+      }
+      .a-word.accent {
+        font-weight: 500;
+      }
+      .a-word:last-child {
+        margin-right: 0;
+      }
+      #a-3 {
+        margin-right: 0;
+      }
+
+      /* ---------- SCENE 2b (2.4–3.4s): name ---------- */
+      .name-line {
+        font-size: 0;
+        font-weight: 300;
+        letter-spacing: -0.025em;
+        color: #f5f5f7;
+        text-align: center;
+      }
+      .name-line .accent {
+        color: #f5f5f7;
+        font-weight: 500;
+      }
+      .name-meta {
+        margin-top: 14px;
+        font-size: 0;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: #80808a;
+        text-align: center;
+      }
+      .n-word {
+        display: inline-block;
+        font-size: 56px;
+        margin-right: 0.18em;
+        will-change: transform, opacity, filter;
+      }
+      .n-word:last-child {
+        margin-right: 0;
+      }
+      #n-franco {
+        margin-right: 0;
+      }
+      .m-word {
+        display: inline-block;
+        font-size: 17px;
+        margin-right: 0.32em;
+        will-change: transform, opacity, filter;
+      }
+      .m-word:last-child {
+        margin-right: 0;
+      }
+
+      /* ---------- SCENE 3 (2.6–4.6s): work ---------- */
+      .work-eyebrow {
+        font-size: 12px;
+        font-weight: 500;
+        color: #80808a;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        margin-bottom: 26px;
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        width: 100%;
+        max-width: 1480px;
+      }
+
+      .pcard {
+        background: #131316;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .pcard-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        background: #0d0d10;
+        opacity: 0.92;
+      }
+
+      .pcard-body {
+        padding: 18px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .pcard-name {
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        color: #f5f5f7;
+      }
+
+      .pcard-tag {
+        font-size: 13px;
+        font-weight: 400;
+        color: #80808a;
+        letter-spacing: 0.005em;
+      }
+
+      /* ---------- SCENE 4 (4.6–6.0s): close ---------- */
+      .close-url {
+        font-size: 88px;
+        font-weight: 300;
+        letter-spacing: -0.04em;
+        color: #f5f5f7;
+        line-height: 1;
+      }
+      .close-url .dot {
+        color: #80808a;
+      }
+
+      .close-meta {
+        margin-top: 22px;
+        font-size: 0;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: #80808a;
+        text-align: center;
+      }
+      .cm-word {
+        display: inline-block;
+        font-size: 15px;
+        margin-right: 0.34em;
+        will-change: transform, opacity, filter;
+      }
+      .cm-word:last-child {
+        margin-right: 0;
+      }
+      #c-name, #c-dot {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+      }
+
+      /* ---------- shared transition layers ---------- */
+      .layer {
+        will-change: transform, opacity, filter;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="7"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- ============ SCENE 1: QUESTION (0–1.4s) ============ -->
+      <div
+        id="s1"
+        class="stage clip"
+        data-start="0"
+        data-duration="1.4"
+        data-track-index="1"
+      >
+        <div class="center">
+          <div id="q1" class="q-text">
+            <div class="q-line">
+              <span class="q-word">you</span>
+              <span class="q-word">have</span>
+              <span class="q-word">an</span>
+              <span class="q-word">idea.</span>
+            </div>
+            <div class="q-line q-faint">
+              <span class="q-word">but</span>
+              <span class="q-word">no</span>
+              <span class="q-word">one</span>
+              <span class="q-word">to</span>
+              <span class="q-word">ship</span>
+              <span class="q-word">it.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 2a: ANSWER (1.4–2.4s) ============ -->
+      <div
+        id="s2a"
+        class="stage clip"
+        data-start="1.4"
+        data-duration="1.0"
+        data-track-index="1"
+      >
+        <div class="center">
+          <div class="answer-line">
+            <span id="a-1" class="a-word">i</span>
+            <span id="a-2" class="a-word accent">ship</span>
+            <span id="a-3" class="a-word">them</span><span id="a-4" class="a-word">.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 2b: NAME (2.4–3.4s) ============ -->
+      <div
+        id="s2"
+        class="stage clip"
+        data-start="2.4"
+        data-duration="1.0"
+        data-track-index="1"
+      >
+        <div class="center">
+          <div>
+            <div class="name-line">
+              <span id="n-im" class="n-word">i'm</span>
+              <span id="n-franco" class="n-word accent">franco</span><span id="n-dot" class="n-word">.</span>
+            </div>
+            <div class="name-meta">
+              <span id="m-1" class="m-word">full-stack</span>
+              <span id="m-2" class="m-word">engineer</span>
+              <span id="m-sep" class="m-word">·</span>
+              <span id="m-3" class="m-word">based</span>
+              <span id="m-4" class="m-word">in</span>
+              <span id="m-5" class="m-word">argentina</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 3: WORK (3.4–5.4s) ============ -->
+      <div
+        id="s3"
+        class="stage clip"
+        data-start="3.4"
+        data-duration="2"
+        data-track-index="1"
+      >
+        <div class="center">
+          <div id="w-eyebrow" class="work-eyebrow layer">selected work</div>
+          <div class="work-grid">
+            <div id="pc1" class="pcard layer">
+              <img class="pcard-img" src="media/starton-card.webp" alt="" />
+              <div class="pcard-body">
+                <div class="pcard-name">starton</div>
+                <div class="pcard-tag">talent platform</div>
+              </div>
+            </div>
+            <div id="pc2" class="pcard layer">
+              <img class="pcard-img" src="media/miagenda-card.webp" alt="" />
+              <div class="pcard-body">
+                <div class="pcard-name">mi agenda</div>
+                <div class="pcard-tag">booking · payments</div>
+              </div>
+            </div>
+            <div id="pc3" class="pcard layer">
+              <img class="pcard-img" src="media/ateevo-card.webp" alt="" />
+              <div class="pcard-body">
+                <div class="pcard-name">ateevo</div>
+                <div class="pcard-tag">b2b fashion saas</div>
+              </div>
+            </div>
+            <div id="pc4" class="pcard layer">
+              <img class="pcard-img" src="media/tecnomar-card.webp" alt="" />
+              <div class="pcard-body">
+                <div class="pcard-name">tecnomar</div>
+                <div class="pcard-tag">industrial site</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 4: CLOSE (5.4–7.0s) ============ -->
+      <div
+        id="s4"
+        class="stage clip"
+        data-start="5.4"
+        data-duration="1.6"
+        data-track-index="1"
+      >
+        <div class="center">
+          <div style="text-align: center">
+            <div class="close-url">
+              <span id="c-name">francoseiler</span><span id="c-dot" class="dot">.com</span>
+            </div>
+            <div class="close-meta">
+              <span id="c-m1" class="cm-word">available</span>
+              <span id="c-m2" class="cm-word">for</span>
+              <span id="c-m3" class="cm-word">new</span>
+              <span id="c-m4" class="cm-word">work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* ============ SCENE 1: QUESTION (0–1.4s) — word-by-word ============ */
+      // Line 1: "you have an idea." — words stagger in
+      tl.from("#q1 .q-line:nth-child(1) .q-word", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.06,
+      }, 0.05);
+      // Line 2: "but no one to ship it." — starts after line 1 is mostly in
+      tl.from("#q1 .q-line:nth-child(2) .q-word", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.05,
+      }, 0.5);
+
+      /* ============ SCENE 2a: ANSWER (1.4–2.4s) ============ */
+      // "i ship them." — answer to the hook, beat by beat
+      tl.from("#a-1", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.4,
+        ease: "power2.out",
+      }, 1.45);
+      tl.from("#a-2", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.45,
+        ease: "power2.out",
+      }, 1.6);
+      tl.from("#a-3", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.4,
+        ease: "power2.out",
+      }, 1.78);
+      tl.from("#a-4", {
+        opacity: 0,
+        duration: 0.25,
+        ease: "power2.out",
+      }, 2.0);
+
+      /* ============ SCENE 2b: NAME (2.4–3.4s) — word-by-word ============ */
+      tl.from("#n-im", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.4,
+        ease: "power2.out",
+      }, 2.45);
+      tl.from("#n-franco", {
+        opacity: 0,
+        y: 14,
+        filter: "blur(8px)",
+        duration: 0.45,
+        ease: "power2.out",
+      }, 2.62);
+      tl.from("#n-dot", {
+        opacity: 0,
+        duration: 0.25,
+        ease: "power2.out",
+      }, 2.92);
+      // Meta line: each word fades in tight
+      tl.from(".m-word", {
+        opacity: 0,
+        y: 6,
+        duration: 0.3,
+        ease: "power2.out",
+        stagger: 0.04,
+      }, 3.0);
+
+      /* ============ SCENE 3: WORK (3.4–5.4s) ============ */
+      tl.from("#w-eyebrow", {
+        opacity: 0,
+        y: 8,
+        duration: 0.4,
+        ease: "power2.out",
+      }, 3.45);
+
+      // Cards: soft fade + subtle rise, very tight stagger, no slam
+      tl.from("#pc1", {
+        opacity: 0,
+        y: 18,
+        filter: "blur(6px)",
+        duration: 0.55,
+        ease: "power3.out",
+      }, 3.58);
+      tl.from("#pc2", {
+        opacity: 0,
+        y: 18,
+        filter: "blur(6px)",
+        duration: 0.55,
+        ease: "power3.out",
+      }, 3.66);
+      tl.from("#pc3", {
+        opacity: 0,
+        y: 18,
+        filter: "blur(6px)",
+        duration: 0.55,
+        ease: "power3.out",
+      }, 3.74);
+      tl.from("#pc4", {
+        opacity: 0,
+        y: 18,
+        filter: "blur(6px)",
+        duration: 0.55,
+        ease: "power3.out",
+      }, 3.82);
+
+      /* ============ SCENE 4: CLOSE (5.4–7.0s) ============ */
+      // "francoseiler" enters, then ".com" lands
+      tl.from("#c-name", {
+        opacity: 0,
+        y: 18,
+        filter: "blur(10px)",
+        duration: 0.6,
+        ease: "power2.out",
+      }, 5.45);
+      tl.from("#c-dot", {
+        opacity: 0,
+        x: -8,
+        filter: "blur(6px)",
+        duration: 0.4,
+        ease: "power2.out",
+      }, 5.8);
+      // Meta words tighten in
+      tl.from(".cm-word", {
+        opacity: 0,
+        y: 6,
+        duration: 0.3,
+        ease: "power2.out",
+        stagger: 0.05,
+      }, 5.95);
+
+      // Final fade-out — only allowed on the final scene
+      tl.to("#s4 .center", {
+        opacity: 0,
+        filter: "blur(4px)",
+        duration: 0.35,
+        ease: "power2.in",
+      }, 6.6);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

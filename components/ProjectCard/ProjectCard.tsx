@@ -71,7 +71,7 @@ interface Project {
   previewImage?: string;
   link1?: string;
   link2?: string | null;
-  link3?: string;
+  link3?: string | null;
   technologies?: string[];
   category?: 'product' | 'platform' | 'landing';
   status?: 'latest';
@@ -177,11 +177,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                   <Lock className={styles.iconSmall} size={18} />
                 </div>
               ) : null}
-              {project.link3 && !project.isTutorial && (
+              {project.link3 && !project.isTutorial ? (
                 <a href={project.link3} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                   <ExternalLink className={styles.iconSmall} size={18} />
                 </a>
-              )}
+              ) : project.link3 === null && !project.isTutorial ? (
+                <div className={styles.privateButton} title={t('projects.privateProjectTooltip')}>
+                  <Lock className={styles.iconSmall} size={18} />
+                </div>
+              ) : null}
             </div>
             {project.slug && (
               <Link

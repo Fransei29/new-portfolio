@@ -1,6 +1,331 @@
 // src/data/projects.ts
 export const projects = [
   {
+    slug: 'acer0',
+    title: 'a.cer0',
+    subtitle: 'Custom E-Commerce Platform',
+    whatIs: `a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.
+
+Features include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.`,
+    problemSolved: `The client needed a tailor-made digital storefront that reflected their brand identity while handling the full complexity of Argentine e-commerce — including Mercado Pago integration, bank transfer confirmation workflows, and a bilingual admin experience.
+
+Off-the-shelf solutions couldn't deliver the custom UX, performance, and control required, so a purpose-built platform was the answer — giving the client total ownership of their data, branding, and operations, with a backend tuned exactly to their workflow.`,
+    techStack: [
+      'Next.js 15',
+      'React 19',
+      'TypeScript',
+      'SCSS Modules',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Prisma ORM',
+      'Mercado Pago SDK',
+      'Google OAuth 2.0',
+      'JWT',
+      'Docker',
+      'PM2'
+    ],
+    learnings: [
+      'Architected a full-stack monorepo with Next.js 15 (App Router) frontend proxying to an Express/TypeScript backend via a secure BFF (Backend-for-Frontend) pattern.',
+      'Integrated Mercado Pago as the primary payment gateway with webhook-driven order status sync, plus a parallel bank transfer flow with admin confirmation/rejection.',
+      'Implemented JWT authentication with token versioning for instant revocation, Google OAuth 2.0 sign-in, and role-based access control (customer/admin).',
+      'Built a comprehensive admin panel: product and category CRUD with image uploads, order management with fulfillment tracking, coupon engine, review moderation, and real-time sales statistics dashboard.',
+      'Designed a customer account area with order history, wishlist/favorites, profile and security settings, and password recovery via transactional email (Nodemailer).',
+      'Hardened security with Helmet, express-rate-limit, Zod validation on every endpoint, Google reCAPTCHA on all public forms, and input sanitization across the BFF proxy layer.',
+      'Containerized the entire stack with Docker Compose (PostgreSQL 17, backend, frontend) and automated VPS deployment with PM2 cluster mode for zero-downtime releases.',
+      'Delivered a pixel-perfect mobile-first responsive UI with SCSS modules and breakpoints at 480px, 640px, 768px, and 900px — looks impeccable on every device, from small phones to ultra-wide desktops.'
+    ],
+    screenshots: [
+      '/img/img/Acero-web/acero-01.webp',
+      '/img/img/Acero-web/acero-02.webp',
+      '/img/img/Acero-web/acero-03.webp',
+      '/img/img/Acero-web/acero-04.webp',
+      '/img/img/Acero-web/acero-05.webp',
+      '/img/img/Acero-web/acero-06.webp',
+      '/img/img/Acero-web/acero-07.webp',
+      '/img/img/Acero-web/acero-08.webp',
+      '/img/img/Acero-web/acero-09.webp',
+      '/img/img/Acero-web/acero-10.webp',
+      '/img/img/Acero-web/acero-11.webp',
+      '/img/img/Acero-web/acero-12.webp',
+      '/img/img/Acero-web/acero-13.webp',
+      '/img/img/Acero-web/acero-14.webp',
+      '/img/img/Acero-web/acero-15.webp',
+      '/img/img/Acero-web/acero-16.webp',
+      '/img/img/Acero-web/acero-17.webp',
+      '/img/img/Acero-web/acero-18.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://www.acer0.com.ar/',
+  },
+  {
+    slug: 'bellum',
+    title: 'Bellum',
+    subtitle: 'HOA Financial Management Platform',
+    whatIs: `Bellum is a professional-grade platform built for HOA and condominium associations seeking to outsource their financial management, reporting, and back-office operations.
+
+The platform serves as both a marketing site and a content-managed service hub, allowing boards and property managers to explore services, request proposals, and access detailed financial resources — all through a polished, animation-rich experience.
+
+At its core sits a powerful admin panel that turns the entire website into a fully editable surface: every service page, blog post, hero image, FAQ, testimonial, pricing block, and proposal flow can be updated in real time from a secure dashboard, with changes committed straight to the repository — no database, no developer dependency, no downtime.
+
+Features include a multi-variant service page system, a git-backed CMS with a full visual admin panel, a multi-step proposal flow, a blog engine, transactional email integration, and a Three.js-powered visual layer.`,
+    problemSolved: `HOA boards are often overwhelmed by financial complexity — budgeting, collections, payables, homeowner communication — with limited tools to evaluate and onboard professional help. On top of that, the management firm itself usually has no easy way to keep its marketing site, service catalog, and proposal flow up to date without going back to a developer every time.
+
+Bellum solves both sides: associations get a clear, segmented service catalog with multiple layout variants, allowing them to quickly understand offerings, compare services, and submit tailored proposals — all within a fast, SEO-optimized, and visually engaging experience. The Bellum team, in turn, gets a full administrative panel to manage every piece of content on the site — services, pricing, blog articles, FAQs, hero media, testimonials, and proposal templates — autonomously, with version control built in.`,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'SCSS',
+      'GSAP',
+      'Three.js',
+      'React Three Fiber',
+      'Resend',
+      'Node.js',
+      'GitHub Contents API',
+      'Vitest',
+      'ESLint',
+      'Vercel'
+    ],
+    learnings: [
+      'Built a full-featured administration panel that lets the Bellum team edit every section of the site (services, pricing, blog, FAQs, hero media, testimonials, proposal flow, navigation) through a polished visual dashboard — no SQL, no CLI, no developer in the loop.',
+      'Designed and built a git-backed CMS architecture powering the admin panel: local filesystem in development, GitHub Contents API commits in production (Vercel), enabling content editing without a traditional database and giving every change a full audit trail via git history.',
+      'Implemented a multi-variant service page system (Variant A, B, C) driven by JSON configuration, allowing flexible layouts per service without route duplication — variants are switched from the admin panel with a single click.',
+      'Built a rich animation layer using GSAP (scroll-triggered parallax, staggered entrance timelines, scrub-based fade effects) across all major sections, designed to feel premium without sacrificing performance.',
+      'Integrated Three.js with React Three Fiber for particle-based 3D scene backgrounds with dynamic loading and progressive enhancement.',
+      'Implemented hardened contact and proposal API routes with origin allowlists, honeypot fields, minimum submit timing, HTML escaping, and in-memory rate limiting.',
+      'Transactional email system via Resend for contact submissions and proposal notifications, with branded templates fully editable from the admin panel.',
+      'Full SEO implementation: dynamic sitemap, robots.txt, Open Graph metadata, FAQ JSON-LD, and Organization structured data — automatically regenerated whenever content changes through the admin.',
+      'Mobile-first SCSS architecture with modular component design, fluid responsive typography, smooth crossfade hero carousel, and a consistent design system using custom variables and mixins — flawless from 320px phones to ultra-wide desktops.'
+    ],
+    screenshots: [
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-24.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-28.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-34.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-39.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-47.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-47-56.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-48-01.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-48-24.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-48-33.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-08.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-14.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-22.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-28.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-39.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-47.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-49-58.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-02.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-07.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-14.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-20.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-24.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-29.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-39.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-44.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-50-53.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-51-02.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-51-31.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-51-39.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-51-44.webp',
+      '/img/img/bellum-web/Screenshot from 2026-05-12 19-51-49.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://bellumhoafinance.com/',
+  },
+  {
+    slug: 'comply-dq',
+    title: 'Comply DQ',
+    subtitle: 'Fleet Compliance & Document Intelligence Platform',
+    whatIs: `Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.
+
+The product combines role-aware workspaces, company-scoped data, and subscription-aware billing so operators can move from spreadsheets and legacy tools to a single source of truth with audit-friendly workflows.
+
+Developed in partnership with a Canadian engineering team, Comply DQ is one of the largest and most complex platforms I've contributed to — a true enterprise SaaS with deep multi-tenant architecture, hundreds of pages of operational tooling, and B2B compliance requirements as the core of every decision.`,
+    problemSolved: `Transportation and compliance programs often juggle fragmented files, inconsistent access control, and manual renewals — which increases risk and slows audits.
+
+Comply DQ addresses this by centralizing driver profiles, document lifecycles, and company administration in a secure, multi-tenant architecture with clear separation between customer organizations and platform-level oversight.
+
+The platform was built side by side with a senior team based in Canada, combining their domain expertise in US/Canadian transportation compliance with hands-on engineering to ship a production-grade product trusted to handle real fleets and real regulatory pressure — not a prototype, not a single-developer side project.`,
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Redux Toolkit',
+      'NestJS',
+      'Prisma',
+      'PostgreSQL',
+      'Keycloak (OIDC)',
+      'JWT',
+      'Stripe',
+      'AWS S3',
+      'Ant Design',
+      'MUI',
+      'Radix UI',
+      'REST APIs'
+    ],
+    learnings: [
+      'Collaborated with a Canadian engineering team on one of the largest platforms in my portfolio — a real enterprise SaaS shipped to motor carriers and compliance teams operating across North America.',
+      'Multi-tenant product model with tenant resolution, company types (e.g. D2C / MSP-style hierarchies), and role-based access for admins and operational users.',
+      'End-to-end document workflows: document library, uploads, deduplication logic, and cloud-backed storage aligned with a modern API layer.',
+      'Payments & monetization: Stripe integration for subscriptions and invoice-related flows, including webhook-driven server paths for reliable billing events.',
+      'Auth at enterprise standards: Keycloak (OIDC) + credential flows, JWT access/refresh handling, and session hardening patterns suited to B2B SaaS.',
+      'Data platform: PostgreSQL with Prisma for schema-safe access, plus controlled legacy migration tooling (CSV-driven pipelines, validation, and operational scripts) for real-world cutovers — not toy demos.',
+      'Responsive, productized UI: Next.js App Router, Redux for complex client state, Ant Design / MUI / Radix-style component stacks, and layouts optimized for desktop dashboards + mobile-friendly operator tasks.',
+      'Operational excellence: structured logging, tenant-aware API guards, and deployment-oriented configuration for staging/production parity.',
+      'Pixel-perfect responsive design across the entire admin surface — looks impeccable from operator tablets on the road up to ultra-wide compliance dashboards.'
+    ],
+    screenshots: [
+      '/img/img/cdq-web/cdq-01.webp',
+      '/img/img/cdq-web/cdq-02.webp',
+      '/img/img/cdq-web/cdq-03.webp',
+      '/img/img/cdq-web/cdq-04.webp',
+      '/img/img/cdq-web/cdq-05.webp',
+      '/img/img/cdq-web/cdq-06.webp',
+      '/img/img/cdq-web/cdq-07.webp',
+      '/img/img/cdq-web/cdq-08.webp',
+      '/img/img/cdq-web/cdq-09.webp',
+      '/img/img/cdq-web/cdq-10.webp',
+      '/img/img/cdq-web/cdq-11.webp',
+      '/img/img/cdq-web/cdq-12.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
+    slug: 'grupo-el-triunfo',
+    title: 'Grupo El Triunfo',
+    subtitle: 'Corporate Agribusiness Platform',
+    whatIs: `Grupo El Triunfo is a corporate website for an agribusiness holding company based in Oncativo, Córdoba, Argentina, with over 36 years of experience in the agricultural sector.
+
+The platform showcases six integrated business units — Grain Storage, Logistics, Agronomy, Bonsmara Cattle, Shell Fuel, and Bar/Café — presenting their services, history, and brand identity in a modern, visually rich experience.
+
+Features include a full-viewport video hero with GSAP entrance animations, dynamic service detail pages with photo galleries, a branded tab navigation system, an interactive contact form with embedded map, scroll-triggered reveal animations, and a fully responsive mobile-first design.`,
+    problemSolved: `Grupo El Triunfo needed a digital presence that reflects the scale and professionalism of a multi-unit agribusiness group, while keeping the warmth and proximity of a family-founded company.
+
+The website solves this by unifying six distinct business units under a cohesive visual identity, with dedicated sections for each service, a branded color system per unit, and a design language rooted in rural Argentina's aesthetic — professional yet approachable.`,
+    techStack: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'SCSS Modules',
+      'GSAP',
+      'ScrollTrigger',
+      'Radix UI',
+      'Lucide React',
+      'Next.js App Router'
+    ],
+    learnings: [
+      'Designed and implemented a scalable component architecture organized by domain (home, empresa, servicios, layout, UI primitives), with co-located SCSS modules per component.',
+      'Built dynamic service detail pages using Next.js App Router with [slug] routing, featuring hero banners, photo galleries, extended content sections, and branded tab navigation.',
+      'Developed a comprehensive design token system (colors, typography, spacing, shadows, breakpoints) in SCSS, with per-business-unit color theming via CSS custom properties.',
+      'Full-viewport video hero with GSAP scroll-triggered animations, loading spinner fallback, and staggered entrance transitions.',
+      'Created a reusable UI component library built on Radix UI primitives (Accordion, Dialog, Alert, Checkbox, Progress, etc.) with custom SCSS styling.',
+      'Implemented a multi-section company page with history timeline, mission/vision, stats, gallery, and brand values.',
+      'Pixel-perfect responsive mobile-first layout with custom breakpoints, fluid typography, and optimized image delivery via Next.js <Image> — looks impeccable on every device, from small phones to 4K monitors.',
+      'Contact page with form, info cards, and Google Maps embed integration.'
+    ],
+    screenshots: [
+      '/img/img/eltriunfo-web/eltriunfo-01.webp',
+      '/img/img/eltriunfo-web/eltriunfo-02.webp',
+      '/img/img/eltriunfo-web/eltriunfo-03.webp',
+      '/img/img/eltriunfo-web/eltriunfo-04.webp',
+      '/img/img/eltriunfo-web/eltriunfo-05.webp',
+      '/img/img/eltriunfo-web/eltriunfo-06.webp',
+      '/img/img/eltriunfo-web/eltriunfo-07.webp',
+      '/img/img/eltriunfo-web/eltriunfo-08.webp',
+      '/img/img/eltriunfo-web/eltriunfo-09.webp',
+      '/img/img/eltriunfo-web/eltriunfo-10.webp',
+      '/img/img/eltriunfo-web/eltriunfo-11.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://el-triunfo.vercel.app/',
+  },
+  {
+    slug: 'home-trades-online',
+    title: 'Home Trades Online',
+    subtitle: 'Contractor Proposal Platform (SaaS)',
+    whatIs: `Home Trades Online is a mobile-first SaaS platform that empowers contractors and tradespeople to generate AI-powered professional proposals in under 30 seconds. The platform bridges the gap between contractors working on job sites and the administrative work of creating, sending, and managing client proposals.
+
+Features include AI-generated proposals with line items and pricing, public proposal sharing via unique links, digital signature capture, multi-tenant business management with role-based access control, magic link authentication for subcontractors, internationalization (English/Spanish), and a referral/invite system.`,
+    problemSolved: `Contractors spend hours creating proposals manually, often losing jobs because they can't respond fast enough. Existing tools are desktop-oriented and complex, ignoring the reality that tradespeople work on dusty job sites, often one-handed, with spotty cellular connections.
+
+Home Trades Online solves this by enabling contractors to describe a job in plain language and receive a complete, professional proposal with scope of work, itemized pricing, and terms — ready to send to the client in seconds.`,
+    techStack: [
+      'Django 5.2',
+      'Django REST Framework',
+      'PostgreSQL 15',
+      'HTMX',
+      'Alpine.js',
+      'Tailwind CSS',
+      'Docker',
+      'Gunicorn',
+      'Nginx',
+      'Playwright',
+      'GitHub Actions',
+      'Google Cloud Platform'
+    ],
+    learnings: [
+      'Designed and implemented a multi-tenant architecture with 6-layer defense-in-depth RBAC (BusinessScopedManager, middleware, decorators, service-level checks) ensuring strict data isolation between businesses.',
+      'Built an AI proposal generation engine that converts natural language job descriptions into structured proposals with line items, pricing, scope of work, and terms.',
+      'Developed a public proposal sharing system with unique token-based URLs, branded email delivery, client viewing tracking, and digital signature capture (signature_pad).',
+      'Implemented a hybrid authentication system: session-based login for business owners, magic link (JWT) authentication for subcontractors, and shadow user profiles for invited collaborators.',
+      'Full internationalization infrastructure with URL-prefix routing, country-aware currency formatting, and complete Argentine Spanish translation — enabling near-zero-effort expansion to 9+ countries.',
+      'Pixel-perfect mobile-first UX engineered for outdoor and job-site conditions: 48px+ touch targets, high-contrast design, true one-handed operation, glove-friendly inputs, and streaming proposal generation with progressive skeleton loading — flawless from small phones to large tablets.',
+      'Production deployment pipeline with Docker Compose, Gunicorn, Nginx reverse proxy, Let\'s Encrypt SSL, and GitHub Actions CI (unit tests + Playwright E2E).'
+    ],
+    screenshots: [
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-21.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-32.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-37.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-47.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-28-58.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-29-41.webp',
+      '/img/img/HomePlatform-web/Screenshot from 2026-05-12 19-30-07.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
+    slug: 'salesforpro',
+    title: 'Home Trades Online Landing',
+    subtitle: 'Marketing Landing Page & Website',
+    whatIs: `SalesForPro is the public-facing marketing website for Home Trades Online, designed to convert visiting contractors into users through an interactive product demo experience.
+
+The site features a cinematic page intro animation, a multi-step interactive hero that lets visitors try the AI proposal generator before signing up, scroll-triggered content sections, and a fully bilingual experience (English/Spanish). Built as a server-rendered marketing site with rich client-side animations, dark mode support, and a mobile-first responsive design.`,
+    problemSolved: `SaaS landing pages for contractor tools are typically static and generic, failing to communicate the product's value quickly. Contractors are skeptical and need to see the tool in action before committing.
+
+SalesForPro solves this by embedding a live product demo directly into the hero section — visitors can select their trade, enter their location, and generate a real AI proposal without signing up, turning the landing page itself into a conversion tool.`,
+    techStack: [
+      'Django Templates',
+      'Tailwind CSS',
+      'GSAP',
+      'ScrollTrigger',
+      'Alpine.js',
+      'CSS Animations',
+      'SVG (inline, animated)',
+      'Django i18n'
+    ],
+    learnings: [
+      'Designed and built a cinematic page intro with layered circle-reveal animations using CSS @property for smooth radius transitions, creating a branded first impression.',
+      'Developed a multi-step interactive hero card with animated gradient border (conic-gradient rotation), shimmer effects on step transitions, dot-pattern backgrounds, and progress bar with pulse glow.',
+      'Implemented GSAP-powered scroll animations: word-by-word subtitle reveals, staggered left/right card entries with ScrollTrigger, and SVG path-draw connectors with traveling dot animations between "How It Works" steps.',
+      'Built full dark mode support with a consistent color palette across all sections (hero, how-it-works, testimonials, CTA, footer), including adapted SVG connector colors and card shadows.',
+      'Built a flawlessly responsive, mobile-first design that scales beautifully from 320px phones up to ultra-wide desktops: vertical connectors on small screens, horizontal wave SVG dividers between sections, sticky navbar with scroll-aware shadow, and 48px+ touch targets across every interactive element.',
+      'Integrated Django i18n with {% trans %} tags across all marketing content for seamless English/Spanish switching via URL prefix routing (/ar/).',
+      'Implemented accessibility best practices: prefers-reduced-motion media query disabling all animations, ARIA labels, semantic HTML, visible focus rings, and aria-live regions for loading states.',
+      'CTA shimmer effect with CSS-only animated gradient sweep, wave dividers using inline SVG paths, and skeleton loading states with shimmer animation for the proposal generation preview.'
+    ],
+    screenshots: [
+      '/img/img/HomeWeb-web/Screenshot from 2026-05-12 19-26-22.webp',
+      '/img/img/HomeWeb-web/Screenshot from 2026-05-12 19-27-20.webp',
+      '/img/img/HomeWeb-web/Screenshot from 2026-05-12 19-27-34.webp',
+      '/img/img/HomeWeb-web/Screenshot from 2026-05-12 19-27-41.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
     slug: 'starton',
     title: 'StartOn ',
     subtitle: 'Talent-Startup Connection Platform',
@@ -195,7 +520,7 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
     ],
     videoUrl: '/img/img/Tecnomar/TecnoMar.mp4',
     githubLink: null as any,
-    liveDemoLink: '',
+    liveDemoLink: null as any,
   },
   {
     slug: 'ateevo-wholesale',
@@ -283,7 +608,7 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     ],
     videoUrl: '/atevo/Ecommerce.mp4',
     githubLink: null as any,
-    liveDemoLink: 'https://www.tecno-mar.com.ar/',
+    liveDemoLink: null as any,
   },
   {
     slug: 'lexmax',
@@ -331,7 +656,7 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
       '/img/img/Lex/LexG.webp',
     ],
     githubLink: null as any,
-    liveDemoLink: '',
+    liveDemoLink: null as any,
   },
   {
     slug: 'property-recommender',
@@ -433,7 +758,7 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     ],
     videoUrl: '/img/img/Event/EventScheduler.mp4',
     githubLink: null as any,
-    liveDemoLink: '',
+    liveDemoLink: null as any,
   },
   {
     slug: 'the-club-northfield',

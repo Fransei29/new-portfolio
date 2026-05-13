@@ -457,16 +457,26 @@ export default function ProjectDetailComponent({
                     {t('projects.githubRepository')} <Github className={styles.iconSmall} />
                   </a>
                 ) : githubLink === null || githubLink === '' ? (
-                  <div className={styles.privateLink} title="Código privado">
+                  <div className={styles.privateLink} title={t('projects.privateProjectTooltip')}>
                     {t('projects.githubRepository')} <Lock className={styles.iconSmall} />
                   </div>
                 ) : null}
-                {liveDemoLink && (
+                {liveDemoLink ? (
                   <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
                     {t('projects.liveDemo')} <ExternalLink className={styles.iconSmall} />
                   </a>
-                )}
+                ) : liveDemoLink === null ? (
+                  <div className={styles.privateLink} title={t('projects.privateProjectTooltip')}>
+                    {t('projects.liveDemo')} <Lock className={styles.iconSmall} />
+                  </div>
+                ) : null}
               </div>
+              {(githubLink === null || liveDemoLink === null) && (
+                <p className={styles.privateNote}>
+                  <Lock className={styles.iconInline} size={14} />
+                  <span>{t('projects.privateProject')}</span>
+                </p>
+              )}
             </section>
           </div>
         </div>

@@ -17,12 +17,12 @@
   .projectsContent{
     max-width: var(--container-max-width);
     margin-inline: auto;
-    padding: 2rem 0rem;
+    padding: 2rem 0rem 6rem;
     width: 100%;
     box-sizing: border-box;
 
     @media (max-width: 768px) {
-      padding: 1rem 0.5rem;
+      padding: 1rem 0.5rem 4rem;
     }
   }
 
