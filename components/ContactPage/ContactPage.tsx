@@ -27,7 +27,7 @@ export default function ContactPage() {
     <div className={styles.contactPageContainer}>
       <div className={styles.contactPageContent}>
         <div className={styles.contactHeader}>
-          <p className={styles.highlight}>{t('contactPage.title')}</p>
+          <p className="highlight">{t('contactPage.title')}</p>
           <p className={styles.subtitle}>{t('contactPage.subtitle')}</p>
         </div>
 

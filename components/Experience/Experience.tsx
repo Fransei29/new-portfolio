@@ -1,147 +1,96 @@
 'use client';
 
-import React, { useState } from "react";
-import styles from "./Experience.module.scss";
-import "../../app/globals.css";
+import React, { useState } from 'react';
+import styles from './Experience.module.scss';
+import '../../app/globals.css';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import { motion, AnimatePresence } from "framer-motion";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { useLanguage } from '../../contexts/LanguageContext';
 
-interface IsOpenState {
-  [key: string]: boolean;
-}
+// The locale data is keyed by job (experience.<key>.title / company / period /
+// responsibilities[]). We list the keys in display order (most recent first)
+// and resolve each field through t() at render time.
+const JOB_KEYS = ['freelance', 'morseVerse', 'intelligentApps', 'digitalInnovators'] as const;
 
 const Experience: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<IsOpenState>({});
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
+  const elementsRef = useScrollAnimation();
 
-  const toggleDetail = (id: string): void => {
-    setIsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
+  // Master-detail: one job is always active; clicking another swaps the detail
+  // panel in place, which keeps the layout fixed and easy to scan.
+  const [activeKey, setActiveKey] = useState<string>(JOB_KEYS[0]);
+
+  // responsibilities/tags are arrays in the locale JSON, but this project's t()
+  // returns non-string values as JSON.stringify(...), so we parse them back.
+  const getArray = (key: string): string[] => {
+    try {
+      const parsed = JSON.parse(t(key));
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   };
-
-  const renderIcon = () => (
-    <span className={styles.timelineIcon}>
-      <svg
-        className={styles.timelineSvg}
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-      </svg>
-    </span>
-  );
 
   return (
     <section className={styles.experienceContainer}>
       <div className={styles.experienceSection}>
         <p className={styles.highlight}>{t('experience.title')}</p>
         <p className={styles.subtitle}>{t('experience.subtitle')}</p>
-        <ol className={styles.timeline}>
 
-        <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">
-            <li className={styles.timelineItem} onClick={() => toggleDetail("freelance")}>
-              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
-              <div className={styles.timelineRight}>
-                <h3 className={styles.titleExperience}>
-                  <div className={styles.titleExperienceContent}>
-                    <span className={styles.jobTitle}>{t('experience.freelance.title')}</span>
-                    <span className={styles.companyName}>{t('experience.freelance.company')}</span>
-                  </div>
-                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.freelance ? styles.iconOpen : ''}`} />
-                </h3>
-                <time className={styles.experienceDate}>{t('experience.freelance.period')}</time>
-                {isOpen.freelance && (
-                  <ul className={styles.experienceList}>
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.0') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.1') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.2') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.freelance.responsibilities.3') }} />
-                  </ul>
-                )}
-              </div>
-            </li>
-          </section>
+        <div
+          ref={(el) => { elementsRef.current[0] = el; }}
+          className={styles.layout}
+        >
+          {/* Master: the list of roles */}
+          <ul className={styles.list} role="tablist" aria-label={t('experience.title')}>
+            {JOB_KEYS.map((key) => {
+              const selected = key === activeKey;
+              return (
+                <li key={key}>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    className={`${styles.listItem} ${selected ? styles.listItemActive : ''}`}
+                    onClick={() => setActiveKey(key)}
+                  >
+                    <span className={styles.listText}>
+                      <span className={styles.listRole}>{t(`experience.${key}.title`)}</span>
+                      <span className={styles.listCompany}>{t(`experience.${key}.company`)}</span>
+                      <span className={styles.listPeriod}>{t(`experience.${key}.period`)}</span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
-        <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
-            <li className={styles.timelineItem} onClick={() => toggleDetail("morseVerse")}>
-              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
-              <div className={styles.timelineRight}>
-                <h3 className={styles.titleExperience}>
-                  <div className={styles.titleExperienceContent}>
-                    <span className={styles.jobTitle}>{t('experience.morseVerse.title')}</span>
-                    <span className={styles.companyName}>{t('experience.morseVerse.company')}</span>
-                  </div>
-                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.morseVerse ? styles.iconOpen : ''}`} />
-                </h3>
-                <time className={styles.experienceDate}>{t('experience.morseVerse.period')}</time>
-                {isOpen.morseVerse && (
-                  <ul className={styles.experienceList}>
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.0') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.1') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.2') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.morseVerse.responsibilities.3') }} />
-                  </ul>
-                )}
+          {/* Detail: re-keyed on activeKey so its fade replays on each swap. */}
+          <div className={styles.detail} role="tabpanel" key={activeKey}>
+            <div className={styles.detailHeader}>
+              <div className={styles.detailHeading}>
+                <h3 className={styles.detailRole}>{t(`experience.${activeKey}.title`)}</h3>
+                <span className={styles.detailCompany}>{t(`experience.${activeKey}.company`)}</span>
               </div>
-            </li>
-          </section>
+              <span className={styles.detailPeriod}>{t(`experience.${activeKey}.period`)}</span>
+            </div>
+            <ul className={styles.detailList}>
+              {getArray(`experience.${activeKey}.responsibilities`).map((item, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
 
-          <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
-            <li className={styles.timelineItem} onClick={() => toggleDetail("coursfy")}>
-              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
-              <div className={styles.timelineRight}>
-                <h3 className={styles.titleExperience}>
-                  <div className={styles.titleExperienceContent}>
-                    <span className={styles.jobTitle}>{t('experience.intelligentApps.title')}</span>
-                    <span className={styles.companyName}>{t('experience.intelligentApps.company')}</span>
-                  </div>
-                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.coursfy ? styles.iconOpen : ''}`} />
-                </h3>
-                <time className={styles.experienceDate}>{t('experience.intelligentApps.period')}</time>
-                {isOpen.coursfy && (
-                  <ul className={styles.experienceList}>
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.0') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.1') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.2') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.intelligentApps.responsibilities.3') }} />
-                  </ul>
-                )}
-              </div>
-            </li>
-          </section>
-  
-  
-          <section ref={el => { elementsRef.current[2] = el; }} className="fade-in-right">
-            <li className={styles.timelineItem} onClick={() => toggleDetail("digitalInnovators")}>
-              <div className={styles.timelineLeft}><div className={styles.timelineIcon}>{renderIcon()}</div></div>
-              <div className={styles.timelineRight}>
-                <h3 className={styles.titleExperience}>
-                  <div className={styles.titleExperienceContent}>
-                    <span className={styles.jobTitle}>{t('experience.digitalInnovators.title')}</span>
-                    <span className={styles.companyName}>{t('experience.digitalInnovators.company')}</span>
-                  </div>
-                  <HiOutlineArrowNarrowRight className={`${styles.clickIcon} ${isOpen.digitalInnovators ? styles.iconOpen : ''}`} />
-                </h3>
-                <time className={styles.experienceDate}>{t('experience.digitalInnovators.period')}</time>
-                {isOpen.digitalInnovators && (
-                  <ul className={styles.experienceList}>
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.0') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.1') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.2') }} />
-                    <li dangerouslySetInnerHTML={{ __html: t('experience.digitalInnovators.responsibilities.3') }} />
-                  </ul>
-                )}
-              </div>
-            </li>
-          </section>
-  
-        </ol>
+            {getArray(`experience.${activeKey}.tags`).length > 0 && (
+              <ul className={styles.tags} aria-label="Tech stack">
+                {getArray(`experience.${activeKey}.tags`).map((tag, i) => (
+                  <li key={i} className={styles.tag}>{tag}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
-}  
+};
+
 export default Experience;

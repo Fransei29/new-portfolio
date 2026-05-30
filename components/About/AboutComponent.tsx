@@ -16,10 +16,10 @@ const About = () => {
       <div className={styles.aboutSection}>
         <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
           <div className={styles.firstPart}>
-            <p className={styles.highlight}>
+            <p className="highlight">
               {t('about.whoIAm')}
             </p>
-          </div>   
+          </div>
         </section>
        
         <div className={styles.contentGrid}>

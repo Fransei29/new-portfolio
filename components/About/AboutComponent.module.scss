@@ -275,10 +275,15 @@
     display: block; 
   }
   
-  .highlight {
+  // Base title styling lives in the global `.highlight` rule (app/globals.css).
+  // Page-specific tweaks match projects/contact: start lower + a touch smaller.
+  .firstPart :global(.highlight) {
     margin-top: 0;
+    padding-top: 1.5rem;
+    font-size: clamp(1.5rem, 2.4vw, 1.9rem);
 
-    @media screen and (max-width: 768px) {
-      margin-top: 0rem;
+    @media (max-width: 768px) {
+      padding-top: 0.75rem;
+      font-size: 1.35rem;
     }
   }

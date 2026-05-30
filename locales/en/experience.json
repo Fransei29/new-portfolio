@@ -1,54 +1,70 @@
 {
   "experience": {
     "title": "Experience",
-    "subtitle": "Professional journey in innovative companies, from frontend development to scalable full-stack architectures.",
+    "subtitle": "Corporate-grade experience, now at the service of your projects.",
+    "freelance": {
+      "title": "Full Stack Developer",
+      "company": "Freelance",
+      "period": "March 2024 - Present",
+      "responsibilities": [
+        "Design, build and ship end-to-end web platforms for startups and businesses, owning each project from first call to production.",
+        "Work across the full stack with <strong>React, Next.js, Node.js, Python</strong> and <strong>TypeScript</strong>, building everything from custom e-commerce and SaaS products to corporate sites.",
+        "Develop backends with <strong>Node.js/Express, NestJS</strong> and <strong>Python (Django, Django REST)</strong>, modeling data in PostgreSQL and MySQL with Prisma, TypeORM and Sequelize.",
+        "Design and document <strong>REST APIs</strong>, reusable component libraries and design systems with SCSS and Tailwind CSS to keep delivery fast and consistent.",
+        "Integrate <strong>payments and third-party services</strong>: Mercado Pago and Stripe (subscriptions, webhooks), Google OAuth, cloud storage (AWS S3 / GCS) and transactional email.",
+        "Build <strong>AI-powered features</strong> with the OpenAI API (assistants, generative content, smart automation) and architect multi-tenant, role-based platforms with secure auth (JWT, OAuth, Keycloak).",
+        "Provision and administer <strong>Linux (Ubuntu/Debian) VPS servers</strong>: Nginx reverse proxy, SSL with Let's Encrypt, PM2/Gunicorn, firewall (UFW) and SSH hardening.",
+        "Set up <strong>Docker deployments and CI/CD pipelines</strong> (GitHub Actions) with automated tests, zero-downtime releases, and ongoing maintenance, performance tuning and SEO.",
+        "Lead technical planning, database modeling and architecture decisions directly with clients, translating business goals into scalable systems."
+      ],
+      "tags": ["React", "Next.js", "Node.js", "Python", "Django", "NestJS", "TypeScript", "PostgreSQL", "MySQL", "Prisma", "Docker", "Linux", "Nginx", "VPS", "Stripe", "OpenAI API"]
+    },
     "morseVerse": {
       "title": "Co-Founder & Full Stack Developer",
       "company": "Morse Verse",
-      "period": "November 2024 - Present",
+      "period": "November 2024 - November 2025",
       "responsibilities": [
-        "Develop using Python, Next.js, React, and TypeScript, ensuring clean and scalable code.",
-        "Contribute to design and functionality decisions, improving user experience.",
-        "Organize architecture and project structures, ensuring maintainability and scalability.",
-        "Collaborate on database and API integrations, optimizing frontend-backend communication."
-      ]
+        "Co-founded the company and led technical direction, taking products from idea to launch.",
+        "Built scalable applications with <strong>Python, Next.js, React</strong> and <strong>TypeScript</strong>, keeping the codebase clean, typed and maintainable.",
+        "Designed the overall <strong>architecture and project structure</strong>, defining conventions, folder layout and reusable modules for long-term scalability.",
+        "Developed and integrated <strong>databases and APIs</strong>, optimizing frontend-backend communication and query performance.",
+        "Deployed and maintained services on <strong>Linux servers</strong>, configuring environments, domains, SSL and automated deployments.",
+        "Drove product and UX decisions alongside the team, balancing technical trade-offs with user needs.",
+        "Implemented authentication, role-based access and secure data handling across the platform.",
+        "Set up version control workflows (Git/GitHub), code reviews and collaborative practices for the dev team."
+      ],
+      "tags": ["Python", "Next.js", "React", "TypeScript", "PostgreSQL", "Linux", "Git", "REST APIs"]
     },
     "intelligentApps": {
       "title": "Full Stack Developer",
       "company": "Intelligent Apps Sweden",
       "period": "October 2024 - March 2025",
       "responsibilities": [
-        "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL.",
-        "Integrated AI features using OpenAI APIs (generative descriptions, smart filters).",
-        "Developed REST and GraphQL APIs with Prisma ORM and strong validation layers.",
-        "Participated in designing scalable architectures with microservices.",
-        "Implemented automated testing (unit and integration).",
-        "Used TypeScript and Tailwind CSS across the stack for consistency and productivity.",
-        "Deployed apps with Docker and CI/CD pipelines on Linux servers (Vercel and VPS)."
-      ]
-    },
-    "freelance": {
-      "title": "Full Stack Developer",
-      "company": "Freelance",
-      "period": "March 2024 - Present",
-      "responsibilities": [
-        "Designed and developed custom web platforms for startups and small businesses.",
-        "Built full-stack solutions using React, Node.js, MySQL, and Sequelize.",
-        "Created RESTful APIs and reusable components with Tailwind and TypeScript.",
-        "Handled deployment and maintenance on Linux servers using Git and VPS.",
-        "Led technical planning and architecture with clients."
-      ]
+        "Built full-stack applications with <strong>React, Next.js, Node.js</strong> and <strong>PostgreSQL</strong> in a fast-paced product team.",
+        "Developed <strong>REST and GraphQL APIs</strong> with Prisma ORM, strong validation layers and clear error handling.",
+        "Integrated AI features using the <strong>OpenAI API</strong> — generative descriptions, smart filters and content automation.",
+        "Contributed to <strong>scalable, microservice-oriented architectures</strong> and shared internal libraries.",
+        "Implemented <strong>automated testing</strong> (unit and integration) to raise reliability and prevent regressions.",
+        "Deployed applications with <strong>Docker and CI/CD pipelines</strong> on Linux servers (Vercel and VPS).",
+        "Applied TypeScript and Tailwind CSS across the stack for consistency, type safety and developer productivity.",
+        "Collaborated in agile workflows with code reviews, Git branching strategies and continuous delivery."
+      ],
+      "tags": ["React", "Next.js", "Node.js", "PostgreSQL", "GraphQL", "Prisma", "Docker", "Linux", "OpenAI API"]
     },
     "digitalInnovators": {
       "title": "Front End Developer",
       "company": "Digital Innovators",
       "period": "May 2023 - February 2024",
       "responsibilities": [
-        "Built and maintained SPAs using React and Redux.",
-        "Increased user retention by 15% and improved conversion rates by 20%.",
-        "Contributed to an internal component library, reducing development time by 30%.",
-        "Developed custom React hooks to enhance code modularity."
-      ]
+        "Built and maintained <strong>single-page applications</strong> with React and Redux for production clients.",
+        "Increased user retention by <strong>15%</strong> and improved conversion rates by <strong>20%</strong> through UX and performance work.",
+        "Contributed to an internal <strong>component library</strong>, reducing feature development time by 30%.",
+        "Developed custom <strong>React hooks</strong> and reusable patterns to improve code modularity and consistency.",
+        "Optimized rendering performance and bundle size, improving page load and responsiveness.",
+        "Worked closely with designers to translate Figma mockups into pixel-accurate, accessible interfaces.",
+        "Integrated REST APIs and managed application state for complex, data-heavy views."
+      ],
+      "tags": ["React", "Redux", "JavaScript", "REST APIs", "Figma", "HTML/CSS"]
     }
   }
 }

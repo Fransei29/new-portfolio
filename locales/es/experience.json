@@ -1,54 +1,70 @@
 {
   "experience": {
     "title": "Experiencia",
-    "subtitle": "Trayectoria profesional en empresas innovadoras, desde desarrollo frontend hasta arquitecturas full-stack escalables.",
+    "subtitle": "Experiencia de empresa, ahora al servicio de tus proyectos.",
+    "freelance": {
+      "title": "Desarrollador Full Stack",
+      "company": "Freelance",
+      "period": "Marzo 2024 - Presente",
+      "responsibilities": [
+        "Diseño, construyo y entrego plataformas web de punta a punta para startups y empresas, llevando cada proyecto desde la primera reunión hasta producción.",
+        "Trabajo en todo el stack con <strong>React, Next.js, Node.js, Python</strong> y <strong>TypeScript</strong>, construyendo desde e-commerce y productos SaaS a medida hasta sitios corporativos.",
+        "Desarrollo backends con <strong>Node.js/Express, NestJS</strong> y <strong>Python (Django, Django REST)</strong>, modelando datos en PostgreSQL y MySQL con Prisma, TypeORM y Sequelize.",
+        "Diseño y documento <strong>APIs REST</strong>, librerías de componentes reutilizables y design systems con SCSS y Tailwind CSS para una entrega rápida y consistente.",
+        "Integro <strong>pagos y servicios de terceros</strong>: Mercado Pago y Stripe (suscripciones, webhooks), Google OAuth, almacenamiento en la nube (AWS S3 / GCS) y emails transaccionales.",
+        "Desarrollo <strong>funcionalidades con IA</strong> mediante la API de OpenAI (asistentes, contenido generativo, automatización) y arquitecturas multi-tenant con roles y autenticación segura (JWT, OAuth, Keycloak).",
+        "Aprovisiono y administro <strong>servidores Linux (Ubuntu/Debian) en VPS</strong>: proxy inverso con Nginx, SSL con Let's Encrypt, PM2/Gunicorn, firewall (UFW) y endurecimiento de SSH.",
+        "Configuro <strong>despliegues con Docker y pipelines de CI/CD</strong> (GitHub Actions) con tests automatizados, releases sin downtime, y mantenimiento continuo, optimización de rendimiento y SEO.",
+        "Lidero la planificación técnica, el modelado de bases de datos y las decisiones de arquitectura directamente con los clientes, traduciendo objetivos de negocio en sistemas escalables."
+      ],
+      "tags": ["React", "Next.js", "Node.js", "Python", "Django", "NestJS", "TypeScript", "PostgreSQL", "MySQL", "Prisma", "Docker", "Linux", "Nginx", "VPS", "Stripe", "OpenAI API"]
+    },
     "morseVerse": {
       "title": "Co-Fundador & Desarrollador Full Stack",
       "company": "Morse Verse",
-      "period": "Noviembre 2024 - Presente",
+      "period": "Noviembre 2024 - Noviembre 2025",
       "responsibilities": [
-        "Desarrollo con Python, Next.js, React y TypeScript, asegurando código limpio y escalable.",
-        "Participo en decisiones de diseño y funcionamiento, mejorando la experiencia del usuario.",
-        "Organizo estructuras y arquitecturas del proyecto, garantizando mantenibilidad y escalabilidad.",
-        "Colaboro en integraciones de bases de datos y APIs, optimizando la comunicación frontend-backend."
-      ]
+        "Co-fundé la empresa y lideré la dirección técnica, llevando los productos de la idea al lanzamiento.",
+        "Construí aplicaciones escalables con <strong>Python, Next.js, React</strong> y <strong>TypeScript</strong>, manteniendo el código limpio, tipado y mantenible.",
+        "Diseñé la <strong>arquitectura y la estructura general del proyecto</strong>, definiendo convenciones, organización de carpetas y módulos reutilizables para escalar a largo plazo.",
+        "Desarrollé e integré <strong>bases de datos y APIs</strong>, optimizando la comunicación frontend-backend y el rendimiento de las consultas.",
+        "Desplegué y mantuve servicios en <strong>servidores Linux</strong>, configurando entornos, dominios, SSL y despliegues automatizados.",
+        "Impulsé decisiones de producto y UX junto al equipo, equilibrando los trade-offs técnicos con las necesidades del usuario.",
+        "Implementé autenticación, control de acceso por roles y manejo seguro de datos en toda la plataforma.",
+        "Establecí flujos de trabajo con control de versiones (Git/GitHub), code reviews y prácticas colaborativas para el equipo de desarrollo."
+      ],
+      "tags": ["Python", "Next.js", "React", "TypeScript", "PostgreSQL", "Linux", "Git", "APIs REST"]
     },
     "intelligentApps": {
       "title": "Desarrollador Full Stack",
       "company": "Intelligent Apps Sweden",
-      "period": "Octubre 2024 - Presente",
+      "period": "Octubre 2024 - Marzo 2025",
       "responsibilities": [
-        "Desarrollé aplicaciones full-stack utilizando React, Next.js, Node.js y PostgreSQL.",
-        "Integré funcionalidades de inteligencia artificial con APIs de OpenAI (descripciones generativas, filtros inteligentes).",
-        "Construí APIs REST y GraphQL con Prisma ORM y validaciones robustas.",
-        "Participé en el diseño de arquitecturas escalables basadas en microservicios.",
-        "Implementé testing automatizado (unitario e integración).",
-        "Apliqué TypeScript y Tailwind CSS en todo el stack para mayor consistencia y productividad.",
-        "Desplegué aplicaciones con Docker y pipelines CI/CD en entornos Linux (Vercel y VPS)."
-      ]
-    },
-    "freelance": {
-      "title": "Desarrollador Full Stack",
-      "company": "Freelance",
-      "period": "Marzo 2024 - Octubre 2024",
-      "responsibilities": [
-        "Diseñé y desarrollé plataformas web personalizadas para startups y pymes.",
-        "Trabajé con React, Node.js, MySQL y Sequelize para construir soluciones full-stack.",
-        "Creé APIs RESTful y componentes reutilizables con Tailwind y TypeScript.",
-        "Me encargué del despliegue y mantenimiento en servidores Linux usando Git y VPS.",
-        "Establecí buenas prácticas de arquitectura y planificación técnica con los clientes."
-      ]
+        "Desarrollé aplicaciones full-stack con <strong>React, Next.js, Node.js</strong> y <strong>PostgreSQL</strong> en un equipo de producto ágil.",
+        "Construí <strong>APIs REST y GraphQL</strong> con Prisma ORM, validaciones robustas y manejo claro de errores.",
+        "Integré funcionalidades de IA con la <strong>API de OpenAI</strong> — descripciones generativas, filtros inteligentes y automatización de contenido.",
+        "Contribuí a <strong>arquitecturas escalables orientadas a microservicios</strong> y a librerías internas compartidas.",
+        "Implementé <strong>testing automatizado</strong> (unitario e integración) para aumentar la confiabilidad y evitar regresiones.",
+        "Desplegué aplicaciones con <strong>Docker y pipelines de CI/CD</strong> en servidores Linux (Vercel y VPS).",
+        "Apliqué TypeScript y Tailwind CSS en todo el stack para mayor consistencia, seguridad de tipos y productividad.",
+        "Colaboré en flujos ágiles con code reviews, estrategias de branching en Git y entrega continua."
+      ],
+      "tags": ["React", "Next.js", "Node.js", "PostgreSQL", "GraphQL", "Prisma", "Docker", "Linux", "OpenAI API"]
     },
     "digitalInnovators": {
       "title": "Desarrollador Front End",
       "company": "Digital Innovators",
       "period": "Mayo 2023 - Febrero 2024",
       "responsibilities": [
-        "Construí y mantuve SPAs usando React y Redux.",
-        "Aumenté la retención de usuarios en un 15% y mejoré las tasas de conversión en un 20%.",
-        "Contribuí a una biblioteca de componentes interna, reduciendo el tiempo de desarrollo en un 30%.",
-        "Desarrollé hooks personalizados de React para mejorar la modularidad del código."
-      ]
+        "Construí y mantuve <strong>aplicaciones de página única (SPA)</strong> con React y Redux para clientes en producción.",
+        "Aumenté la retención de usuarios en un <strong>15%</strong> y mejoré las tasas de conversión en un <strong>20%</strong> mediante trabajo de UX y rendimiento.",
+        "Contribuí a una <strong>biblioteca de componentes</strong> interna, reduciendo el tiempo de desarrollo de funcionalidades en un 30%.",
+        "Desarrollé <strong>hooks personalizados de React</strong> y patrones reutilizables para mejorar la modularidad y consistencia del código.",
+        "Optimicé el rendimiento de renderizado y el tamaño del bundle, mejorando la carga y la fluidez de las páginas.",
+        "Trabajé en estrecha colaboración con diseñadores para traducir mockups de Figma en interfaces accesibles y fieles al pixel.",
+        "Integré APIs REST y gestioné el estado de la aplicación en vistas complejas con gran volumen de datos."
+      ],
+      "tags": ["React", "Redux", "JavaScript", "APIs REST", "Figma", "HTML/CSS"]
     }
   }
 }

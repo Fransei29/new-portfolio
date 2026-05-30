@@ -45,7 +45,7 @@ const Projects = () => {
       <section className={styles.containerProjects}>
         <div className={styles.projectsContent}>        
           <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-          <p className={styles.highlight}>
+          <p className="highlight">
             {t('pages.tutorials.title')}
           </p>
           <p className={styles.projectsSubtitle}>

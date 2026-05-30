@@ -6,6 +6,10 @@
   margin-right: 0;
   transform-origin: top right;
   font-family: 'Space Grotesk', system-ui, sans-serif;
+  // Sharper text + smoother edges across the whole dashboard.
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 
   @media (max-width: 520px) {
     margin-inline: auto;
@@ -49,10 +53,12 @@
   width: 100%;
   background: #ffffff;
   border-radius: 16px;
+  // Tighter contact shadow + ambient + crisp hairline ring = more definition.
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.08),
-    0 35px 70px rgba(0, 0, 0, 0.14),
-    0 0 0 1px rgba(0, 0, 0, 0.03);
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 35px 70px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.06);
   transform: rotate(-1.2deg);
@@ -67,9 +73,11 @@
     background: #14172a;
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow:
-      0 10px 30px rgba(0, 0, 0, 0.55),
-      0 35px 70px rgba(0, 0, 0, 0.65),
-      0 0 0 1px rgba(255, 255, 255, 0.04);
+      0 2px 6px rgba(0, 0, 0, 0.5),
+      0 10px 30px rgba(0, 0, 0, 0.58),
+      0 35px 70px rgba(0, 0, 0, 0.68),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -315,6 +323,11 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   flex-shrink: 0;
   animation: liveGlow 2.4s ease-in-out infinite;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background: rgba(16, 185, 129, 0.18);
+  }
 
   :global(html.dark) & {
     color: #6ee7a8;
@@ -380,8 +393,8 @@
 .statsFlash .statCard:nth-child(3) { animation-delay: 0.16s; }
 
 @keyframes statFlash {
-  0%   { background: rgba(204, 2, 103, 0.12); border-color: rgba(204, 2, 103, 0.35); }
-  100% { background: rgba(0, 0, 0, 0.025);   border-color: rgba(0, 0, 0, 0.05); }
+  0%   { background: rgba(0, 0, 0, 0.07); border-color: rgba(0, 0, 0, 0.14); }
+  100% { background: rgba(0, 0, 0, 0.025); border-color: rgba(0, 0, 0, 0.05); }
 }
 
 :global(html.dark) .statsFlash .statCard {
@@ -389,7 +402,7 @@
 }
 
 @keyframes statFlashDark {
-  0%   { background: rgba(204, 2, 103, 0.16); border-color: rgba(204, 2, 103, 0.4); }
+  0%   { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.18); }
   100% { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); }
 }
 
@@ -401,10 +414,29 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: rgba(0, 0, 0, 0.045);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.25);
+  }
 
   :global(html.dark) & {
     background: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  :global(html.dark) &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -414,6 +446,7 @@
   letter-spacing: -0.02em;
   color: rgba(0, 0, 0, 0.9);
   line-height: 1;
+  transition: color 0.3s ease;
 
   :global(html.dark) & {
     color: rgba(255, 255, 255, 0.95);
@@ -448,10 +481,21 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
 
   :global(html.dark) & {
     background: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  :global(html.dark) &:hover {
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 }
 
@@ -489,6 +533,7 @@
   stroke-dasharray: 900;
   stroke-dashoffset: 900;
   animation: chartDraw 2.2s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
+  transition: filter 0.35s ease;
 }
 
 .chartFill {
@@ -501,6 +546,7 @@
   animation: chartDotIn 0.4s ease 2.6s forwards;
   transform-origin: 398px 8px;
   filter: drop-shadow(0 0 4px rgba(204, 2, 103, 0.6));
+  transition: filter 0.35s ease;
 }
 
 .chartDotOuter {
@@ -544,10 +590,30 @@
   background: rgba(0, 0, 0, 0.025);
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    transform: translateX(2px);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.09);
+
+    .stackIcon { transform: rotate(-3deg); }
+    .stackTitle { color: rgba(0, 0, 0, 1); }
+  }
 
   :global(html.dark) & {
     background: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  :global(html.dark) &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+
+    .stackTitle { color: #fff; }
   }
 }
 
@@ -560,6 +626,7 @@
   border-radius: 6px;
   color: #ffffff;
   flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .stackIconFrontend {
@@ -603,6 +670,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 
   :global(html.dark) & {
     color: rgba(255, 255, 255, 0.88);
@@ -752,6 +820,12 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   transform: rotate(-4deg);
   animation: metricFloat 6s ease-in-out infinite;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
 
   @media (max-width: 768px) {
     left: 0%;
@@ -804,7 +878,16 @@
   z-index: 5;
   animation: testimonialFloat 6s ease-in-out infinite;
   animation-delay: -3s;
-  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), filter 0.45s ease;
+  transition:
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.45s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
 
   &.testimonialFading {
     opacity: 0;
@@ -814,6 +897,11 @@
   :global(html.dark) & {
     background: #1a1e36;
     border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global(html.dark) &:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.38);
   }
 
   @media (max-width: 768px) {

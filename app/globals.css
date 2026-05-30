@@ -260,7 +260,8 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   z-index: 10;
 }
 
-/* Título de sección (Services, Why Choose Us, etc.) - una sola definición global */
+/* Título de sección y de página (Projects, Contact, Services, etc.)
+   Única definición global: cambiar aquí afecta a todos los títulos. */
 .highlight {
   display: block;
   position: relative;
@@ -273,17 +274,20 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
   margin: 0 0 var(--h3-spacing) 0;
   line-height: 1.2;
   letter-spacing: var(--h3-letter-spacing, -0.015em);
-  text-align: center;
   width: 100%;
 }
 
 @media (max-width: 768px) {
   .highlight {
-    display: flex;
-    justify-content: center;
     font-size: var(--h3-font-size-mobile);
     margin-bottom: var(--h3-spacing-mobile);
   }
+}
+
+/* Home page section titles stay centered; standalone pages (projects, contact,
+   tutorials) keep the title left-aligned. */
+.ContainerGeneralComplete .highlight {
+  text-align: center;
 }
 
 /* --- HOME PAGE --- */
