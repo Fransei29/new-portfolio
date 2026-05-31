@@ -2,8 +2,12 @@
   position: relative;
   width: 100%;
   max-width: 478px; // was 520 * 0.92 — bake the scale into max-width so type stays crisp
+  // Keep the dashboard to the right of its column (its intended look), but
+  // leave a small right gutter so the floating pills (right:-8%) have room to
+  // sit without pushing past the viewport and adding a horizontal scrollbar.
+  // The .stage clips horizontal overflow as a safety net.
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 4.5rem;
   transform-origin: top right;
   font-family: 'Space Grotesk', system-ui, sans-serif;
   // Sharper text + smoother edges across the whole dashboard.

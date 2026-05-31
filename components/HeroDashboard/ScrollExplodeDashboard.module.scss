@@ -5,6 +5,14 @@
 .pinHost {
   position: relative;
   width: 100%;
+  // The old ScrollTrigger pin wrapped this in a spacer that clipped the
+  // dashboard's decorative pieces (floating pills sit at left:-6% / right:-8%).
+  // Without that spacer they overflow the column and push the page wider, which
+  // adds a horizontal scrollbar. Clip ONLY the horizontal axis so the pills
+  // can't widen the page, while leaving the vertical axis free (overflow-x:clip
+  // still lets the rotated card / pills breathe top and bottom). `clip` (not
+  // `hidden`) does NOT create a scroll container, so no nested scrollbar.
+  overflow-x: clip;
 }
 
 .stage {
@@ -15,6 +23,10 @@
   justify-content: center;
   pointer-events: auto; // dashboard is interactive again (hover effects on its inner cards)
   will-change: transform, opacity;
+  overflow-x: clip;
+  // A little vertical breathing room so the rotated card and floating pills
+  // are never clipped top/bottom by the horizontal clip's context.
+  padding-block: 1.25rem;
 }
 
 @media (max-width: 768px) {
@@ -23,9 +35,16 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    // On mobile the dashboard is centred and already fits, so the desktop
+    // horizontal clip would shave its sides. Drop the clip here and just keep
+    // it from exceeding the viewport.
+    overflow-x: visible;
+    max-width: 100%;
   }
   .stage {
-    width: auto; // let the dashboard size itself instead of stretching the flex item
+    width: 100%; // full column so the centred dashboard has room on both sides
     justify-content: center;
+    overflow-x: visible; // no side clipping on mobile — the dashboard fits
+    padding-block: 0.5rem;
   }
 }
