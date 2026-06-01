@@ -2,11 +2,16 @@
 
 .contactPageContainer {
   width: 100%;
+  min-height: 100vh; // fill the viewport so the page is never short
   background-color: var(--background-colorA);
 
   :global(html.dark) & {
     background-color: var(--dark-light);
     color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
   }
 }
 
@@ -16,13 +21,13 @@
   padding: 2rem 0 6rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   width: 100%;
   box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 1rem 0.5rem 4rem 0.5rem;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 }
 
@@ -62,7 +67,7 @@
 .contactMethods {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 
   @media (max-width: 768px) {
     gap: 1rem;
@@ -219,5 +224,37 @@
 
 .copyIcon {
   transition: all 0.2s ease;
+}
+
+// ---- Action affordance: arrow on the right of each card ----
+.cardArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-light);
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+
+  .contactCard:hover & {
+    opacity: 1;
+    transform: translate(0, 0);
+    color: var(--primary-color);
+  }
+
+  :global(html.dark) & {
+    color: rgb(170, 170, 170);
+
+    .contactCard:hover & {
+      color: rgb(253, 182, 215);
+    }
+  }
+
+  @media (max-width: 768px) {
+    // on touch there is no hover — keep it visible but quiet
+    opacity: 0.6;
+    transform: none;
+  }
 }
 

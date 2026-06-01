@@ -47,28 +47,29 @@
   gap: 0;
   align-items: stretch;
   margin-top: 2rem;
-  background: var(--card-bg);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: var(--br);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-
-  :global(html.dark) & {
-    background: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.08);
-  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 2.25rem;
     margin-top: 1.5rem;
   }
 }
 
+// Each side is now its own elevated panel, not halves of one block.
 .column {
   display: flex;
   flex-direction: column;
   padding: 1.75rem 1.85rem;
   min-width: 0;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: var(--br);
+  box-shadow: var(--shadow-sm);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
 
   @media (max-width: 768px) {
     padding: 1.25rem 1.1rem;
@@ -81,20 +82,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 1.5rem;
-    bottom: 1.5rem;
-    left: 50%;
-    width: 1px;
-    background: rgba(0, 0, 0, 0.08);
-
-    :global(html.dark) & {
-      background: rgba(255, 255, 255, 0.08);
-    }
-  }
 
   @media (max-width: 768px) {
     display: none;
@@ -285,23 +272,24 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
 }
 
+// Each row is its own mini-card: separated, with a marked, lively hover.
 .listItem {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.85rem;
-  padding: 0.95rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: background 0.25s ease;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  padding: 0.85rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.012);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease, background 0.25s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.018);
+    transform: translateY(-2px);
 
     .itemIcon {
       transform: scale(1.08);
@@ -313,17 +301,39 @@
   }
 
   :global(html.dark) & {
-    border-color: rgba(255, 255, 255, 0.06);
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.025);
-    }
+    border-color: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.02);
   }
 
   @media (max-width: 768px) {
     grid-template-columns: auto 1fr;
     gap: 0.7rem;
-    padding: 0.75rem 0;
+    padding: 0.7rem 0.75rem;
+  }
+}
+
+// Hover accent per side — border + surface take the side's color.
+.listItem:has(.itemIconWithout):hover {
+  border-color: rgba(201, 76, 92, 0.45);
+  background: rgba(201, 76, 92, 0.05);
+  box-shadow: 0 6px 16px -8px rgba(201, 76, 92, 0.35);
+
+  :global(html.dark) & {
+    border-color: rgba(229, 115, 130, 0.5);
+    background: rgba(229, 115, 130, 0.07);
+    box-shadow: 0 6px 16px -8px rgba(229, 115, 130, 0.4);
+  }
+}
+
+.listItem:has(.itemIconWith):hover {
+  border-color: rgba(45, 143, 110, 0.45);
+  background: rgba(45, 143, 110, 0.05);
+  box-shadow: 0 6px 16px -8px rgba(45, 143, 110, 0.35);
+
+  :global(html.dark) & {
+    border-color: rgba(77, 184, 150, 0.5);
+    background: rgba(77, 184, 150, 0.07);
+    box-shadow: 0 6px 16px -8px rgba(77, 184, 150, 0.4);
   }
 }
 

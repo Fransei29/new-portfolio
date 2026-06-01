@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Github, Linkedin, Copy, Check } from 'lucide-react';
+import { Mail, Github, Linkedin, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ContactPage.module.scss';
 
@@ -19,10 +19,6 @@ export default function ContactPage() {
     }
   };
 
-  const openEmail = () => {
-    window.location.href = 'mailto:seilerfranco317@gmail.com';
-  };
-
   return (
     <div className={styles.contactPageContainer}>
       <div className={styles.contactPageContent}>
@@ -32,9 +28,9 @@ export default function ContactPage() {
         </div>
 
         <div className={styles.contactMethods}>
-          <div 
+          <div
             className={styles.contactCard}
-            onClick={openEmail}
+            onClick={copyToClipboard}
           >
             <div className={styles.cardIconWrapper}>
               <Mail className={styles.cardIcon} size={28} />
@@ -43,7 +39,7 @@ export default function ContactPage() {
               <h3 className={styles.cardTitle}>{t('contactPage.email')}</h3>
               <p className={styles.cardSubtitle}>seilerfranco317@gmail.com</p>
             </div>
-            <button 
+            <button
               className={styles.copyButton}
               onClick={(e) => {
                 e.stopPropagation();
@@ -58,8 +54,8 @@ export default function ContactPage() {
               )}
             </button>
           </div>
-          
-          <div 
+
+          <div
             className={styles.contactCard}
             onClick={() => window.open('https://github.com/Fransei29', '_blank')}
           >
@@ -70,9 +66,12 @@ export default function ContactPage() {
               <h3 className={styles.cardTitle}>GitHub</h3>
               <p className={styles.cardSubtitle}>@Fransei29</p>
             </div>
+            <span className={styles.cardArrow} aria-hidden="true">
+              <ArrowUpRight size={18} />
+            </span>
           </div>
 
-          <div 
+          <div
             className={styles.contactCard}
             onClick={() => window.open('https://www.linkedin.com/in/franco-seiler/', '_blank')}
           >
@@ -83,6 +82,9 @@ export default function ContactPage() {
               <h3 className={styles.cardTitle}>LinkedIn</h3>
               <p className={styles.cardSubtitle}>franco-seiler</p>
             </div>
+            <span className={styles.cardArrow} aria-hidden="true">
+              <ArrowUpRight size={18} />
+            </span>
           </div>
         </div>
       </div>

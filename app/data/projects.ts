@@ -2,7 +2,7 @@
 export const projects = [
   {
     slug: 'acer0',
-    title: 'a.cer0',
+    title: 'Acer0',
     subtitle: 'Custom E-Commerce Platform',
     whatIs: `a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.
 
