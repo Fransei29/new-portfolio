@@ -1,49 +1,30 @@
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 478px; // was 520 * 0.92 — bake the scale into max-width so type stays crisp
-  // Keep the dashboard to the right of its column (its intended look), but
-  // leave a small right gutter so the floating pills (right:-8%) have room to
-  // sit without pushing past the viewport and adding a horizontal scrollbar.
-  // The .stage clips horizontal overflow as a safety net.
-  margin-left: auto;
-  margin-right: 4.5rem;
-  transform-origin: top right;
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-  // Sharper text + smoother edges across the whole dashboard.
+  max-width: 440px;
+  // Derecho y centrado en su columna (estilo panel de producto Vercel).
+  margin-inline: auto;
+  font-family: var(--font-body), 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  @media (max-width: 520px) {
-    margin-inline: auto;
-    transform-origin: top center;
-  }
-
-  // Subtle hover — just a tiny Z rotation
+  // Hover casi imperceptible — leve elevación, sin rotar.
   &:hover .browser {
-    transform: rotate(-0.3deg);
-  }
-
-  :global(html.dark) &:hover .browser {
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.58),
-      0 38px 74px rgba(0, 0, 0, 0.68),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 1200px) {
-    max-width: 432px;
+    max-width: 420px;
   }
 
   @media (max-width: 1024px) {
-    max-width: 396px;
+    max-width: 390px;
   }
 
   @media (max-width: 768px) {
     max-width: 360px;
     margin: 1rem auto;
-    transform-origin: top center;
   }
 
   @media (max-width: 420px) {
@@ -56,46 +37,37 @@
   position: relative;
   width: 100%;
   background: #ffffff;
-  border-radius: 16px;
-  // Tighter contact shadow + ambient + crisp hairline ring = more definition.
+  border-radius: 12px;
+  // Estilo Vercel: hairline nítido + sombra muy contenida. Derecho, sin rotación.
+  border: 1px solid rgba(0, 0, 0, 0.09);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.06),
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 35px 70px rgba(0, 0, 0, 0.16),
-    0 0 0 1px rgba(0, 0, 0, 0.04);
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  transform: rotate(-1.2deg);
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1s ease;
-
-  @media (max-width: 768px) {
-    transform: rotate(-0.8deg);
-  }
+  transform: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   z-index: 1;
 
   :global(html.dark) & {
-    background: #14172a;
-    border-color: rgba(255, 255, 255, 0.08);
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(255, 255, 255, 0.1);
     box-shadow:
-      0 2px 6px rgba(0, 0, 0, 0.5),
-      0 10px 30px rgba(0, 0, 0, 0.58),
-      0 35px 70px rgba(0, 0, 0, 0.68),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.5);
   }
 }
 
 .browserChrome {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: #f7f7f8;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  gap: 0.7rem;
+  padding: 0.65rem 0.85rem;
+  background: #fafafa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 
   :global(html.dark) & {
-    background: #0f1226;
-    border-bottom-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -119,18 +91,29 @@
 .urlBar {
   flex: 1;
   min-width: 0;
-  padding: 0.45rem 0.95rem;
-  background: #ffffff;
-  border-radius: 7px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 0.82rem;
+  padding: 0.4rem 0.85rem;
+  background: #fbfbfc;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  font-size: 0.78rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
 
   :global(html.dark) & {
-    background: #1a1e36;
-    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Ruta discreta y centrada (sin efecto typing, más calmo)
+.urlPath {
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.01em;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
@@ -164,7 +147,7 @@
   background: var(--primary-color);
   vertical-align: -2px;
   flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(204, 2, 103, 0.55);
+  box-shadow: 0 0 6px rgba(142, 122, 230, 0.55);
   animation: caretBlink 0.7s steps(2, end) infinite;
 }
 
@@ -549,7 +532,7 @@
   opacity: 0;
   animation: chartDotIn 0.4s ease 2.6s forwards;
   transform-origin: 398px 8px;
-  filter: drop-shadow(0 0 4px rgba(204, 2, 103, 0.6));
+  filter: drop-shadow(0 0 4px rgba(142, 122, 230, 0.6));
   transition: filter 0.35s ease;
 }
 
@@ -634,7 +617,7 @@
 }
 
 .stackIconFrontend {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #b59cf8 100%);
 }
 
 .stackIconBackend {
@@ -767,7 +750,7 @@
 }
 
 .progressDone {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #f472b6 100%);
+  background: linear-gradient(90deg, var(--primary-color) 0%, #b59cf8 100%);
 }
 
 .progressLive {
@@ -923,7 +906,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #b59cf8 100%);
   color: #ffffff;
   display: flex;
   align-items: center;

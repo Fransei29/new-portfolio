@@ -90,11 +90,11 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border-color: rgba(204, 2, 103, 0.2);
+    border-color: rgba(142, 122, 230, 0.2);
   }
 
   :global(html.dark) & {
-    background-color: #181c33;
+    background-color: #2e2a3a;
     border-color: rgba(255, 255, 255, 0.1);
     color: rgb(235, 235, 235);
 
@@ -117,17 +117,17 @@
   width: 64px;
   height: 64px;
   border-radius: var(--br);
-  background-color: rgba(204, 2, 103, 0.08);
+  background-color: rgba(142, 122, 230, 0.08);
   flex-shrink: 0;
   transition: all 0.3s ease;
 
   .contactCard:hover & {
-    background-color: rgba(204, 2, 103, 0.15);
+    background-color: rgba(142, 122, 230, 0.15);
     transform: scale(1.05);
   }
 
   :global(html.dark) & {
-    background-color: rgba(204, 2, 103, 0.15);
+    background-color: rgba(142, 122, 230, 0.15);
   }
 
   @media (max-width: 768px) {
@@ -204,7 +204,7 @@
   flex-shrink: 0;
 
   &:hover {
-    background-color: rgba(204, 2, 103, 0.1);
+    background-color: rgba(142, 122, 230, 0.1);
     opacity: 1;
     transform: scale(1.1);
   }
@@ -217,7 +217,7 @@
     color: rgb(200, 200, 200);
     
     &:hover {
-      background-color: rgba(204, 2, 103, 0.2);
+      background-color: rgba(142, 122, 230, 0.2);
     }
   }
 }

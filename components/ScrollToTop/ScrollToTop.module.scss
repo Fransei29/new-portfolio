@@ -20,7 +20,7 @@
 
   :global(html.dark) & {
     background-color: rgba(24, 28, 51, 0.9);
-    border-color: rgba(253, 3, 128, 0.5);
+    border-color: rgba(181, 156, 248, 0.5);
     color: rgb(226, 226, 226);
   }
 
@@ -37,7 +37,7 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 
     :global(html.dark) & {
-      background-color: rgba(253, 3, 128, 0.2);
+      background-color: rgba(181, 156, 248, 0.2);
     }
   }
 

@@ -100,7 +100,7 @@
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   color: rgba(0, 0, 0, 0.5);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-style: italic;
   font-weight: 500;
   font-size: 0.8rem;
@@ -314,9 +314,9 @@
 
 // Hover accent per side — border + surface take the side's color.
 .listItem:has(.itemIconWithout):hover {
-  border-color: rgba(201, 76, 92, 0.45);
-  background: rgba(201, 76, 92, 0.05);
-  box-shadow: 0 6px 16px -8px rgba(201, 76, 92, 0.35);
+  border-color: rgba(142, 122, 230, 0.45);
+  background: rgba(142, 122, 230, 0.05);
+  box-shadow: 0 6px 16px -8px rgba(142, 122, 230, 0.35);
 
   :global(html.dark) & {
     border-color: rgba(229, 115, 130, 0.5);
@@ -349,7 +349,7 @@
 }
 
 .itemIconWithout {
-  background: rgba(201, 76, 92, 0.1);
+  background: rgba(142, 122, 230, 0.1);
   color: #c94c5c;
 
   :global(html.dark) & {

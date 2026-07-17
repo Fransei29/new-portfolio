@@ -48,7 +48,7 @@
 }
 
 .ctaText {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: 2.4rem;
   font-weight: 600;
   color: var(--cta-text);

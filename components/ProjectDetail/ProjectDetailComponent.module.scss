@@ -36,12 +36,12 @@
 
   :global(html.dark) & {
     background-color: rgba(24, 28, 51, 0.8);
-    border-color: rgba(253, 3, 128, 0.3);
+    border-color: rgba(181, 156, 248, 0.3);
     color: rgb(226, 226, 226);
 
     &:hover {
       background-color: rgba(24, 28, 51, 0.95);
-      border-color: rgba(253, 3, 128, 0.5);
+      border-color: rgba(181, 156, 248, 0.5);
     }
   }
 
@@ -206,7 +206,7 @@
   margin-bottom: 0.5rem;
 
   :global(html.dark) & {
-    color: #fa51a6;
+    color: #b59cf8;
   }
 }
 
@@ -349,7 +349,7 @@
 
 
 .bullet {
-  color: rgb(185, 0, 91, 0.7);
+  color: rgb(142, 122, 230, 0.7);
   font-weight: bold;
   margin-right: 0.75rem;
   font-size: 0.8rem;
@@ -652,7 +652,7 @@
 }
 
 .techIcon {
-  color: rgb(151, 0, 76);
+  color: rgb(46, 41, 78);
   width: 22px;
   height: 22px;
   fill: currentColor;
@@ -664,7 +664,7 @@
   }
 
   :global(html.dark) & {
-    color: rgb(185, 0, 91);
+    color: rgb(142, 122, 230);
   }
 }
 
@@ -720,7 +720,7 @@
     border-radius: var(--br);
     background-color: var(--primary-color);
     color: white;
-    border: 1px solid rgba(151, 0, 76, 0.2);
+    border: 1px solid rgba(46, 41, 78, 0.2);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     text-decoration: none !important;
@@ -733,7 +733,7 @@
   
     &:hover {
       background-color: white;
-      color: #cc0267;
+      color: #8e7ae6;
     }
   
     :global(html.dark) & {
@@ -803,7 +803,7 @@
   font-style: italic;
   color: rgba(120, 120, 120, 0.9);
   background-color: rgba(128, 128, 128, 0.08);
-  border-left: 2px solid rgba(151, 0, 76, 0.5);
+  border-left: 2px solid rgba(46, 41, 78, 0.5);
   border-radius: 4px;
   line-height: 1.3;
 

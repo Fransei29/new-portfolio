@@ -81,7 +81,7 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(180, 0, 90, 0.25);
+    border-color: rgba(142, 122, 230, 0.25);
   }
 
   :global(html.dark) & {
@@ -91,7 +91,7 @@
     box-shadow: var(--shadow-sm);
 
     &:hover {
-      border-color: rgba(180, 0, 90, 0.4);
+      border-color: rgba(142, 122, 230, 0.4);
     }
   }
 
@@ -129,21 +129,21 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: rgba(204, 2, 103, 0.08);
+  background: rgba(142, 122, 230, 0.08);
   color: var(--primary-color);
   flex-shrink: 0;
   transition: background 0.25s ease, transform 0.25s ease;
 
   :global(html.dark) & {
-    background: rgba(204, 2, 103, 0.16);
+    background: rgba(142, 122, 230, 0.16);
   }
 
   .card:hover & {
-    background: rgba(204, 2, 103, 0.14);
+    background: rgba(142, 122, 230, 0.14);
     transform: scale(1.05);
 
     :global(html.dark) & {
-      background: rgba(204, 2, 103, 0.22);
+      background: rgba(142, 122, 230, 0.22);
     }
   }
 }
@@ -484,13 +484,13 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(204, 2, 103, 0.1);
+  background: rgba(142, 122, 230, 0.1);
   color: var(--primary-color);
   flex-shrink: 0;
   transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 
   :global(html.dark) & {
-    background: rgba(204, 2, 103, 0.18);
+    background: rgba(142, 122, 230, 0.18);
   }
 }
 

@@ -49,19 +49,26 @@ export default function Header() {
         >
           <Link href="/" passHref className={styles.logoLink}>
             <div className={styles.logoContainer}>
+              {/* Imagotipo horizontal (panda + wordmark). Se muestra la variante
+                  clara u oscura según el tema vía CSS (sin hydration mismatch). */}
               <Image
-                src="/Logo.svg"
-                alt="Logo"
-                width={92}
-                height={92}
-                className={styles.logo}
+                src="/brand-header.svg"
+                alt="Franco Seiler — Software Studio"
+                width={430}
+                height={160}
+                className={`${styles.logo} ${styles.logoLight}`}
                 priority
                 unoptimized
               />
-              <span className={styles.brandBlock}>
-                <span className={styles.brandName}>Franco Seiler</span>
-                <span className={styles.brandRole}>Software Solutions</span>
-              </span>
+              <Image
+                src="/brand-header-dark.svg"
+                alt="Franco Seiler — Software Studio"
+                width={430}
+                height={160}
+                className={`${styles.logo} ${styles.logoDark}`}
+                priority
+                unoptimized
+              />
             </div>
           </Link>
         </section>

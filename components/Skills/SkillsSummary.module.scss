@@ -81,7 +81,7 @@
 }
 
 .skillIcon, .skillsIconA {
-  color: rgb(151, 0, 76);
+  color: rgb(46, 41, 78);
   width: 24px;
   height: 24px;
   fill: currentColor;
@@ -161,11 +161,11 @@
     padding: 1px;
     background: linear-gradient(
       90deg,
-      rgba(247, 86, 166, 0.3) 0%,
-      rgba(247, 86, 166, 0.3) 30%,
-      rgba(247, 86, 166, 0.4) 50%,
-      rgba(247, 86, 166, 0.3) 70%,
-      rgba(247, 86, 166, 0.3) 100%
+      rgba(181, 156, 248, 0.3) 0%,
+      rgba(181, 156, 248, 0.3) 30%,
+      rgba(181, 156, 248, 0.4) 50%,
+      rgba(181, 156, 248, 0.3) 70%,
+      rgba(181, 156, 248, 0.3) 100%
     );
     background-size: 200% 100%;
     background-position: -200% 0;
@@ -185,7 +185,7 @@
   }
     
   :global(html.dark) & {
-    background-color: #181c33;
+    background-color: #2e2a3a;
     color: white;
 
     &::before {
@@ -193,7 +193,7 @@
         90deg,
         rgba(248, 248, 248, 0.1) 0%,
         rgba(248, 248, 248, 0.1) 30%,
-        rgba(250, 81, 166, 0.3) 50%,
+        rgba(181, 156, 248, 0.3) 50%,
         rgba(248, 248, 248, 0.1) 70%,
         rgba(248, 248, 248, 0.1) 100%
       );

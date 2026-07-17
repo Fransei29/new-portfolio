@@ -1,6 +1,22 @@
 // app/layout.tsx
 import './globals.css';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+
+// Tipografías de marca: Bricolage Grotesque (títulos) + Plus Jakarta Sans (texto)
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-heading',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+});
 import Footer from '../components/Footer/Footer'; 
 import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
@@ -64,7 +80,7 @@ import { ReactNode } from 'react';
 export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${bricolage.variable} ${jakarta.variable}`}>
       <head>
         <link 
           rel="stylesheet" 

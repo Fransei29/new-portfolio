@@ -149,11 +149,11 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(180, 0, 90, 0.25);
+    border-color: rgba(142, 122, 230, 0.25);
 
     :global(html.dark) & {
       box-shadow: var(--shadow-md);
-      border-color: rgba(180, 0, 90, 0.4);
+      border-color: rgba(142, 122, 230, 0.4);
     }
   }
 

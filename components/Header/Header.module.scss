@@ -24,12 +24,12 @@
   &.scrolled {
     background: #faf9f8;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(204, 2, 103, 0.1);
+    border-bottom: 1px solid rgba(142, 122, 230, 0.1);
 
     :global(html.dark) & {
-      background: #181c33;
+      background: #2e2a3a;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid rgba(204, 2, 103, 0.2);
+      border-bottom: 1px solid rgba(142, 122, 230, 0.2);
     }
   }
 }
@@ -134,7 +134,7 @@
       color: rgb(223, 222, 222);
 
       &:hover {
-        color: #fa51a6;
+        color: #b59cf8;
       }
     }
   }
@@ -275,7 +275,7 @@
     }
 
     :global(html.dark) & {
-      background-color: #181c33;
+      background-color: #2e2a3a;
     }
   }
 }
@@ -492,7 +492,7 @@
 }
 
 .brandName {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: 0.92rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -506,7 +506,7 @@
 }
 
 .brandRole {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -530,29 +530,37 @@
 }
 
 .logo {
-  width: 46px;
-  height: 46px;
+  // Imagotipo horizontal (ratio ~1080:401). Alto fijo, ancho automático.
+  height: 76px !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-shrink: 0;
+  object-fit: contain;
   background-color: transparent !important;
-  border-radius: 50%;
+  border-radius: 0;
   box-shadow: none !important;
   transition: transform 0.3s ease;
-  // Crisp rendering — keeps the SVG sharp when down-scaled and avoids the
-  // subpixel blur that browsers introduce when an element has any transform.
   image-rendering: -webkit-optimize-contrast;
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
 
   &:hover {
-    transform: scale(1.05) translateZ(0);
+    transform: scale(1.03) translateZ(0);
   }
 
   @media (max-width: 768px) {
     padding: 0;
-    width: 38px;
-    height: 38px;
+    height: 52px !important;
   }
 }
+
+// Swap de variante según tema (sin JS, evita hydration mismatch)
+.logoLight { display: block; }
+.logoDark { display: none; }
+
+:global(html.dark) .logoLight { display: none; }
+:global(html.dark) .logoDark { display: block; }
 
 .iconNav{
   padding: 0rem 1.7rem;

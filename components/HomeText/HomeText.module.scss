@@ -34,13 +34,15 @@ p.greeting {
   padding: 0;
   margin: 0;
   color: var(--primary-color);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
 }
 
-/* Solo el span "productos digitales" mantiene Space Grotesk como tipografía display */
+/* El span "productos digitales" usa la tipografía display de marca (Bricolage Grotesque) */
 .highlight {
-  color: var(--primary-color);
-  font-family: 'Space Grotesk', sans-serif;
+  /* "digital products": Lila Corporativo #6d5dd3 — un punto más oscuro que el
+     Principal para dar sensación de negocio más serio, sin perder vida. */
+  color: var(--lila-corporativo, #6d5dd3);
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: 4.15rem;
   letter-spacing: var(--h1-highlight-letter-spacing);
   margin: 0;
@@ -261,7 +263,7 @@ p.greeting {
   }
 
   :global(html.dark) & {
-    border-color: var(--background-colorA, #181c33);
+    border-color: var(--background-colorA, #2e2a3a);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     filter: grayscale(0.6) brightness(0.92);
   }

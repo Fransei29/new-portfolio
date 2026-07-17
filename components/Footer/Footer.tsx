@@ -29,7 +29,7 @@ const Footer = () => {
         {/* Brand Section */}
         <div className={styles.brandSection}>
           <div className={styles.brand}>
-            <Image src='/Logo.svg' alt="Franco Seiler Logo" width={44} height={44} className={styles.logo} />
+            <Image src='/brand-isotipo.svg' alt="Franco Seiler Logo" width={128} height={128} className={styles.logo} unoptimized />
             <span className={styles.brandBlock}>
               <span className={styles.brandName}>Franco Seiler</span>
               <span className={styles.brandRole}>Software Solutions</span>

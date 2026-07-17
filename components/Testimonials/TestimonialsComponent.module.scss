@@ -219,7 +219,7 @@
 
     &:hover {
       box-shadow: var(--shadow-md);
-      border-color: rgba(180, 0, 90, 0.25);
+      border-color: rgba(142, 122, 230, 0.25);
     }
 
     &:hover .linkedinButton {
@@ -233,7 +233,7 @@
       box-shadow: var(--shadow-sm);
 
       &:hover {
-        border-color: rgba(180, 0, 90, 0.4);
+        border-color: rgba(142, 122, 230, 0.4);
         box-shadow: var(--shadow-md);
       }
     }
@@ -253,10 +253,10 @@
 
   // Featured card variant — subtle glow + stronger border
   .cardFeatured {
-    border-color: rgba(180, 0, 90, 0.35);
+    border-color: rgba(142, 122, 230, 0.35);
     box-shadow:
       var(--shadow-md),
-      0 0 0 1px rgba(180, 0, 90, 0.18) inset;
+      0 0 0 1px rgba(142, 122, 230, 0.18) inset;
 
     &::before {
       content: '';
@@ -266,9 +266,9 @@
       padding: 1px;
       background: linear-gradient(
         135deg,
-        rgba(180, 0, 90, 0.5) 0%,
-        rgba(180, 0, 90, 0.1) 50%,
-        rgba(180, 0, 90, 0.5) 100%
+        rgba(142, 122, 230, 0.5) 0%,
+        rgba(142, 122, 230, 0.1) 50%,
+        rgba(142, 122, 230, 0.5) 100%
       );
       -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -280,11 +280,11 @@
     }
 
     &:hover {
-      border-color: rgba(180, 0, 90, 0.5);
+      border-color: rgba(142, 122, 230, 0.5);
     }
 
     :global(html.dark) & {
-      border-color: rgba(180, 0, 90, 0.5);
+      border-color: rgba(142, 122, 230, 0.5);
     }
   }
 
@@ -305,7 +305,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     z-index: 2;
-    box-shadow: 0 1px 3px rgba(180, 0, 90, 0.3);
+    box-shadow: 0 1px 3px rgba(142, 122, 230, 0.3);
 
     svg {
       flex-shrink: 0;

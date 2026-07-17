@@ -43,11 +43,11 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   width: 14rem;
   height: 14rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(204, 2, 103, 0.14), transparent 70%);
+  background: radial-gradient(circle at 30% 30%, rgba(142, 122, 230, 0.14), transparent 70%);
   border: 2.5px solid $shapeStroke;
 
   :global(html.dark) & {
-    background: radial-gradient(circle at 30% 30%, rgba(204, 2, 103, 0.18), transparent 70%);
+    background: radial-gradient(circle at 30% 30%, rgba(142, 122, 230, 0.18), transparent 70%);
     border-color: $shapeStrokeDark;
   }
 }
@@ -291,11 +291,11 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05), 0 12px 28px rgba(0, 0, 0, 0.08);
-    border-color: rgba(180, 0, 90, 0.25);
+    border-color: rgba(142, 122, 230, 0.25);
 
     :global(html.dark) & {
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
-      border-color: rgba(180, 0, 90, 0.4);
+      border-color: rgba(142, 122, 230, 0.4);
     }
 
     .benefitIconWrapper {

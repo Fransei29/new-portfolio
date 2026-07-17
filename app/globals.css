@@ -1,50 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+/* Tipografías de marca cargadas vía next/font en app/layout.tsx.
+   Exponen las CSS vars --font-heading (Bricolage Grotesque, títulos) y
+   --font-body (Plus Jakarta Sans, texto) en el elemento <html>. */
 
 :root {
-  /* Paleta de colores */
-  --primary-color:rgb(180, 0, 90);
-  --primary-colorA:#b4035c;
-  --primary-color-light:#fdb6da;
-  --dark:#090a16;
-  --dark-light:#0f1326;
-  --text-color: #111111;
+  /* ============================================================
+     PALETA DE MARCA — Franco Seiler (Lila + Verde acento)
+     Lila Suave    #b59cf8  hovers, fondos suaves, glows, ilustraciones
+     Lila Principal#8e7ae6  links, iconos interactivos, acentos
+     Lila Profundo #2e294e  CTAs, textos con peso, presencia sobria
+     Verde Menta   #d1f0d1  superficies de acento / estados positivos
+     Verde Bosque  #58876e  contraste funcional sobre verde
+     Blanco Arena  #f3f2f4  fondo principal claro
+     Negro Grafito #292833  fondo principal oscuro
+     Grafito Elev. #2e2a3a  superficies elevadas en oscuro
+     Gris Medio    #8a8599  textos secundarios, bordes, dividers
+     ============================================================ */
+
+  /* Marca lila */
+  --lila-suave: #b59cf8;
+  --lila-principal: #8e7ae6;
+  /* Lila Corporativo: tono extra (fuera del manual original) entre el Principal
+     y el Profundo. Da presencia más seria/business sin perder vida.
+     Ajustado a #7d68d8: más violeta y un punto menos fuerte que el #6d5dd3
+     inicial (que tiraba a azul). */
+  --lila-corporativo: #7d68d8;
+  --lila-profundo: #2e294e;
+  /* Verde acento (uso acotado) */
+  --verde-menta: #d1f0d1;
+  --verde-bosque: #58876e;
+  /* Neutros de marca */
+  --arena: #f3f2f4;
+  --grafito: #292833;
+  --grafito-elevado: #2e2a3a;
+  --gris-medio: #8a8599;
+
+  /* Paleta de colores (tokens de compatibilidad → ahora lila)
+     PROTAGONISTA = Lila Profundo (#2e294e): fuerte, con peso, para
+     links/iconos/acentos. Lila Principal (#8e7ae6) = hover/secundario.
+     Lila Suave (#b59cf8) = uso estratégico y sutil (fondos/glows). */
+  --primary-color: var(--lila-profundo);
+  --primary-colorA: #2e294e;
+  --primary-color-light: var(--lila-suave);
+  /* Acento secundario para hovers y estados interactivos medios */
+  --primary-accent: var(--lila-principal);
+  --dark: #211f2b;
+  --dark-light: #292833;
+  --text-color: #1c1a2e;
   --text-color-B: #333333;
   --text-color-light: #6b6b6b;
   --text-color-dark: #0a0a0a;
   --text-color-dark-mode: rgb(237, 236, 236);
-  /* Ink: color funcional negro para CTAs, iconos, elementos estructurales */
-  --ink: #0a0a0a;
-  --ink-hover: #1f1f1f;
-  --ink-soft: rgba(0, 0, 0, 0.05);
-  --ink-soft-hover: rgba(0, 0, 0, 0.08);
+  /* Ink: color funcional para CTAs, iconos, elementos estructurales */
+  --ink: #2e294e;
+  --ink-hover: #3d3768;
+  --ink-soft: rgba(46, 41, 78, 0.06);
+  --ink-soft-hover: rgba(46, 41, 78, 0.1);
   /* Card backgrounds: blanco puro y off-white para crear jerarquía sutil */
   --card-bg: #ffffff;
   --card-bg-soft: #fafafa;
-  --button-color:rgba(248, 152, 200, 0.8);
-  --button-color-hover:rgb(245, 84, 165, 0.9);
+  /* Botón protagonista: relleno Lila Profundo, hover se aclara a Lila Principal */
+  --button-color: #2e294e;
+  --button-color-hover: #8e7ae6;
     background-color: rgb(255, 255, 255);
-  --border: 1px solid rgba(233, 7, 120, 0.5);
+  --border: 1px solid rgba(142, 122, 230, 0.5);
   --borderB: 1px solid rgba(0, 0, 0, 0.08);
-  --borderA: 1px solid rgba(233, 7, 120, 0.4);
+  --borderA: 1px solid rgba(142, 122, 230, 0.4);
   --borderC: 1px solid rgba(0, 0, 0, 0.06);
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
-  --background-colorB: rgb(249, 248, 246);
-  --background-colorB-gradient: linear-gradient(180deg, #faf9f7 0%, #fdfcfb 35%, #ffffff 50%, #fdfcfb 65%, #faf9f7 100%);
+  --background-colorB: var(--arena);
+  --background-colorB-gradient: linear-gradient(180deg, #f3f2f4 0%, #faf9fc 35%, #ffffff 50%, #faf9fc 65%, #f3f2f4 100%);
   --background-ivory: rgb(255, 255, 255);
-  --bg-hover: rgba(245, 84, 165, 0.9);
-  --cta-bg: #032e8b;
-  --cta-bg-hover: #1D4ED8;
+  --bg-hover: rgba(142, 122, 230, 0.9);
+  --cta-bg: #2e294e;
+  --cta-bg-hover: #3d3768;
   /* CTA: mismo token en gradiente, wave y fallback */
-  --cta-gradient-top: #0a1230;
-  --cta-gradient-mid: #131a2b;
+  --cta-gradient-top: #2e294e;
+  --cta-gradient-mid: #3a3460;
   --cta-bg-gradient: linear-gradient(
     180deg,
     var(--cta-gradient-top) 0%,
@@ -63,7 +98,7 @@
 
   /* Wave dividers (home): deben alinear con --background-colorA / B y CTA */
   --wave-a: rgb(255, 255, 255);
-  --wave-b: #faf9f7;
+  --wave-b: #f3f2f4;
 
   /* Variables para títulos y subtítulos - Sistema global */
   
@@ -166,7 +201,7 @@ html, body {
   scroll-snap-type: y mandatory;
   overflow: auto; 
   overflow-x: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body), 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-color-light);
   transition: background-color 0.4s ease, color 0.4s ease;
   
@@ -215,28 +250,38 @@ h1, .highlight, .socialmedia {
 }
 
 html.dark {
-  background-color: var(--dark-light);
+  background-color: var(--grafito);
   /* Alias usado por secciones con gradiente claro en light; evita fondos inválidos si se referencia sin definir */
-  --background-colorA-dark: var(--dark-light);
+  --background-colorA-dark: var(--grafito);
   /* Mismo token que las secciones; el match en dark fallaba sobre todo por el drop-shadow del SVG (ver WaveDivider) */
-  --wave-a: var(--dark-light);
-  --wave-b: var(--dark-light);
+  --wave-a: var(--grafito);
+  --wave-b: var(--grafito);
+  /* En dark el protagonista se aclara: #2e294e no contrasta sobre grafito,
+     así que Lila Principal toma el rol primario y Lila Suave el acento. */
+  --primary-color: var(--lila-principal);
+  --primary-colorA: #8e7ae6;
+  --primary-accent: var(--lila-suave);
+  /* Botón en dark: relleno Lila Principal, hover al Suave */
+  --button-color: #8e7ae6;
+  --button-color-hover: #b59cf8;
   /* Mismos valores que :root: el wave CTA usa var(--cta-gradient-top) en CSS; re-declarar evita cascadas raras en SVG */
-  --cta-gradient-top: #070d22;
-  --cta-gradient-mid: #131a2b;
+  --cta-gradient-top: #232040;
+  --cta-gradient-mid: #2e294e;
+  --cta-bg: #2e294e;
+  --cta-bg-hover: #3d3768;
   /* Sombras delicadas adaptadas a fondo oscuro */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0, 0, 0, 0.35);
   --borderB: 1px solid rgba(255, 255, 255, 0.08);
   --borderC: 1px solid rgba(255, 255, 255, 0.06);
-  /* En dark, "ink" se invierte: el blanco actúa como el negro */
+  /* En dark, "ink" usa lila claro para acentos interactivos */
   --ink: #f5f5f5;
   --ink-hover: #ffffff;
   --ink-soft: rgba(255, 255, 255, 0.06);
   --ink-soft-hover: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-bg-soft: rgba(255, 255, 255, 0.05);
+  --card-bg: var(--grafito-elevado);
+  --card-bg-soft: #35304a;
 }
 
 html.dark .svg-duo {
@@ -265,7 +310,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .highlight {
   display: block;
   position: relative;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: var(--h3-font-size);
   font-weight: var(--h3-font-weight);
   color: var(--h3-color);
@@ -397,7 +442,7 @@ html.dark .hero-section::before {
   transform: translate(-50%, -50%);
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(204, 2, 103, 0.1) 0%, rgba(204, 2, 103, 0.035) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(181, 156, 248, 0.1) 0%, rgba(181, 156, 248, 0.035) 50%, transparent 70%);
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
@@ -436,13 +481,13 @@ html.dark .hero-section::before {
   top: 100px;
   left: 40px;
   z-index: 1;
-  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
+  filter: drop-shadow(0 15px 20px rgba(181, 156, 248, 0.3)) drop-shadow(0 0 28px rgba(181, 156, 248, 0.1));
   animation: floatA 4.5s ease-in-out infinite;
   transition: filter 0.4s ease;
 }
 
 .shape-a:hover {
-  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 16px 24px rgba(181, 156, 248, 0.42)) drop-shadow(0 0 42px rgba(181, 156, 248, 0.2));
 }
 
 .shape-b {
@@ -451,14 +496,14 @@ html.dark .hero-section::before {
   top: 80px;
   left: 135px;
   z-index: 2;
-  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
+  filter: drop-shadow(0 15px 20px rgba(181, 156, 248, 0.3)) drop-shadow(0 0 28px rgba(181, 156, 248, 0.1));
   animation: floatB 3.8s ease-in-out infinite;
   animation-delay: -1.8s;
   transition: filter 0.4s ease;
 }
 
 .shape-b:hover {
-  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 16px 24px rgba(181, 156, 248, 0.42)) drop-shadow(0 0 42px rgba(181, 156, 248, 0.2));
 }
 
 
@@ -686,8 +731,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
-    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
   }
   
   .shape-b {
@@ -701,8 +746,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
-    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
   }
 
   .parallax-shape {
