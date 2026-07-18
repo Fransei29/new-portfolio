@@ -1,20 +1,20 @@
 {
   "hero": {
-    "title": "Hi, I'm Franco",
+    "title": "We",
     "subtitle": {
-      "before": "I build powerful ",
+      "before": "We build powerful ",
       "highlight": "digital products",
       "after": "ready to scale.",
       "mobile": {
-        "before": "I build powerful",
+        "before": "We build powerful",
         "highlight": "digital products",
         "after": "ready to scale."
       }
     },
-    "description": "With more than 3 years of experience, I help startups and teams launch reliable platforms that adapt to business growth.",
+    "description": "With more than 4 years of experience, we help startups and teams launch reliable platforms that adapt to business growth.",
     "cta": {
-      "projects": "Explore my work",
-      "contact": "Book a 15 min call",
+      "projects": "Explore our work",
+      "contact": "Book a call",
       "bootcamp": "Go to my Bootcamp",
       "youtube": "YouTube"
     },

@@ -92,7 +92,7 @@
   --br: 10px;
   --br-sm: 6px;
   --br-lg: 14px;
-  --container-max-width: 1350px;
+  --container-max-width: 1440px;
   --section-py: 8rem;
   --section-py-mobile: 4rem;
 
@@ -172,13 +172,13 @@
 
 @media (min-width: 1400px) {
   :root {
-    --container-max-width: 1350px;
+    --container-max-width: 1440px;
   }
 }
 
 @media (min-width: 1800px) {
   :root {
-    --container-max-width: 1350px;
+    --container-max-width: 1440px;
   }
 }
 
@@ -419,10 +419,16 @@ html.dark .hero-section::before {
 .home-textB {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   flex: 0 1 50%;
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .home-textB {
+    align-items: center;
+  }
 }
 
 .svg-duo {

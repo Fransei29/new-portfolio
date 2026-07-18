@@ -1,19 +1,19 @@
 {
   "hero": {
-    "title": "Hola, soy Franco",
+    "title": "Nosotros",
     "subtitle": {
-      "before": "Construyo ",
+      "before": "Construimos ",
       "highlight": "productos digitales",
       "after": " listos para crecer.",
       "mobile": {
-        "before": "Construyo",
+        "before": "Construimos",
         "highlight": "productos digitales",
         "after": "listos para crecer."
       }
     },
-    "description": "Con más de 3 años de experiencia, ayudo a startups y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
+    "description": "Con más de 4 años de experiencia, ayudamos a startups y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
     "cta": {
-      "projects": "Explora mi trabajo",
+      "projects": "Explora nuestro trabajo",
       "contact": "Agenda una llamada",
       "bootcamp": "Ve a Mi bootcamp",
       "youtube": "YouTube"

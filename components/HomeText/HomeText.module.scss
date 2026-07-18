@@ -61,7 +61,8 @@ p.greeting {
   line-height: 1.12;
   max-width: 900px;
   letter-spacing: -0.025em;
-  color: var(--text-color);
+  /* Lila profundo de marca (#2e294e) en vez del casi-negro. */
+  color: var(--lila-profundo, #2e294e);
   white-space: pre-line;
   overflow-wrap: break-word;
   word-break: break-word;

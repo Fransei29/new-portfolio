@@ -13,6 +13,13 @@
   // still lets the rotated card / pills breathe top and bottom). `clip` (not
   // `hidden`) does NOT create a scroll container, so no nested scrollbar.
   overflow-x: clip;
+  // En desktop NO recortamos: el clip local cortaba el borde derecho del
+  // dashboard (alineado a flex-end). Las decoraciones que asoman a la izquierda
+  // (panda, metricPill) no ensanchan la página porque `body { overflow-x: hidden }`
+  // ya lo evita a nivel viewport.
+  @media (min-width: 769px) {
+    overflow-x: visible;
+  }
 }
 
 .stage {
@@ -27,6 +34,11 @@
   // A little vertical breathing room so the rotated card and floating pills
   // are never clipped top/bottom by the horizontal clip's context.
   padding-block: 1.25rem;
+  // Desktop: dashboard alineado a la derecha, sin clip local (cortaba el borde).
+  @media (min-width: 769px) {
+    justify-content: flex-end;
+    overflow-x: visible;
+  }
 }
 
 @media (max-width: 768px) {

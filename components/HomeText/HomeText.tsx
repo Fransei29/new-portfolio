@@ -28,7 +28,6 @@ const HomeText: React.FC = () => {
   return (
   <section className={styles.homeTextContainer}>
     <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
-        <p className={styles.greeting}>{t('hero.title')}</p>
         <h1 className={styles.mainTitle}>
           {subtitleBefore}
           <br />
@@ -47,19 +46,19 @@ const HomeText: React.FC = () => {
           </p>
         )}
         <div className={styles.ctaButtons}>
-          <Link href="/projects" className={styles.btnPrimary}>
-            {t('hero.cta.projects')}
-            <HiArrowRight className={styles.arrow} />
-          </Link>
           <a
             href="https://calendly.com/seilerfranco317/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.btnSecondary}
+            className={styles.btnPrimary}
           >
             {t('hero.cta.contact')}
             <HiArrowRight className={styles.arrow} />
           </a>
+          <Link href="/projects" className={styles.btnSecondary}>
+            {t('hero.cta.projects')}
+            <HiArrowRight className={styles.arrow} />
+          </Link>
         </div>
         <div className={styles.socialProof} aria-label={t('hero.socialProof.label') ?? 'Trusted by clients'}>
           <div className={styles.avatarStack}>
