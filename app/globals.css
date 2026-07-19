@@ -33,6 +33,13 @@
   --grafito: #292833;
   --grafito-elevado: #2e2a3a;
   --gris-medio: #8a8599;
+  /* Grisecito: neutro un punto más frío/marcado que el arena, para variar fondos B */
+  --grisecito: #eeedf1;
+  /* Lila Velo: lila MUY tenue (más suave que --lila-suave), pensado como fondo
+     de sección grande. Se lee como "gris con calidez lila" sin invadir. */
+  --lila-velo: #f2effb;
+  /* Variante oscura del lila velo, para fondos de sección en dark mode */
+  --lila-velo-dark: #262336;
 
   /* Paleta de colores (tokens de compatibilidad → ahora lila)
      PROTAGONISTA = Lila Profundo (#2e294e): fuerte, con peso, para
@@ -71,8 +78,8 @@
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
-  --background-colorB: var(--arena);
-  --background-colorB-gradient: linear-gradient(180deg, #f3f2f4 0%, #faf9fc 35%, #ffffff 50%, #faf9fc 65%, #f3f2f4 100%);
+  --background-colorB: var(--grisecito);
+  --background-colorB-gradient: linear-gradient(180deg, #eeedf1 0%, #f6f5f9 35%, #ffffff 50%, #f6f5f9 65%, #eeedf1 100%);
   --background-ivory: rgb(255, 255, 255);
   --bg-hover: rgba(142, 122, 230, 0.9);
   --cta-bg: #2e294e;
@@ -98,7 +105,7 @@
 
   /* Wave dividers (home): deben alinear con --background-colorA / B y CTA */
   --wave-a: rgb(255, 255, 255);
-  --wave-b: #f3f2f4;
+  --wave-b: var(--grisecito);
 
   /* Variables para títulos y subtítulos - Sistema global */
   
@@ -333,6 +340,29 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
    tutorials) keep the title left-aligned. */
 .ContainerGeneralComplete .highlight {
   text-align: center;
+}
+
+/* Section background theming: reasigna el "fondo B" (gris/arena) por un tono lila
+   muy tenue en una franja concreta. Al redefinir --wave-b y --background-colorB
+   localmente, los WaveDivider de entrada/salida heredan el color y la costura calza. */
+.section-bg-lila {
+  /* Lila de sección: el Principal (#8e7ae6) muy diluido en blanco para bajar
+     saturación sin perder identidad. Fondo lila claro, cómodo para franja grande. */
+  --lila-seccion: #d2c8f5;
+  --wave-b: var(--lila-seccion);
+  --background-colorB: var(--lila-seccion);
+  /* Gradiente coherente con el nuevo fondo, con leve respiración */
+  --background-colorB-gradient: linear-gradient(
+    180deg,
+    var(--lila-seccion) 0%,
+    #dad2f7 50%,
+    var(--lila-seccion) 100%
+  );
+}
+
+html.dark .section-bg-lila {
+  --wave-b: var(--lila-velo-dark);
+  --background-colorB: var(--lila-velo-dark);
 }
 
 /* --- HOME PAGE --- */

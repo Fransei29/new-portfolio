@@ -12,7 +12,9 @@
 
   :global(html.dark) & {
     background-image: none;
-    background-color: var(--dark-light);
+    /* Respeta el override de sección (--background-colorB) cuando existe;
+       si no, cae al gris oscuro estándar. */
+    background-color: var(--background-colorB, var(--dark-light));
   }
 
   @media (max-width: 768px) {
@@ -268,12 +270,12 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   justify-content: flex-start;
   text-align: left;
   gap: 1.25rem;
-  padding: 2.75rem 2rem;
-  min-height: 280px;
-  background: rgba(255, 255, 255, 0.78);
+  padding: 1.75rem 2rem;
+  min-height: 0;
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--br);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -304,7 +306,7 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   }
 
   @media (max-width: 768px) {
-    padding: 2rem 1.5rem;
+    padding: 1.35rem 1.5rem;
     gap: 1.25rem;
     min-height: 0;
   }

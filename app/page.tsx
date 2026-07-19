@@ -61,13 +61,16 @@ export default function Home() {
             <HowWeWork />
           </div>
 
-          <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToB" />
-            <WhyChooseUs />
+          <div className="section-bg-lila">
+            <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left">
+              <WaveDivider variant="aToB" />
+              <WhyChooseUs />
+            </div>
+
+            <WaveDivider variant="bToA" />
           </div>
 
           <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-right">
-            <WaveDivider variant="bToA" />
             <ProjectsSection variant="tutorials" />
           </div>
 
