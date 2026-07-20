@@ -27,8 +27,10 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     overflow: hidden;
-    /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde */
-    padding: 2rem 0 0.75rem var(--container-inset);
+    /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde.
+       Padding vertical amplio (arriba/abajo) para que la sombra de hover de las tarjetas
+       respire y no se recorte contra el borde del viewport. */
+    padding: 2.5rem 0 2.5rem var(--container-inset);
     box-sizing: border-box;
 
     /* Solo desktop: en mobile usamos el .mobileStack */
@@ -55,8 +57,9 @@
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
-    /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde */
-    padding-left: 1.25rem;
+    /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde.
+       Padding vertical para que la sombra de hover no se recorte contra el borde. */
+    padding: 1.5rem 0 1.5rem 1.25rem;
 }
 
 .mobileTrack {

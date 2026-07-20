@@ -93,10 +93,10 @@ const HowWeWork = () => {
                 className={`${styles.stepCard} ${animationClass}`}
               >
                 <div className={styles.stepHeader}>
-                  <div className={styles.stepNumber}>{step.number}</div>
                   <div className={styles.iconWrapper}>
                     {step.icon}
                   </div>
+                  <div className={styles.stepNumber}>{step.number}</div>
                 </div>
                 <h3 className={styles.stepTitle}>{step.title}</h3>
                 <p className={styles.stepDescription}>{step.description}</p>

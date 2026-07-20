@@ -62,6 +62,13 @@
   --ink-hover: #3d3768;
   --ink-soft: rgba(46, 41, 78, 0.06);
   --ink-soft-hover: rgba(46, 41, 78, 0.1);
+  /* Fondo de iconos de tarjetas (services, why-choose-us, how-we-work):
+     violeta de marca suave con un toque grisáceo. Una sola fuente de verdad
+     para mantener consistencia visual entre secciones. */
+  --icon-bg: rgba(134, 118, 190, 0.1);
+  --icon-bg-hover: rgba(134, 118, 190, 0.18);
+  --icon-border: 1px solid rgba(134, 118, 190, 0.28);
+  --icon-border-hover: 1px solid rgba(134, 118, 190, 0.42);
   /* Card backgrounds: blanco puro y off-white para crear jerarquía sutil */
   --card-bg: #ffffff;
   --card-bg-soft: #fafafa;
@@ -79,7 +86,7 @@
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
   --background-colorB: var(--grisecito);
-  --background-colorB-gradient: linear-gradient(180deg, #eeedf1 0%, #f6f5f9 35%, #ffffff 50%, #f6f5f9 65%, #eeedf1 100%);
+  --background-colorB-gradient: linear-gradient(180deg, #eeedf1 0%, #f2f1f6 50%, #eeedf1 100%);
   --background-ivory: rgb(255, 255, 255);
   --bg-hover: rgba(142, 122, 230, 0.9);
   --cta-bg: #2e294e;
@@ -287,6 +294,11 @@ html.dark {
   --ink-hover: #ffffff;
   --ink-soft: rgba(255, 255, 255, 0.06);
   --ink-soft-hover: rgba(255, 255, 255, 0.1);
+  /* En dark el violeta de icono se aclara para leerse sobre grafito */
+  --icon-bg: rgba(158, 144, 205, 0.1);
+  --icon-bg-hover: rgba(158, 144, 205, 0.18);
+  --icon-border: 1px solid rgba(158, 144, 205, 0.3);
+  --icon-border-hover: 1px solid rgba(158, 144, 205, 0.45);
   --card-bg: var(--grafito-elevado);
   --card-bg-soft: #35304a;
 }
@@ -348,14 +360,14 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .section-bg-lila {
   /* Lila de sección: el Principal (#8e7ae6) muy diluido en blanco para bajar
      saturación sin perder identidad. Fondo lila claro, cómodo para franja grande. */
-  --lila-seccion: #d2c8f5;
+  --lila-seccion: #ebe6fb;
   --wave-b: var(--lila-seccion);
   --background-colorB: var(--lila-seccion);
   /* Gradiente coherente con el nuevo fondo, con leve respiración */
   --background-colorB-gradient: linear-gradient(
     180deg,
     var(--lila-seccion) 0%,
-    #dad2f7 50%,
+    #f1edfc 50%,
     var(--lila-seccion) 100%
   );
 }
@@ -363,6 +375,17 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 html.dark .section-bg-lila {
   --wave-b: var(--lila-velo-dark);
   --background-colorB: var(--lila-velo-dark);
+}
+
+/* Sección "ink" (fondo lila profundo #2e294e, como el CTA). Redefine --wave-a
+   localmente para que los WaveDivider de entrada/salida hereden el color oscuro
+   y la costura calce, igual que .section-bg-lila hace con --wave-b. */
+.section-bg-ink {
+  --wave-a: #2e294e;
+}
+
+html.dark .section-bg-ink {
+  --wave-a: #2e294e;
 }
 
 /* --- HOME PAGE --- */

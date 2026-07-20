@@ -59,16 +59,25 @@ const SkillsSummary: React.FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Configurar Sortable para el grid de skills summary
-    if (gridRef.current) {
-      Sortable.create(gridRef.current, {
-        group: 'summary',
-        animation: 150,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-      });
-    }
+    if (!gridRef.current) return;
+
+    // Drag suave y consistente entre navegadores. forceFallback usa el drag
+    // propio de SortableJS (no el nativo del browser), garantizando que dragClass
+    // se aplique y el movimiento se sienta parejo.
+    const sortable = Sortable.create(gridRef.current, {
+      group: 'summary',
+      animation: 220,
+      easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
+      ghostClass: styles.sortableGhost,
+      chosenClass: styles.sortableChosen,
+      dragClass: styles.sortableDrag,
+      forceFallback: true,
+      fallbackTolerance: 4,
+      delay: 40,
+      delayOnTouchOnly: true,
+    });
+
+    return () => sortable.destroy();
   }, []);
 
   return (

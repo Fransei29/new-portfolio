@@ -1,7 +1,7 @@
 @import '../../app/styles/utilities.scss';
 
 .footer {
-  background-color: #111111;
+  background-color: #292833;
   margin-top: 0;
   width: 100%;
   color: rgb(230, 230, 230);
@@ -9,7 +9,7 @@
   box-shadow: inset 0 14px 24px -16px rgba(0, 0, 0, 0.5);
 
   :global(html.dark) & {
-    background-color: #111111;
+    background-color: #292833;
     color: rgb(230, 230, 230);
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     box-shadow: inset 0 14px 24px -16px rgba(0, 0, 0, 0.5);

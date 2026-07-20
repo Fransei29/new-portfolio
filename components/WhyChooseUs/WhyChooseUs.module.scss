@@ -22,176 +22,6 @@
   }
 }
 
-// Subtle geometric shapes background — minimalist, barely visible
-.ambientBg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-$shapeStroke: rgba(50, 50, 60, 0.22);
-$shapeStrokeDark: rgba(255, 255, 255, 0.18);
-
-.shape {
-  position: absolute;
-  user-select: none;
-  will-change: transform, opacity;
-}
-
-// Filled circle with gradient tint
-.shapeCircle {
-  width: 14rem;
-  height: 14rem;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(142, 122, 230, 0.14), transparent 70%);
-  border: 2.5px solid $shapeStroke;
-
-  :global(html.dark) & {
-    background: radial-gradient(circle at 30% 30%, rgba(142, 122, 230, 0.18), transparent 70%);
-    border-color: $shapeStrokeDark;
-  }
-}
-
-// Outline square rotated
-.shapeSquare {
-  width: 6rem;
-  height: 6rem;
-  border: 2px solid rgba(50, 50, 60, 0.14);
-  transform: rotate(18deg);
-  opacity: 0.7;
-
-  :global(html.dark) & {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-// Ring (thicker outline circle)
-.shapeRing {
-  width: 11rem;
-  height: 11rem;
-  border-radius: 50%;
-  border: 3px solid $shapeStroke;
-
-  :global(html.dark) & {
-    border-color: $shapeStrokeDark;
-  }
-}
-
-// Triangle (outlined)
-.shapeTriangle {
-  width: 6.5rem;
-  height: 5.8rem;
-  position: absolute;
-  background: transparent;
-  clip-path: polygon(
-    50% 0%, 0% 100%, 100% 100%,
-    100% 94%, 52% 10%, 4% 94%, 100% 94%
-  );
-  background-color: rgba(50, 50, 60, 0.14);
-  opacity: 0.7;
-
-  :global(html.dark) & {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-// Horizontal line
-.shapeLine {
-  width: 18rem;
-  height: 2.5px;
-  background: $shapeStroke;
-
-  :global(html.dark) & {
-    background: $shapeStrokeDark;
-  }
-}
-
-// Plus/cross sign
-.shapePlus {
-  width: 3rem;
-  height: 3rem;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: rgba(50, 50, 60, 0.32);
-  }
-
-  &::before {
-    width: 3rem;
-    height: 2.5px;
-    transform: translate(-50%, -50%);
-  }
-
-  &::after {
-    width: 2.5px;
-    height: 3rem;
-    transform: translate(-50%, -50%);
-  }
-
-  :global(html.dark) & {
-    &::before, &::after {
-      background: rgba(255, 255, 255, 0.26);
-    }
-  }
-}
-
-// Positioning — spread across the section corners and mid zones
-.shapeA {
-  top: 8%;
-  left: -4rem;
-  animation: floatShape 26s ease-in-out infinite;
-}
-
-.shapeB {
-  top: 12%;
-  right: 8%;
-  animation: floatShape 22s ease-in-out infinite reverse;
-}
-
-.shapeC {
-  bottom: 10%;
-  left: 10%;
-  animation: floatShape 30s ease-in-out infinite;
-}
-
-.shapeD {
-  bottom: 18%;
-  right: -3rem;
-  animation: floatShape 28s ease-in-out infinite reverse;
-}
-
-.shapeE {
-  display: none;
-}
-
-.shapeF {
-  top: 48%;
-  right: 15%;
-  animation: floatShape 18s ease-in-out infinite;
-}
-
-@keyframes floatShape {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-12px) rotate(4deg); }
-}
-
-@media (max-width: 768px) {
-  .shapeCircle { width: 9rem; height: 9rem; }
-  .shapeSquare { width: 4.5rem; height: 4.5rem; }
-  .shapeRing   { width: 7rem; height: 7rem; }
-  .shapeLine   { width: 10rem; }
-  .shapeTriangle { width: 4.5rem; height: 4rem; }
-  .shapeA { top: 6%; left: -3rem; }
-  .shapeB { right: 4%; }
-  .shapeD { right: -2rem; }
-}
-
 .container {
   position: relative;
   z-index: 1;
@@ -293,7 +123,7 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05), 0 12px 28px rgba(0, 0, 0, 0.08);
-    border-color: rgba(142, 122, 230, 0.25);
+    border-color: rgba(46, 41, 78, 0.22);
 
     :global(html.dark) & {
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
@@ -301,7 +131,8 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
     }
 
     .benefitIconWrapper {
-      background-color: var(--ink-soft-hover);
+      background-color: var(--icon-bg-hover);
+      border: var(--icon-border-hover);
     }
   }
 
@@ -319,8 +150,9 @@ $shapeStrokeDark: rgba(255, 255, 255, 0.18);
   width: 48px;
   height: 48px;
   border-radius: var(--br);
-  background: var(--ink-soft);
-  transition: background-color 0.25s ease;
+  background: var(--icon-bg);
+  border: var(--icon-border);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
   flex-shrink: 0;
 
   svg {

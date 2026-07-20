@@ -137,38 +137,36 @@ const Skills: React.FC = () => {
   const toolsGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Configurar Sortable para Frontend
-    if (frontendGridRef.current) {
-      Sortable.create(frontendGridRef.current, {
-        group: 'frontend',
-        animation: 150,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-      });
-    }
+    // Opciones compartidas: drag suave y consistente entre navegadores.
+    // forceFallback usa el drag propio de SortableJS (no el nativo del browser),
+    // lo que garantiza que dragClass se aplique y el movimiento se sienta parejo.
+    const commonOptions: Sortable.Options = {
+      animation: 220,
+      easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
+      ghostClass: styles.sortableGhost,
+      chosenClass: styles.sortableChosen,
+      dragClass: styles.sortableDrag,
+      forceFallback: true,
+      fallbackTolerance: 4,
+      delay: 40,
+      delayOnTouchOnly: true,
+    };
 
-    // Configurar Sortable para Backend
-    if (backendGridRef.current) {
-      Sortable.create(backendGridRef.current, {
-        group: 'backend',
-        animation: 150,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-      });
-    }
+    const grids: [React.RefObject<HTMLDivElement | null>, string][] = [
+      [frontendGridRef, 'frontend'],
+      [backendGridRef, 'backend'],
+      [toolsGridRef, 'tools'],
+    ];
 
-    // Configurar Sortable para Tools
-    if (toolsGridRef.current) {
-      Sortable.create(toolsGridRef.current, {
-        group: 'tools',
-        animation: 150,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-      });
-    }
+    const instances = grids
+      .map(([ref, group]) =>
+        ref.current ? Sortable.create(ref.current, { ...commonOptions, group }) : null
+      )
+      .filter((instance): instance is Sortable => instance !== null);
+
+    return () => {
+      instances.forEach((instance) => instance.destroy());
+    };
   }, []);
 
   return (
