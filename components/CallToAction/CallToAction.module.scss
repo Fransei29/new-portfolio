@@ -11,16 +11,86 @@
   background-image: var(--cta-bg-gradient);
   background-color: var(--cta-gradient-top);
   overflow: hidden;
+  isolation: isolate;
+
+  /* Aurora minimalista: dos manchas radiales lila que se desplazan muy lento
+     en el fondo, para darle profundidad y vida sin distraer. Opacidad baja. */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(60px);
+    will-change: transform;
+  }
+
+  &::before {
+    width: 42vw;
+    height: 42vw;
+    max-width: 620px;
+    max-height: 620px;
+    top: 50%;
+    left: -14%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(142, 122, 230, 0.1), transparent 62%);
+    animation: ctaAuroraA 48s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    width: 38vw;
+    height: 38vw;
+    max-width: 540px;
+    max-height: 540px;
+    top: 50%;
+    right: -14%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(181, 156, 248, 0.08), transparent 64%);
+    animation: ctaAuroraB 54s ease-in-out infinite alternate;
+  }
 
   :global(html.dark) & {
     background-image: var(--cta-bg-gradient);
     background-color: var(--cta-gradient-top);
     color: var(--cta-text);
+
+    &::before {
+      background: radial-gradient(circle, rgba(142, 122, 230, 0.09), transparent 62%);
+    }
+
+    &::after {
+      background: radial-gradient(circle, rgba(181, 156, 248, 0.06), transparent 64%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before,
+    &::after {
+      animation: none;
+    }
   }
 
   @media (max-width: 768px) {
     padding: 5.5rem 1.5rem;
+
+    &::before,
+    &::after {
+      filter: blur(48px);
+    }
   }
+}
+
+/* Movimiento mínimo y muy lento, pegado a los costados. Mantiene el centrado
+   vertical (translateY -50%) y solo "respira" un poco en horizontal/vertical. */
+@keyframes ctaAuroraA {
+  from { transform: translate(0, -50%); }
+  to { transform: translate(3%, -46%); }
+}
+
+@keyframes ctaAuroraB {
+  from { transform: translate(0, -50%); }
+  to { transform: translate(-3%, -54%); }
 }
 
 
@@ -32,7 +102,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
+  /* Título y subtítulo juntos; el aire antes del botón lo da su margin-top */
+  gap: 1rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -40,7 +111,7 @@
 
   @media (max-width: 768px) {
     padding: 0;
-    gap: 1.25rem;
+    gap: 0.75rem;
     align-items: center;
     width: 100%;
     max-width: 100%;
@@ -84,6 +155,8 @@
 }
 
 .ctaButton {
+  /* Recupera la separación respecto al subtítulo (antes la daba el gap general) */
+  margin-top: 1.5rem;
   text-decoration: none;
   height: 3rem;
   padding: 0 2rem;
@@ -91,7 +164,8 @@
   font-size: 1rem;
   letter-spacing: 0.01em;
   border-radius: var(--br);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.25s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +173,15 @@
   background-color: rgba(255, 255, 255, 0.92);
   color: #111;
   border: 1px solid rgba(255, 255, 255, 0.6);
+  /* Halo lila muy tenue en reposo: integra el botón con la aurora */
+  box-shadow: 0 4px 20px rgba(142, 122, 230, 0.18);
 
   &:hover {
     background-color: #ffffff;
     border-color: #ffffff;
     transform: translateY(-1px);
+    /* Glow lila un punto más presente al pasar el mouse (sin exagerar) */
+    box-shadow: 0 6px 26px rgba(142, 122, 230, 0.32);
 
     .arrow {
       transform: translateX(2px);
@@ -114,10 +192,12 @@
     color: rgb(228, 227, 227);
     background-color: rgba(0, 0, 0, 0.45);
     border-color: rgba(255, 255, 255, 0.32);
+    box-shadow: 0 4px 20px rgba(142, 122, 230, 0.2);
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.65);
       border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 6px 26px rgba(142, 122, 230, 0.34);
     }
   }
 

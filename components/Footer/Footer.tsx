@@ -29,11 +29,14 @@ const Footer = () => {
         {/* Brand Section */}
         <div className={styles.brandSection}>
           <div className={styles.brand}>
-            <Image src='/brand-isotipo.svg' alt="Franco Seiler Logo" width={128} height={128} className={styles.logo} unoptimized />
-            <span className={styles.brandBlock}>
-              <span className={styles.brandName}>Franco Seiler</span>
-              <span className={styles.brandRole}>Software Solutions</span>
-            </span>
+            <Image
+              src="/brand-header-dark.svg"
+              alt="Franco Seiler — Software Studio"
+              width={430}
+              height={160}
+              className={styles.logo}
+              unoptimized
+            />
           </div>
           <p className={styles.brandTagline}>{t('footer.tagline')}</p>
           <div className={styles.socials}>

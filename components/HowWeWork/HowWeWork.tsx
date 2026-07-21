@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { HiArrowRight } from 'react-icons/hi';
 import styles from './HowWeWork.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -110,6 +111,7 @@ const HowWeWork = () => {
           <div className={styles.ctaContainer}>
             <Link href="/contact" className={styles.ctaButton}>
               {t('howWeWork.cta.text')}
+              <HiArrowRight className={styles.arrow} />
             </Link>
           </div>
         </section>

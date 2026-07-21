@@ -16,6 +16,7 @@ import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
 import HowWeWork from '../components/HowWeWork/HowWeWork';
 import WaveDivider from '../components/WaveDivider/WaveDivider';
+import PeekPanda from '../components/PeekPanda/PeekPanda';
 
 export default function Home() {
   const elementsRef = useScrollAnimation();
@@ -39,7 +40,7 @@ export default function Home() {
 
 
       <section className="containerGeneral">
-         
+
          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
             <WaveDivider variant="aToB" />
            <Services />
@@ -56,11 +57,9 @@ export default function Home() {
             <ProjectsSection variant="projects" />
           </div>
 
-          <div className="section-bg-ink">
-            <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left">
-              <WaveDivider variant="bToA" />
-              <HowWeWork />
-            </div>
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left section-bg-ink">
+            <WaveDivider variant="bToA" />
+            <HowWeWork />
           </div>
 
           <div className="section-bg-lila">
@@ -77,7 +76,12 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToB" />
+            {/* Panda asomándose a la izquierda desde el wave que separa
+                tutoriales de la sección Tools */}
+            <div className="peekPandaWaveWrap">
+              <PeekPanda side="left" />
+              <WaveDivider variant="aToB" />
+            </div>
             <SkillsSummary />
           </div>
 

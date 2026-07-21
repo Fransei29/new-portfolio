@@ -14,7 +14,11 @@ export const useScrollAnimation = () => {
             }
           });
         },
-        { threshold: 0.1 }
+        // threshold: 0 + rootMargin dispara en cuanto el borde superior del bloque
+        // (donde vive el wave) entra al viewport, independientemente de la altura
+        // del contenido. Con threshold:0.1 los bloques altos disparaban tarde y los
+        // bajos temprano, así que el wave y su sección aparecían desfasados.
+        { threshold: 0, rootMargin: '0px 0px -12% 0px' }
       );
 
       elementsRef.current.forEach((el) => {

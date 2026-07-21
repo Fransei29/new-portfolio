@@ -79,19 +79,33 @@ const Projects = () => {
               {t('pages.projects.subtitle')}
             </p>
 
-            <div className={styles.tabsBar} role="tablist">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  role="tab"
-                  aria-selected={activeTab === tab.key}
-                  className={`${styles.tab} ${activeTab === tab.key ? styles.tabActive : ''}`}
-                  onClick={() => setActiveTab(tab.key)}
-                >
-                  <span className={styles.tabLabel}>{t(tab.labelKey)}</span>
-                  <span className={styles.tabCount}>{getTabCount(tab.key)}</span>
-                </button>
-              ))}
+            <div className={styles.tabsBarWrap}>
+              {/* Isotipo panda que se asoma por encima de la línea, a la derecha
+                  (mismo guiño que el panda del dashboard del hero). El clip lo
+                  recorta justo en la línea: solo asoma la mitad superior. */}
+              <div className={styles.peekPandaClip} aria-hidden>
+                <img
+                  className={styles.peekPanda}
+                  src="/isotipo-panda.svg"
+                  alt=""
+                  aria-hidden
+                  loading="lazy"
+                />
+              </div>
+              <div className={styles.tabsBar} role="tablist">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.key}
+                    role="tab"
+                    aria-selected={activeTab === tab.key}
+                    className={`${styles.tab} ${activeTab === tab.key ? styles.tabActive : ''}`}
+                    onClick={() => setActiveTab(tab.key)}
+                  >
+                    <span className={styles.tabLabel}>{t(tab.labelKey)}</span>
+                    <span className={styles.tabCount}>{getTabCount(tab.key)}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className={styles.projectsGrid}>

@@ -57,18 +57,33 @@
   }
 }
 
-/* Variant: secondary (soft surface — default = old hover) */
+/* Variant: secondary — CTA de navegación con identidad de marca.
+   Sólido lila protagonista, forma píldora, sombra elevada y flecha que
+   se desliza en hover (mismo lenguaje que el "Book a call" del hero). */
 .secondary {
-  height: 3rem;
-  padding: 0 2rem;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.65);
-  color: var(--text-color);
-  border-color: rgba(0, 0, 0, 0.32);
+  /* Mismas medidas que los CTA del hero (Book a call) */
+  height: 2.875rem;
+  padding: 0 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  /* Mismo radio que los CTA del hero (cuadrado suave, var(--br)) */
+  border-radius: var(--br);
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: 1px solid var(--primary-color);
+  /* Sombra moderna y calmada: difusa, baja opacidad, sin "flotar" */
+  box-shadow: 0 2px 8px rgba(46, 41, 78, 0.12);
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(0, 0, 0, 0.5);
+    /* Mismo color, apenas más intenso (sin cambiar de tono) */
+    filter: brightness(0.92);
+    box-shadow: 0 4px 12px rgba(46, 41, 78, 0.16);
+
+    .arrow {
+      transform: translateX(3px);
+    }
   }
 
   @media (max-width: 768px) {
@@ -77,16 +92,28 @@
     font-size: 0.925rem;
   }
 
+  /* En dark el protagonista #2e294e no contrasta sobre grafito: se usa el
+     Lila Principal (#8e7ae6) como relleno, igual que el resto del tema dark. */
   :global(html.dark) & {
-    color: rgb(228, 227, 227);
-    background-color: rgba(0, 0, 0, 0.45);
-    border-color: rgba(255, 255, 255, 0.32);
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.65);
-      border-color: rgba(255, 255, 255, 0.5);
+      /* En dark el fondo es lila claro: "más fuerte" = un punto más luminoso */
+      filter: brightness(1.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
     }
   }
+}
+
+/* Flecha del CTA: se desliza a la derecha en hover (ver .secondary:hover) */
+.arrow {
+  margin-left: 0.55rem;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
 .icon {

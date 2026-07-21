@@ -267,9 +267,12 @@ html.dark {
   background-color: var(--grafito);
   /* Alias usado por secciones con gradiente claro en light; evita fondos inválidos si se referencia sin definir */
   --background-colorA-dark: var(--grafito);
-  /* Mismo token que las secciones; el match en dark fallaba sobre todo por el drop-shadow del SVG (ver WaveDivider) */
-  --wave-a: var(--grafito);
-  --wave-b: var(--grafito);
+  /* Alternancia de fondo por sección en dark (igual que en light, pero con tonos
+     oscuros). A = base grafito; B = grafito elevado (un punto más claro). Las
+     secciones B usan var(--wave-b) como fondo para que la costura del wave calce.
+     El drop-shadow del SVG se desactiva en dark (ver WaveDivider) para no romperla. */
+  --wave-a: var(--grafito);          /* #292833 — fondo A */
+  --wave-b: var(--grafito-elevado);  /* #2e2a3a — fondo B */
   /* En dark el protagonista se aclara: #2e294e no contrasta sobre grafito,
      así que Lila Principal toma el rol primario y Lila Suave el acento. */
   --primary-color: var(--lila-principal);
@@ -417,6 +420,58 @@ html.dark .section-bg-ink {
 
 html.dark .hero-section::before {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Aurora minimalista: un resplandor lila muy tenue a un costado, que se
+   desplaza muy lento. Apenas perceptible; solo da algo de profundidad. */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  filter: blur(70px);
+  pointer-events: none;
+  will-change: transform;
+  /* Aurora lila muy sutil: derecha (lila principal) e izquierda (lila suave) */
+  background:
+    radial-gradient(42vw 42vw at 104% 92%, rgba(142, 122, 230, 0.1), transparent 60%),
+    radial-gradient(34vw 34vw at -10% 78%, rgba(181, 156, 248, 0.14), transparent 60%);
+  animation: heroAurora 52s ease-in-out infinite alternate;
+}
+
+html.dark .hero-section::after {
+  background:
+    radial-gradient(42vw 42vw at 104% 92%, rgba(142, 122, 230, 0.12), transparent 60%),
+    radial-gradient(34vw 34vw at -10% 78%, rgba(181, 156, 248, 0.16), transparent 60%);
+}
+
+@keyframes heroAurora {
+  from { transform: translate(0, -50%); }
+  to { transform: translate(-3%, -54%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section::after {
+    filter: blur(52px);
+  }
+}
+
+/* Wrapper del wave inferior de "Backed by data" con el panda asomándose.
+   Relative para anclar el PeekPanda; el wave (dentro) va por encima del panda
+   para tapar su base, dando el efecto de asomarse desde atrás de la curva. */
+.peekPandaWaveWrap {
+  position: relative;
+}
+
+.peekPandaWaveWrap > :not([class*="clip"]) {
+  position: relative;
+  z-index: 3;
 }
 
 @media (max-width: 768px) {

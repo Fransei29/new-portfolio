@@ -9,7 +9,8 @@
 
   :global(html.dark) & {
     background-image: none;
-    background-color: var(--dark-light);
+    /* Fondo B en dark: elevado, para que el wave marque la división (calza con --wave-b) */
+    background-color: var(--wave-b);
     color: rgb(235, 235, 235);
   }
 
@@ -85,7 +86,9 @@
   }
 
   :global(html.dark) & {
-    background-color: var(--card-bg);
+    /* Fondo de sección ahora es --wave-b (#2e2a3a); la tarjeta sube a
+       --card-bg-soft (#35304a) para despegarse y leerse. */
+    background-color: var(--card-bg-soft);
     color: rgb(226, 226, 226);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-sm);

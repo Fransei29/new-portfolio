@@ -9,7 +9,8 @@
 
     :global(html.dark) & {
       background-image: none;
-      background-color: var(--dark-light);
+      /* Sección B en dark: fondo elevado (calza con --wave-b) */
+      background-color: var(--wave-b);
       color: rgb(236, 235, 235);
     }
 
@@ -43,37 +44,6 @@
     margin: 0.75rem auto 1rem;
     padding: 0;
   }
-}
-
-.dragHint {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--subtitle-color);
-  margin: -0.5rem 0 1.5rem 0;
-  font-weight: 400;
-
-  :global(html.dark) & {
-    color: rgba(200, 200, 210, 0.85);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-}
-
-.dragHintIcon {
-  flex-shrink: 0;
-  color: var(--primary-color);
-  animation: handShake 1.5s ease-in-out infinite;
-}
-
-@keyframes handShake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(14deg); }
-  75% { transform: rotate(-14deg); }
 }
 
 .skillsTitle {
@@ -118,19 +88,82 @@
   font-size: 0.95rem;
   font-weight: 400;
   padding-left: 1rem;
-}
-
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
+  }
+}
+
+/* Marquee de 4 filas que se deslizan en direcciones alternas (izq/der/izq/der).
+   Cada .marqueeTrack contiene la fila duplicada 2× y se anima con translateX;
+   al desplazarse exactamente el 50% (una copia completa) el loop es imperceptible. */
+.marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  /* Full-bleed: rompe el max-width del contenedor y ocupa todo el ancho del
+     viewport, igual que el carrusel de Testimonials. */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-top: 1rem;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
     gap: 0.75rem;
     margin-bottom: 0.5rem;
-    padding: 0.25rem 1.25rem;
+  }
+}
+
+.marqueeRow {
+  overflow: hidden;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  will-change: transform;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+}
+
+/* La fila está duplicada 2×; desplazar -50% mueve exactamente una copia,
+   así el punto de reset coincide con el inicio y no se ve costura. */
+.toLeft {
+  animation: marqueeLeft 90s linear infinite;
+}
+
+.toRight {
+  animation: marqueeRight 90s linear infinite;
+}
+
+/* Pausa delicada al pasar el mouse por encima de la sección */
+.marquee:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toLeft,
+  .toRight {
+    animation: none;
   }
 }
 
@@ -142,6 +175,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  /* En el marquee las tarjetas no deben encogerse ni estirarse. El ancho es el
+     mismo que tenían en el grid original: (1440 − 3×16px gap) / 4 = 348px.
+     El padding/alto no cambian. */
+  flex-shrink: 0;
+  width: 348px;
+  box-sizing: border-box;
   padding: 1.1rem 1.75rem;
   margin: 0;
   text-align: center;
@@ -185,7 +224,9 @@
   }
     
   :global(html.dark) & {
-    background-color: var(--card-bg);
+    /* Fondo de sección ahora es --wave-b (#2e2a3a); la tarjeta sube a
+       --card-bg-soft (#35304a) para despegarse y leerse. */
+    background-color: var(--card-bg-soft);
     color: white;
 
     &::before {
@@ -198,6 +239,13 @@
         rgba(248, 248, 248, 0.1) 100%
       );
     }
+  }
+
+  @media (max-width: 768px) {
+    /* Tarjetas compactas en mobile: menos ancho y padding para que no se vean
+       enormes. (Desktop queda intacto con 348px / 1.1rem 1.75rem.) */
+    width: auto;
+    padding: 0.7rem 1rem;
   }
 }
 
@@ -215,7 +263,6 @@
 
 .skillsCard:hover {
   background-color: rgba(134, 118, 190, 0.08);
-  transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(46, 41, 78, 0.08);
 
   :global(html.dark) & {
@@ -247,54 +294,6 @@
   .skillIcon {
     width: 24px;
     height: 24px;
-  }
-}
-
-// Estilos para SortableJS
-// Ghost = el hueco que deja la tarjeta mientras se arrastra. Placeholder tenue
-// con tinte lila, sin rotación, para indicar dónde caerá sin distraer.
-.sortableGhost {
-  opacity: 1;
-  background-color: rgba(134, 118, 190, 0.06) !important;
-  box-shadow: none !important;
-
-  &::before {
-    background: transparent !important;
-  }
-
-  > * {
-    opacity: 0.25;
-  }
-}
-
-// Chosen = el elemento seleccionado (mouse down) antes de moverse.
-.sortableChosen {
-  cursor: grabbing;
-}
-
-// Drag = la copia que sigue al cursor. Se despega con sombra marcada y scale
-// sutil, sin rotación ni transición (SortableJS lo mueve por transform en cada
-// frame; una transición aquí genera lag/arrastre).
-.sortableDrag {
-  opacity: 1 !important;
-  transform: scale(1.04);
-  box-shadow: 0 14px 32px rgba(46, 41, 78, 0.22) !important;
-  cursor: grabbing;
-  z-index: 1000;
-
-  &::before {
-    animation: none !important;
-  }
-}
-
-// Hover effect para indicar que es arrastrable
-.skillsGrid {
-  &:hover .skillsCard {
-    cursor: grab;
-    
-    &:active {
-      cursor: grabbing;
-    }
   }
 }
 

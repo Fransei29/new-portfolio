@@ -5,9 +5,6 @@ import Image from 'next/image';
 import styles from './SkillsSummary.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
-import { Hand } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-import Sortable from 'sortablejs';
 
 // SVG importados como componentes
 import JavascriptIcon from '../icons/javascript.svg';
@@ -53,32 +50,36 @@ const mainSkills: Skill[] = [
   { name: "Nest.js", icon: NestIcon },
 ];
 
+// Reparte los skills en 4 filas (de a 4). Cada fila se desliza en marquee
+// automático, alternando dirección: izq, der, izq, der.
+const ROWS = 4;
+const skillRows: Skill[][] = Array.from({ length: ROWS }, (_, r) =>
+  mainSkills.filter((_, i) => i % ROWS === r)
+);
+
+const SkillCardItem: React.FC<{ skill: Skill }> = ({ skill }) => {
+  const isComponent = typeof skill.icon !== 'string';
+  return (
+    <div className={styles.skillsCard}>
+      {isComponent ? (
+        <skill.icon className={styles.skillsIconA} />
+      ) : (
+        <Image
+          src={typeof skill.icon === 'string' ? skill.icon : ''}
+          alt={`${skill.name} Icon`}
+          width={24}
+          height={24}
+          className={styles.skillIcon}
+        />
+      )}
+      <span className={styles.skillName}>{skill.name}</span>
+    </div>
+  );
+};
+
 const SkillsSummary: React.FC = () => {
   const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
   const { t } = useLanguage();
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!gridRef.current) return;
-
-    // Drag suave y consistente entre navegadores. forceFallback usa el drag
-    // propio de SortableJS (no el nativo del browser), garantizando que dragClass
-    // se aplique y el movimiento se sienta parejo.
-    const sortable = Sortable.create(gridRef.current, {
-      group: 'summary',
-      animation: 220,
-      easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
-      ghostClass: styles.sortableGhost,
-      chosenClass: styles.sortableChosen,
-      dragClass: styles.sortableDrag,
-      forceFallback: true,
-      fallbackTolerance: 4,
-      delay: 40,
-      delayOnTouchOnly: true,
-    });
-
-    return () => sortable.destroy();
-  }, []);
 
   return (
     <section className={styles.skillsSummaryContainer}>
@@ -89,30 +90,23 @@ const SkillsSummary: React.FC = () => {
         <p className={styles.subtitle}>
           {t('skills.summarySubtitle')}
         </p>
-        <p className={styles.dragHint}>
-          <Hand className={styles.dragHintIcon} size={18} aria-hidden />
-          {t('skills.dragHint')}
-        </p>
 
         <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
-          <div className={styles.skillsGrid} ref={gridRef}>
-            {mainSkills.map((skill, index) => {
-              const isComponent = typeof skill.icon !== 'string';
-
+          <div className={styles.marquee}>
+            {skillRows.map((row, r) => {
+              // Filas pares (0,2) → izquierda; impares (1,3) → derecha
+              const dirClass = r % 2 === 0 ? styles.toLeft : styles.toRight;
+              // Repetimos la fila para llenar el ancho (evita huecos en desktop),
+              // luego duplicamos ese bloque para que el loop a -50% no tenga costura.
+              const base = [...row, ...row, ...row];
+              const loop = [...base, ...base];
               return (
-                <div className={styles.skillsCard} key={index}>
-                  {isComponent ? (
-                    <skill.icon className={styles.skillsIconA} />
-                  ) : (
-                    <Image
-                      src={typeof skill.icon === 'string' ? skill.icon : ''}
-                      alt={`${skill.name} Icon`}
-                      width={24}
-                      height={24}
-                      className={styles.skillIcon}
-                    />
-                  )}
-                  <span className={styles.skillName}>{skill.name}</span>
+                <div className={styles.marqueeRow} key={r}>
+                  <div className={`${styles.marqueeTrack} ${dirClass}`}>
+                    {loop.map((skill, i) => (
+                      <SkillCardItem skill={skill} key={`${r}-${i}`} />
+                    ))}
+                  </div>
                 </div>
               );
             })}

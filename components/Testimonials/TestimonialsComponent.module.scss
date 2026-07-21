@@ -227,7 +227,9 @@
     }
 
     :global(html.dark) & {
-      background-color: var(--card-bg);
+      /* Fondo de sección A es #292833; la tarjeta sube a --card-bg-soft
+         (#35304a) para tener contraste suficiente y leerse. */
+      background-color: var(--card-bg-soft);
       color: rgb(226, 226, 226);
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow-sm);

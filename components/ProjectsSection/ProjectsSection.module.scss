@@ -12,7 +12,8 @@
 
   :global(html.dark) & {
     background-image: none;
-    background-color: var(--dark-light);
+    /* Variante projects = sección B: fondo elevado (calza con --wave-b) */
+    background-color: var(--wave-b);
     color: rgb(235, 235, 235);
   }
 }
@@ -22,7 +23,8 @@
   background-color: var(--background-colorA);
 
   :global(html.dark) & {
-    background-color: var(--dark-light);
+    /* Variante tutorials = sección A: fondo base (calza con --wave-a) */
+    background-color: var(--wave-a);
   }
 }
 
