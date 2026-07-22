@@ -77,7 +77,7 @@
   .peekPandaClip {
     position: absolute;
     bottom: 0;
-    right: 130px;
+    right: 12px;
     width: 208px;
     height: 280px;
     overflow: hidden;
@@ -87,7 +87,7 @@
     @media (max-width: 768px) {
       width: 150px;
       height: 200px;
-      right: 64px;
+      right: 6px;
     }
   }
 
@@ -100,6 +100,9 @@
     position: absolute;
     right: 0;
     bottom: -70px;
+    /* Inclinación apenas a la izquierda */
+    transform: rotate(-1.5deg);
+    transform-origin: bottom center;
 
     @media (max-width: 768px) {
       width: 150px;

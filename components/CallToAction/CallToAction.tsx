@@ -26,6 +26,15 @@ export default function CallToAction() {
 
   return (
     <section className={styles.ctaContainer}>
+      {/* Panda asomándose por el borde derecho del contenedor; el overflow:hidden
+          del ctaContainer lo recorta en ese borde. */}
+      <img
+        className={styles.peekPanda}
+        src="/isotipo-panda-contorno.svg"
+        alt=""
+        aria-hidden
+        loading="lazy"
+      />
       <div className={styles.ctaContent}>
         <p className={styles.ctaText}>
           {buttonText.split('\n').map((line, index) => (

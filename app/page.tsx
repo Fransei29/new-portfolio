@@ -16,7 +16,6 @@ import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
 import HowWeWork from '../components/HowWeWork/HowWeWork';
 import WaveDivider from '../components/WaveDivider/WaveDivider';
-import PeekPanda from '../components/PeekPanda/PeekPanda';
 
 export default function Home() {
   const elementsRef = useScrollAnimation();
@@ -75,11 +74,21 @@ export default function Home() {
             <ProjectsSection variant="tutorials" />
           </div>
 
-          <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
-            {/* Panda asomándose a la izquierda desde el wave que separa
-                tutoriales de la sección Tools */}
-            <div className="peekPandaWaveWrap">
-              <PeekPanda side="left" />
+          {/* El panda "programando" se ancla al borde superior de este bloque
+              (la CRESTA de la curva del wave gris) y asoma hacia arriba. Va detrás
+              del relleno gris (curva del wave + SkillsSummary) que lo tapa con la
+              forma exacta de la curva. El fondo blanco del wave se hace
+              transparente (variante toolsWave) para que NO tape al panda con la
+              franja de 52px sobre la curva. */}
+          <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left toolsPandaHost">
+            <img
+              className="toolsPanda"
+              src="/isotipo-panda-programando.svg"
+              alt=""
+              aria-hidden
+              loading="lazy"
+            />
+            <div className="toolsWave">
               <WaveDivider variant="aToB" />
             </div>
             <SkillsSummary />
@@ -91,8 +100,11 @@ export default function Home() {
           </div>
 
           <div ref={(el) => {elementsRef.current[12] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToCta" />
-            <CallToAction />
+            {/* CTA como contenedor separado: ancho contenido, centrado, esquinas
+                redondeadas. Sin wave arriba. */}
+            <div className="ctaWrap">
+              <CallToAction />
+            </div>
           </div>
       </section>
 

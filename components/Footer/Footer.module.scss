@@ -7,6 +7,23 @@
   color: rgb(230, 230, 230);
   border-top: none;
   box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  /* Zona inferior amplia para el wordmark grande, debajo de la línea + copyright. */
+  padding-bottom: 15rem;
+
+  @media (max-width: 768px) {
+    padding-bottom: 9.5rem;
+  }
+  /* Puntas superiores apenas tendidas (elíptico sutil), en relación con el radio
+     del contenedor del CTA. Sintaxis: horizontal / vertical. */
+  border-top-left-radius: 34px 22px;
+  border-top-right-radius: 34px 22px;
+
+  @media (max-width: 768px) {
+    border-top-left-radius: 24px 16px;
+    border-top-right-radius: 24px 16px;
+  }
 
   :global(html.dark) & {
     background-color: #292833;
@@ -16,10 +33,36 @@
   }
 }
 
+/* Wordmark de marca grande y muy tenue, asomando en el borde inferior del footer
+   (cortado por el overflow:hidden). Detrás del contenido. */
+.footerWordmark {
+  position: absolute;
+  left: 50%;
+  /* Pegado al fondo del footer, asomando desde debajo del copyright. */
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 88%;
+  max-width: 1300px;
+  height: auto;
+  opacity: 0.035;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    width: 120%;
+    max-width: none;
+    bottom: 0;
+    opacity: 0.045;
+  }
+}
+
 .container {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-max-width);
   margin-inline: auto;
-  padding: 6rem 1rem 12rem;
+  padding: 6rem 1rem 3rem;
   display: grid;
   grid-template-columns: 2fr 1.5fr 1.5fr;
   gap: 6rem;
@@ -30,7 +73,7 @@
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 3rem;
-    padding: 3rem 1rem 4rem;
+    padding: 3rem 1rem 2rem;
   }
 }
 
@@ -278,11 +321,13 @@
 }
 
 .bottomBar {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-max-width);
   margin-inline: auto;
-  padding: 2.5rem 1rem;
+  padding: 1.25rem 1rem 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: center;
+  text-align: left;
   font-size: 0.9rem;
   color: rgba(235, 235, 235, 0.6);
   box-sizing: border-box;

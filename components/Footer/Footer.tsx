@@ -100,6 +100,15 @@ const Footer = () => {
       <div className={styles.bottomBar}>
         <p>&copy; 2026 {t('footer.by')}. All rights reserved.</p>
       </div>
+
+      {/* Wordmark de marca, grande y muy tenue, asomando en el borde inferior */}
+      <img
+        className={styles.footerWordmark}
+        src="/footer-wordmark.svg"
+        alt=""
+        aria-hidden
+        loading="lazy"
+      />
     </footer>
   );
 };

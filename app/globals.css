@@ -462,23 +462,91 @@ html.dark .hero-section::after {
   }
 }
 
-/* Wrapper del wave inferior de "Backed by data" con el panda asomándose.
-   Relative para anclar el PeekPanda; el wave (dentro) va por encima del panda
-   para tapar su base, dando el efecto de asomarse desde atrás de la curva. */
-.peekPandaWaveWrap {
-  position: relative;
-}
-
-.peekPandaWaveWrap > :not([class*="clip"]) {
-  position: relative;
-  z-index: 3;
-}
-
 @media (max-width: 768px) {
   .hero-section {
     min-height: auto !important;
     padding: 1.5rem 0 0;
     align-items: flex-start;
+  }
+}
+
+/* Host del panda "programando": el bloque wave(aToB) + SkillsSummary. Relative
+   para anclar el panda a su borde SUPERIOR (donde vive el wave). */
+.toolsPandaHost {
+  position: relative;
+}
+
+/* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
+   ENCIMA de la curva sea transparente y deje ver al panda que está detrás. Solo
+   el relleno gris de la curva (opaco) tapa la base del panda, siguiendo la curva
+   exacta. Sin fondo blanco → sin franja blanca. La sombra del wave se quita
+   porque dibujaría una línea sobre el panda. */
+.toolsWave [class*="WaveDivider_root"] {
+  background: transparent !important;
+}
+.toolsWave [class*="WaveDivider_root"] path {
+  filter: none !important;
+}
+
+/* El panda se ancla al borde superior del host (top:0 ≈ cresta de la curva) y
+   asoma hacia arriba. Va DETRÁS del wave (z-index:-1): el relleno gris de la
+   curva lo tapa por abajo; la zona transparente sobre la curva lo deja ver. */
+.toolsPanda {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: 292px;
+  height: auto;
+  transform: translateY(-56%) rotate(-1.25deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    width: 185px;
+    left: 70px;
+    transform: translateY(-54%) rotate(-1.25deg);
+  }
+}
+
+/* CTA del final del home como contenedor separado: ancho contenido (igual que
+   el resto de las secciones), centrado con márgenes laterales y esquinas
+   redondeadas. El .ctaContainer usa filter/will-change en sus pseudos → capa
+   compuesta que puede ignorar el clip del padre, por eso el redondeo va DIRECTO
+   sobre el .ctaContainer, además del overflow del wrap. */
+.ctaWrap {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  margin-block: 4rem 6rem;
+  /* Esquinas superiores apenas tendidas (elíptico sutil), inferiores iguales. */
+  border-radius: 34px 34px 24px 24px / 22px 22px 24px 24px;
+  overflow: hidden;
+  isolation: isolate;
+  /* Sombra delicada para despegar e integrar el CTA en la pantalla. */
+  box-shadow: 0 18px 50px -20px rgba(46, 41, 78, 0.35),
+    0 6px 18px -12px rgba(46, 41, 78, 0.25);
+}
+
+html.dark .ctaWrap {
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.55),
+    0 6px 18px -12px rgba(0, 0, 0, 0.4);
+}
+
+.ctaWrap > * {
+  margin-top: 0;
+  border-radius: 34px 34px 24px 24px / 22px 22px 24px 24px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .ctaWrap > * {
+    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
+  }
+
+  .ctaWrap {
+    margin-inline: 1rem;
+    margin-block: 2.5rem 3.5rem;
+    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
   }
 }
 
@@ -716,6 +784,38 @@ html.dark .hero-section::after {
 .visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Sincronización wave ↔ contenido: cuando un bloque externo (el que contiene el
+   wave) se vuelve .visible, sus hijos .fade-in-* internos (título, subtítulo,
+   cards de HowWeWork / WhyChooseUs) entran AL MISMO TIEMPO que el wave, en vez de
+   esperar su propio IntersectionObserver (que los desfasaba). El stagger se
+   conserva con transition-delay escalonado por posición. */
+.visible .fade-in-left,
+.visible .fade-in-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.visible .fade-in-left,
+.visible .fade-in-right {
+  transition-delay: 0.05s;
+}
+.visible .fade-in-left:nth-of-type(2),
+.visible .fade-in-right:nth-of-type(2) {
+  transition-delay: 0.12s;
+}
+.visible .fade-in-left:nth-of-type(3),
+.visible .fade-in-right:nth-of-type(3) {
+  transition-delay: 0.19s;
+}
+.visible .fade-in-left:nth-of-type(4),
+.visible .fade-in-right:nth-of-type(4) {
+  transition-delay: 0.26s;
+}
+.visible .fade-in-left:nth-of-type(5),
+.visible .fade-in-right:nth-of-type(5) {
+  transition-delay: 0.33s;
 }
 
 /* --- HERO ENTRANCE ---
