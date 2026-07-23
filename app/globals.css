@@ -497,7 +497,7 @@ html.dark .hero-section::after {
   left: 250px;
   width: 292px;
   height: auto;
-  transform: translateY(-56%) rotate(-1.25deg);
+  transform: translateY(-54%) rotate(-1.25deg);
   pointer-events: none;
   user-select: none;
   z-index: -1;
@@ -505,7 +505,7 @@ html.dark .hero-section::after {
   @media (max-width: 768px) {
     width: 185px;
     left: 70px;
-    transform: translateY(-54%) rotate(-1.25deg);
+    transform: translateY(-52%) rotate(-1.25deg);
   }
 }
 

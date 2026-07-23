@@ -53,95 +53,212 @@
   }
 }
 
+// Ruta vertical en zigzag: los pasos bajan en dos columnas, alternando lado
+// (01 izq, 02 der, 03 izq, 04 der). Un riel vertical central los conecta.
 .stepsGrid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.75rem;
+  grid-template-columns: 1fr 1fr;
+  // Un cachín más de aire central que el zigzag original, para que el riel respire.
+  column-gap: 4.5rem;
+  row-gap: 2rem;
 
-  // Connector path (horizontal, desktop) — solid line with fade-out ends
-  &::before {
-    content: '';
-    position: absolute;
-    top: 3.5rem;
-    left: 7%;
-    right: 7%;
-    height: 2px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(255, 255, 255, 0.38) 12%,
-      rgba(255, 255, 255, 0.38) 88%,
-      transparent 100%
-    );
-    z-index: 0;
-    pointer-events: none;
+  // El riel base ya no es un pseudo-elemento con topes arbitrarios: ahora es
+  // .railBase, medido para ir exactamente del primer punto al último.
 
-    :global(html.dark) & {
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255, 255, 255, 0.38) 12%,
-        rgba(255, 255, 255, 0.38) 88%,
-        transparent 100%
-      );
-    }
-  }
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-
-    &::before { display: none; }
-  }
+  // Cada paso vive en SU PROPIA fila y alterna de columna: impar a la izquierda,
+  // par a la derecha. Al forzar grid-row por posición, el lado opuesto queda
+  // vacío y las tarjetas bajan escalonadas alrededor del riel central.
+  // Se cuenta SOLO entre .stepCard (of type .stepCard), así la capa de rieles
+  // —u cualquier otro hijo que se agregue— no corre la numeración.
+  .stepCard:nth-of-type(1) { grid-column: 1; grid-row: 1; }
+  .stepCard:nth-of-type(2) { grid-column: 2; grid-row: 2; }
+  .stepCard:nth-of-type(3) { grid-column: 1; grid-row: 3; }
+  .stepCard:nth-of-type(4) { grid-column: 2; grid-row: 4; }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    column-gap: 0;
+    row-gap: 1rem;
 
-    // Connector path (vertical, mobile) — solid line with fade-out ends
-    &::before {
-      display: block;
-      top: 2rem;
-      bottom: 2rem;
-      left: calc(1.25rem + 22px);
-      right: auto;
-      width: 1px;
-      height: auto;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(255, 255, 255, 0.2) 8%,
-        rgba(255, 255, 255, 0.2) 92%,
-        transparent 100%
-      );
-
-      :global(html.dark) & {
-        background: linear-gradient(
-          to bottom,
-          transparent 0%,
-          rgba(255, 255, 255, 0.2) 8%,
-          rgba(255, 255, 255, 0.2) 92%,
-          transparent 100%
-        );
-      }
+    .stepCard,
+    .stepCard:nth-of-type(1),
+    .stepCard:nth-of-type(2),
+    .stepCard:nth-of-type(3),
+    .stepCard:nth-of-type(4) {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 0;
+      max-width: none;
+      justify-self: stretch;
     }
   }
+}
+
+// Capa de los rieles: se superpone a la grilla sin ocupar celda ni afectar el
+// layout de las tarjetas. Es <span> para no contar en el nth-of-type de los div.
+.railLayer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Riel base: línea tenue que va EXACTAMENTE del primer punto al último
+// (top/height medidos en el componente). Sin sobrantes arriba ni abajo.
+.railBase {
+  position: absolute;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    left: calc(1.25rem + 22px);
+    transform: none;
+  }
+}
+
+// Tramo recorrido: del primer punto hasta el nodo activo. El movimiento es
+// deliberadamente contenido — recorrido largo y easing suave, sin rebote.
+.railProgress {
+  position: absolute;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: var(--primary-color-light);
+  z-index: 1;
+  pointer-events: none;
+  will-change: height;
+  // Movimiento controlado: lento, entrada y salida suaves, sin overshoot.
+  transition: height 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  @media (max-width: 768px) {
+    left: calc(1.25rem + 22px);
+    transform: none;
+  }
+}
+
+// Dot al final del tramo recorrido: un punto limpio, sin pulso ni halos
+// llamativos. Minimalista: núcleo claro y un aro lila fino.
+.railDot {
+  position: absolute;
+  bottom: -3.5px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 2.5px var(--primary-color-light),
+    0 0 10px 1px rgba(142, 122, 230, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railProgress { transition: none; }
 }
 
 .stepCard {
   position: relative;
   z-index: 1;
+
+  // Conector del paso: una línea fina que va del borde interior de la tarjeta
+  // hasta el riel central (ancho = mitad del column-gap). En su PUNTA, sobre el
+  // riel, lleva UN solo nodo (::after). Así no hay puntos duplicados sueltos.
+  .stepNode {
+    position: absolute;
+    top: 2.75rem;
+    width: 2.25rem; // = mitad de column-gap (4.5rem) → la punta cae en el centro
+    height: 2px;
+    background: rgba(142, 122, 230, 0.28);
+    z-index: 2;
+    transition: background-color 0.4s ease;
+
+    // El nodo, en la punta que toca el riel.
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2e294e;
+      border: 2px solid rgba(142, 122, 230, 0.5);
+      transition: background-color 0.4s ease, border-color 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+  }
+
+  // Impar (pasos 1 y 3) → tarjeta a la izquierda: el conector sale de su borde
+  // derecho hacia el centro; el nodo queda en el extremo derecho (sobre el riel).
+  &:nth-of-type(odd) .stepNode {
+    left: 100%;
+    &::after { right: -5px; transform: translate(50%, -50%); }
+  }
+  // Par (pasos 2 y 4) → tarjeta a la derecha: el conector sale de su borde
+  // izquierdo; el nodo queda en el extremo izquierdo (sobre el riel).
+  &:nth-of-type(even) .stepNode {
+    right: 100%;
+    &::after { left: -5px; transform: translate(-50%, -50%); }
+  }
+
+  // Paso YA VISITADO: nodo relleno, sobrio (sin glow) — el recorrido hecho.
+  &.stepDone .stepNode {
+    background: rgba(142, 122, 230, 0.45);
+
+    &::after {
+      background: var(--primary-color-light);
+      border-color: var(--primary-color-light);
+    }
+  }
+
+  // Paso PROTAGONISTA (donde está el dot): nodo encendido con glow.
+  &.stepCurrent .stepNode {
+    background: rgba(142, 122, 230, 0.6);
+
+    &::after {
+      background: var(--primary-color-light);
+      border-color: var(--primary-color-light);
+      box-shadow: 0 0 0 4px rgba(142, 122, 230, 0.18),
+        0 0 14px 3px rgba(142, 122, 230, 0.5);
+    }
+  }
+
+  @media (max-width: 768px) {
+    // En una columna el conector no aplica; el nodo se apoya en el riel izquierdo.
+    .stepNode,
+    &:nth-of-type(odd) .stepNode,
+    &:nth-of-type(even) .stepNode {
+      left: 22px;
+      right: auto;
+      top: 2rem;
+      width: 0;
+      background: transparent;
+
+      &::after { left: 0; right: auto; transform: translate(-50%, -50%); }
+    }
+  }
 }
 
 .stepCard {
-  background: #fcfbff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  // Off-white con un velo lila apenas perceptible en lugar del blanco puro:
+  // la tarjeta se apoya sobre el fondo lila profundo en vez de aplastarlo, pero
+  // sigue siendo bien clara para que el texto oscuro se lea sin problemas.
+  background: linear-gradient(180deg, #faf9ff 0%, #f3f0fb 100%);
+  border: 1px solid rgba(142, 122, 230, 0.18);
   border-radius: var(--br);
   padding: 2rem 1.75rem;
-  // Halo blanco tenue: integra la tarjeta clara sobre el fondo oscuro sin corte duro
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 4px 20px rgba(255, 255, 255, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  // Sombra lila difusa (no halo blanco): integra la tarjeta con el fondo oscuro
+  // con un borde de contacto suave en vez de un corte blanco duro.
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 10px 30px -12px rgba(20, 16, 45, 0.55);
+  // Sin transform/opacity: las maneja el fade-in de entrada (.visible).
+  transition: box-shadow 0.45s ease, border-color 0.45s ease;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -153,9 +270,9 @@
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 28px rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 16px 38px -12px rgba(20, 16, 45, 0.6);
+    border-color: rgba(142, 122, 230, 0.4);
 
     :global(html.dark) & {
       box-shadow: var(--shadow-md);
@@ -166,10 +283,46 @@
   :global(html.dark) & {
     /* La tarjeta ya no es blanca en dark: sube a --card-bg-soft (#35304a)
        para leerse sobre el fondo lila profundo (#2e294e) de la sección. */
-    background-color: var(--card-bg-soft);
+    background: var(--card-bg-soft);
     color: rgb(226, 226, 226);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-sm);
+  }
+
+  // --- Estados del recorrido -------------------------------------------------
+  // IMPORTANTE: acá NO se tocan `transform` ni `opacity`: esas dos propiedades
+  // las maneja el fade-in de entrada (.fade-in-left/right + .visible). Si las
+  // pisáramos, la tarjeta quedaría trabada en su translateX inicial. El
+  // protagonismo se expresa solo con borde, sombra, ícono y número.
+
+  // PROTAGONISTA: anillo lila y sombra más profunda — la que "está ocurriendo".
+  &.stepCurrent {
+    border-color: rgba(142, 122, 230, 0.6);
+    box-shadow: 0 0 0 1px rgba(142, 122, 230, 0.38),
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 22px 46px -16px rgba(20, 16, 45, 0.7),
+      0 0 34px -6px rgba(142, 122, 230, 0.5);
+
+    .iconWrapper {
+      background-color: var(--icon-bg-hover);
+      border: var(--icon-border-hover);
+    }
+
+    .stepNumber {
+      color: var(--primary-color);
+      opacity: 1;
+    }
+
+    :global(html.dark) & {
+      border-color: rgba(142, 122, 230, 0.5);
+      box-shadow: 0 0 0 1px rgba(142, 122, 230, 0.3),
+        var(--shadow-md);
+    }
+  }
+
+  // Ya visitado: borde apenas teñido, sin glow — recorrido hecho.
+  &.stepDone {
+    border-color: rgba(142, 122, 230, 0.28);
   }
 }
 

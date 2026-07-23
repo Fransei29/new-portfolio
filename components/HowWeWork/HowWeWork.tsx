@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HiArrowRight } from 'react-icons/hi';
 import styles from './HowWeWork.module.scss';
@@ -18,6 +18,88 @@ interface Step {
 const HowWeWork = () => {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
+
+  // El dot NO se desliza continuo: avanza por ETAPAS (paso 1→2→3→4) según el
+  // scroll. Se calcula el paso activo y el dot salta a la altura de ese nodo,
+  // con la transición suave a cargo de CSS. Lee como "proceso por etapas".
+  const gridRef = useRef<HTMLDivElement>(null);
+  const nodeRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [activeStep, setActiveStep] = useState(-1); // -1 = aún ninguno
+  const [dotTop, setDotTop] = useState(0);
+  // Extremos del riel: primer y último nodo (medidos), para que la línea empiece
+  // y termine EXACTAMENTE en los puntos, sin sobrante arriba ni abajo.
+  const [railTop, setRailTop] = useState(0);
+  const [railBottom, setRailBottom] = useState(0);
+
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      // OJO: no compactar el array (nada de filter) — los índices deben seguir
+      // correspondiendo 1:1 con los pasos.
+      const nodes = nodeRefs.current;
+      const count = nodes.length;
+      if (!count) return;
+
+      // Línea de "cabezal": el paso se activa cuando su nodo cruza ~82% del alto
+      // del viewport hacia arriba. Cabezal bien bajo = el recorrido engancha el
+      // paso siguiente apenas asoma, sin esperar a tenerlo cerca del centro.
+      const gridTop = el.getBoundingClientRect().top;
+      const trigger = window.innerHeight * 0.82;
+
+      // El zigzag usa márgenes negativos, así que el orden del DOM NO coincide
+      // con el orden vertical en pantalla. Ordenamos por Y real antes de decidir
+      // qué paso está activo; si no, el "último que cruza" da cualquier cosa.
+      const measured = nodes
+        .map((n, i) => {
+          if (!n) return null;
+          const r = n.getBoundingClientRect();
+          return { index: i, center: r.top + r.height / 2 };
+        })
+        .filter(Boolean) as { index: number; center: number }[];
+      if (!measured.length) return;
+
+      const byY = [...measured].sort((a, b) => a.center - b.center);
+
+      // Avanza mientras el nodo (en orden visual) ya cruzó el cabezal.
+      let visualPos = -1;
+      for (let i = 0; i < byY.length; i++) {
+        if (byY[i].center <= trigger) visualPos = i;
+        else break;
+      }
+      if (prefersReduced) visualPos = byY.length - 1;
+
+      const activeIdx = visualPos < 0 ? -1 : byY[visualPos].index;
+      setActiveStep(activeIdx);
+
+      // Riel: del primer punto al último (en orden visual).
+      const first = byY[0].center - gridTop;
+      const last = byY[byY.length - 1].center - gridTop;
+      setRailTop(first);
+      setRailBottom(last);
+
+      const anchor = visualPos < 0 ? byY[0] : byY[visualPos];
+      setDotTop(anchor.center - gridTop);
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const steps: Step[] = [
     {
@@ -84,15 +166,43 @@ const HowWeWork = () => {
           </p>
         </section>
 
-        <div className={styles.stepsGrid}>
+        <div className={styles.stepsGrid} ref={gridRef}>
+          {/* Los rieles van en su PROPIA capa (no como hijos sueltos de la grilla):
+              si fueran hijos directos correrían el nth-child de las tarjetas y el
+              zigzag se desarma. */}
+          <span className={styles.railLayer} aria-hidden>
+            {/* Riel base: exactamente del primer punto al último. */}
+            <span
+              className={styles.railBase}
+              style={{ top: `${railTop}px`, height: `${Math.max(0, railBottom - railTop)}px` }}
+            />
+            {/* Tramo recorrido: del primer punto hasta el nodo activo, con el dot. */}
+            <span
+              className={styles.railProgress}
+              style={{ top: `${railTop}px`, height: `${Math.max(0, dotTop - railTop)}px` }}
+            >
+              <span className={styles.railDot} />
+            </span>
+          </span>
+
           {steps.map((step, index) => {
             const animationClass = index % 2 === 0 ? 'fade-in-left' : 'fade-in-right';
+            // Un paso "protagonista" es el que el dot alcanzó (el activo actual);
+            // los ya visitados quedan como "hechos", los futuros en reposo.
+            const isCurrent = index === activeStep;
+            const isDone = index < activeStep;
+            const stateClass = isCurrent ? styles.stepCurrent : isDone ? styles.stepDone : '';
             return (
               <div
                 key={step.key}
                 ref={(el) => { elementsRef.current[index + 2] = el; }}
-                className={`${styles.stepCard} ${animationClass}`}
+                className={`${styles.stepCard} ${animationClass} ${stateClass}`}
               >
+                <span
+                  className={styles.stepNode}
+                  ref={(el) => { nodeRefs.current[index] = el; }}
+                  aria-hidden
+                />
                 <div className={styles.stepHeader}>
                   <div className={styles.iconWrapper}>
                     {step.icon}
