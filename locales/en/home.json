@@ -85,8 +85,8 @@
     }
   },
   "blogSection": {
-    "title": "From the blog",
-    "subtitle": "Notes on architecture, engineering decisions, and what we learn shipping real products.",
+    "title": "Notes from the build",
+    "subtitle": "Architecture, engineering decisions, and what we learn shipping real products.",
     "readMore": "Read article",
     "viewAll": "Read the blog",
     "readingSuffix": "min read",

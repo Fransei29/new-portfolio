@@ -85,8 +85,8 @@
     }
   },
   "blogSection": {
-    "title": "Del blog",
-    "subtitle": "Notas sobre arquitectura, decisiones de ingeniería y lo que aprendemos construyendo productos reales.",
+    "title": "Notas del taller",
+    "subtitle": "Arquitectura, decisiones de ingeniería y lo que aprendemos construyendo productos reales.",
     "readMore": "Leer artículo",
     "viewAll": "Ir al blog",
     "readingSuffix": "min de lectura",

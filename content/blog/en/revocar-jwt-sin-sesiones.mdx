@@ -1,0 +1,111 @@
+---
+title: "How to revoke a JWT instantly without storing sessions"
+description: "The classic JWT problem is that you can't revoke a token until it expires. Token versioning solves it with one integer — no Redis, no session table."
+date: 2026-07-08
+tags: ["security", "backend", "authentication"]
+cover: "/img/img/Acero-web/acero-03.webp"
+coverAlt: "Admin panel with user management"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+JWTs are appealing because they're stateless: the server doesn't store anything, it just verifies a signature. That's also their biggest flaw. Once you've signed a token that expires in seven days, **you can't take it back**.
+
+The user changes their password because their account was compromised? The old token keeps working. You ban an abusive account? It keeps working. You demote someone from admin? Their token still says admin.
+
+The usual answer is a blocklist in Redis. There's a simpler one.
+
+## Token versioning
+
+Add an integer to your users table:
+
+```sql
+ALTER TABLE users ADD COLUMN token_version INTEGER NOT NULL DEFAULT 0;
+```
+
+Include it in the token payload when you sign it:
+
+```ts
+const token = jwt.sign(
+  {
+    sub: user.id,
+    role: user.role,
+    tv: user.tokenVersion, // <- the version at sign time
+  },
+  process.env.JWT_SECRET,
+  { expiresIn: '7d' }
+);
+```
+
+And compare it when you validate:
+
+```ts
+export async function verifyToken(token: string) {
+  const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+  // A single read by primary key — the DB already has this row cached.
+  const user = await db.user.findUnique({
+    where: { id: payload.sub },
+    select: { tokenVersion: true, role: true },
+  });
+
+  if (!user) return null;
+
+  // The token carries an old version: it was revoked.
+  if (payload.tv !== user.tokenVersion) return null;
+
+  return { id: payload.sub, role: user.role };
+}
+```
+
+To kill **every** token for a user, increment the integer:
+
+```ts
+await db.user.update({
+  where: { id: userId },
+  data: { tokenVersion: { increment: 1 } },
+});
+```
+
+Every token issued before that moment now carries a stale `tv` and fails validation. Instantly, across every device, with no extra infrastructure.
+
+## When to increment it
+
+The trigger points are the ones where identity or privileges change:
+
+| Event | Why revoke |
+| --- | --- |
+| Password change | If it was compromised, the attacker's session must die |
+| Explicit "log out everywhere" | The user is asking for exactly this |
+| Role change | A demoted admin shouldn't keep admin claims |
+| Account suspension | The ban has to be immediate, not in seven days |
+
+## The honest trade-off
+
+This isn't free, and it's worth being clear about what you're giving up.
+
+**You lose pure statelessness.** Every validation now reads the database. If you chose JWT specifically to avoid touching the DB on every request, this defeats that purpose.
+
+In practice it matters less than it sounds: it's a lookup by primary key, the cheapest query there is, and most requests already hit the database for something else. But if you're building an API that serves cached responses without touching persistence, the cost is real.
+
+**Compared to a Redis blocklist:**
+
+| | Token versioning | Redis blocklist |
+| --- | --- | --- |
+| Extra infrastructure | None | Redis |
+| Cost per validation | 1 DB read | 1 Redis read |
+| Revokes one token | No — all of them | Yes |
+| Storage grows | No | Yes, until tokens expire |
+
+The row where versioning loses is granularity: you can't kill one session and keep the others. If "log out of this device only" is a feature you need, you want per-session records, not a single counter.
+
+## When not to use this
+
+If your tokens are short-lived — fifteen minutes with a refresh flow — the whole problem mostly disappears. A compromised token expires before you'd notice. Versioning matters when tokens are long-lived, which is the common case for apps that don't want to log users out constantly.
+
+## Wrapping up
+
+Token versioning is one column, one comparison, and one increment. It doesn't cover every case — you can't revoke individual sessions — but it solves the most common one with no infrastructure at all.
+
+If you're thinking about where tokens should live in the first place, [the BFF pattern](/blog/arquitectura-bff-nextjs) covers keeping them out of the browser entirely.

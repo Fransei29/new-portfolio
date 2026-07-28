@@ -175,8 +175,10 @@ p.greeting {
     border-color: var(--primary-colorA);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
 
-    .arrow {
-      transform: translateX(2px);
+    // Los CTA del hero ya no llevan flecha sino iconos con forma propia
+    // (estrella y lupa): girarlos -45° no significaría nada. Crecen apenas.
+    .ctaIcon {
+      transform: scale(1.08);
     }
   }
 }
@@ -191,8 +193,10 @@ p.greeting {
     background-color: #ffffff;
     border-color: rgba(0, 0, 0, 0.55);
 
-    .arrow {
-      transform: translateX(2px);
+    // Los CTA del hero ya no llevan flecha sino iconos con forma propia
+    // (estrella y lupa): girarlos -45° no significaría nada. Crecen apenas.
+    .ctaIcon {
+      transform: scale(1.08);
     }
   }
 
@@ -413,12 +417,16 @@ p.greeting {
   user-select: none;
 }
 
-.arrow {
-  font-size: 0.95rem;
+// Iconos de marca de los CTA del hero (estrella en "start your project", lupa
+// en "explore our work"). Vienen a 1em, así que el tamaño lo da font-size y el
+// color lo heredan por currentColor.
+.ctaIcon {
+  font-size: 1.3rem;
+  width: 1em;
+  height: 1em;
   margin-left: 0.55rem;
-  font-weight: 500;
-  transition: transform 0.15s ease-in-out;
-  transform: rotate(0deg);
+  transform-origin: center center;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
   flex-shrink: 0;
 }
 
@@ -488,8 +496,8 @@ p.greeting {
     padding: 0 1rem;
   }
 
-  .arrow {
-    font-size: 0.8rem;
+  .ctaIcon {
+    font-size: 1.1rem;
     margin-left: 0.4rem;
   }
 }

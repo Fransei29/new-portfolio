@@ -1,0 +1,111 @@
+---
+title: "Cómo revocar un JWT al instante sin guardar sesiones"
+description: "El problema clásico de los JWT es que no se revocan hasta que expiran. El versionado de tokens lo resuelve con un entero: sin Redis, sin tabla de sesiones."
+date: 2026-07-08
+tags: ["seguridad", "backend", "autenticación"]
+cover: "/img/img/Acero-web/acero-03.webp"
+coverAlt: "Panel de administración con gestión de usuarios"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+Los JWT son atractivos porque no guardan estado: el servidor no almacena nada, solo verifica una firma. Esa es también su falla más grande. Una vez que firmaste un token que expira en siete días, **no lo podés dar de baja**.
+
+¿El usuario cambia la contraseña porque le comprometieron la cuenta? El token viejo sigue funcionando. ¿Bloqueás una cuenta abusiva? Sigue funcionando. ¿Le sacás el rol de admin a alguien? Su token sigue diciendo admin.
+
+La respuesta habitual es una lista de bloqueo en Redis. Hay una más simple.
+
+## Versionado de tokens
+
+Agregá un entero a tu tabla de usuarios:
+
+```sql
+ALTER TABLE users ADD COLUMN token_version INTEGER NOT NULL DEFAULT 0;
+```
+
+Incluilo en el payload del token cuando lo firmás:
+
+```ts
+const token = jwt.sign(
+  {
+    sub: user.id,
+    role: user.role,
+    tv: user.tokenVersion, // <- la versión al momento de firmar
+  },
+  process.env.JWT_SECRET,
+  { expiresIn: '7d' }
+);
+```
+
+Y compará al validar:
+
+```ts
+export async function verifyToken(token: string) {
+  const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+  // Una sola lectura por clave primaria: la base ya tiene esa fila cacheada.
+  const user = await db.user.findUnique({
+    where: { id: payload.sub },
+    select: { tokenVersion: true, role: true },
+  });
+
+  if (!user) return null;
+
+  // El token trae una versión vieja: fue revocado.
+  if (payload.tv !== user.tokenVersion) return null;
+
+  return { id: payload.sub, role: user.role };
+}
+```
+
+Para matar **todos** los tokens de un usuario, incrementás el entero:
+
+```ts
+await db.user.update({
+  where: { id: userId },
+  data: { tokenVersion: { increment: 1 } },
+});
+```
+
+Todo token emitido antes de ese momento ahora lleva un `tv` desactualizado y falla la validación. Al instante, en todos los dispositivos, sin infraestructura extra.
+
+## Cuándo incrementarlo
+
+Los disparadores son los momentos donde cambia la identidad o los privilegios:
+
+| Evento | Por qué revocar |
+| --- | --- |
+| Cambio de contraseña | Si fue comprometida, la sesión del atacante tiene que morir |
+| "Cerrar sesión en todos lados" | El usuario está pidiendo exactamente esto |
+| Cambio de rol | Un admin degradado no debería conservar sus permisos |
+| Suspensión de cuenta | El bloqueo tiene que ser inmediato, no dentro de siete días |
+
+## El trade-off honesto
+
+Esto no es gratis, y vale la pena ser claro sobre qué estás resignando.
+
+**Perdés el "sin estado" puro.** Cada validación ahora lee la base de datos. Si elegiste JWT justamente para no tocar la base en cada request, esto anula ese propósito.
+
+En la práctica importa menos de lo que suena: es una búsqueda por clave primaria, la consulta más barata que hay, y la mayoría de los requests ya van a la base por otra cosa. Pero si estás construyendo una API que sirve respuestas cacheadas sin tocar la persistencia, el costo es real.
+
+**Comparado con una lista de bloqueo en Redis:**
+
+| | Versionado de tokens | Lista en Redis |
+| --- | --- | --- |
+| Infraestructura extra | Ninguna | Redis |
+| Costo por validación | 1 lectura a la base | 1 lectura a Redis |
+| Revoca un token puntual | No, todos | Sí |
+| El almacenamiento crece | No | Sí, hasta que expiren |
+
+La fila donde el versionado pierde es la granularidad: no podés matar una sesión y conservar las otras. Si "cerrar sesión solo en este dispositivo" es una funcionalidad que necesitás, vas a querer registros por sesión y no un contador único.
+
+## Cuándo no usarlo
+
+Si tus tokens son de vida corta —quince minutos con un flujo de refresh— el problema prácticamente desaparece. Un token comprometido expira antes de que te enteres. El versionado importa cuando los tokens son de vida larga, que es el caso común de las apps que no quieren estar deslogueando gente todo el tiempo.
+
+## Cierre
+
+El versionado de tokens es una columna, una comparación y un incremento. No cubre todos los casos —no podés revocar sesiones individuales— pero resuelve el más común sin nada de infraestructura.
+
+Si estás pensando dónde deberían vivir los tokens en primer lugar, [el patrón BFF](/blog/arquitectura-bff-nextjs?lang=es) cubre cómo mantenerlos completamente fuera del navegador.

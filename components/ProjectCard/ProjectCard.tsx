@@ -162,6 +162,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
 
           {/* Botones a la derecha */}
           <div className={styles.buttonsContainer}>
+            {/* Los links directos (docs / código / demo) sólo se muestran cuando
+                la tarjeta NO tiene página de detalle — el caso de los tutoriales,
+                donde son la única salida. En un proyecto con slug competían con
+                "Learn more" apilando cuatro botones sobre la imagen, y el detalle
+                del proyecto ya ofrece esos mismos enlaces. */}
+            {!project.slug && (
             <div className={styles.projectLinks}>
               {showDocumentation && project.link1 && (
                 <a href={project.link1} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
@@ -187,6 +193,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
                 </div>
               ) : null}
             </div>
+            )}
             {project.slug && (
               <Link
                 href={`/projects/${project.slug}`}

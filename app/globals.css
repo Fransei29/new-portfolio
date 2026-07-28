@@ -152,6 +152,11 @@
   --h3-letter-spacing: -0.015em;
 
   /* Subtítulo de sección */
+  /* Separación título → subtítulo. Las dos líneas son una sola unidad de
+     lectura, así que van cerca: el aire grande va DEBAJO del par, separándolo
+     del contenido. Antes cada sección repetía 1.25rem a mano. */
+  --subtitle-spacing-top: 0.5rem;
+  --subtitle-spacing-top-mobile: 0.35rem;
   --subtitle-font-size: 1.125rem;
   --subtitle-font-size-mobile: 0.9rem;
   --subtitle-font-weight: 400;

@@ -51,7 +51,7 @@
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 0;
+  margin: var(--subtitle-spacing-top) auto 0;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
   text-align: center;
@@ -63,7 +63,7 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin-top: 0rem;
+    margin-top: var(--subtitle-spacing-top-mobile);
     text-align: center;
   }
 }
@@ -102,18 +102,26 @@
   gap: 1.25rem;
   padding: 1.75rem 2rem;
   min-height: 0;
-  // La tarjeta ya no es blanco puro sobre el fondo claro de la sección: lleva
-  // un velo lila muy tenue, del mismo tinte que el fondo, así se apoya sobre él
-  // en vez de recortarse como un rectángulo blanco. El gradiente es corto a
-  // propósito: si el pie se oscurece más, el texto de la descripción —que vive
-  // justo ahí— empieza a perder contraste.
-  background: linear-gradient(180deg, #fdfcff 0%, #f7f5fd 100%);
+  // MISMO criterio que las tarjetas de Working methodology: la tarjeta es el
+  // color del fondo de la sección (#ebe6fb) levantado, no un blanco que se
+  // recorta encima. Allá el fondo es #2e294e y la tarjeta #3a3457: la tarjeta
+  // emerge en vez de pegarse.
+  // El punto de equilibrio está entre dos extremos que se probaron y fallaron:
+  // #fdfcff (blanco puro) abría un salto de ~10 puntos y leía como sticker;
+  // #f4f1fd se iba al otro lado y la tarjeta se apagaba contra el fondo. Este
+  // valor conserva el tinte lila —el gradiente sigue cayendo hacia el fondo—
+  // pero arranca lo bastante claro para que la tarjeta tenga presencia propia.
+  background: linear-gradient(180deg, #fbfaff 0%, #f5f2fc 100%);
   border: 1px solid rgba(142, 122, 230, 0.16);
   border-radius: var(--br);
-  // Sombra teñida de lila en lugar de negro puro: integra la tarjeta con la
-  // sección en vez de dejarla flotando con un halo gris.
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 8px 22px -12px rgba(46, 41, 78, 0.28);
+  // Sombra teñida de lila en lugar de negro puro, y desplazada hacia
+  // abajo-derecha igual que la ProjectCard: hay una fuente de luz implícita
+  // arriba a la izquierda, consistente en toda la web. Una sombra centrada
+  // (0 Ypx) lee como objeto flotando; ésta apoya la tarjeta sobre la sección.
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    1px 1px 2px -1px rgba(46, 41, 78, 0.08),
+    3px 5px 12px -7px rgba(46, 41, 78, 0.16),
+    6px 14px 30px -18px rgba(46, 41, 78, 0.22);
   transition: background 0.35s ease, transform 0.25s ease,
     box-shadow 0.25s ease, border-color 0.25s ease;
   width: 100%;
@@ -130,12 +138,19 @@
   &:hover {
     transform: translateY(-2px);
     // Se aclara apenas y el borde lila se define: el mismo criterio de
-    // "encenderse" de Working methodology, dentro de la paleta clara.
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    // "encenderse" de Working methodology, dentro de la paleta clara. Sube un
+    // escalón desde el reposo (#fbfaff → #ffffff), y el pie del gradiente sube
+    // con él: el estado se nota por contraste con las vecinas, sin cambiar de
+    // familia de color.
+    background: linear-gradient(180deg, #ffffff 0%, #faf8fe 100%);
     border-color: rgba(142, 122, 230, 0.38);
+    // Misma dirección de luz que en reposo, sólo crece la distancia: la tarjeta
+    // se levanta, la luz no se mueve.
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      0 14px 32px -14px rgba(46, 41, 78, 0.34),
-      0 0 24px -10px rgba(142, 122, 230, 0.4);
+      1px 2px 3px -1px rgba(46, 41, 78, 0.1),
+      4px 8px 18px -9px rgba(46, 41, 78, 0.2),
+      10px 20px 42px -22px rgba(46, 41, 78, 0.3),
+      0 0 24px -10px rgba(142, 122, 230, 0.35);
 
     :global(html.dark) & {
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);

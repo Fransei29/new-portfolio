@@ -1,0 +1,130 @@
+---
+title: "Rate limiting without Redis: how far in-memory state actually gets you"
+description: "Most rate limiting guides assume Redis from minute one. In-memory state is imperfect, but often enough for a contact form. Where the line actually is."
+date: 2026-06-24
+tags: ["nextjs", "backend", "serverless"]
+cover: "/img/img/cdq-web/cdq-04.webp"
+coverAlt: "Server monitoring dashboard"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+Search for "rate limiting in Next.js" and every result reaches for Redis in the first paragraph. Redis is the right answer at scale — but if you're protecting a contact form on a portfolio site, provisioning a database to count requests is a lot of setup for the problem you have.
+
+Here's the in-memory version, and an honest account of where it breaks.
+
+## The implementation
+
+A `Map` holding timestamps per IP:
+
+```ts
+// lib/rateLimit.ts
+type Entry = { count: number; resetAt: number };
+const store = new Map<string, Entry>();
+
+export function rateLimit(
+  key: string,
+  limit = 5,
+  windowMs = 60_000
+): { ok: boolean; remaining: number } {
+  const now = Date.now();
+  const entry = store.get(key);
+
+  if (!entry || now > entry.resetAt) {
+    store.set(key, { count: 1, resetAt: now + windowMs });
+    return { ok: true, remaining: limit - 1 };
+  }
+
+  if (entry.count >= limit) {
+    return { ok: false, remaining: 0 };
+  }
+
+  entry.count++;
+  return { ok: true, remaining: limit - entry.count };
+}
+```
+
+Used in a route handler:
+
+```ts
+export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+  const { ok } = rateLimit(`contact:${ip}`, 5, 60_000);
+
+  if (!ok) {
+    return Response.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': '60' } }
+    );
+  }
+
+  // ... handle the form
+}
+```
+
+Thirty lines, no dependencies, no infrastructure.
+
+## The leak nobody mentions
+
+That `Map` grows forever. Every new IP adds an entry, and nothing removes it. On a long-lived server that's a memory leak.
+
+The fix is cleaning up expired entries occasionally — not on a timer, but piggybacked on regular calls:
+
+```ts
+let lastCleanup = Date.now();
+
+function cleanup(now: number) {
+  // At most once a minute, and only walking entries that are already dead.
+  if (now - lastCleanup < 60_000) return;
+  lastCleanup = now;
+  for (const [key, entry] of store) {
+    if (now > entry.resetAt) store.delete(key);
+  }
+}
+```
+
+Call `cleanup(now)` at the top of `rateLimit`. A `setInterval` would also work on a traditional server, but it keeps the process alive and behaves badly in serverless.
+
+## Where it actually breaks
+
+Two limitations, and the second is the one that decides whether this is enough for you.
+
+**It doesn't survive restarts.** Deploy, and every counter resets. For abuse protection this barely matters — an attacker can't force your deploys.
+
+**In serverless, the limit is per instance.** This is the real one. Vercel, Lambda and friends run several instances of your function in parallel, each with its own memory. A limit of 5 requests per minute across 4 warm instances is, in the worst case, 20 requests per minute.
+
+So the honest way to describe it: it's not "5 per minute", it's **"between 5 and 5×N per minute"**, where N is however many instances happen to be warm.
+
+## When that's fine
+
+For most protection, it is. Consider what you're defending against:
+
+| Threat | Is in-memory enough? |
+| --- | --- |
+| Someone spamming your contact form by hand | Yes, easily |
+| A basic bot hitting a public endpoint | Yes — 20/min still blocks the flood |
+| Brute-forcing a login | **No** — the multiplier is dangerous here |
+| Metered API where you bill per request | **No** — you need exact counts |
+| Distributed attack from many IPs | No, but neither does Redis; you need a WAF |
+
+The pattern: if going over the limit costs you money or security, you need shared state. If it just means a few extra emails, in-memory is fine.
+
+## When to migrate
+
+Move to Upstash or Redis when any of these becomes true: the limit protects authentication, you're billing by request, you need counters visible across instances for monitoring, or you're already running Redis for something else — at that point there's no reason not to.
+
+The migration is contained if you keep the same signature:
+
+```ts
+// The call site doesn't change; only the implementation behind it.
+const { ok } = await rateLimit(`contact:${ip}`, 5, 60_000);
+```
+
+Write it returning a promise from day one, even while it's synchronous. That way swapping the backend doesn't ripple through every caller.
+
+## Wrapping up
+
+In-memory rate limiting is a deliberately imperfect solution, and knowing exactly *how* it's imperfect is what makes it a reasonable choice. It stops accidental abuse and casual bots with zero infrastructure. It does not give you a hard guarantee — so don't put it in front of anything where crossing the limit really hurts.
+
+If you're hardening a public form, [moving email sending server-side](/blog/emailjs-a-envio-server-side) is the other half of the same job.

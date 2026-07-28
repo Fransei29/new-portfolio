@@ -1,0 +1,111 @@
+---
+title: "From EmailJS to server-side sending: why keys don't belong in the browser"
+description: "EmailJS is convenient until you see your credentials sitting in the bundle. The migration to an API route, double opt-in, and what it does for deliverability."
+date: 2026-07-01
+tags: ["security", "nextjs", "email"]
+cover: "/img/img/cdq-web/cdq-02.webp"
+coverAlt: "Contact form on a web platform"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+I used EmailJS on this very site. It's genuinely convenient: you drop in a script, configure a template, and your contact form works without writing a single line of backend.
+
+Then I looked at the production bundle and found my keys sitting there in plain text.
+
+## How the attack looks
+
+EmailJS works by calling their API **from the browser**. For that to work, the browser needs the credentials:
+
+```js
+// This ships to the client. All of it.
+emailjs.send(
+  'service_a8f3k2',   // service ID
+  'template_x9m4p',   // template ID
+  formData,
+  'user_K3nP9qL2mX'   // public key
+);
+```
+
+Anyone can open DevTools, read those three values, and send emails through your account from a script:
+
+```bash
+# With the values from the bundle, this works from anywhere.
+curl -X POST https://api.emailjs.com/api/v1.0/email/send \
+  -H 'Content-Type: application/json' \
+  -d '{"service_id":"service_a8f3k2","template_id":"template_x9m4p","user_id":"user_K3nP9qL2mX","template_params":{...}}'
+```
+
+The consequences aren't hypothetical. Your monthly quota burns in minutes. Worse: the emails go out **from your verified domain**, so spam sent by someone else damages your sending reputation — and that's slow and painful to repair.
+
+EmailJS offers domain restrictions to mitigate this. It helps, but it's a filter on an `Origin` header, and headers can be forged outside a browser.
+
+## The fix: the key never leaves the server
+
+The migration is smaller than it sounds. The form stops calling the email provider and calls your own API route instead:
+
+```ts
+// app/api/contact/route.ts
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY); // server-side only
+
+export async function POST(request: Request) {
+  const { name, email, message } = await request.json();
+
+  if (!name || !email || !message) {
+    return Response.json({ error: 'Missing fields' }, { status: 400 });
+  }
+
+  await resend.emails.send({
+    from: 'Contact <hello@yourdomain.com>',
+    to: 'you@yourdomain.com',
+    replyTo: email,
+    subject: `New message from ${name}`,
+    text: message,
+  });
+
+  return Response.json({ ok: true });
+}
+```
+
+`RESEND_API_KEY` has no `NEXT_PUBLIC_` prefix, so Next.js never includes it in the client bundle. The browser sends the form to your own domain and never sees a credential.
+
+Note `replyTo`: the email is sent by your domain but replies go to whoever wrote you. Sending it *from* the visitor's address would fail SPF and land you in spam.
+
+## What you gain beyond security
+
+Once you own the endpoint, things that were impossible before become straightforward:
+
+**Rate limiting.** Without it, your form is a spam relay with your name on it.
+
+**Real validation.** Server-side, where it can't be bypassed by disabling JavaScript.
+
+**Double opt-in for the newsletter.** This is the one that matters most for deliverability. Instead of adding an address to your list on submit, you send a confirmation link:
+
+```ts
+const token = crypto.randomBytes(32).toString('hex');
+await db.pendingSubscriber.create({
+  data: { email, token, expiresAt: addHours(new Date(), 24) },
+});
+
+await resend.emails.send({
+  from: 'Newsletter <news@yourdomain.com>',
+  to: email,
+  subject: 'Confirm your subscription',
+  html: `<a href="${process.env.SITE_URL}/api/newsletter/confirm?token=${token}">Confirm</a>`,
+});
+```
+
+The address only joins the list when someone clicks. That kills two problems: bots signing up fake addresses, and people typing someone else's email. Both inflate your bounce rate, and a high bounce rate is what gets a sending domain flagged.
+
+## What it cost
+
+You need somewhere to run server code — trivial if you're already on Next.js or similar, a real change if your site is fully static. And double opt-in requires storing pending subscriptions, which means a database you might not have had.
+
+The trade is worth it. EmailJS is fine for a prototype or an internal tool with no public exposure. For anything with a public form, publishing credentials to every visitor is a cost that shows up later, and at the worst moment.
+
+## Wrapping up
+
+The rule is simple: **if a key can do something you wouldn't let an anonymous visitor do, it can't be in the browser**. The browser is a hostile environment where you can't keep secrets — the same reason [the BFF pattern](/blog/arquitectura-bff-nextjs) exists.

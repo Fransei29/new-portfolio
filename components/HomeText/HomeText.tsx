@@ -4,7 +4,8 @@ import Image from 'next/image';
 import styles from './HomeText.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { HiArrowRight } from 'react-icons/hi';
+import StartIcon from '../../public/NewBrand/icons/star-arrow-right-start-20-regular.svg';
+import SearchIcon from '../../public/NewBrand/icons/search.svg';
 
 const HomeText: React.FC = () => {
   const elementsRef = useScrollAnimation();
@@ -53,11 +54,11 @@ const HomeText: React.FC = () => {
             className={styles.btnPrimary}
           >
             {t('hero.cta.contact')}
-            <HiArrowRight className={styles.arrow} />
+            <StartIcon className={styles.ctaIcon} />
           </a>
           <Link href="/projects" className={styles.btnSecondary}>
             {t('hero.cta.projects')}
-            <HiArrowRight className={styles.arrow} />
+            <SearchIcon className={styles.ctaIcon} />
           </Link>
         </div>
         <div className={styles.socialProof} aria-label={t('hero.socialProof.label') ?? 'Trusted by clients'}>

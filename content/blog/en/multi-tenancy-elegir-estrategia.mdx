@@ -1,0 +1,102 @@
+---
+title: "Multi-tenancy: choosing between one database, one schema, or one column"
+description: "Three ways to isolate tenants in a SaaS, with the real trade-offs. Why I chose a discriminator column for a property platform, and when I wouldn't."
+date: 2026-06-17
+tags: ["architecture", "backend", "saas"]
+cover: "/img/img/bellum-web/Screenshot from 2026-05-12 19-47-24.webp"
+coverAlt: "Administration panel of the Bellum platform"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+When you build a platform that serves multiple organizations, the first architectural decision is how to keep their data apart. Get it wrong and you're facing a migration that touches every query in the codebase.
+
+I went through this building Bellum, a platform for HOA and condominium associations where each administrator manages their own buildings, owners and expenses. Here are the three options, what each actually costs, and why I picked the one I did.
+
+## Option 1: one database per tenant
+
+Each organization gets its own database. Total isolation.
+
+**In favor:** a bug in your query layer cannot leak data across tenants, because there's no physical path between them. Restoring one client's backup doesn't touch anyone else. If a regulation demands a client's data live in a specific country, you just point their database there.
+
+**Against:** migrations become an operation. A schema change has to run N times, and if it fails on tenant 40 of 100, you're left with a split fleet. Connection pools multiply. And onboarding stops being an `INSERT` and becomes provisioning infrastructure.
+
+**Use it when:** you have few, large, high-paying tenants, or a regulatory requirement that forces it.
+
+## Option 2: one schema per tenant
+
+One database, but each tenant gets its own schema — `tenant_42.owners`, `tenant_43.owners`. Postgres handles this natively.
+
+**In favor:** decent isolation with a single connection. Backing up one tenant is a schema-level dump.
+
+**Against:** migrations still run N times, with the same partial-failure risk. And Postgres slows down with thousands of schemas: the system catalog grows, and tools that introspect it start crawling.
+
+**Use it when:** you want isolation and know you'll stay in the dozens or low hundreds of tenants.
+
+## Option 3: a discriminator column
+
+Everything shares tables, and every row carries a `tenant_id`.
+
+**In favor:** one migration, one connection pool, one query plan. Onboarding a tenant is inserting a row. Cross-tenant analytics — "what's the average across all our clients?" — is a normal query instead of a fan-out across databases.
+
+**Against:** isolation depends entirely on your code. A query missing its `WHERE tenant_id = ?` returns another organization's data, and that's the worst bug a SaaS can ship.
+
+## What I chose, and how I protected it
+
+I went with the discriminator column. Bellum has many small tenants, each one an administrator with a handful of buildings, and onboarding needed to be immediate.
+
+But "isolation depends on your code" is not something you leave to discipline. Two safeguards:
+
+**Row-level security in the database.** The rule stops being a convention and becomes something the engine enforces:
+
+```sql
+ALTER TABLE owners ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY tenant_isolation ON owners
+  USING (tenant_id = current_setting('app.tenant_id')::uuid);
+```
+
+With this active, a query that forgets its filter returns zero rows instead of someone else's data. The failure mode flips from silent leak to visible bug.
+
+**A repository layer that can't forget it.** No feature code writes raw queries:
+
+```ts
+// Every method takes the tenant explicitly. There's no default,
+// and no way to get a client scoped to nothing.
+export function forTenant(tenantId: string) {
+  return {
+    owners: {
+      findMany: (where = {}) =>
+        db.owner.findMany({ where: { ...where, tenantId } }),
+      create: (data) =>
+        db.owner.create({ data: { ...data, tenantId } }),
+    },
+  };
+}
+```
+
+Belt and suspenders on purpose: the repository makes the right thing easy, and RLS makes the wrong thing fail.
+
+## The honest comparison
+
+| | DB per tenant | Schema per tenant | Discriminator column |
+| --- | --- | --- | --- |
+| Isolation | Physical | Strong | Depends on code + RLS |
+| Migration cost | N runs | N runs | 1 run |
+| Onboarding | Provision infra | Create schema | `INSERT` |
+| Scales to thousands | Hard | No | Yes |
+| Cross-tenant queries | Very hard | Hard | Trivial |
+| Noisy neighbor | Isolated | Partial | Shared |
+
+## What happens when one tenant outgrows the rest
+
+This is the question that decides it long-term, and the discriminator column has a real answer: **it's the only one you can escape from gradually.** When a tenant gets big enough to hurt the others, you move that one to its own database and leave everybody else where they are. Your code already takes `tenantId` everywhere; what changes is which connection it resolves to.
+
+Going the other direction — starting with a database per tenant and consolidating — means merging N schemas with colliding primary keys. Far worse.
+
+## Wrapping up
+
+There's no universally right answer, but there is a reasonable default: **start with the discriminator column, protect it with row-level security, and split out individual tenants when one earns it.** Physical isolation from day one is a real cost paid in migration pain, and it's only worth it when regulation or tenant size demands it.
+
+The mistake isn't picking one over another. It's picking without knowing what you gave up.

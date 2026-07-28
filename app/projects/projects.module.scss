@@ -42,6 +42,9 @@
     font-size: 1.2rem;
     font-weight: 400;
     color: var(--text-color-light);
+    // No declaraba margin-top y heredaba el ~1em por defecto del <p>: mismo
+    // hueco que el resto de las secciones, por otra vía.
+    margin: var(--subtitle-spacing-top) 0 0;
 
     @media (max-width: 768px) {
       font-size: 0.9rem;

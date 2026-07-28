@@ -1,0 +1,102 @@
+---
+title: "Multi-tenancy: elegir entre una base, un esquema o una columna"
+description: "Tres formas de aislar tenants en un SaaS, con los trade-offs reales. Por qué elegí columna discriminadora en una plataforma de consorcios."
+date: 2026-06-17
+tags: ["arquitectura", "backend", "saas"]
+cover: "/img/img/bellum-web/Screenshot from 2026-05-12 19-47-24.webp"
+coverAlt: "Panel de administración de la plataforma Bellum"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+Cuando construís una plataforma que atiende a varias organizaciones, la primera decisión arquitectónica es cómo mantener sus datos separados. Si la errás, te espera una migración que toca cada consulta del código.
+
+Pasé por esto construyendo Bellum, una plataforma para administradores de consorcios donde cada uno gestiona sus propios edificios, propietarios y expensas. Estas son las tres opciones, lo que cuesta cada una y por qué elegí la que elegí.
+
+## Opción 1: una base de datos por tenant
+
+Cada organización tiene su propia base. Aislamiento total.
+
+**A favor:** un bug en tu capa de consultas no puede filtrar datos entre tenants, porque no hay camino físico entre ellos. Restaurar el backup de un cliente no toca a nadie más. Si una regulación exige que los datos de un cliente vivan en un país determinado, apuntás esa base ahí y listo.
+
+**En contra:** las migraciones se vuelven una operación. Un cambio de esquema tiene que correr N veces, y si falla en el tenant 40 de 100 te queda la flota partida al medio. Los pools de conexiones se multiplican. Y dar de alta un cliente deja de ser un `INSERT` para pasar a ser aprovisionar infraestructura.
+
+**Usala cuando:** tenés pocos tenants, grandes y que pagan bien, o un requisito regulatorio que te obliga.
+
+## Opción 2: un esquema por tenant
+
+Una sola base, pero cada tenant con su esquema: `tenant_42.propietarios`, `tenant_43.propietarios`. Postgres lo maneja de forma nativa.
+
+**A favor:** aislamiento decente con una sola conexión. Respaldar un tenant es un dump a nivel esquema.
+
+**En contra:** las migraciones siguen corriendo N veces, con el mismo riesgo de falla parcial. Y Postgres se pone lento con miles de esquemas: el catálogo del sistema crece y las herramientas que lo inspeccionan empiezan a arrastrarse.
+
+**Usala cuando:** querés aislamiento y sabés que vas a quedarte en decenas o pocos cientos de tenants.
+
+## Opción 3: una columna discriminadora
+
+Todo comparte tablas y cada fila lleva un `tenant_id`.
+
+**A favor:** una migración, un pool de conexiones, un plan de consulta. Dar de alta un tenant es insertar una fila. Las métricas entre tenants —"¿cuál es el promedio de todos nuestros clientes?"— son una consulta normal en vez de un fan-out entre bases.
+
+**En contra:** el aislamiento depende enteramente de tu código. Una consulta a la que le falte el `WHERE tenant_id = ?` devuelve datos de otra organización, y ese es el peor bug que un SaaS puede publicar.
+
+## Qué elegí y cómo lo protegí
+
+Fui con la columna discriminadora. Bellum tiene muchos tenants chicos, cada uno un administrador con un puñado de edificios, y el alta tenía que ser inmediata.
+
+Pero "el aislamiento depende de tu código" no es algo que se deje librado a la disciplina. Dos resguardos:
+
+**Row-level security en la base.** La regla deja de ser una convención y pasa a ser algo que el motor hace cumplir:
+
+```sql
+ALTER TABLE propietarios ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY tenant_isolation ON propietarios
+  USING (tenant_id = current_setting('app.tenant_id')::uuid);
+```
+
+Con esto activo, una consulta que se olvide del filtro devuelve cero filas en vez de los datos de otro. El modo de falla pasa de fuga silenciosa a bug visible.
+
+**Una capa de repositorio que no se puede olvidar.** Ningún código de funcionalidad escribe consultas crudas:
+
+```ts
+// Cada método recibe el tenant explícitamente. No hay valor por defecto
+// ni forma de obtener un cliente sin alcance.
+export function forTenant(tenantId: string) {
+  return {
+    propietarios: {
+      findMany: (where = {}) =>
+        db.propietario.findMany({ where: { ...where, tenantId } }),
+      create: (data) =>
+        db.propietario.create({ data: { ...data, tenantId } }),
+    },
+  };
+}
+```
+
+Cinturón y tiradores a propósito: el repositorio hace que lo correcto sea fácil, y RLS hace que lo incorrecto falle.
+
+## La comparación honesta
+
+| | Base por tenant | Esquema por tenant | Columna discriminadora |
+| --- | --- | --- | --- |
+| Aislamiento | Físico | Fuerte | Depende del código + RLS |
+| Costo de migración | N corridas | N corridas | 1 corrida |
+| Alta de cliente | Aprovisionar infra | Crear esquema | `INSERT` |
+| Escala a miles | Difícil | No | Sí |
+| Consultas entre tenants | Muy difícil | Difícil | Triviales |
+| Vecino ruidoso | Aislado | Parcial | Compartido |
+
+## Qué pasa cuando un tenant crece más que el resto
+
+Esta es la pregunta que lo define a largo plazo, y la columna discriminadora tiene una respuesta real: **es la única de la que se puede salir de a poco.** Cuando un tenant se vuelve lo bastante grande como para molestar a los demás, movés ese a su propia base y dejás a todo el mundo donde está. Tu código ya recibe `tenantId` en todos lados; lo que cambia es a qué conexión resuelve.
+
+Ir en la dirección contraria —arrancar con una base por tenant y consolidar— significa fusionar N esquemas con claves primarias que chocan. Mucho peor.
+
+## Cierre
+
+No hay una respuesta correcta universal, pero sí un valor por defecto razonable: **empezá con la columna discriminadora, protegela con row-level security y separá tenants individuales cuando alguno se lo gane.** El aislamiento físico desde el día uno es un costo real que se paga en dolor de migraciones, y solo vale la pena cuando la regulación o el tamaño del cliente lo exigen.
+
+El error no es elegir una u otra. Es elegir sin saber qué resignaste.

@@ -1,0 +1,148 @@
+---
+title: "Mercado Pago en Next.js: el flujo completo con webhooks"
+description: "Crear la preferencia, manejar el redirect, verificar la firma del webhook y la race condition que nadie documenta: qué pasa si el webhook llega primero."
+date: 2026-07-22
+tags: ["nextjs", "pagos", "backend"]
+cover: "/img/img/Acero-web/acero-02.webp"
+coverAlt: "Pantalla de checkout de la plataforma e-commerce a.cer0"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+Casi todos los tutoriales de pagos escritos en inglés asumen Stripe. Si vendés en Latinoamérica esa suposición no te sirve: acá la pasarela es Mercado Pago, y la documentación oficial muestra el camino feliz sin mencionar nunca qué pasa cuando la realidad se mete en el medio.
+
+Lo integré en a.cer0, una plataforma de e-commerce a medida. Este es el flujo completo, incluida la parte que me costó una tarde de debugging.
+
+## El flujo en cuatro pasos
+
+1. El backend crea una **preferencia**: un objeto que describe qué se está cobrando.
+2. El navegador redirige a Mercado Pago con el ID de esa preferencia.
+3. El usuario paga y Mercado Pago lo devuelve a tu sitio.
+4. Por separado, Mercado Pago le pega a tu **webhook** para confirmar qué pasó.
+
+El detalle crítico: los pasos 3 y 4 son independientes y **no hay orden garantizado entre ellos**.
+
+## Crear la preferencia
+
+La preferencia vive en el servidor. El access token nunca toca el navegador:
+
+```ts
+// app/api/checkout/route.ts
+export async function POST(request: Request) {
+  const { items, orderId } = await request.json();
+
+  const preference = {
+    items: items.map((item) => ({
+      title: item.name,
+      quantity: item.quantity,
+      unit_price: item.price,
+      currency_id: 'ARS',
+    })),
+    // external_reference es cómo atás el pago a TU pedido.
+    // Sin esto, llega el webhook y no sabés a qué corresponde.
+    external_reference: orderId,
+    back_urls: {
+      success: `${process.env.SITE_URL}/checkout/success`,
+      failure: `${process.env.SITE_URL}/checkout/failure`,
+    },
+    notification_url: `${process.env.SITE_URL}/api/webhooks/mercadopago`,
+  };
+
+  const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify(preference),
+  });
+
+  const data = await response.json();
+  return Response.json({ redirectUrl: data.init_point });
+}
+```
+
+`external_reference` es el campo que más importa. Es lo que te permite hacer coincidir una notificación entrante con un pedido de tu base de datos.
+
+## Verificar la firma del webhook
+
+Tu endpoint de webhook es público. Cualquiera que encuentre la URL puede hacerle POST diciendo que un pedido se pagó. Mercado Pago firma cada notificación, y verificar esa firma no es opcional:
+
+```ts
+import crypto from 'crypto';
+
+function verifySignature(request: Request, dataId: string): boolean {
+  const signature = request.headers.get('x-signature');
+  const requestId = request.headers.get('x-request-id');
+  if (!signature || !requestId) return false;
+
+  // El header viene así: ts=1704908010,v1=618c85345248dd820d5fd456117c2ab2ef8eda45
+  const parts = Object.fromEntries(
+    signature.split(',').map((p) => p.split('=').map((s) => s.trim()))
+  );
+
+  const manifest = `id:${dataId};request-id:${requestId};ts:${parts.ts};`;
+  const expected = crypto
+    .createHmac('sha256', process.env.MP_WEBHOOK_SECRET!)
+    .update(manifest)
+    .digest('hex');
+
+  // timingSafeEqual en vez de === : comparar strings con === filtra
+  // información a través de cuánto tarda la comparación.
+  return crypto.timingSafeEqual(
+    Buffer.from(expected),
+    Buffer.from(parts.v1)
+  );
+}
+```
+
+El formato del manifest es exacto. Falta un punto y coma y la firma no coincide nunca.
+
+## Lo que nadie documenta: la race condition
+
+Acá está lo que me costó la tarde. El usuario paga y pasan dos cosas en paralelo:
+
+- Mercado Pago redirige el navegador a tu página de éxito.
+- Mercado Pago manda el webhook a tu servidor.
+
+La suposición natural es que el redirect llega primero: el usuario ve la confirmación y después tu backend se entera. **Eso no está garantizado.** Con una conexión lenta, el webhook puede llegar antes de que el navegador termine de redirigir.
+
+Si tu página de éxito lee el pedido y espera que esté en `paid`, funciona en las pruebas y falla de forma intermitente en producción.
+
+La solución es que la página de éxito no dependa de que el webhook ya haya llegado:
+
+```ts
+// La página de éxito tolera los dos órdenes de llegada.
+const order = await getOrder(orderId);
+
+if (order.status === 'paid') {
+  return <OrderConfirmed order={order} />;
+}
+
+// El webhook todavía no llegó: mostrar un estado pendiente que consulta,
+// en vez de un error o un falso "el pago falló".
+return <OrderProcessing orderId={orderId} />;
+```
+
+Y el webhook tiene que ser **idempotente**: Mercado Pago reintenta cuando falla, así que la misma notificación puede llegar varias veces:
+
+```ts
+// Si ya está marcado como pagado, no hacer nada y devolver 200.
+// Devolver un error haría que Mercado Pago reintente para siempre.
+if (order.status === 'paid') {
+  return new Response(null, { status: 200 });
+}
+```
+
+## Qué costó
+
+La integración en sí es directa. Lo que lleva tiempo es todo lo que la rodea: estados que no coinciden, notificaciones que llegan dos veces, pagos que quedan pendientes durante días.
+
+Si tuviera que dar un solo consejo: **tratá al webhook como la fuente de verdad y al redirect como una pista de interfaz**. El redirect te dice que el usuario volvió. El webhook te dice que pagó. No son lo mismo.
+
+## Cierre
+
+Mercado Pago está bien documentado para el camino feliz y callado para los casos borde. Los dos que te van a morder son la verificación de firma —que es una cuestión de seguridad, no un trámite— y suponer que el redirect siempre le gana al webhook.
+
+Si estás construyendo un checkout con autenticación real, también vale leer cómo [un patrón BFF mantiene los tokens fuera del navegador](/blog/arquitectura-bff-nextjs?lang=es).

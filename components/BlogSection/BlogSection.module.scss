@@ -23,7 +23,7 @@
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 3rem;
+  margin: var(--subtitle-spacing-top) auto 3rem;
   text-align: center;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
@@ -67,14 +67,16 @@
 .card {
   // Mismo velo lila tenue y sombra teñida que las tarjetas de "Backed by data":
   // las secciones claras del home comparten lenguaje de tarjeta.
-  background: linear-gradient(180deg, #fdfcff 0%, #f7f5fd 100%);
+  background: linear-gradient(180deg, #fbfaff 0%, #f5f2fc 100%);
   border: 1px solid rgba(142, 122, 230, 0.16);
-  border-radius: var(--br);
+  border-radius: var(--br-lg);
   overflow: hidden;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 8px 22px -12px rgba(46, 41, 78, 0.28);
-  transition: background 0.35s ease, transform 0.25s ease,
-    box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    1px 1px 2px -1px rgba(46, 41, 78, 0.08),
+    3px 5px 12px -7px rgba(46, 41, 78, 0.16),
+    6px 14px 30px -18px rgba(46, 41, 78, 0.22);
+  // Sin transform en la transición: la tarjeta ya no se mueve en hover.
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
 
   :global(html.dark) & {
     background: rgba(24, 28, 51, 0.6);
@@ -82,25 +84,25 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 
+  // El hover no levanta la tarjeta ni hace zoom en la imagen: sólo crece la
+  // sombra y el borde lila se define. La flecha del enlace sigue girando —es
+  // la señal de "esto lleva a algún lado"— pero la tarjeta se queda quieta.
   &:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
     border-color: rgba(142, 122, 230, 0.38);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      0 14px 32px -14px rgba(46, 41, 78, 0.34),
-      0 0 24px -10px rgba(142, 122, 230, 0.4);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+      1px 2px 3px -1px rgba(46, 41, 78, 0.1),
+      4px 8px 18px -9px rgba(46, 41, 78, 0.2),
+      10px 20px 42px -22px rgba(46, 41, 78, 0.3);
 
     :global(html.dark) & {
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
+      box-shadow: 1px 2px 4px -1px rgba(0, 0, 0, 0.4),
+        4px 9px 20px -9px rgba(0, 0, 0, 0.45),
+        10px 22px 44px -24px rgba(0, 0, 0, 0.5);
       border-color: rgba(142, 122, 230, 0.4);
     }
 
-    .cover {
-      transform: scale(1.04);
-    }
-
     .readMore .arrow {
-      transform: translateX(4px);
+      transform: rotate(-45deg);
     }
   }
 }
@@ -123,7 +125,6 @@
 
 .cover {
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
 
 .body {
@@ -230,13 +231,15 @@
   color: var(--primary-color);
 
   .arrow {
-    transition: transform 0.25s ease;
+    transform-origin: center center;
+    transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
   }
 }
 
 .ctaContainer {
   display: flex;
-  justify-content: center;
+  // Pegado a la derecha, alineado con el borde de la grilla de tarjetas.
+  justify-content: flex-end;
   margin-top: 3rem;
 
   @media (max-width: 768px) {
@@ -244,47 +247,50 @@
   }
 }
 
+// Mismas medidas y radio que el resto de los CTA de la plataforma
+// (ver HowWeWork/CallToAction): 3rem de alto, padding 0 2rem, --br.
+// Antes era una píldora de 999px, el único botón con esa forma.
 .ctaButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 999px;
+  height: 3rem;
+  padding: 0 2rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border-radius: var(--br);
   background: var(--primary-color);
   color: #ffffff;
   font-weight: 500;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background-color 0.25s ease, transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
 
   .arrow {
-    transition: transform 0.25s ease;
+    transform-origin: center center;
+    transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 26px -12px rgba(46, 41, 78, 0.45);
+    box-shadow: 1px 2px 4px -1px rgba(46, 41, 78, 0.2),
+      4px 10px 22px -10px rgba(46, 41, 78, 0.4);
 
     .arrow {
-      transform: translateX(4px);
+      transform: rotate(-45deg);
     }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .cover,
   .ctaButton,
   .arrow {
     transition: none;
   }
 
-  .card:hover {
-    transform: none;
-  }
-
-  .ctaButton:hover {
+  .arrow {
     transform: none;
   }
 }

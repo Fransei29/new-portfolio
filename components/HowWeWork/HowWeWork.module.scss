@@ -40,7 +40,7 @@ $step-column-gap: 10rem;
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: rgba(235, 235, 240, 0.82);
-  margin: 1.25rem auto 3rem;
+  margin: var(--subtitle-spacing-top) auto 3rem;
   text-align: center;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
@@ -52,7 +52,7 @@ $step-column-gap: 10rem;
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem 0 1.75rem;
+    margin: var(--subtitle-spacing-top-mobile) 0 1.75rem;
     text-align: center;
     max-width: none;
   }
@@ -599,7 +599,7 @@ $step-column-gap: 10rem;
     transform: translateY(-1px);
 
     .arrow {
-      transform: translateX(2px);
+      transform: rotate(-45deg);
     }
   }
 
@@ -624,7 +624,8 @@ $step-column-gap: 10rem;
 .arrow {
   font-size: 0.85rem;
   margin-left: 0.55rem;
-  transition: transform 0.15s ease-in-out;
+  transform-origin: center center;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
   flex-shrink: 0;
 
   @media (max-width: 768px) {

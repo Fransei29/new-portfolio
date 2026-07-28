@@ -1,16 +1,19 @@
 .themeToggleButton {
     background-color: transparent;
-    border: none;
+    // Borde tenue que envuelve el control, con aire entre el trazo del icono y
+    // el borde: 38px de caja para un icono de 21px.
+    border: 1px solid rgba(46, 41, 78, 0.16);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--br);
-    width: 28px;
-    height: 28px;
+    width: 38px;
+    height: 38px;
     padding: 0;
     box-shadow: none;
-    transition: color 0.25s ease;
+    transition: color 0.25s ease, border-color 0.25s ease,
+      background-color 0.25s ease;
     color: rgb(73, 73, 73);
   }
 
@@ -20,20 +23,29 @@
   }
 
   .themeToggleButton:hover {
-    background-color: transparent;
+    background-color: rgba(142, 122, 230, 0.06);
+    border-color: rgba(142, 122, 230, 0.4);
     color: #000000;
   }
 
   .icon {
+    // Los SVG de marca vienen a 1em: el tamaño se fija por font-size en vez de
+    // por un prop, y el color lo heredan vía currentColor.
+    font-size: 20px;
+    width: 1em;
+    height: 1em;
     transition: color 0.25s ease;
   }
 
   :global(html.dark) .themeToggleButton {
     color: rgb(210, 210, 210);
+    border-color: rgba(255, 255, 255, 0.16);
   }
 
   :global(html.dark) .themeToggleButton:hover {
     color: #ffffff;
+    background-color: rgba(181, 156, 248, 0.1);
+    border-color: rgba(181, 156, 248, 0.45);
   }
   
   .containerSocial {
@@ -55,14 +67,15 @@
   }
 
   .themeToggleButton {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     margin-top: 0.25rem;
     margin-left: 0;
   }
 
   .icon {
-    width: 14px !important;
-    height: 14px !important;
+    font-size: 18px;
+    width: 1em;
+    height: 1em;
   }
   }

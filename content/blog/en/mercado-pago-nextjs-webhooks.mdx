@@ -1,0 +1,148 @@
+---
+title: "Mercado Pago in Next.js: the complete flow with webhooks"
+description: "Creating the preference, verifying the webhook signature, and the race condition nobody documents: what happens when the webhook beats the redirect."
+date: 2026-07-22
+tags: ["nextjs", "payments", "backend"]
+cover: "/img/img/Acero-web/acero-02.webp"
+coverAlt: "Checkout screen of the a.cer0 e-commerce platform"
+author: "Franco Seiler"
+featured: false
+draft: false
+---
+
+Almost every payment tutorial written in English assumes Stripe. If you sell in Latin America, that assumption is useless: here the gateway is Mercado Pago, and the official documentation shows the happy path without ever mentioning what happens when reality gets in the way.
+
+I integrated it into a.cer0, a custom e-commerce platform. This is the complete flow, including the part that cost me an afternoon of debugging.
+
+## The flow in four steps
+
+1. The backend creates a **preference** — an object describing what's being charged.
+2. The browser redirects to Mercado Pago with that preference's ID.
+3. The user pays and Mercado Pago redirects them back.
+4. Separately, Mercado Pago hits your **webhook** to confirm what happened.
+
+The critical detail: steps 3 and 4 are independent, and **there's no guaranteed order between them**.
+
+## Creating the preference
+
+The preference lives server-side. The access token never touches the browser:
+
+```ts
+// app/api/checkout/route.ts
+export async function POST(request: Request) {
+  const { items, orderId } = await request.json();
+
+  const preference = {
+    items: items.map((item) => ({
+      title: item.name,
+      quantity: item.quantity,
+      unit_price: item.price,
+      currency_id: 'ARS',
+    })),
+    // external_reference is how you tie the payment back to YOUR order.
+    // Without it, the webhook arrives and you don't know what it belongs to.
+    external_reference: orderId,
+    back_urls: {
+      success: `${process.env.SITE_URL}/checkout/success`,
+      failure: `${process.env.SITE_URL}/checkout/failure`,
+    },
+    notification_url: `${process.env.SITE_URL}/api/webhooks/mercadopago`,
+  };
+
+  const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify(preference),
+  });
+
+  const data = await response.json();
+  return Response.json({ redirectUrl: data.init_point });
+}
+```
+
+`external_reference` is the field that matters most. It's what lets you match an incoming notification to an order in your database.
+
+## Verifying the webhook signature
+
+Your webhook endpoint is public. Anyone who finds the URL can POST to it claiming an order was paid. Mercado Pago signs every notification, and verifying that signature is not optional:
+
+```ts
+import crypto from 'crypto';
+
+function verifySignature(request: Request, dataId: string): boolean {
+  const signature = request.headers.get('x-signature');
+  const requestId = request.headers.get('x-request-id');
+  if (!signature || !requestId) return false;
+
+  // The header looks like: ts=1704908010,v1=618c85345248dd820d5fd456117c2ab2ef8eda45
+  const parts = Object.fromEntries(
+    signature.split(',').map((p) => p.split('=').map((s) => s.trim()))
+  );
+
+  const manifest = `id:${dataId};request-id:${requestId};ts:${parts.ts};`;
+  const expected = crypto
+    .createHmac('sha256', process.env.MP_WEBHOOK_SECRET!)
+    .update(manifest)
+    .digest('hex');
+
+  // timingSafeEqual instead of === : comparing strings with === leaks
+  // information through how long the comparison takes.
+  return crypto.timingSafeEqual(
+    Buffer.from(expected),
+    Buffer.from(parts.v1)
+  );
+}
+```
+
+The manifest format is exact. A missing semicolon and the signature never matches.
+
+## The part nobody documents: the race condition
+
+Here's what cost me the afternoon. The user pays, and two things happen in parallel:
+
+- Mercado Pago redirects the browser to your success page.
+- Mercado Pago sends the webhook to your server.
+
+The natural assumption is that the redirect comes first — the user sees the confirmation, then your backend gets notified. **That's not guaranteed.** On a slow connection, the webhook can land before the browser finishes redirecting.
+
+If your success page reads the order and expects it to be `paid`, it works in testing and fails intermittently in production.
+
+The fix is to make the success page not depend on the webhook having arrived:
+
+```ts
+// The success page tolerates both orders of arrival.
+const order = await getOrder(orderId);
+
+if (order.status === 'paid') {
+  return <OrderConfirmed order={order} />;
+}
+
+// The webhook hasn't landed yet: show a pending state that polls,
+// instead of an error or a false "payment failed".
+return <OrderProcessing orderId={orderId} />;
+```
+
+And the webhook must be **idempotent** — Mercado Pago retries on failure, so the same notification can arrive several times:
+
+```ts
+// If it's already marked paid, do nothing and return 200.
+// Returning an error would make Mercado Pago retry forever.
+if (order.status === 'paid') {
+  return new Response(null, { status: 200 });
+}
+```
+
+## What it cost
+
+The integration itself is straightforward. What takes time is everything around it: states that don't line up, notifications arriving twice, payments that stay pending for days.
+
+If I had to give one piece of advice: **treat the webhook as the source of truth, and the redirect as a UI hint**. The redirect tells you the user came back. The webhook tells you they paid. They're not the same thing.
+
+## Wrapping up
+
+Mercado Pago is well documented for the happy path and quiet about the edge cases. The two that will bite you are signature verification — which is a security matter, not a formality — and the assumption that the redirect always beats the webhook.
+
+If you're building checkout with real authentication, it's also worth reading how [a BFF pattern keeps tokens out of the browser](/blog/arquitectura-bff-nextjs).

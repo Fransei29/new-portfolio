@@ -82,7 +82,7 @@
     box-shadow: 0 4px 12px rgba(46, 41, 78, 0.16);
 
     .arrow {
-      transform: translateX(3px);
+      transform: rotate(-45deg);
     }
   }
 
@@ -108,12 +108,14 @@
   }
 }
 
-/* Flecha del CTA: se desliza a la derecha en hover (ver .secondary:hover) */
+/* Flecha del CTA: gira sobre su eje hasta mirar arriba-derecha en hover
+   (ver .secondary:hover) — el gesto de "ir a", sin moverse de lugar. */
 .arrow {
   margin-left: 0.55rem;
   font-size: 1.05rem;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transform-origin: center center;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
 }
 
 .icon {

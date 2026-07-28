@@ -31,7 +31,7 @@
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 2rem;
+  margin: var(--subtitle-spacing-top) auto 2rem;
   text-align: center;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
