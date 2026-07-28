@@ -1,0 +1,78 @@
+// components/Blog/TableOfContents.module.scss
+
+.toc {
+  position: sticky;
+  top: 7rem;
+  align-self: start;
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  scrollbar-width: thin;
+
+  :global(html.dark) & {
+    border-left-color: rgba(255, 255, 255, 0.12);
+  }
+
+  // Por debajo del ancho del artículo no hay columna lateral donde ponerlo.
+  @media (max-width: 1180px) {
+    display: none;
+  }
+}
+
+.title {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris-medio);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.item {
+  margin: 0;
+}
+
+.nested {
+  padding-left: 0.85rem;
+}
+
+.link {
+  display: block;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-color-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--ink);
+  }
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.6);
+
+    &:hover {
+      color: rgb(240, 239, 245);
+    }
+  }
+}
+
+.active {
+  font-weight: 600;
+  color: var(--lila-corporativo);
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+  }
+}

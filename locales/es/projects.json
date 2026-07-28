@@ -3,16 +3,16 @@
     "title": "Mis Proyectos",
     "subtitle": "Algunos de los proyectos en los que he trabajado",
     "learnMore": "Ver más",
-    "viewProject": "Ver proyecto",
+    "viewProject": "Ver caso",
     "viewCode": "Ver código",
     "viewDemo": "Ver demo",
     "recentWork": "Trabajo Reciente",
     "recentTutorials": "Tutoriales Recientes",
-    "projects": "Proyectos",
+    "projects": "Casos de estudio",
     "projectsSubtitle": "Una selección de trabajos recientes construidos de punta a punta.",
     "tutorials": "Tutoriales",
     "tutorialsSubtitle": "Recorridos breves de decisiones reales que tomé construyendo software.",
-    "goToProjects": "Ver Proyectos",
+    "goToProjects": "Ver todos los casos",
     "goToTutorials": "Ver Tutoriales",
     "back": "Atrás",
     "overview": "Resumen",
@@ -52,7 +52,10 @@
           "UI responsive y productizada: Next.js App Router, Redux para estado de cliente complejo, stacks de componentes Ant Design / MUI / Radix, y layouts optimizados para dashboards de escritorio + tareas operativas mobile-friendly.",
           "Excelencia operacional: logging estructurado, guards de API conscientes del tenant y configuración orientada a despliegue para paridad staging/producción.",
           "Diseño responsive pixel-perfect en toda la superficie del admin — se ve impecable desde tablets de operador en ruta hasta dashboards de compliance ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · Multi-tenant",
+        "industry": "Compliance de transporte",
+        "engagement": "Colaboración con equipo"
       },
       "acer0": {
         "title": "Acer0",
@@ -69,7 +72,10 @@
           "Endurecimiento de seguridad con Helmet, express-rate-limit, validación con Zod en cada endpoint, Google reCAPTCHA en todos los formularios públicos y sanitización de inputs en la capa proxy del BFF.",
           "Containerización de todo el stack con Docker Compose (PostgreSQL 17, backend, frontend) y despliegue automatizado en VPS con PM2 en modo cluster para releases sin downtime.",
           "UI mobile-first totalmente responsive y pixel-perfect con módulos SCSS y breakpoints en 480px, 640px, 768px y 900px — se ve impecable en cualquier dispositivo, desde teléfonos chicos hasta desktops ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · Arquitectura",
+        "industry": "Manufactura y retail",
+        "engagement": "Trabajo para cliente"
       },
       "bellum": {
         "title": "Bellum",
@@ -87,7 +93,10 @@
           "Sistema de emails transaccionales con Resend para envíos de contacto y notificaciones de propuestas, con plantillas con branding totalmente editables desde el panel de administración.",
           "Implementación SEO completa: sitemap dinámico, robots.txt, metadata Open Graph, JSON-LD para FAQ y datos estructurados de Organización — regenerados automáticamente cada vez que se cambia contenido desde el panel.",
           "Arquitectura SCSS mobile-first con diseño modular de componentes, tipografía responsive fluida, hero carousel con crossfade suave y un sistema de diseño consistente con variables y mixins propios — impecable desde teléfonos de 320px hasta desktops ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · CMS a medida",
+        "industry": "Administración de consorcios",
+        "engagement": "Trabajo para cliente"
       },
       "grupo-el-triunfo": {
         "title": "Grupo El Triunfo",
@@ -104,7 +113,10 @@
           "Página institucional multi-sección con línea de tiempo histórica, misión/visión, estadísticas, galería y valores de marca.",
           "Layout responsive mobile-first pixel-perfect con breakpoints custom, tipografía fluida y entrega optimizada de imágenes mediante Next.js <Image> — se ve impecable en cualquier dispositivo, desde teléfonos chicos hasta monitores 4K.",
           "Página de contacto con formulario, tarjetas de información e integración de Google Maps embebido."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Agroindustria",
+        "engagement": "Trabajo para cliente"
       },
       "home-trades-online": {
         "title": "Home Trades Online",
@@ -120,7 +132,10 @@
           "Infraestructura de internacionalización completa con ruteo por prefijo de URL, formato de moneda según país y traducción completa al español de Argentina — habilitando expansión a 9+ países con esfuerzo mínimo.",
           "UX mobile-first impecable, diseñada al detalle para uso en exteriores y obra: áreas táctiles de 48px+, diseño de alto contraste, operación real con una sola mano, inputs aptos para guantes y generación de propuestas con streaming y skeletons progresivos — perfecta desde teléfonos chicos hasta tablets grandes.",
           "Pipeline de despliegue productivo con Docker Compose, Gunicorn, Nginx como reverse proxy, SSL de Let's Encrypt y CI en GitHub Actions (tests unitarios + E2E con Playwright)."
-        ]
+        ],
+        "role": "Full-stack · SaaS",
+        "industry": "Construcción y oficios",
+        "engagement": "Trabajo para cliente"
       },
       "salesforpro": {
         "title": "Home Trades Online Landing",
@@ -137,7 +152,10 @@
           "Integración de Django i18n con tags {% trans %} en todo el contenido de marketing para un cambio sin fricciones entre inglés y español mediante ruteo por prefijo de URL (/ar/).",
           "Buenas prácticas de accesibilidad: media query prefers-reduced-motion deshabilitando animaciones, etiquetas ARIA, HTML semántico, focus rings visibles y regiones aria-live para estados de carga.",
           "Efecto shimmer en CTA con barrido de gradiente solo con CSS, divisores en forma de ola con paths SVG inline y estados de carga con skeletons animados en el preview de generación de propuestas."
-        ]
+        ],
+        "role": "Frontend · Landing de producto",
+        "industry": "Construcción y oficios",
+        "engagement": "Trabajo para cliente"
       },
       "starton": {
         "title": "StartOn ",
@@ -153,7 +171,10 @@
           "Sistema de mensajería privada persistente y filtros avanzados por ciudad, tecnología y tipo de empresa.",
           "Optimización UX/UI: mobile-first, animaciones suaves, tipografía escalable y paleta de colores consistente.",
           "Implementación de blogs, páginas de servicios y sistema de networking de fundadores."
-        ]
+        ],
+        "role": "Full-stack",
+        "industry": "Empleo tech",
+        "engagement": "Producto propio"
       },
       "mi-agenda": {
         "title": "Mi Agenda",
@@ -170,7 +191,10 @@
           "Sincronización con Google Calendar para marcar bloques ocupados y evitar solapamiento de turnos.",
           "Actualizaciones en tiempo real mediante WebSockets (Socket.io con adaptador Redis) para reservas y notificaciones.",
           "PWA «Mi agenda»: instalable, página offline, notificaciones push y atajos de app."
-        ]
+        ],
+        "role": "Full-stack · Pagos e integraciones",
+        "industry": "Servicios con turnos",
+        "engagement": "Trabajo para cliente"
       },
       "tecnomar": {
         "title": "TecnoMar",
@@ -185,7 +209,10 @@
           "Cotizador online en ruta dedicada y enlaces a Contacto; CTAs diferenciados (cotizador vs contacto) en Approach y Process.",
           "Diseño mobile-first: hamburger animado (líneas → X), tarjetas de contacto alineadas, logos de clientes con tamaños desktop/mobile por archivo y carga prioritaria en la primera fila.",
           "Loading overlay con logo fijo y spinner; integración de mapa en la sección de contacto."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Industrial",
+        "engagement": "Trabajo para cliente"
       },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
@@ -203,7 +230,10 @@
           "Viewport y meta configurados para consistencia entre desarrollo y producción en móviles.",
           "Despliegue en Vercel con un único proyecto conectado al repositorio.",
           "Arquitectura preparada para escalar en un shop (compra de planes, área de miembros) si el cliente amplía el producto."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Fitness y entrenamiento",
+        "engagement": "Trabajo para cliente"
       },
       "property-recommender": {
         "title": "Habita",
@@ -217,7 +247,10 @@
           "Apliqué SCSS modular para estilos limpios y reutilizables.",
           "Optimicé el rendimiento de la aplicación y la experiencia de usuario mediante el manejo eficiente de datos y diseño UI.",
           "Creé un panel de administración para la gestión de propiedades del usuario y seguimiento de favoritos."
-        ]
+        ],
+        "role": "Full-stack",
+        "industry": "Inmobiliario",
+        "engagement": "Producto propio"
       },
       "ecommerce": {
         "title": "Quiero Sport",
@@ -232,7 +265,9 @@
           "Gestioné estado y efectos secundarios con hooks de React.",
           "Usé Prisma ORM para operaciones de base de datos.",
           "Configuré Docker para desarrollo local y desplegué en Vercel."
-        ]
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "healthcare-crm": {
         "title": "Medicare ",
@@ -249,7 +284,10 @@
           "Probé servicios principales y casos límite con tests unitarios e integración.",
           "Diseñé una UI responsive y accesible con Tailwind y toggle de modo oscuro.",
           "Gestioné configuración de entorno para despliegue en Render y Vercel."
-        ]
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica",
+        "industry": "Salud"
       },
       "taskmanager": {
         "title": "Task Manager",
@@ -264,7 +302,9 @@
           "Configuré Docker para entorno de desarrollo local.",
           "Implementé diseño responsive con CSS Modules.",
           "Gestioné estado y llamadas API con Axios."
-        ]
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "flipper": {
         "title": "Flipper",
@@ -279,7 +319,9 @@
           "Configuré Docker para containerización y despliegue.",
           "Implementé características en tiempo real para interacción social.",
           "Desplegué la aplicación en Vercel."
-        ]
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "vestire": {
         "title": "Vestiré",
@@ -295,7 +337,9 @@
           "Gestioné operaciones de base de datos con PostgreSQL.",
           "Desplegué la aplicación en Vercel.",
           "Implementé prácticas modernas de UI/UX."
-        ]
+        ],
+        "role": "Frontend",
+        "engagement": "Proyecto de práctica"
       },
       "trip-planner": {
         "title": "Trip Planner",
@@ -306,7 +350,9 @@
         "learnings": [
           "Configuración con Next.js App Router y create-next-app.",
           "Desplegado en Vercel (trip-planner-c.vercel.app)."
-        ]
+        ],
+        "role": "Frontend",
+        "engagement": "Proyecto de práctica"
       },
       "dynamic-blog": {
         "title": "Dynamic Blog",
@@ -367,7 +413,10 @@
           "Construí un dashboard integral con estadísticas y visualización de datos.",
           "Diseñé una arquitectura escalable con Node.js y Express en el backend.",
           "Implementé diseño responsive con SCSS para una experiencia de usuario óptima."
-        ]
+        ],
+        "role": "Full-stack · Automatización con IA",
+        "industry": "Legal",
+        "engagement": "Trabajo para cliente"
       },
       "lexmax-landing": {
         "title": "LexMax Landing",
@@ -384,7 +433,10 @@
           "Implementé navegación responsive con menú hamburguesa para dispositivos móviles.",
           "Creé efectos visuales y animaciones para mejorar la participación del usuario.",
           "Optimicé el rendimiento de la página y tiempos de carga con optimizaciones de Next.js."
-        ]
+        ],
+        "role": "Frontend · Landing de producto",
+        "industry": "Legal",
+        "engagement": "Trabajo para cliente"
       },
       "the-club-northfield": {
         "title": "The Club at Northfield",
@@ -401,7 +453,10 @@
           "Optimicé para exportación estática y tiempos de carga rápidos.",
           "Diseñé componentes modulares para fácil mantenimiento.",
           "Creé un sistema de navegación intuitivo para mejor experiencia de usuario."
-        ]
+        ],
+        "role": "Full-stack · CMS con Strapi",
+        "industry": "Deportes y fitness",
+        "engagement": "Trabajo para cliente"
       },
       "event-scheduler": {
         "title": "Event Scheduler",
@@ -422,38 +477,44 @@
           "Diseñé un sistema de doble interfaz (portal de administración y sitio web público) con componentes compartidos.",
           "Implementé funcionalidad de auto-guardado para prevenir pérdida de datos durante la completación de formularios.",
           "Desarrollé un sistema completo de coordinación de eventos con gestión de disponibilidad."
-        ]
+        ],
+        "role": "Full-stack",
+        "industry": "Eventos y espacios",
+        "engagement": "Producto propio"
       },
       "ateevo-wholesale": {
-      "title": "Ateevo Wholesale",
-      "subtitle": "Plataforma B2B de Comercio Electrónico para Moda",
-      "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nArquitecturada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
-      "whatIs": "Ateevo Wholesale es una plataforma B2B de comercio electrónico para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\n\nLa plataforma permite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a los administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\n\nArquitectura SaaS multi-tenant soportando múltiples marcas independientes con aislamiento completo de datos y branding white-label personalizable.\n\nCaracterísticas Clave:\n\n• Arquitectura Multi-Tenant con bases de datos PostgreSQL aisladas y branding personalizable\n• Contratos Digitales con firmas capturadas en canvas y generación automática de PDF\n• Notificaciones en Tiempo Real con centro de alertas y notificaciones persistentes\n• Reportes Avanzados: Availability y Margin Reports con soporte multi-moneda (USD, CAD, MXN)\n• Gestión de Temporadas con fechas de disponibilidad, pre-orders y fechas estimadas de envío\n• Precios Multi-Moneda (USD, CAD, MXN) con MSRP y conversión automática\n• Gestión Completa de Pedidos desde New hasta Invoice Paid con exportación PDF\n• Sistema Avanzado de Inventario con múltiples métricas (On Hand, Available to Sell, Available to Ship)\n• Catálogo de Productos con múltiples imágenes, variantes automáticas y códigos SKU/MFC\n• Gestión de Clientes con múltiples direcciones, facturación e historial completo\n• Dashboard y Analytics con métricas configurables y gráficos de tendencias\n• Panel de Super Administración para gestión de múltiples tenants y creación de bases de datos\n• Seguridad Empresarial con autenticación JWT, passwords hasheados y permisos por rol",
-      "problemSolved": "El sector de la moda mayorista carece de plataformas modernas que conecten eficientemente a marcas con sus clientes mayoristas.\n\nAteevo Wholesale resuelve este problema permitiendo a las marcas gestionar su catálogo, inventario y pedidos de forma centralizada, mientras que los clientes pueden navegar, ordenar y hacer seguimiento de sus compras de manera intuitiva, todo con contratos digitales firmados y reportes avanzados de márgenes y disponibilidad.\n\nLa arquitectura multi-tenant permite escalar el negocio soportando múltiples marcas en una sola plataforma con seguridad y personalización completa.\n\nEsta plataforma entrega una solución completa de comercio electrónico B2B para la industria de la moda. Las marcas pueden gestionar su negocio mayorista de extremo a extremo, desde catálogo hasta facturación, mientras que los clientes disfrutan de una experiencia de compra moderna, intuitiva y completamente personalizada. El sistema de contratos digitales, reportes avanzados y arquitectura multi-tenant hacen de Ateevo Wholesale una solución enterprise-ready que escala con el crecimiento del negocio.",
-      "learnings": [
-        "Arquitectura multi-tenant con PostgreSQL aislado por tenant y branding white-label (logo, colores, storefront dinámico).",
-        "Contratos digitales con firma en canvas, PDF automático y estados (pending → fully_signed); múltiples contratos por pedido.",
-        "Notificaciones en tiempo real, centro de alertas y avisos de firma de contrato con navegación al pedido.",
-        "Availability Report: productos disponibles, qué clientes ordenaron cada producto, reasignación de ítems entre pedidos.",
-        "Margin Report: márgenes por producto, multi-moneda (USD/CAD), identificación de productos sin costo.",
-        "Gestión de temporadas: fechas de disponibilidad, pre-order y fechas estimadas de envío por temporada.",
-        "Multi-moneda (USD, CAD, MXN), MSRP por moneda y conversión automática según país del cliente.",
-        "Workflow de pedidos completo (New → Invoice Paid), edición por admins, PO opcional, export PDF e historial.",
-        "Inventario: On Hand, Available to Sell, Available to Ship, variantes por color/talla y filtros avanzados.",
-        "Catálogo: múltiples imágenes, variantes automáticas, SKU/MFC, categorías y asignación a temporadas.",
-        "Panel de clientes: direcciones, facturación, activación de cuentas, historial de pedidos y reset de contraseña.",
-        "Dashboard con ventas, pedidos, clientes activos, gráficos de tendencias y productos más vendidos.",
-        "Super admin: múltiples tenants, creación de DB automática, impersonación y activación/desactivación.",
-        "Diseño responsive para desktop, tablet y móvil.",
-        "Seguridad: JWT, bcrypt, roles (Customer/Admin/Super Admin), base de datos aislada por tenant."
-      ]
+        "title": "Ateevo Wholesale",
+        "subtitle": "Plataforma B2B de Comercio Electrónico para Moda",
+        "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nArquitecturada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
+        "whatIs": "Ateevo Wholesale es una plataforma B2B de comercio electrónico para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\n\nLa plataforma permite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a los administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\n\nArquitectura SaaS multi-tenant soportando múltiples marcas independientes con aislamiento completo de datos y branding white-label personalizable.\n\nCaracterísticas Clave:\n\n• Arquitectura Multi-Tenant con bases de datos PostgreSQL aisladas y branding personalizable\n• Contratos Digitales con firmas capturadas en canvas y generación automática de PDF\n• Notificaciones en Tiempo Real con centro de alertas y notificaciones persistentes\n• Reportes Avanzados: Availability y Margin Reports con soporte multi-moneda (USD, CAD, MXN)\n• Gestión de Temporadas con fechas de disponibilidad, pre-orders y fechas estimadas de envío\n• Precios Multi-Moneda (USD, CAD, MXN) con MSRP y conversión automática\n• Gestión Completa de Pedidos desde New hasta Invoice Paid con exportación PDF\n• Sistema Avanzado de Inventario con múltiples métricas (On Hand, Available to Sell, Available to Ship)\n• Catálogo de Productos con múltiples imágenes, variantes automáticas y códigos SKU/MFC\n• Gestión de Clientes con múltiples direcciones, facturación e historial completo\n• Dashboard y Analytics con métricas configurables y gráficos de tendencias\n• Panel de Super Administración para gestión de múltiples tenants y creación de bases de datos\n• Seguridad Empresarial con autenticación JWT, passwords hasheados y permisos por rol",
+        "problemSolved": "El sector de la moda mayorista carece de plataformas modernas que conecten eficientemente a marcas con sus clientes mayoristas.\n\nAteevo Wholesale resuelve este problema permitiendo a las marcas gestionar su catálogo, inventario y pedidos de forma centralizada, mientras que los clientes pueden navegar, ordenar y hacer seguimiento de sus compras de manera intuitiva, todo con contratos digitales firmados y reportes avanzados de márgenes y disponibilidad.\n\nLa arquitectura multi-tenant permite escalar el negocio soportando múltiples marcas en una sola plataforma con seguridad y personalización completa.\n\nEsta plataforma entrega una solución completa de comercio electrónico B2B para la industria de la moda. Las marcas pueden gestionar su negocio mayorista de extremo a extremo, desde catálogo hasta facturación, mientras que los clientes disfrutan de una experiencia de compra moderna, intuitiva y completamente personalizada. El sistema de contratos digitales, reportes avanzados y arquitectura multi-tenant hacen de Ateevo Wholesale una solución enterprise-ready que escala con el crecimiento del negocio.",
+        "learnings": [
+          "Arquitectura multi-tenant con PostgreSQL aislado por tenant y branding white-label (logo, colores, storefront dinámico).",
+          "Contratos digitales con firma en canvas, PDF automático y estados (pending → fully_signed); múltiples contratos por pedido.",
+          "Notificaciones en tiempo real, centro de alertas y avisos de firma de contrato con navegación al pedido.",
+          "Availability Report: productos disponibles, qué clientes ordenaron cada producto, reasignación de ítems entre pedidos.",
+          "Margin Report: márgenes por producto, multi-moneda (USD/CAD), identificación de productos sin costo.",
+          "Gestión de temporadas: fechas de disponibilidad, pre-order y fechas estimadas de envío por temporada.",
+          "Multi-moneda (USD, CAD, MXN), MSRP por moneda y conversión automática según país del cliente.",
+          "Workflow de pedidos completo (New → Invoice Paid), edición por admins, PO opcional, export PDF e historial.",
+          "Inventario: On Hand, Available to Sell, Available to Ship, variantes por color/talla y filtros avanzados.",
+          "Catálogo: múltiples imágenes, variantes automáticas, SKU/MFC, categorías y asignación a temporadas.",
+          "Panel de clientes: direcciones, facturación, activación de cuentas, historial de pedidos y reset de contraseña.",
+          "Dashboard con ventas, pedidos, clientes activos, gráficos de tendencias y productos más vendidos.",
+          "Super admin: múltiples tenants, creación de DB automática, impersonación y activación/desactivación.",
+          "Diseño responsive para desktop, tablet y móvil.",
+          "Seguridad: JWT, bcrypt, roles (Customer/Admin/Super Admin), base de datos aislada por tenant."
+        ],
+        "role": "Full-stack · B2B e-commerce",
+        "industry": "Moda mayorista",
+        "engagement": "Trabajo para cliente"
       }
     }
   },
   "pages": {
     "projects": {
-      "title": "Proyectos",
-      "subtitle": "Una selección curada de trabajos entregados de punta a punta — de la arquitectura a producción."
+      "title": "Casos de estudio",
+      "subtitle": "Trabajos entregados de punta a punta — el problema, las decisiones técnicas y lo que quedó funcionando en producción."
     },
     "tutorials": {
       "title": "Tutoriales",

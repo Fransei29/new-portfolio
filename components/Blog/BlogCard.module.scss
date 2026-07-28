@@ -1,0 +1,227 @@
+// components/Blog/BlogCard.module.scss
+
+.card {
+  position: relative;
+  border-radius: var(--br-lg);
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(142, 122, 230, 0.4);
+  }
+
+  :global(html.dark) & {
+    background: var(--grafito-elevado);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(181, 156, 248, 0.45);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.coverWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--grisecito);
+  overflow: hidden;
+
+  :global(html.dark) & {
+    background: var(--grafito);
+  }
+}
+
+.cover {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+
+  .card:hover & {
+    transform: scale(1.03);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    .card:hover & {
+      transform: none;
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 1.15rem;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--gris-medio);
+}
+
+.metaDot {
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--ink);
+
+  :global(html.dark) & {
+    color: rgb(240, 239, 245);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+.description {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-color-light);
+  margin: 0;
+
+  // Recorta a 3 líneas para que las tarjetas del grid queden parejas.
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.72);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 1.6rem;
+  padding: 0 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--lila-corporativo);
+  background: var(--lila-velo);
+  border-radius: var(--br-sm);
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+    background: var(--lila-velo-dark);
+  }
+}
+
+// Variante destacada: el post más reciente, a ancho completo y en dos columnas
+// en desktop.
+.cardLead {
+  margin-top: 2.5rem;
+
+  .cardLink {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .coverWrap {
+    width: 55%;
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  .body {
+    width: 45%;
+    justify-content: center;
+    padding: 2.5rem;
+    gap: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    -webkit-line-clamp: 4;
+  }
+
+  @media (max-width: 900px) {
+    .cardLink {
+      flex-direction: column;
+    }
+
+    .coverWrap,
+    .body {
+      width: 100%;
+    }
+
+    .coverWrap {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+    }
+
+    .body {
+      padding: 1.5rem;
+    }
+
+    .title {
+      font-size: 1.3rem;
+    }
+
+    .description {
+      font-size: 0.92rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+
+    .body {
+      padding: 1.15rem;
+    }
+  }
+}

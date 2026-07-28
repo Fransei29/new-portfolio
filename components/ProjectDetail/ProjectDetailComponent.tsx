@@ -6,6 +6,8 @@ import styles from './ProjectDetailComponent.module.scss';
 import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowLeft, Lock, X, FileText, Target, Code2, GraduationCap, Link2 } from 'lucide-react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import CaseStudyMeta from './CaseStudyMeta';
+import type { CaseStudyOutcome, CaseStudyTestimonial } from '../../app/data/caseStudy';
 import { gsap } from '../../animations/gsap.config';
 import { FADE_UP } from '../../animations/presets';
 
@@ -34,8 +36,18 @@ interface ProjectProps {
   learnings?: string[];
   screenshots?: string[];
   videoUrl?: string;
-  githubLink?: string;
-  liveDemoLink?: string;
+  // null es válido: varios proyectos son privados y no tienen repo público.
+  githubLink?: string | null;
+  liveDemoLink?: string | null;
+  // Campos de case study — opcionales, ver app/data/caseStudy.ts
+  role?: string;
+  engagement?: string;
+  duration?: string;
+  client?: string;
+  industry?: string;
+  year?: string;
+  outcomes?: CaseStudyOutcome[];
+  testimonial?: CaseStudyTestimonial;
 }
 
 interface TechIcon {
@@ -106,8 +118,16 @@ export default function ProjectDetailComponent({
   videoUrl,
   githubLink,
   liveDemoLink,
+  role,
+  engagement,
+  duration,
+  client,
+  industry,
+  year,
+  outcomes,
+  testimonial,
 }: ProjectProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const validScreenshots = screenshots?.filter(Boolean) || [];
   const hasVideo = Boolean(videoUrl);
@@ -374,6 +394,21 @@ export default function ProjectDetailComponent({
               <h1>{title}</h1>
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
+
+            {/* Contexto y resultados antes del relato: un prospecto que solo lee
+                lo de arriba se lleva igual lo esencial. Se oculta solo si el
+                proyecto todavía no tiene estos datos cargados. */}
+            <CaseStudyMeta
+              language={language === 'es' ? 'es' : 'en'}
+              role={role}
+              engagement={engagement}
+              duration={duration}
+              client={client}
+              industry={industry}
+              year={year}
+              outcomes={outcomes}
+              testimonial={testimonial}
+            />
 
             {whatIs && (
               <section className={styles.detailSection}>

@@ -36,15 +36,6 @@ const nextConfig = {
     scrollRestoration: true, // Mejora el control de scroll
   },
   reactStrictMode: true, // Asegura que el código esté más optimizado y sin errores
-  async redirects() {
-    return [
-      {
-        source: '/old-page',
-        destination: '/new-page',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

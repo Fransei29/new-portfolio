@@ -22,6 +22,7 @@ const PeekPanda: React.FC<PeekPandaProps> = ({ side = 'right', className }) => {
       className={`${styles.clip} ${side === 'left' ? styles.left : styles.right} ${className ?? ''}`}
       aria-hidden
     >
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={styles.panda}
         src="/isotipo-panda.svg"

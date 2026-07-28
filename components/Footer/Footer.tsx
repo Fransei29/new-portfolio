@@ -71,6 +71,9 @@ const Footer = () => {
             <Link href="/projects" className={styles.navLink}>
               {t('nav.projects')}
             </Link>
+            <Link href="/blog" className={styles.navLink}>
+              {t('nav.blog')}
+            </Link>
             <Link href="/tutorials" className={styles.navLink}>
               {t('nav.tutorials')}
             </Link>
@@ -102,6 +105,7 @@ const Footer = () => {
       </div>
 
       {/* Wordmark de marca, grande y muy tenue, asomando en el borde inferior */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={styles.footerWordmark}
         src="/footer-wordmark.svg"

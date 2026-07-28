@@ -138,11 +138,11 @@
 /* La fila está duplicada 2×; desplazar -50% mueve exactamente una copia,
    así el punto de reset coincide con el inicio y no se ve costura. */
 .toLeft {
-  animation: marqueeLeft 90s linear infinite;
+  animation: marqueeLeft 150s linear infinite;
 }
 
 .toRight {
-  animation: marqueeRight 90s linear infinite;
+  animation: marqueeRight 150s linear infinite;
 }
 
 /* Pausa delicada al pasar el mouse por encima de la sección */

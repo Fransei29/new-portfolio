@@ -84,6 +84,7 @@ const Projects = () => {
                   (mismo guiño que el panda del dashboard del hero). El clip lo
                   recorta justo en la línea: solo asoma la mitad superior. */}
               <div className={styles.peekPandaClip} aria-hidden>
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
                 <img
                   className={styles.peekPanda}
                   src="/isotipo-panda.svg"

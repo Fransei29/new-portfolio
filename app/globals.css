@@ -35,6 +35,12 @@
   --gris-medio: #8a8599;
   /* Grisecito: neutro un punto más frío/marcado que el arena, para variar fondos B */
   --grisecito: #eeedf1;
+  /* Superficie compartida por el navbar y las secciones B: el "papel" de la marca.
+     Gris frío muy claro con un tinte lila apenas perceptible (canal azul un punto
+     por encima del rojo/verde) para acompañar la paleta sin invadir. Más claro que
+     el grisecito anterior, pero con suficiente separación del fondo A blanco. */
+  --nav-surface: #f4f3f7;
+  --nav-surface-dark: #2e2a3a;
   /* Lila Velo: lila MUY tenue (más suave que --lila-suave), pensado como fondo
      de sección grande. Se lee como "gris con calidez lila" sin invadir. */
   --lila-velo: #f2effb;
@@ -85,8 +91,8 @@
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
-  --background-colorB: var(--grisecito);
-  --background-colorB-gradient: linear-gradient(180deg, #eeedf1 0%, #f2f1f6 50%, #eeedf1 100%);
+  --background-colorB: var(--nav-surface);
+  --background-colorB-gradient: linear-gradient(180deg, #f4f3f7 0%, #f8f7fa 50%, #f4f3f7 100%);
   --background-ivory: rgb(255, 255, 255);
   --bg-hover: rgba(142, 122, 230, 0.9);
   --cta-bg: #2e294e;
@@ -112,7 +118,7 @@
 
   /* Wave dividers (home): deben alinear con --background-colorA / B y CTA */
   --wave-a: rgb(255, 255, 255);
-  --wave-b: var(--grisecito);
+  --wave-b: var(--nav-surface);
 
   /* Variables para títulos y subtítulos - Sistema global */
   
@@ -271,8 +277,9 @@ html.dark {
      oscuros). A = base grafito; B = grafito elevado (un punto más claro). Las
      secciones B usan var(--wave-b) como fondo para que la costura del wave calce.
      El drop-shadow del SVG se desactiva en dark (ver WaveDivider) para no romperla. */
-  --wave-a: var(--grafito);          /* #292833 — fondo A */
-  --wave-b: var(--grafito-elevado);  /* #2e2a3a — fondo B */
+  --wave-a: var(--grafito);            /* #292833 — fondo A */
+  --wave-b: var(--nav-surface-dark);   /* #2e2a3a — fondo B, mismo tono que el navbar */
+  --background-colorB: var(--nav-surface-dark);
   /* En dark el protagonista se aclara: #2e294e no contrasta sobre grafito,
      así que Lila Principal toma el rol primario y Lila Suave el acento. */
   --primary-color: var(--lila-principal);

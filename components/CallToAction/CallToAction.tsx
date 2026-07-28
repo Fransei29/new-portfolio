@@ -28,6 +28,7 @@ export default function CallToAction() {
     <section className={styles.ctaContainer}>
       {/* Panda asomándose por el borde derecho del contenedor; el overflow:hidden
           del ctaContainer lo recorta en ese borde. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={styles.peekPanda}
         src="/isotipo-panda-contorno.svg"

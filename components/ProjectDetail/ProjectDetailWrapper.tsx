@@ -29,7 +29,9 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
   }
 
   // Get translated content - if translation doesn't exist, fall back to original
-  const getTranslatedField = (field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved'): string => {
+  const getTranslatedField = (
+    field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved' | 'role' | 'engagement' | 'industry' | 'duration' | 'client'
+  ): string => {
     const key = `projects.items.${slug}.${field}`;
     const translated = t(key);
     // If translation exists and is different from the key (meaning it was found), use it
@@ -72,6 +74,19 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
       videoUrl={project.videoUrl}
       githubLink={project.githubLink}
       liveDemoLink={project.liveDemoLink}
+      // Campos de case study. Los proyectos que todavía no los tienen pasan
+      // undefined y el bloque no se renderiza.
+      // role e industry se traducen igual que el resto del contenido: la clave
+      // projects.items.<slug>.<campo> en locales/, con fallback al valor inglés
+      // del archivo de datos.
+      role={getTranslatedField('role') || project.role}
+      engagement={getTranslatedField('engagement') || project.engagement}
+      duration={getTranslatedField('duration') || project.duration}
+      client={getTranslatedField('client') || project.client}
+      industry={getTranslatedField('industry') || project.industry}
+      year={project.year}
+      outcomes={project.outcomes}
+      testimonial={project.testimonial}
     />
     </>
   );

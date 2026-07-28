@@ -29,6 +29,11 @@ import type { Metadata } from 'next';
 const siteUrl = 'https://www.francoseiler.com';
 
 export const metadata: Metadata = {
+  // Base para resolver URLs relativas en metadata. Sin esto, las imágenes que
+  // genera opengraph-image.tsx se anuncian con el host del request — en un
+  // preview de Vercel saldría la URL del preview, y los scrapers de LinkedIn y
+  // Twitter cachearían esa dirección efímera en lugar del dominio real.
+  metadataBase: new URL(siteUrl),
   title: 'Franco Seiler | Soluciones de Software',
   description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
   keywords: ['Franco Seiler', 'Full-Stack Developer', 'Web Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
@@ -87,6 +92,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
         />
         <link rel="stylesheet" href="https://geisthub.vercel.app/font.css" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Blog | Franco Seiler"
+          href="/blog/rss.xml"
+        />
       </head>
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>

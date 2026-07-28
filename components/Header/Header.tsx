@@ -100,6 +100,12 @@ export default function Header() {
               {t('nav.projects')}
             </p>
           </Link>
+          <Link href="/blog" passHref>
+            {/* startsWith para que el link siga activo dentro de /blog/[slug] */}
+            <p className={`${styles.navLink} ${pathname?.startsWith('/blog') ? styles.active : ''}`}>
+              {t('nav.blog')}
+            </p>
+          </Link>
           <Link href="/tutorials" passHref>
             <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
               {t('nav.tutorials')}
@@ -175,6 +181,11 @@ export default function Header() {
           <p className={styles.mobileNavLink}>
             <FolderOpen size={18} className={styles.mobileNavIcon} />
             {t('nav.projects')}
+          </p>
+        </Link>
+        <Link href="/blog" passHref onClick={toggleMobileMenu}>
+          <p className={styles.mobileNavLink}>
+            {t('nav.blog')}
           </p>
         </Link>
         <Link href="/tutorials" passHref onClick={toggleMobileMenu}>

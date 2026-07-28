@@ -1,0 +1,171 @@
+// components/ProjectDetail/CaseStudyMeta.module.scss
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+// Ficha de contexto: rol, duración, cliente. Fila de datos separados por líneas.
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 1.25rem 2rem;
+  margin: 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.factLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris-medio);
+}
+
+.factValue {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+
+  :global(html.dark) & {
+    color: rgb(240, 239, 245);
+  }
+}
+
+.outcomes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.outcomesTitle {
+  margin: 0;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris-medio);
+}
+
+.outcomeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+.outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem;
+  border-radius: var(--br);
+  background: var(--lila-velo);
+  border: 1px solid rgba(142, 122, 230, 0.2);
+
+  :global(html.dark) & {
+    background: var(--lila-velo-dark);
+    border-color: rgba(181, 156, 248, 0.22);
+  }
+}
+
+// El número es el protagonista: es lo que un prospecto retiene.
+.outcomeValue {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--lila-profundo);
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.outcomeLabel {
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-color);
+
+  :global(html.dark) & {
+    color: rgba(238, 238, 242, 0.9);
+  }
+}
+
+.outcomeContext {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--gris-medio);
+}
+
+.testimonial {
+  margin: 0;
+  padding: 1.5rem;
+  border-radius: var(--br);
+  background: var(--card-bg-soft);
+  border-left: 3px solid var(--lila-principal);
+
+  :global(html.dark) & {
+    background: var(--grafito-elevado);
+  }
+}
+
+.quote {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--text-color);
+
+  // Comillas tipográficas sin ensuciar el dato en el JS.
+  &::before { content: '\201C'; }
+  &::after { content: '\201D'; }
+
+  :global(html.dark) & {
+    color: rgba(238, 238, 242, 0.9);
+  }
+}
+
+.attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.author {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+
+  :global(html.dark) & {
+    color: rgb(240, 239, 245);
+  }
+}
+
+.authorRole {
+  font-size: 0.8rem;
+  color: var(--gris-medio);
+}

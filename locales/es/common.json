@@ -2,7 +2,8 @@
   "nav": {
     "home": "Inicio",
     "about": "Sobre mí",
-    "projects": "Proyectos",
+    "projects": "Casos",
+    "blog": "Blog",
     "tutorials": "Tutoriales",
     "contact": "Contacto",
     "bootcamp": "Bootcamp",

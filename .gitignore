@@ -1,4 +1,10 @@
 /node-modules
 /.next
-.env
 node_modules
+
+# Variables de entorno. .env.local es el que usa Next.js y contiene las claves
+# reales — nunca debe commitearse. .env.example sí, porque no tiene secretos.
+.env
+.env.local
+.env.*.local
+!.env.example

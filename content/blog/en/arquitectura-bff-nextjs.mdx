@@ -1,0 +1,68 @@
+---
+title: "Why I used a BFF pattern to separate Next.js from my backend"
+description: "How a Backend-for-Frontend keeps tokens out of the browser and lets the frontend evolve without touching the API. With a real example from an e-commerce platform."
+date: 2026-07-15
+tags: ["architecture", "nextjs", "security"]
+cover: "/img/img/Acero-web/acero-01.webp"
+coverAlt: "Admin dashboard of the e-commerce platform"
+author: "Franco Seiler"
+featured: true
+draft: false
+---
+
+When I built a.cer0, a custom e-commerce platform, I made a decision that looks like extra work at first glance: the Next.js frontend never talks directly to the Express backend. Everything goes through an intermediate layer.
+
+That pattern is called **Backend-for-Frontend** (BFF), and it solved three concrete problems.
+
+## The problem: tokens shouldn't live in the browser
+
+The usual way to authenticate a SPA is storing the JWT in `localStorage` and attaching it to every request. It works, but it leaves the token exposed to any script running on the page. A single compromised package in your dependency tree can read it.
+
+With a BFF, the token lives in an `httpOnly` cookie that client-side JavaScript cannot read:
+
+```ts
+// The Next.js route handler receives the browser's request,
+// reads the httpOnly cookie, and forwards to the real backend.
+export async function POST(request: Request) {
+  const token = (await cookies()).get('session')?.value;
+
+  const response = await fetch(`${process.env.API_URL}/orders`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: await request.text(),
+  });
+
+  return Response.json(await response.json(), { status: response.status });
+}
+```
+
+The browser never sees the token. It only sees a cookie it cannot inspect.
+
+## The second benefit: the backend URL stays private
+
+Without a BFF, your API URL sits in the client bundle. Anyone can extract it and hit it directly, bypassing whatever rate limiting your frontend applies. With the proxy in place, the backend can live on a private network and accept traffic only from the BFF.
+
+## The third: the frontend stops depending on the API's shape
+
+This is the one I underestimated most. When the backend exposes three endpoints the frontend needs to combine, the BFF combines them server-side:
+
+| Without BFF | With BFF |
+| --- | --- |
+| 3 requests from the browser | 1 request from the browser |
+| Client-side latency adds up | Latency stays server-to-server |
+| Client knows the API structure | Client knows only its own shape |
+
+On a slow mobile connection, that difference is hundreds of milliseconds.
+
+## What it cost
+
+It isn't free. The BFF adds a network hop and one more layer to maintain. If your API is already public and you don't handle sensitive sessions, you probably don't need it.
+
+I'd use it again on any project with real authentication and a backend of my own. On a static site or a public API consumer, it's over-engineering.
+
+## Wrapping up
+
+The BFF pattern isn't an architectural fad — it's a concrete answer to the fact that the browser is a hostile environment where you cannot keep secrets. If your app handles user sessions, it's worth considering before it becomes hard to retrofit.

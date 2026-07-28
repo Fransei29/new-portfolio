@@ -81,6 +81,7 @@ export default function Home() {
               transparente (variante toolsWave) para que NO tape al panda con la
               franja de 52px sobre la curva. */}
           <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left toolsPandaHost">
+            {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
             <img
               className="toolsPanda"
               src="/isotipo-panda-programando.svg"

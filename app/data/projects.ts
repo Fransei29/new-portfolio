@@ -1,7 +1,41 @@
 // src/data/projects.ts
-export const projects = [
+import type { CaseStudyOutcome, CaseStudyTestimonial } from './caseStudy';
+
+/**
+ * Forma de una entrada. Se declara explícitamente para que los campos de case
+ * study existan en el tipo aunque todavía no se hayan cargado en cada proyecto;
+ * si no, TypeScript infiere el tipo del literal y solo conoce las claves que ya
+ * aparecen en algún objeto.
+ */
+export interface Project {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  whatIs?: string;
+  problemSolved?: string;
+  techStack?: string[];
+  learnings?: string[];
+  screenshots?: string[];
+  videoUrl?: string;
+  githubLink?: string | null;
+  liveDemoLink?: string | null;
+  // Case study — ver CASE_STUDIES.md
+  role?: string;
+  engagement?: string;
+  duration?: string;
+  client?: string;
+  industry?: string;
+  year?: string;
+  outcomes?: CaseStudyOutcome[];
+  testimonial?: CaseStudyTestimonial;
+}
+
+export const projects: Project[] = [
   {
     slug: 'acer0',
+    role: 'Full-stack · Architecture',
+    engagement: 'Client work',
+    industry: 'Manufacturing & retail',
     title: 'Acer0',
     subtitle: 'Custom E-Commerce Platform',
     whatIs: `a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.
@@ -60,6 +94,9 @@ Off-the-shelf solutions couldn't deliver the custom UX, performance, and control
   },
   {
     slug: 'bellum',
+    role: 'Full-stack · Custom CMS',
+    engagement: 'Client work',
+    industry: 'HOA management',
     title: 'Bellum',
     subtitle: 'HOA Financial Management Platform',
     whatIs: `Bellum is a professional-grade platform built for HOA and condominium associations seeking to outsource their financial management, reporting, and back-office operations.
@@ -135,6 +172,9 @@ Bellum solves both sides: associations get a clear, segmented service catalog wi
   },
   {
     slug: 'comply-dq',
+    role: 'Full-stack · Multi-tenant',
+    engagement: 'Team collaboration',
+    industry: 'Transportation compliance',
     title: 'Comply DQ',
     subtitle: 'Fleet Compliance & Document Intelligence Platform',
     whatIs: `Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.
@@ -194,6 +234,9 @@ The platform was built side by side with a senior team based in Canada, combinin
   },
   {
     slug: 'grupo-el-triunfo',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Agribusiness',
     title: 'Grupo El Triunfo',
     subtitle: 'Corporate Agribusiness Platform',
     whatIs: `Grupo El Triunfo is a corporate website for an agribusiness holding company based in Oncativo, Córdoba, Argentina, with over 36 years of experience in the agricultural sector.
@@ -243,6 +286,9 @@ The website solves this by unifying six distinct business units under a cohesive
   },
   {
     slug: 'home-trades-online',
+    role: 'Full-stack · SaaS',
+    engagement: 'Client work',
+    industry: 'Construction & trades',
     title: 'Home Trades Online',
     subtitle: 'Contractor Proposal Platform (SaaS)',
     whatIs: `Home Trades Online is a mobile-first SaaS platform that empowers contractors and tradespeople to generate AI-powered professional proposals in under 30 seconds. The platform bridges the gap between contractors working on job sites and the administrative work of creating, sending, and managing client proposals.
@@ -288,6 +334,9 @@ Home Trades Online solves this by enabling contractors to describe a job in plai
   },
   {
     slug: 'salesforpro',
+    role: 'Frontend · Product landing',
+    engagement: 'Client work',
+    industry: 'Construction & trades',
     title: 'Home Trades Online Landing',
     subtitle: 'Marketing Landing Page & Website',
     whatIs: `SalesForPro is the public-facing marketing website for Home Trades Online, designed to convert visiting contractors into users through an interactive product demo experience.
@@ -327,6 +376,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
   },
   {
     slug: 'starton',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Tech recruiting',
     title: 'StartOn ',
     subtitle: 'Talent-Startup Connection Platform',
     whatIs: `
@@ -373,6 +425,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
   },
   {
     slug: 'mi-agenda',
+    role: 'Full-stack · Payments & integrations',
+    engagement: 'Client work',
+    industry: 'Appointment-based services',
     title: 'Mi Agenda',
     subtitle: 'Online Booking & Appointments Platform',
     whatIs: `Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with MercadoPago (one-time and subscriptions), notifications (email, push, and optionally SMS/WhatsApp), and an installable PWA ("Mi agenda") with reminders and offline access.
@@ -433,6 +488,9 @@ The solution centralizes recurring and one-off availability, payments, reminders
   },
   {
     slug: 'augusto-fit-program',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Fitness & training',
     title: 'Augusto Fit Program',
     subtitle: 'Personal Trainer Corporate Website',
     whatIs: `Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training plans, and a contact form integrated with EmailJS. Dark design with GSAP animations, next/font typography and mobile-first responsive experience.
@@ -479,6 +537,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
   },
   {
     slug: 'tecnomar',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Industrial services',
     title: 'TecnoMar',
     subtitle: 'Industrial Pumps Corporate Website',
     whatIs: `Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.`,
@@ -524,6 +585,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
   },
   {
     slug: 'ateevo-wholesale',
+    role: 'Full-stack · B2B e-commerce',
+    engagement: 'Client work',
+    industry: 'Wholesale fashion',
     title: 'Ateevo Wholesale',
     subtitle: 'B2B E-Commerce Platform for Fashion',
     whatIs: `Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.
@@ -612,6 +676,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'lexmax',
+    role: 'Full-stack · AI automation',
+    engagement: 'Client work',
+    industry: 'Legal',
     title: 'LexMax',
     subtitle: 'Judicial Case Management Platform',
     whatIs: `
@@ -660,6 +727,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'property-recommender',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Real estate',
     title: 'Property Recommender',
     subtitle: 'Property Recommendation System',
     whatIs: `
@@ -699,6 +769,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'event-scheduler',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Events & venues',
     title: 'Event Scheduler',
     subtitle: 'Event Booking & Venue Management Platform',
     whatIs: `
@@ -762,6 +835,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'the-club-northfield',
+    role: 'Full-stack · Strapi CMS',
+    engagement: 'Client work',
+    industry: 'Sports & fitness',
     title: 'The Club at Northfield',
     subtitle: 'Corporate Website for Sports & Fitness Club - Ontario, Canada',
     whatIs: `
@@ -806,6 +882,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'lexmax-landing',
+    role: 'Frontend · Product landing',
+    engagement: 'Client work',
+    industry: 'Legal',
     title: 'LexMax Landing',
     subtitle: 'Legal Automation Landing Page',
     whatIs: `
@@ -846,6 +925,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },  
   {
     slug: 'ecommerce',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Quiero Sport',
     subtitle: 'Modern E-Commerce Platform',
     whatIs: `
@@ -888,6 +969,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'healthcare-crm',
+    role: 'Full-stack',
+    engagement: 'Practice project',
+    industry: 'Healthcare',
     title: 'Medicare ',
     subtitle: 'Healthcare Treatment Management',
     whatIs: `
@@ -935,6 +1019,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },  
   {
     slug: 'taskmanager',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Task Manager',
     subtitle: 'Full Stack Task Management App',
     whatIs: `
@@ -977,6 +1063,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'flipper',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Flipper',
     subtitle: 'Twitter Clone Platform',
     whatIs: `
@@ -1016,6 +1104,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'vestire',
+    role: 'Frontend',
+    engagement: 'Practice project',
     title: 'Vestiré',
     subtitle: 'Fashion E-Commerce Platform',
     whatIs: `
@@ -1060,6 +1150,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'trip-planner',
+    role: 'Frontend',
+    engagement: 'Practice project',
     title: 'Trip Planner',
     subtitle: 'Simple Trip Planning App',
     whatIs: `Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.`,

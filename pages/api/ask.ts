@@ -203,6 +203,34 @@ export default async function handler(
       });
     }
 
+    // Check blog and newsletter.
+    // Va antes del bloque de contacto porque "newsletter" y "suscrib" también
+    // matchean 'email', y ahí la respuesta correcta es la del blog.
+    if (
+      userMessage.includes('blog') ||
+      userMessage.includes('article') ||
+      userMessage.includes('artículo') ||
+      userMessage.includes('articulo') ||
+      userMessage.includes('newsletter') ||
+      userMessage.includes('suscri') ||
+      userMessage.includes('subscribe') ||
+      userMessage.includes('rss') ||
+      userMessage.includes('escribe') ||
+      userMessage.includes('writes')
+    ) {
+      const isSpanish = /[áéíóúñ¿¡]/.test(userMessage) ||
+        userMessage.includes('artículo') ||
+        userMessage.includes('articulo') ||
+        userMessage.includes('suscri') ||
+        userMessage.includes('escribe');
+
+      return res.status(200).json({
+        response: isSpanish
+          ? `${knowledge.blog.descriptionEs}\n\n• Blog: ${knowledge.blog.url}\n• RSS: ${knowledge.blog.rss}\n\n${knowledge.blog.newsletterEs}`
+          : `${knowledge.blog.description}\n\n• Blog: ${knowledge.blog.url}\n• RSS: ${knowledge.blog.rss}\n\n${knowledge.blog.newsletter}`,
+      });
+    }
+
     // Check contact information
     if (userMessage.includes('contact') || userMessage.includes('email') || userMessage.includes('linkedin') || userMessage.includes('github')) {
       return res.status(200).json({ 

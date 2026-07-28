@@ -3,16 +3,16 @@
     "title": "My Projects",
     "subtitle": "Some of the projects I've worked on",
     "learnMore": "Learn more",
-    "viewProject": "View project",
+    "viewProject": "View case study",
     "viewCode": "View code",
     "viewDemo": "View demo",
     "recentWork": "Recent Work",
     "recentTutorials": "Recent Tutorials",
-    "projects": "Projects",
+    "projects": "Case Studies",
     "projectsSubtitle": "A selection of recent work built end-to-end.",
     "tutorials": "Tutorials",
     "tutorialsSubtitle": "Short walkthroughs of real decisions made while shipping software.",
-    "goToProjects": "View All Projects",
+    "goToProjects": "View all case studies",
     "goToTutorials": "View All Tutorials",
     "back": "Back",
     "overview": "Overview",
@@ -425,35 +425,35 @@
         ]
       },
       "ateevo-wholesale": {
-      "title": "Ateevo Wholesale",
-      "subtitle": "B2B E-Commerce Platform for Fashion",
-      "description": "B2B e-commerce platform designed for fashion brands managing wholesale operations. Developed for a client in Canada.\nAllows wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.\nArchitected as a multi-tenant SaaS application, supporting multiple independent brands with complete data isolation and per-tenant custom branding.",
-      "whatIs": "Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.\n\nThe platform enables wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.\n\nMulti-tenant SaaS architecture supporting multiple independent brands with complete data isolation and customizable white-label branding.\n\nKey Features:\n\n• Multi-Tenant Architecture with isolated PostgreSQL databases and customizable branding\n• Digital Contract Signing with canvas-captured signatures and automatic PDF generation\n• Real-Time Notifications with alert center and persistent notifications\n• Advanced Reporting: Availability and Margin Reports with multi-currency support (USD, CAD, MXN)\n• Seasonal Management with availability dates, pre-orders, and estimated shipping dates\n• Multi-Currency Pricing (USD, CAD, MXN) with MSRP and automatic conversion\n• Complete Order Management workflow from New to Invoice Paid with PDF export\n• Advanced Inventory System with multiple metrics (On Hand, Available to Sell, Available to Ship)\n• Product Catalog with multiple images, automatic variants, and SKU/MFC codes\n• Customer Management with multiple addresses, billing info, and order history\n• Dashboard & Analytics with configurable metrics and trend charts\n• Super Admin Panel for managing multiple tenants and database creation\n• Enterprise Security with JWT authentication, bcrypt-hashed passwords, and role-based permissions",
-      "problemSolved": "The wholesale fashion sector lacks modern platforms that efficiently connect brands with their wholesale customers.\nAteevo Wholesale solves this problem by allowing brands to manage their catalog, inventory, and orders centrally, while customers can browse, order, and track their purchases intuitively, all with digitally signed contracts and advanced margin and availability reports.\nThe multi-tenant architecture allows scaling the business by supporting multiple brands on a single platform with complete security and customization.",
-      "learnings": [
-        "Multi-tenant architecture with isolated PostgreSQL per tenant and white-label branding (logo, colors, dynamic storefront).",
-        "Digital contract signing with canvas signatures, automatic PDF generation, and states (pending → fully_signed); multiple contracts per order.",
-        "Real-time notifications, alert center, and contract signature alerts with direct navigation to order.",
-        "Availability Report: products available for sale, which customers ordered each product, reallocation of items between orders.",
-        "Margin Report: profit margins per product, multi-currency (USD/CAD), identification of products without cost data.",
-        "Seasonal management: availability dates, pre-order, and estimated shipping dates per season.",
-        "Multi-currency (USD, CAD, MXN), MSRP per currency, and automatic conversion by customer country.",
-        "Full order workflow (New → Invoice Paid), admin editing, optional PO, PDF export, and state history.",
-        "Inventory: On Hand, Available to Sell, Available to Ship, color/size variants, and advanced filters.",
-        "Product catalog: multiple images, automatic variants, SKU/MFC, categories, and season assignment.",
-        "Customer panel: addresses, billing, account activation, order history, and password reset.",
-        "Dashboard with sales, orders, active customers, trend charts, and best-selling products.",
-        "Super admin: multiple tenants, automatic DB creation, impersonation, and activation/deactivation.",
-        "Fully responsive design for desktop, tablet, and mobile.",
-        "Security: JWT, bcrypt, roles (Customer/Admin/Super Admin), isolated database per tenant."
-      ]
+        "title": "Ateevo Wholesale",
+        "subtitle": "B2B E-Commerce Platform for Fashion",
+        "description": "B2B e-commerce platform designed for fashion brands managing wholesale operations. Developed for a client in Canada.\nAllows wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.\nArchitected as a multi-tenant SaaS application, supporting multiple independent brands with complete data isolation and per-tenant custom branding.",
+        "whatIs": "Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.\n\nThe platform enables wholesale customers to browse seasonal catalogs, place orders, and track shipments, while providing administrators with tools for product management, inventory, order processing, and customer relationships.\n\nMulti-tenant SaaS architecture supporting multiple independent brands with complete data isolation and customizable white-label branding.\n\nKey Features:\n\n• Multi-Tenant Architecture with isolated PostgreSQL databases and customizable branding\n• Digital Contract Signing with canvas-captured signatures and automatic PDF generation\n• Real-Time Notifications with alert center and persistent notifications\n• Advanced Reporting: Availability and Margin Reports with multi-currency support (USD, CAD, MXN)\n• Seasonal Management with availability dates, pre-orders, and estimated shipping dates\n• Multi-Currency Pricing (USD, CAD, MXN) with MSRP and automatic conversion\n• Complete Order Management workflow from New to Invoice Paid with PDF export\n• Advanced Inventory System with multiple metrics (On Hand, Available to Sell, Available to Ship)\n• Product Catalog with multiple images, automatic variants, and SKU/MFC codes\n• Customer Management with multiple addresses, billing info, and order history\n• Dashboard & Analytics with configurable metrics and trend charts\n• Super Admin Panel for managing multiple tenants and database creation\n• Enterprise Security with JWT authentication, bcrypt-hashed passwords, and role-based permissions",
+        "problemSolved": "The wholesale fashion sector lacks modern platforms that efficiently connect brands with their wholesale customers.\nAteevo Wholesale solves this problem by allowing brands to manage their catalog, inventory, and orders centrally, while customers can browse, order, and track their purchases intuitively, all with digitally signed contracts and advanced margin and availability reports.\nThe multi-tenant architecture allows scaling the business by supporting multiple brands on a single platform with complete security and customization.",
+        "learnings": [
+          "Multi-tenant architecture with isolated PostgreSQL per tenant and white-label branding (logo, colors, dynamic storefront).",
+          "Digital contract signing with canvas signatures, automatic PDF generation, and states (pending → fully_signed); multiple contracts per order.",
+          "Real-time notifications, alert center, and contract signature alerts with direct navigation to order.",
+          "Availability Report: products available for sale, which customers ordered each product, reallocation of items between orders.",
+          "Margin Report: profit margins per product, multi-currency (USD/CAD), identification of products without cost data.",
+          "Seasonal management: availability dates, pre-order, and estimated shipping dates per season.",
+          "Multi-currency (USD, CAD, MXN), MSRP per currency, and automatic conversion by customer country.",
+          "Full order workflow (New → Invoice Paid), admin editing, optional PO, PDF export, and state history.",
+          "Inventory: On Hand, Available to Sell, Available to Ship, color/size variants, and advanced filters.",
+          "Product catalog: multiple images, automatic variants, SKU/MFC, categories, and season assignment.",
+          "Customer panel: addresses, billing, account activation, order history, and password reset.",
+          "Dashboard with sales, orders, active customers, trend charts, and best-selling products.",
+          "Super admin: multiple tenants, automatic DB creation, impersonation, and activation/deactivation.",
+          "Fully responsive design for desktop, tablet, and mobile.",
+          "Security: JWT, bcrypt, roles (Customer/Admin/Super Admin), isolated database per tenant."
+        ]
       }
     }
   },
   "pages": {
     "projects": {
-      "title": "Projects",
-      "subtitle": "A curated selection of work shipped end-to-end — from architecture to production."
+      "title": "Case Studies",
+      "subtitle": "Work shipped end-to-end — the problem, the technical decisions, and what ended up running in production."
     },
     "tutorials": {
       "title": "Tutorials",

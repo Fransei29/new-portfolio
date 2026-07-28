@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
+import Image from 'next/image';
 import styles from './HeroDashboard.module.scss';
 
 // Animated counter — transitions from previous value to new target
@@ -147,6 +148,7 @@ const HeroDashboard = () => {
   return (
     <div className={styles.wrapper} aria-hidden data-explode-root>
       {/* Isotipo panda que se asoma por el borde derecho — como con vida. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={styles.peekPanda}
         src="/isotipo-panda.svg"
@@ -354,10 +356,15 @@ const HeroDashboard = () => {
         className={`${styles.floatingPill} ${styles.testimonialPill} ${testimonialFading ? styles.testimonialFading : ''}`}
         data-explode-piece="testimonial-pill"
       >
-        <img
+        {/* next/image sirve el avatar redimensionado a 24px en vez del .webp
+            completo. Los demás <img> de este archivo son SVG, que el
+            optimizador no procesa — ahí no aportaría nada. */}
+        <Image
           className={styles.avatarImg}
           src={currentTestimonial.image}
           alt={currentTestimonial.name}
+          width={24}
+          height={24}
           loading="lazy"
         />
         <span className={styles.testimonialText}>
