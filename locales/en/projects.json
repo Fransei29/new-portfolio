@@ -1,7 +1,7 @@
 {
   "projects": {
-    "title": "My Projects",
-    "subtitle": "Some of the projects I've worked on",
+    "title": "Our Projects",
+    "subtitle": "Some of the projects we've worked on",
     "learnMore": "Learn more",
     "viewProject": "View case study",
     "viewCode": "View code",
@@ -39,11 +39,11 @@
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Fleet Compliance & Document Intelligence Platform",
-        "description": "Enterprise-grade SaaS platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation at scale. Developed in partnership with a Canadian engineering team, it's one of the largest and most complex platforms in my portfolio — multi-tenant architecture, Keycloak-based enterprise auth, Stripe subscriptions, deep document workflows, and a production B2B surface trusted with real fleet operations.",
-        "whatIs": "Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.\nThe product combines role-aware workspaces, company-scoped data, and subscription-aware billing so operators can move from spreadsheets and legacy tools to a single source of truth with audit-friendly workflows.\nDeveloped in partnership with a Canadian engineering team, Comply DQ is one of the largest and most complex platforms I've contributed to — a true enterprise SaaS with deep multi-tenant architecture, hundreds of pages of operational tooling, and B2B compliance requirements as the core of every decision.",
+        "description": "Enterprise-grade SaaS platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation at scale. Developed in partnership with a Canadian engineering team, it's one of the largest and most complex platforms in our portfolio — multi-tenant architecture, Keycloak-based enterprise auth, Stripe subscriptions, deep document workflows, and a production B2B surface trusted with real fleet operations.",
+        "whatIs": "Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.\nThe product combines role-aware workspaces, company-scoped data, and subscription-aware billing so operators can move from spreadsheets and legacy tools to a single source of truth with audit-friendly workflows.\nDeveloped in partnership with a Canadian engineering team, Comply DQ is one of the largest and most complex platforms we've contributed to — a true enterprise SaaS with deep multi-tenant architecture, hundreds of pages of operational tooling, and B2B compliance requirements as the core of every decision.",
         "problemSolved": "Transportation and compliance programs often juggle fragmented files, inconsistent access control, and manual renewals — which increases risk and slows audits.\nComply DQ addresses this by centralizing driver profiles, document lifecycles, and company administration in a secure, multi-tenant architecture with clear separation between customer organizations and platform-level oversight.\nThe platform was built side by side with a senior team based in Canada, combining their domain expertise in US/Canadian transportation compliance with hands-on engineering to ship a production-grade product trusted to handle real fleets and real regulatory pressure — not a prototype, not a single-developer side project.",
         "learnings": [
-          "Collaborated with a Canadian engineering team on one of the largest platforms in my portfolio — a real enterprise SaaS shipped to motor carriers and compliance teams operating across North America.",
+          "Collaborated with a Canadian engineering team on one of the largest platforms in our portfolio — a real enterprise SaaS shipped to motor carriers and compliance teams operating across North America.",
           "Multi-tenant product model with tenant resolution, company types (e.g. D2C / MSP-style hierarchies), and role-based access for admins and operational users.",
           "End-to-end document workflows: document library, uploads, deduplication logic, and cloud-backed storage aligned with a modern API layer.",
           "Payments & monetization: Stripe integration for subscriptions and invoice-related flows, including webhook-driven server paths for reliable billing events.",

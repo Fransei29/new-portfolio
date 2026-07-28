@@ -2,41 +2,41 @@
   "hero": {
     "title": "We",
     "subtitle": {
-      "before": "We build powerful ",
-      "highlight": "digital products",
+      "before": "Build your ",
+      "highlight": "digital product",
       "after": "ready to scale.",
       "mobile": {
-        "before": "We build powerful",
-        "highlight": "digital products",
+        "before": "Build your",
+        "highlight": "digital product",
         "after": "ready to scale."
       }
     },
     "description": "With more than 4 years of experience, we help startups and teams launch reliable platforms that adapt to business growth.",
     "cta": {
       "projects": "Explore our work",
-      "contact": "Book a call",
-      "bootcamp": "Go to my Bootcamp",
+      "contact": "Start your project",
+      "bootcamp": "Go to our Bootcamp",
       "youtube": "YouTube"
     },
     "socialProof": {
       "label": "Trusted by founders and engineering teams",
       "headline": "Trusted by founders and engineering teams",
-      "sub": "15 clients trust my work",
+      "sub": "15 clients trust our work",
       "projects": "Projects shipped"
     }
   },
   "about": {
-    "title": "About me",
+    "title": "About us",
     "description": "",
     "experience": "Years of experience",
     "projects": "Completed projects",
     "technologies": "Technologies mastered",
-    "whoIAm": "Who I Am",
-    "personalStory": "Full-stack developer with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, I work with modern technologies to create products that generate real impact.",
-    "newChapter": "Specialized in scalable architectures and quality code. I develop web applications that grow with the business, prioritizing maintainability and performance.",
+    "whoIAm": "Who We Are",
+    "personalStory": "A full-stack team with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, we work with modern technologies to create products that generate real impact.",
+    "newChapter": "Specialized in scalable architectures and quality code. We develop web applications that grow with the business, prioritizing maintainability and performance.",
     "dedicationTitle": "Engineering principles",
     "dedication": "Ship small, measure, iterate.",
-    "interestsTitle": "What I care about",
+    "interestsTitle": "What we care about",
     "interests": "Building things people actually use."
   },
   "aboutPage": {
@@ -50,19 +50,19 @@
     "subtitle": "A clear, collaborative process to take your idea from concept to launch.",
     "discovery": {
       "title": "Discovery",
-      "description": "We align on your business, goals, and users. We define scope, priorities, and a plan that works for you."
+      "description": "We align on your business, goals, and users.\nWe define scope, priorities, and a plan that works for you."
     },
     "design": {
       "title": "Design & planning",
-      "description": "We structure the solution: architecture, flows, and UX. We validate with you before writing code so there are no surprises."
+      "description": "We structure the solution: architecture, flows, and UX.\nWe validate with you before writing code so there are no surprises."
     },
     "development": {
       "title": "Development",
-      "description": "Iterative build with quality code. Regular updates and incremental deliveries so you can track progress."
+      "description": "Iterative build with quality code.\nRegular updates and incremental deliveries so you can track progress."
     },
     "launch": {
       "title": "Launch & support",
-      "description": "Deploy, documentation, and post-launch support. You get everything you need to maintain or scale the product."
+      "description": "Deploy, documentation, and post-launch support.\nYou get everything you need to maintain or scale the product."
     },
     "cta": {
       "text": "Discuss your project"
@@ -70,7 +70,7 @@
   },
   "whyChooseUs": {
     "title": "Backed by data",
-    "subtitle": "Added value I bring to every project to achieve exceptional results.",
+    "subtitle": "Added value we bring to every project to achieve exceptional results.",
     "expertise": {
       "title": "Technical Expertise",
       "description": "Over 3 years developing scalable solutions with modern technologies and industry best practices."
@@ -81,8 +81,16 @@
     },
     "collaboration": {
       "title": "Collaborative Approach",
-      "description": "I work closely with teams and clients, prioritizing understanding of business needs and objectives."
+      "description": "We work closely with teams and clients, prioritizing understanding of business needs and objectives."
     }
+  },
+  "blogSection": {
+    "title": "From the blog",
+    "subtitle": "Notes on architecture, engineering decisions, and what we learn shipping real products.",
+    "readMore": "Read article",
+    "viewAll": "Read the blog",
+    "readingSuffix": "min read",
+    "empty": "New articles are on the way."
   },
   "statsNumbers": {
     "heading": "Results that back the work",

@@ -1,5 +1,10 @@
 @import '../../app/styles/utilities.scss';
 
+// Separación entre las dos columnas del zigzag. El conector (.stepNode) mide
+// exactamente la mitad, para que su punta caiga justo sobre el riel central:
+// si se cambia este valor, el conector se ajusta solo.
+$step-column-gap: 10rem;
+
 .howWeWork {
   margin: 0;
   width: 100%;
@@ -59,8 +64,9 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  // Un cachín más de aire central que el zigzag original, para que el riel respire.
-  column-gap: 4.5rem;
+  // Aire central amplio para que el riel respire y las tarjetas de cada lado
+  // queden claramente separadas del eje.
+  column-gap: $step-column-gap;
   row-gap: 2rem;
 
   // El riel base ya no es un pseudo-elemento con topes arbitrarios: ahora es
@@ -102,7 +108,10 @@
   inset: 0;
   display: block;
   pointer-events: none;
-  z-index: 0;
+  // Por encima de las tarjetas (z-index:1) para que el panda pase por delante de
+  // los nodos. Es un stacking context: los z-index de adentro son relativos a él,
+  // así que esta capa entera debe quedar arriba, no sólo el panda.
+  z-index: 3;
 }
 
 // Riel base: línea tenue que va EXACTAMENTE del primer punto al último
@@ -135,8 +144,10 @@
   z-index: 1;
   pointer-events: none;
   will-change: height;
-  // Movimiento controlado: lento, entrada y salida suaves, sin overshoot.
-  transition: height 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+  // MISMA duración y MISMA curva que el panda: la línea crece exactamente al
+  // ritmo al que él baja, así la punta del trazo queda siempre bajo sus pies.
+  // Si difieren, el panda "patina" adelantándose o quedándose atrás.
+  transition: height 1.35s cubic-bezier(0.16, 0.62, 0.22, 1);
 
   @media (max-width: 768px) {
     left: calc(1.25rem + 22px);
@@ -144,23 +155,49 @@
   }
 }
 
-// Dot al final del tramo recorrido: un punto limpio, sin pulso ni halos
-// llamativos. Minimalista: núcleo claro y un aro lila fino.
-.railDot {
+@media (prefers-reduced-motion: reduce) {
+  .railProgress { transition: none; }
+}
+
+// El isotipo panda viaja en la punta del tramo recorrido, como cabezal del
+// recorrido. Gira una vuelta entera por paso (rotación inline desde el TSX) y
+// aterriza derecho en cada nodo. El translate va en el transform inline junto a
+// la rotación — no acá — porque una sola propiedad transform gana a la otra.
+.railPanda {
   position: absolute;
-  bottom: -3.5px;
+  // El desplazamiento vertical entero lo hace el translateY inline (medido en
+  // px desde el tope de la grilla), no `top`/`bottom`: así descenso y giro son
+  // una sola propiedad `transform` y comparten exactamente la misma curva.
+  top: 0;
   left: 50%;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #fff;
-  transform: translateX(-50%);
-  box-shadow: 0 0 0 2.5px var(--primary-color-light),
-    0 0 10px 1px rgba(142, 122, 230, 0.35);
+  width: 92px;
+  height: 92px;
+  transform-origin: center center;
+  // Por encima de los nodos que conectan tarjeta y riel (.stepNode, z-index:2):
+  // el panda pasa por delante de cada punto en vez de esconderse detrás.
+  z-index: 5;
+  // Curva ASIMÉTRICA: sale con decisión y frena largo (el 0.16 inicial ya tiene
+  // pendiente; el 0.94 final aplana la llegada). Un ease simétrico se siente
+  // mecánico; este se siente conducido. Nada de overshoot: el panda no rebota
+  // al llegar al nodo, se posa.
+  transition: transform 1.35s cubic-bezier(0.16, 0.62, 0.22, 1);
+  // Sólo transform: al animar una propiedad compuesta el navegador la resuelve
+  // en el compositor, sin recalcular layout en cada frame.
+  will-change: transform;
+  // Halo lila suave para despegarlo del fondo oscuro sin competir con el riel.
+  filter: drop-shadow(0 2px 8px rgba(20, 16, 45, 0.55))
+    drop-shadow(0 0 6px rgba(142, 122, 230, 0.35));
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    width: 62px;
+    height: 62px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .railProgress { transition: none; }
+  // Sin viaje animado: el panda aparece directamente en su posición.
+  .railPanda { transition: none; }
 }
 
 .stepCard {
@@ -173,7 +210,8 @@
   .stepNode {
     position: absolute;
     top: 2.75rem;
-    width: 2.25rem; // = mitad de column-gap (4.5rem) → la punta cae en el centro
+    // Mitad del gap: la punta del conector cae exactamente sobre el riel central.
+    width: $step-column-gap * 0.5;
     height: 2px;
     background: rgba(142, 122, 230, 0.28);
     z-index: 2;
@@ -217,7 +255,7 @@
     }
   }
 
-  // Paso PROTAGONISTA (donde está el dot): nodo encendido con glow.
+  // Paso PROTAGONISTA (donde está el panda): nodo encendido con glow.
   &.stepCurrent .stepNode {
     background: rgba(142, 122, 230, 0.6);
 
@@ -243,35 +281,51 @@
       &::after { left: 0; right: auto; transform: translate(-50%, -50%); }
     }
   }
-}
 
-.stepCard {
-  // Off-white con un velo lila apenas perceptible en lugar del blanco puro:
-  // la tarjeta se apoya sobre el fondo lila profundo en vez de aplastarlo, pero
-  // sigue siendo bien clara para que el texto oscuro se lea sin problemas.
-  background: linear-gradient(180deg, #faf9ff 0%, #f3f0fb 100%);
+  // El fondo lo define el ESTADO del recorrido (ver más abajo): dormida se funde
+  // con el lila profundo de la sección, despierta se enciende en off-white. Acá
+  // sólo van forma y transición.
   border: 1px solid rgba(142, 122, 230, 0.18);
   border-radius: var(--br);
   padding: 2rem 1.75rem;
-  // Sombra lila difusa (no halo blanco): integra la tarjeta con el fondo oscuro
-  // con un borde de contacto suave en vez de un corte blanco duro.
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 10px 30px -12px rgba(20, 16, 45, 0.55);
   // Sin transform/opacity: las maneja el fade-in de entrada (.visible).
-  transition: box-shadow 0.45s ease, border-color 0.45s ease;
+  // El background entra en la transición porque el estado dormido/despierto se
+  // expresa sobre todo con el FONDO de la tarjeta, no atenuando el texto.
+  transition: background 0.6s ease, box-shadow 0.45s ease,
+    border-color 0.45s ease;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 1.25rem;
+
+  // Separación del borde EXTERIOR de la sección (no del riel central): la
+  // columna izquierda se despega por la izquierda y la derecha por la derecha.
+  // Es margin, no padding: encoge la tarjeta hacia adentro en vez de engordarla.
+  &:nth-of-type(odd) {
+    margin-left: 4rem;
+  }
+
+  &:nth-of-type(even) {
+    margin-right: 4rem;
+  }
 
   @media (max-width: 768px) {
     padding: 1.5rem 1.25rem;
     gap: 1rem;
+
+    // En una sola columna ya no hay lado interior/exterior: se anula el margen.
+    &:nth-of-type(odd),
+    &:nth-of-type(even) {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   &:hover {
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-      0 16px 38px -12px rgba(20, 16, 45, 0.6);
+    // Sin inset blanco: la tarjeta es oscura, ese highlight superior era para
+    // cuando el fondo era off-white.
+    box-shadow: 0 16px 38px -12px rgba(20, 16, 45, 0.6);
     border-color: rgba(142, 122, 230, 0.4);
 
     :global(html.dark) & {
@@ -281,37 +335,129 @@
   }
 
   :global(html.dark) & {
-    /* La tarjeta ya no es blanca en dark: sube a --card-bg-soft (#35304a)
-       para leerse sobre el fondo lila profundo (#2e294e) de la sección. */
-    background: var(--card-bg-soft);
+    /* En dark sólo se ajustan borde y sombra: el FONDO lo sigue definiendo el
+       estado del recorrido (dormida/despierta), igual que en light. Fijarlo acá
+       pisaría esos estados y las tarjetas nunca se encenderían. */
     color: rgb(226, 226, 226);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-sm);
   }
 
   // --- Estados del recorrido -------------------------------------------------
-  // IMPORTANTE: acá NO se tocan `transform` ni `opacity`: esas dos propiedades
-  // las maneja el fade-in de entrada (.fade-in-left/right + .visible). Si las
-  // pisáramos, la tarjeta quedaría trabada en su translateX inicial. El
-  // protagonismo se expresa solo con borde, sombra, ícono y número.
+  // IMPORTANTE: acá NO se tocan `transform` ni `opacity` DE LA TARJETA: esas dos
+  // propiedades las maneja el fade-in de entrada (.fade-in-left/right +
+  // .visible). Si las pisáramos, la tarjeta quedaría trabada en su translateX
+  // inicial. Por eso el "dormido/despierto" se aplica al CONTENIDO interno
+  // (header y descripción), que no está en esa disputa.
 
-  // PROTAGONISTA: anillo lila y sombra más profunda — la que "está ocurriendo".
+  // EN REPOSO (dormida): el FONDO se apaga hacia el lila profundo de la sección,
+  // de modo que la tarjeta casi se funde con él. El texto se aclara para seguir
+  // siendo legible sobre ese fondo oscuro — el contraste lo hace el fondo, no
+  // la opacidad del texto (atenuar texto sólo lo vuelve ilegible).
+  // El `& {}` es necesario: son declaraciones después de reglas anidadas, y sin
+  // envolverlas Sass avisa que cambiará el orden en que se aplican.
+  & {
+    background: linear-gradient(180deg, #3a3457 0%, #332e4d 100%);
+    border-color: rgba(142, 122, 230, 0.14);
+    box-shadow: 0 6px 20px -14px rgba(20, 16, 45, 0.5);
+  }
+
+  .stepTitle,
+  .stepDescription {
+    color: rgba(240, 238, 250, 0.72);
+    transition: color 0.6s ease;
+  }
+
+  .iconWrapper {
+    background-color: rgba(142, 122, 230, 0.14);
+    border-color: rgba(142, 122, 230, 0.22);
+    transition: background-color 0.6s ease, border-color 0.6s ease;
+
+    svg,
+    .stepIcon {
+      color: rgba(196, 184, 245, 0.85);
+      transition: color 0.6s ease;
+    }
+  }
+
+  // DESPIERTA: la MISMA tarjeta oscura, sólo un punto más luminosa y con el
+  // texto a plena intensidad. Nada de saltar a blanco: el estado se nota por
+  // contraste con las vecinas dormidas, no por cambiar de familia de color.
+  &.stepCurrent {
+    background: linear-gradient(180deg, #4a4370 0%, #423b64 100%);
+
+    .stepTitle {
+      color: #ffffff;
+    }
+
+    .stepDescription {
+      color: rgba(245, 243, 255, 0.95);
+    }
+
+    .iconWrapper {
+      background-color: rgba(142, 122, 230, 0.3);
+      border-color: rgba(142, 122, 230, 0.55);
+
+      svg,
+      .stepIcon {
+        color: #d9d0ff;
+      }
+    }
+  }
+
+  // YA VISITADA: a mitad de camino entre dormida y protagonista — se lee "hecho"
+  // sin robarle presencia a la que está ocurriendo.
+  &.stepDone {
+    background: linear-gradient(180deg, #423b63 0%, #3b3557 100%);
+
+    .stepTitle {
+      color: rgba(248, 246, 255, 0.9);
+    }
+
+    .stepDescription {
+      color: rgba(240, 238, 250, 0.82);
+    }
+
+    .iconWrapper {
+      background-color: rgba(142, 122, 230, 0.2);
+      border-color: rgba(142, 122, 230, 0.34);
+
+      svg,
+      .stepIcon {
+        color: rgba(210, 199, 250, 0.9);
+      }
+    }
+  }
+
+  // Si el usuario pide menos movimiento, no hay estados que perseguir: todas las
+  // tarjetas quedan a la luminosidad de la protagonista, legibles de entrada.
+  @media (prefers-reduced-motion: reduce) {
+    background: linear-gradient(180deg, #4a4370 0%, #423b64 100%);
+    transition: none;
+
+    .stepTitle {
+      color: #ffffff;
+      transition: none;
+    }
+
+    .stepDescription {
+      color: rgba(245, 243, 255, 0.95);
+      transition: none;
+    }
+
+    .iconWrapper {
+      background-color: rgba(142, 122, 230, 0.3);
+      transition: none;
+    }
+  }
+
+  // PROTAGONISTA: anillo lila y halo. Sin el inset blanco de antes —era para la
+  // tarjeta clara y sobre el fondo oscuro marcaba una línea rara arriba.
   &.stepCurrent {
     border-color: rgba(142, 122, 230, 0.6);
     box-shadow: 0 0 0 1px rgba(142, 122, 230, 0.38),
-      0 1px 0 rgba(255, 255, 255, 0.6) inset,
       0 22px 46px -16px rgba(20, 16, 45, 0.7),
       0 0 34px -6px rgba(142, 122, 230, 0.5);
-
-    .iconWrapper {
-      background-color: var(--icon-bg-hover);
-      border: var(--icon-border-hover);
-    }
-
-    .stepNumber {
-      color: var(--primary-color);
-      opacity: 1;
-    }
 
     :global(html.dark) & {
       border-color: rgba(142, 122, 230, 0.5);
@@ -328,20 +474,13 @@
 
 .stepHeader {
   display: flex;
+  // Ícono y número agrupados al centro: con la tarjeta centrada, un
+  // space-between los mandaría a los extremos y rompería el eje.
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  gap: 0.75rem;
-}
-
-.stepNumber {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-color-light);
-  line-height: 1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.9;
+  gap: 0.6rem;
 }
 
 .iconWrapper {
@@ -407,6 +546,9 @@
   line-height: 1.55;
   margin: 0;
   font-size: 0.95rem;
+  // Respeta los \n de los locales: cada descripción está partida en dos frases
+  // a propósito, para que la tarjeta no sea un bloque compacto de texto.
+  white-space: pre-line;
 
   :global(html.dark) & {
     color: var(--text-color-light);
@@ -415,6 +557,9 @@
   @media (max-width: 768px) {
     font-size: 0.875rem;
     line-height: 1.5;
+    // En una columna angosta el salto forzado deja huérfanas muy cortas: se
+    // deja fluir el texto y que corte donde entre.
+    white-space: normal;
   }
 }
 

@@ -15,6 +15,7 @@ import CallToAction from '../components/CallToAction/CallToAction';
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
 import HowWeWork from '../components/HowWeWork/HowWeWork';
+import BlogSection from '../components/BlogSection/BlogSection';
 import WaveDivider from '../components/WaveDivider/WaveDivider';
 
 export default function Home() {
@@ -98,6 +99,13 @@ export default function Home() {
           <div ref={(el) => {elementsRef.current[10] = el;}} className="fade-in-right">
             <WaveDivider variant="bToA" />
             <Testimonials />
+          </div>
+
+          {/* Blog antes del CTA final: quien todavía no está listo para agendar
+              encuentra algo más para leer, y quien sí lo está no se distrae
+              antes de llegar al botón. */}
+          <div ref={(el) => {elementsRef.current[13] = el;}} className="fade-in-left">
+            <BlogSection />
           </div>
 
           <div ref={(el) => {elementsRef.current[12] = el;}} className="fade-in-left">

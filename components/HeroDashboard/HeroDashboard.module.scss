@@ -42,8 +42,10 @@
   // Asomado por el borde IZQUIERDO, a media altura. La mitad derecha del panda
   // queda DETRÁS del browser; sólo asoma la cabeza hacia la izquierda, cruzado.
   top: 16%;
-  left: -198px;
-  width: 250px;
+  // El left se ajusta junto al width para mantener constante cuánto asoma
+  // (width - |left| ≈ 52px): si sólo se achica el width, el panda deja de asomar.
+  left: -172px;
+  width: 220px;
   height: auto;
   z-index: 0; // DETRÁS del browser (z-index: 1): se asoma desde atrás
   // Bien cruzado, quieto (sin flotar). Centrado vertical vía translateY(-50%).
@@ -53,13 +55,13 @@
   filter: drop-shadow(-6px 8px 14px rgba(46, 41, 78, 0.22));
 
   @media (max-width: 1024px) {
-    width: 210px;
-    left: -158px;
+    width: 185px;
+    left: -145px;
   }
 
   @media (max-width: 768px) {
-    width: 160px;
-    left: -120px;
+    width: 140px;
+    left: -110px;
   }
 }
 

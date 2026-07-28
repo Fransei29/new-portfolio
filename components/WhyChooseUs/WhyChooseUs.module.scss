@@ -102,13 +102,20 @@
   gap: 1.25rem;
   padding: 1.75rem 2rem;
   min-height: 0;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  // La tarjeta ya no es blanco puro sobre el fondo claro de la sección: lleva
+  // un velo lila muy tenue, del mismo tinte que el fondo, así se apoya sobre él
+  // en vez de recortarse como un rectángulo blanco. El gradiente es corto a
+  // propósito: si el pie se oscurece más, el texto de la descripción —que vive
+  // justo ahí— empieza a perder contraste.
+  background: linear-gradient(180deg, #fdfcff 0%, #f7f5fd 100%);
+  border: 1px solid rgba(142, 122, 230, 0.16);
   border-radius: var(--br);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  // Sombra teñida de lila en lugar de negro puro: integra la tarjeta con la
+  // sección en vez de dejarla flotando con un halo gris.
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 22px -12px rgba(46, 41, 78, 0.28);
+  transition: background 0.35s ease, transform 0.25s ease,
+    box-shadow 0.25s ease, border-color 0.25s ease;
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -122,8 +129,13 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05), 0 12px 28px rgba(0, 0, 0, 0.08);
-    border-color: rgba(46, 41, 78, 0.22);
+    // Se aclara apenas y el borde lila se define: el mismo criterio de
+    // "encenderse" de Working methodology, dentro de la paleta clara.
+    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    border-color: rgba(142, 122, 230, 0.38);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
+      0 14px 32px -14px rgba(46, 41, 78, 0.34),
+      0 0 24px -10px rgba(142, 122, 230, 0.4);
 
     :global(html.dark) & {
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
@@ -208,7 +220,10 @@
 }
 
 .benefitDescription {
-  color: var(--text-color-light);
+  // No usa --text-color-light (#6b6b6b): ese gris se pensó contra blanco puro y
+  // sobre el velo lila del pie de la tarjeta pierde contraste. Este tono es más
+  // oscuro y está teñido de lila, así se lee bien en toda la altura.
+  color: #4a4560;
   line-height: 1.5;
   margin: 0;
   font-size: var(--card-description-font-size);

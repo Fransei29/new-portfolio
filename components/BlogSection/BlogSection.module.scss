@@ -1,0 +1,290 @@
+@import '../../app/styles/utilities.scss';
+
+.blogSection {
+  margin: 0;
+  width: 100%;
+  padding: 5.5rem 0;
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: 1.25rem auto 3rem;
+  text-align: center;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  max-width: 60ch;
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin: 0.75rem 0 1.75rem;
+    max-width: none;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  align-items: stretch;
+
+  // Con pocos posts la grilla se centra en vez de estirar las tarjetas: una
+  // sola tarjeta a 3 columnas se ve como un banner, no como una tarjeta.
+  &.gridSingle {
+    grid-template-columns: minmax(0, 420px);
+    justify-content: center;
+  }
+
+  &.gridPair {
+    grid-template-columns: repeat(2, minmax(0, 420px));
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+
+    &.gridSingle,
+    &.gridPair {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.card {
+  // Mismo velo lila tenue y sombra teñida que las tarjetas de "Backed by data":
+  // las secciones claras del home comparten lenguaje de tarjeta.
+  background: linear-gradient(180deg, #fdfcff 0%, #f7f5fd 100%);
+  border: 1px solid rgba(142, 122, 230, 0.16);
+  border-radius: var(--br);
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 22px -12px rgba(46, 41, 78, 0.28);
+  transition: background 0.35s ease, transform 0.25s ease,
+    box-shadow 0.25s ease, border-color 0.25s ease;
+
+  :global(html.dark) & {
+    background: rgba(24, 28, 51, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    border-color: rgba(142, 122, 230, 0.38);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
+      0 14px 32px -14px rgba(46, 41, 78, 0.34),
+      0 0 24px -10px rgba(142, 122, 230, 0.4);
+
+    :global(html.dark) & {
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
+      border-color: rgba(142, 122, 230, 0.4);
+    }
+
+    .cover {
+      transform: scale(1.04);
+    }
+
+    .readMore .arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.coverWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(142, 122, 230, 0.08);
+}
+
+.cover {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.5rem 1.65rem;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 1.25rem 1.25rem 1.4rem;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #6f6a85;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.65);
+  }
+}
+
+.metaDot {
+  opacity: 0.6;
+}
+
+.cardTitle {
+  font-size: var(--card-title-font-size);
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--card-title-font-size-mobile);
+  }
+}
+
+.cardDescription {
+  // Mismo tono que la descripción de "Backed by data": el gris estándar pierde
+  // contraste contra el velo lila del pie de la tarjeta.
+  color: #4a4560;
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.95rem;
+  // Se recorta a 3 líneas para que tarjetas con descripciones de largo distinto
+  // no descuadren la altura de la fila.
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.75);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+}
+
+.tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  background: rgba(142, 122, 230, 0.12);
+  border: 1px solid rgba(142, 122, 230, 0.2);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+
+  :global(html.dark) & {
+    background: rgba(142, 122, 230, 0.18);
+    border-color: rgba(142, 122, 230, 0.3);
+  }
+}
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary-color);
+
+  .arrow {
+    transition: transform 0.25s ease;
+  }
+}
+
+.ctaContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  .arrow {
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -12px rgba(46, 41, 78, 0.45);
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cover,
+  .ctaButton,
+  .arrow {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .ctaButton:hover {
+    transform: none;
+  }
+}

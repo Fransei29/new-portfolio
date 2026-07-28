@@ -27,7 +27,7 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "tools": "Tools",
-    "summarySubtitle": "Tools and frameworks I work with to build scalable solutions",
+    "summarySubtitle": "Tools and frameworks we work with to build scalable solutions",
     "dragHint": "You can drag the cards to arrange them to your liking",
     "viewFullStack": "View full stack"
   }

@@ -2,47 +2,47 @@
   "hero": {
     "title": "Nosotros",
     "subtitle": {
-      "before": "Construimos ",
-      "highlight": "productos digitales",
-      "after": " listos para crecer.",
+      "before": "Construí tu ",
+      "highlight": "producto digital",
+      "after": " listo para crecer.",
       "mobile": {
-        "before": "Construimos",
-        "highlight": "productos digitales",
-        "after": "listos para crecer."
+        "before": "Construí tu",
+        "highlight": "producto digital",
+        "after": "listo para crecer."
       }
     },
     "description": "Con más de 4 años de experiencia, ayudamos a startups y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
     "cta": {
-      "projects": "Explora nuestro trabajo",
-      "contact": "Agenda una llamada",
-      "bootcamp": "Ve a Mi bootcamp",
+      "projects": "Explorá nuestro trabajo",
+      "contact": "Empezá tu proyecto",
+      "bootcamp": "Ve a nuestro bootcamp",
       "youtube": "YouTube"
     },
     "socialProof": {
-      "label": "Confían en mí founders y equipos de ingeniería",
-      "headline": "Confían en mí founders y equipos de ingeniería",
-      "sub": "15 clientes confían en mi trabajo",
+      "label": "Confían en nosotros founders y equipos de ingeniería",
+      "headline": "Confían en nosotros founders y equipos de ingeniería",
+      "sub": "15 clientes confían en nuestro trabajo",
       "projects": "Proyectos entregados"
     }
   },
   "about": {
-    "title": "Sobre mí",
+    "title": "Sobre nosotros",
     "description": "",
     "experience": "Años de experiencia",
     "projects": "Proyectos completados",
     "technologies": "Tecnologías dominadas",
-    "whoIAm": "Quién Soy",
-    "personalStory": "Desarrollador full-stack con más de 3 años de experiencia construyendo soluciones para startups y empresas. Basado en Ámsterdam, trabajo con tecnologías modernas para crear productos que generan impacto real.",
-    "newChapter": "Especializado en arquitecturas escalables y código de calidad. Desarrollo aplicaciones web que crecen con el negocio, priorizando mantenibilidad y rendimiento.",
+    "whoIAm": "Quiénes Somos",
+    "personalStory": "Un equipo full-stack con más de 3 años de experiencia construyendo soluciones para startups y empresas. Basados en Ámsterdam, trabajamos con tecnologías modernas para crear productos que generan impacto real.",
+    "newChapter": "Especializados en arquitecturas escalables y código de calidad. Desarrollamos aplicaciones web que crecen con el negocio, priorizando mantenibilidad y rendimiento.",
     "dedicationTitle": "Principios",
     "dedication": "Entregar en chico, medir, iterar.",
-    "interestsTitle": "Lo que me importa",
+    "interestsTitle": "Lo que nos importa",
     "interests": "Construir cosas que la gente realmente usa."
   },
   "aboutPage": {
     "buttonText": "¿Estás listo para empezar tu proyecto?",
     "buttonTextMobile": "¿Estás listo para\nempezar tu proyecto?",
-    "description": "Desde el concepto hasta el lanzamiento, estoy aquí para ayudarte.",
+    "description": "Desde el concepto hasta el lanzamiento, estamos aquí para ayudarte.",
     "buttonLabel": "Conectemos"
   },
   "howWeWork": {
@@ -50,19 +50,19 @@
     "subtitle": "Un proceso claro y colaborativo para llevar tu idea desde el concepto hasta el lanzamiento.",
     "discovery": {
       "title": "Descubrimiento",
-      "description": "Entendemos tu negocio, objetivos y usuarios. Definimos alcance, prioridades y un plan de trabajo alineado contigo."
+      "description": "Entendemos tu negocio, objetivos y usuarios.\nDefinimos alcance, prioridades y un plan de trabajo alineado contigo."
     },
     "design": {
       "title": "Diseño y planificación",
-      "description": "Estructuramos la solución: arquitectura, flujos y UX. Validamos contigo antes de escribir código para evitar sorpresas."
+      "description": "Estructuramos la solución: arquitectura, flujos y UX.\nValidamos contigo antes de escribir código para evitar sorpresas."
     },
     "development": {
       "title": "Desarrollo",
-      "description": "Construcción iterativa con código de calidad. Comunicación constante y entregas parciales para que puedas seguir el avance."
+      "description": "Construcción iterativa con código de calidad.\nComunicación constante y entregas parciales para que puedas seguir el avance."
     },
     "launch": {
       "title": "Lanzamiento y soporte",
-      "description": "Despliegue, documentación y acompañamiento post-lanzamiento. Te dejo todo listo para que mantengas o escales el producto."
+      "description": "Despliegue, documentación y acompañamiento post-lanzamiento.\nTe dejamos todo listo para que mantengas o escales el producto."
     },
     "cta": {
       "text": "Hablemos de tu proyecto"
@@ -70,19 +70,27 @@
   },
   "whyChooseUs": {
     "title": "Datos que respaldan",
-    "subtitle": "Valor agregado que aporto a cada proyecto para alcanzar resultados excepcionales.",
+    "subtitle": "Valor agregado que aportamos a cada proyecto para alcanzar resultados excepcionales.",
     "expertise": {
       "title": "Experiencia Técnica",
       "description": "Más de 3 años desarrollando soluciones escalables con tecnologías modernas y mejores prácticas de la industria."
     },
     "delivery": {
       "title": "Entrega Eficiente",
-      "description": "Comprometido con plazos realistas y comunicación clara. Cada proyecto se entrega con código limpio y documentación."
+      "description": "Comprometidos con plazos realistas y comunicación clara. Cada proyecto se entrega con código limpio y documentación."
     },
     "collaboration": {
       "title": "Enfoque Colaborativo",
-      "description": "Trabajo cercano con equipos y clientes, priorizando la comprensión de necesidades y objetivos del negocio."
+      "description": "Trabajamos de cerca con equipos y clientes, priorizando la comprensión de necesidades y objetivos del negocio."
     }
+  },
+  "blogSection": {
+    "title": "Del blog",
+    "subtitle": "Notas sobre arquitectura, decisiones de ingeniería y lo que aprendemos construyendo productos reales.",
+    "readMore": "Leer artículo",
+    "viewAll": "Ir al blog",
+    "readingSuffix": "min de lectura",
+    "empty": "Pronto vamos a publicar nuevos artículos."
   },
   "statsNumbers": {
     "heading": "Resultados que respaldan el trabajo",
