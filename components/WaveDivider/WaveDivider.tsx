@@ -29,7 +29,7 @@ export default function WaveDivider({ variant }: WaveDividerProps) {
 
   if (variant === 'aToCta') {
     return (
-      <div className={`${styles.root} ${variantClass[variant]}`}>
+      <div className={`${styles.root} ${variantClass[variant]} wave-static`}>
         <svg
           className={styles.svgCta}
           viewBox={`0 0 1440 ${WAVE_CTA_VIEW_H}`}
@@ -43,7 +43,7 @@ export default function WaveDivider({ variant }: WaveDividerProps) {
   }
 
   return (
-    <div className={`${styles.root} ${variantClass[variant]}`}>
+    <div className={`${styles.root} ${variantClass[variant]} wave-static`}>
       <svg
         className={styles.svg}
         viewBox="0 0 1440 52"

@@ -1,14 +1,19 @@
 @import '../../app/styles/utilities.scss';
 
-// Separación entre las dos columnas del zigzag. El conector (.stepNode) mide
-// exactamente la mitad, para que su punta caiga justo sobre el riel central:
-// si se cambia este valor, el conector se ajusta solo.
+// Separación entre las dos columnas del zigzag. El brazo de medición (.stepNode)
+// mide exactamente la mitad, para que su punta caiga justo sobre el eje central
+// por donde baja el panda: si se cambia este valor, el brazo se ajusta solo.
 $step-column-gap: 10rem;
 
 .howWeWork {
   margin: 0;
   width: 100%;
-  padding: 5.5rem 0;
+  // Más aire ABAJO que arriba, y a propósito: el zigzag termina en una tarjeta
+  // desplazada a un lado, así que el borde inferior queda ópticamente más cerca
+  // de lo que está. Con padding simétrico la última tarjeta se ve pegada al
+  // corte de la sección. (El CTA que vivía acá aportaba ese respiro; al sacarlo
+  // hay que darlo con el padding.)
+  padding: 5.5rem 0 8rem;
   background-color: #2e294e;
 
   // Fondo oscuro fijo (light y dark): el título de sección va en claro
@@ -23,7 +28,7 @@ $step-column-gap: 10rem;
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    padding: 3rem 0 4.5rem;
   }
 }
 
@@ -69,9 +74,6 @@ $step-column-gap: 10rem;
   column-gap: $step-column-gap;
   row-gap: 2rem;
 
-  // El riel base ya no es un pseudo-elemento con topes arbitrarios: ahora es
-  // .railBase, medido para ir exactamente del primer punto al último.
-
   // Cada paso vive en SU PROPIA fila y alterna de columna: impar a la izquierda,
   // par a la derecha. Al forzar grid-row por posición, el lado opuesto queda
   // vacío y las tarjetas bajan escalonadas alrededor del riel central.
@@ -101,62 +103,21 @@ $step-column-gap: 10rem;
   }
 }
 
-// Capa de los rieles: se superpone a la grilla sin ocupar celda ni afectar el
+// Capa del panda: se superpone a la grilla sin ocupar celda ni afectar el
 // layout de las tarjetas. Es <span> para no contar en el nth-of-type de los div.
+//
+// El riel (.railBase) y el tramo recorrido (.railProgress) se eliminaron: la
+// línea del eje y los puntos competían con el único movimiento que importa. La
+// capa quedó, porque el panda necesita su sistema de coordenadas absoluto.
 .railLayer {
   position: absolute;
   inset: 0;
   display: block;
   pointer-events: none;
-  // Por encima de las tarjetas (z-index:1) para que el panda pase por delante de
-  // los nodos. Es un stacking context: los z-index de adentro son relativos a él,
-  // así que esta capa entera debe quedar arriba, no sólo el panda.
+  // Por encima de las tarjetas (z-index:1) para que el panda pase por delante
+  // de ellas. Es un stacking context: los z-index de adentro son relativos a
+  // él, así que esta capa entera debe quedar arriba.
   z-index: 3;
-}
-
-// Riel base: línea tenue que va EXACTAMENTE del primer punto al último
-// (top/height medidos en el componente). Sin sobrantes arriba ni abajo.
-.railBase {
-  position: absolute;
-  display: block;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  background: rgba(255, 255, 255, 0.14);
-  z-index: 0;
-  pointer-events: none;
-
-  @media (max-width: 768px) {
-    left: calc(1.25rem + 22px);
-    transform: none;
-  }
-}
-
-// Tramo recorrido: del primer punto hasta el nodo activo. El movimiento es
-// deliberadamente contenido — recorrido largo y easing suave, sin rebote.
-.railProgress {
-  position: absolute;
-  display: block;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  background: var(--primary-color-light);
-  z-index: 1;
-  pointer-events: none;
-  will-change: height;
-  // MISMA duración y MISMA curva que el panda: la línea crece exactamente al
-  // ritmo al que él baja, así la punta del trazo queda siempre bajo sus pies.
-  // Si difieren, el panda "patina" adelantándose o quedándose atrás.
-  transition: height 1.35s cubic-bezier(0.16, 0.62, 0.22, 1);
-
-  @media (max-width: 768px) {
-    left: calc(1.25rem + 22px);
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .railProgress { transition: none; }
 }
 
 // El isotipo panda viaja en la punta del tramo recorrido, como cabezal del
@@ -173,8 +134,8 @@ $step-column-gap: 10rem;
   width: 92px;
   height: 92px;
   transform-origin: center center;
-  // Por encima de los nodos que conectan tarjeta y riel (.stepNode, z-index:2):
-  // el panda pasa por delante de cada punto en vez de esconderse detrás.
+  // Por encima de las tarjetas: el panda pasa por delante al bajar, nunca
+  // desaparece detrás de una.
   z-index: 5;
   // Curva ASIMÉTRICA: sale con decisión y frena largo (el 0.16 inicial ya tiene
   // pendiente; el 0.94 final aplana la llegada). Un ease simétrico se siente
@@ -204,71 +165,45 @@ $step-column-gap: 10rem;
   position: relative;
   z-index: 1;
 
-  // Conector del paso: una línea fina que va del borde interior de la tarjeta
-  // hasta el riel central (ancho = mitad del column-gap). En su PUNTA, sobre el
-  // riel, lleva UN solo nodo (::after). Así no hay puntos duplicados sueltos.
+  // Brazo de MEDICIÓN, totalmente invisible. Ya no dibuja nada: ni la línea
+  // conectora ni el punto sobre el eje. Se quitaron a propósito — el andamiaje
+  // (líneas cruzando el vacío + puntos + riel) competía con el único movimiento
+  // que importa, que es el descenso del panda. Ahora el panda baja solo.
+  //
+  // OJO: el elemento SIGUE EXISTIENDO y conserva su geometría (top y ancho =
+  // mitad del column-gap). Es lo que el efecto de scroll mide para saber dónde
+  // posar al panda en cada paso: el centro de este brazo, sobre el eje central,
+  // es la coordenada exacta de cada parada. Si se borrara del TSX, o se le
+  // pusiera width:0 / display:none, el recorrido del panda cambiaría por
+  // completo. Es geometría pura, sin pintura.
   .stepNode {
     position: absolute;
     top: 2.75rem;
-    // Mitad del gap: la punta del conector cae exactamente sobre el riel central.
+    // Mitad del gap: la punta del brazo cae exactamente sobre el eje central,
+    // que es por donde baja el panda.
     width: $step-column-gap * 0.5;
     height: 2px;
-    background: rgba(142, 122, 230, 0.28);
     z-index: 2;
-    transition: background-color 0.4s ease;
-
-    // El nodo, en la punta que toca el riel.
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #2e294e;
-      border: 2px solid rgba(142, 122, 230, 0.5);
-      transition: background-color 0.4s ease, border-color 0.4s ease,
-        box-shadow 0.4s ease;
-    }
   }
 
-  // Impar (pasos 1 y 3) → tarjeta a la izquierda: el conector sale de su borde
-  // derecho hacia el centro; el nodo queda en el extremo derecho (sobre el riel).
+  // Impar (pasos 1 y 3) → tarjeta a la izquierda: el brazo se proyecta desde su
+  // borde derecho hacia el centro, así su punta cae sobre el eje.
   &:nth-of-type(odd) .stepNode {
     left: 100%;
-    &::after { right: -5px; transform: translate(50%, -50%); }
   }
-  // Par (pasos 2 y 4) → tarjeta a la derecha: el conector sale de su borde
-  // izquierdo; el nodo queda en el extremo izquierdo (sobre el riel).
+  // Par (pasos 2 y 4) → tarjeta a la derecha: el brazo se proyecta desde su
+  // borde izquierdo.
   &:nth-of-type(even) .stepNode {
     right: 100%;
-    &::after { left: -5px; transform: translate(-50%, -50%); }
   }
 
-  // Paso YA VISITADO: nodo relleno, sobrio (sin glow) — el recorrido hecho.
-  &.stepDone .stepNode {
-    background: rgba(142, 122, 230, 0.45);
-
-    &::after {
-      background: var(--primary-color-light);
-      border-color: var(--primary-color-light);
-    }
-  }
-
-  // Paso PROTAGONISTA (donde está el panda): nodo encendido con glow.
-  &.stepCurrent .stepNode {
-    background: rgba(142, 122, 230, 0.6);
-
-    &::after {
-      background: var(--primary-color-light);
-      border-color: var(--primary-color-light);
-      box-shadow: 0 0 0 4px rgba(142, 122, 230, 0.18),
-        0 0 14px 3px rgba(142, 122, 230, 0.5);
-    }
-  }
+  // Los estados (.stepDone / .stepCurrent) ya no tocan el brazo: no hay punto
+  // que encender. El paso activo se distingue por el FONDO de la tarjeta y el
+  // ícono, más el panda posado a su altura.
 
   @media (max-width: 768px) {
-    // En una columna el conector no aplica; el nodo se apoya en el riel izquierdo.
+    // En una columna el panda baja por el borde izquierdo: el brazo se anula y
+    // la parada queda a 22px del borde, que es la coordenada que mide el efecto.
     .stepNode,
     &:nth-of-type(odd) .stepNode,
     &:nth-of-type(even) .stepNode {
@@ -276,9 +211,6 @@ $step-column-gap: 10rem;
       right: auto;
       top: 2rem;
       width: 0;
-      background: transparent;
-
-      &::after { left: 0; right: auto; transform: translate(-50%, -50%); }
     }
   }
 
@@ -288,6 +220,12 @@ $step-column-gap: 10rem;
   border: 1px solid rgba(142, 122, 230, 0.18);
   border-radius: var(--br);
   padding: 2rem 1.75rem;
+  // OJO: nada de `overflow: hidden` acá, por más que la marca de agua lo pida.
+  // El brazo de medición (.stepNode) se proyecta FUERA de la tarjeta
+  // (left/right: 100%) para apoyar la parada del panda sobre el eje central.
+  // El overflow no cambiaría su geometría —getBoundingClientRect seguiría
+  // midiendo bien— pero deja el layout dependiendo de esa sutileza. El número se
+  // recorta solo, con su propio clip-path (ver .stepNumber).
   // Sin transform/opacity: las maneja el fade-in de entrada (.visible).
   // El background entra en la transición porque el estado dormido/despierto se
   // expresa sobre todo con el FONDO de la tarjeta, no atenuando el texto.
@@ -386,6 +324,13 @@ $step-column-gap: 10rem;
   &.stepCurrent {
     background: linear-gradient(180deg, #4a4370 0%, #423b64 100%);
 
+    // La marca de agua sube de intensidad, pero SIGUE siendo fondo: a 7rem un
+    // lila sólido taparía el título. El salto se nota igual porque es un área
+    // enorme — no hace falta más opacidad.
+    .stepNumber {
+      color: rgba(174, 156, 245, 0.3);
+    }
+
     .stepTitle {
       color: #ffffff;
     }
@@ -409,6 +354,10 @@ $step-column-gap: 10rem;
   // sin robarle presencia a la que está ocurriendo.
   &.stepDone {
     background: linear-gradient(180deg, #423b63 0%, #3b3557 100%);
+
+    .stepNumber {
+      color: rgba(160, 143, 240, 0.2);
+    }
 
     .stepTitle {
       color: rgba(248, 246, 255, 0.9);
@@ -434,6 +383,11 @@ $step-column-gap: 10rem;
   @media (prefers-reduced-motion: reduce) {
     background: linear-gradient(180deg, #4a4370 0%, #423b64 100%);
     transition: none;
+
+    .stepNumber {
+      color: rgba(174, 156, 245, 0.3);
+      transition: none;
+    }
 
     .stepTitle {
       color: #ffffff;
@@ -474,13 +428,51 @@ $step-column-gap: 10rem;
 
 .stepHeader {
   display: flex;
-  // Ícono y número agrupados al centro: con la tarjeta centrada, un
-  // space-between los mandaría a los extremos y rompería el eje.
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 0.6rem;
+  // Por encima de la marca de agua (.stepNumber, z-index:0). Sin esto el ícono
+  // quedaría por detrás del número gigante.
+  position: relative;
+  z-index: 1;
+}
+
+// Número del paso (01–04) como MARCA DE AGUA: enorme, tenue y anclado a la
+// esquina superior izquierda, detrás del contenido. Es el gesto maximalista de
+// la tarjeta — declara la secuencia a gritos sin robarle una sola línea de
+// espacio al texto, porque vive en una capa que no ocupa flujo.
+//
+// Va con la Bricolage de marca (--font-heading): a este tamaño la tipografía
+// display es justamente lo que hace que se lea como decisión y no como sobra.
+.stepNumber {
+  position: absolute;
+  // Queda DENTRO de la tarjeta (no sangrado hacia afuera): así no necesita que
+  // la tarjeta lo recorte, y el brazo de medición puede seguir proyectándose
+  // fuera sin que haya un overflow que complique nada. Ver nota en .stepCard.
+  top: 0.25rem;
+  left: 0.9rem;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  // Tabular: el 01 y el 04 ocupan exactamente lo mismo, así el número no
+  // "baila" de ancho entre tarjetas.
+  font-variant-numeric: tabular-nums;
+  // Muy tenue: tiene que leerse como textura de fondo, no como dato. Si sube
+  // de acá compite con el título, que es lo que la persona vino a leer.
+  color: rgba(142, 122, 230, 0.13);
+  // Detrás de todo el contenido de la tarjeta.
+  z-index: 0;
+  // No es texto seleccionable ni un obstáculo para el mouse: es decoración.
+  user-select: none;
+  pointer-events: none;
+  transition: color 0.6s ease;
+
+  @media (max-width: 768px) {
+    font-size: 5rem;
+  }
 }
 
 .iconWrapper {
@@ -531,6 +523,9 @@ $step-column-gap: 10rem;
   margin: 0;
   line-height: 1.3;
   letter-spacing: -0.005em;
+  // Por encima de la marca de agua (ver .stepNumber).
+  position: relative;
+  z-index: 1;
 
   :global(html.dark) & {
     color: var(--text-color);
@@ -546,6 +541,9 @@ $step-column-gap: 10rem;
   line-height: 1.55;
   margin: 0;
   font-size: 0.95rem;
+  // Por encima de la marca de agua (ver .stepNumber).
+  position: relative;
+  z-index: 1;
   // Respeta los \n de los locales: cada descripción está partida en dos frases
   // a propósito, para que la tarjeta no sea un bloque compacto de texto.
   white-space: pre-line;
@@ -560,76 +558,5 @@ $step-column-gap: 10rem;
     // En una columna angosta el salto forzado deja huérfanas muy cortas: se
     // deja fluir el texto y que corte donde entre.
     white-space: normal;
-  }
-}
-
-.ctaContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-
-  @media (max-width: 768px) {
-    margin-top: 2rem;
-  }
-}
-
-/* Mismo estilo que el botón "Let's connect" del CTA (CallToAction.module.scss):
-   blanco sólido sobre el fondo oscuro de la sección, con flecha animada. */
-.ctaButton {
-  text-decoration: none !important;
-  height: 3rem;
-  padding: 0 2rem;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  border-radius: var(--br);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  background-color: rgba(255, 255, 255, 0.92);
-  color: #111;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
-  &:hover {
-    background-color: #ffffff;
-    border-color: #ffffff;
-    transform: translateY(-1px);
-
-    .arrow {
-      transform: rotate(-45deg);
-    }
-  }
-
-  :global(html.dark) & {
-    color: rgb(228, 227, 227);
-    background-color: rgba(0, 0, 0, 0.45);
-    border-color: rgba(255, 255, 255, 0.32);
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.65);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-  }
-
-  @media (max-width: 768px) {
-    height: 2.75rem;
-    padding: 0 1.6rem;
-    font-size: 0.925rem;
-  }
-}
-
-.arrow {
-  font-size: 0.85rem;
-  margin-left: 0.55rem;
-  transform-origin: center center;
-  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
-  flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    font-size: 0.72rem;
-    margin-left: 0.4rem;
   }
 }

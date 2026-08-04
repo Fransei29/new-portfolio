@@ -41,9 +41,12 @@ export default function Home() {
 
       <section className="containerGeneral">
 
-         <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
+          {/* El wave va DENTRO del bloque para que su sección y él aparezcan
+              sincronizados (el bloque es el que observa el scroll). No se anima:
+              lleva la clase wave-static, que lo exime del fade del padre. */}
+          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
             <WaveDivider variant="aToB" />
-           <Services />
+            <Services />
           </div>
 
           <WaveDivider variant="bToA" />
@@ -63,8 +66,22 @@ export default function Home() {
           </div>
 
           <div className="section-bg-lila">
-            <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left section-bg-ink">
+            {/* Este wave CIERRA HowWeWork (no abre WhyChooseUs), así que es el
+                único que va FUERA del bloque animado.
+                `wave-static` no alcanzaba acá: exime al wave de su propio fade,
+                pero el bloque padre sigue aplicando translateX(-50px) y un
+                transform arrastra a todo su subárbol — el wave viajaba igual.
+                En los otros waves no se nota porque abren su sección y entran
+                junto con ella; este cierra la anterior, y el desfase queda a la
+                vista al terminar de leer HowWeWork.
+                Conserva section-bg-ink: esa clase define --wave-a (#2e294e), el
+                color del lado del que VIENE la curva. Sin ella la costura con
+                HowWeWork deja de calzar. */}
+            <div className="section-bg-ink">
               <WaveDivider variant="aToB" />
+            </div>
+
+            <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left section-bg-ink">
               <WhyChooseUs />
             </div>
 

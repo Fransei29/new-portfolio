@@ -3,6 +3,17 @@
   margin-top: -1px;
 }
 
+/* Marca global que exime al wave del fade-in del bloque que lo contiene (la
+   regla vive en globals.css, junto a .fade-in-*). El wave es la costura entre
+   dos fondos: si se desliza o entra con opacity se ve el corte aparecer a
+   destiempo. Se aplica siempre, en cualquier contexto — un divisor no se anima
+   nunca. */
+.root:global(.wave-static) {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .svg {
   width: 100%;
   height: 52px;

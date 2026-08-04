@@ -798,6 +798,21 @@ html.dark .ctaWrap {
   transform: translateX(0);
 }
 
+/* El WaveDivider NUNCA se anima, aunque viva dentro de un bloque .fade-in-*.
+   Es la costura entre dos fondos, no contenido: si se desliza desde un lado o
+   entra con opacity, se ve el corte entre secciones aparecer a destiempo.
+   Queda DENTRO del bloque (y no como hermano suelto) para no romper la
+   sincronía de abajo: el bloque es el que observa el scroll, y sacar el wave
+   afuera lo dejaba pintado desde el arranque mientras su sección seguía
+   haciendo fade — desfasados. Acá el wave se exime del fade pero conserva su
+   lugar en el flujo, pegado a la sección que abre. */
+.fade-in-left > .wave-static,
+.fade-in-right > .wave-static {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 /* Sincronización wave ↔ contenido: cuando un bloque externo (el que contiene el
    wave) se vuelve .visible, sus hijos .fade-in-* internos (título, subtítulo,
    cards de HowWeWork / WhyChooseUs) entran AL MISMO TIEMPO que el wave, en vez de

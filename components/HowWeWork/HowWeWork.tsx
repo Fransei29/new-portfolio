@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { HiArrowRight } from 'react-icons/hi';
 import styles from './HowWeWork.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -32,10 +30,6 @@ const HowWeWork = () => {
   // el panda no se deslice desde el origen al cargar la página.
   const [armed, setArmed] = useState(false);
   const [dotTop, setDotTop] = useState(0);
-  // Extremos del riel: primer y último nodo (medidos), para que la línea empiece
-  // y termine EXACTAMENTE en los puntos, sin sobrante arriba ni abajo.
-  const [railTop, setRailTop] = useState(0);
-  const [railBottom, setRailBottom] = useState(0);
 
   useEffect(() => {
     const el = gridRef.current;
@@ -93,12 +87,8 @@ const HowWeWork = () => {
       const activeIdx = visualPos < 0 ? -1 : byY[visualPos].index;
       setActiveStep(activeIdx);
 
-      // Riel: del primer punto al último (en orden visual).
-      const first = byY[0].center - gridTop;
-      const last = byY[byY.length - 1].center - gridTop;
-      setRailTop(first);
-      setRailBottom(last);
-
+      // Parada del panda: el nodo del paso activo (en orden visual). Antes del
+      // primer paso espera en el primero, no en el origen de la grilla.
       const anchor = visualPos < 0 ? byY[0] : byY[visualPos];
       setDotTop(anchor.center - gridTop);
 
@@ -193,31 +183,17 @@ const HowWeWork = () => {
         </section>
 
         <div className={styles.stepsGrid} ref={gridRef}>
-          {/* Los rieles van en su PROPIA capa (no como hijos sueltos de la grilla):
-              si fueran hijos directos correrían el nth-child de las tarjetas y el
+          {/* El panda va en su PROPIA capa (no como hijo suelto de la grilla):
+              si fuera hijo directo correría el nth-child de las tarjetas y el
               zigzag se desarma. */}
           <span className={styles.railLayer} aria-hidden>
-            {/* Riel base: exactamente del primer punto al último. */}
-            <span
-              className={styles.railBase}
-              style={{ top: `${railTop}px`, height: `${Math.max(0, railBottom - railTop)}px` }}
-            />
-            {/* Tramo recorrido: del primer punto hasta el nodo activo. */}
-            <span
-              className={styles.railProgress}
-              style={{
-                top: `${railTop}px`,
-                height: `${Math.max(0, dotTop - railTop)}px`,
-                transition: armed ? undefined : 'none',
-              }}
-            />
+            {/* Sin riel ni puntos a propósito: la línea del eje y los nodos se
+                quitaron para que el ÚNICO elemento en movimiento sea el panda.
+                Su recorrido no cambió — sigue midiendo los .stepNode (invisibles
+                pero presentes) y posándose exactamente donde se posaba antes. */}
 
-            {/* El panda NO cuelga del tramo: se posiciona por su cuenta sobre el
-                riel. Si fuera hijo de .railProgress su descenso dependería del
-                height del padre y su giro de su propia transición — dos
-                animaciones separadas que se desincronizan. Acá una sola
-                propiedad `transform` mueve y gira a la vez, con el mismo
-                easing, así el giro y la bajada son literalmente el mismo
+            {/* Una sola propiedad `transform` mueve y gira a la vez, con el
+                mismo easing, así el giro y la bajada son literalmente el mismo
                 movimiento. La rotación se deriva del paso activo (no del
                 scroll): va a velocidad constante y no tiembla al scrollear
                 rápido. Una vuelta entera por paso (ver pandaSpin): sólo los
@@ -253,6 +229,16 @@ const HowWeWork = () => {
                   ref={(el) => { nodeRefs.current[index] = el; }}
                   aria-hidden
                 />
+                {/* Marca de agua: hijo DIRECTO de la tarjeta, que es quien tiene
+                    el position:relative y el overflow que la recorta. Dentro del
+                    header se posicionaría contra él y no contra la tarjeta.
+                    aria-hidden: es una pista VISUAL de secuencia. El orden ya se
+                    lo da el DOM a quien usa lector de pantalla, y leer "cero uno"
+                    antes de cada título sólo agrega ruido. */}
+                <span className={styles.stepNumber} aria-hidden>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
                 <div className={styles.stepHeader}>
                   <div className={styles.iconWrapper}>
                     {step.icon}
@@ -265,15 +251,9 @@ const HowWeWork = () => {
           })}
         </div>
 
-        {/* CTA Button Section */}
-        <section ref={el => { elementsRef.current[6] = el; }} className="fade-in-right">
-          <div className={styles.ctaContainer}>
-            <Link href="/contact" className={styles.ctaButton}>
-              {t('howWeWork.cta.text')}
-              <HiArrowRight className={styles.arrow} />
-            </Link>
-          </div>
-        </section>
+        {/* Sin CTA acá a propósito: la home ya cierra con su propio
+            CallToAction, y un botón intermedio competía con ese. Esta sección
+            explica el proceso; convertir es tarea del cierre. */}
       </div>
     </section>
   );
