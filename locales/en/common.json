@@ -17,10 +17,20 @@
     "contact": "Contact"
   },
   "ai": {
-    "placeholder": "Ask me about Franco...",
+    "placeholder": "Ask anything…",
     "send": "Send",
     "thinking": "Thinking...",
-    "error": "Sorry, I'm having technical issues. You can contact Franco directly at seilerfranco317@gmail.com"
+    "error": "Sorry, I'm having technical issues. You can contact Franco directly at seilerfranco317@gmail.com",
+    "title": "Assistant",
+    "welcome": "Hey — I'm Franco's assistant. Ask me a dev question, or anything about the work he does.",
+    "suggestedTitle": "For example",
+    "q1": "How should I handle payment webhooks?",
+    "q2": "Postgres or MongoDB for a multi-tenant SaaS?",
+    "q3": "What does Franco build?",
+    "q4": "Is he available for new projects?",
+    "refProject": "Case study",
+    "refArticle": "Article",
+    "refOpen": "Open"
   },
   "skills": {
     "title": "Tools",

@@ -4,28 +4,65 @@ import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './HeroDashboard.module.scss';
 
-// Animated counter — transitions from previous value to new target
-function useAnimatedNumber(target: number, duration = 1500) {
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+/**
+ * Contador animado, versión tranquila.
+ *
+ * Antes los tres números arrancaban juntos con easeOutCubic: entraban rápido y
+ * frenaban de golpe, lo que leía como parpadeo. Ahora usan easeInOutQuart —
+ * arranca y termina quieto, todo el movimiento pasa en el medio — con un
+ * `delay` distinto por tarjeta para que la fila se actualice en cascada en vez
+ * de saltar en bloque.
+ *
+ * El valor se redondea acá y solo se llama a setValue cuando el entero cambia:
+ * evita un re-render por frame (60/s) para un número que muestra 2 dígitos.
+ */
+function useAnimatedNumber(target: number, { duration = 2200, delay = 0 } = {}) {
   const [value, setValue] = useState(target);
   const raf = useRef<number | null>(null);
-  const fromRef = useRef(target);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Se lee de un ref para que el efecto no dependa de `value` y se reinicie solo
+  // cuando cambia el target.
+  const valueRef = useRef(target);
+  valueRef.current = value;
+
   useEffect(() => {
-    fromRef.current = value;
-    const startTime = performance.now();
-    const start = fromRef.current;
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-      setValue(start + (target - start) * eased);
-      if (progress < 1) raf.current = requestAnimationFrame(tick);
+    const start = valueRef.current;
+    if (start === target) return;
+
+    if (prefersReducedMotion()) {
+      setValue(target);
+      return;
+    }
+
+    const run = () => {
+      const startTime = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        // easeInOutQuart: entra y sale sin sobresalto.
+        const eased =
+          progress < 0.5
+            ? 8 * progress * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+        const next = Math.round(start + (target - start) * eased);
+        setValue((prev) => (prev === next ? prev : next));
+        if (progress < 1) raf.current = requestAnimationFrame(tick);
+      };
+      raf.current = requestAnimationFrame(tick);
     };
-    raf.current = requestAnimationFrame(tick);
+
+    if (delay > 0) timer.current = setTimeout(run, delay);
+    else run();
+
     return () => {
       if (raf.current) cancelAnimationFrame(raf.current);
+      if (timer.current) clearTimeout(timer.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target]);
+  }, [target, duration, delay]);
+
   return value;
 }
 
@@ -99,7 +136,6 @@ const HeroDashboard = () => {
   // Rotating "shipped tasks" — strike-through cycle
   const [taskIndex, setTaskIndex] = useState(0);
   const [taskPhase, setTaskPhase] = useState<'enter' | 'striking' | 'done' | 'leave'>('enter');
-  const [statsFlash, setStatsFlash] = useState(false);
   // Ciclo tranquilo: más reposo entre cambios para que no se sienta "movido".
   useEffect(() => {
     const timeouts: ReturnType<typeof setTimeout>[] = [];
@@ -108,10 +144,10 @@ const HeroDashboard = () => {
       timeouts.push(setTimeout(() => setTaskPhase('striking'), 2000));
       timeouts.push(setTimeout(() => setTaskPhase('done'), 3200));
       timeouts.push(setTimeout(() => setTaskPhase('leave'), 7300));
+      // El cambio de tarea ya se comunica por el conteo animado de las stats;
+      // el flash de fondo que había acá encima sumaba parpadeo, no información.
       timeouts.push(setTimeout(() => {
         setTaskIndex((prev) => (prev + 1) % TASKS.length);
-        setStatsFlash(true);
-        setTimeout(() => setStatsFlash(false), 700);
       }, 8000));
     };
     run();
@@ -138,11 +174,15 @@ const HeroDashboard = () => {
   }, []);
   const currentTestimonial = TESTIMONIALS[testimonialIndex];
 
-  // Stats driven by current task — animate on change
-  const conversion = useAnimatedNumber(currentTask.stats.conversion);
-  const latency = useAnimatedNumber(currentTask.stats.latency);
-  const incidents = useAnimatedNumber(currentTask.stats.incidents);
-  const infraProgress = useAnimatedNumber(currentTask.stats.infraProgress);
+  // Stats driven by current task. El delay escalonado hace que la fila se
+  // actualice de izquierda a derecha en vez de saltar los tres a la vez.
+  const conversion = useAnimatedNumber(currentTask.stats.conversion, { delay: 0 });
+  const latency = useAnimatedNumber(currentTask.stats.latency, { delay: 180 });
+  const incidents = useAnimatedNumber(currentTask.stats.incidents, { delay: 360 });
+  const infraProgress = useAnimatedNumber(currentTask.stats.infraProgress, {
+    duration: 2600,
+    delay: 500,
+  });
   const checksCount = currentTask.stats.checks;
 
   return (
@@ -198,7 +238,7 @@ const HeroDashboard = () => {
           </div>
 
           {/* Stats row */}
-          <div className={`${styles.statsRow} ${statsFlash ? styles.statsFlash : ''}`}>
+          <div className={styles.statsRow}>
             <div className={styles.statCard} data-explode-piece="stat-card" data-explode-index="0">
               <div className={styles.statValue}>
                 +{Math.round(conversion)}<span className={styles.statUnit}>%</span>

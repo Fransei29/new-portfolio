@@ -17,10 +17,20 @@
     "contact": "Contacto"
   },
   "ai": {
-    "placeholder": "Pregúntame sobre Franco...",
+    "placeholder": "Preguntá lo que quieras…",
     "send": "Enviar",
     "thinking": "Pensando...",
-    "error": "Lo siento, estoy teniendo problemas técnicos. Puedes contactar a Franco directamente en seilerfranco317@gmail.com"
+    "error": "Lo siento, estoy teniendo problemas técnicos. Puedes contactar a Franco directamente en seilerfranco317@gmail.com",
+    "title": "Asistente",
+    "welcome": "Hola, soy el asistente de Franco. Preguntame algo de desarrollo, o lo que quieras sobre su trabajo.",
+    "suggestedTitle": "Por ejemplo",
+    "q1": "¿Cómo conviene manejar webhooks de pago?",
+    "q2": "¿Postgres o MongoDB para un SaaS multi-tenant?",
+    "q3": "¿Qué construye Franco?",
+    "q4": "¿Está disponible para nuevos proyectos?",
+    "refProject": "Case study",
+    "refArticle": "Artículo",
+    "refOpen": "Abrir"
   },
   "skills": {
     "title": "Herramientas",

@@ -30,6 +30,8 @@ const COPY = {
 
 interface Props {
   language: 'es' | 'en';
+  /** Ancla para el índice de navegación del case study. */
+  id?: string;
   role?: string;
   engagement?: string;
   duration?: string;
@@ -45,6 +47,7 @@ const isFilled = (value?: string) => Boolean(value && value.trim() && value.trim
 
 export default function CaseStudyMeta({
   language,
+  id,
   role,
   engagement,
   duration,
@@ -73,7 +76,7 @@ export default function CaseStudyMeta({
   if (facts.length === 0 && realOutcomes.length === 0 && !hasTestimonial) return null;
 
   return (
-    <div className={styles.wrap}>
+    <div id={id} className={styles.wrap} data-case-section>
       {facts.length > 0 && (
         <dl className={styles.facts}>
           {facts.map((fact) => (

@@ -407,30 +407,6 @@
   gap: 0.6rem;
 }
 
-// Flash highlight when task changes
-.statsFlash .statCard {
-  animation: statFlash 0.9s ease;
-}
-
-.statsFlash .statCard:nth-child(1) { animation-delay: 0s; }
-.statsFlash .statCard:nth-child(2) { animation-delay: 0.1s; }
-.statsFlash .statCard:nth-child(3) { animation-delay: 0.2s; }
-
-// Flash apenas perceptible: un leve tinte lila que vuelve, sin salto brusco.
-@keyframes statFlash {
-  0%   { background: rgba(46, 41, 78, 0.035); border-color: rgba(46, 41, 78, 0.1); }
-  100% { background: rgba(46, 41, 78, 0.015); border-color: rgba(46, 41, 78, 0.06); }
-}
-
-:global(html.dark) .statsFlash .statCard {
-  animation: statFlashDark 0.9s ease;
-}
-
-@keyframes statFlashDark {
-  0%   { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
-  100% { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); }
-}
-
 .statCard {
   // Fondo más clarito para no ensuciar la vista.
   background: rgba(46, 41, 78, 0.015);
@@ -471,6 +447,10 @@
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+  // Cifras de ancho fijo: al contar, el número no se ensancha ni corre a la
+  // etiqueta de al lado. Es la diferencia entre "anima" y "tiembla".
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
   color: rgba(0, 0, 0, 0.82);
   line-height: 1;
   transition: color 0.3s ease;
@@ -746,13 +726,9 @@
 .stackChecksCount {
   color: #10b981;
   font-weight: 600;
-  animation: checksFlicker 4.5s ease-in-out infinite;
-}
-
-@keyframes checksFlicker {
-  0%, 100% { opacity: 1; }
-  97% { opacity: 1; }
-  98%, 99% { opacity: 0.4; }
+  font-variant-numeric: tabular-nums;
+  // Antes tenía un parpadeo infinito. Era movimiento sin dato detrás: el
+  // número ya cambia cuando cambia la tarea, no hace falta llamar la atención.
 }
 
 .stackPercent {

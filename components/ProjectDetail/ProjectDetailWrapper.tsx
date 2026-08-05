@@ -30,7 +30,7 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
 
   // Get translated content - if translation doesn't exist, fall back to original
   const getTranslatedField = (
-    field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved' | 'role' | 'engagement' | 'industry' | 'duration' | 'client'
+    field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved' | 'role' | 'engagement' | 'industry' | 'duration' | 'client' | 'location'
   ): string => {
     const key = `projects.items.${slug}.${field}`;
     const translated = t(key);
@@ -85,8 +85,17 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
       client={getTranslatedField('client') || project.client}
       industry={getTranslatedField('industry') || project.industry}
       year={project.year}
+      location={getTranslatedField('location') || project.location}
+      locationFlag={project.locationFlag}
+      locations={project.locations}
       outcomes={project.outcomes}
       testimonial={project.testimonial}
+      // Profundidad técnica. Por ahora se sirven en inglés desde el archivo de
+      // datos; cuando haya traducción van a seguir el mismo patrón que el resto.
+      architecture={project.architecture}
+      payments={project.payments}
+      infra={project.infra}
+      deliverables={project.deliverables}
     />
     </>
   );

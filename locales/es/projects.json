@@ -20,6 +20,8 @@
     "goal": "Objetivo",
     "builtWith": "Construido con",
     "learnings": "Entregables clave",
+    "sectionsNav": "Secciones",
+    "context": "Contexto",
     "links": "Enlaces",
     "githubRepository": "Repositorio de GitHub",
     "liveDemo": "Demo en Vivo",
@@ -509,7 +511,15 @@
         "industry": "Moda mayorista",
         "engagement": "Trabajo para cliente"
       }
-    }
+    },
+    "tabOverview": "Overview",
+    "tabPayments": "Pagos",
+    "tabDeliverables": "Entregables",
+    "tabEngineering": "Ingeniería",
+    "sectionArchitecture": "Arquitectura del sistema",
+    "sectionInfra": "Infraestructura y deploy",
+    "clientLocation": "Ubicación del cliente",
+    "tabTools": "Herramientas"
   },
   "pages": {
     "projects": {

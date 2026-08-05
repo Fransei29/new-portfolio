@@ -18,8 +18,10 @@
     "overview": "Overview",
     "challenge": "The challenge",
     "goal": "Goal",
-    "builtWith": "Built With",
+    "builtWith": "Built with",
     "learnings": "Key deliverables",
+    "sectionsNav": "Sections",
+    "context": "Context",
     "links": "Links",
     "githubRepository": "GitHub Repository",
     "liveDemo": "Live Demo",
@@ -448,7 +450,15 @@
           "Security: JWT, bcrypt, roles (Customer/Admin/Super Admin), isolated database per tenant."
         ]
       }
-    }
+    },
+    "tabOverview": "Overview",
+    "tabPayments": "Payments",
+    "tabDeliverables": "Deliverables",
+    "tabEngineering": "Engineering",
+    "sectionArchitecture": "System architecture",
+    "sectionInfra": "Infrastructure & deployment",
+    "clientLocation": "Client location",
+    "tabTools": "Tools"
   },
   "pages": {
     "projects": {

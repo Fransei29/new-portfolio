@@ -1,5 +1,5 @@
 .projectContainer {
-  padding: 2rem 2rem 6rem;
+  padding: 4.5rem 2rem 6rem;
   max-width: var(--container-max-width);
   margin: 0 auto;
   display: flex;
@@ -53,8 +53,12 @@
 
 .mainGrid {
   display: grid;
-  // Media (izq) y texto (der) un poco más balanceados — algo más de aire alrededor de las imágenes
-  grid-template-columns: 1.2fr 1fr;
+  // Las capturas son la prueba del trabajo: se llevan la mayor parte del ancho.
+  // Con los tabs, la columna de texto muestra un panel corto por vez y no
+  // necesita tanto espacio como cuando era un documento continuo.
+  // Con cinco tabs, la columna de texto necesita un poco más de aire; la foto
+  // cede lo justo para que la fila entre sin scroll horizontal.
+  grid-template-columns: 1.32fr 1fr;
   gap: 2.5rem;
   align-items: start;
 
@@ -63,31 +67,37 @@
     gap: 1.5rem;
     display: flex;
     flex-direction: column;
+    // En una columna, el texto va primero: en el orden del DOM las fotos
+    // arrancan arriba y empujaban título y tabs fuera de la primera pantalla,
+    // así que llegabas al proyecto sin saber de cuál se trataba.
+    .leftColumn { order: 1; }
+    .rightColumn { order: 2; }
   }
 }
 
 .leftColumn {
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    display: contents; // Permite que los hijos se reordenen con el resto
-  }
+  // Sin esto, una fila de tabs larga fuerza a la columna a crecer más allá de
+  // su fracción del grid y desborda la página en horizontal.
+  min-width: 0;
 }
 
 .rightColumn {
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
+  min-width: 0;
   position: sticky;
-  top: calc(10vh + 3rem);
+  // Misma altura de reposo que los tabs (header 104px + aire): así la imagen y
+  // la barra quedan alineadas cuando ambas se pegan.
+  top: 7.5rem;
   align-self: start;
 
   @media (max-width: 768px) {
     gap: 1rem;
     position: static;
     top: auto;
-    display: contents; // Permite que los hijos se reordenen con el resto
   }
 }
 
@@ -100,20 +110,123 @@
 .textContent {
   display: flex;
   flex-direction: column;
-  padding-left: 2.5rem;
+  padding-left: 1.25rem;
+  min-width: 0;
 
   @media (max-width: 768px) {
     padding: 0;
-    display: contents;
+  }
+}
+
+// Contenedor de los paneles de tabs.
+.tabPanels {
+  // Alto mínimo para que la página no dé un salto al pasar a una pestaña más
+  // corta y los tabs no se despeguen de golpe del tope.
+  min-height: 24rem;
+
+  @media (max-width: 768px) {
+    min-height: 0;
+  }
+}
+
+.tabPanel {
+  display: flex;
+  flex-direction: column;
+
+  // El último bloque del panel no necesita margen inferior: lo aporta el
+  // padding del contenedor.
+  > :last-child {
+    margin-bottom: 0;
   }
 }
 
 .titleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+
   @media (max-width: 768px) {
-    order: 1;
-    margin-bottom: 0.5rem;
-    display: block;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
   }
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.projectTitle {
+  display: block;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.titleBlock .titleSubtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--gris-medio);
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    margin: 0.15rem 0 0;
+  }
+}
+
+.locationChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  margin-top: 0.3rem;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+}
+
+.locationChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--br);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--text-color);
+  background: rgba(142, 122, 230, 0.05);
+  border: 1px solid rgba(142, 122, 230, 0.38);
+
+  :global(html.dark) & {
+    color: rgba(236, 234, 245, 0.93);
+    background: rgba(181, 156, 248, 0.06);
+    border-color: rgba(181, 156, 248, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.74rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+.locationPin {
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.locationFlag {
+  font-size: 1.15em;
+  line-height: 1;
 }
 
 .textContent h1 {
@@ -122,11 +235,11 @@
   color: var(--text-color);
   font-weight: var(--project-title-font-weight);
   letter-spacing: 0.02em;
-  padding-bottom: 0.25rem;
-  
+  padding-bottom: 0;
+
   @media (max-width: 768px) {
     font-size: var(--project-title-font-size-mobile);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0;
   }
 }
 
@@ -155,16 +268,31 @@
 
 .detailSection {
   margin-bottom: 2rem;
+  // Deja aire arriba al saltar desde el índice: sin esto, la barra sticky
+  // queda justo encima del encabezado al que acabás de navegar.
+  scroll-margin-top: 8rem;
 
   @media (max-width: 768px) {
     margin-bottom: 1.5rem;
+    scroll-margin-top: 6rem;
+  }
+}
 
-    &:nth-of-type(1) { order: 3; }
-    &:nth-of-type(2) { order: 4; }
-    &:nth-of-type(3) { order: 5; }
-    &:nth-of-type(4) { order: 6; }
-    &:nth-of-type(5) { order: 7; }
-    &:nth-of-type(6) { order: 8; }
+// El stack cierra la pestaña de Engineering, después de los bloques técnicos.
+// Necesita el mismo aire y la misma regla que separa esos bloques entre sí,
+// o se lee como si perteneciera al último de ellos.
+.stackSection {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(46, 41, 78, 0.1);
+
+  :global(html.dark) & {
+    border-top-color: rgba(181, 156, 248, 0.16);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
   }
 }
 
@@ -374,8 +502,9 @@
 
 .imageCarouselContainer {
   position: relative;
-  width: 97%;
-  max-width: 820px;
+  // Ocupa todo el ancho de su columna: el max-width de 820px la achicaba en
+  // pantallas grandes, que es justo donde las capturas se aprovechan.
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   aspect-ratio: 16 / 9;
@@ -389,7 +518,6 @@
     width: 100%;
     max-width: none;
     min-height: 220px;
-    order: 4;
     margin-bottom: 1rem;
   }
 
@@ -400,8 +528,9 @@
 
 .videoContainer {
   position: relative;
-  width: 97%;
-  max-width: 820px;
+  // Ocupa todo el ancho de su columna: el max-width de 820px la achicaba en
+  // pantallas grandes, que es justo donde las capturas se aprovechan.
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   aspect-ratio: 16 / 9;
@@ -418,7 +547,6 @@
     width: 100%;
     max-width: none;
     min-height: 220px;
-    order: 7;
     margin-bottom: 0rem;
   }
 }

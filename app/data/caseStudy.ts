@@ -25,9 +25,76 @@ export interface CaseStudyTestimonial {
   role?: string;
 }
 
+/**
+ * Un grupo dentro de una pestaña técnica. Ej: dentro de Arquitectura,
+ * "Application Architecture", "Platform Features" y "Security".
+ *
+ * Agrupar importa: una lista de 12 bullets seguidos no se lee, tres grupos de
+ * cuatro sí. Es la diferencia entre volcar información y organizarla.
+ */
+export interface CaseStudyGroup {
+  /** Título del grupo. Ej: 'Order Lifecycle'. */
+  title: string;
+  /** Párrafo de contexto, opcional: muchos grupos se explican con los bullets. */
+  body?: string;
+  bullets?: string[];
+  /**
+   * Bullets cortos que se muestran como chips en vez de lista. Para
+   * enumeraciones de una o dos palabras (Docker, PM2, Helmet), donde una lista
+   * con viñetas desperdicia una línea entera por dato.
+   */
+  chips?: string[];
+}
+
+/**
+ * Una pestaña técnica: lo que separa "hice un e-commerce" de "integré Mercado
+ * Pago con webhooks idempotentes y lo testeé en sandbox y producción".
+ */
+export interface CaseStudyDeepDive {
+  /** Párrafo introductorio de la pestaña. */
+  body?: string;
+  /** Bullets sueltos, cuando el contenido no amerita dividirse en grupos. */
+  bullets?: string[];
+  /** Subsecciones. Es la forma preferida: da estructura escaneable. */
+  groups?: CaseStudyGroup[];
+}
+
 export interface CaseStudyMeta {
   /** Ej: 'Full-stack · Diseño de producto'. */
   role?: string;
+  /**
+   * Dónde opera el proyecto, no dónde estoy yo. Ej: 'Buenos Aires, Argentina'.
+   * Va en el header como chip con pin.
+   */
+  location?: string;
+  /** Bandera del lugar de `location`, como emoji. Ej: '🇦🇷'. */
+  locationFlag?: string;
+  /**
+   * Lugares adicionales, cada uno con su propia bandera. Se renderiza un chip
+   * por entrada, para que bandera y nombre queden siempre emparejados en vez de
+   * amontonar varias banderas delante de un texto.
+   */
+  locations?: { flag?: string; label: string }[];
+  /**
+   * Cómo está diseñado el sistema: capas, features de plataforma, modelo de
+   * tipos. Responde "qué construiste" desde el diseño, no desde una lista de
+   * tareas — que es lo que separa a alguien que arma pantallas de alguien que
+   * diseña un sistema.
+   */
+  architecture?: CaseStudyDeepDive;
+  /** Cobros: flujo de checkout, ciclo de vida de la orden, verificación. */
+  payments?: CaseStudyDeepDive;
+  /**
+   * Cómo corre en producción: deploy, seguridad operativa, base de datos.
+   * Deliberadamente separado de `architecture` — uno es cómo está diseñado,
+   * otro es cómo se sostiene funcionando.
+   */
+  infra?: CaseStudyDeepDive;
+  /**
+   * Qué se entregó, en términos de producto. No repite el detalle técnico de
+   * las otras pestañas: responde "qué recibió el cliente al final".
+   */
+  deliverables?: CaseStudyDeepDive;
   /**
    * Naturaleza del trabajo: encargo de cliente, colaboración con un equipo, o
    * producto propio. Va aparte de `client` porque "Producto propio" no es un

@@ -248,8 +248,14 @@ html.project-detail-page body {
   scroll-snap-type: none !important;
 }
 
+/* El overflow tiene que volver a `visible` en html Y en body. Con `overflow:
+   auto` en html, el elemento raíz se vuelve el contenedor de scroll y cualquier
+   position:sticky de adentro se mide contra él en vez de contra el viewport —
+   por eso el índice del case study no se pegaba. */
+html.project-detail-page,
 html.project-detail-page body {
   overflow: visible;
+  overflow-x: clip; /* sigue conteniendo desbordes horizontales, sin crear scroll container */
 }
 
 * {

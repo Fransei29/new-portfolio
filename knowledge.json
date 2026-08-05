@@ -1,100 +1,114 @@
 {
   "name": "Franco Seiler",
-  "role": "Full Stack Developer",
-  "bio": "Franco Seiler is a Full Stack Developer from Córdoba, Argentina. He has over 3 years of experience building scalable web applications with React, Node.js, TypeScript and modern tools. He's passionate about clean code, performance, user experience and integrating AI into real-world products.",
-  "location": "Córdoba, Argentina",
-  "availability": "Open to remote or hybrid roles in Europe or globally",
+  "role": "Full Stack Developer · Software Studio",
+  "bio": "Franco Seiler is a full-stack developer running a software studio, with over 4 years of experience building web platforms for startups and businesses. He works across the stack with React, Next.js, Node.js, Python and TypeScript, taking products from first call to production: custom e-commerce, SaaS platforms, internal tools and corporate sites. His work emphasises scalable architecture, payment integrations, and infrastructure that clients own outright.",
+  "location": "Amsterdam, Netherlands",
+  "availability": "Available for new projects and collaborations. Works remotely with clients in Europe, the Americas and globally.",
   "languages": [
     "Spanish (native)",
     "English (advanced)",
     "Italian (advanced)",
     "Dutch (basic)"
   ],
-  "experience": "3+ years developing modern and scalable web applications",
+  "experience": "4+ years building and shipping production web platforms",
   "achievements": [
-    "Optimized web app response times by 20%",
-    "Reduced bugs by 20% using TypeScript",
-    "Increased user retention by 15% with SPA implementation",
-    "Improved page load times by 30% using React and performance tweaks"
+    "Shipped 22 client and product projects, from custom e-commerce to enterprise SaaS.",
+    "Built payment integrations with Mercado Pago and Stripe, including webhook-driven order and subscription lifecycles.",
+    "Delivered a multi-tenant compliance platform alongside a Canadian engineering team, serving motor carriers across the US and Canada.",
+    "Reduced runtime errors by around 20% through end-to-end TypeScript adoption.",
+    "Improved page load times by 30% through React performance work and rendering strategy."
   ],
   "workExperience": [
     {
       "title": "Full Stack Developer",
-      "company": "Intelligent Apps Sweden",
-      "location": "Stockholm, Sweden",
-      "date": "Oct 2024 - Apr 2025",
-      "description": [
-        "Built full-stack applications using React, Next.js, Node.js, and PostgreSQL",
-        "Integrated OpenAI APIs to add generative AI features like smart property descriptions",
-        "Designed backend services with Prisma ORM and REST/GraphQL APIs",
-        "Worked with microservice architectures and containerized environments (Docker)",
-        "Implemented automated tests and participated in architectural decisions",
-        "Used Tailwind and TypeScript across the full stack for maintainability and consistency",
-        "Deployed projects to Vercel and Linux-based servers with CI/CD pipelines"
-      ]
-    },
-    {
-      "title": "Software Developer",
       "company": "Freelance",
-      "location": "Remote",
-      "date": "Mar 2024 - Oct 2024",
+      "date": "March 2024 - Present",
       "description": [
-        "Developed custom platforms and MVPs for small businesses and real estate clients",
-        "Created full-stack solutions with React, Node.js, MySQL, and Sequelize",
-        "Implemented REST APIs and responsive UIs using Tailwind CSS",
-        "Used TypeScript across all projects to ensure type safety and reduce bugs",
-        "Managed deployments on VPS and cloud servers using Linux and Git",
-        "Maintained client communication and handled project scoping and delivery"
+        "Design, build and ship end-to-end web platforms for startups and businesses, owning each project from first call to production.",
+        "Work across the full stack with React, Next.js, Node.js, Python and TypeScript, building everything from custom e-commerce and SaaS products to corporate sites.",
+        "Develop backends with Node.js/Express, NestJS and Python (Django, Django REST), modeling data in PostgreSQL and MySQL with Prisma, TypeORM and Sequelize.",
+        "Design and document REST APIs, reusable component libraries and design systems with SCSS and Tailwind CSS to keep delivery fast and consistent.",
+        "Integrate payments and third-party services: Mercado Pago and Stripe (subscriptions, webhooks), Google OAuth, cloud storage (AWS S3 / GCS) and transactional email."
+      ],
+      "stack": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Python",
+        "Django",
+        "NestJS",
+        "TypeScript",
+        "PostgreSQL",
+        "MySQL",
+        "Prisma"
       ]
     },
     {
-      "title": "Front-End Developer",
-      "company": "Digital Innovators",
-      "location": "Amsterdam, Netherlands",
-      "date": "May 2023 - Feb 2024",
+      "title": "Co-Founder & Full Stack Developer",
+      "company": "Morse Verse",
+      "date": "November 2024 - November 2025",
       "description": [
-        "Built SPAs with React and Redux, increasing user retention by 15%",
-        "Improved conversion rates by 20% through A/B testing and performance optimization",
-        "Created internal UI component libraries, reducing development time by 30%",
-        "Integrated RESTful and GraphQL APIs",
-        "Developed custom React hooks and reusable components"
+        "Co-founded the company and led technical direction, taking products from idea to launch.",
+        "Built scalable applications with Python, Next.js, React and TypeScript, keeping the codebase clean, typed and maintainable.",
+        "Designed the overall architecture and project structure, defining conventions, folder layout and reusable modules for long-term scalability.",
+        "Developed and integrated databases and APIs, optimizing frontend-backend communication and query performance.",
+        "Deployed and maintained services on Linux servers, configuring environments, domains, SSL and automated deployments."
+      ],
+      "stack": [
+        "Python",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Linux",
+        "Git",
+        "REST APIs"
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Intelligent Apps Sweden",
+      "date": "October 2024 - March 2025",
+      "description": [
+        "Built full-stack applications with React, Next.js, Node.js and PostgreSQL in a fast-paced product team.",
+        "Developed REST and GraphQL APIs with Prisma ORM, strong validation layers and clear error handling.",
+        "Integrated AI features using the OpenAI API — generative descriptions, smart filters and content automation.",
+        "Contributed to scalable, microservice-oriented architectures and shared internal libraries.",
+        "Implemented automated testing (unit and integration) to raise reliability and prevent regressions."
+      ],
+      "stack": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "GraphQL",
+        "Prisma",
+        "Docker",
+        "Linux",
+        "OpenAI API"
+      ]
+    },
+    {
+      "title": "Front End Developer",
+      "company": "Digital Innovators",
+      "date": "May 2023 - February 2024",
+      "description": [
+        "Built and maintained single-page applications with React and Redux for production clients.",
+        "Increased user retention by 15% and improved conversion rates by 20% through UX and performance work.",
+        "Contributed to an internal component library, reducing feature development time by 30%.",
+        "Developed custom React hooks and reusable patterns to improve code modularity and consistency.",
+        "Optimized rendering performance and bundle size, improving page load and responsiveness."
+      ],
+      "stack": [
+        "React",
+        "Redux",
+        "JavaScript",
+        "REST APIs",
+        "Figma",
+        "HTML/CSS"
       ]
     }
   ],
-  "technologyExperiences": {
-    "React": "Franco has built multiple interactive user interfaces with React, including an e‑commerce platform and a task management app. He leveraged hooks, state management (Redux, Zustand), and performance optimizations to improve load times and responsiveness.",
-    "Next.js": "Franco used Next.js for his portfolio and freelance projects to enable server‑side rendering, static site generation, and seamless routing. He integrated dynamic API routes and optimized the initial load with image and script optimization.",
-    "TypeScript": "Franco applied TypeScript across all frontend and backend layers, reducing runtime errors by around 20% and enhancing code quality and developer experience.",
-    "Node.js": "Franco built RESTful and GraphQL APIs with Node.js and Express, handling database connections, authentication, and business logic for various apps including e‑commerce and collaboration tools.",
-    "Express": "In combination with Node.js, Franco used Express to structure scalable backends, define middleware, and handle routing and error management for production‑ready applications.",
-    "Python": "Franco worked on backend utilities and scripts using Python and FastAPI/Django for specific freelance tasks, including data processing and small web services.",
-    "FastAPI": "Franco used FastAPI to quickly spin up performant REST APIs, benefiting from its built‑in validation, documentation, and async capabilities.",
-    "Django": "Franco built traditional web apps and admin interfaces with Django for internal tools, taking advantage of its ORM, authentication system and rapid scaffolding.",
-    "PostgreSQL": "Franco used PostgreSQL extensively in his task manager and e‑commerce projects to model relational data with Prisma/Sequelize, write optimized SQL queries, and ensure data integrity.",
-    "MongoDB": "Franco used MongoDB with Mongoose in his e‑commerce platform to model product catalogs, orders, and user sessions in a flexible document‑based structure.",
-    "MySQL": "Franco applied MySQL in freelance projects requiring relational databases, creating schemas, relations and integrating with ORMs like Sequelize.",
-    "Redis": "Franco implemented Redis for caching session data and improving performance in high‑traffic apps like task collaboration tools.",
-    "SQLite": "Franco used lightweight SQLite databases for quick prototypes and small utilities where simplified storage was sufficient.",
-    "GraphQL": "Franco built GraphQL APIs using Node.js and Express with Apollo Server, enabling flexible client queries in production apps.",
-    "Docker": "Franco containerized applications end‑to‑end with Docker, defining Dockerfiles and docker‑compose for development and CI setups.",
-    "Git/GitHub/GitLab": "Franco uses Git daily with CI/CD pipelines, code reviews and branching strategies to ensure clean and collaborative development.",
-    "AWS": "Franco deployed apps to AWS, managing CPU/storage with EC2 or Lambda, databases with RDS and S3 for static asset hosting.",
-    "Vercel/Netlify": "Franco used Vercel and Netlify for deploying React/Next.js frontends with serverless functions and instant rollbacks.",
-    "Jest": "Franco wrote unit tests for frontend components and backend endpoints to safeguard functionality and reduce regressions.",
-    "React Testing Library": "Franco utilized RTL for testing UI components, ensuring accessibility compliance and component behavior.",
-    "Cypress/Playwright": "Franco set up end‑to‑end tests with Cypress/Playwright to validate user flows like checkout or drag‑and‑drop.",
-    "OAuth/NextAuth.js/JWT": "Franco implemented secure authentication flows using OAuth providers and JWT sessions in Next.js apps.",
-    "Tailwind CSS/Sass/Bootstrap": "Franco styled UIs using Tailwind, Sass or Bootstrap, focusing on responsive design and consistency across devices.",
-    "Framer Motion": "Franco added polished animations and transitions using Framer Motion to improve UX and polish interfaces.",
-    "Postman": "Franco used Postman to test and document APIs during development and backend integrations.",
-    "Figma/Adobe XD": "Franco created UI/UX mockups and prototypes in Figma and Adobe XD before implementation.",
-    "SEO": "Franco optimized page structure, metadata, and performance to improve search visibility and Lighthouse scores.",
-    "Accessibility (WCAG)": "Franco ensured ARIA labels, proper semantic HTML and keyboard navigation to meet WCAG accessibility standards.",
-    "Supabase": "Franco used Supabase extensively in StartOn for backend-as-a-service, leveraging its PostgreSQL database, Edge Functions, real-time subscriptions, and authentication system. This enabled rapid development of complex features like multi-role authorization and private messaging.",
-    "Google OAuth 2.0": "Franco implemented Google OAuth 2.0 authentication in StartOn with advanced JWT handling and automatic refresh tokens, providing seamless user experience and secure access control.",
-    "SCSS Modules": "Franco used SCSS Modules in StartOn for scalable and maintainable styling, creating reusable component styles and implementing a consistent design system across the platform.",
-    "Lucide React": "Franco integrated Lucide React icons in StartOn for a modern, consistent iconography system that enhances user interface clarity and visual appeal."
-  },
   "education": [
     {
       "degree": "Full Stack Web Development",
@@ -113,14 +127,15 @@
       "date": "2022"
     }
   ],
-  "technologies": [
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Next.js",
-    "Python",
-    "PostgreSQL"
-  ],
+  "skills": {
+    "frontend": "Frontend Development",
+    "backend": "Backend Development",
+    "databases": "Database Design",
+    "uiux": "UI/UX Design",
+    "performance": "Performance Optimization",
+    "testing": "Testing and Quality Assurance",
+    "devops": "CI/CD and DevOps"
+  },
   "detailedTechnologies": {
     "frontend": [
       "React",
@@ -192,6 +207,20 @@
       "SEO"
     ]
   },
+  "technologyExperiences": {
+    "React": "Franco has built multiple interactive user interfaces with React, including an e‑commerce platform and a task management app. He leveraged hooks, state management (Redux, Zustand), and performance optimizations to improve load times and responsiveness.",
+    "Next.js": "Franco used Next.js for his portfolio and freelance projects to enable server‑side rendering, static site generation, and seamless routing. He integrated dynamic API routes and optimized the initial load with image and script optimization.",
+    "TypeScript": "Franco applied TypeScript across all frontend and backend layers, reducing runtime errors by around 20% and enhancing code quality and developer experience.",
+    "Node.js": "Franco built RESTful and GraphQL APIs with Node.js and Express, handling database connections, authentication, and business logic for various apps including e‑commerce and collaboration tools.",
+    "PostgreSQL": "Franco used PostgreSQL extensively in his task manager and e‑commerce projects to model relational data with Prisma/Sequelize, write optimized SQL queries, and ensure data integrity.",
+    "Docker": "Franco containerized applications end‑to‑end with Docker, defining Dockerfiles and docker‑compose for development and CI setups.",
+    "GraphQL": "Franco built GraphQL APIs using Node.js and Express with Apollo Server, enabling flexible client queries in production apps.",
+    "Python": "Franco worked on backend utilities and scripts using Python and FastAPI/Django for specific freelance tasks, including data processing and small web services.",
+    "MongoDB": "Franco used MongoDB with Mongoose in his e‑commerce platform to model product catalogs, orders, and user sessions in a flexible document‑based structure.",
+    "AWS": "Franco deployed apps to AWS, managing CPU/storage with EC2 or Lambda, databases with RDS and S3 for static asset hosting.",
+    "Supabase": "Franco used Supabase extensively in StartOn for backend-as-a-service, leveraging its PostgreSQL database, Edge Functions, real-time subscriptions, and authentication system. This enabled rapid development of complex features like multi-role authorization and private messaging.",
+    "Jest": "Franco wrote unit tests for frontend components and backend endpoints to safeguard functionality and reduce regressions."
+  },
   "softSkills": [
     "Effective communication and collaboration",
     "Attention to detail with clean, accessible design",
@@ -201,38 +230,373 @@
     "Comfortable in international, interdisciplinary teams",
     "Open to feedback and continuous improvement"
   ],
-  "skills": {
-    "frontend": "Frontend Development",
-    "backend": "Backend Development",
-    "databases": "Database Design",
-    "uiux": "UI/UX Design",
-    "performance": "Performance Optimization",
-    "testing": "Testing and Quality Assurance",
-    "devops": "CI/CD and DevOps"
-  },
   "projects": [
     {
-      "name": "StartOn",
-      "description": "Complete talent-startup connection platform with multi-role dashboards, internal messaging, and advanced networking capabilities",
-      "impact": "Built a comprehensive platform connecting developers, designers, and tech professionals with innovative startups and companies. Features include differentiated role-based dashboards, Google OAuth authentication, and Supabase backend with Edge Functions.",
-      "technologies": [
+      "slug": "acer0",
+      "name": "Acer0",
+      "tagline": "Custom E-Commerce Platform",
+      "summary": "a.cer0 is a fully custom e-commerce platform designed and built from scratch for a manufacturing and retail company. It combines a high-performance storefront with a complete back-office system, letting the business manage products,…",
+      "stack": [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "SCSS Modules",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Mercado Pago SDK",
+        "Google OAuth 2.0",
+        "JWT",
+        "Docker"
+      ],
+      "url": "https://www.francoseiler.com/projects/acer0",
+      "role": "Full-stack Engineer",
+      "engagement": "Client Project",
+      "industry": "Manufacturing • E-commerce",
+      "clientLocation": "Buenos Aires, Argentina",
+      "liveDemo": "https://www.acer0.com.ar/",
+      "depth": "Case study with detailed architecture, payments and infrastructure sections."
+    },
+    {
+      "slug": "bellum",
+      "name": "Bellum",
+      "tagline": "HOA Financial Management Platform",
+      "summary": "Bellum is a professional-grade platform built for HOA and condominium associations seeking to outsource their financial management, reporting, and back-office operations.",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "SCSS",
+        "GSAP",
+        "Three.js",
+        "React Three Fiber",
+        "Resend",
+        "Node.js",
+        "GitHub Contents API",
+        "Vitest",
+        "ESLint"
+      ],
+      "url": "https://www.francoseiler.com/projects/bellum",
+      "role": "Full-stack · Custom CMS",
+      "engagement": "Client work",
+      "industry": "HOA management",
+      "liveDemo": "https://bellumhoafinance.com/"
+    },
+    {
+      "slug": "comply-dq",
+      "name": "Comply DQ",
+      "tagline": "Fleet Compliance & Document Intelligence Platform",
+      "summary": "Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Redux Toolkit",
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Keycloak (OIDC)",
+        "JWT",
+        "Stripe",
+        "AWS S3",
+        "Ant Design"
+      ],
+      "url": "https://www.francoseiler.com/projects/comply-dq",
+      "role": "Full-stack Engineer",
+      "engagement": "Team Collaboration",
+      "industry": "Transportation • Compliance SaaS",
+      "clientLocation": "Ontario, Canada · United States",
+      "depth": "Case study with detailed architecture, payments and infrastructure sections."
+    },
+    {
+      "slug": "grupo-el-triunfo",
+      "name": "Grupo El Triunfo",
+      "tagline": "Corporate Agribusiness Platform",
+      "summary": "Grupo El Triunfo is a corporate website for an agribusiness holding company based in Oncativo, Córdoba, Argentina, with over 36 years of experience in the agricultural sector.",
+      "stack": [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "SCSS Modules",
+        "GSAP",
+        "ScrollTrigger",
+        "Radix UI",
+        "Lucide React",
+        "Next.js App Router"
+      ],
+      "url": "https://www.francoseiler.com/projects/grupo-el-triunfo",
+      "role": "Full-stack · Corporate site",
+      "engagement": "Client work",
+      "industry": "Agribusiness",
+      "liveDemo": "https://el-triunfo.vercel.app/"
+    },
+    {
+      "slug": "home-trades-online",
+      "name": "Home Trades Online",
+      "tagline": "Contractor Proposal Platform (SaaS)",
+      "summary": "Home Trades Online is a mobile-first SaaS platform that empowers contractors and tradespeople to generate AI-powered professional proposals in under 30 seconds. The platform bridges the gap between contractors working on job sites and the…",
+      "stack": [
+        "Django 5.2",
+        "Django REST Framework",
+        "PostgreSQL 15",
+        "HTMX",
+        "Alpine.js",
+        "Tailwind CSS",
+        "Docker",
+        "Gunicorn",
+        "Nginx",
+        "Playwright",
+        "GitHub Actions",
+        "Google Cloud Platform"
+      ],
+      "url": "https://www.francoseiler.com/projects/home-trades-online",
+      "role": "Full-stack · SaaS",
+      "engagement": "Client work",
+      "industry": "Construction & trades"
+    },
+    {
+      "slug": "salesforpro",
+      "name": "Home Trades Online Landing",
+      "tagline": "Marketing Landing Page & Website",
+      "summary": "SalesForPro is the public-facing marketing website for Home Trades Online, designed to convert visiting contractors into users through an interactive product demo experience.",
+      "stack": [
+        "Django Templates",
+        "Tailwind CSS",
+        "GSAP",
+        "ScrollTrigger",
+        "Alpine.js",
+        "CSS Animations",
+        "SVG (inline, animated)",
+        "Django i18n"
+      ],
+      "url": "https://www.francoseiler.com/projects/salesforpro",
+      "role": "Frontend · Product landing",
+      "engagement": "Client work",
+      "industry": "Construction & trades"
+    },
+    {
+      "slug": "starton",
+      "name": "StartOn ",
+      "tagline": "Talent-Startup Connection Platform",
+      "summary": "",
+      "stack": [
         "Next.js 15.4.2",
         "React 19.1.0",
         "TypeScript",
         "SCSS Modules",
-        "Supabase",
+        "Lucide React",
+        "Node.js",
+        "Express",
+        "PostgreSQL (Supabase)",
         "Google OAuth 2.0",
-        "JWT",
-        "Lucide React"
+        "JWT"
       ],
-      "url": "https://github.com/Fransei29/starton",
-      "liveDemo": "https://www.starton.it.com/"
+      "url": "https://www.francoseiler.com/projects/starton",
+      "role": "Full-stack",
+      "engagement": "Own product",
+      "industry": "Tech recruiting",
+      "liveDemo": "https://www.starton.it.com/",
+      "github": "https://github.com/Fransei29/StartOn"
     },
     {
-      "name": "Quiero Sport E-commerce",
-      "description": "Full e-commerce platform for sports gear with product browsing, cart management, and secure checkout",
-      "impact": "Delivered a fast, modern UX with secure authentication, reliable data handling (Prisma), and streamlined development (Docker). Features include user authentication (NextAuth.js), order storage (PostgreSQL & Prisma), and deployment on Vercel.",
-      "technologies": [
+      "slug": "mi-agenda",
+      "name": "Mi Agenda",
+      "tagline": "Online Booking & Appointments Platform",
+      "summary": "Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with…",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Redux Toolkit",
+        "SCSS",
+        "Tailwind CSS",
+        "MUI",
+        "React Hook Form",
+        "Framer Motion",
+        "Recharts",
+        "Socket.io-client",
+        "NestJS"
+      ],
+      "url": "https://www.francoseiler.com/projects/mi-agenda",
+      "role": "Full-stack · Payments & integrations",
+      "engagement": "Client work",
+      "industry": "Appointment-based services",
+      "liveDemo": "https://miagenda.site/"
+    },
+    {
+      "slug": "augusto-fit-program",
+      "name": "Augusto Fit Program",
+      "tagline": "Personal Trainer Corporate Website",
+      "summary": "Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training…",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "SCSS Modules",
+        "GSAP",
+        "next/font (Google Fonts)",
+        "EmailJS",
+        "Vercel"
+      ],
+      "url": "https://www.francoseiler.com/projects/augusto-fit-program",
+      "role": "Full-stack · Corporate site",
+      "engagement": "Client work",
+      "industry": "Fitness & training",
+      "liveDemo": "https://www.augustoluque.com/"
+    },
+    {
+      "slug": "tecnomar",
+      "name": "TecnoMar",
+      "tagline": "Industrial Pumps Corporate Website",
+      "summary": "Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer…",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "SCSS (modules)",
+        "CSS variables (theme, spacing, typography)",
+        "Next/Image (optimization and priority for hero and clients)"
+      ],
+      "url": "https://www.francoseiler.com/projects/tecnomar",
+      "role": "Full-stack · Corporate site",
+      "engagement": "Client work",
+      "industry": "Industrial services"
+    },
+    {
+      "slug": "ateevo-wholesale",
+      "name": "Ateevo Wholesale",
+      "tagline": "B2B E-Commerce Platform for Fashion",
+      "summary": "Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "SCSS Modules",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "React Router",
+        "Node.js",
+        "Express",
+        "TypeORM",
+        "PostgreSQL",
+        "JWT"
+      ],
+      "url": "https://www.francoseiler.com/projects/ateevo-wholesale",
+      "role": "Full-stack · B2B e-commerce",
+      "engagement": "Client work",
+      "industry": "Wholesale fashion"
+    },
+    {
+      "slug": "lexmax",
+      "name": "LexMax",
+      "tagline": "Judicial Case Management Platform",
+      "summary": "",
+      "stack": [
+        "React",
+        "Vite",
+        "SCSS",
+        "React Router",
+        "Axios",
+        "Node.js",
+        "Express",
+        "JWT",
+        "AI Integration",
+        "Google OAuth (Gmail)",
+        "Telegram API"
+      ],
+      "url": "https://www.francoseiler.com/projects/lexmax",
+      "role": "Full-stack · AI automation",
+      "engagement": "Client work",
+      "industry": "Legal"
+    },
+    {
+      "slug": "property-recommender",
+      "name": "Property Recommender",
+      "tagline": "Property Recommendation System",
+      "summary": "",
+      "stack": [
+        "Next.js 15",
+        "React",
+        "TypeScript",
+        "SCSS (Modular)",
+        "Vercel"
+      ],
+      "url": "https://www.francoseiler.com/projects/property-recommender",
+      "role": "Full-stack",
+      "engagement": "Own product",
+      "industry": "Real estate",
+      "liveDemo": "https://property-recommenderv2.vercel.app/",
+      "github": "https://github.com/Fransei29/property-recommenderv2"
+    },
+    {
+      "slug": "event-scheduler",
+      "name": "Event Scheduler",
+      "tagline": "Event Booking & Venue Management Platform",
+      "summary": "",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "SCSS",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "TypeORM",
+        "Framer Motion",
+        "Leaflet",
+        "Google Cloud Storage",
+        "Stripe"
+      ],
+      "url": "https://www.francoseiler.com/projects/event-scheduler",
+      "role": "Full-stack",
+      "engagement": "Own product",
+      "industry": "Events & venues"
+    },
+    {
+      "slug": "the-club-northfield",
+      "name": "The Club at Northfield",
+      "tagline": "Corporate Website for Sports & Fitness Club - Ontario, Canada",
+      "summary": "",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "SCSS",
+        "Tailwind CSS",
+        "Strapi CMS",
+        "Vercel"
+      ],
+      "url": "https://www.francoseiler.com/projects/the-club-northfield",
+      "role": "Full-stack · Strapi CMS",
+      "engagement": "Client work",
+      "industry": "Sports & fitness",
+      "liveDemo": "https://www.theclubatnorthfield.com/"
+    },
+    {
+      "slug": "lexmax-landing",
+      "name": "LexMax Landing",
+      "tagline": "Legal Automation Landing Page",
+      "summary": "",
+      "stack": [
+        "Next.js",
+        "React",
+        "SCSS",
+        "Tailwind CSS",
+        "React Icons"
+      ],
+      "url": "https://www.francoseiler.com/projects/lexmax-landing",
+      "role": "Frontend · Product landing",
+      "engagement": "Client work",
+      "industry": "Legal",
+      "liveDemo": "https://lexmaxsoluciones.com/"
+    },
+    {
+      "slug": "ecommerce",
+      "name": "Quiero Sport",
+      "tagline": "Modern E-Commerce Platform",
+      "summary": "",
+      "stack": [
         "React",
         "Next.js",
         "TypeScript",
@@ -243,28 +607,18 @@
         "Docker",
         "Vercel"
       ],
-      "url": "https://github.com/Fransei29/sport-ecommerce/blob/main/README.md",
-      "liveDemo": "https://sport-ecommerce-58pi.vercel.app/"
+      "url": "https://www.francoseiler.com/projects/ecommerce",
+      "role": "Full-stack",
+      "engagement": "Practice project",
+      "liveDemo": "https://sport-ecommerce-58pi.vercel.app/",
+      "github": "https://github.com/Fransei29/sport-ecommerce/blob/main/README.md"
     },
     {
-      "name": "Property Recommender",
-      "description": "Web application that recommends real estate properties based on user preferences and similarity algorithms",
-      "impact": "Provides targeted recommendations, improving user satisfaction and decision-making efficiency. Includes an admin panel for user property management and favorites tracking.",
-      "technologies": [
-        "Next.js 15",
-        "React",
-        "TypeScript",
-        "SCSS (Modular)",
-        "Vercel"
-      ],
-      "url": "https://github.com/Fransei29/property-recommenderv2",
-      "liveDemo": "https://property-recommenderv2.vercel.app/"
-    },
-    {
-      "name": "Medicare Healthcare CRM",
-      "description": "Full-stack web application to manage patients, medications, and treatment assignments in a digital healthcare workflow",
-      "impact": "Simplifies healthcare treatment management with structured CRUD operations, assignment tracking, and automatic remaining days calculation. Ensures reliability with full-stack validation and high test coverage.",
-      "technologies": [
+      "slug": "healthcare-crm",
+      "name": "Medicare ",
+      "tagline": "Healthcare Treatment Management",
+      "summary": "",
+      "stack": [
         "React",
         "Next.js",
         "TypeScript",
@@ -276,14 +630,19 @@
         "Render",
         "Vercel"
       ],
-      "url": "https://github.com/fransei29/interview-challenge",
-      "liveDemo": "https://interview-challenge-ecru.vercel.app"
+      "url": "https://www.francoseiler.com/projects/healthcare-crm",
+      "role": "Full-stack",
+      "engagement": "Practice project",
+      "industry": "Healthcare",
+      "liveDemo": "https://interview-challenge-ecru.vercel.app",
+      "github": "https://github.com/fransei29/interview-challenge"
     },
     {
+      "slug": "taskmanager",
       "name": "Task Manager",
-      "description": "Comprehensive task management application built with Next.js and PostgreSQL",
-      "impact": "Provides a reliable solution with user-specific task management, secure data storage, and responsive design that works across all devices.",
-      "technologies": [
+      "tagline": "Full Stack Task Management App",
+      "summary": "",
+      "stack": [
         "Next.js",
         "React",
         "Axios",
@@ -293,8 +652,67 @@
         "NextAuth.js",
         "Docker"
       ],
-      "url": "https://github.com/Fransei29/task-manager-b",
-      "liveDemo": "https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/"
+      "url": "https://www.francoseiler.com/projects/taskmanager",
+      "role": "Full-stack",
+      "engagement": "Practice project",
+      "liveDemo": "https://task-manager-b-git-main-francos-projects-94304a5e.vercel.app/",
+      "github": "https://github.com/Fransei29/task-manager-b"
+    },
+    {
+      "slug": "flipper",
+      "name": "Flipper",
+      "tagline": "Twitter Clone Platform",
+      "summary": "",
+      "stack": [
+        "Node.js",
+        "Express",
+        "Pug Templates",
+        "JavaScript",
+        "Tailwind CSS",
+        "Docker",
+        "Vercel"
+      ],
+      "url": "https://www.francoseiler.com/projects/flipper",
+      "role": "Full-stack",
+      "engagement": "Practice project",
+      "liveDemo": "https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/",
+      "github": "https://github.com/Fransei29/clonetwitter.git"
+    },
+    {
+      "slug": "vestire",
+      "name": "Vestiré",
+      "tagline": "Fashion E-Commerce Platform",
+      "summary": "",
+      "stack": [
+        "React",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "CSS",
+        "JWT Auth",
+        "Vercel"
+      ],
+      "url": "https://www.francoseiler.com/projects/vestire",
+      "role": "Frontend",
+      "engagement": "Practice project",
+      "liveDemo": "https://vestire-front-s196.vercel.app/",
+      "github": "https://github.com/Fransei29/vestire_front.git"
+    },
+    {
+      "slug": "trip-planner",
+      "name": "Trip Planner",
+      "tagline": "Simple Trip Planning App",
+      "summary": "Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.",
+      "stack": [
+        "Next.js",
+        "JavaScript",
+        "CSS"
+      ],
+      "url": "https://www.francoseiler.com/projects/trip-planner",
+      "role": "Frontend",
+      "engagement": "Practice project",
+      "liveDemo": "https://trip-planner-c.vercel.app/",
+      "github": "https://github.com/Fransei29/trip-planner-c"
     }
   ],
   "blog": {
@@ -303,11 +721,98 @@
     "description": "Articles on web development, software architecture, and the technical decisions behind the products Franco builds. Available in English and Spanish.",
     "descriptionEs": "Artículos sobre desarrollo web, arquitectura de software y las decisiones técnicas detrás de los productos que construye Franco. Disponible en inglés y español.",
     "newsletter": "Readers can subscribe from the blog to get an email when a new article is published. No spam, unsubscribe in one click.",
-    "newsletterEs": "Desde el blog podés suscribirte para recibir un mail cuando se publica un artículo nuevo. Sin spam, y te das de baja en un clic."
+    "newsletterEs": "Desde el blog podés suscribirte para recibir un mail cuando se publica un artículo nuevo. Sin spam, y te das de baja en un clic.",
+    "articles": [
+      {
+        "slug": "arquitectura-bff-nextjs",
+        "title": "Why I used a BFF pattern to separate Next.js from my backend",
+        "titleEs": "Por qué usé un patrón BFF para separar Next.js de mi backend",
+        "summary": "How a Backend-for-Frontend keeps tokens out of the browser and lets the frontend evolve without touching the API. With a real example from an e-commerce platform.",
+        "tags": [
+          "architecture",
+          "nextjs",
+          "security"
+        ],
+        "date": "2026-07-15",
+        "url": "https://www.francoseiler.com/blog/arquitectura-bff-nextjs"
+      },
+      {
+        "slug": "emailjs-a-envio-server-side",
+        "title": "From EmailJS to server-side sending: why keys don't belong in the browser",
+        "titleEs": "De EmailJS a envío server-side: por qué las claves no van en el navegador",
+        "summary": "EmailJS is convenient until you see your credentials sitting in the bundle. The migration to an API route, double opt-in, and what it does for deliverability.",
+        "tags": [
+          "security",
+          "nextjs",
+          "email"
+        ],
+        "date": "2026-07-01",
+        "url": "https://www.francoseiler.com/blog/emailjs-a-envio-server-side"
+      },
+      {
+        "slug": "mercado-pago-nextjs-webhooks",
+        "title": "Mercado Pago in Next.js: the complete flow with webhooks",
+        "titleEs": "Mercado Pago en Next.js: el flujo completo con webhooks",
+        "summary": "Creating the preference, verifying the webhook signature, and the race condition nobody documents: what happens when the webhook beats the redirect.",
+        "tags": [
+          "nextjs",
+          "payments",
+          "backend"
+        ],
+        "date": "2026-07-22",
+        "url": "https://www.francoseiler.com/blog/mercado-pago-nextjs-webhooks"
+      },
+      {
+        "slug": "multi-tenancy-elegir-estrategia",
+        "title": "Multi-tenancy: choosing between one database, one schema, or one column",
+        "titleEs": "Multi-tenancy: elegir entre una base, un esquema o una columna",
+        "summary": "Three ways to isolate tenants in a SaaS, with the real trade-offs. Why I chose a discriminator column for a property platform, and when I wouldn't.",
+        "tags": [
+          "architecture",
+          "backend",
+          "saas"
+        ],
+        "date": "2026-06-17",
+        "url": "https://www.francoseiler.com/blog/multi-tenancy-elegir-estrategia"
+      },
+      {
+        "slug": "rate-limiting-sin-redis",
+        "title": "Rate limiting without Redis: how far in-memory state actually gets you",
+        "titleEs": "Rate limiting sin Redis: hasta dónde llega el estado en memoria",
+        "summary": "Most rate limiting guides assume Redis from minute one. In-memory state is imperfect, but often enough for a contact form. Where the line actually is.",
+        "tags": [
+          "nextjs",
+          "backend",
+          "serverless"
+        ],
+        "date": "2026-06-24",
+        "url": "https://www.francoseiler.com/blog/rate-limiting-sin-redis"
+      },
+      {
+        "slug": "revocar-jwt-sin-sesiones",
+        "title": "How to revoke a JWT instantly without storing sessions",
+        "titleEs": "Cómo revocar un JWT al instante sin guardar sesiones",
+        "summary": "The classic JWT problem is that you can't revoke a token until it expires. Token versioning solves it with one integer — no Redis, no session table.",
+        "tags": [
+          "security",
+          "backend",
+          "authentication"
+        ],
+        "date": "2026-07-08",
+        "url": "https://www.francoseiler.com/blog/revocar-jwt-sin-sesiones"
+      }
+    ]
   },
   "contact": {
     "email": "seilerfranco317@gmail.com",
     "linkedin": "https://www.linkedin.com/in/franco-seiler/",
     "github": "https://github.com/Fransei29"
-  }
+  },
+  "focusAreas": [
+    "Payment integrations: Mercado Pago, Stripe, webhook-driven order and subscription state.",
+    "Multi-tenant SaaS architecture with tenant-scoped data and role-based access.",
+    "Infrastructure clients own: Docker, VPS deployment, PM2, no vendor lock-in.",
+    "Legacy data migration with validation pipelines and repeatable cutovers.",
+    "Next.js App Router, BFF patterns, and end-to-end TypeScript."
+  ]
 }

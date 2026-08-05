@@ -22,6 +22,7 @@ import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
+import ChatWidget from '../components/ChatWidget/ChatWidget';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
@@ -109,6 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ThemeTransitionOverlay />
           <NavigationLoader />
           <ScrollToTop />
+          <ChatWidget />
         </LanguageProvider>
       </ThemeProvider>
       <Analytics />
