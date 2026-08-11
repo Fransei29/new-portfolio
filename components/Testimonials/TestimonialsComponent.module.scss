@@ -199,7 +199,7 @@
   .card {
     position: relative;
     background: var(--card-bg);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.14);
     padding: 1.5rem 1.5rem 1.25rem;
     border-radius: var(--br);
     box-shadow: var(--shadow-sm);
@@ -219,11 +219,13 @@
 
     &:hover {
       box-shadow: var(--shadow-md);
-      border-color: rgba(142, 122, 230, 0.25);
+      border-color: rgba(142, 122, 230, 0.5);
     }
 
+    /* El icono ya no vive dentro de un botón circular, así que rotarlo se lee
+       como un glitch. Un desplazamiento mínimo alcanza como señal de hover. */
     &:hover .linkedinButton {
-      transform: rotate(15deg);
+      transform: translateY(-1px);
     }
 
     :global(html.dark) & {
@@ -231,7 +233,7 @@
          (#35304a) para tener contraste suficiente y leerse. */
       background-color: var(--card-bg-soft);
       color: rgb(226, 226, 226);
-      border-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
       box-shadow: var(--shadow-sm);
 
       &:hover {
@@ -493,31 +495,32 @@
     }
   }
 
+  /* Sólo el icono: sin círculo, sin borde, sin sombra. El botón encapsulado
+     pesaba más que el propio glifo y competía con el nombre de la persona,
+     que es lo que tiene que leerse en el pie de la tarjeta. */
   .linkedinButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: var(--primary-color);
     background-color: transparent;
-    border: 1px solid rgb(204, 204, 204, 0.6);
-    width: 28px;
-    height: 28px;
+    border: none;
+    width: 22px;
+    height: 22px;
     padding: 0;
-    border-radius: 50%;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease, transform 0.3s ease;
     flex-shrink: 0;
     box-sizing: border-box;
-  
+
     &:hover {
-      background-color: #f4f9fd;
+      color: var(--primary-accent);
     }
 
     :global(html.dark) & {
-      border: 1px solid rgb(114, 114, 114, 0.6);
+      color: var(--lila-suave);
     }
-  
+
     svg {
       vertical-align: middle;
       width: 100%;

@@ -39,11 +39,21 @@
   background: rgb(0, 0, 0, 0);
   border-radius: var(--br);
   color: #fff;
-  padding: 0;
+  padding-block: 0;
   justify-content: space-between;
   align-items: center;
-  max-width: var(--container-max-width);
+  /* El nav respira más ancho que el contenido (1440px) a propósito: es el
+     patrón de las webs corporativas actuales — la barra acompaña el ancho de
+     la ventana y el contenido queda contenido adentro. Con el mismo max-width
+     que el contenido, el nav se leía como una caja más de la página en vez de
+     como un marco. */
+  max-width: var(--nav-max-width);
   margin-inline: auto;
+  /* Padding chico a propósito: el punto de ensanchar el nav es que el logo y
+     el CTA se vayan a los extremos. Con un colchón grande el ancho extra se lo
+     comía el padding y la barra volvía a leerse angosta. Sólo despega el
+     contenido del borde de la ventana. */
+  padding-inline: 1.25rem;
   z-index: 1000;
   top: 0;
   width: 100%;

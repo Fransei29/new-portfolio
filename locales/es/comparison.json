@@ -1,0 +1,38 @@
+{
+  "comparison": {
+    "title": "Hay más de una forma de construirlo.",
+    "subtitle": "Así se comparan las opciones.",
+    "criteria": {
+      "option": "Opción",
+      "speed": "Velocidad",
+      "cost": "Costo",
+      "maintainable": "Mantenible",
+      "scales": "Escala",
+      "ownership": "Es tuyo"
+    },
+    "yes": "Sí",
+    "no": "No",
+    "rows": {
+      "me": {
+        "name": "Desarrollo a medida",
+        "description": "Software y automatizaciones construidas alrededor de cómo ya trabajás, con el código, la infraestructura y la propiedad quedando en tus manos."
+      },
+      "inhouse": {
+        "name": "Contratar in-house",
+        "description": "Una inversión sólida a largo plazo, pero más lenta de arrancar y cara hasta que el equipo está funcionando del todo."
+      },
+      "agency": {
+        "name": "Agencia de desarrollo",
+        "description": "Confiable y escalable, aunque normalmente más cara y menos directa: solés estar a un paso de quien construye."
+      },
+      "nocode": {
+        "name": "Herramientas no-code",
+        "description": "Rápidas y económicas para empezar, pero limitadas cuando tus necesidades crecen, y dependés de la plataforma que hay detrás."
+      },
+      "manual": {
+        "name": "Seguir a mano",
+        "description": "Nada que construir de entrada. Pero el costo se acumula en tiempo, repetición y oportunidades perdidas."
+      }
+    }
+  }
+}

@@ -1,0 +1,495 @@
+@import '../../app/styles/utilities.scss';
+
+.container {
+  width: 100%;
+  background-color: var(--background-colorA);
+  padding: 5.5rem 0;
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
+}
+
+.section {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: var(--subtitle-spacing-top) auto 2.5rem;
+  text-align: center;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  max-width: 60ch;
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin: 0.75rem auto 1.5rem;
+  }
+}
+
+/* El contenedor de sección es de 1440px, pero una matriz estirada a ese ancho
+   es ilegible: los ✓/✕ quedan lejísimos de la fila que califican y el ojo
+   pierde el renglón cruzando el vacío. La tabla se limita a una medida donde
+   etiqueta y marcas todavía se leen juntas; el header sí usa el ancho completo. */
+.tableWrap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+
+  /* Entre el breakpoint de cards y el ancho cómodo de la tabla, dejamos que
+     scrollee en vez de apretar las columnas hasta romper las cabeceras. */
+  @media (min-width: 769px) {
+    overflow-x: auto;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+
+  @media (min-width: 769px) {
+    min-width: 860px;
+  }
+}
+
+.criterionHead {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-color-light);
+  text-align: center;
+  padding: 0 0.5rem 1rem;
+  /* Sin nowrap: en el ancho asignado etiquetas como "Mantenible" se
+     desbordarían. Que corten en dos líneas es preferible a ensanchar toda la
+     tabla por una palabra. */
+  hyphens: auto;
+  /* Ancho FIJO: sin esto las columnas se reparten el sobrante de la tabla y
+     separan los ✓ de la etiqueta que califican. Que el aire extra se lo quede
+     la columna de opciones, no los carriles de marcas. */
+  width: 112px;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.6);
+  }
+}
+
+/* La columna de etiquetas se queda con todo el sobrante, así el bloque de
+   marcas viaja compacto a la derecha en vez de desparramarse. */
+.rowHeadCol {
+  width: 46%;
+  min-width: 260px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// ---------- Filas ----------
+.row {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  /* border-spacing separa las filas, pero el fondo/borde hay que pintarlo
+     celda por celda: <tr> no acepta border-radius. */
+  .rowHead,
+  .cell {
+    background: var(--card-bg);
+    border-block: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.25s ease, border-color 0.25s ease;
+
+    :global(html.dark) & {
+      background: rgba(255, 255, 255, 0.025);
+      border-block-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .rowHead {
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px 0 0 12px;
+
+    :global(html.dark) & {
+      border-left-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .cell:last-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0 12px 12px 0;
+
+    :global(html.dark) & {
+      border-right-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  &:hover {
+    .rowHead,
+    .cell {
+      background: rgba(142, 122, 230, 0.04);
+      border-block-color: rgba(142, 122, 230, 0.28);
+
+      :global(html.dark) & {
+        background: rgba(181, 156, 248, 0.06);
+        border-block-color: rgba(181, 156, 248, 0.28);
+      }
+    }
+  }
+}
+
+/* La fila propia es la única con superficie lila plena: se lee antes que el
+   resto de la tabla y no compite con nada.
+   Además pesa más FÍSICAMENTE (más alto, con sombra) — si tuviera la misma
+   escala que las otras se leería como una alternativa más de la lista, y es la
+   propuesta. La ventaja se la dan ownership + fit + velocidad, no un trato
+   injusto a las otras filas: cada una conserva los ✓ que legítimamente tiene. */
+.rowFeatured {
+  .rowHead,
+  .cell {
+    background: var(--lila-profundo);
+    border-block-color: var(--lila-profundo);
+    color: #ffffff;
+    padding-block: 2.1rem;
+
+    :global(html.dark) & {
+      background: var(--lila-corporativo);
+      border-block-color: var(--lila-corporativo);
+    }
+  }
+
+  @media (min-width: 769px) {
+    .rowHead {
+      box-shadow: -6px 0 18px -10px rgba(46, 41, 78, 0.5);
+    }
+
+    .cell:last-child {
+      box-shadow: 6px 0 18px -10px rgba(46, 41, 78, 0.5);
+    }
+  }
+
+  .rowHead {
+    border-left-color: var(--lila-profundo);
+
+    :global(html.dark) & {
+      border-left-color: var(--lila-corporativo);
+    }
+  }
+
+  .cell:last-child {
+    border-right-color: var(--lila-profundo);
+
+    :global(html.dark) & {
+      border-right-color: var(--lila-corporativo);
+    }
+  }
+
+  /* Sobre la superficie lila plena el riel gris ensucia: acá el carril se
+     dibuja en blanco translúcido. */
+  @media (min-width: 769px) {
+    .cell {
+      border-left-color: rgba(255, 255, 255, 0.16);
+
+      :global(html.dark) & {
+        border-left-color: rgba(255, 255, 255, 0.16);
+      }
+    }
+  }
+
+  .rowName {
+    color: #ffffff;
+    font-size: 1.24rem;
+  }
+
+  .rowDescription {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  /* Bloque propio para el panda, como el logo en la referencia. No puede ser
+     --lila-profundo: en light la fila YA es ese color y el icono desaparecería.
+     Un blanco muy tenue lo levanta en ambos temas sin lavarlo. */
+  .rowIcon {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &:hover {
+    .rowHead,
+    .cell {
+      background: var(--lila-profundo);
+      border-block-color: var(--lila-profundo);
+
+      :global(html.dark) & {
+        background: var(--lila-corporativo);
+        border-block-color: var(--lila-corporativo);
+      }
+    }
+  }
+}
+
+.rowHead {
+  text-align: left;
+  font-weight: 400;
+  /* Más aire a los lados y arriba/abajo: la columna de opciones es la única
+     con texto corrido, y sin este colchón la descripción se lee apretada
+     contra el borde de la fila. */
+  padding: 1.7rem 1.9rem;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+/* Icono grande a la izquierda, contenido a la derecha alineado ARRIBA (no
+   centrado): con descripciones de dos o tres líneas, centrar deja el icono
+   flotando en el medio y el bloque pierde el borde superior común. */
+.rowHeadInner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.rowIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-color-light);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(235, 235, 235, 0.7);
+  }
+
+  img {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  /* Con la tabla más ancha la descripción entra en menos líneas, así que la
+     medida puede crecer sin que la fila se estire en alto. */
+  max-width: 46ch;
+  /* Compensa el desfase óptico: el bloque del icono tiene más masa visual que
+     la primera línea de texto, así que el nombre baja un pelo para que las dos
+     cosas se lean arrancando a la misma altura. */
+  padding-top: 0.15rem;
+}
+
+.rowName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-color);
+
+  :global(html.dark) & {
+    color: rgb(235, 235, 235);
+  }
+}
+
+.rowDescription {
+  font-size: 0.92rem;
+  /* Interlineado suelto: son dos o tres líneas de texto corrido dentro de una
+     tabla, y es lo que más cuesta leer de toda la sección. */
+  line-height: 1.6;
+  color: var(--text-color-light);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.6);
+  }
+}
+
+// ---------- Celdas ✓ / ✕ ----------
+.cell {
+  text-align: center;
+  padding: 1.7rem 0.5rem;
+  vertical-align: middle;
+
+  /* Riel vertical tenue por columna: da un carril que el ojo puede bajar y
+     marca dónde termina la etiqueta y empiezan las marcas. Sin esto, a lo
+     ancho las filas se despegan de sus ✓. */
+  @media (min-width: 769px) {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+
+    :global(html.dark) & {
+      border-left-color: rgba(255, 255, 255, 0.06);
+    }
+  }
+}
+
+.cellLabel {
+  display: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markOn {
+  color: var(--primary-accent);
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+  }
+
+  .rowFeatured & {
+    color: #ffffff;
+  }
+}
+
+/* El ✕ va en gris tenue, no en rojo: la tabla tiene que leerse honesta, no
+   agresiva con las alternativas. */
+.markOff {
+  color: rgba(0, 0, 0, 0.22);
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.25);
+  }
+}
+
+// ---------- Mobile: la tabla colapsa a cards ----------
+@media (max-width: 768px) {
+  .table,
+  .table tbody,
+  .table tr,
+  .table th,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table {
+    border-spacing: 0;
+  }
+
+  .row {
+    margin-bottom: 1rem;
+    border-radius: 14px;
+    overflow: hidden;
+
+    .rowHead,
+    .cell {
+      border-block: 0;
+      border-radius: 0;
+    }
+
+    .rowHead {
+      border-left: 0;
+      border-radius: 0;
+    }
+
+    .cell:last-child {
+      border-right: 0;
+      border-radius: 0;
+    }
+  }
+
+  /* En cards el borde lo lleva la fila entera, no cada celda. */
+  .row {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    :global(html.dark) & {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .rowFeatured {
+    border-color: var(--lila-profundo);
+
+    :global(html.dark) & {
+      border-color: var(--lila-corporativo);
+    }
+  }
+
+  .rowHead {
+    padding: 1.25rem 1.15rem 1rem;
+  }
+
+  .rowText {
+    max-width: none;
+  }
+
+  /* En card el icono se achica: a 56px se come el ancho útil de la fila y
+     empuja el texto a demasiadas líneas. */
+  .rowIcon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .rowHeadInner {
+    gap: 0.85rem;
+  }
+
+  /* Los criterios pasan a ser filas etiqueta → ✓/✕ dentro de la card. */
+  .cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+    :global(html.dark) & {
+      border-top-color: rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  .rowFeatured .cell {
+    border-top-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .cellLabel {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-color-light);
+
+    :global(html.dark) & {
+      color: rgba(235, 235, 235, 0.65);
+    }
+  }
+
+  .rowFeatured .cellLabel {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}

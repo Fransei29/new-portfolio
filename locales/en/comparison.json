@@ -1,0 +1,38 @@
+{
+  "comparison": {
+    "title": "There's more than one way to build it.",
+    "subtitle": "Here's how the options compare.",
+    "criteria": {
+      "option": "Option",
+      "speed": "Speed",
+      "cost": "Cost",
+      "maintainable": "Maintainable",
+      "scales": "Scales",
+      "ownership": "You own it"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "rows": {
+      "me": {
+        "name": "Custom development",
+        "description": "Software and automations built around how you already work — with the code, infrastructure, and ownership staying with you."
+      },
+      "inhouse": {
+        "name": "Hiring in-house",
+        "description": "A strong long-term investment, but slower to get started and expensive before the team is fully up and running."
+      },
+      "agency": {
+        "name": "Development agency",
+        "description": "Reliable and scalable, but typically more expensive and less direct — you're often one step removed from the person building it."
+      },
+      "nocode": {
+        "name": "No-code tools",
+        "description": "Fast and inexpensive to start, but limited when your needs grow — and you're dependent on the platform behind it."
+      },
+      "manual": {
+        "name": "Keeping it manual",
+        "description": "Nothing to build upfront. But the cost keeps adding up in time, repetition, and missed opportunities."
+      }
+    }
+  }
+}

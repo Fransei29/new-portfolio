@@ -14,9 +14,13 @@ import Testimonials from '../components/Testimonials/TestimonialsComponent';
 import CallToAction from '../components/CallToAction/CallToAction';
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
+import ComparisonMatrix from '../components/ComparisonMatrix/ComparisonMatrix';
 import HowWeWork from '../components/HowWeWork/HowWeWork';
 import BlogSection from '../components/BlogSection/BlogSection';
 import WaveDivider from '../components/WaveDivider/WaveDivider';
+// Desmontado del hero, se guarda para otro lugar del sitio. Ver el comentario
+// en el <section> del hero, más abajo.
+// import HeroParticles from '../components/HeroParticles/HeroParticles';
 
 export default function Home() {
   const elementsRef = useScrollAnimation();
@@ -26,6 +30,14 @@ export default function Home() {
     <ClientLayout>
     <div className='ContainerGeneralComplete'>
     <section ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right hero-section">
+      {/* Campo de partículas que forma el isotipo del panda y se reorganiza en
+          un grafo al scrollear. DESMONTADO a propósito: el efecto funciona pero
+          se reserva para otro lugar del sitio, no para el hero.
+          El componente y toda su infraestructura siguen en
+          components/HeroParticles/ — para reactivarlo alcanza con descomentar
+          esta línea (y su import arriba). */}
+      {/* <HeroParticles /> */}
+
       <div className="home-text">
         <div className="home-textA">
           <HomeText />
@@ -60,7 +72,25 @@ export default function Home() {
             <ProjectsSection variant="projects" />
           </div>
 
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left section-bg-ink">
+          {/* Va DESPUÉS de los case studies a propósito: la objeción real
+              ("¿y por qué no una agencia?") recién aparece cuando ya vieron el
+              trabajo. Antes de eso el visitante todavía no está comparando. */}
+          <div ref={(el) => {elementsRef.current[14] = el;}} className="fade-in-left">
+            {/* Cierra el gris (B) de ProjectsSection y abre el blanco (A) de
+                esta sección. Sin este wave las dos franjas se tocaban a filo
+                recto y el bToA de HowWeWork salía de un color que no era el
+                de arriba. */}
+            <WaveDivider variant="bToA" />
+            <ComparisonMatrix />
+          </div>
+
+          {/* wave-from-white: arriba quedó el blanco (A) de ComparisonMatrix,
+              pero bToA pinta su franja con --wave-b (el gris). Ese gris ya no
+              existe acá, así que el wave se veía como una banda suelta.
+              La clase redefine --wave-b a blanco sólo para este bloque; el
+              relleno de la curva sigue siendo --wave-a, que .section-bg-ink ya
+              pisa con el lila profundo de HowWeWork. */}
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left section-bg-ink wave-from-white">
             <WaveDivider variant="bToA" />
             <HowWeWork />
           </div>
@@ -121,7 +151,12 @@ export default function Home() {
           {/* Blog antes del CTA final: quien todavía no está listo para agendar
               encuentra algo más para leer, y quien sí lo está no se distrae
               antes de llegar al botón. */}
+          {/* Wave arriba como el resto de la home, pero NO abajo: el CTA que
+              sigue usa su propio contenedor flotante, así que un wave de cierre
+              chocaría con esa forma. En su lugar el gris se desvanece a blanco
+              dentro de la propia sección (ver .blogSection en su módulo). */}
           <div ref={(el) => {elementsRef.current[13] = el;}} className="fade-in-left">
+            <WaveDivider variant="aToB" />
             <BlogSection />
           </div>
 

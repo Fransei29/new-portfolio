@@ -67,7 +67,7 @@
 .card {
   position: relative;
   background: var(--card-bg);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(142, 122, 230, 0.3);
   border-radius: var(--br);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
@@ -82,7 +82,7 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(142, 122, 230, 0.25);
+    border-color: rgba(142, 122, 230, 0.5);
   }
 
   :global(html.dark) & {
@@ -90,11 +90,14 @@
        --card-bg-soft (#35304a) para despegarse y leerse. */
     background-color: var(--card-bg-soft);
     color: rgb(226, 226, 226);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* En dark el lila principal (#8e7ae6) se apaga contra la card oscura, así
+       que el borde usa --lila-suave (#b59cf8), que es el acento de dark en el
+       resto del sitio. */
+    border: 1px solid rgba(181, 156, 248, 0.32);
     box-shadow: var(--shadow-sm);
 
     &:hover {
-      border-color: rgba(142, 122, 230, 0.4);
+      border-color: rgba(181, 156, 248, 0.55);
     }
   }
 

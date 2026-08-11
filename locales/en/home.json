@@ -31,13 +31,16 @@
     "experience": "Years of experience",
     "projects": "Completed projects",
     "technologies": "Technologies mastered",
-    "whoIAm": "Who We Are",
-    "personalStory": "A full-stack team with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, we work with modern technologies to create products that generate real impact.",
-    "newChapter": "Specialized in scalable architectures and quality code. We develop web applications that grow with the business, prioritizing maintainability and performance.",
-    "dedicationTitle": "Engineering principles",
-    "dedication": "Ship small, measure, iterate.",
-    "interestsTitle": "What we care about",
-    "interests": "Building things people actually use."
+    "whoIAm": "Who you'll work with",
+    "personalStory": "I lead projects end to end, from the first idea to production. You work directly with the people building your software — without layers of account managers or unnecessary handoffs.",
+    "teamNote": "I keep the core team small and bring in trusted specialists when a project calls for them.\nThat means senior-level attention without the overhead of a traditional agency.",
+    "newChapter": "Based in Córdoba, Argentina, working with teams across the US, Canada, and Europe.\nWe build custom software and automations for businesses whose operations have outgrown spreadsheets and manual processes.",
+    "dedicationTitle": "Years building",
+    "dedication": "4+",
+    "interestsTitle": "Case studies",
+    "interests": "20+",
+    "reachTitle": "US · Canada · Europe · Latin America",
+    "reach": "Global"
   },
   "aboutPage": {
     "buttonText": "Ready to start your project?",
@@ -73,7 +76,7 @@
     "subtitle": "Added value we bring to every project to achieve exceptional results.",
     "expertise": {
       "title": "Technical Expertise",
-      "description": "Over 3 years developing scalable solutions with modern technologies and industry best practices."
+      "description": "Over 4 years developing scalable solutions with modern technologies and industry best practices."
     },
     "delivery": {
       "title": "Efficient Delivery",
@@ -85,7 +88,7 @@
     }
   },
   "blogSection": {
-    "title": "Notes from the build",
+    "title": "Behind the build",
     "subtitle": "Architecture, engineering decisions, and what we learn shipping real products.",
     "readMore": "Read article",
     "viewAll": "Read the blog",

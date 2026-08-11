@@ -54,10 +54,12 @@
 
 .cover {
   object-fit: cover;
-  transition: transform 0.4s ease;
+  /* Curva larga y escala algo mayor que el 1.03 anterior: a esa medida el
+     movimiento era tan chico que se leía como que la imagen no reaccionaba. */
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 
   .card:hover & {
-    transform: scale(1.03);
+    transform: scale(1.06);
   }
 
   @media (prefers-reduced-motion: reduce) {

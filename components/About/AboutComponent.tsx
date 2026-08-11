@@ -5,7 +5,6 @@ import styles from './AboutComponent.module.scss';
 import Image from 'next/image';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Target, Sparkles } from 'lucide-react';
 
 const About = () => {
   const elementsRef = useScrollAnimation();
@@ -29,30 +28,31 @@ const About = () => {
                 {t('about.personalStory')}
               </p>
               <p className={styles.introParagraph}>
+                {t('about.teamNote')}
+              </p>
+              <p className={styles.introParagraph}>
                 {t('about.newChapter')}
               </p>
             </div>
 
-            <div className={styles.cardsRow}>
-              <div className={styles.paragraphWithIcon}>
-                <div className={styles.cardHeader}>
-                  <Target className={styles.paragraphIcon} size={20} />
-                  <h4 className={styles.cardTitle}>{t('about.dedicationTitle')}</h4>
-                </div>
-                <p>
-                  {t('about.dedication')}
-                </p>
+            {/* Antes había dos tarjetas con frases genéricas ("ship small,
+                measure, iterate") que cualquiera podría firmar. Acá van hechos
+                verificables: en una sección de identidad, un dato prueba más
+                que una declaración de principios. */}
+            <dl className={styles.statsRow}>
+              <div className={styles.stat}>
+                <dt className={styles.statLabel}>{t('about.dedicationTitle')}</dt>
+                <dd className={styles.statValue}>{t('about.dedication')}</dd>
               </div>
-              <div className={styles.paragraphWithIcon}>
-                <div className={styles.cardHeader}>
-                  <Sparkles className={styles.paragraphIcon} size={20} />
-                  <h4 className={styles.cardTitle}>{t('about.interestsTitle')}</h4>
-                </div>
-                <p>
-                  {t('about.interests')}
-                </p>
+              <div className={styles.stat}>
+                <dt className={styles.statLabel}>{t('about.interestsTitle')}</dt>
+                <dd className={styles.statValue}>{t('about.interests')}</dd>
               </div>
-            </div>
+              <div className={styles.stat}>
+                <dt className={styles.statLabel}>{t('about.reachTitle')}</dt>
+                <dd className={styles.statValue}>{t('about.reach')}</dd>
+              </div>
+            </dl>
           </section>
 
           <section className={styles.imageSection}>

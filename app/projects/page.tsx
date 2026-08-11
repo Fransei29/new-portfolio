@@ -28,7 +28,9 @@ type TabKey = 'featured' | 'all' | 'product' | 'platform' | 'landing';
 
 const Projects = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
-  const [activeTab, setActiveTab] = useState<TabKey>('featured');
+  // Arranca en 'all': entrar a case studies y ver un subconjunto filtrado
+  // esconde la mayor parte del trabajo. El destacado queda a un clic, al lado.
+  const [activeTab, setActiveTab] = useState<TabKey>('all');
   const elementsRef = useScrollAnimation();
   const { t, language } = useLanguage();
 
@@ -47,8 +49,10 @@ const Projects = () => {
   }, [language]);
 
   const tabs: { key: TabKey; labelKey: string }[] = [
-    { key: 'featured', labelKey: 'projects.tabs.featured' },
+    // 'all' primero porque es el estado por defecto: el tab activo al entrar
+    // tiene que ser el de la izquierda, si no se lee como que algo se saltó.
     { key: 'all', labelKey: 'projects.tabs.all' },
+    { key: 'featured', labelKey: 'projects.tabs.featured' },
     { key: 'product', labelKey: 'projects.badges.product' },
     { key: 'platform', labelKey: 'projects.badges.platform' },
     { key: 'landing', labelKey: 'projects.badges.landing' },

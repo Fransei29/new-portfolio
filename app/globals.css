@@ -113,6 +113,9 @@
   --br-sm: 6px;
   --br-lg: 14px;
   --container-max-width: 1440px;
+  /* El nav va más ancho que el contenido a propósito (ver Header.module.scss):
+     la barra enmarca la página en vez de alinearse con ella. */
+  --nav-max-width: 1920px;
   --section-py: 8rem;
   --section-py-mobile: 4rem;
 
@@ -381,16 +384,15 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .section-bg-lila {
   /* Lila de sección: el Principal (#8e7ae6) muy diluido en blanco para bajar
      saturación sin perder identidad. Fondo lila claro, cómodo para franja grande. */
-  --lila-seccion: #ebe6fb;
+  /* Usa --lila-velo, el mismo lila tenue del bloque de newsletter, en vez del
+     --lila-seccion más saturado que tenía antes: así la franja lila del home y
+     la del blog son el mismo color y no dos lilas parecidos pero distintos. */
+  --lila-seccion: var(--lila-velo);
   --wave-b: var(--lila-seccion);
   --background-colorB: var(--lila-seccion);
-  /* Gradiente coherente con el nuevo fondo, con leve respiración */
-  --background-colorB-gradient: linear-gradient(
-    180deg,
-    var(--lila-seccion) 0%,
-    #f1edfc 50%,
-    var(--lila-seccion) 100%
-  );
+  /* Plano, sin gradiente: el velo es tan tenue que la "respiración" del
+     gradiente anterior sólo agregaba una banda sucia al medio. */
+  --background-colorB-gradient: none;
 }
 
 html.dark .section-bg-lila {
@@ -403,6 +405,18 @@ html.dark .section-bg-lila {
    y la costura calce, igual que .section-bg-lila hace con --wave-b. */
 .section-bg-ink {
   --wave-a: #2e294e;
+}
+
+/* Para un bToA cuya sección de ARRIBA es blanca (fondo A) en vez de gris (B).
+   bToA pinta su franja con --wave-b; si la sección previa es blanca, ese gris
+   aparece como una banda suelta. Acá --wave-b pasa a blanco para que la franja
+   continúe el color de arriba y sólo se vea la curva. */
+.wave-from-white {
+  --wave-b: var(--background-colorA);
+}
+
+html.dark .wave-from-white {
+  --wave-b: var(--dark-light);
 }
 
 html.dark .section-bg-ink {

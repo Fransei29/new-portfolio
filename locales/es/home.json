@@ -31,13 +31,16 @@
     "experience": "Años de experiencia",
     "projects": "Proyectos completados",
     "technologies": "Tecnologías dominadas",
-    "whoIAm": "Quiénes Somos",
-    "personalStory": "Un equipo full-stack con más de 3 años de experiencia construyendo soluciones para startups y empresas. Basados en Ámsterdam, trabajamos con tecnologías modernas para crear productos que generan impacto real.",
-    "newChapter": "Especializados en arquitecturas escalables y código de calidad. Desarrollamos aplicaciones web que crecen con el negocio, priorizando mantenibilidad y rendimiento.",
-    "dedicationTitle": "Principios",
-    "dedication": "Entregar en chico, medir, iterar.",
-    "interestsTitle": "Lo que nos importa",
-    "interests": "Construir cosas que la gente realmente usa."
+    "whoIAm": "Con quién vas a trabajar",
+    "personalStory": "Llevo los proyectos de punta a punta, desde la primera idea hasta producción. Trabajás directamente con quienes construyen tu software, sin capas de intermediarios ni traspasos innecesarios.",
+    "teamNote": "Mantengo el equipo chico y sumo especialistas de confianza cuando el proyecto lo pide.\nEso significa atención senior sin la estructura pesada de una agencia.",
+    "newChapter": "Desde Córdoba, Argentina, trabajando con equipos de Estados Unidos, Canadá y Europa.\nConstruimos software a medida y automatizaciones para negocios cuya operación ya no entra en planillas y procesos manuales.",
+    "dedicationTitle": "Años construyendo",
+    "dedication": "4+",
+    "interestsTitle": "Case studies",
+    "interests": "20+",
+    "reachTitle": "EE.UU. · Canadá · Europa · Latinoamérica",
+    "reach": "Global"
   },
   "aboutPage": {
     "buttonText": "¿Estás listo para empezar tu proyecto?",
@@ -73,7 +76,7 @@
     "subtitle": "Valor agregado que aportamos a cada proyecto para alcanzar resultados excepcionales.",
     "expertise": {
       "title": "Experiencia Técnica",
-      "description": "Más de 3 años desarrollando soluciones escalables con tecnologías modernas y mejores prácticas de la industria."
+      "description": "Más de 4 años desarrollando soluciones escalables con tecnologías modernas y mejores prácticas de la industria."
     },
     "delivery": {
       "title": "Entrega Eficiente",
@@ -85,7 +88,7 @@
     }
   },
   "blogSection": {
-    "title": "Notas del taller",
+    "title": "Detrás de la construcción",
     "subtitle": "Arquitectura, decisiones de ingeniería y lo que aprendemos construyendo productos reales.",
     "readMore": "Leer artículo",
     "viewAll": "Ir al blog",

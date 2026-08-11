@@ -22,9 +22,12 @@ import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
-import ChatWidget from '../components/ChatWidget/ChatWidget';
+// Oculto temporalmente — ver el comentario en el body.
+// import ChatWidget from '../components/ChatWidget/ChatWidget';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
+import GoogleAnalytics from '../components/Analytics/GoogleAnalytics';
+import SiteJsonLd from '../components/Seo/SiteJsonLd';
 import type { Metadata } from 'next';
 
 const siteUrl = 'https://www.francoseiler.com';
@@ -99,6 +102,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           title="Blog | Franco Seiler"
           href="/blog/rss.xml"
         />
+        <SiteJsonLd />
       </head>
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
@@ -110,10 +114,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ThemeTransitionOverlay />
           <NavigationLoader />
           <ScrollToTop />
-          <ChatWidget />
+          {/* Oculto temporalmente: se retoma cuando mejoremos el asistente.
+              El componente y su API siguen en el repo intactos. */}
+          {/* <ChatWidget /> */}
         </LanguageProvider>
       </ThemeProvider>
       <Analytics />
+      <GoogleAnalytics />
       </body>
     </html>
   );

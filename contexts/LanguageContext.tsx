@@ -49,7 +49,8 @@ const loadTranslationsSync = (lang: string): Translations => {
         'contact',
         'services',
         'bootcamp',
-        'automation'
+        'automation',
+        'comparison'
       ];
 
       const loadedTranslations: Translations = {};
