@@ -187,11 +187,23 @@ const HeroDashboard = () => {
 
   return (
     <div className={styles.wrapper} aria-hidden data-explode-root>
-      {/* Isotipo panda que se asoma por el borde derecho — como con vida. */}
+      {/* Isotipo panda que se asoma por el borde derecho — como con vida.
+          Van los dos variantes y el CSS muestra uno según el tema: en dark el
+          panda plano se funde con el fondo oscuro, así que ahí entra el de
+          contorno. Se resuelve por CSS y no por estado para que no haya
+          parpadeo del isotipo equivocado al cambiar de tema. */}
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
-        className={styles.peekPanda}
+        className={`${styles.peekPanda} ${styles.peekPandaLight}`}
         src="/isotipo-panda.svg"
+        alt=""
+        aria-hidden
+        loading="lazy"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
+      <img
+        className={`${styles.peekPanda} ${styles.peekPandaDark}`}
+        src="/isotipo-panda-contorno.svg"
         alt=""
         aria-hidden
         loading="lazy"

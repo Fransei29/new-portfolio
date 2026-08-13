@@ -238,7 +238,9 @@
   }
 
   :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.5);
+    /* 0.5 daba 4.2:1, apenas por debajo de AA. Subimos a 0.62 sin perder el
+       rol secundario del tag frente al título del post. */
+    color: rgba(235, 235, 235, 0.62);
   }
 }
 

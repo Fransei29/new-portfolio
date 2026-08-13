@@ -150,9 +150,14 @@ $step-column-gap: 10rem;
     drop-shadow(0 0 6px rgba(142, 122, 230, 0.35));
   pointer-events: none;
 
+  // Mobile: el panda deja de viajar por el centro (donde se montaba encima del
+  // texto) y baja pegado al borde izquierdo, sobre el mismo eje de 22px que ya
+  // usa .stepNode para marcar las paradas. Las tarjetas le dejan el carril
+  // libre con su padding-left (ver .stepCard).
   @media (max-width: 768px) {
-    width: 62px;
-    height: 62px;
+    width: 52px;
+    height: 52px;
+    left: 22px;
   }
 }
 
@@ -212,6 +217,12 @@ $step-column-gap: 10rem;
       top: 2rem;
       width: 0;
     }
+
+    // Carril izquierdo reservado para el panda: el contenido arranca después
+    // del eje de 22px + el radio del isotipo, así el texto nunca queda debajo.
+    // Escala mobile más contenida: menos padding, más aire entre tarjetas.
+    padding: 1.35rem 1.15rem 1.35rem 3.6rem;
+    border-radius: 14px;
   }
 
   // El fondo lo define el ESTADO del recorrido (ver más abajo): dormida se funde
@@ -471,7 +482,11 @@ $step-column-gap: 10rem;
   transition: color 0.6s ease;
 
   @media (max-width: 768px) {
-    font-size: 5rem;
+    // Más chico y corrido al carril de contenido: en el borde izquierdo se
+    // cruzaba con el panda, que ahora baja justo por ahí.
+    font-size: 3.75rem;
+    left: auto;
+    right: 0.9rem;
   }
 }
 

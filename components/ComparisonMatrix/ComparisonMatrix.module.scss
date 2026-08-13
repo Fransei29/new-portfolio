@@ -91,8 +91,13 @@
   hyphens: auto;
   /* Ancho FIJO: sin esto las columnas se reparten el sobrante de la tabla y
      separan los ✓ de la etiqueta que califican. Que el aire extra se lo quede
-     la columna de opciones, no los carriles de marcas. */
-  width: 112px;
+     la columna de opciones, no los carriles de marcas.
+     Va acotado a desktop: en mobile la tabla colapsa a cards y este ancho de
+     112px se le quedaba pegado a celdas ya convertidas en `display: block`,
+     que es lo que rompía el layout. */
+  @media (min-width: 769px) {
+    width: 112px;
+  }
 
   :global(html.dark) & {
     color: rgba(235, 235, 235, 0.6);
@@ -102,8 +107,10 @@
 /* La columna de etiquetas se queda con todo el sobrante, así el bloque de
    marcas viaja compacto a la derecha en vez de desparramarse. */
 .rowHeadCol {
-  width: 46%;
-  min-width: 260px;
+  @media (min-width: 769px) {
+    width: 46%;
+    min-width: 260px;
+  }
 
   @media (max-width: 768px) {
     display: none;
@@ -172,7 +179,14 @@
     background: var(--lila-profundo);
     border-block-color: var(--lila-profundo);
     color: #ffffff;
-    padding-block: 2.1rem;
+
+    /* Sólo desktop: en la tabla este padding le da a la fila propia más peso
+       físico que al resto. En mobile la fila es una card y este valor se le
+       aplicaba a CADA celda de criterio (67px verticales por renglón), que es
+       lo que dejaba la card destacada desproporcionada. */
+    @media (min-width: 769px) {
+      padding-block: 2.1rem;
+    }
 
     :global(html.dark) & {
       background: var(--lila-corporativo);
@@ -220,7 +234,14 @@
 
   .rowName {
     color: #ffffff;
-    font-size: 1.24rem;
+
+    /* El cuerpo más grande es parte del peso extra de la fila propia en la
+       tabla. En mobile todas las cards comparten escala, así que este tamaño
+       queda acotado a desktop (si no, le gana por especificidad al 1rem del
+       bloque mobile). */
+    @media (min-width: 769px) {
+      font-size: 1.24rem;
+    }
   }
 
   .rowDescription {
@@ -324,7 +345,10 @@
   color: var(--text-color-light);
 
   :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.6);
+    /* Sólido en vez de alpha 0.6 (5.4:1): es texto corrido de 2-3 líneas dentro
+       de una tabla, lo que más cuesta leer de la sección, así que se le da aire
+       de sobra en vez del mínimo. 8.6:1 sobre grafito. */
+    color: #c3c0ce;
   }
 }
 
@@ -380,11 +404,15 @@
 
 // ---------- Mobile: la tabla colapsa a cards ----------
 @media (max-width: 768px) {
+  /* OJO con la especificidad: `.table td` (clase + elemento) le gana a `.cell`
+     (una sola clase), así que si las celdas entran acá se quedan en `block` y
+     el `display: flex` de más abajo NUNCA se aplica — que es lo que dejaba el
+     ✓/✕ pegado a la etiqueta en vez de alineado a la derecha.
+     Por eso `td` queda fuera de esta lista y se maneja en su propia regla. */
   .table,
   .table tbody,
   .table tr,
-  .table th,
-  .table td {
+  .table th {
     display: block;
     width: 100%;
   }
@@ -397,10 +425,24 @@
     border-spacing: 0;
   }
 
+  /* Cards apiladas: cada una se pega bajo el header y la siguiente se le monta
+     encima al scrollear. Es sticky puro, sin JS ni listeners de scroll.
+     Requisitos que hacen que funcione:
+      - el ancestro que scrollea NO puede tener overflow hidden/clip
+      - cada card necesita fondo opaco propio (si no se transparenta la de atrás)
+      - el z-index crece con el orden para que la nueva tape a la anterior */
   .row {
-    margin-bottom: 1rem;
-    border-radius: 14px;
-    overflow: hidden;
+    position: sticky;
+    /* Debajo del header fijo (9vh, ver Header.module.scss) más un respiro, con
+       un escalón por card para que asome el borde superior de las que ya
+       pasaron. */
+    top: calc(9vh + 0.75rem + var(--stack-step, 0px));
+    /* El margen entre cards ahora lo da el propio apilado; queda sólo el aire
+       necesario para que la transición se lea. */
+    margin-bottom: 1.4rem;
+    border-radius: 12px;
+    /* Sin `overflow: hidden`: crea un contenedor de scroll y anula el sticky.
+       El clip de las esquinas lo resuelve cada celda con su propio radio. */
 
     .rowHead,
     .cell {
@@ -408,23 +450,56 @@
       border-radius: 0;
     }
 
+    /* Las esquinas las redondea la primera y la última celda: sin
+       `overflow: hidden` en la card (rompería el sticky), el recorte tiene que
+       hacerlo cada extremo por su cuenta. */
     .rowHead {
       border-left: 0;
-      border-radius: 0;
+      border-radius: 12px 12px 0 0;
     }
 
     .cell:last-child {
       border-right: 0;
-      border-radius: 0;
+      border-radius: 0 0 12px 12px;
     }
   }
 
   /* En cards el borde lo lleva la fila entera, no cada celda. */
   .row {
     border: 1px solid rgba(0, 0, 0, 0.1);
+    /* Fondo OPACO obligatorio: al superponerse, sin esto se ve la card de atrás
+       a través de la de adelante. */
+    background: var(--card-bg, #ffffff);
+    /* Sombra hacia arriba: marca el borde de la card que se está montando. */
+    box-shadow: 0 -6px 18px -10px rgba(46, 41, 78, 0.35);
 
     :global(html.dark) & {
       border-color: rgba(255, 255, 255, 0.1);
+      background: var(--grafito-elevado, #2e2a3a);
+      box-shadow: 0 -6px 18px -10px rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  /* Escalón + orden de apilado. El z-index creciente hace que cada card tape a
+     la anterior; el --stack-step deja asomar unos píxeles de las que ya se
+     pegaron, para que se lea como pila y no como una card sola. */
+  .row:nth-of-type(1) { --stack-step: 0px;  z-index: 1; }
+  .row:nth-of-type(2) { --stack-step: 10px; z-index: 2; }
+  .row:nth-of-type(3) { --stack-step: 20px; z-index: 3; }
+  .row:nth-of-type(4) { --stack-step: 30px; z-index: 4; }
+  .row:nth-of-type(5) { --stack-step: 40px; z-index: 5; }
+
+  /* La última no necesita margen: no hay card que la siga montando. */
+  .row:last-of-type {
+    margin-bottom: 0;
+  }
+
+  /* Quien pide no animar recibe la lista de cards de siempre, sin apilado:
+     el efecto depende del scroll y puede resultar desorientador. */
+  @media (prefers-reduced-motion: reduce) {
+    .row {
+      position: static;
+      box-shadow: none;
     }
   }
 
@@ -437,36 +512,60 @@
   }
 
   .rowHead {
-    padding: 1.25rem 1.15rem 1rem;
+    padding: 1rem 0.95rem 0.85rem;
+    /* Mismo motivo que en td.cell: el proyecto no tiene reset global de
+       box-sizing, así que sin esto el padding desborda el 100% de la card. */
+    box-sizing: border-box;
   }
 
   .rowText {
     max-width: none;
   }
 
+  /* Escala mobile: tipografía más chica y más aire entre cards. El nombre baja
+     lo justo para seguir leyéndose como título de la card. */
+  .rowName {
+    font-size: 1rem;
+  }
+
+  .rowDescription {
+    font-size: 0.83rem;
+    line-height: 1.55;
+  }
+
   /* En card el icono se achica: a 56px se come el ancho útil de la fila y
      empuja el texto a demasiadas líneas. */
   .rowIcon {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    flex-shrink: 0;
 
     img {
-      width: 28px;
-      height: 28px;
+      width: 23px;
+      height: 23px;
     }
   }
 
   .rowHeadInner {
-    gap: 0.85rem;
+    gap: 0.7rem;
   }
 
-  /* Los criterios pasan a ser filas etiqueta → ✓/✕ dentro de la card. */
-  .cell {
+  /* Los criterios pasan a ser filas etiqueta → ✓/✕ dentro de la card.
+     Va como `td.cell` para igualar la especificidad de `.table td` y que el
+     flex gane sin depender del orden del archivo. */
+  td.cell {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 1rem;
+    width: 100%;
+    /* Sin esto el padding se SUMA al 100% y la celda desborda la card, que es
+       lo que empujaba los ✓ fuera del borde derecho. */
+    box-sizing: border-box;
+    /* Gap para que la etiqueta nunca se pegue al ✓/✕ cuando corta en dos
+       líneas en pantallas angostas. */
+    gap: 0.75rem;
+    padding: 0.5rem 0.95rem;
     text-align: left;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 
@@ -481,7 +580,7 @@
 
   .cellLabel {
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-color-light);
 
     :global(html.dark) & {
