@@ -107,6 +107,82 @@
   }
 }
 
+// Mobile: el icono y el título comparten fila para que la tarjeta deje de ser
+// tan alta. El markup NO cambia — la card pasa a grid de 2 columnas y el
+// contenedor del texto a `display: contents`, así el h3 y el <p> se vuelven
+// items directos del grid y se pueden ubicar por separado.
+//
+// Se aplica a TODAS las cards, incluida la featured: ahí el orbital y el CTA
+// simplemente cruzan las dos columnas.
+@media (max-width: 768px) {
+  .card {
+    display: grid;
+    // col 1: el icono, al ancho que ocupe. col 2: el texto, el resto.
+    grid-template-columns: auto 1fr;
+    // El título se apoya en la BASE del icono en vez de centrarse: así la
+    // primera línea de texto arranca al ras de abajo del cuadrado.
+    align-items: end;
+    // Fila 1: icono + título. Filas siguientes: descripción, orbital, footer,
+    // todos cruzando las dos columnas.
+    column-gap: 0.75rem;
+    row-gap: 0.6rem;
+    padding: 1rem 1.1rem;
+
+    .cardTop {
+      grid-column: 1;
+      width: auto;
+      // `.cardTop` es flex con align-items:flex-start; en la fila del grid ya
+      // no necesita empujar nada hacia arriba.
+      align-items: center;
+    }
+
+    // Deja que el h3 y el <p> sean items del grid de la card.
+    .cardBody,
+    .featuredBody {
+      display: contents;
+    }
+
+    .cardTitle,
+    .featuredTitle {
+      grid-column: 2;
+      // Sin descender extra por debajo de la línea de base del icono.
+      margin-bottom: 0;
+    }
+
+    // Al lado del icono el título compite con menos espacio horizontal:
+    // baja un punto para que no se parta en tres líneas.
+    .cardTitle {
+      font-size: 1rem;
+    }
+
+    // La featured sigue siendo la destacada, así que su título no baja hasta
+    // 1rem — sólo lo justo para convivir con el icono en la misma fila.
+    .featuredTitle {
+      font-size: 1.25rem;
+    }
+
+    .cardDescription,
+    .featuredDescription,
+    .cardFooter,
+    .orbital,
+    .featuredCta {
+      grid-column: 1 / -1;
+    }
+
+    .cardFooter {
+      padding-top: 0.25rem;
+    }
+  }
+
+  // El cuadrado del icono también baja: a 42px dominaba la fila y volvía a
+  // estirar la card a lo alto.
+  .card .iconWrapper {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+}
+
 // ---------- Featured card ----------
 .featuredCard {
   grid-column: 1 / 2;
@@ -117,7 +193,9 @@
   @media (max-width: 768px) {
     grid-column: auto;
     grid-row: auto;
-    padding: 1.5rem;
+    // Mismo padding que el resto de las cards en mobile (ver el bloque grid
+    // de arriba): si queda en 1.5rem, la featured se ve inflada al lado.
+    padding: 1rem 1.1rem;
   }
 }
 

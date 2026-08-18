@@ -50,7 +50,10 @@
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    // Baja de 2.25rem: el divider ahora ocupa su propia fila (2.5rem de alto)
+    // y aporta la separación, así que el gap sólo tiene que despegarlo de
+    // cada columna.
+    gap: 0.75rem;
     margin-top: 1.5rem;
   }
 }
@@ -129,8 +132,49 @@
     }
   }
 
+  // Mobile: las columnas se apilan, así que el eje deja de ser vertical y pasa
+  // a ser una línea HORIZONTAL entre las dos. Antes acá el divider se ocultaba
+  // del todo y las dos columnas quedaban una encima de la otra sin ninguna
+  // marca del corte "sin → con": la transición no se leía.
   @media (max-width: 768px) {
-    display: none;
+    // El grid mobile es de una sola columna, el divider entra como una fila más.
+    height: 2.5rem;
+
+    &::before {
+      // La línea gira: cruza a lo ancho en vez de a lo largo.
+      top: 50%;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      width: auto;
+      height: 1.5px;
+      transform: translateY(-50%) scaleX(0);
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.06) 0%,
+        rgba(142, 122, 230, 0.35) 45%,
+        rgba(142, 122, 230, 0.55) 100%
+      );
+
+      :global(html.dark) & {
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.07) 0%,
+          rgba(181, 156, 248, 0.35) 45%,
+          rgba(181, 156, 248, 0.6) 100%
+        );
+      }
+    }
+
+    :global(.visible) &::before {
+      transform: translateY(-50%) scaleX(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::before {
+        transform: translateY(-50%) scaleX(1);
+      }
+    }
   }
 }
 
@@ -358,6 +402,19 @@
     grid-template-columns: auto 1fr;
     gap: 0.7rem;
     padding: 0.7rem 0.75rem;
+  }
+}
+
+// Cuarto ítem de cada lista: fuera en mobile. Ver el comentario de
+// MOBILE_HIDDEN_FROM en AutomationComparison.tsx.
+//
+// Va DESPUÉS de `.listItem` y doblando la clase (`.listItem.hideOnMobile`):
+// `.listItem` setea `display: grid` y las reglas `:has()` de más abajo suben a
+// (0,2,0), así que una `.hideOnMobile` suelta y anterior perdía la cascada y el
+// ítem seguía viéndose.
+.listItem.hideOnMobile {
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 

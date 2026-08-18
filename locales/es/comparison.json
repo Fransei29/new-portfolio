@@ -15,7 +15,8 @@
     "rows": {
       "me": {
         "name": "Desarrollo a medida",
-        "description": "Software y automatizaciones construidas alrededor de cómo ya trabajás, con el código, la infraestructura y la propiedad quedando en tus manos."
+        "description": "Software y automatizaciones construidas alrededor de cómo ya trabajás, con el código, la infraestructura y la propiedad quedando en tus manos.",
+        "descriptionShort": "Hecho a la medida de cómo trabajás. El código y la propiedad quedan tuyos."
       },
       "inhouse": {
         "name": "Contratar in-house",
@@ -23,11 +24,13 @@
       },
       "agency": {
         "name": "Agencia de desarrollo",
-        "description": "Confiable y escalable, aunque normalmente más cara y menos directa: solés estar a un paso de quien construye."
+        "description": "Confiable y escalable, aunque normalmente más cara y menos directa: solés estar a un paso de quien construye.",
+        "descriptionShort": "Confiable, pero más cara y a un paso de quien construye."
       },
       "nocode": {
         "name": "Herramientas no-code",
-        "description": "Rápidas y económicas para empezar, pero limitadas cuando tus necesidades crecen, y dependés de la plataforma que hay detrás."
+        "description": "Rápidas y económicas para empezar, pero limitadas cuando tus necesidades crecen, y dependés de la plataforma que hay detrás.",
+        "descriptionShort": "Rápidas y baratas al inicio, limitadas cuando crecés."
       },
       "manual": {
         "name": "Seguir a mano",

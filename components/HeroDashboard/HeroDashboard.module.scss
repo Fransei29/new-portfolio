@@ -34,10 +34,12 @@
   // no aporta padding horizontal en mobile.
   @media (max-width: 768px) {
     max-width: none;
-    // Aire arriba para el panda: al estar más metido, la parte que queda por
-    // encima del browser es mayor (~114px contando el giro). El margen tiene
-    // que superarla para que no se monte sobre el texto del hero.
-    margin: 7.5rem 1rem 1rem;
+    // Aire arriba SÓLO el que necesita la cabeza del panda: con translateY(-86px)
+    // sobre un panda de 126px asoman ~10px por encima del browser (~14px con el
+    // giro), así que la cabeza pide poco. 3rem le da ese aire más un respiro
+    // de separación real; el 7.5rem de antes venía de cuando el panda salía
+    // mucho más y dejaba un hueco enorme sobre el dashboard.
+    margin: 3rem 1rem 1rem;
   }
 }
 
@@ -100,23 +102,26 @@
     width: 126px;
     top: 0;
     left: auto;
-    right: 1.25rem;
-    // Casi derecho: apenas -5° para que no se lea como un isotipo pegado en
+    // Menos `right` = más cerca de la esquina derecha del browser.
+    right: 0.75rem;
+    // Casi derecho: apenas -2° para que no se lea como un isotipo pegado en
     // ángulo, pero sin quedar perfectamente vertical (rígido).
     //
     // El desplazamiento va en px y NO en %: el % se calcula sobre el alto del
     // propio panda, así que al agrandarlo salía MÁS afuera aunque el porcentaje
     // subiera. En px, "cuánto asoma" queda fijo sin importar el tamaño.
-    // -104px sobre un panda de 126px deja ~22px de cabeza a la vista.
-    transform: translateY(-104px) rotate(-5deg);
+    // Menos negativo = el panda BAJA y se esconde MÁS detrás del browser.
+    // -86px sobre un panda de 126px deja ~10px de cabeza a la vista: apenas un
+    // guiño espiando desde atrás, no un isotipo apoyado arriba.
+    transform: translateY(-86px) rotate(-2deg);
     transform-origin: center bottom;
   }
 
   @media (max-width: 420px) {
     width: 108px;
-    right: 1rem;
-    // Mismo criterio: 108 - 88 = 20px asomando.
-    transform: translateY(-88px) rotate(-5deg);
+    right: 0.5rem;
+    // Mismo criterio: 108 - 72 = 8px asomando.
+    transform: translateY(-72px) rotate(-2deg);
   }
 }
 

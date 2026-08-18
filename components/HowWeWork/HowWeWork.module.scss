@@ -88,6 +88,11 @@ $step-column-gap: 10rem;
     grid-template-columns: 1fr;
     column-gap: 0;
     row-gap: 1rem;
+    // Todas las filas a la altura de la más alta: las descripciones no miden
+    // lo mismo (y el salto de línea que traen corta distinto según el ancho),
+    // así que sin esto cada tarjeta quedaba de un alto distinto y la columna
+    // se veía despareja.
+    grid-auto-rows: 1fr;
 
     .stepCard,
     .stepCard:nth-of-type(1),
@@ -98,7 +103,9 @@ $step-column-gap: 10rem;
       grid-row: auto;
       margin-top: 0;
       max-width: none;
-      justify-self: stretch;
+      // El ancho y la alineación los define .stepCard en su propio bloque
+      // mobile (75% pegada a la derecha, con el carril del panda a la
+      // izquierda). Acá un `stretch` sólo contradiría eso.
     }
   }
 }
@@ -150,14 +157,15 @@ $step-column-gap: 10rem;
     drop-shadow(0 0 6px rgba(142, 122, 230, 0.35));
   pointer-events: none;
 
-  // Mobile: el panda deja de viajar por el centro (donde se montaba encima del
-  // texto) y baja pegado al borde izquierdo, sobre el mismo eje de 22px que ya
-  // usa .stepNode para marcar las paradas. Las tarjetas le dejan el carril
-  // libre con su padding-left (ver .stepCard).
+  // Mobile: el panda baja por el carril libre del 25% que dejan las tarjetas a
+  // su izquierda (ver `width: 75%` en .stepCard). Viaja centrado en ese carril,
+  // o sea al 12.5% del ancho de la grilla — el mismo eje que marca .stepNode.
+  // Antes iba a 22px fijos del borde y pasaba por encima del fondo de la
+  // tarjeta, que llegaba hasta el borde izquierdo.
   @media (max-width: 768px) {
-    width: 52px;
-    height: 52px;
-    left: 22px;
+    width: 68px;
+    height: 68px;
+    left: 12.5%;
   }
 }
 
@@ -209,20 +217,77 @@ $step-column-gap: 10rem;
   @media (max-width: 768px) {
     // En una columna el panda baja por el borde izquierdo: el brazo se anula y
     // la parada queda a 22px del borde, que es la coordenada que mide el efecto.
+    // El brazo de medición se proyecta al centro del carril libre. Su `left`
+    // es sólo cosmético: el efecto lee de este nodo la coordenada VERTICAL
+    // (ver dotTop en el .tsx, que usa center - gridTop); la horizontal del
+    // panda la fija el `left` de .railPanda. Se alinea igual para que ambos
+    // coincidan si alguna vez el brazo vuelve a dibujar algo.
     .stepNode,
     &:nth-of-type(odd) .stepNode,
     &:nth-of-type(even) .stepNode {
-      left: 22px;
+      left: -16.67%;
       right: auto;
-      top: 2rem;
+      // El efecto lee el CENTRO vertical de este brazo para posar al panda, así
+      // que se alinea con la fila del ícono: padding (1.4rem) + la mitad del
+      // ícono (38px / 2). Si cambia el padding de la tarjeta, este valor tiene
+      // que seguirlo o el panda queda corrido respecto del ícono.
+      top: calc(1.4rem + 19px);
       width: 0;
     }
 
-    // Carril izquierdo reservado para el panda: el contenido arranca después
-    // del eje de 22px + el radio del isotipo, así el texto nunca queda debajo.
-    // Escala mobile más contenida: menos padding, más aire entre tarjetas.
-    padding: 1.35rem 1.15rem 1.35rem 3.6rem;
-    border-radius: 14px;
+    // La tarjeta ocupa el 75% derecho: el 25% de la izquierda queda LIBRE como
+    // carril por donde el panda sube y baja. Antes el carril era un
+    // `padding-left` dentro de una tarjeta a ancho completo, así que el panda
+    // viajaba por ENCIMA del fondo de la tarjeta en vez de al costado.
+    width: 75%;
+    justify-self: end;
+    // Sin reset global de box-sizing en el proyecto: sin esto el padding se
+    // suma al 75% y la tarjeta se pasa del carril.
+    box-sizing: border-box;
+    // Ya no hace falta el padding-left gigante que reservaba el carril: el
+    // carril ahora es espacio real fuera de la tarjeta.
+    padding: 1.4rem 1.3rem;
+    border-radius: 8px;
+
+    // Contenido alineado a la IZQUIERDA. En desktop la tarjeta centra todo
+    // (ver align-items/text-align arriba); en el ancho reducido de mobile el
+    // centrado dejaba el título y el ícono flotando en el medio, con el texto
+    // arrancando en un margen distinto en cada línea.
+    text-align: left;
+
+    // El ícono comparte fila con el título en vez de ocupar una fila propia.
+    // Era la fila que más alto sumaba: 44px de ícono + gap, sólo para mostrar
+    // un cuadradito centrado sobre el texto. En grid de 2 columnas la tarjeta
+    // baja una fila entera de altura.
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 0.8rem;
+    row-gap: 0.7rem;
+    // Todas las tarjetas miden lo mismo: el contenedor las estira a la altura
+    // de la más alta (ver grid-auto-rows en .stepsGrid). El contenido se
+    // alinea arriba para que el texto de las más cortas no quede flotando en
+    // el medio del sobrante.
+    align-content: start;
+
+    .stepHeader {
+      grid-column: 1;
+      // Con el ícono en su celda, el wrapper ya no necesita ocupar el ancho
+      // entero ni centrar nada.
+      width: auto;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .stepTitle {
+      grid-column: 2;
+    }
+
+    .stepDescription {
+      // La descripción cruza las dos columnas: alineada bajo el ícono, no
+      // sangrada a la derecha del título.
+      grid-column: 1 / -1;
+    }
   }
 
   // El fondo lo define el ESTADO del recorrido (ver más abajo): dormida se funde
@@ -260,8 +325,11 @@ $step-column-gap: 10rem;
   }
 
   @media (max-width: 768px) {
-    padding: 1.5rem 1.25rem;
-    gap: 1rem;
+    // OJO: el padding y el gap mobile los define el OTRO bloque
+    // `@media (max-width: 768px)` de esta misma tarjeta (el del layout en
+    // grid, más arriba). Acá había un `padding: 1.5rem 1.25rem` + `gap: 1rem`
+    // que, por venir después en el archivo y empatar en especificidad, pisaba
+    // silenciosamente aquellos valores y dejaba la tarjeta más alta.
 
     // En una sola columna ya no hay lado interior/exterior: se anula el margen.
     &:nth-of-type(odd),
@@ -482,11 +550,13 @@ $step-column-gap: 10rem;
   transition: color 0.6s ease;
 
   @media (max-width: 768px) {
-    // Más chico y corrido al carril de contenido: en el borde izquierdo se
-    // cruzaba con el panda, que ahora baja justo por ahí.
-    font-size: 3.75rem;
+    // Marca de agua bastante más contenida: a 3.75rem competía con el título
+    // en una tarjeta que ahora mide el 75% del ancho. Sigue anclada a la
+    // derecha para no cruzarse con el panda, que baja por el carril izquierdo.
+    font-size: 2.25rem;
     left: auto;
-    right: 0.9rem;
+    right: 0.8rem;
+    top: 0.4rem;
   }
 }
 
@@ -515,13 +585,17 @@ $step-column-gap: 10rem;
     flex-shrink: 0;
   }
 
+  // Compartiendo fila con el título (ver el bloque mobile de .stepCard) el
+  // ícono no necesita el peso de 44px: a 38 acompaña la altura de línea del
+  // título en vez de imponerla.
   @media (max-width: 768px) {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
 
     .stepIcon {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
   }
 }

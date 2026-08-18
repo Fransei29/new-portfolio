@@ -1008,7 +1008,12 @@ html.hydrated .hero-section .fade-in-left {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem 0 0 0; /* aire arriba para separarlo del social proof */
+    /* Margen negativo para absorber el gap de .home-text (0.35rem) y pegar el
+       dashboard al social proof: el hero mobile entra más arriba del fold.
+       Pasado el gap, el resto del negativo lo mete por debajo del bloque de
+       arriba. El grueso de la separación la maneja el margin-top del
+       .wrapper del dashboard, no este margen. */
+    margin: -0.35rem 0 0 0;
     width: 100%;
     position: relative;
     z-index: 1;

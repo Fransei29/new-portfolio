@@ -54,11 +54,28 @@ const ROWS: Row[] = [
   },
 ];
 
+// En mobile la matriz se apila en cards y las 5 opciones obligaban a un scroll
+// larguísimo. Se dejan las 3 que un cliente realmente compara cuando ya decidió
+// construir algo: la propuesta, la agencia y el no-code.
+//
+// `inhouse` sale porque su perfil es casi idéntico al de `agency` (sólo cambia
+// ownership), y `manual` porque el "no hacer nada" ya lo cubre la sección de
+// arriba (operational architecture). En desktop siguen apareciendo las cinco.
+const MOBILE_HIDDEN_ROWS = ['inhouse', 'manual'];
+
 const ComparisonMatrix = () => {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   // El ✓/✕ es decorativo: el estado real va en texto para lectores de pantalla.
+  // `t()` devuelve la clave tal cual cuando no encuentra la traducción, así que
+  // para las filas sin versión corta hay que detectarlo y caer en la larga.
+  const shortDescription = (key: string) => {
+    const shortKey = `comparison.rows.${key}.descriptionShort`;
+    const short = t(shortKey);
+    return short === shortKey ? t(`comparison.rows.${key}.description`) : short;
+  };
+
   const Mark = ({ on }: { on: boolean }) => (
     <span className={`${styles.mark} ${on ? styles.markOn : styles.markOff}`}>
       {on ? <Check size={20} aria-hidden /> : <X size={20} aria-hidden />}
@@ -99,7 +116,13 @@ const ComparisonMatrix = () => {
                 return (
                   <tr
                     key={row.key}
-                    className={`${styles.row} ${isMe ? styles.rowFeatured : ''}`}
+                    className={[
+                      styles.row,
+                      isMe ? styles.rowFeatured : '',
+                      MOBILE_HIDDEN_ROWS.includes(row.key) ? styles.hideOnMobile : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
                   >
                     <th scope="row" className={styles.rowHead}>
                       {/* Wrapper flex propio: el <th> mantiene su display de
@@ -122,8 +145,22 @@ const ComparisonMatrix = () => {
                           <span className={styles.rowName}>
                             {t(`comparison.rows.${row.key}.name`)}
                           </span>
-                          <span className={styles.rowDescription}>
+                          {/* Dos versiones del subtítulo: la larga en desktop
+                              y una recortada en mobile, donde el texto completo
+                              estiraba demasiado la card. El CSS decide cuál se
+                              ve; sólo se renderiza una de las dos por vez.
+                              `descriptionShort` existe únicamente para las filas
+                              que sobreviven en mobile (ver MOBILE_HIDDEN_ROWS),
+                              de ahí el fallback a la larga. */}
+                          <span
+                            className={`${styles.rowDescription} ${styles.rowDescriptionLong}`}
+                          >
                             {t(`comparison.rows.${row.key}.description`)}
+                          </span>
+                          <span
+                            className={`${styles.rowDescription} ${styles.rowDescriptionShort}`}
+                          >
+                            {shortDescription(row.key)}
                           </span>
                         </span>
                       </span>

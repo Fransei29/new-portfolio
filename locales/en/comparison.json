@@ -15,7 +15,8 @@
     "rows": {
       "me": {
         "name": "Custom development",
-        "description": "Software and automations built around how you already work — with the code, infrastructure, and ownership staying with you."
+        "description": "Software and automations built around how you already work — with the code, infrastructure, and ownership staying with you.",
+        "descriptionShort": "Built around how you work. Code and ownership stay with you."
       },
       "inhouse": {
         "name": "Hiring in-house",
@@ -23,11 +24,13 @@
       },
       "agency": {
         "name": "Development agency",
-        "description": "Reliable and scalable, but typically more expensive and less direct — you're often one step removed from the person building it."
+        "description": "Reliable and scalable, but typically more expensive and less direct — you're often one step removed from the person building it.",
+        "descriptionShort": "Reliable, but pricier — and you're a step removed from the builder."
       },
       "nocode": {
         "name": "No-code tools",
-        "description": "Fast and inexpensive to start, but limited when your needs grow — and you're dependent on the platform behind it."
+        "description": "Fast and inexpensive to start, but limited when your needs grow — and you're dependent on the platform behind it.",
+        "descriptionShort": "Fast and cheap to start, limited once your needs grow."
       },
       "manual": {
         "name": "Keeping it manual",
