@@ -41,7 +41,7 @@ const Footer = () => {
           <p className={styles.brandTagline}>{t('footer.tagline')}</p>
           <div className={styles.socials}>
             <a 
-              href="https://github.com/francoseiler" 
+              href="https://github.com/Fransei29" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub"

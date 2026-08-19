@@ -1,139 +1,50 @@
-'use client'
+// app/projects/page.tsx
+// Server Component: la lista de case studies se arma acá y viaja dentro del
+// HTML. Antes esta página era 'use client' y pedía /api/projects dentro de un
+// useEffect, así que el HTML servido no traía ni un case study — para cualquier
+// crawler que no ejecuta JavaScript la página estaba vacía.
+//
+// La interacción (tabs, filtros, animaciones) sigue en ProjectsView, que recibe
+// la lista ya resuelta como prop.
 
-import { useEffect, useState } from 'react';
-import ProjectCard from '../../components/ProjectCard/ProjectCard';
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '../../hooks/Scroll';
-import styles from '../projects/projects.module.scss';
-import ClientLayout from '../../components/ClientLayout/ClientLayout';
-import { useLanguage } from '../../contexts/LanguageContext';
-import '../../app/styles/utilities.scss'; 
+import ProjectsView from '../../components/ProjectsView/ProjectsView';
+import Breadcrumbs from '../../components/Seo/Breadcrumbs';
+import { getProjectCards } from '../../lib/projectCards';
+import { SITE_URL } from '../../lib/site';
 
-// Definir los tipos de los proyectos
-interface Projects {
-  title: string;
-  isTutorial?: boolean;
-  description: string;
-  link1?: string;
-  link2?: string | null;
-  link3?: string | null;
-  previewImage?: string;
-  logs?: string[];
-  category?: 'product' | 'platform' | 'landing';
-  status?: 'latest';
-  featured?: boolean;
-}
+export default function ProjectsPage() {
+  const cards = getProjectCards('en');
 
-type TabKey = 'featured' | 'all' | 'product' | 'platform' | 'landing';
-
-const Projects = () => {
-  const [projects, setProjects] = useState<Projects[]>([]);
-  // Arranca en 'all': entrar a case studies y ver un subconjunto filtrado
-  // esconde la mayor parte del trabajo. El destacado queda a un clic, al lado.
-  const [activeTab, setActiveTab] = useState<TabKey>('all');
-  const elementsRef = useScrollAnimation();
-  const { t, language } = useLanguage();
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch(`/api/projects?lang=${language}`);
-        const data = await res.json();
-        setProjects(data);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-      }
-    };
-
-    fetchProjects();
-  }, [language]);
-
-  const tabs: { key: TabKey; labelKey: string }[] = [
-    // 'all' primero porque es el estado por defecto: el tab activo al entrar
-    // tiene que ser el de la izquierda, si no se lee como que algo se saltó.
-    { key: 'all', labelKey: 'projects.tabs.all' },
-    { key: 'featured', labelKey: 'projects.tabs.featured' },
-    { key: 'product', labelKey: 'projects.badges.product' },
-    { key: 'platform', labelKey: 'projects.badges.platform' },
-    { key: 'landing', labelKey: 'projects.badges.landing' },
-  ];
-
-  const getTabCount = (key: TabKey) => {
-    if (key === 'featured') return projects.filter((p) => p.featured).length;
-    if (key === 'all') return projects.length;
-    return projects.filter((p) => p.category === key).length;
+  /* ItemList del índice. Sin esto la página es una grilla de tarjetas que el
+     motor tiene que interpretar visualmente; con esto declara explícitamente
+     qué case studies contiene y en qué orden. Solo lista lo que la página
+     realmente muestra. */
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Case Studies — Franco Seiler',
+    numberOfItems: cards.length,
+    itemListElement: cards.map((card, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: card.title,
+      url: `${SITE_URL}/projects/${card.slug}`,
+    })),
   };
 
-  const filteredProjects =
-    activeTab === 'featured'
-      ? projects.filter((p) => p.featured)
-      : activeTab === 'all'
-      ? projects
-      : projects.filter((p) => p.category === activeTab);
-
   return (
-    <ClientLayout>
-      <section className={styles.containerProjects}>
-        <div className={styles.projectsContent}>
-          <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-            <p className="highlight">
-              {t('pages.projects.title')}
-            </p>
-            <p className={styles.projectsSubtitle}>
-              {t('pages.projects.subtitle')}
-            </p>
-
-            <div className={styles.tabsBarWrap}>
-              {/* Isotipo panda que se asoma por encima de la línea, a la derecha
-                  (mismo guiño que el panda del dashboard del hero). El clip lo
-                  recorta justo en la línea: solo asoma la mitad superior. */}
-              <div className={styles.peekPandaClip} aria-hidden>
-                {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
-                <img
-                  className={styles.peekPanda}
-                  src="/isotipo-panda.svg"
-                  alt=""
-                  aria-hidden
-                  loading="lazy"
-                />
-              </div>
-              <div className={styles.tabsBar} role="tablist">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.key}
-                    role="tab"
-                    aria-selected={activeTab === tab.key}
-                    className={`${styles.tab} ${activeTab === tab.key ? styles.tabActive : ''}`}
-                    onClick={() => setActiveTab(tab.key)}
-                  >
-                    <span className={styles.tabLabel}>{t(tab.labelKey)}</span>
-                    <span className={styles.tabCount}>{getTabCount(tab.key)}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.projectsGrid}>
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={`${activeTab}-${project.title}-${index}`}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: index * 0.05 }}
-                  style={{
-                    willChange: 'opacity, transform',
-                    minHeight: 'inherit',
-                  }}
-                >
-                  <ProjectCard project={project} />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </ClientLayout>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', path: '' },
+          { name: 'Case Studies', path: '/projects' },
+        ]}
+      />
+      <ProjectsView initialProjects={cards} />
+    </>
   );
-};
-
-export default Projects;
+}

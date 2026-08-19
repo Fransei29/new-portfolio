@@ -57,7 +57,7 @@ export default function BlogIndex({ posts, tags, activeTag, language }: Props) {
   return (
     <section className={styles.containerBlog}>
       <div className={styles.blogContent}>
-        <p className="highlight">{copy.title}</p>
+        <h1 className="highlight">{copy.title}</h1>
         <p className={styles.blogSubtitle}>{copy.subtitle}</p>
 
         {tags.length > 0 && (

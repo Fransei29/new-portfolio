@@ -15,9 +15,9 @@ const About = () => {
       <div className={styles.aboutSection}>
         <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
           <div className={styles.firstPart}>
-            <p className="highlight">
+            <h1 className="highlight">
               {t('about.whoIAm')}
-            </p>
+            </h1>
           </div>
         </section>
        

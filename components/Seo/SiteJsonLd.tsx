@@ -51,7 +51,7 @@ const jsonLd = {
          rota acá rompe esa asociación en vez de reforzarla. */
       sameAs: [
         'https://linkedin.com/in/francoseiler',
-        'https://github.com/francoseiler',
+        'https://github.com/Fransei29',
       ],
     },
     {

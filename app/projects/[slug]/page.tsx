@@ -3,6 +3,7 @@
 import ProjectDetailWrapper from '../../../components/ProjectDetail/ProjectDetailWrapper';
 import { projects } from '../../data/projects';
 import { notFound } from 'next/navigation';
+import Breadcrumbs from '../../../components/Seo/Breadcrumbs';
 import ClientLayout from '../../../components/ClientLayout/ClientLayout';
 import type { Metadata } from 'next';
 
@@ -95,6 +96,13 @@ export default async function ProjectPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', path: '' },
+          { name: 'Case Studies', path: '/projects' },
+          { name: project.title, path: `/projects/${project.slug}` },
+        ]}
       />
       <ClientLayout>
         <ProjectDetailWrapper slug={slug} />
