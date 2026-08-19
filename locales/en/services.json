@@ -27,7 +27,11 @@
       "title": "AI Strategy",
       "titleAccent": "& Integration",
       "description": "AI as a growth lever — not a buzzword. We define a strategy and ship integrations that move sales, margin and scalability, not demos.",
-      "tags": ["LLM OPS", "RAG", "WORKFLOWS"],
+      "tags": [
+        "LLM OPS",
+        "RAG",
+        "WORKFLOWS"
+      ],
       "slug": "AI"
     },
     "businessAutomation": {
@@ -81,6 +85,239 @@
       "name": "Tomas Del Pino",
       "role": "Web Developer",
       "message": "I highly recommend Franco. We worked together building a high-availability multi-sector appointment system. \nHe proved to be a key developer; his contributions with Next.js and Node.js were fundamental to ensure that the product could scale."
+    }
+  },
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "Services",
+      "title": "Software that runs your operation",
+      "subtitle": "Custom platforms, automations and AI integrations for teams whose operations have outgrown spreadsheets and off-the-shelf tools. You work directly with the developer building your software — no account managers, no handoffs.",
+      "ctaPrimary": "Book a call",
+      "ctaSecondary": "See case studies"
+    },
+    "stats": [
+      {
+        "value": "20+",
+        "label": "Products shipped to production"
+      },
+      {
+        "value": "4",
+        "label": "Regions: US, Canada, Europe, LATAM"
+      },
+      {
+        "value": "1",
+        "label": "Developer you talk to, start to finish"
+      }
+    ],
+    "detail": {
+      "includesLabel": "What it includes",
+      "deliverablesLabel": "What you get",
+      "stackLabel": "Typical stack",
+      "fitLabel": "A good fit if",
+      "cta": "Discuss this"
+    },
+    "items": {
+      "aiIntegration": {
+        "name": "AI Strategy & Integration",
+        "tagline": "AI as a growth lever, not a demo.",
+        "description": "We start from the business case — where AI actually moves sales, margin or capacity — and ship the integration into the systems your team already uses. No chatbot bolted onto a landing page.",
+        "includes": [
+          "Use-case audit and prioritization by expected return",
+          "RAG over your own documents, tickets or catalog",
+          "LLM integration into existing flows (CRM, support, back office)",
+          "Guardrails, evaluation and cost control per request"
+        ],
+        "deliverables": [
+          "A working integration in production, not a prototype",
+          "Prompt and retrieval layer documented and versioned",
+          "Usage and cost dashboard"
+        ],
+        "stack": [
+          "Claude API",
+          "OpenAI",
+          "Vector DB",
+          "Node.js",
+          "Next.js"
+        ],
+        "fit": "You have volume of repetitive knowledge work — support, quoting, documentation, classification — and want to measure the impact before scaling it."
+      },
+      "businessAutomation": {
+        "name": "Business Automation",
+        "tagline": "The manual steps stop being manual.",
+        "description": "We map the process as it actually runs today, find the steps that cost hours and errors, and replace them with a workflow that runs on its own — with alerts when something needs a human.",
+        "includes": [
+          "Process mapping and detection of the real bottleneck",
+          "Integration between the tools you already pay for",
+          "Scheduled jobs, webhooks and event-driven flows",
+          "Notifications, retries and error handling"
+        ],
+        "deliverables": [
+          "Automated workflow running in production",
+          "Panel to monitor runs and failures",
+          "Documentation so your team can operate it"
+        ],
+        "stack": [
+          "Node.js",
+          "PostgreSQL",
+          "Webhooks",
+          "Cron",
+          "REST APIs"
+        ],
+        "fit": "Your team copies data between systems, chases spreadsheets, or repeats the same sequence of steps every day."
+      },
+      "webDevelopment": {
+        "name": "Custom Software Development",
+        "tagline": "Platforms that grow with the business.",
+        "description": "Software built for how your business actually operates, instead of bending the operation to fit a generic tool. Robust, scalable and maintainable — code you can hand to another team without an archaeology project.",
+        "includes": [
+          "Architecture and data model designed for your domain",
+          "Authentication, roles and permissions",
+          "Admin panel so the team is autonomous",
+          "Testing, CI and deployment pipeline"
+        ],
+        "deliverables": [
+          "Product in production with its repository and documentation",
+          "Deploy and rollback pipeline",
+          "Handoff session with your team"
+        ],
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "Prisma",
+          "Docker"
+        ],
+        "fit": "Your operation outgrew spreadsheets and the SaaS you tried does 60% of what you need."
+      },
+      "webApplications": {
+        "name": "Web Applications",
+        "tagline": "Fast, clear, built to convert.",
+        "description": "Applications your users understand on the first visit. Performance, accessibility and SEO are part of the build, not a cleanup pass at the end.",
+        "includes": [
+          "Interface design and interaction flows",
+          "Server rendering for real SEO",
+          "Responsive on mobile, tablet and desktop",
+          "Core Web Vitals and accessibility measured, not assumed"
+        ],
+        "deliverables": [
+          "Application deployed with its domain and analytics",
+          "Performance and accessibility report",
+          "Componentized codebase ready to keep growing"
+        ],
+        "stack": [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "SCSS Modules",
+          "Vercel"
+        ],
+        "fit": "You need a product interface — dashboard, portal, booking system — that has to work on the first try for a non-technical user."
+      },
+      "ecommerceSolutions": {
+        "name": "E-commerce & Payments",
+        "tagline": "Stores that sell, payments that reconcile.",
+        "description": "From catalog to checkout to the money landing in the account. Payment integrations built with the edge cases handled: failed payments, refunds, webhooks arriving twice.",
+        "includes": [
+          "Catalog, cart and checkout",
+          "Payment gateway integration and reconciliation",
+          "Webhooks with idempotency and retries",
+          "Order, stock and shipping management"
+        ],
+        "deliverables": [
+          "Store in production with payments live",
+          "Admin panel for orders and inventory",
+          "Conversion tracking configured"
+        ],
+        "stack": [
+          "Next.js",
+          "Stripe",
+          "Mercado Pago",
+          "PostgreSQL",
+          "Prisma"
+        ],
+        "fit": "You sell online and the platform you use limits your catalog, your checkout or your margins."
+      },
+      "scalableArchitecture": {
+        "name": "Scalable Architecture",
+        "tagline": "Infrastructure that holds when traffic arrives.",
+        "description": "Systems designed to grow without a rewrite. When an existing product is already struggling, we audit it, find what actually breaks, and fix it in priority order.",
+        "includes": [
+          "Audit of the current architecture and its bottlenecks",
+          "Database design, indexes and query optimization",
+          "Caching, queues and background jobs",
+          "Monitoring, logs and alerts"
+        ],
+        "deliverables": [
+          "Audit report with prioritized findings",
+          "Optimizations applied and measured before/after",
+          "Observability configured"
+        ],
+        "stack": [
+          "PostgreSQL",
+          "Redis",
+          "Docker",
+          "PM2",
+          "Nginx"
+        ],
+        "fit": "Your product works but slows down, falls over under load, or costs more in infrastructure every month."
+      }
+    },
+    "process": {
+      "title": "How an engagement runs",
+      "subtitle": "Same four steps on every project, whatever the size.",
+      "steps": [
+        {
+          "title": "Call",
+          "description": "Thirty minutes to understand the problem, not to pitch. You leave with a first read on scope and feasibility even if we do not work together."
+        },
+        {
+          "title": "Proposal",
+          "description": "Written scope, phases, timeline and a closed price. No hourly surprises."
+        },
+        {
+          "title": "Build",
+          "description": "Incremental deliveries with a working environment you can review from week one."
+        },
+        {
+          "title": "Handoff",
+          "description": "Deploy, documentation and a support window. The code and the infrastructure are yours."
+        }
+      ]
+    },
+    "faq": {
+      "title": "Common questions",
+      "items": [
+        {
+          "q": "How do you price a project?",
+          "a": "Fixed price per scope, defined after the first call. For open-ended or evolving work, a monthly retainer. You always know the number before anything starts."
+        },
+        {
+          "q": "How long does a project take?",
+          "a": "An automation or a landing page: one to three weeks. A full application: six to twelve weeks depending on scope. The proposal breaks it into phases with dates."
+        },
+        {
+          "q": "Do you work with existing code?",
+          "a": "Yes. Audits, migrations and feature work on codebases someone else wrote are a regular part of the job."
+        },
+        {
+          "q": "Who owns the code?",
+          "a": "You do. Repository, infrastructure and accounts are in your name from day one."
+        },
+        {
+          "q": "What happens after launch?",
+          "a": "A support window is included with every project. After that, maintenance is available as a monthly plan or per request."
+        },
+        {
+          "q": "What time zones do you work with?",
+          "a": "Based in Córdoba, Argentina, working with teams in the US, Canada, Europe and Latin America. Overlap with US hours is full, and with Europe it is the morning."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Not sure which one you need?",
+      "description": "Most projects start as one thing and turn out to be another. Describe the problem and we figure out the shape together.",
+      "button": "Book a call"
     }
   }
 }

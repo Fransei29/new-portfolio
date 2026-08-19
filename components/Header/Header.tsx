@@ -9,7 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight } from 'lucide-react';
+import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight, Layers } from 'lucide-react';
 import { SiYoutube } from 'react-icons/si';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -100,6 +100,11 @@ export default function Header() {
               {t('nav.projects')}
             </p>
           </Link>
+          <Link href="/services" passHref>
+            <p className={`${styles.navLink} ${pathname === '/services' ? styles.active : ''}`}>
+              {t('nav.services')}
+            </p>
+          </Link>
           <Link href="/blog" passHref>
             {/* startsWith para que el link siga activo dentro de /blog/[slug] */}
             <p className={`${styles.navLink} ${pathname?.startsWith('/blog') ? styles.active : ''}`}>
@@ -181,6 +186,12 @@ export default function Header() {
           <p className={styles.mobileNavLink}>
             <FolderOpen size={18} className={styles.mobileNavIcon} />
             {t('nav.projects')}
+          </p>
+        </Link>
+        <Link href="/services" passHref onClick={toggleMobileMenu}>
+          <p className={styles.mobileNavLink}>
+            <Layers size={18} className={styles.mobileNavIcon} />
+            {t('nav.services')}
           </p>
         </Link>
         <Link href="/blog" passHref onClick={toggleMobileMenu}>

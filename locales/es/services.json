@@ -27,7 +27,11 @@
       "title": "Estrategia",
       "titleAccent": "e Integración de IA",
       "description": "La IA como palanca de crecimiento — no como buzzword. Definimos una estrategia e integramos soluciones que mueven ventas, margen y escalabilidad, no demos.",
-      "tags": ["LLM OPS", "RAG", "WORKFLOWS"],
+      "tags": [
+        "LLM OPS",
+        "RAG",
+        "WORKFLOWS"
+      ],
       "slug": "IA"
     },
     "businessAutomation": {
@@ -82,6 +86,239 @@
       "name": "Tomas Del Pino",
       "role": "Desarrollador Web",
       "message": "Recomiendo mucho a Franco. Trabajamos juntos construyendo un turnero multi-rubro de alta disponibilidad. \nDemostró ser un desarrollador clave; sus aportes con Next.js y Node.js fueron fundamentales para asegurar que el producto pudiera escalar."
+    }
+  },
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "Servicios",
+      "title": "Software que hace funcionar tu operación",
+      "subtitle": "Plataformas a medida, automatizaciones e integraciones de IA para equipos cuya operación ya no entra en planillas ni en herramientas genéricas. Trabajás directo con quien programa tu software — sin intermediarios ni traspasos.",
+      "ctaPrimary": "Agendar una llamada",
+      "ctaSecondary": "Ver casos de estudio"
+    },
+    "stats": [
+      {
+        "value": "20+",
+        "label": "Productos en producción"
+      },
+      {
+        "value": "4",
+        "label": "Regiones: EE.UU., Canadá, Europa, LATAM"
+      },
+      {
+        "value": "1",
+        "label": "Desarrollador de principio a fin"
+      }
+    ],
+    "detail": {
+      "includesLabel": "Qué incluye",
+      "deliverablesLabel": "Qué te llevás",
+      "stackLabel": "Stack típico",
+      "fitLabel": "Te sirve si",
+      "cta": "Consultar por esto"
+    },
+    "items": {
+      "aiIntegration": {
+        "name": "Estrategia e Integración de IA",
+        "tagline": "IA como palanca de crecimiento, no como demo.",
+        "description": "Arrancamos por el caso de negocio — dónde la IA mueve ventas, margen o capacidad de verdad — y llevamos la integración a los sistemas que tu equipo ya usa. Nada de un chatbot pegado a una landing.",
+        "includes": [
+          "Auditoría de casos de uso y priorización por retorno esperado",
+          "RAG sobre tus propios documentos, tickets o catálogo",
+          "Integración de LLM en los flujos existentes (CRM, soporte, back office)",
+          "Guardrails, evaluación y control de costo por request"
+        ],
+        "deliverables": [
+          "Una integración funcionando en producción, no un prototipo",
+          "Capa de prompts y retrieval documentada y versionada",
+          "Panel de uso y costos"
+        ],
+        "stack": [
+          "Claude API",
+          "OpenAI",
+          "Vector DB",
+          "Node.js",
+          "Next.js"
+        ],
+        "fit": "Tenés volumen de trabajo repetitivo de conocimiento — soporte, cotizaciones, documentación, clasificación — y querés medir el impacto antes de escalarlo."
+      },
+      "businessAutomation": {
+        "name": "Automatización de Negocio",
+        "tagline": "Los pasos manuales dejan de ser manuales.",
+        "description": "Mapeamos el proceso como corre hoy de verdad, encontramos los pasos que cuestan horas y errores, y los reemplazamos por un flujo que corre solo — con avisos cuando algo necesita a una persona.",
+        "includes": [
+          "Mapeo del proceso y detección del cuello de botella real",
+          "Integración entre las herramientas que ya pagás",
+          "Tareas programadas, webhooks y flujos por eventos",
+          "Notificaciones, reintentos y manejo de errores"
+        ],
+        "deliverables": [
+          "Flujo automatizado corriendo en producción",
+          "Panel para monitorear ejecuciones y fallas",
+          "Documentación para que tu equipo lo opere"
+        ],
+        "stack": [
+          "Node.js",
+          "PostgreSQL",
+          "Webhooks",
+          "Cron",
+          "REST APIs"
+        ],
+        "fit": "Tu equipo copia datos entre sistemas, persigue planillas o repite la misma secuencia de pasos todos los días."
+      },
+      "webDevelopment": {
+        "name": "Desarrollo de Software a Medida",
+        "tagline": "Plataformas que crecen con el negocio.",
+        "description": "Software construido para cómo opera tu negocio en realidad, en vez de doblar la operación para que entre en una herramienta genérica. Robusto, escalable y mantenible — código que podés pasarle a otro equipo sin que sea arqueología.",
+        "includes": [
+          "Arquitectura y modelo de datos diseñados para tu dominio",
+          "Autenticación, roles y permisos",
+          "Panel de administración para que el equipo sea autónomo",
+          "Testing, CI y pipeline de deploy"
+        ],
+        "deliverables": [
+          "Producto en producción con su repositorio y documentación",
+          "Pipeline de deploy y rollback",
+          "Sesión de traspaso con tu equipo"
+        ],
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "Prisma",
+          "Docker"
+        ],
+        "fit": "Tu operación superó las planillas y el SaaS que probaste hace el 60% de lo que necesitás."
+      },
+      "webApplications": {
+        "name": "Aplicaciones Web",
+        "tagline": "Rápidas, claras, hechas para convertir.",
+        "description": "Aplicaciones que tus usuarios entienden en la primera visita. Performance, accesibilidad y SEO son parte de la construcción, no una pasada de limpieza al final.",
+        "includes": [
+          "Diseño de interfaz y flujos de interacción",
+          "Renderizado en servidor para SEO real",
+          "Responsive en mobile, tablet y desktop",
+          "Core Web Vitals y accesibilidad medidos, no asumidos"
+        ],
+        "deliverables": [
+          "Aplicación deployada con su dominio y analytics",
+          "Reporte de performance y accesibilidad",
+          "Código componentizado listo para seguir creciendo"
+        ],
+        "stack": [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "SCSS Modules",
+          "Vercel"
+        ],
+        "fit": "Necesitás una interfaz de producto — dashboard, portal, sistema de turnos — que tiene que funcionar a la primera para alguien no técnico."
+      },
+      "ecommerceSolutions": {
+        "name": "E-commerce y Pagos",
+        "tagline": "Tiendas que venden, pagos que concilian.",
+        "description": "Del catálogo al checkout y hasta que la plata cae en la cuenta. Integraciones de pago hechas con los casos borde resueltos: pagos fallidos, reembolsos, webhooks que llegan dos veces.",
+        "includes": [
+          "Catálogo, carrito y checkout",
+          "Integración de pasarela de pagos y conciliación",
+          "Webhooks con idempotencia y reintentos",
+          "Gestión de pedidos, stock y envíos"
+        ],
+        "deliverables": [
+          "Tienda en producción con pagos en vivo",
+          "Panel de administración de pedidos e inventario",
+          "Tracking de conversión configurado"
+        ],
+        "stack": [
+          "Next.js",
+          "Stripe",
+          "Mercado Pago",
+          "PostgreSQL",
+          "Prisma"
+        ],
+        "fit": "Vendés online y la plataforma que usás te limita el catálogo, el checkout o el margen."
+      },
+      "scalableArchitecture": {
+        "name": "Arquitectura Escalable",
+        "tagline": "Infraestructura que aguanta cuando llega el tráfico.",
+        "description": "Sistemas diseñados para crecer sin reescribir. Cuando un producto que ya existe viene sufriendo, lo auditamos, encontramos qué se rompe de verdad y lo arreglamos por orden de prioridad.",
+        "includes": [
+          "Auditoría de la arquitectura actual y sus cuellos de botella",
+          "Diseño de base de datos, índices y optimización de queries",
+          "Caché, colas y trabajos en segundo plano",
+          "Monitoreo, logs y alertas"
+        ],
+        "deliverables": [
+          "Informe de auditoría con hallazgos priorizados",
+          "Optimizaciones aplicadas y medidas antes/después",
+          "Observabilidad configurada"
+        ],
+        "stack": [
+          "PostgreSQL",
+          "Redis",
+          "Docker",
+          "PM2",
+          "Nginx"
+        ],
+        "fit": "Tu producto funciona pero se pone lento, se cae con carga o cuesta más en infraestructura cada mes."
+      }
+    },
+    "process": {
+      "title": "Cómo se trabaja",
+      "subtitle": "Los mismos cuatro pasos en todos los proyectos, sea del tamaño que sea.",
+      "steps": [
+        {
+          "title": "Llamada",
+          "description": "Treinta minutos para entender el problema, no para vender. Te vas con una primera lectura de alcance y viabilidad aunque no trabajemos juntos."
+        },
+        {
+          "title": "Propuesta",
+          "description": "Alcance escrito, fases, plazos y precio cerrado. Sin sorpresas por hora."
+        },
+        {
+          "title": "Construcción",
+          "description": "Entregas incrementales con un entorno funcionando que podés revisar desde la primera semana."
+        },
+        {
+          "title": "Traspaso",
+          "description": "Deploy, documentación y una ventana de soporte. El código y la infraestructura son tuyos."
+        }
+      ]
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Cómo se cotiza un proyecto?",
+          "a": "Precio cerrado por alcance, definido después de la primera llamada. Para trabajo abierto o que va evolucionando, un abono mensual. Siempre sabés el número antes de que arranque nada."
+        },
+        {
+          "q": "¿Cuánto tarda un proyecto?",
+          "a": "Una automatización o una landing: de una a tres semanas. Una aplicación completa: de seis a doce semanas según el alcance. La propuesta lo divide en fases con fechas."
+        },
+        {
+          "q": "¿Trabajás sobre código existente?",
+          "a": "Sí. Auditorías, migraciones y nuevas funcionalidades sobre código que escribió otro equipo son parte habitual del trabajo."
+        },
+        {
+          "q": "¿De quién es el código?",
+          "a": "Tuyo. El repositorio, la infraestructura y las cuentas están a tu nombre desde el día uno."
+        },
+        {
+          "q": "¿Qué pasa después del lanzamiento?",
+          "a": "Todos los proyectos incluyen una ventana de soporte. Después, el mantenimiento se puede tomar como plan mensual o por pedido."
+        },
+        {
+          "q": "¿Con qué zonas horarias trabajás?",
+          "a": "Con base en Córdoba, Argentina, trabajando con equipos de EE.UU., Canadá, Europa y Latinoamérica. La superposición con horario de EE.UU. es total y con Europa, la mañana."
+        }
+      ]
+    },
+    "cta": {
+      "title": "¿No sabés cuál necesitás?",
+      "description": "La mayoría de los proyectos arrancan siendo una cosa y terminan siendo otra. Contame el problema y le encontramos la forma juntos.",
+      "button": "Agendar una llamada"
     }
   }
 }

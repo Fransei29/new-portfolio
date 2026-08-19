@@ -71,6 +71,9 @@ const Footer = () => {
             <Link href="/projects" className={styles.navLink}>
               {t('nav.projects')}
             </Link>
+            <Link href="/services" className={styles.navLink}>
+              {t('nav.services')}
+            </Link>
             <Link href="/blog" className={styles.navLink}>
               {t('nav.blog')}
             </Link>

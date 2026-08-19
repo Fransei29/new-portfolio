@@ -220,7 +220,7 @@ export const Services = () => {
 
           {/* Other cards */}
           {others.map((service) => (
-            <a key={service.key} href="/contact" className={styles.card}>
+            <a key={service.key} href={`/services#${service.key}`} className={styles.card}>
               <div className={styles.cardTop}>
                 <div className={styles.iconWrapper}>
                   <service.Icon size={20} className={styles.serviceIcon} />
@@ -244,7 +244,7 @@ export const Services = () => {
 
         <div className={styles.ctaContainer}>
           <Button
-            href="/about"
+            href="/services"
             label={t('services.cta')}
             variant="secondary"
           />
