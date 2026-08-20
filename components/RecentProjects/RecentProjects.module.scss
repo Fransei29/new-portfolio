@@ -46,9 +46,13 @@
     @media (max-width: 1024px) {
         display: flex;
         flex-direction: column;
-        gap: 1.75rem;
+        /* El gap se suma al padding vertical de cada .mobileViewport, así que
+           el hueco real entre filas era gap + 1.5 + 1.5rem. Se baja el gap y
+           se recorta ese padding (abajo) para acercar las dos filas. */
+        gap: 0.25rem;
         width: 100%;
-        padding: 1.5rem 0 0.5rem;
+        /* padding-top bajo: la primera fila queda más cerca del subtítulo. */
+        padding: 0.25rem 0 0.5rem;
         box-sizing: border-box;
     }
 }
@@ -58,8 +62,9 @@
     overflow: hidden;
     box-sizing: border-box;
     /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde.
-       Padding vertical para que la sombra de hover no se recorte contra el borde. */
-    padding: 1.5rem 0 1.5rem 1.25rem;
+       Padding vertical para que la sombra de hover no se recorte contra el borde:
+       se achica pero no se saca, si va a 0 la sombra queda cortada por overflow:hidden. */
+    padding: 0.5rem 0 0.5rem 1.25rem;
 }
 
 .mobileTrack {

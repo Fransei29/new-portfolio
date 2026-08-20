@@ -119,18 +119,24 @@ const BlogSection: React.FC = () => {
                   <h3 className={styles.cardTitle}>{post.title}</h3>
                   <p className={styles.cardDescription}>{post.description}</p>
 
-                  {post.tags.length > 0 && (
-                    <ul className={styles.tags}>
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <li key={tag} className={styles.tag}>{tag}</li>
-                      ))}
-                    </ul>
-                  )}
+                  {/* Tags y "read article" comparten contenedor: en mobile van
+                      en la MISMA línea (tags a la izquierda, enlace a la
+                      derecha) para no gastar un renglón extra de alto. En
+                      desktop el footer sigue apilado, como antes. */}
+                  <div className={styles.cardFooter}>
+                    {post.tags.length > 0 && (
+                      <ul className={styles.tags}>
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <li key={tag} className={styles.tag}>{tag}</li>
+                        ))}
+                      </ul>
+                    )}
 
-                  <span className={styles.readMore}>
-                    {t('blogSection.readMore')}
-                    <HiArrowRight className={styles.arrow} />
-                  </span>
+                    <span className={styles.readMore}>
+                      {t('blogSection.readMore')}
+                      <HiArrowRight className={styles.arrow} />
+                    </span>
+                  </div>
                 </div>
               </Link>
             </article>

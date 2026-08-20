@@ -583,7 +583,9 @@ html.dark .hero-section::after {
 
   @media (max-width: 768px) {
     width: 185px;
-    left: 70px;
+    /* Pegado al borde izquierdo: el negativo deja que el hombro del panda se
+       recorte contra el borde en vez de quedar flotando en el medio. */
+    left: -30px;
     transform: translateY(-52%) rotate(-1.25deg);
   }
 }
@@ -596,7 +598,7 @@ html.dark .hero-section::after {
 .ctaWrap {
   max-width: var(--container-max-width);
   margin-inline: auto;
-  margin-block: 4rem 6rem;
+  margin-block: 2.75rem 6rem;
   /* Esquinas superiores apenas tendidas (elíptico sutil), inferiores iguales. */
   border-radius: 34px 34px 24px 24px / 22px 22px 24px 24px;
   overflow: hidden;
@@ -623,8 +625,8 @@ html.dark .ctaWrap {
   }
 
   .ctaWrap {
-    margin-inline: 1rem;
-    margin-block: 2.5rem 3.5rem;
+    margin-inline: 0.6rem;
+    margin-block: 1.5rem 3.5rem;
     border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
   }
 }

@@ -570,6 +570,20 @@
     }
   }
 
+  /* El panda de "Custom development" es la única fila con isotipo (el resto usa
+     iconos de línea) y a 23px se leía como una mancha. Se agranda solo en esa
+     fila: el cuadro crece y el SVG casi lo llena, como en desktop (46/56). */
+  .rowFeatured .rowIcon {
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
+
+    img {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
   .rowHeadInner {
     gap: 0.7rem;
   }

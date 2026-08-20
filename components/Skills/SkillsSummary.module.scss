@@ -54,6 +54,9 @@
   color: rgb(46, 41, 78);
   width: 24px;
   height: 24px;
+  /* Sin esto el flex lo comprime por debajo de 24px cuando la tarjeta pasa a
+     width:auto en mobile: el icono queda aplastado y desalineado del texto. */
+  flex-shrink: 0;
   fill: currentColor;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: iconFloatSkills 6s ease-in-out infinite;
@@ -88,6 +91,9 @@
   font-size: 0.95rem;
   font-weight: 400;
   padding-left: 1rem;
+  /* El marquee mide por contenido: si el nombre corta en dos líneas la tarjeta
+     crece en alto y desalinea toda la fila. Que la tarjeta sea más ancha. */
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     font-size: 0.85rem;
@@ -247,10 +253,14 @@
   }
 
   @media (max-width: 768px) {
-    /* Tarjetas compactas en mobile: menos ancho y padding para que no se vean
-       enormes. (Desktop queda intacto con 348px / 1.1rem 1.75rem.) */
-    width: auto;
-    padding: 0.7rem 1rem;
+    /* Compactas pero de ancho FIJO, como en desktop. Con `width: auto` cada
+       tarjeta se ajustaba a su propio texto (el track es `max-content`), así que
+       "Go" quedaba diminuta al lado de "React Native" y la fila se veía
+       despareja — que es lo que se leía como roto. Un ancho único las vuelve a
+       alinear; el texto se centra dentro. */
+    width: 172px;
+    padding: 0.7rem 0.9rem;
+    justify-content: center;
   }
 }
 

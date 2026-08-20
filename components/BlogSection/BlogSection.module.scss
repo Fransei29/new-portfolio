@@ -83,6 +83,17 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* Mobile: se muestran sólo 2 posts. El endpoint pide 3 (los usa desktop), así
+     que la tercera tarjeta se oculta acá en vez de recortar el fetch, para no
+     cambiar el markup que ya viene armado. */
+  @media (max-width: 768px) {
+    gap: 1.1rem;
+
+    .card:nth-child(3) {
+      display: none;
+    }
+  }
 }
 
 /* Tarjeta minimalista: superficie plana, sin gradiente ni sombras apiladas.
@@ -92,7 +103,9 @@
 .card {
   background: #ffffff;
   border: 1px solid rgba(46, 41, 78, 0.16);
-  border-radius: var(--br-lg);
+  /* --br-lg (14px) es token compartido: se pisa acá, local a la tarjeta, para
+     no cambiarle el radio al resto del sitio. */
+  border-radius: 8px;
   overflow: hidden;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
@@ -110,6 +123,18 @@
     :global(html.dark) & {
       border-color: rgba(181, 156, 248, 0.55);
       box-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Ahora que es un botón, el hover de la tarjeta también le marca la caja:
+       si sólo se moviera la flecha, el borde quedaría inerte. */
+    .readMore {
+      border-color: rgba(142, 122, 230, 0.75);
+      background-color: rgba(142, 122, 230, 0.07);
+
+      :global(html.dark) & {
+        border-color: rgba(181, 156, 248, 0.75);
+        background-color: rgba(181, 156, 248, 0.1);
+      }
     }
 
     .readMore .arrow {
@@ -134,6 +159,46 @@
   aspect-ratio: 2 / 1;
   overflow: hidden;
   background: rgba(142, 122, 230, 0.06);
+
+  /* En mobile la tarjeta ocupa todo el ancho, así que un 2:1 se come media
+     pantalla de alto. Se achata la banda: sigue anclando la tarjeta pero deja
+     el texto arriba del pliegue. */
+  @media (max-width: 768px) {
+    aspect-ratio: 21 / 9;
+  }
+
+  /* Velo de marca sobre la portada: las imágenes vienen de fuentes distintas y
+     cada una tira a un color propio, así que la fila se veía despareja. Un tinte
+     lila muy tenue las lleva a un rango común sin taparlas — con `multiply` el
+     tinte se apoya en los medios/oscuros y deja los claros casi intactos, que es
+     lo que mantiene la foto legible en vez de lavarla.
+     Va en ::after (no un div): .coverWrap ya es `position: relative`. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    background: linear-gradient(
+      160deg,
+      rgba(181, 156, 248, 0.16) 0%,
+      rgba(125, 104, 216, 0.1) 55%,
+      rgba(46, 41, 78, 0.14) 100%
+    );
+  }
+
+  /* En dark el `multiply` sobre una foto ya oscura la hunde de más: se cambia a
+     un velo plano del morado profundo, que iguala sin apagar. */
+  :global(html.dark) &::after {
+    mix-blend-mode: normal;
+    background: linear-gradient(
+      160deg,
+      rgba(46, 41, 78, 0.28) 0%,
+      rgba(46, 41, 78, 0.14) 55%,
+      rgba(125, 104, 216, 0.16) 100%
+    );
+  }
 }
 
 .cover {
@@ -148,7 +213,8 @@
   flex: 1;
 
   @media (max-width: 768px) {
-    padding: 1.4rem 1.35rem 1.5rem;
+    padding: 1.1rem 1.1rem 1.15rem;
+    gap: 0.55rem;
   }
 }
 
@@ -212,6 +278,27 @@
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
+    /* De 3 a 2 líneas: con la tarjeta más compacta, la 3ra línea era lo que
+       más la estiraba en alto. */
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Envuelve tags + "read article". El `margin-top: auto` vive acá ahora (antes
+   estaba en .readMore): es este bloque el que se empuja al fondo de la tarjeta. */
+.cardFooter {
+  /* Tags a la izquierda y botón a la derecha en la MISMA línea, en todos los
+     breakpoints: ahorra un renglón de alto y empareja la lectura del pie. */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+
+  @media (max-width: 768px) {
+    padding-top: 0.9rem;
   }
 }
 
@@ -222,6 +309,13 @@
   list-style: none;
   margin: 0.15rem 0 0;
   padding: 0;
+
+  /* Sin margen propio: la línea la alinea el flex del footer. `min-width: 0`
+     deja que los tags se recorten antes de empujar al botón fuera. */
+  margin: 0;
+  min-width: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 /* Tags como texto, no como píldoras: rellenas con fondo y borde eran el
@@ -244,18 +338,31 @@
   }
 }
 
+/* Botón de contorno: al compartir línea con los tags, sin caja se leía como un
+   tag más. Contorno y no relleno a propósito — el botón sólido de la sección es
+   el "View all" de abajo, y dos sólidos competirían. */
 .readMore {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-top: auto;
-  padding-top: 1.1rem;
-  font-size: 0.9rem;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid rgba(142, 122, 230, 0.45);
+  border-radius: var(--br);
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--primary-color);
+  white-space: nowrap;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+  }
 
   :global(html.dark) & {
     color: var(--lila-suave);
+    border-color: rgba(181, 156, 248, 0.45);
   }
 
   /* Desplazamiento lateral en vez de rotación: acompaña la dirección de la
