@@ -550,9 +550,18 @@ html.dark .hero-section::after {
 }
 
 /* Host del panda "programando": el bloque wave(aToB) + SkillsSummary. Relative
-   para anclar el panda a su borde SUPERIOR (donde vive el wave). */
+   para anclar el panda a su borde SUPERIOR (donde vive el wave).
+
+   isolation:isolate es OBLIGATORIO, no decorativo: el panda usa z-index:-1 para
+   meterse detrás del wave. Sin un contexto de apilado propio acá, ese -1 sube a
+   buscar el del ancestro y el panda se hunde DETRÁS del fondo de la sección,
+   que lo recorta. Antes esto funcionaba de casualidad, porque el host llevaba
+   `fade-in-left` y su `will-change: transform` creaba el contexto como efecto
+   colateral; al pasar a `.assemble` (que a propósito no transforma nada) ese
+   apoyo desapareció. Ahora la condición queda declarada donde se necesita. */
 .toolsPandaHost {
   position: relative;
+  isolation: isolate;
 }
 
 /* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
@@ -914,6 +923,197 @@ html.dark .ctaWrap {
   transition-delay: 0.33s;
 }
 
+
+/* ============================================================================
+   ASSEMBLE — entrada compuesta por piezas
+   ============================================================================
+   Antes cada sección entraba como UN bloque: el wrapper .fade-in-* llevaba el
+   translateX y arrastraba a todo su subárbol, así que título, subtítulo y cards
+   viajaban pegados desde el mismo costado.
+
+   Acá el wrapper (.assemble) ya NO se mueve: sólo observa el scroll y reparte
+   el trigger. Cada pieza interna declara de dónde viene (.piece-l / .piece-r /
+   .piece-u / .piece-d / .piece-pop) y entra por su cuenta, escalonada, así la
+   sección se ARMA en vez de deslizarse.
+
+   Uso:
+     <div className="assemble">           ← observado por useScrollAnimation
+       <p className="piece-l">título</p>
+       <p className="piece-r">subtítulo</p>
+       <div className="assemble-stagger">  ← escalona a sus hijos directos
+         <article className="piece-u">card</article>
+         ...
+   ============================================================================ */
+
+/* El wrapper no se transforma nunca: un transform en el padre crea un
+   containing block y arrastraría a las piezas, que es exactamente el problema
+   que este sistema resuelve. */
+.assemble {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Piezas: estado inicial ─────────────────────────────────────────────── */
+
+.piece-l,
+.piece-r,
+.piece-u,
+.piece-d,
+.piece-pop {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.piece-l   { transform: translate3d(-36px, 0, 0); }
+.piece-r   { transform: translate3d(36px, 0, 0); }
+.piece-u   { transform: translate3d(0, 28px, 0); }
+.piece-d   { transform: translate3d(0, -24px, 0); }
+.piece-pop { transform: translate3d(0, 24px, 0) scale(0.96); }
+
+/* ── Piezas: estado final ───────────────────────────────────────────────── */
+
+.assemble.visible .piece-l,
+.assemble.visible .piece-r,
+.assemble.visible .piece-u,
+.assemble.visible .piece-d,
+.assemble.visible .piece-pop {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Una pieza suelta fuera de un .assemble (o el propio wrapper marcado como
+   pieza) se anima con su propio observer. */
+.piece-l.visible,
+.piece-r.visible,
+.piece-u.visible,
+.piece-d.visible,
+.piece-pop.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ── Stagger manual por orden de aparición ──────────────────────────────────
+   Las piezas nombradas (título, subtítulo, CTA) llevan su delay explícito para
+   que el orden no dependa de dónde estén en el DOM. */
+.assemble.visible .piece-delay-0 { transition-delay: 0s; }
+.assemble.visible .piece-delay-1 { transition-delay: 0.07s; }
+.assemble.visible .piece-delay-2 { transition-delay: 0.14s; }
+.assemble.visible .piece-delay-3 { transition-delay: 0.21s; }
+.assemble.visible .piece-delay-4 { transition-delay: 0.28s; }
+.assemble.visible .piece-delay-5 { transition-delay: 0.35s; }
+
+/* ── Stagger automático para grids y listas ─────────────────────────────────
+   Marcá el CONTENEDOR del grid con .assemble-stagger y sus hijos directos
+   entran en cascada, sin tener que numerar card por card (útil cuando las
+   cards salen de un .map()). Base 0.14s = arranca después del título y el
+   subtítulo.
+
+   El contenedor también da el ESTADO INICIAL a sus hijos, así una card que
+   sale de un .map() no necesita llevar .piece-* propia. */
+.assemble .assemble-stagger > * {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.assemble.visible .assemble-stagger > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.assemble.visible .assemble-stagger > *:nth-child(1)  { transition-delay: 0.14s; }
+.assemble.visible .assemble-stagger > *:nth-child(2)  { transition-delay: 0.20s; }
+.assemble.visible .assemble-stagger > *:nth-child(3)  { transition-delay: 0.26s; }
+.assemble.visible .assemble-stagger > *:nth-child(4)  { transition-delay: 0.32s; }
+.assemble.visible .assemble-stagger > *:nth-child(5)  { transition-delay: 0.38s; }
+.assemble.visible .assemble-stagger > *:nth-child(6)  { transition-delay: 0.44s; }
+.assemble.visible .assemble-stagger > *:nth-child(7)  { transition-delay: 0.50s; }
+.assemble.visible .assemble-stagger > *:nth-child(8)  { transition-delay: 0.56s; }
+.assemble.visible .assemble-stagger > *:nth-child(n+9) { transition-delay: 0.62s; }
+
+/* Alterna la dirección de origen en un grid: impares desde la izquierda,
+   pares desde la derecha. Da la sensación de piezas convergiendo al centro. */
+.assemble-stagger.stagger-alt > *:nth-child(odd)  { transform: translate3d(-30px, 14px, 0); }
+.assemble-stagger.stagger-alt > *:nth-child(even) { transform: translate3d(30px, 14px, 0); }
+
+.assemble.visible .assemble-stagger.stagger-alt > * {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ── Anti-anidado ───────────────────────────────────────────────────────────
+   Una pieza dentro de otra pieza viajaría dos veces (el transform del padre se
+   suma al propio) y el recorrido se duplica. La de adentro se neutraliza: la
+   externa ya la lleva puesta. */
+.piece-l .piece-l, .piece-l .piece-r, .piece-l .piece-u, .piece-l .piece-d, .piece-l .piece-pop,
+.piece-r .piece-l, .piece-r .piece-r, .piece-r .piece-u, .piece-r .piece-d, .piece-r .piece-pop,
+.piece-u .piece-l, .piece-u .piece-r, .piece-u .piece-u, .piece-u .piece-d, .piece-u .piece-pop,
+.piece-d .piece-l, .piece-d .piece-r, .piece-d .piece-u, .piece-d .piece-d, .piece-d .piece-pop,
+.piece-pop .piece-l, .piece-pop .piece-r, .piece-pop .piece-u, .piece-pop .piece-d,
+.piece-l .assemble-stagger > *,
+.piece-r .assemble-stagger > *,
+.piece-u .assemble-stagger > *,
+.piece-d .assemble-stagger > *,
+.piece-pop .assemble-stagger > * {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* El wave es la costura entre dos fondos, no contenido: nunca se anima.
+   Mismo criterio que .wave-static arriba, repetido acá porque una pieza puede
+   envolverlo sin querer. */
+.assemble .wave-static,
+.assemble > .waveDivider {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────
+   Recorrido horizontal más corto: 36px sobre un viewport de 360px se lee como
+   un salto, y además cualquier desborde lateral dispara scroll horizontal.
+   El eje vertical se conserva, que es el que da la sensación de armado. */
+@media (max-width: 768px) {
+  .piece-l   { transform: translate3d(-18px, 10px, 0); }
+  .piece-r   { transform: translate3d(18px, 10px, 0); }
+  .piece-u   { transform: translate3d(0, 22px, 0); }
+  .piece-d   { transform: translate3d(0, -16px, 0); }
+  .piece-pop { transform: translate3d(0, 20px, 0) scale(0.97); }
+
+  .assemble-stagger.stagger-alt > *:nth-child(odd),
+  .assemble-stagger.stagger-alt > *:nth-child(even) {
+    transform: translate3d(0, 22px, 0);
+  }
+
+  /* Stagger más corto: en mobile las cards se ven de a una y los delays
+     largos se sienten como lag, no como coreografía. */
+  .assemble.visible .assemble-stagger > *:nth-child(1)  { transition-delay: 0.08s; }
+  .assemble.visible .assemble-stagger > *:nth-child(2)  { transition-delay: 0.13s; }
+  .assemble.visible .assemble-stagger > *:nth-child(3)  { transition-delay: 0.18s; }
+  .assemble.visible .assemble-stagger > *:nth-child(4)  { transition-delay: 0.23s; }
+  .assemble.visible .assemble-stagger > *:nth-child(n+5) { transition-delay: 0.28s; }
+}
+
+/* Accesibilidad: sin movimiento, sólo el fade. */
+@media (prefers-reduced-motion: reduce) {
+  .piece-l,
+  .piece-r,
+  .piece-u,
+  .piece-d,
+  .piece-pop,
+  .assemble-stagger.stagger-alt > *:nth-child(odd),
+  .assemble-stagger.stagger-alt > *:nth-child(even) {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+}
+
 /* --- HERO ENTRANCE ---
    El hero está siempre en viewport en el primer paint, así que no debería
    esperar al IntersectionObserver. Arranca invisible y se anima recién
@@ -939,6 +1139,52 @@ html.hydrated .hero-section.fade-in-right,
 html.hydrated .hero-section .fade-in-right,
 html.hydrated .hero-section .fade-in-left {
   animation: heroFadeIn 0.8s ease forwards;
+}
+
+/* El hero también se ARMA en vez de aparecer entero: título, subtítulo y
+   bloque de CTAs entran desde lados alternados, escalonados. El dashboard de
+   la derecha llega último, como pieza que cierra la composición.
+   No usa .assemble/.piece-* porque el hero no espera al IntersectionObserver:
+   su trigger es html.hydrated, el mismo que el header. */
+@keyframes heroPieceIn {
+  from { opacity: 0; transform: translate3d(var(--hp-x, 0), var(--hp-y, 0), 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.hero-section .hero-piece,
+.hero-section .home-textB {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.hero-section .hero-piece-1 { --hp-x: -32px; }
+.hero-section .hero-piece-2 { --hp-x: 32px; }
+.hero-section .hero-piece-3 { --hp-x: -26px; --hp-y: 12px; }
+.hero-section .home-textB   { --hp-x: 40px; }
+
+html.hydrated .hero-section .hero-piece,
+html.hydrated .hero-section .home-textB {
+  animation: heroPieceIn 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+html.hydrated .hero-section .hero-piece-1 { animation-delay: 0.05s; }
+html.hydrated .hero-section .hero-piece-2 { animation-delay: 0.15s; }
+html.hydrated .hero-section .hero-piece-3 { animation-delay: 0.25s; }
+html.hydrated .hero-section .home-textB   { animation-delay: 0.35s; }
+
+@media (max-width: 768px) {
+  .hero-section .hero-piece-1 { --hp-x: -16px; --hp-y: 10px; }
+  .hero-section .hero-piece-2 { --hp-x: 16px; --hp-y: 10px; }
+  .hero-section .hero-piece-3 { --hp-x: -14px; --hp-y: 12px; }
+  .hero-section .home-textB   { --hp-x: 0; --hp-y: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section .hero-piece,
+  .hero-section .home-textB {
+    --hp-x: 0;
+    --hp-y: 0;
+  }
 }
 
 /* Prevenir problemas de scrollbar en mobile durante animaciones */

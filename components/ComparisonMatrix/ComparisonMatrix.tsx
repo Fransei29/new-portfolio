@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './ComparisonMatrix.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Check, X, Users, Building2, Blocks, PenLine } from 'lucide-react';
 
@@ -64,7 +63,6 @@ const ROWS: Row[] = [
 const MOBILE_HIDDEN_ROWS = ['inhouse', 'manual'];
 
 const ComparisonMatrix = () => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   // El ✓/✕ es decorativo: el estado real va en texto para lectores de pantalla.
@@ -89,10 +87,12 @@ const ComparisonMatrix = () => {
         {/* .highlight es el título de sección compartido del sitio (mismo que
             usan Services y AutomationComparison): así esta sección no inventa
             una jerarquía propia. */}
-        <h2 className="highlight">{t('comparison.title')}</h2>
-        <p className={styles.subtitle}>{t('comparison.subtitle')}</p>
+        <h2 className="highlight piece-l piece-delay-0">{t('comparison.title')}</h2>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>{t('comparison.subtitle')}</p>
 
-        <div ref={(el) => { elementsRef.current[0] = el; }} className={styles.tableWrap}>
+        {/* piece-u: la tabla es ancha y scrollea en horizontal en mobile; una
+            entrada lateral le agregaría desborde. */}
+        <div className={`${styles.tableWrap} piece-u piece-delay-2`}>
           <table className={styles.table}>
             <caption className={styles.srOnly}>{t('comparison.subtitle')}</caption>
             <thead>

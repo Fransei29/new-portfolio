@@ -72,12 +72,12 @@ const BlogSection: React.FC = () => {
   return (
     <section className={styles.blogSection}>
       <div className={styles.container}>
-        <section ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-          <h2 className="highlight">{t('blogSection.title')}</h2>
+        <section>
+          <h2 className="highlight piece-l piece-delay-0">{t('blogSection.title')}</h2>
         </section>
 
-        <section ref={(el) => { elementsRef.current[1] = el; }} className="fade-in-left">
-          <p className={styles.subtitle}>{t('blogSection.subtitle')}</p>
+        <section>
+          <p className={`${styles.subtitle} piece-r piece-delay-1`}>{t('blogSection.subtitle')}</p>
         </section>
 
         {/* El modificador `single` evita que una sola tarjeta se estire a todo
@@ -92,7 +92,7 @@ const BlogSection: React.FC = () => {
             <article
               key={post.slug}
               ref={(el) => { elementsRef.current[index + 2] = el; }}
-              className={`${styles.card} ${index % 2 === 0 ? 'fade-in-left' : 'fade-in-right'}`}
+              className={`${styles.card} ${index % 2 === 0 ? 'piece-l' : 'piece-r'}`}
             >
               <Link href={postHref(post.slug)} className={styles.cardLink}>
                 {post.cover && (

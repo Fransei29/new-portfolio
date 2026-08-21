@@ -170,14 +170,14 @@ const HowWeWork = () => {
   return (
     <section className={styles.howWeWork}>
       <div className={styles.container}>
-        <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
-          <h2 className="highlight">
+        <section>
+          <h2 className="highlight piece-l piece-delay-0">
             {t('howWeWork.title')}
           </h2>
         </section>
 
-        <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-left">
-          <p className={styles.subtitle}>
+        <section>
+          <p className={`${styles.subtitle} piece-r piece-delay-1`}>
             {t('howWeWork.subtitle')}
           </p>
         </section>
@@ -212,7 +212,7 @@ const HowWeWork = () => {
           </span>
 
           {steps.map((step, index) => {
-            const animationClass = index % 2 === 0 ? 'fade-in-left' : 'fade-in-right';
+            const animationClass = index % 2 === 0 ? 'piece-l' : 'piece-r';
             // Un paso "protagonista" es el que el panda alcanzó (el activo
             // actual); los ya visitados quedan como "hechos", los futuros dormidos.
             const isCurrent = index === activeStep;

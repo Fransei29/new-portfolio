@@ -94,14 +94,18 @@ export const Services = () => {
   return (
     <section ref={servicesRef} className={styles.services}>
       <div className={styles.container}>
-        <p className="highlight">
+        <p className="highlight piece-l piece-delay-0">
           {t('services.title')}
         </p>
-        <p className={styles.subtitle}>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t('services.subtitle')}
         </p>
 
-        <div className={styles.grid}>
+        {/* assemble-stagger: las cards entran en cascada por orden en el DOM,
+            sin numerarlas a mano (salen de un .map()). stagger-alt alterna el
+            lado de origen, así convergen al centro en vez de venir todas de
+            un costado. */}
+        <div className={`${styles.grid} assemble-stagger stagger-alt`}>
           {/* Featured card */}
           <article className={`${styles.card} ${styles.featuredCard}`}>
             <div className={styles.cardTop}>
@@ -242,7 +246,7 @@ export const Services = () => {
           ))}
         </div>
 
-        <div className={styles.ctaContainer}>
+        <div className={`${styles.ctaContainer} piece-pop piece-delay-5`}>
           <Button
             href="/services"
             label={t('services.cta')}

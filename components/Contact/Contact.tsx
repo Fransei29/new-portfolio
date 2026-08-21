@@ -27,12 +27,12 @@ const ContactSection = () => {
   return (
     <div className={styles.contactSectionContainer}> 
       <div className={styles.contactSection}>
-        <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
+        <section ref={el => { elementsRef.current[0] = el; }} className="assemble">
           <div className={styles.contactFirst}>
-            <p className={styles.contactSubtitle}>
+            <p className={`${styles.contactSubtitle} piece-l piece-delay-0`}>
               {t('contact.subtitle')}
             </p>
-            <p className={styles.contactDescription}>
+            <p className={`${styles.contactDescription} piece-r piece-delay-1`}>
               {t('contact.description')}
               <strong> {t('contact.reachOut')}</strong>
             </p>
@@ -40,7 +40,7 @@ const ContactSection = () => {
         </section>
 
         <div className={styles.contactGrid}>
-          <section ref={el => { elementsRef.current[1] = el; }} className="fade-in-right">
+          <section ref={el => { elementsRef.current[1] = el; }} className="piece-l">
             <div className={styles.contactMethods}>
               <div 
                 className={styles.contactCard}

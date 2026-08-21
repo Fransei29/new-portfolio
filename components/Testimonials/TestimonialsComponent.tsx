@@ -285,10 +285,12 @@ export default function Testimonials() {
     <div className={styles.testimonialsContainer}>
       <section className={styles.testimonials}>
         <div className={styles.titleWrapper}>
-          <p className="highlight">{t('testimonials.title')}</p>
-          <p className={styles.subtitle}>{t('testimonials.subtitle')}</p>
+          <p className="highlight piece-l piece-delay-0">{t('testimonials.title')}</p>
+          <p className={`${styles.subtitle} piece-r piece-delay-1`}>{t('testimonials.subtitle')}</p>
         </div>
-        <div className={styles.carouselWrapper}>
+        {/* piece-u: el carrusel ya corre en horizontal (motion.div con x), así
+            que entra desde abajo para no pelear con ese eje. */}
+        <div className={`${styles.carouselWrapper} piece-u piece-delay-2`}>
           <div
             className={styles.carousel}
             ref={carouselRef}

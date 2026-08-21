@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './HomeText.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StartIcon from '../../public/NewBrand/icons/star-arrow-right-start-20-regular.svg';
 import SearchIcon from '../../public/NewBrand/icons/search.svg';
 
 const HomeText: React.FC = () => {
-  const elementsRef = useScrollAnimation();
   const { t, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -28,7 +26,7 @@ const HomeText: React.FC = () => {
 
   return (
   <section className={styles.homeTextContainer}>
-    <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
+    <section className="hero-piece hero-piece-1">
         <h1 className={styles.mainTitle}>
           {subtitleBefore}
           <br />
@@ -37,10 +35,10 @@ const HomeText: React.FC = () => {
           {subtitleAfter}
         </h1>
     </section>
-    <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">
+    <section className="hero-piece hero-piece-2">
        <h2 className={styles.subTitle}>{t('hero.description')}</h2>
     </section>
-    <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-right">
+    <section className="hero-piece hero-piece-3">
         {t('about.description') && (
           <p className={styles.description}>
             {t('about.description')}

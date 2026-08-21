@@ -3,7 +3,6 @@
 import styles from './ProjectsSection.module.scss';
 import RecentProjects from '../RecentProjects/RecentProjects';
 import RecentTutorials from '../RecentTutorials/RecentTutorials';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 type ProjectsSectionProps = {
@@ -11,7 +10,6 @@ type ProjectsSectionProps = {
 };
 
 const ProjectsSection = ({ variant = 'projects' }: ProjectsSectionProps) => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   const isTutorials = variant === 'tutorials';
@@ -21,14 +19,14 @@ const ProjectsSection = ({ variant = 'projects' }: ProjectsSectionProps) => {
   return (
     <section className={`${styles.projectsSectionContainer} ${isTutorials ? styles.tutorialsVariant : ''}`}>
       <div className={styles.projectsSection}>
-        <p className="highlight">
+        <p className={`highlight piece-l piece-delay-0`}>
           {t(titleKey)}
         </p>
-        <p className={styles.subtitle}>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t(subtitleKey)}
         </p>
         <div className={styles.singleColumn}>
-          <section ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
+          <section className="piece-u piece-delay-2">
             {isTutorials ? <RecentTutorials /> : <RecentProjects />}
           </section>
         </div>

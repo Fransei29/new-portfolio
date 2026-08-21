@@ -2,7 +2,6 @@
 
 import React from 'react';
 import styles from './WhyChooseUs.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 interface Benefit {
@@ -13,7 +12,6 @@ interface Benefit {
 }
 
 const WhyChooseUs = () => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   const benefits: Benefit[] = [
@@ -57,19 +55,19 @@ const WhyChooseUs = () => {
       <div className={styles.container}>
         {/* Header Section - Left Aligned */}
         <div className={styles.headerSection}>
-          <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
-            <p className="highlight">
+          <section>
+            <p className="highlight piece-l piece-delay-0">
               {t('whyChooseUs.title')}
             </p>
-            <p className={styles.subtitle}>
+            <p className={`${styles.subtitle} piece-r piece-delay-1`}>
               {t('whyChooseUs.subtitle')}
             </p>
           </section>
         </div>
 
         {/* Benefits Section - Grid Layout */}
-        <section ref={el => { elementsRef.current[3] = el; }} className="fade-in-left">
-          <div className={styles.benefitsSection}>
+        <section>
+          <div className={`${styles.benefitsSection} assemble-stagger stagger-alt`}>
             {benefits.map((benefit) => {
               return (
                 <div

@@ -56,18 +56,18 @@ export default function HomeContent() {
           {/* El wave va DENTRO del bloque para que su sección y él aparezcan
               sincronizados (el bloque es el que observa el scroll). No se anima:
               lleva la clase wave-static, que lo exime del fade del padre. */}
-          <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[3] = el;}} className="assemble">
             <WaveDivider variant="aToB" />
             <Services />
           </div>
 
           <WaveDivider variant="bToA" />
 
-          <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[4] = el;}} className="assemble">
             <AutomationComparison />
           </div>
 
-          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[5] = el;}} className="assemble">
             <WaveDivider variant="aToB" />
             <ProjectsSection variant="projects" />
           </div>
@@ -75,7 +75,7 @@ export default function HomeContent() {
           {/* Va DESPUÉS de los case studies a propósito: la objeción real
               ("¿y por qué no una agencia?") recién aparece cuando ya vieron el
               trabajo. Antes de eso el visitante todavía no está comparando. */}
-          <div ref={(el) => {elementsRef.current[14] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[14] = el;}} className="assemble">
             {/* Cierra el gris (B) de ProjectsSection y abre el blanco (A) de
                 esta sección. Sin este wave las dos franjas se tocaban a filo
                 recto y el bToA de HowWeWork salía de un color que no era el
@@ -90,7 +90,7 @@ export default function HomeContent() {
               La clase redefine --wave-b a blanco sólo para este bloque; el
               relleno de la curva sigue siendo --wave-a, que .section-bg-ink ya
               pisa con el lila profundo de HowWeWork. */}
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left section-bg-ink wave-from-white">
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="assemble section-bg-ink wave-from-white">
             <WaveDivider variant="bToA" />
             <HowWeWork />
           </div>
@@ -111,14 +111,14 @@ export default function HomeContent() {
               <WaveDivider variant="aToB" />
             </div>
 
-            <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left section-bg-ink">
+            <div ref={(el) => {elementsRef.current[8] = el;}} className="assemble section-bg-ink">
               <WhyChooseUs />
             </div>
 
             <WaveDivider variant="bToA" />
           </div>
 
-          <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[11] = el;}} className="assemble">
             <ProjectsSection variant="tutorials" />
           </div>
 
@@ -128,7 +128,7 @@ export default function HomeContent() {
               forma exacta de la curva. El fondo blanco del wave se hace
               transparente (variante toolsWave) para que NO tape al panda con la
               franja de 52px sobre la curva. */}
-          <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left toolsPandaHost">
+          <div ref={(el) => {elementsRef.current[9] = el;}} className="assemble toolsPandaHost">
             {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
             <img
               className="toolsPanda"
@@ -143,7 +143,7 @@ export default function HomeContent() {
             <SkillsSummary />
           </div>
 
-          <div ref={(el) => {elementsRef.current[10] = el;}} className="fade-in-right">
+          <div ref={(el) => {elementsRef.current[10] = el;}} className="assemble">
             <WaveDivider variant="bToA" />
             <Testimonials />
           </div>
@@ -155,12 +155,12 @@ export default function HomeContent() {
               sigue usa su propio contenedor flotante, así que un wave de cierre
               chocaría con esa forma. En su lugar el gris se desvanece a blanco
               dentro de la propia sección (ver .blogSection en su módulo). */}
-          <div ref={(el) => {elementsRef.current[13] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[13] = el;}} className="assemble">
             <WaveDivider variant="aToB" />
             <BlogSection />
           </div>
 
-          <div ref={(el) => {elementsRef.current[12] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[12] = el;}} className="assemble">
             {/* CTA como contenedor separado: ancho contenido, centrado, esquinas
                 redondeadas. Sin wave arriba. */}
             <div className="ctaWrap">

@@ -23,11 +23,11 @@ const Projects = ({ tutorials }: Props) => {
     <ClientLayout>
       <section className={styles.containerProjects}>
         <div className={styles.projectsContent}>        
-          <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
-          <h1 className="highlight">
+          <div ref={(el) => { elementsRef.current[0] = el; }} className="assemble">
+          <h1 className="highlight piece-l piece-delay-0">
             {t('pages.tutorials.title')}
           </h1>
-          <p className={styles.projectsSubtitle}>
+          <p className={`${styles.projectsSubtitle} piece-r piece-delay-1`}>
             {t('pages.tutorials.subtitle')}
           </p>
       <div className={styles.projectsGrid}>

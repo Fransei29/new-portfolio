@@ -177,15 +177,15 @@ const Skills: React.FC = () => {
         </p>
 
         <div className={styles.skillsCards}>
-          <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+          <div ref={(el) => {elementsRef.current[0] = el;}} className="piece-l">
               <SkillsSection title={t('skills.frontend')} skills={frontEndSkills} gridRef={frontendGridRef} />
             </div>
 
-            <div ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-right">
+            <div ref={(el) => {elementsRef.current[1] = el;}} className="piece-r">
               <SkillsSection title={t('skills.backend')} skills={backEndSkills} gridRef={backendGridRef} />
             </div>
 
-            <div ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-left">
+            <div ref={(el) => {elementsRef.current[2] = el;}} className="piece-l">
               <SkillsSection title={t('skills.tools')} skills={toolsSkills} gridRef={toolsGridRef} />
             </div>
         </div>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useScrollAnimation } from '../../hooks/Scroll';
 import Image from 'next/image';
 import styles from './SkillsSummary.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -78,20 +77,21 @@ const SkillCardItem: React.FC<{ skill: Skill }> = ({ skill }) => {
 };
 
 const SkillsSummary: React.FC = () => {
-  const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
   const { t } = useLanguage();
 
   return (
     <section className={styles.skillsSummaryContainer}>
       <div className={styles.skillsSummarySection}>
-        <p className="highlight">
+        <p className="highlight piece-l piece-delay-0">
           {t('skills.title')}
         </p>
-        <p className={styles.subtitle}>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t('skills.summarySubtitle')}
         </p>
 
-        <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
+        {/* piece-u y no piece-l/r: el marquee ya se desplaza en horizontal por
+            su cuenta, así que una entrada lateral pelea con ese movimiento. */}
+        <div className="piece-u piece-delay-2">
           <div className={styles.marquee}>
             {skillRows.map((row, r) => {
               // Filas pares (0,2) → izquierda; impares (1,3) → derecha

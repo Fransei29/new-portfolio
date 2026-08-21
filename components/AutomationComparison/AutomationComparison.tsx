@@ -2,7 +2,6 @@
 
 import React from 'react';
 import styles from './AutomationComparison.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
   Clock,
@@ -27,20 +26,19 @@ const WITHOUT_ICONS = [Clock, AlertTriangle, UserMinus, FileWarning];
 const WITH_ICONS = [RefreshCw, CheckCheck, FileCheck2, LayoutGrid];
 
 const AutomationComparison = () => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   return (
     <section className={styles.container}>
       <div className={styles.section}>
-        <p className="highlight">{t('automation.title')}</p>
-        <p className={styles.subtitle}>
+        <p className="highlight piece-l piece-delay-0">{t('automation.title')}</p>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t('automation.subtitleLine1')}
           <br />
           {t('automation.subtitleLine2')}
         </p>
 
-        <div ref={(el) => { elementsRef.current[0] = el; }} className={styles.grid}>
+        <div className={`${styles.grid} assemble-stagger stagger-alt`}>
           {/* WITHOUT side */}
           <div className={styles.column}>
             <div className={styles.headerRow}>

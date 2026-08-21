@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { Mail, Github, Linkedin, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ContactPage.module.scss';
+import { useScrollAnimation } from '../../hooks/Scroll';
 
 export default function ContactPage() {
   const [copied, setCopied] = useState(false);
   const { t } = useLanguage();
+  const elementsRef = useScrollAnimation();
 
   const copyToClipboard = async () => {
     try {
@@ -21,13 +23,13 @@ export default function ContactPage() {
 
   return (
     <div className={styles.contactPageContainer}>
-      <div className={styles.contactPageContent}>
+      <div ref={(el) => { elementsRef.current[0] = el; }} className={`${styles.contactPageContent} assemble`}>
         <div className={styles.contactHeader}>
-          <h1 className="highlight">{t('contactPage.title')}</h1>
-          <p className={styles.subtitle}>{t('contactPage.subtitle')}</p>
+          <h1 className="highlight piece-l piece-delay-0">{t('contactPage.title')}</h1>
+          <p className={`${styles.subtitle} piece-r piece-delay-1`}>{t('contactPage.subtitle')}</p>
         </div>
 
-        <div className={styles.contactMethods}>
+        <div className={`${styles.contactMethods} assemble-stagger stagger-alt`}>
           <div
             className={styles.contactCard}
             onClick={copyToClipboard}

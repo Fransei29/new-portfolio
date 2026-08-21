@@ -3,26 +3,24 @@
 import React from 'react';
 import styles from './AboutComponent.module.scss';
 import Image from 'next/image';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const About = () => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   return (
     <section className={styles.aboutContainer}>
       <div className={styles.aboutSection}>
-        <section ref={el => { elementsRef.current[0] = el; }} className="fade-in-right">
+        <section>
           <div className={styles.firstPart}>
-            <h1 className="highlight">
+            <h1 className="highlight piece-l piece-delay-0">
               {t('about.whoIAm')}
             </h1>
           </div>
         </section>
        
         <div className={styles.contentGrid}>
-          <section ref={el => { elementsRef.current[1] = el; }} className={`${styles.leftColumn} fade-in-right`}>
+          <section className={`${styles.leftColumn} piece-l piece-delay-1`}>
             <div className={styles.introSection}>
               <p className={styles.introParagraph}>
                 {t('about.personalStory')}
@@ -55,7 +53,7 @@ const About = () => {
             </dl>
           </section>
 
-          <section className={styles.imageSection}>
+          <section className={`${styles.imageSection} piece-r piece-delay-2`}>
             <div className={styles.imageWrapper}>
               <Image
                 src='/yo.jpg'
