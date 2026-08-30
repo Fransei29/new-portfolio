@@ -238,20 +238,13 @@
 }
 
 
+/* El overlay oscuro existía para atenuar la página detrás del drawer lateral.
+   Con el menú a pantalla completa (opaco) nunca se ve, pero seguía montando un
+   `backdrop-filter: blur(8px)` sobre toda la pantalla: una capa compuesta cara
+   en GPU para algo invisible. Se mantiene en el DOM porque es el que cierra el
+   menú al tocar fuera, sólo que ya no pinta nada. */
 .menuOverlay {
   display: none;
-
-  @media (max-width: 768px) {
-    display: block;
-    position: fixed;
-    top: -20px;
-    left: -20px;
-    width: calc(100% + 40px);
-    height: calc(100vh + 40px);
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-    backdrop-filter: blur(8px);
-  }
 }
 
 .mobileMenu {
@@ -260,31 +253,68 @@
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     background-color: #fff;
-    padding: 2rem 1.5rem;
+    /* Aire arriba para el botón de cerrar; abajo, safe-area del notch/gesture
+       bar de iOS, que si no se come la última fila. */
+    padding: clamp(5.5rem, 10vh, 7rem) 2rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    /* Los links arrancan bajo el botón de cerrar y el bloque queda alineado
+       arriba; el pie lo baja el `margin-top: auto` de los controles. */
+    justify-content: flex-start;
     position: fixed;
     top: 0;
     right: 0;
+    /* Pantalla completa (antes era un drawer lateral de 70% / máx 320px).
+       `100dvh` y no `100vh`: en mobile la barra del navegador se recoge al
+       scrollear y con vh el menú quedaba más alto que la pantalla visible;
+       dvh sigue la altura real. El vh queda de fallback para navegadores
+       viejos, declarado antes para que dvh lo pise donde exista. */
     height: 100vh;
-    width: 70%;
-    max-width: 320px;
+    height: 100dvh;
+    width: 100%;
+    max-width: none;
+    left: 0;
     z-index: 1001;
-    gap: 1rem;
+    /* El aire entre links lo reparte el gap, uniforme. En vh para que se
+       comprima solo en pantallas cortas en vez de empujar el menú a scroll. */
+    gap: clamp(0.9rem, 2.6vh, 1.9rem);
     box-shadow: none;
     backdrop-filter: blur(6px);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    transform: translateX(100%); 
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
     overflow-y: auto;
     overflow-x: hidden;
 
     &.open {
       transform: translateX(0);
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      /* Sin sombra: ocupando toda la pantalla no hay borde contra el que
+         proyectarla. */
+      box-shadow: none;
     }
 
     :global(html.dark) & {
-      background-color: #2e2a3a;
+      /* Misma superficie que el navbar: el menú es su continuación a pantalla
+         completa, así que sigue la variable en vez del literal lila viejo. */
+      background-color: var(--nav-surface-dark);
+    }
+  }
+}
+
+/* Logo dentro del menú mobile: arriba a la izquierda, alineado con el mismo
+   padding lateral que los links. Sólo existe a pantalla completa. */
+.mobileMenuLogo {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    line-height: 0;
+
+    img {
+      height: 42px;
+      width: auto;
     }
   }
 }
@@ -297,8 +327,10 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    /* Alineado con el padding del menú (1.75rem) para que no quede flotando
+       fuera de la grilla del contenido ahora que ocupa toda la pantalla. */
+    top: 1.75rem;
+    right: 1.75rem;
     background-color: transparent;
     border: 1px solid #f0f0f0;
     border-radius: 8px;
@@ -340,6 +372,35 @@
   &:hover {
     color: #000;
   }
+
+  /* Pantalla completa: tipografía grande, sin separadores ni cajas. El aire
+     entre items lo reparte el `justify-content` del contenedor, no un borde por
+     link — los separadores daban aspecto de lista de sistema, no de menú. */
+  @media (max-width: 768px) {
+    font-size: clamp(1.05rem, 2.2vh, 1.25rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--lila-profundo, #2e294e);
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    /* Área táctil sin caja visible: el alto lo da la propia tipografía grande.
+       Nunca baja de 44px, el mínimo táctil recomendado. */
+    min-height: 2.75rem;
+    align-items: center;
+    transition: opacity 0.2s ease;
+
+    :global(html.dark) & {
+      color: rgb(236, 235, 235);
+    }
+
+    /* Feedback al tocar (en touch no hay hover que valga). */
+    &:active {
+      opacity: 0.45;
+    }
+  }
 }
 
 .mobileMenuControls {
@@ -349,10 +410,20 @@
     display: flex !important;
     align-items: center;
     gap: 0.75rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
+    /* `auto` empuja los controles al pie de la pantalla en vez de dejarlos
+       pegados al último link con todo el espacio vacío debajo. */
+    margin-top: auto;
+    padding-top: 1.75rem;
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+    /* ThemeToggleButton trae `margin-top: -20px` en su propia hoja para el
+       contexto del footer; acá lo subía fuera de la fila y quedaba cortado
+       contra el borde del bloque. Se neutraliza y se alinean los tres. */
+    > * {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
 
     :global(html.dark) & {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -616,6 +687,16 @@
   margin-right: 0.7rem;
   vertical-align: middle;
   transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    /* Los <svg> de lucide traen size=18 en el atributo; el width/height de CSS
+       lo pisa, así que el icono escala sin tocar el TSX. */
+    width: 19px;
+    height: 19px;
+    margin-right: 0.9rem;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
 }
 
 .externalArrow {

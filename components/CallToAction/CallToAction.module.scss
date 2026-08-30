@@ -118,6 +118,10 @@
   @media (max-width: 768px) {
     width: 158px;
     right: -64px;
+    /* El `top: 32%` de desktop lo dejaba a media altura del bloque; en mobile el
+       CTA es mucho más alto (el texto envuelve en varias líneas), así que ese
+       32% caía demasiado abajo. 20% lo sube sin sacarlo por el borde. */
+    top: 20%;
   }
 }
 

@@ -50,7 +50,7 @@ p.greeting {
   font-weight: var(--h1-highlight-font-weight);
 
   @media (max-width: 768px) {
-    font-size: 1.85rem;
+    font-size: 2.45rem;
   }
 }
 
@@ -75,10 +75,11 @@ p.greeting {
   }
 
   @media (max-width: 768px) {
-    margin: 0 0 0.15rem 0;
+    /* Más aire entre el H1 y el subtítulo (antes 0.15rem). */
+    margin: 0 0 0.7rem 0;
     padding: 0;
     line-height: 1.08;
-    font-size: 1.95rem;
+    font-size: 2.2rem;
     text-align: center;
     max-width: 100%;
   }
@@ -141,10 +142,10 @@ p.greeting {
 
   a {
     text-decoration: none;
-    height: 2.875rem;
+    height: 3.4rem;
     padding: 0 1.5rem;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     letter-spacing: 0.005em;
     border-radius: var(--br);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -164,10 +165,11 @@ p.greeting {
   color: #ffffff;
   border: 1px solid var(--primary-color);
   border-radius: 999px;
-  height: 3rem;
-  padding: 0 1.85rem;
-  font-size: 1rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  /* Altura heredada del <a> (3.4rem): primario y secundario ya no escalonan. */
+  padding: 0 2.15rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 8px 22px rgba(46, 41, 78, 0.22);
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
   &:hover {
@@ -184,14 +186,18 @@ p.greeting {
 }
 
 .btnSecondary {
+  /* Conserva la caja, pero con un borde mas liviano que el primario para que
+     el foco siga siendo "Start your project". */
   background-color: rgba(255, 255, 255, 0.85);
   color: var(--text-color);
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.22);
   border-radius: 999px;
+  padding: 0 1.85rem;
+  box-shadow: none;
 
   &:hover {
     background-color: #ffffff;
-    border-color: rgba(0, 0, 0, 0.55);
+    border-color: rgba(0, 0, 0, 0.38);
 
     // Los CTA del hero ya no llevan flecha sino iconos con forma propia
     // (estrella y lupa): girarlos -45° no significaría nada. Crecen apenas.
@@ -203,11 +209,11 @@ p.greeting {
   :global(html.dark) & {
     color: var(--text-color-dark-mode);
     background-color: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.34);
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.62);
+      border-color: rgba(255, 255, 255, 0.5);
     }
   }
 }
@@ -382,6 +388,14 @@ p.greeting {
   .socialProofStatLabel {
     font-size: 0.72rem;
   }
+
+  /* "22+ Projects shipped" fuera en mobile: en una sola línea con los avatares
+     y el copy de clientes, el bloque quedaba apretado. Se va también el divisor,
+     que sin el stat a la derecha quedaría colgando al final. */
+  .socialProofStat,
+  .socialProofDivider {
+    display: none;
+  }
 }
 
 .heroStats {
@@ -472,7 +486,8 @@ p.greeting {
   .ctaButtons {
     flex-direction: column;
     gap: 0.65rem;
-    margin: 0.5rem 0 1rem;
+    /* Más aire entre el subtítulo y los botones (antes 0.5rem arriba). */
+    margin: 1.1rem 0 1rem;
     width: 100%;
     max-width: 100%;
     padding-bottom: 0;
@@ -481,9 +496,9 @@ p.greeting {
     a {
       width: 85%;
       max-width: 85%;
-      height: 2.75rem;
+      height: 3.05rem;
       padding: 0 1.2rem;
-      font-size: 0.95rem;
+      font-size: 1.02rem;
       justify-content: center;
       margin: 0;
     }
@@ -512,6 +527,10 @@ p.greeting {
     margin-top: 1.5rem;
   }
 }
+
+
+
+
 
 
 

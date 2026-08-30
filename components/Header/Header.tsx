@@ -9,7 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight, Layers } from 'lucide-react';
+import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight, Layers, PenLine } from 'lucide-react';
 import { SiYoutube } from 'react-icons/si';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -168,6 +168,28 @@ export default function Header() {
       <div
         className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ''}`}
       >
+        {/* Logo dentro del menú: a pantalla completa el header queda tapado, así
+            que sin esto se pierde la referencia de marca y el camino al home.
+            Mismas dos variantes light/dark que el header, alternadas por CSS. */}
+        <Link href="/" passHref onClick={toggleMobileMenu} className={styles.mobileMenuLogo}>
+          <Image
+            src="/brand-header.svg"
+            alt="Franco Seiler — Software Studio"
+            width={430}
+            height={160}
+            className={`${styles.logo} ${styles.logoLight}`}
+            unoptimized
+          />
+          <Image
+            src="/brand-header-dark.svg"
+            alt="Franco Seiler — Software Studio"
+            width={430}
+            height={160}
+            className={`${styles.logo} ${styles.logoDark}`}
+            unoptimized
+          />
+        </Link>
+
         <button 
           className={styles.closeButton}
           onClick={toggleMobileMenu}
@@ -196,6 +218,7 @@ export default function Header() {
         </Link>
         <Link href="/blog" passHref onClick={toggleMobileMenu}>
           <p className={styles.mobileNavLink}>
+            <PenLine size={18} className={styles.mobileNavIcon} />
             {t('nav.blog')}
           </p>
         </Link>

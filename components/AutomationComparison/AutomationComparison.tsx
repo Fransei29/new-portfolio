@@ -33,8 +33,6 @@ const AutomationComparison = () => {
       <div className={styles.section}>
         <p className="highlight piece-l piece-delay-0">{t('automation.title')}</p>
         <p className={`${styles.subtitle} piece-r piece-delay-1`}>
-          {t('automation.subtitleLine1')}
-          <br />
           {t('automation.subtitleLine2')}
         </p>
 
@@ -83,13 +81,8 @@ const AutomationComparison = () => {
             </ul>
           </div>
 
-          {/* Center divider */}
-          <div className={styles.divider} aria-hidden="true">
-            <span className={styles.dividerBadge}>vs.</span>
-          </div>
-
           {/* WITH side */}
-          <div className={styles.column}>
+          <div className={`${styles.column} ${styles.columnWith}`}>
             <div className={styles.headerRow}>
               <div className={`${styles.eyebrow} ${styles.eyebrowWith}`}>
                 <span className={styles.eyebrowDot} />

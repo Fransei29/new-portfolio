@@ -291,24 +291,27 @@
   }
 
   .skillsCard {
-    margin: 0.25rem 0rem;
-    width: 70%;
-    padding: 0.9rem 1.5rem;
+    margin: 0;
+    /* Ancho FIJO, no porcentual. Las tarjetas son flex items de .marqueeTrack,
+       que mide `width: max-content`: un % ahí es circular (el track mide según
+       los hijos y los hijos según el track), y las tarjetas colapsaban vacías.
+       Se mantiene el criterio del ancho fijo de desktop, sólo que más chico. */
+    width: 190px;
+    padding: 0.75rem 1rem;
   }
 
   .skillName {
-    font-size: 0.95rem;
-    padding-left: 1rem;
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
   }
   
-  .skillsIconA {
-    width: 24px;
-    height: 24px;
-  }
-
+  /* 24px era el tamaño de desktop: en una tarjeta de 190px se comía el espacio
+     del nombre. flex-shrink 0 para que el icono no se deforme si el texto es largo. */
+  .skillsIconA,
   .skillIcon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 }
 

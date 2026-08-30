@@ -1,7 +1,7 @@
 {
   "services": {
     "title": "Services",
-    "subtitle": "Custom development services to enhance your online presence and optimize your business operations.",
+    "subtitle": "Custom development services to enhance your online presence.",
     "cta": "Learn More",
     "featuredLabel": "Featured",
     "seeCaseStudies": "See case studies",
@@ -49,7 +49,7 @@
   },
   "testimonials": {
     "title": "Testimonials",
-    "subtitle": "Colleagues, clients, and team leaders share their experience working with us.",
+    "subtitle": "Colleagues, clients, and team leaders.",
     "featured": "Top pick",
     "matias": {
       "name": "Matias Rivarola",

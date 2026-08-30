@@ -151,20 +151,20 @@
   color: inherit;
 }
 
-/* 2:1: la imagen queda como una banda superior que ancla la tarjeta sin
-   robarle espacio al texto, que es lo que sostiene la lectura. */
+/* Banda superior achatada: la imagen ancla la tarjeta sin robarle espacio al
+   texto, que es lo que sostiene la lectura. Venía de 2/1 y ocupaba demasiado
+   alto en la fila del home. */
 .coverWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 5 / 2;
   overflow: hidden;
   background: rgba(142, 122, 230, 0.06);
 
-  /* En mobile la tarjeta ocupa todo el ancho, así que un 2:1 se come media
-     pantalla de alto. Se achata la banda: sigue anclando la tarjeta pero deja
-     el texto arriba del pliegue. */
+  /* En mobile la tarjeta ocupa todo el ancho, así que la banda se achata más
+     todavía: sigue anclando la tarjeta pero deja el texto arriba del pliegue. */
   @media (max-width: 768px) {
-    aspect-ratio: 21 / 9;
+    aspect-ratio: 12 / 5;
   }
 
   /* Velo de marca sobre la portada: las imágenes vienen de fuentes distintas y

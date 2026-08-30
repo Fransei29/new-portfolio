@@ -65,15 +65,6 @@ const MOBILE_HIDDEN_ROWS = ['inhouse', 'manual'];
 const ComparisonMatrix = () => {
   const { t } = useLanguage();
 
-  // El ✓/✕ es decorativo: el estado real va en texto para lectores de pantalla.
-  // `t()` devuelve la clave tal cual cuando no encuentra la traducción, así que
-  // para las filas sin versión corta hay que detectarlo y caer en la larga.
-  const shortDescription = (key: string) => {
-    const shortKey = `comparison.rows.${key}.descriptionShort`;
-    const short = t(shortKey);
-    return short === shortKey ? t(`comparison.rows.${key}.description`) : short;
-  };
-
   const Mark = ({ on }: { on: boolean }) => (
     <span className={`${styles.mark} ${on ? styles.markOn : styles.markOff}`}>
       {on ? <Check size={20} aria-hidden /> : <X size={20} aria-hidden />}
@@ -92,16 +83,23 @@ const ComparisonMatrix = () => {
 
         {/* piece-u: la tabla es ancha y scrollea en horizontal en mobile; una
             entrada lateral le agregaría desborde. */}
-        <div className={`${styles.tableWrap} piece-u piece-delay-2`}>
+        {/* La animación de entrada (`piece-u`) NO puede ir en un ancestro de la
+            tabla: aplica `transform`, y un ancestro con transform crea un
+            containing block que ANULA el `position: sticky` de las cabeceras
+            —incluso en su estado final `translate3d(0,0,0)`, porque el transform
+            sigue declarado—. Por eso el wrap queda limpio y el efecto se aplica
+            sólo al <caption>, que no envuelve a los <th>. */}
+        <div className={styles.tableWrap}>
           <table className={styles.table}>
             <caption className={styles.srOnly}>{t('comparison.subtitle')}</caption>
             <thead>
               <tr>
-                {/* La celda se queda (define el ancho de la columna) pero sin
-                    rótulo visible: las filas se explican solas. El texto sigue
-                    para lectores de pantalla, que sí necesitan la cabecera. */}
+                {/* El rótulo era `srOnly` porque las filas se explican solas.
+                    Ahora que la cabecera es sticky y acompaña el scroll, la
+                    esquina vacía dejaba la barra coja: se muestra el texto para
+                    que la fila de cabecera se lea completa de lado a lado. */}
                 <th scope="col" className={styles.rowHeadCol}>
-                  <span className={styles.srOnly}>{t('comparison.criteria.option')}</span>
+                  {t('comparison.criteria.option')}
                 </th>
                 {CRITERIA.map((criterion) => (
                   <th key={criterion} scope="col" className={styles.criterionHead}>
@@ -145,22 +143,8 @@ const ComparisonMatrix = () => {
                           <span className={styles.rowName}>
                             {t(`comparison.rows.${row.key}.name`)}
                           </span>
-                          {/* Dos versiones del subtítulo: la larga en desktop
-                              y una recortada en mobile, donde el texto completo
-                              estiraba demasiado la card. El CSS decide cuál se
-                              ve; sólo se renderiza una de las dos por vez.
-                              `descriptionShort` existe únicamente para las filas
-                              que sobreviven en mobile (ver MOBILE_HIDDEN_ROWS),
-                              de ahí el fallback a la larga. */}
-                          <span
-                            className={`${styles.rowDescription} ${styles.rowDescriptionLong}`}
-                          >
+                          <span className={styles.rowDescription}>
                             {t(`comparison.rows.${row.key}.description`)}
-                          </span>
-                          <span
-                            className={`${styles.rowDescription} ${styles.rowDescriptionShort}`}
-                          >
-                            {shortDescription(row.key)}
                           </span>
                         </span>
                       </span>

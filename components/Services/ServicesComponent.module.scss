@@ -539,6 +539,7 @@
       transform: translate(3px, -3px);
       background: var(--primary-color);
       color: #ffffff;
+      opacity: 1;
     }
   }
 }
@@ -565,7 +566,9 @@
   background: rgba(142, 122, 230, 0.1);
   color: var(--primary-color);
   flex-shrink: 0;
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  opacity: 0.92;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
+    opacity 0.3s ease;
 
   :global(html.dark) & {
     background: rgba(142, 122, 230, 0.18);
@@ -592,17 +595,24 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.85);
+  /* Mismo lila que la flecha de la tarjeta destacada (AI Strategy): antes eran
+     negras y quedaban duras contra la paleta. */
+  background: rgba(142, 122, 230, 0.1);
+  color: var(--primary-color);
   flex-shrink: 0;
-  transition: transform 0.3s ease, background 0.3s ease;
+  /* En reposo apenas apagada; llega a opacidad plena cuando se hoverea la
+     tarjeta entera (el selector cuelga de .card:hover, no del propio círculo). */
+  opacity: 0.92;
+  transition: transform 0.3s ease, background 0.3s ease, opacity 0.3s ease;
 
   :global(html.dark) & {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(142, 122, 230, 0.18);
   }
 
   .card:hover & {
     background: var(--primary-color);
     transform: scale(1.1);
+    opacity: 1;
 
     :global(html.dark) & {
       background: var(--primary-color);
@@ -611,11 +621,14 @@
 }
 
 .footerDotIcon {
-  color: #ffffff;
+  /* Lila sobre el círculo lila claro. Era blanco cuando el fondo del .footerDot
+     era negro; sobre el lila nuevo quedaba invisible. En hover el círculo se
+     pinta de --primary-color sólido y ahí sí vuelve a blanco (más abajo). */
+  color: var(--primary-color);
   transition: color 0.3s ease;
 
   :global(html.dark) & {
-    color: #1a1a1a;
+    color: var(--primary-color);
   }
 
   .card:hover & {

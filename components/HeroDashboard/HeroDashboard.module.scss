@@ -1,7 +1,7 @@
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 458px;
   // Alineado a la derecha de su columna (estilo panel de producto Vercel).
   margin-inline: auto;
   // Desktop: corrido un poco a la izquierda del borde derecho de su columna.
@@ -19,11 +19,11 @@
   }
 
   @media (max-width: 1200px) {
-    max-width: 420px;
+    max-width: 402px;
   }
 
   @media (max-width: 1024px) {
-    max-width: 390px;
+    max-width: 374px;
   }
 
   // Mobile: el dashboard aprovecha todo el ancho disponible. El panda ya no
@@ -33,13 +33,25 @@
   // El margen lateral lo pone el propio wrapper: el contenedor padre (.stage)
   // no aporta padding horizontal en mobile.
   @media (max-width: 768px) {
-    max-width: none;
+    // Mucho más chico: en vez de ocupar todo el ancho (`max-width: none`), el
+    // dashboard se limita a 385px y queda centrado. Un ancho tope en px —y no
+    // un `transform: scale()`— porque el scale deja el hueco del tamaño
+    // original reservado en el layout y habría que compensarlo con márgenes
+    // negativos; el max-width achica de verdad.
+    max-width: 385px;
     // Aire arriba SÓLO el que necesita la cabeza del panda: con translateY(-86px)
     // sobre un panda de 126px asoman ~10px por encima del browser (~14px con el
     // giro), así que la cabeza pide poco. 3rem le da ese aire más un respiro
     // de separación real; el 7.5rem de antes venía de cuando el panda salía
     // mucho más y dejaba un hueco enorme sobre el dashboard.
-    margin: 3rem 1rem 1rem;
+    /* El margen inferior (antes 1rem) separa el dashboard de la sección que
+       sigue: con 1rem quedaban casi pegados. */
+    margin: 3rem auto 2.5rem;
+  }
+
+  // Pantallas muy angostas: un poco más chico todavía.
+  @media (max-width: 420px) {
+    max-width: 335px;
   }
 }
 
@@ -66,10 +78,11 @@
   // Asomado por el borde IZQUIERDO, a media altura. La mitad derecha del panda
   // queda DETRÁS del browser; sólo asoma la cabeza hacia la izquierda, cruzado.
   top: 16%;
-  // El left se ajusta junto al width para mantener constante cuánto asoma
-  // (width - |left| ≈ 52px): si sólo se achica el width, el panda deja de asomar.
-  left: -172px;
-  width: 220px;
+  // `left` MÁS negativo = el panda se corre a la izquierda = asoma MÁS afuera.
+  // Lo que queda tapado por el browser es (width - |left|): con 180/-145 unos
+  // ~35px quedan detrás, así que asoma bien pero sin despegarse del panel.
+  left: -145px;
+  width: 180px;
   height: auto;
   z-index: 0; // DETRÁS del browser (z-index: 1): se asoma desde atrás
   // Bien cruzado, quieto (sin flotar). Centrado vertical vía translateY(-50%).
@@ -85,8 +98,8 @@
   }
 
   @media (max-width: 1024px) {
-    width: 185px;
-    left: -145px;
+    width: 152px;
+    left: -122px;
   }
 
   // Mobile: el panda deja de asomar por el costado y pasa a asomar por ARRIBA,
@@ -99,7 +112,7 @@
   // la barra de URL). El translate vertical negativo lo saca por encima del
   // browser dejando visible sólo la cabeza.
   @media (max-width: 768px) {
-    width: 126px;
+    width: 92px;
     top: 0;
     left: auto;
     // Menos `right` = más cerca de la esquina derecha del browser.
@@ -111,17 +124,17 @@
     // propio panda, así que al agrandarlo salía MÁS afuera aunque el porcentaje
     // subiera. En px, "cuánto asoma" queda fijo sin importar el tamaño.
     // Menos negativo = el panda BAJA y se esconde MÁS detrás del browser.
-    // -86px sobre un panda de 126px deja ~10px de cabeza a la vista: apenas un
+    // -57px sobre un panda de 92px deja ~4px de cabeza a la vista: apenas un
     // guiño espiando desde atrás, no un isotipo apoyado arriba.
-    transform: translateY(-86px) rotate(-2deg);
+    transform: translateY(-57px) rotate(-2deg);
     transform-origin: center bottom;
   }
 
   @media (max-width: 420px) {
-    width: 108px;
+    width: 80px;
     right: 0.5rem;
-    // Mismo criterio: 108 - 72 = 8px asomando.
-    transform: translateY(-72px) rotate(-2deg);
+    // Mismo criterio: sobre 80px, -50px deja ~3px de cabeza asomando.
+    transform: translateY(-50px) rotate(-2deg);
   }
 }
 
@@ -266,10 +279,12 @@
 
 // ---------- Content ----------
 .content {
-  padding: 0.95rem 1.1rem 1.1rem;
+  /* Mas ancho y mas bajo: el recorte va en el eje vertical (padding y gap),
+     el horizontal se mantiene porque ahora sobra ancho. */
+  padding: 0.75rem 1.1rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
 
   // Dashboard más bajo en mobile: el recorte va en el eje vertical (padding y
   // gap entre bloques), no en el horizontal, que ahora tiene ancho de sobra.
@@ -474,10 +489,10 @@
   background: rgba(46, 41, 78, 0.015);
   border: 1px solid rgba(46, 41, 78, 0.06);
   border-radius: 8px;
-  padding: 0.55rem 0.75rem;
+  padding: 0.45rem 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
 
   @media (max-width: 768px) {
     padding: 0.4rem 0.6rem;
@@ -634,20 +649,25 @@
 // Área bajo la curva — degradado suave que aparece tras dibujarse la línea.
 .chartFill {
   opacity: 0;
-  animation: chartFadeIn 1.2s ease 1.4s forwards;
+  animation: chartFadeIn 0.9s ease 0.75s forwards;
 }
 
 .chartLine {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: chartDraw 2.2s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
+  /* 1200 cubre la curva más larga que puede generar seriesToPath; si queda
+     corto la línea aparece cortada al final del trazado. */
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: chartDraw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
   transition: filter 0.35s ease;
 }
 
 .chartDot {
   opacity: 0;
-  animation: chartDotIn 0.4s ease 2.6s forwards;
-  transform-origin: 392px 11px;
+  animation: chartDotIn 0.4s ease 1.5s forwards;
+  /* Antes era `392px 11px`, la posición fija del dot viejo. Ahora el dot se
+     mueve con la serie, así que el origen se toma del propio círculo. */
+  transform-origin: center;
+  transform-box: fill-box;
   transition: filter 0.35s ease;
 }
 
@@ -655,7 +675,7 @@
   opacity: 0;
   transform-origin: center;
   transform-box: fill-box;
-  animation: chartDotPing 2.4s ease-out 2.6s infinite;
+  animation: chartDotPing 2.4s ease-out 1.5s infinite;
 }
 
 @keyframes chartDotPing {
@@ -692,7 +712,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 0.7rem;
+  padding: 0.4rem 0.7rem;
   background: rgba(0, 0, 0, 0.025);
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
@@ -701,6 +721,20 @@
   // mantiene, que ahora hay ancho de sobra.
   @media (max-width: 768px) {
     padding: 0.35rem 0.7rem;
+  }
+
+  /* En mobile el dashboard muestra sólo dos filas de stack: con tres, el panel
+     crecía en alto justo donde el espacio vertical es el recurso escaso. Se va
+     la primera (Frontend & UI) y quedan Backend & APIs e Infra & DevOps.
+
+     Va anidada dentro de .stackRow (→ `.stackRow.hideOnMobile`, dos clases) y
+     NO como `.hideOnMobile` suelta: el elemento lleva ambas clases, así que a
+     igual especificidad ganaba `.stackRow { display: flex }` y la fila seguía
+     visible. */
+  &.hideOnMobile {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1038,8 +1072,16 @@
   }
 
   @media (max-width: 768px) {
-    right: 0%;
-    bottom: 0%;
+    /* Anclado por `left` y NO por `right`.
+
+       Con `right` el pill no se movía: es `position: absolute` sin `left`, así
+       que su ancho lo da el contenido, y al empujarlo con un `right` grande
+       topaba contra el borde izquierdo del contenedor y se COMPRIMÍA en vez de
+       desplazarse. Fijando `left` (y soltando `right`) el borde izquierdo queda
+       determinado y la tarjeta se mueve manteniendo su ancho. */
+    left: -5%;
+    right: auto;
+    bottom: -10%;
     padding: 0.3rem 0.6rem 0.3rem 0.3rem;
   }
 }

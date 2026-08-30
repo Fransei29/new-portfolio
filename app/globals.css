@@ -36,11 +36,23 @@
   /* Grisecito: neutro un punto más frío/marcado que el arena, para variar fondos B */
   --grisecito: #eeedf1;
   /* Superficie compartida por el navbar y las secciones B: el "papel" de la marca.
-     Gris frío muy claro con un tinte lila apenas perceptible (canal azul un punto
-     por encima del rojo/verde) para acompañar la paleta sin invadir. Más claro que
-     el grisecito anterior, pero con suficiente separación del fondo A blanco. */
-  --nav-surface: #f4f3f7;
-  --nav-surface-dark: #2e2a3a;
+     Valores tomados de `main`: blanco cálido en light y azul profundo en dark.
+     Reemplazan al par lila (#f4f3f7 / #2e2a3a) que tenía la rama.
+
+     OJO: la variable no es sólo del navbar — alimenta --background-colorB y
+     --wave-b, así que también define el fondo de las secciones B y el color de
+     las ondas divisorias en todo el sitio. */
+  /* #faf9f8 (de `main`) tiraba a crema: su rojo iba 2 puntos por encima del
+     azul y contra la paleta lila se leía amarillento. #f9f9fa invierte ese
+     sesgo apenas (azul 1 punto arriba del rojo) manteniendo el mismo tono y
+     prácticamente el mismo brillo — calma la crema sin volverse gris plano. */
+  /* Alto del header fijo. Medido en el navegador: 103.8px en un viewport de
+     900px de alto. Se declara como variable para que quien necesite dejarle
+     espacio (p. ej. la cabecera sticky de la tabla comparativa) no tenga que
+     adivinar con un `vh`, que no coincide en todos los altos de pantalla. */
+  --header-h: 104px;
+  --nav-surface: #f9f9fa;      /* anterior: #faf9f8 (main) · #f4f3f7 (lila) */
+  --nav-surface-dark: #181c33; /* anterior (lila): #2e2a3a */
   /* Lila Velo: lila MUY tenue (más suave que --lila-suave), pensado como fondo
      de sección grande. Se lee como "gris con calidez lila" sin invadir. */
   --lila-velo: #f2effb;
@@ -92,7 +104,14 @@
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
   --background-colorB: var(--nav-surface);
-  --background-colorB-gradient: linear-gradient(180deg, #f4f3f7 0%, #f8f7fa 50%, #f4f3f7 100%);
+  /* Los tonos van derivados de --nav-surface (#faf9f8) y no hardcodeados: antes
+     eran los lila viejos (#f4f3f7/#f8f7fa) y, como `background-image` se pinta
+     ENCIMA de `background-color`, el gradiente tapaba el fondo B en todas las
+     secciones — el cambio de variable sólo se veía en los waves.
+     El tramo del medio es un punto más claro, para el mismo degradé sutil. */
+  --background-colorB-gradient: linear-gradient(180deg, #f9f9fa 0%, #fcfcfd 50%, #f9f9fa 100%);
+  /* anterior (main):  linear-gradient(180deg, #faf9f8 0%, #fdfcfb 50%, #faf9f8 100%); */
+  /* anterior (lila):  linear-gradient(180deg, #f4f3f7 0%, #f8f7fa 50%, #f4f3f7 100%); */
   --background-ivory: rgb(255, 255, 255);
   --bg-hover: rgba(142, 122, 230, 0.9);
   --cta-bg: #2e294e;
@@ -232,22 +251,19 @@ html, body {
   width: 100%;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
-  overflow: auto; 
-  overflow-x: hidden;
+  /* SIN overflow en ningún eje. Verificado con Chrome + CDP: el body computaba
+     `overflow: clip visible` y eso, aunque `clip` por sí solo no crea scroll
+     container, SÍ establece un containing block — que anula el
+     `position: sticky` de la cabecera de la tabla comparativa.
+     (Antes fue `overflow: auto`, que lo rompía por la vía del scroll container.)
+     El desborde horizontal lo contienen los propios componentes con su
+     `max-width` y `min-width: 0`; no hace falta recortarlo acá. */
   font-family: var(--font-body), 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-color-light);
   transition: background-color 0.4s ease, color 0.4s ease;
   
   @media (max-width: 768px) {
     scroll-snap-type: none;
-    /* `overflow: auto` convierte a html/body en su propio contenedor de scroll,
-       y eso ANULA cualquier position:sticky de adentro (mismo problema que ya
-       estaba documentado para el índice del case study, más abajo).
-       En mobile se devuelve a `visible` para que las cards apiladas de la tabla
-       comparativa puedan pegarse. El desborde horizontal lo sigue conteniendo
-       `overflow-x: clip`, que no crea contenedor de scroll. */
-    overflow-y: visible;
-    overflow-x: clip;
   }
 }
 
@@ -320,11 +336,18 @@ html.dark {
   /* Alias usado por secciones con gradiente claro en light; evita fondos inválidos si se referencia sin definir */
   --background-colorA-dark: var(--grafito);
   /* Alternancia de fondo por sección en dark (igual que en light, pero con tonos
-     oscuros). A = base grafito; B = grafito elevado (un punto más claro). Las
-     secciones B usan var(--wave-b) como fondo para que la costura del wave calce.
-     El drop-shadow del SVG se desactiva en dark (ver WaveDivider) para no romperla. */
+     oscuros). Las secciones B usan var(--wave-b) como fondo para que la costura
+     del wave calce. El drop-shadow del SVG se desactiva en dark (ver WaveDivider)
+     para no romperla.
+
+     OJO — la alternancia quedó INVERTIDA respecto del diseño original: B fue
+     pensado como "un punto más claro" que A, y con el #2e2a3a anterior lo era
+     (luminancia 0.0254 contra 0.0223 de A). El #181c33 traído de `main` es más
+     OSCURO que A (0.0126), así que ahora las secciones B se hunden en vez de
+     elevarse. Si el resultado no convence, el arreglo es cambiar A o volver B
+     a un tono por encima de #292833. */
   --wave-a: var(--grafito);            /* #292833 — fondo A */
-  --wave-b: var(--nav-surface-dark);   /* #2e2a3a — fondo B, mismo tono que el navbar */
+  --wave-b: var(--nav-surface-dark);   /* #181c33 — fondo B, mismo tono que el navbar */
   --background-colorB: var(--nav-surface-dark);
   /* En dark el protagonista se aclara: #2e294e no contrasta sobre grafito,
      así que Lila Principal toma el rol primario y Lila Suave el acento. */
@@ -595,7 +618,9 @@ html.dark .hero-section::after {
     /* Pegado al borde izquierdo: el negativo deja que el hombro del panda se
        recorte contra el borde en vez de quedar flotando en el medio. */
     left: -30px;
-    transform: translateY(-52%) rotate(-1.25deg);
+    /* Menos negativo = el panda BAJA y queda más tapado por el relleno de la
+       curva. -52% dejaba asomar casi medio cuerpo; -49% lo esconde apenas más. */
+    transform: translateY(-49%) rotate(-1.25deg);
   }
 }
 

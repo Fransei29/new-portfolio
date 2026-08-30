@@ -1,7 +1,7 @@
 {
   "services": {
     "title": "Servicios",
-    "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea y optimizar las operaciones de tu negocio.",
+    "subtitle": "Servicios de desarrollo personalizados para potenciar tu presencia en línea.",
     "cta": "Consultar",
     "featuredLabel": "Destacado",
     "seeCaseStudies": "Ver casos de estudio",
@@ -50,7 +50,7 @@
   },
   "testimonials": {
     "title": "Testimonios",
-    "subtitle": "Colaboradores, clientes y líderes de equipo comparten su experiencia trabajando con nosotros.",
+    "subtitle": "Colaboradores, clientes y líderes de equipo.",
     "featured": "Top recomendado",
     "matias": {
       "name": "Matias Rivarola",

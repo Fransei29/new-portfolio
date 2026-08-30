@@ -122,7 +122,9 @@
 
 
    :global(html.dark) & {
-    background-color: #2e2a3a;
+    /* Panel de navegación: sigue la superficie del navbar (antes era el literal
+       lila #2e2a3a, que ahora desentona contra el navbar). */
+    background-color: var(--nav-surface-dark);
   }
   }
 }

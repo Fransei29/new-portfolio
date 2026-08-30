@@ -40,20 +40,20 @@
   }
 }
 
-// ---------- Grid with center divider ----------
+// ---------- Grid de dos columnas ----------
+// Antes era `1fr 56px 1fr`: la pista del medio existía para el divisor con el
+// badge "vs.". Al sacarlo, ese carril quedaba como un hueco vacío, así que el
+// grid pasa a dos columnas y la separación la da el gap.
 .grid {
   display: grid;
-  grid-template-columns: 1fr 56px 1fr;
-  gap: 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
   align-items: stretch;
   margin-top: 2rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    // Baja de 2.25rem: el divider ahora ocupa su propia fila (2.5rem de alto)
-    // y aporta la separación, así que el gap sólo tiene que despegarlo de
-    // cada columna.
-    gap: 0.75rem;
+    gap: 1rem;
     margin-top: 1.5rem;
   }
 }
@@ -68,10 +68,32 @@
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: var(--br);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+
+  /* Hover apenas perceptible: la tarjeta se despega 2px y la sombra se abre.
+     Nada de escala ni color — a este tamaño cualquier cosa más marcada se
+     siente brusca, y son dos bloques de lectura, no botones. */
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px -14px rgba(46, 41, 78, 0.28);
+
+    :global(html.dark) & {
+      box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.55);
+    }
+  }
 
   :global(html.dark) & {
     background: rgba(255, 255, 255, 0.025);
     border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* En touch no hay hover: el translate quedaría "pegado" tras el tap. */
+  @media (hover: none) {
+    &:hover {
+      transform: none;
+      box-shadow: var(--shadow-sm);
+    }
   }
 
   @media (max-width: 768px) {
@@ -79,115 +101,27 @@
   }
 }
 
-// ---------- Center divider ----------
-.divider {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Columna "with": borde lila de marca para separarla visualmente del lado
+   manual, que conserva el borde neutro.
 
-  /* Línea vertical que "se dibuja" al entrar en viewport: va de gris (lado
-     without) a lila (lado with), así el eje central deja de ser un badge
-     suelto y pasa a leerse como la transición entre los dos estados.
-     scaleY se anima desde el centro, por eso el badge queda anclado. */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 1.5px;
-    transform: translateX(-50%) scaleY(0);
-    transform-origin: center;
-    border-radius: 2px;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.06) 0%,
-      rgba(142, 122, 230, 0.35) 45%,
-      rgba(142, 122, 230, 0.55) 100%
-    );
-    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+   Va el lila principal (#8e7ae6) y NO --primary-color: esa variable resuelve a
+   --lila-profundo (#2e294e), un lila tan oscuro que como borde se lee negro.
 
-    :global(html.dark) & {
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.07) 0%,
-        rgba(181, 156, 248, 0.35) 45%,
-        rgba(181, 156, 248, 0.6) 100%
-      );
-    }
+   Al 32% de opacidad: marca la columna sin gritar. Va en rgba y no con la
+   variable + opacity porque `opacity` afectaría a toda la tarjeta. */
+.columnWith {
+  border-color: rgba(142, 122, 230, 0.32);
+
+  &:hover {
+    border-color: rgba(142, 122, 230, 0.5);
   }
-
-  /* El bloque padre lleva .fade-in-right (hook useScrollAnimation), que le
-     agrega .visible al entrar. Colgamos el trazo de ese mismo estado para no
-     necesitar un observer propio. */
-  :global(.visible) &::before {
-    transform: translateX(-50%) scaleY(1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before {
-      transition: none;
-      transform: translateX(-50%) scaleY(1);
-    }
-  }
-
-  // Mobile: las columnas se apilan, así que el eje deja de ser vertical y pasa
-  // a ser una línea HORIZONTAL entre las dos. Antes acá el divider se ocultaba
-  // del todo y las dos columnas quedaban una encima de la otra sin ninguna
-  // marca del corte "sin → con": la transición no se leía.
-  @media (max-width: 768px) {
-    // El grid mobile es de una sola columna, el divider entra como una fila más.
-    height: 2.5rem;
-
-    // Sin línea en mobile: el corte "sin → con" queda marcado solo por la
-    // palabra "vs.". La regla desktop define ::before, hay que apagarlo acá.
-    &::before {
-      display: none;
-    }
-  }
-}
-
-.dividerBadge {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: rgba(0, 0, 0, 0.5);
-  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 
   :global(html.dark) & {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: rgba(235, 235, 235, 0.55);
-    box-shadow: none;
+    border-color: rgba(181, 156, 248, 0.34);
   }
 
-  // Mobile: sin círculo. Queda la palabra sola, sin borde ni sombra ni fondo.
-  @media (max-width: 768px) {
-    width: auto;
-    height: auto;
-    border: none;
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-
-    :global(html.dark) & {
-      background: none;
-      border: none;
-      box-shadow: none;
-    }
+  :global(html.dark) &:hover {
+    border-color: rgba(181, 156, 248, 0.52);
   }
 }
 
@@ -203,6 +137,18 @@
 
   :global(html.dark) & {
     border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+
+  /* Mobile: el título y el stat comparten una sola línea (el stat pegado a la
+     derecha) en vez de apilarse. `nowrap` + `min-width: 0` en el eyebrow evitan
+     que el texto largo empuje el stat a una segunda fila, que es lo que hacía
+     la cabecera alta. */
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.6rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.9rem;
   }
 }
 
@@ -221,7 +167,15 @@
   }
 
   @media (max-width: 768px) {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    gap: 0.45rem;
+    /* Se encoge antes que empujar al stat fuera de la línea. El texto del
+       eyebrow es un nodo suelto (no un <span>), así que el recorte se aplica
+       al contenedor: el punto no se deforma porque ya tiene flex-shrink: 0. */
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -242,9 +196,36 @@
 
 .eyebrowWith .eyebrowDot {
   background: var(--primary-accent);
+  /* Late como un indicador "en vivo": el punto en sí queda quieto y lo que
+     pulsa es un halo en ::after, así no empuja al texto del eyebrow. */
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: eyebrowDotPulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
 
   :global(html.dark) & {
     background: var(--lila-suave);
+  }
+}
+
+@keyframes eyebrowDotPulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* El latido es decorativo: quien pide no animar ve el punto sin halo. */
+@media (prefers-reduced-motion: reduce) {
+  .eyebrowWith .eyebrowDot::after {
+    animation: none;
+    opacity: 0;
   }
 }
 
@@ -256,6 +237,13 @@
   gap: 0.1rem;
   text-align: right;
   flex-shrink: 0;
+
+  /* Mobile: pegado a la derecha del título, en la misma línea. `margin-left:
+     auto` lo empuja al borde aunque el eyebrow quede corto. */
+  @media (max-width: 768px) {
+    margin-left: auto;
+    gap: 0;
+  }
 }
 
 .statValue {
@@ -275,12 +263,19 @@
   }
 }
 
+/* El stat del lado manual retrocede: es el dato "malo", no tiene que competir
+   con el +3.4x del lado con herramientas. Se atenúa el bloque entero (valor y
+   label juntos) para que baje parejo. */
+.statBlockWithout {
+  opacity: 0.72;
+}
+
 .statBlockWithout .statValue {
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.38);
   font-variant-numeric: tabular-nums;
 
   :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.38);
   }
 }
 
@@ -328,12 +323,14 @@
     left: -2%;
     right: -2%;
     height: 1.5px;
-    background: #c94c5c;
+    /* Rojo al 45%: el sólido (#c94c5c) era el elemento más saturado de la
+       sección y se llevaba la mirada; tachar sólo tiene que leerse, no gritar. */
+    background: rgba(201, 76, 92, 0.45);
     transform: translateY(-50%);
     border-radius: 2px;
 
     :global(html.dark) & {
-      background: #e57382;
+      background: rgba(229, 115, 130, 0.45);
     }
   }
 }

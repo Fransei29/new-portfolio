@@ -20,7 +20,7 @@ const prefersReducedMotion = () =>
  * El valor se redondea acá y solo se llama a setValue cuando el entero cambia:
  * evita un re-render por frame (60/s) para un número que muestra 2 dígitos.
  */
-function useAnimatedNumber(target: number, { duration = 2200, delay = 0 } = {}) {
+function useAnimatedNumber(target: number, { duration = 1100, delay = 0 } = {}) {
   const [value, setValue] = useState(target);
   const raf = useRef<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -104,31 +104,104 @@ const TESTIMONIALS = [
   },
 ];
 
+// ---------------------------------------------------------------------------
+// Sparkline de conversion
+//
+// Antes el `d` del path era una constante: la curva era la MISMA para las cinco
+// tareas aunque el número de conversion cambiara, así que línea y dato se
+// contradecían. Ahora cada tarea trae su serie y el path se deriva de ella.
+//
+// Se hace a mano (no Chart.js) a propósito: son ~30 líneas contra ~200KB de
+// librería, el SVG sigue siendo animable pieza por pieza para el efecto de
+// explosión al scroll, y el control estético queda acá y no en los defaults de
+// un tercero.
+// ---------------------------------------------------------------------------
+const CHART = { w: 400, h: 58, padX: 8, padTop: 11, padBottom: 12 };
+
+/**
+ * Catmull-Rom a bézier cúbica: pasa por todos los puntos con tangentes
+ * continuas, así que la curva queda suave sin los picos de una polilínea.
+ * `tension` 6 es el valor estándar (curva natural); más alto = más recta.
+ */
+function seriesToPath(series: number[]) {
+  const { w, h, padX, padTop, padBottom } = CHART;
+  if (series.length < 2) return '';
+
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  // Rango mínimo de 1 para que una serie plana no divida por cero ni se pegue
+  // al borde superior.
+  const span = Math.max(max - min, 1);
+
+  const pts = series.map((v, i) => ({
+    x: padX + (i * (w - padX * 2)) / (series.length - 1),
+    y: padTop + (1 - (v - min) / span) * (h - padTop - padBottom),
+  }));
+
+  let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+  }
+  return d;
+}
+
+/** Cierra la curva contra la base para el área con degradado. */
+function pathToArea(d: string) {
+  const { w, h, padX } = CHART;
+  return d ? `${d} L${w - padX},${h} L${padX},${h} Z` : '';
+}
+
+/** Último punto de la serie — ahí va el dot final. */
+function seriesEndPoint(series: number[]) {
+  const { w, h, padX, padTop, padBottom } = CHART;
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  const span = Math.max(max - min, 1);
+  const last = series[series.length - 1];
+  return {
+    x: w - padX,
+    y: padTop + (1 - (last - min) / span) * (h - padTop - padBottom),
+  };
+}
+
 const TASKS = [
   {
     slug: 'starton-rebuild',
     week: 'Week 6 of 6',
-    stats: { conversion: 23, latency: 140, incidents: 0, checks: 47, infraProgress: 98 },
+    stats: { conversion: 27, latency: 140, incidents: 0, checks: 47, infraProgress: 98 },
+    series: [11, 13, 12, 16, 19, 18, 22, 24, 27],
   },
   {
     slug: 'auth-flow-redesign',
     week: 'Week 3 of 3',
-    stats: { conversion: 18, latency: 85, incidents: 0, checks: 32, infraProgress: 97 },
+    stats: { conversion: 24, latency: 118, incidents: 0, checks: 32, infraProgress: 97 },
+    series: [9, 10, 14, 13, 16, 18, 17, 21, 24],
   },
   {
     slug: 'checkout-optimization',
     week: 'Week 4 of 4',
-    stats: { conversion: 41, latency: 210, incidents: 0, checks: 58, infraProgress: 99 },
+    stats: { conversion: 33, latency: 152, incidents: 0, checks: 58, infraProgress: 99 },
+    series: [14, 16, 15, 20, 23, 26, 25, 30, 33],
   },
   {
     slug: 'dashboard-v2',
     week: 'Week 8 of 8',
-    stats: { conversion: 12, latency: 320, incidents: 1, checks: 74, infraProgress: 96 },
+    stats: { conversion: 25, latency: 165, incidents: 1, checks: 74, infraProgress: 96 },
+    series: [12, 11, 15, 14, 18, 17, 20, 22, 25],
   },
   {
     slug: 'payments-integration',
     week: 'Week 2 of 2',
-    stats: { conversion: 31, latency: 95, incidents: 0, checks: 26, infraProgress: 98 },
+    stats: { conversion: 30, latency: 110, incidents: 0, checks: 26, infraProgress: 98 },
+    series: [13, 15, 18, 17, 21, 20, 24, 27, 30],
   },
 ];
 
@@ -184,6 +257,17 @@ const HeroDashboard = () => {
     delay: 500,
   });
   const checksCount = currentTask.stats.checks;
+
+  // Curva derivada de la serie de la tarea activa (useMemo: recalcular en cada
+  // render no aporta nada, la serie sólo cambia al rotar de tarea).
+  const chartPath = React.useMemo(() => seriesToPath(currentTask.series), [currentTask.series]);
+  const chartArea = React.useMemo(() => pathToArea(chartPath), [chartPath]);
+  const chartEnd = React.useMemo(() => seriesEndPoint(currentTask.series), [currentTask.series]);
+
+  // Animación de trazado: se relanza en cada cambio de tarea reiniciando la
+  // animación CSS. El key remonta el <path>, que es la forma barata de volver a
+  // disparar un stroke-dashoffset sin tocar el DOM a mano.
+  const chartKey = `${taskIndex}-chart`;
 
   return (
     <div className={styles.wrapper} aria-hidden data-explode-root>
@@ -296,15 +380,17 @@ const HeroDashboard = () => {
 
               {/* Área bajo la curva — degradado suave, curva bezier */}
               <path
+                key={`${chartKey}-fill`}
                 className={styles.chartFill}
-                d="M8,46 C70,43 110,38 170,33 S280,20 392,11 L392,58 L8,58 Z"
+                d={chartArea}
                 fill="url(#heroChartFill)"
               />
 
               {/* Línea de conversión — curva suave */}
               <path
+                key={`${chartKey}-line`}
                 className={styles.chartLine}
-                d="M8,46 C70,43 110,38 170,33 S280,20 392,11"
+                d={chartPath}
                 fill="none"
                 stroke="#c9b8f5"
                 strokeWidth="1.75"
@@ -314,17 +400,19 @@ const HeroDashboard = () => {
 
               {/* Punto final — con margen para que no se corte */}
               <circle
+                key={`${chartKey}-dot-outer`}
                 className={styles.chartDotOuter}
-                cx="392"
-                cy="11"
+                cx={chartEnd.x}
+                cy={chartEnd.y}
                 r="6.5"
                 fill="#c9b8f5"
                 opacity="0.18"
               />
               <circle
+                key={`${chartKey}-dot`}
                 className={styles.chartDot}
-                cx="392"
-                cy="11"
+                cx={chartEnd.x}
+                cy={chartEnd.y}
                 r="3.8"
                 fill="#ffffff"
                 stroke="#c9b8f5"
@@ -335,7 +423,9 @@ const HeroDashboard = () => {
 
           {/* Work area rows — live progress indicators */}
           <div className={styles.stackRows}>
-            <div className={styles.stackRow} data-explode-piece="stack-row" data-explode-index="0">
+            {/* Frontend & UI se oculta en mobile: ahí sólo entran dos filas sin
+                que el dashboard se estire de más (ver .hideOnMobile en el scss). */}
+            <div className={`${styles.stackRow} ${styles.hideOnMobile}`} data-explode-piece="stack-row" data-explode-index="0">
               <div className={`${styles.stackIcon} ${styles.stackIconFrontend}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="3" y="4" width="18" height="14" rx="2" />

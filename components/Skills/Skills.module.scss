@@ -199,18 +199,35 @@
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     gap: 0.75rem;
-    box-sizing:content-box;
+    box-sizing: border-box;
   }
 
   .skillsCard{
-    margin: 0rem;
-    width: 75%;
-    padding: 0.7rem 1.25rem;
+    margin: 0;
+    /* Antes `width: 75%`: como es un item de grid, dejaba un 25% muerto a la
+       derecha de cada tarjeta y las dos columnas no alineaban. El ancho lo
+       reparte el grid (1fr); la tarjeta sólo tiene que llenar su celda. */
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0.7rem 0.9rem;
+    justify-content: flex-start;
   }
 
+  /* El nombre no puede desbordar la tarjeta en pantallas angostas: el padding
+     lateral baja y el texto se recorta con elipsis en vez de empujar la celda. */
   .skillName {
     font-size: 0.8rem;
-    padding-left: 1rem;
+    padding-left: 0.6rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .skillIcon,
+  .skillsIconA {
+    flex-shrink: 0;
   }
   
   .skillsIconA {
