@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
+import { useThemeTransition } from '../../hooks/useThemeTransition';
 import MoonIcon from '../../public/NewBrand/icons/mode-dark.svg';
 import SunIcon from '../../public/NewBrand/icons/sun-light.svg';
 import styles from './ThemeToggleButton.module.scss';
 
 export default function ThemeToggleButton() {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeTransition();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -17,10 +17,6 @@ export default function ThemeToggleButton() {
   if (!isMounted) {
     return null;
   }
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
 
   return (
     <button

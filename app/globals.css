@@ -313,6 +313,64 @@ html.theme-switching * {
   }
 }
 
+/* ============================================================
+   VIEW TRANSITIONS — cambio de tema
+   El tema nuevo entra recortado por un círculo que crece desde el botón
+   (ver hooks/useThemeTransition.ts). El clip-path lo anima JS porque el
+   origen depende de dónde esté el botón en pantalla.
+   ============================================================ */
+
+/* El navegador, por defecto, hace crossfade de las dos capas. Eso arruina el
+   círculo: la capa vieja se desvanece y el recorte deja de leerse como un
+   borde nítido. Las dos capas se muestran a opacidad plena y el único efecto
+   es el clip-path. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* El grupo es el contenedor de las dos capas y trae su propia animación de
+   morph (~250ms). Como acá las dos capas ocupan el viewport entero y no hay
+   nada que morphear, esa animación sólo compite con el círculo: termina antes
+   y puede cortar el recorte a mitad de camino. */
+::view-transition-group(root) {
+  animation: none;
+}
+
+/* La capa nueva va ENCIMA: es la que se revela. Sin este orden, el snapshot
+   viejo taparía al tema nuevo y no se vería nada crecer. */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Durante la transición el header queda capturado dentro del snapshot de la
+   página; su backdrop-filter sobre el pseudo-elemento genera repintados caros
+   y bordes sucios en el arco del círculo. */
+html.theme-transition-active header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* La View Transition congela la página: cualquier scroll durante esos ~620ms
+   desincroniza el snapshot viejo del contenido real y se ve un salto al
+   terminar. */
+html.theme-transition-active,
+html.theme-transition-active body {
+  overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
 /* Page transition: scale down + fade content when navigating */
 html.page-transitioning main {
   opacity: 0.4;

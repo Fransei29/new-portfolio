@@ -31,6 +31,13 @@ export default function ThemeTransitionOverlay() {
     previous.current = resolvedTheme
 
     const root = document.documentElement
+
+    // El toggle del header ya marca la clase él mismo (y encima corre la View
+    // Transition del círculo). Este efecto queda sólo para los cambios que NO
+    // pasan por ese botón: el usuario cambiando el tema del sistema con la
+    // pestaña abierta, o next-themes sincronizando desde otra pestaña.
+    if (root.classList.contains('theme-transition-active')) return
+
     root.classList.add('theme-switching')
     const timeout = window.setTimeout(
       () => root.classList.remove('theme-switching'),
