@@ -111,7 +111,13 @@ export default function HomeContent() {
               <WaveDivider variant="aToB" />
             </div>
 
-            <div ref={(el) => {elementsRef.current[8] = el;}} className="assemble section-bg-ink">
+            {/* Sin `assemble` ni ref del observer: la sección se pinea y se
+                anima sola. El wrapper de fade ya no tiene piezas que escalonar
+                (las tarjetas entran con el desplazamiento horizontal), y un
+                contenedor de más sólo agrega un nodo entre el pin y el layout.
+                Conserva section-bg-ink porque esa clase define --wave-a, el
+                color con el que calza la costura del wave de arriba. */}
+            <div className="section-bg-ink">
               <WhyChooseUs />
             </div>
 

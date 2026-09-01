@@ -72,19 +72,22 @@
     }
   },
   "whyChooseUs": {
-    "title": "Backed by data",
-    "subtitle": "Added value we bring to every project to achieve exceptional results.",
+    "title": "Why work this way",
+    "subtitle": "Three things you won't get from an agency or a no-code tool.",
     "expertise": {
-      "title": "Technical Expertise",
-      "description": "Over 4 years developing scalable solutions with modern technologies and industry best practices."
+      "eyebrow": "No middlemen",
+      "title": "You talk to whoever builds it",
+      "description": "There's no account manager taking notes and translating them later. The person who understands your problem is the one writing the code, so nothing gets lost in between."
     },
     "delivery": {
-      "title": "Efficient Delivery",
-      "description": "Committed to realistic timelines and clear communication. Every project is delivered with clean code and documentation."
+      "eyebrow": "No rental",
+      "title": "The code is yours",
+      "description": "Repository, documentation and access in your name from day one. If you want to continue with another team tomorrow, you can: there's no proprietary platform holding you."
     },
     "collaboration": {
-      "title": "Collaborative Approach",
-      "description": "We work closely with teams and clients, prioritizing understanding of business needs and objectives."
+      "eyebrow": "No surprises",
+      "title": "You watch it grow, you don't just wait",
+      "description": "Partial releases you can actually use while it's being built. Anything off-track shows up in week one, while fixing it is still cheap, instead of at final delivery."
     }
   },
   "blogSection": {

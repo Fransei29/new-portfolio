@@ -6,7 +6,7 @@ import styles from './ComparisonMatrix.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Check, X, Users, Building2, Blocks, PenLine } from 'lucide-react';
 
-// Los cinco criterios, en el orden en que se leen las columnas.
+// Los cinco criterios, en el orden en que se leen.
 const CRITERIA = ['speed', 'cost', 'maintainable', 'scales', 'ownership'] as const;
 
 type Criterion = (typeof CRITERIA)[number];
@@ -53,24 +53,25 @@ const ROWS: Row[] = [
   },
 ];
 
-// En mobile la matriz se apila en cards y las 5 opciones obligaban a un scroll
-// larguísimo. Se dejan las 3 que un cliente realmente compara cuando ya decidió
-// construir algo: la propuesta, la agencia y el no-code.
-//
-// `inhouse` sale porque su perfil es casi idéntico al de `agency` (sólo cambia
-// ownership), y `manual` porque el "no hacer nada" ya lo cubre la sección de
-// arriba (operational architecture). En desktop siguen apareciendo las cinco.
-const MOBILE_HIDDEN_ROWS = ['inhouse', 'manual'];
+/**
+ * ORDEN DE LECTURA: la propuesta va ÚLTIMA, no primera.
+ *
+ * En la tabla `me` iba arriba porque una tabla se lee de un vistazo y la fila
+ * destacada tiene que saltar. Acá el recorrido es temporal: las cartas se apilan
+ * una sobre otra y la que queda ARRIBA DE TODO al final es la que el visitante
+ * se lleva. Poner la propuesta primero significaría taparla con las cuatro
+ * alternativas — literalmente enterrar el argumento bajo las objeciones.
+ *
+ * Así el recorrido descarta opciones y llega a la propuesta como conclusión.
+ */
+const STACK_ORDER = ['manual', 'nocode', 'agency', 'inhouse', 'me'];
 
 const ComparisonMatrix = () => {
   const { t } = useLanguage();
 
-  const Mark = ({ on }: { on: boolean }) => (
-    <span className={`${styles.mark} ${on ? styles.markOn : styles.markOff}`}>
-      {on ? <Check size={20} aria-hidden /> : <X size={20} aria-hidden />}
-      <span className={styles.srOnly}>{on ? t('comparison.yes') : t('comparison.no')}</span>
-    </span>
-  );
+  const cards = STACK_ORDER
+    .map((key) => ROWS.find((r) => r.key === key))
+    .filter((r): r is Row => Boolean(r));
 
   return (
     <section className={styles.container}>
@@ -81,93 +82,74 @@ const ComparisonMatrix = () => {
         <h2 className="highlight piece-l piece-delay-0">{t('comparison.title')}</h2>
         <p className={`${styles.subtitle} piece-r piece-delay-1`}>{t('comparison.subtitle')}</p>
 
-        {/* piece-u: la tabla es ancha y scrollea en horizontal en mobile; una
-            entrada lateral le agregaría desborde. */}
-        {/* La animación de entrada (`piece-u`) NO puede ir en un ancestro de la
-            tabla: aplica `transform`, y un ancestro con transform crea un
-            containing block que ANULA el `position: sticky` de las cabeceras
-            —incluso en su estado final `translate3d(0,0,0)`, porque el transform
-            sigue declarado—. Por eso el wrap queda limpio y el efecto se aplica
-            sólo al <caption>, que no envuelve a los <th>. */}
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <caption className={styles.srOnly}>{t('comparison.subtitle')}</caption>
-            <thead>
-              <tr>
-                {/* El rótulo era `srOnly` porque las filas se explican solas.
-                    Ahora que la cabecera es sticky y acompaña el scroll, la
-                    esquina vacía dejaba la barra coja: se muestra el texto para
-                    que la fila de cabecera se lea completa de lado a lado. */}
-                <th scope="col" className={styles.rowHeadCol}>
-                  {t('comparison.criteria.option')}
-                </th>
-                {CRITERIA.map((criterion) => (
-                  <th key={criterion} scope="col" className={styles.criterionHead}>
-                    {t(`comparison.criteria.${criterion}`)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {ROWS.map((row) => {
-                const isMe = row.key === 'me';
-                return (
-                  <tr
-                    key={row.key}
-                    className={[
-                      styles.row,
-                      isMe ? styles.rowFeatured : '',
-                      MOBILE_HIDDEN_ROWS.includes(row.key) ? styles.hideOnMobile : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                  >
-                    <th scope="row" className={styles.rowHead}>
-                      {/* Wrapper flex propio: el <th> mantiene su display de
-                          tabla y el layout icono/texto se resuelve acá adentro. */}
-                      <span className={styles.rowHeadInner}>
-                        <span className={styles.rowIcon}>
-                          {isMe ? (
-                            <Image
-                              src="/isotipo-panda.svg"
-                              alt=""
-                              width={46}
-                              height={46}
-                              aria-hidden
-                            />
-                          ) : (
-                            row.icon
-                          )}
-                        </span>
-                        <span className={styles.rowText}>
-                          <span className={styles.rowName}>
-                            {t(`comparison.rows.${row.key}.name`)}
-                          </span>
-                          <span className={styles.rowDescription}>
-                            {t(`comparison.rows.${row.key}.description`)}
-                          </span>
-                        </span>
-                      </span>
-                    </th>
+        {/* El apilado es CSS puro (position: sticky). No lleva `piece-*` ni
+            ninguna clase de entrada: esas animaciones aplican `transform`, y un
+            ancestro con transform crea un containing block que ANULA el sticky
+            de las cartas — incluso en su estado final translate3d(0,0,0),
+            porque la propiedad sigue declarada. Es la misma trampa que tenía la
+            cabecera sticky de la tabla anterior. */}
+        <ol className={styles.stack}>
+          {cards.map((row, i) => {
+            const isMe = row.key === 'me';
+            return (
+              <li
+                key={row.key}
+                className={`${styles.card} ${isMe ? styles.cardFeatured : ''}`}
+                /* Cada carta se clava un poco más abajo que la anterior, así el
+                   borde superior de las que quedaron debajo sigue asomando y se
+                   ve el mazo acumulado. Sin esto cada carta taparía a la
+                   anterior por completo y el efecto se leería como un simple
+                   cambio de slide. */
+                style={{ '--i': i } as React.CSSProperties}
+              >
+                <div className={styles.cardInner}>
+                  <header className={styles.cardHead}>
+                    <span className={styles.cardIndex} aria-hidden>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className={styles.rowIcon}>
+                      {isMe ? (
+                        <Image src="/isotipo-panda.svg" alt="" width={46} height={46} aria-hidden />
+                      ) : (
+                        row.icon
+                      )}
+                    </span>
+                    <span className={styles.rowText}>
+                      <h3 className={styles.rowName}>{t(`comparison.rows.${row.key}.name`)}</h3>
+                      <p className={styles.rowDescription}>
+                        {t(`comparison.rows.${row.key}.description`)}
+                      </p>
+                    </span>
+                  </header>
 
-                    {CRITERIA.map((criterion) => (
-                      <td key={criterion} className={styles.cell}>
-                        {/* En mobile la tabla colapsa a cards y las columnas
-                            pierden su cabecera, así que cada celda repite el
-                            criterio con data-label. */}
-                        <span className={styles.cellLabel} aria-hidden>
-                          {t(`comparison.criteria.${criterion}`)}
-                        </span>
-                        <Mark on={row.values[criterion]} />
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
+                  <ul className={styles.criteria}>
+                    {CRITERIA.map((criterion) => {
+                      const on = row.values[criterion];
+                      return (
+                        <li
+                          key={criterion}
+                          className={`${styles.criterion} ${on ? styles.criterionOn : styles.criterionOff}`}
+                        >
+                          <span className={styles.mark}>
+                            {on ? <Check size={18} aria-hidden /> : <X size={18} aria-hidden />}
+                          </span>
+                          <span className={styles.criterionLabel}>
+                            {t(`comparison.criteria.${criterion}`)}
+                          </span>
+                          {/* El icono solo no dice "sí" o "no" a un lector de
+                              pantalla: el estado va en texto, oculto a la vista. */}
+                          <span className={styles.srOnly}>
+                            {on ? t('comparison.yes') : t('comparison.no')}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

@@ -1,5 +1,16 @@
 @import '../../app/styles/utilities.scss';
 
+/* La sección se PINEA: al llegar arriba se clava y el scroll pasa a mover las
+   tarjetas en horizontal.
+
+   SIN `overflow: hidden` acá (lo tenía antes): un ancestro con overflow ≠
+   visible se convierte en el contenedor contra el que se mide el sticky/fixed
+   y anula el pin en silencio. El recorte que hacía falta ahora vive en
+   `.viewport`, que está DENTRO del elemento pineado y por lo tanto no lo
+   afecta.
+
+   Tampoco lleva `isolation: isolate` por la misma razón: crea un stacking
+   context y el wrapper que GSAP inserta al pinear queda atrapado en él. */
 .whyChooseUs {
   position: relative;
   margin: 0;
@@ -7,8 +18,6 @@
   padding: 5.5rem 0;
   background-image: var(--background-colorB-gradient);
   background-color: var(--background-colorB);
-  overflow: hidden;
-  isolation: isolate;
 
   :global(html.dark) & {
     background-image: none;
@@ -17,7 +26,7 @@
     background-color: var(--background-colorB, var(--dark-light));
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     padding: 3rem 0;
   }
 }
@@ -28,228 +37,170 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 1rem;
-
-  @media (max-width: 768px) {
-    padding: 0 0.5rem;
-  }
 }
 
-// Header Section - Left Aligned
 .headerSection {
-  margin-bottom: 2.5rem;
+  max-width: 62ch;
+  margin-bottom: 3rem;
 
-  :global(html.dark) & :global(.highlight) {
-    color: var(--text-color-dark-mode);
-  }
-
-  @media (max-width: 768px) {
-    margin-bottom: 1.25rem;
+  @media (max-width: 900px) {
+    margin-bottom: 1.75rem;
   }
 }
-
 
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: var(--subtitle-spacing-top) auto 0;
+  margin: var(--subtitle-spacing-top) 0 0;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
-  text-align: center;
-  max-width: 60ch;
 
-  :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.7);
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin-top: var(--subtitle-spacing-top-mobile);
-    text-align: center;
   }
 }
 
-// Benefits Section - Grid Layout (floats above ambient bg)
-.benefitsSection {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* ── El riel ────────────────────────────────────────────────────────────────
+   `.viewport` recorta y `.track` es lo que GSAP desplaza en x.
+
+   El recorte va acá y no en la sección justamente porque este nodo está DENTRO
+   del elemento que se pinea: puede tener overflow sin romper nada.
+
+   `overflow-x: clip` y no `hidden`: hidden computa el otro eje como `auto` y
+   convierte al viewport en scroll container — encima del pin, eso deja al
+   usuario con dos scrolls compitiendo. `clip` recorta sin crear scroll. */
+.viewport {
+  overflow-x: clip;
+  /* Rompe el ancho del contenedor para que las tarjetas entren y salgan por los
+     bordes reales de la pantalla, no por el margen del container. Sin esto el
+     desplazamiento se ve encajonado y pierde toda la amplitud. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-inline: max(1rem, calc(50vw - var(--container-max-width) / 2));
+}
+
+.track {
+  display: flex;
   gap: 2rem;
-  width: 100%;
-  margin-top: 0;
-  grid-auto-flow: row;
-  box-sizing: border-box;
+  /* Las tarjetas no se encogen: el track tiene que ser MÁS ANCHO que la
+     pantalla, que es precisamente lo que da la distancia a recorrer. Con
+     flex-shrink por defecto se apretarían para entrar y no habría nada que
+     desplazar. */
+  align-items: stretch;
+  will-change: transform;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0;
+  @media (max-width: 900px) {
+    /* Sin pin en mobile: las tarjetas se apilan en una columna normal. */
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin-top: 0;
+    gap: 1rem;
+    will-change: auto;
   }
 }
 
 .benefitCard {
+  flex: 0 0 clamp(20rem, 32vw, 27rem);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  gap: 1.25rem;
-  padding: 1.75rem 2rem;
-  min-height: 0;
-  // MISMO criterio que las tarjetas de Working methodology: la tarjeta es el
-  // color del fondo de la sección (#ebe6fb) levantado, no un blanco que se
-  // recorta encima. Allá el fondo es #2e294e y la tarjeta #3a3457: la tarjeta
-  // emerge en vez de pegarse.
-  // El punto de equilibrio está entre dos extremos que se probaron y fallaron:
-  // #fdfcff (blanco puro) abría un salto de ~10 puntos y leía como sticker;
-  // #f4f1fd se iba al otro lado y la tarjeta se apagaba contra el fondo. Este
-  // valor conserva el tinte lila —el gradiente sigue cayendo hacia el fondo—
-  // pero arranca lo bastante claro para que la tarjeta tenga presencia propia.
-  background: linear-gradient(180deg, #fbfaff 0%, #f5f2fc 100%);
-  border: 1px solid rgba(142, 122, 230, 0.16);
-  border-radius: var(--br);
-  // Sombra teñida de lila en lugar de negro puro, y desplazada hacia
-  // abajo-derecha igual que la ProjectCard: hay una fuente de luz implícita
-  // arriba a la izquierda, consistente en toda la web. Una sombra centrada
-  // (0 Ypx) lee como objeto flotando; ésta apoya la tarjeta sobre la sección.
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    1px 1px 2px -1px rgba(46, 41, 78, 0.08),
-    3px 5px 12px -7px rgba(46, 41, 78, 0.16),
-    6px 14px 30px -18px rgba(46, 41, 78, 0.22);
-  transition: background 0.35s ease, transform 0.25s ease,
-    box-shadow 0.25s ease, border-color 0.25s ease;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
+  padding: 2.5rem 2.25rem;
+  border-radius: 20px;
+  background: var(--card-bg, #fff);
+  border: var(--borderB);
+  box-shadow: var(--shadow-lg);
 
   :global(html.dark) & {
-    background: rgba(24, 28, 51, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
-  &:hover {
-    transform: translateY(-2px);
-    // Se aclara apenas y el borde lila se define: el mismo criterio de
-    // "encenderse" de Working methodology, dentro de la paleta clara. Sube un
-    // escalón desde el reposo (#fbfaff → #ffffff), y el pie del gradiente sube
-    // con él: el estado se nota por contraste con las vecinas, sin cambiar de
-    // familia de color.
-    background: linear-gradient(180deg, #ffffff 0%, #faf8fe 100%);
-    border-color: rgba(142, 122, 230, 0.38);
-    // Misma dirección de luz que en reposo, sólo crece la distancia: la tarjeta
-    // se levanta, la luz no se mueve.
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      1px 2px 3px -1px rgba(46, 41, 78, 0.1),
-      4px 8px 18px -9px rgba(46, 41, 78, 0.2),
-      10px 20px 42px -22px rgba(46, 41, 78, 0.3),
-      0 0 24px -10px rgba(142, 122, 230, 0.35);
-
-    :global(html.dark) & {
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.38);
-      border-color: rgba(142, 122, 230, 0.4);
-    }
-
-    .benefitIconWrapper {
-      background-color: var(--icon-bg-hover);
-      border: var(--icon-border-hover);
-    }
+  @media (max-width: 900px) {
+    flex: 1 1 auto;
+    padding: 1.75rem 1.5rem;
   }
+}
 
-  @media (max-width: 768px) {
-    padding: 1.35rem 1.5rem;
-    gap: 1.25rem;
-    min-height: 0;
-  }
+.benefitIndex {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--gris-medio, #8a8599);
+  margin-bottom: 1.75rem;
 }
 
 .benefitIconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--br);
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
   background: var(--icon-bg);
   border: var(--icon-border);
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-  flex-shrink: 0;
+  color: var(--lila-profundo, #2e294e);
 
-  svg {
-    color: var(--primary-color);
-    stroke-width: 2;
-    width: 24px;
-    height: 24px;
-  }
-
-  .benefitIcon {
-    width: 24px;
-    height: 24px;
-    color: var(--primary-color);
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 768px) {
-    width: 44px;
-    height: 44px;
-
-    svg, .benefitIcon {
-      width: 22px;
-      height: 22px;
-    }
+  :global(html.dark) & {
+    color: var(--lila-suave, #b59cf8);
   }
 }
 
-.benefitText {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 0.5rem;
+.benefitEyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lila-principal, #8e7ae6);
+  margin: 0 0 0.6rem;
 }
 
 .benefitTitle {
-  font-size: var(--card-title-font-size);
-  font-weight: 500;
-  color: var(--text-color);
-  margin: 0 0 0.5rem 0;
-  line-height: 1.3;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lila-profundo, #2e294e);
+  margin: 0 0 0.9rem;
 
   :global(html.dark) & {
-    color: var(--text-color-dark-mode);
+    color: var(--text-color-dark-mode, #edecec);
   }
 
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    margin-bottom: 0.35rem;
+  @media (max-width: 900px) {
+    font-size: 1.25rem;
   }
 }
 
 .benefitDescription {
-  // No usa --text-color-light (#6b6b6b): ese gris se pensó contra blanco puro y
-  // sobre el velo lila del pie de la tarjeta pierde contraste. Este tono es más
-  // oscuro y está teñido de lila, así se lee bien en toda la altura.
-  color: #4a4560;
-  line-height: 1.5;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-color-light, #6b6b6b);
   margin: 0;
-  font-size: var(--card-description-font-size);
 
   :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.75);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.875rem;
-    line-height: 1.35;
+    color: rgba(237, 236, 236, 0.72);
   }
 }
 
+/* ── Reduced motion ─────────────────────────────────────────────────────────
+   El JS ya no monta el pin en este caso; esto acomoda el layout para que las
+   tres tarjetas convivan en una grilla estática y legible. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    width: auto;
+    margin-left: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.5rem;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .benefitCard {
+    flex: 1 1 auto;
+  }
+}

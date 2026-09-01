@@ -52,712 +52,231 @@
   }
 }
 
-/* El contenedor de sección es de 1440px, pero una matriz estirada a ese ancho
-   es ilegible: los ✓/✕ quedan lejísimos de la fila que califican y el ojo
-   pierde el renglón cruzando el vacío. La tabla se limita a una medida donde
-   etiqueta y marcas todavía se leen juntas; el header sí usa el ancho completo. */
-.tableWrap {
-  width: 100%;
-  max-width: 1280px;
-  margin-inline: auto;
+/* ── El mazo ────────────────────────────────────────────────────────────────
+   El apilado es `position: sticky` puro. Cada carta se clava al llegar arriba
+   y la siguiente le pasa por encima; el resultado es que el mazo se acumula a
+   medida que bajás.
 
-  /* SIN overflow: `overflow-x: auto` + `overflow-y: visible` NO es una
-     combinación válida — la spec obliga al navegador a computar el `visible`
-     como `auto`, así que el wrap seguía siendo contenedor de scroll y eso anula
-     el `position: sticky` de las cabeceras (un ancestro con overflow pasa a ser
-     el contenedor contra el que se mide el sticky).
+   POR QUÉ NO HAY JS: sticky lo resuelve el compositor del navegador. Un
+   equivalente con ScrollTrigger costaría un pin por carta, un recálculo por
+   resize y un salto de scroll cada vez que cambia la altura del documento —
+   para llegar exactamente al mismo píxel. Cuando el CSS alcanza, el CSS gana.
 
-     El scroll horizontal que esto daba ya no hace falta: la tabla baja su
-     `min-width` para entrar en el ancho disponible desde el breakpoint de
-     cards, así que no hay nada que desbordar. */
+   REQUISITO FRÁGIL: ningún ancestro puede tener `overflow` distinto de
+   `visible` ni un `transform` (aunque sea la identidad). Cualquiera de los dos
+   convierte al ancestro en el contenedor contra el que se mide el sticky y el
+   efecto muere en silencio. Por eso el <ol> no lleva clases de entrada.
+*/
+.stack {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1080px;
+
+  /* El aire de abajo es lo que le da al mazo recorrido para acumularse: sin él
+     la última carta llega arriba justo cuando la sección ya terminó y el efecto
+     se corta a la mitad. */
+  padding-bottom: 22vh;
 }
 
-.table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 0.5rem;
+.card {
+  position: sticky;
+  /* --i es el índice: cada carta se clava 14px más abajo que la anterior, así
+     el borde de las de abajo sigue asomando y se ve el mazo. El offset base
+     deja pasar la altura del header fijo del sitio. */
+  top: calc(var(--header-h, 104px) + 1.5rem + var(--i) * 14px);
 
-  /* Sin `min-width` fijo: existía para forzar el scroll horizontal del wrap, que
-     ya no está (rompía el sticky). Las columnas se reparten el ancho real. */
+  /* Las cartas de más abajo tienen que dibujarse ENCIMA de las anteriores.
+     El orden natural del DOM ya hace exactamente eso mientras nadie declare
+     z-index, así que no hay ninguno acá a propósito. */
+
+  /* Cada carta arranca separada de la anterior; ese margen es el scroll que
+     hay que recorrer para que la siguiente alcance a la que está clavada. */
+  & + & {
+    margin-top: 2.5rem;
+  }
 }
 
-.criterionHead {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--text-color-light);
-  text-align: center;
-  padding: 0 0.5rem 1rem;
-  /* Sin nowrap: en el ancho asignado etiquetas como "Mantenible" se
-     desbordarían. Que corten en dos líneas es preferible a ensanchar toda la
-     tabla por una palabra. */
-  hyphens: auto;
-  /* Compensa el `border-spacing: 0 0.5rem` de la tabla (8px) más el resto
-     medido en el navegador: sin esto quedaban 10px de hueco entre la barra y la
-     fila de abajo, y la cabecera se leía flotando en vez de apoyada. */
-  padding-bottom: calc(1.25rem + 16px);
-  /* Ancho FIJO: sin esto las columnas se reparten el sobrante de la tabla y
-     separan los ✓ de la etiqueta que califican. Que el aire extra se lo quede
-     la columna de opciones, no los carriles de marcas.
-     Va acotado a desktop: en mobile la tabla colapsa a cards y este ancho de
-     112px se le quedaba pegado a celdas ya convertidas en `display: block`,
-     que es lo que rompía el layout. */
-  @media (min-width: 769px) {
-    /* Sin el min-width de la tabla (que se fue para no romper el sticky), un
-       ancho fijo apretaba la columna de opciones en pantallas medianas. El
-       porcentaje reparte parejo los cinco carriles de marcas. */
-    width: 10.8%;
-    min-width: 74px;
-  }
+.cardInner {
+  background: var(--card-bg, #fff);
+  border: var(--borderB);
+  border-radius: 20px;
+  padding: 2rem 2.25rem;
+  /* La sombra es lo que vende el apilado: sin ella las cartas se ven pegadas y
+     planas, y no se lee que una pasa POR ENCIMA de la otra. */
+  box-shadow: 0 -2px 20px rgba(46, 41, 78, 0.06), var(--shadow-lg);
 
-  /* Sticky: la cabecera acompaña el scroll para no perder de vista qué columna
-     es cada una.
-
-     `top` va con el alto del header del sitio (position: fixed, ~10vh): con
-     `top: 0` la barra se pegaba DETRÁS de él y no se veía — que es lo que hacía
-     parecer que el sticky no funcionaba. */
-  @media (min-width: 769px) {
-    position: sticky;
-    top: calc(var(--header-h, 104px) + 0.75rem);
-    /* Por encima de las filas, por debajo del header del sitio (z-index: 50). */
-    z-index: 4;
-    /* Fondo propio y opaco: sin esto las filas se verían POR DEBAJO del texto
-       de la cabecera al pasar. */
-    background: var(--nav-surface);
-    /* Borde ARRIBA (no abajo): la barra se lee como una pieza apoyada sobre las
-       filas, cerrada por su lado superior. Abajo queda al ras para pegarse a la
-       primera opción sin una línea que las separe. */
-    border-top: 1px solid rgba(142, 122, 230, 0.28);
-    /* Esquinas redondeadas sólo en los extremos de la fila (ver :first-child y
-       :last-child abajo). */
-  }
-
-  /* Última columna: cierra la barra por la derecha. */
-  @media (min-width: 769px) {
-    &:last-child {
-      border-right: 1px solid rgba(142, 122, 230, 0.28);
-      border-top-right-radius: 10px;
-    }
-  }
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
 
   :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.6);
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
 
-    @media (min-width: 769px) {
-      background: var(--nav-surface-dark);
-      border-top-color: rgba(181, 156, 248, 0.3);
-    }
-
-    @media (min-width: 769px) {
-      &:last-child {
-        border-right-color: rgba(181, 156, 248, 0.3);
-      }
-    }
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
 }
 
-/* La columna de etiquetas se queda con todo el sobrante, así el bloque de
-   marcas viaja compacto a la derecha en vez de desparramarse. */
-.rowHeadCol {
-  /* Mismo tratamiento tipográfico que .criterionHead, pero alineado a la
-     izquierda: es la cabecera de la columna de nombres, no de un carril de
-     marcas. */
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--text-color-light);
-  text-align: left;
-  padding: 0 0.5rem 1rem;
+/* La carta de la propuesta: es la que queda arriba de todo al final del
+   recorrido, y se distingue del resto sin gritar. */
+.cardFeatured .cardInner {
+  border: 1px solid var(--lila-principal, #8e7ae6);
+  background: linear-gradient(180deg, var(--lila-velo, #f2effb) 0%, var(--card-bg, #fff) 100%);
 
   :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.6);
-  }
-
-  @media (min-width: 769px) {
-    width: 46%;
-    min-width: 260px;
-    /* Alineado con el texto de las filas: su .rowHead usa 1.9rem lateral. */
-    padding-left: 1.9rem;
-    /* Acompaña a .criterionHead: sin esto queda un hueco a la izquierda por el
-       que asoman las filas al pasar bajo la barra sticky. */
-    position: sticky;
-    top: calc(var(--header-h, 104px) + 0.75rem);
-    z-index: 4;
-    background: var(--nav-surface);
-    /* Borde superior + izquierdo y esquina redondeada: es el extremo izquierdo
-       de la barra. */
-    border-top: 1px solid rgba(142, 122, 230, 0.28);
-    border-left: 1px solid rgba(142, 122, 230, 0.28);
-    border-top-left-radius: 10px;
-
-    :global(html.dark) & {
-      background: var(--nav-surface-dark);
-      border-top-color: rgba(181, 156, 248, 0.3);
-      border-left-color: rgba(181, 156, 248, 0.3);
-    }
-  }
-
-  @media (max-width: 768px) {
-    display: none;
+    border-color: var(--lila-principal, #8e7ae6);
+    background: linear-gradient(180deg, var(--lila-velo-dark, #262336) 0%, var(--grafito-elevado, #2e2a3a) 100%);
   }
 }
 
-// ---------- Filas ----------
-.row {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-  /* border-spacing separa las filas, pero el fondo/borde hay que pintarlo
-     celda por celda: <tr> no acepta border-radius. */
-  .rowHead,
-  .cell {
-    background: var(--card-bg);
-    border-block: 1px solid rgba(0, 0, 0, 0.08);
-    transition: background 0.25s ease, border-color 0.25s ease;
-
-    :global(html.dark) & {
-      background: rgba(255, 255, 255, 0.025);
-      border-block-color: rgba(255, 255, 255, 0.08);
-    }
-  }
-
-  .rowHead {
-    border-left: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px 0 0 12px;
-
-    :global(html.dark) & {
-      border-left-color: rgba(255, 255, 255, 0.08);
-    }
-  }
-
-  .cell:last-child {
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 0 12px 12px 0;
-
-    :global(html.dark) & {
-      border-right-color: rgba(255, 255, 255, 0.08);
-    }
-  }
-
-  /* Hover: la fila se corre apenas hacia la derecha y se eleva. El desplazamiento
-     va en la <tr> (transform sobre filas de tabla funciona en todos los motores
-     actuales) y la sombra en las celdas, porque <tr> no la pinta. */
-  &:hover {
-    transform: translateX(3px);
-
-    /* Sólo el borde SUPERIOR reacciona. `border-block-color` pintaba también el
-       inferior y esa línea de abajo se leía como un subrayado indeseado. */
-    .rowHead,
-    .cell {
-      border-top-color: rgba(142, 122, 230, 0.34);
-
-      :global(html.dark) & {
-        border-top-color: rgba(181, 156, 248, 0.34);
-      }
-    }
-
-    /* Las marcas ✓/✕ crecen y ganan opacidad: el dato es lo que se viene a
-       comparar, así que es lo que tiene que responder. */
-    .mark {
-      transform: scale(1.18);
-    }
-
-    /* :not(.rowFeatured) — la fila destacada lleva el nombre en blanco sobre
-       superficie lila plena; pintarlo de lila lo volvería ilegible. */
-    &:not(.rowFeatured) .rowName {
-      color: var(--lila-corporativo, #7d68d8);
-    }
-  }
-
-  /* En touch el hover se queda pegado tras el tap. */
-  @media (hover: none) {
-    &:hover {
-      transform: none;
-
-      .mark {
-        transform: none;
-      }
-    }
-  }
-}
-
-/* La fila propia es la única con superficie lila plena: se lee antes que el
-   resto de la tabla y no compite con nada.
-   Además pesa más FÍSICAMENTE (más alto, con sombra) — si tuviera la misma
-   escala que las otras se leería como una alternativa más de la lista, y es la
-   propuesta. La ventaja se la dan ownership + fit + velocidad, no un trato
-   injusto a las otras filas: cada una conserva los ✓ que legítimamente tiene. */
-.rowFeatured {
-  .rowHead,
-  .cell {
-    background: var(--lila-profundo);
-    border-block-color: var(--lila-profundo);
-    color: #ffffff;
-
-    /* Sólo desktop: en la tabla este padding le da a la fila propia más peso
-       físico que al resto. En mobile la fila es una card y este valor se le
-       aplicaba a CADA celda de criterio (67px verticales por renglón), que es
-       lo que dejaba la card destacada desproporcionada. */
-    @media (min-width: 769px) {
-      padding-block: 2.1rem;
-    }
-
-    :global(html.dark) & {
-      background: var(--lila-corporativo);
-      border-block-color: var(--lila-corporativo);
-    }
-  }
-
-  @media (min-width: 769px) {
-    .rowHead {
-      box-shadow: -6px 0 18px -10px rgba(46, 41, 78, 0.5);
-    }
-
-    .cell:last-child {
-      box-shadow: 6px 0 18px -10px rgba(46, 41, 78, 0.5);
-    }
-  }
-
-  .rowHead {
-    border-left-color: var(--lila-profundo);
-
-    :global(html.dark) & {
-      border-left-color: var(--lila-corporativo);
-    }
-  }
-
-  .cell:last-child {
-    border-right-color: var(--lila-profundo);
-
-    :global(html.dark) & {
-      border-right-color: var(--lila-corporativo);
-    }
-  }
-
-  /* Sobre la superficie lila plena el riel gris ensucia: acá el carril se
-     dibuja en blanco translúcido. */
-  @media (min-width: 769px) {
-    .cell {
-      border-left-color: rgba(255, 255, 255, 0.16);
-
-      :global(html.dark) & {
-        border-left-color: rgba(255, 255, 255, 0.16);
-      }
-    }
-  }
-
-  .rowName {
-    color: #ffffff;
-    transition: color 0.25s ease;
-
-    /* El cuerpo más grande es parte del peso extra de la fila propia en la
-       tabla. En mobile todas las cards comparten escala, así que este tamaño
-       queda acotado a desktop (si no, le gana por especificidad al 1rem del
-       bloque mobile). */
-    @media (min-width: 769px) {
-      font-size: 1.24rem;
-    }
-  }
-
-  .rowDescription {
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  /* Bloque propio para el panda, como el logo en la referencia. No puede ser
-     --lila-profundo: en light la fila YA es ese color y el icono desaparecería.
-     Un blanco muy tenue lo levanta en ambos temas sin lavarlo. */
-  .rowIcon {
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  &:hover {
-    .rowHead,
-    .cell {
-      background: var(--lila-profundo);
-      border-block-color: var(--lila-profundo);
-
-      :global(html.dark) & {
-        background: var(--lila-corporativo);
-        border-block-color: var(--lila-corporativo);
-      }
-    }
-  }
-}
-
-.rowHead {
-  text-align: left;
-  font-weight: 400;
-  /* Más aire a los lados y arriba/abajo: la columna de opciones es la única
-     con texto corrido, y sin este colchón la descripción se lee apretada
-     contra el borde de la fila. */
-  padding: 1.7rem 1.9rem;
-  vertical-align: middle;
-  display: table-cell;
-}
-
-/* Icono grande a la izquierda, contenido a la derecha alineado ARRIBA (no
-   centrado): con descripciones de dos o tres líneas, centrar deja el icono
-   flotando en el medio y el bloque pierde el borde superior común. */
-.rowHeadInner {
+.cardHead {
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.cardIndex {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gris-medio, #8a8599);
+  /* Ancho fijo: sin esto "01" y "05" corren los iconos de cada carta a una x
+     distinta y el mazo se ve desalineado al apilarse. */
+  flex: 0 0 1.6rem;
+}
+
+.cardFeatured .cardIndex {
+  color: var(--lila-principal, #8e7ae6);
 }
 
 .rowIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
   width: 46px;
   height: 46px;
-  border-radius: 12px;
-  flex-shrink: 0;
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--text-color-light);
+  color: var(--lila-profundo, #2e294e);
 
   :global(html.dark) & {
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(235, 235, 235, 0.7);
+    color: var(--lila-suave, #b59cf8);
   }
 
   img {
-    width: 38px;
-    height: 38px;
+    width: 46px;
+    height: 46px;
   }
 }
 
 .rowText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
   min-width: 0;
-  /* Con la tabla más ancha la descripción entra en menos líneas, así que la
-     medida puede crecer sin que la fila se estire en alto. */
-  max-width: 46ch;
-  /* Compensa el desfase óptico: el bloque del icono tiene más masa visual que
-     la primera línea de texto, así que el nombre baja un pelo para que las dos
-     cosas se lean arrancando a la misma altura. */
-  padding-top: 0.15rem;
 }
 
 .rowName {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
   line-height: 1.25;
-  color: var(--text-color);
+  color: var(--lila-profundo, #2e294e);
+  margin: 0 0 0.25rem;
 
   :global(html.dark) & {
-    color: rgb(235, 235, 235);
+    color: var(--text-color-dark-mode, #edecec);
   }
 }
 
 .rowDescription {
   font-size: 0.92rem;
-  /* Interlineado suelto: son dos o tres líneas de texto corrido dentro de una
-     tabla, y es lo que más cuesta leer de toda la sección. */
-  line-height: 1.6;
-  color: var(--text-color-light);
+  line-height: 1.5;
+  color: var(--text-color-light, #6b6b6b);
+  margin: 0;
 
   :global(html.dark) & {
-    /* Sólido en vez de alpha 0.6 (5.4:1): es texto corrido de 2-3 líneas dentro
-       de una tabla, lo que más cuesta leer de la sección, así que se le da aire
-       de sobra en vez del mínimo. 8.6:1 sobre grafito. */
-    color: #c3c0ce;
+    color: rgba(237, 236, 236, 0.7);
   }
 }
 
-// ---------- Celdas ✓ / ✕ ----------
-.cell {
-  text-align: center;
-  padding: 1.7rem 0.5rem;
-  vertical-align: middle;
+/* ── Los criterios ─────────────────────────────────────────────────────────── */
 
-  /* Riel vertical tenue por columna: da un carril que el ojo puede bajar y
-     marca dónde termina la etiqueta y empiezan las marcas. Sin esto, a lo
-     ancho las filas se despegan de sus ✓. */
-  @media (min-width: 769px) {
-    border-left: 1px solid rgba(0, 0, 0, 0.05);
+.criteria {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
 
-    :global(html.dark) & {
-      border-left-color: rgba(255, 255, 255, 0.06);
-    }
+  @media (max-width: 900px) {
+    justify-content: flex-start;
   }
 }
 
-.cellLabel {
-  display: none;
+.criterion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.criterionOn {
+  background: rgba(88, 135, 110, 0.1);
+  color: var(--verde-bosque, #58876e);
+
+  :global(html.dark) & {
+    background: rgba(88, 135, 110, 0.2);
+    color: #8fc4a5;
+  }
+}
+
+/* El "no" se apaga en vez de gritar en rojo: la sección compara opciones
+   legítimas, no denuncia a la competencia. Un ✕ rojo en cuatro de las cinco
+   cartas leería como ataque y le restaría credibilidad a la quinta. */
+.criterionOff {
+  background: rgba(138, 133, 153, 0.1);
+  color: var(--gris-medio, #8a8599);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(237, 236, 236, 0.5);
+  }
 }
 
 .mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.28s cubic-bezier(0.34, 1.4, 0.5, 1);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
 }
 
-.markOn {
-  color: var(--primary-accent);
-
-  :global(html.dark) & {
-    color: var(--lila-suave);
-  }
-
-  .rowFeatured & {
-    color: #ffffff;
-  }
+.criterionLabel {
+  line-height: 1;
 }
 
-/* El ✕ va en gris tenue, no en rojo: la tabla tiene que leerse honesta, no
-   agresiva con las alternativas. */
-.markOff {
-  color: rgba(0, 0, 0, 0.22);
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.25);
-  }
-}
-
-// ---------- Mobile: la tabla colapsa a cards ----------
-
-@media (max-width: 768px) {
-  /* OJO con la especificidad: `.table td` (clase + elemento) le gana a `.cell`
-     (una sola clase), así que si las celdas entran acá se quedan en `block` y
-     el `display: flex` de más abajo NUNCA se aplica — que es lo que dejaba el
-     ✓/✕ pegado a la etiqueta en vez de alineado a la derecha.
-     Por eso `td` queda fuera de esta lista y se maneja en su propia regla. */
-  .table,
-  .table tbody,
-  .table tr,
-  .table th {
-    display: block;
-    width: 100%;
+/* ── Reduced motion ─────────────────────────────────────────────────────────
+   El apilado es movimiento producido por el scroll, exactamente lo que esta
+   preferencia pide apagar. Las cartas pasan a ser una lista normal: mismo
+   contenido, mismo orden, sin nada que se mueva. */
+@media (prefers-reduced-motion: reduce) {
+  .stack {
+    padding-bottom: 0;
   }
 
-  .table thead {
-    display: none;
+  .card {
+    position: static;
   }
 
-
-  .table {
-    border-spacing: 0;
-  }
-
-  /* Cards en lista simple, una debajo de la otra.
-     Antes se apilaban con `position: sticky` y cada una se montaba sobre la
-     anterior al scrollear. El efecto era vistoso pero le peleaba al contenido:
-     tapaba la opción que estabas leyendo con la siguiente, y en una sección
-     cuyo punto es COMPARAR, no poder ver una opción entera es el peor costo
-     posible. La versión estática ya existía como fallback de
-     `prefers-reduced-motion`; ahora es el comportamiento único. */
-  .row {
-    margin-bottom: 1rem;
-    border-radius: 12px;
-    /* Sin `overflow: hidden`: crea un contenedor de scroll y anula el sticky.
-       El clip de las esquinas lo resuelve cada celda con su propio radio. */
-
-    .rowHead,
-    .cell {
-      border-block: 0;
-      border-radius: 0;
-    }
-
-    /* Las esquinas las redondea la primera y la última celda: sin
-       `overflow: hidden` en la card (rompería el sticky), el recorte tiene que
-       hacerlo cada extremo por su cuenta. */
-    .rowHead {
-      border-left: 0;
-      border-radius: 12px 12px 0 0;
-    }
-
-    .cell:last-child {
-      border-right: 0;
-      border-radius: 0 0 12px 12px;
-    }
-  }
-
-  /* En cards el borde lo lleva la fila entera, no cada celda. */
-  .row {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    /* Fondo OPACO obligatorio: al superponerse, sin esto se ve la card de atrás
-       a través de la de adelante. */
-    background: var(--card-bg, #ffffff);
-    /* Sombra neutra hacia abajo. La anterior iba hacia ARRIBA para marcar el
-       borde de la card que se montaba encima; sin apilado, una sombra
-       ascendente suelta se lee como error de render. */
-    box-shadow: 0 2px 10px -6px rgba(46, 41, 78, 0.22);
-
-    :global(html.dark) & {
-      border-color: rgba(255, 255, 255, 0.1);
-      background: var(--grafito-elevado, #2e2a3a);
-      box-shadow: 0 2px 10px -6px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  /* La última card no necesita margen inferior. `last-of-type` apuntaría a
-     `manual`, que en mobile está oculta (ver MOBILE_HIDDEN_ROWS), así que se
-     nombra la última VISIBLE: nocode, 4ª del array ROWS. */
-  .row:nth-of-type(4) {
-    margin-bottom: 0;
-  }
-
-  .rowFeatured {
-    border-color: var(--lila-profundo);
-
-    :global(html.dark) & {
-      border-color: var(--lila-corporativo);
-    }
-  }
-
-  .rowHead {
-    padding: 1rem 0.95rem 0.85rem;
-    /* Mismo motivo que en td.cell: el proyecto no tiene reset global de
-       box-sizing, así que sin esto el padding desborda el 100% de la card. */
-    box-sizing: border-box;
-  }
-
-  .rowText {
-    max-width: none;
-  }
-
-  /* Escala mobile: tipografía más chica y más aire entre cards. El nombre baja
-     lo justo para seguir leyéndose como título de la card. */
-  .rowName {
-    font-size: 1rem;
-  }
-
-  .rowDescription {
-    font-size: 0.83rem;
-    line-height: 1.55;
-  }
-
-  /* En card el icono se achica: a 56px se come el ancho útil de la fila y
-     empuja el texto a demasiadas líneas. */
-  .rowIcon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    flex-shrink: 0;
-
-    img {
-      width: 23px;
-      height: 23px;
-    }
-  }
-
-  /* El panda de "Custom development" es la única fila con isotipo (el resto usa
-     iconos de línea) y a 23px se leía como una mancha. Se agranda solo en esa
-     fila: el cuadro crece y el SVG casi lo llena, como en desktop (46/56). */
-  .rowFeatured .rowIcon {
-    width: 52px;
-    height: 52px;
-    border-radius: 13px;
-
-    img {
-      width: 44px;
-      height: 44px;
-    }
-  }
-
-  .rowHeadInner {
-    gap: 0.7rem;
-  }
-
-  /* Los criterios pasan a ser filas etiqueta → ✓/✕ dentro de la card.
-     Va como `td.cell` para igualar la especificidad de `.table td` y que el
-     flex gane sin depender del orden del archivo. */
-  td.cell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    /* Sin esto el padding se SUMA al 100% y la celda desborda la card, que es
-       lo que empujaba los ✓ fuera del borde derecho. */
-    box-sizing: border-box;
-    /* Gap para que la etiqueta nunca se pegue al ✓/✕ cuando corta en dos
-       líneas en pantallas angostas. */
-    gap: 0.5rem;
-    padding: 0.45rem 0.95rem;
-    text-align: left;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-
-    :global(html.dark) & {
-      border-top-color: rgba(255, 255, 255, 0.07);
-    }
-  }
-
-  /* Los 5 criterios en una sola columna estiraban cada card a 5 filas. Pasan a
-     DOS columnas: la card baja de ~5 filas a 3 y la comparación se abarca de
-     un vistazo, sin scrollear dentro de la propia card.
-     Va como `tr.row` y no `.row`: `.table tr` de más arriba es (0,1,1) y le
-     ganaría a la clase suelta, dejando la card en `display: block`. */
-  tr.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    /* El header (nombre + descripción) sigue a ancho completo arriba. */
-    .rowHead {
-      grid-column: 1 / -1;
-    }
-
-    /* El criterio impar final ('You own it') queda solo en su fila: se estira
-       a las dos columnas para que no deje un hueco vacío al lado.
-       Pero el contenido NO se estira con la celda: con `space-between` sobre el
-       ancho completo, el ✓ se iba hasta el borde derecho de la card y quedaba
-       desalineado con los de media fila. Limitándolo a la mitad, la tilde cae
-       en la misma vertical que la de 'Maintainable'. */
-    td.cell:last-child {
-      grid-column: 1 / -1;
-      /* El padding derecho empuja el contenido a la mitad izquierda: con
-         `space-between` sobre el ancho completo la marca se iba al borde de la
-         card. Los 0.95rem replican el padding lateral de una celda normal, así
-         la tilde cae en la misma vertical que la de 'Maintainable'. */
-      padding-right: calc(50% + 0.95rem);
-    }
-
-    /* Con dos columnas hace falta también una línea vertical entre ellas, si no
-       las dos mitades se leen como una sola fila corrida. */
-    td.cell:nth-child(even) {
-      border-left: 1px solid rgba(0, 0, 0, 0.06);
-
-      :global(html.dark) & {
-        border-left-color: rgba(255, 255, 255, 0.07);
-      }
-    }
-
-    /* La celda que se estira a full width no lleva línea izquierda. */
-    td.cell:last-child {
-      border-left: 0;
-    }
-  }
-
-  .rowFeatured td.cell:nth-child(even) {
-    border-left-color: rgba(255, 255, 255, 0.16);
-  }
-
-  .rowFeatured .cell {
-    border-top-color: rgba(255, 255, 255, 0.16);
-  }
-
-  .cellLabel {
-    display: inline-block;
-    font-size: 0.8rem;
-    color: var(--text-color-light);
-
-    :global(html.dark) & {
-      color: rgba(235, 235, 235, 0.65);
-    }
-  }
-
-  .rowFeatured .cellLabel {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  /* Dos opciones fuera en mobile — ver MOBILE_HIDDEN_ROWS en el .tsx.
-     Va como `tr.hideOnMobile` (y no `.hideOnMobile` suelta) para empatarle a
-     `.table tr` y a `tr.row`, ambas (0,1,1). Y va AL FINAL del bloque: contra
-     `tr.row { display: grid }`, que empata en especificidad, el desempate lo
-     define el orden — si quedara antes, la fila oculta volvía a mostrarse. */
-  tr.hideOnMobile {
-    display: none;
+  .card + .card {
+    margin-top: 1.25rem;
   }
 }

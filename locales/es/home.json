@@ -72,19 +72,22 @@
     }
   },
   "whyChooseUs": {
-    "title": "Datos que respaldan",
-    "subtitle": "Valor agregado que aportamos a cada proyecto para alcanzar resultados excepcionales.",
+    "title": "Por qué trabajar así",
+    "subtitle": "Tres cosas que no vas a encontrar en una agencia ni en una herramienta no-code.",
     "expertise": {
-      "title": "Experiencia Técnica",
-      "description": "Más de 4 años desarrollando soluciones escalables con tecnologías modernas y mejores prácticas de la industria."
+      "eyebrow": "Sin intermediarios",
+      "title": "Hablás con quien lo construye",
+      "description": "No hay un comercial que te toma el pedido y después lo traduce. La persona que entiende tu problema es la misma que escribe el código, así que nada se pierde en el camino."
     },
     "delivery": {
-      "title": "Entrega Eficiente",
-      "description": "Comprometidos con plazos realistas y comunicación clara. Cada proyecto se entrega con código limpio y documentación."
+      "eyebrow": "Sin alquiler",
+      "title": "El código queda tuyo",
+      "description": "Repositorio, documentación y accesos a tu nombre desde el primer día. Si mañana querés seguir con otro equipo, podés: no hay plataforma propietaria que te retenga."
     },
     "collaboration": {
-      "title": "Enfoque Colaborativo",
-      "description": "Trabajamos de cerca con equipos y clientes, priorizando la comprensión de necesidades y objetivos del negocio."
+      "eyebrow": "Sin sorpresas",
+      "title": "Lo ves crecer, no lo esperás",
+      "description": "Entregas parciales que podés probar mientras se construye. Los desvíos aparecen en la semana uno, cuando corregir todavía es barato, y no en la entrega final."
     }
   },
   "blogSection": {

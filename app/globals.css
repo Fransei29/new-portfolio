@@ -1286,7 +1286,13 @@ html.hydrated .hero-section .home-textB   { animation-delay: 0.35s; }
 @media (max-width: 768px) {
 
   html, body {
-    overflow-x: hidden; 
+    /* `clip` y no `hidden`: los dos contienen el desborde horizontal, pero
+       `overflow-x: hidden` computa el eje Y como `auto` y convierte al body en
+       scroll container — y un ancestro con scroll anula el `position: sticky`
+       de sus descendientes. Es la misma trampa ya documentada arriba (ver el
+       bloque de html/body cerca del inicio del archivo); acá se colaba de nuevo
+       sólo en mobile, y rompía el apilado de las cartas de ComparisonMatrix. */
+    overflow-x: clip;
     width: 100%;    
     margin: 0;   
     padding: 0;
