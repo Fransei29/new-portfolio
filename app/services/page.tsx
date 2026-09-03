@@ -71,30 +71,11 @@ export default function ServicesPage() {
     })),
   };
 
-  /* Las preguntas del final ya están escritas y respondidas en la página; el
-     FAQPage solo las declara para que puedan aparecer como respuesta directa. */
-  const faqPage = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: content.faq.items.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
-    })),
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
       />
       <Breadcrumbs
         items={[

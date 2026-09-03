@@ -54,7 +54,7 @@ export default function ServicesView({ initialContent }: Props) {
     setContent(language === 'en' ? initialContent : getServicesContent(language));
   }, [language, initialContent]);
 
-  const { hero, labels, services, process, faq } = content;
+  const { hero, labels, services } = content;
   const active = services.find((s) => s.key === activeKey) ?? services[0];
   const ActiveIcon = ICONS[active.key];
 
@@ -207,48 +207,15 @@ export default function ServicesView({ initialContent }: Props) {
           </div>
         </section>
 
-        {/* ---------- Cómo se trabaja ---------- */}
-        <section className={styles.processSection}>
-          <div className={styles.container}>
-            <h2 className="highlight">{process.title}</h2>
-            <p className={styles.sectionSubtitle}>{process.subtitle}</p>
-
-            <ol className={styles.processGrid}>
-              {process.steps.map((step, index) => (
-                <li key={step.title} className={styles.processStep}>
-                  <span className={styles.stepNumber}>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className={styles.stepTitle}>{step.title}</h3>
-                  <p className={styles.stepDescription}>{step.description}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* ---------- FAQ ----------
-            Dos columnas, sin acordeón: las respuestas son cortas y esconderlas
-            solo agregaba un clic para leer seis líneas. */}
-        <section className={styles.faqSection}>
-          <div className={styles.container}>
-            <h2 className="highlight">{faq.title}</h2>
-
-            <ul className={styles.faqGrid}>
-              {faq.items.map((item) => (
-                <li key={item.q} className={styles.faqItem}>
-                  <h3 className={styles.faqQuestion}>{item.q}</h3>
-                  <p className={styles.faqAnswer}>{item.a}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* ---------- CTA final ----------
             Mismo componente que cierra la home, para que el cierre de todas las
             páginas sea el mismo. */}
-        <div className={styles.ctaWrap}>
+        {/* `ctaWrap` global (globals.css) y NO una clase del módulo: es la que
+            le da el ancho contenido, el centrado, las esquinas redondeadas y la
+            sombra. El módulo definía su propio ctaWrap con sólo padding, así
+            que acá el CTA se estiraba a todo el ancho y no coincidía con el de
+            la home. Con la clase global las dos páginas cierran igual. */}
+        <div className="ctaWrap">
           <CallToAction />
         </div>
       </div>

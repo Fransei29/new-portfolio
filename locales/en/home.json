@@ -76,18 +76,18 @@
     "subtitle": "Three things you won't get from an agency or a no-code tool.",
     "expertise": {
       "eyebrow": "No middlemen",
-      "title": "You talk to whoever builds it",
-      "description": "There's no account manager taking notes and translating them later. The person who understands your problem is the one writing the code, so nothing gets lost in between."
+      "title": "You talk to the builder",
+      "description": "No account managers. No communication layers.\nYou talk directly to the person building it."
     },
     "delivery": {
-      "eyebrow": "No rental",
-      "title": "The code is yours",
-      "description": "Repository, documentation and access in your name from day one. If you want to continue with another team tomorrow, you can: there's no proprietary platform holding you."
+      "eyebrow": "No lock-in",
+      "title": "You own everything",
+      "description": "Your code. Your repository. Your documentation.\nYour access. From day one, it's yours."
     },
     "collaboration": {
       "eyebrow": "No surprises",
-      "title": "You watch it grow, you don't just wait",
-      "description": "Partial releases you can actually use while it's being built. Anything off-track shows up in week one, while fixing it is still cheap, instead of at final delivery."
+      "title": "You see it working",
+      "description": "Working releases throughout the build.\nYou don't wait until the end to find out if it's right."
     }
   },
   "blogSection": {

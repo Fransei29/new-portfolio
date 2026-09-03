@@ -1,16 +1,12 @@
 @import '../../app/styles/utilities.scss';
 
-/* La sección se PINEA: al llegar arriba se clava y el scroll pasa a mover las
-   tarjetas en horizontal.
+/* Tres tarjetas en grilla, dentro del container.
 
-   SIN `overflow: hidden` acá (lo tenía antes): un ancestro con overflow ≠
-   visible se convierte en el contenedor contra el que se mide el sticky/fixed
-   y anula el pin en silencio. El recorte que hacía falta ahora vive en
-   `.viewport`, que está DENTRO del elemento pineado y por lo tanto no lo
-   afecta.
-
-   Tampoco lleva `isolation: isolate` por la misma razón: crea un stacking
-   context y el wrapper que GSAP inserta al pinear queda atrapado en él. */
+   Esta sección llegó a pinearse y desplazar las tarjetas en horizontal con el
+   scroll. Se sacó: el `scroll-snap-type: y mandatory` de html/body saltaba el
+   tramo pineado de un tirón y el scrub no llegaba a correr, y el riel a ancho
+   completo (100vw + margin negativo) no calzaba con el max-width del container.
+   Con tres tarjetas que entran en una fila el efecto no valía la complejidad. */
 .whyChooseUs {
   position: relative;
   margin: 0;
@@ -43,6 +39,14 @@
   max-width: 62ch;
   margin-bottom: 3rem;
 
+  /* `.ContainerGeneralComplete .highlight` centra todos los títulos de sección.
+     Acá el subtítulo y las tarjetas están alineados a la izquierda, así que un
+     título centrado queda descolgado del bloque. Se pisa sólo en esta sección
+     — el selector global gana por especificidad si no se anida así. */
+  :global(.highlight) {
+    text-align: left;
+  }
+
   @media (max-width: 900px) {
     margin-bottom: 1.75rem;
   }
@@ -60,84 +64,112 @@
   }
 }
 
-/* ── El riel ────────────────────────────────────────────────────────────────
-   `.viewport` recorta y `.track` es lo que GSAP desplaza en x.
-
-   El recorte va acá y no en la sección justamente porque este nodo está DENTRO
-   del elemento que se pinea: puede tener overflow sin romper nada.
-
-   `overflow-x: clip` y no `hidden`: hidden computa el otro eje como `auto` y
-   convierte al viewport en scroll container — encima del pin, eso deja al
-   usuario con dos scrolls compitiendo. `clip` recorta sin crear scroll. */
-.viewport {
-  overflow-x: clip;
-  /* Rompe el ancho del contenedor para que las tarjetas entren y salgan por los
-     bordes reales de la pantalla, no por el margen del container. Sin esto el
-     desplazamiento se ve encajonado y pierde toda la amplitud. */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  padding-inline: max(1rem, calc(50vw - var(--container-max-width) / 2));
-}
-
-.track {
-  display: flex;
+/* Grilla simple: tres columnas en desktop, una sola en mobile. Vive DENTRO de
+   `.container`, así que hereda su max-width y su padding — el título y la
+   primera tarjeta arrancan alineados sin cuentas de por medio. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  /* Las tarjetas no se encogen: el track tiene que ser MÁS ANCHO que la
-     pantalla, que es precisamente lo que da la distancia a recorrer. Con
-     flex-shrink por defecto se apretarían para entrar y no habría nada que
-     desplazar. */
   align-items: stretch;
-  will-change: transform;
 
-  @media (max-width: 900px) {
-    /* Sin pin en mobile: las tarjetas se apilan en una columna normal. */
-    display: grid;
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
     gap: 1rem;
-    will-change: auto;
   }
 }
 
 .benefitCard {
-  flex: 0 0 clamp(20rem, 32vw, 27rem);
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 2.25rem;
-  border-radius: 20px;
+  gap: 1.1rem;
+  padding: 1.75rem 1.6rem;
+  border-radius: 12px;
   background: var(--card-bg, #fff);
   border: var(--borderB);
-  box-shadow: var(--shadow-lg);
+  /* --shadow-sm y no --shadow-lg: sobre el fondo lila de la sección una sombra
+     de 12px de blur ensucia el color alrededor de cada tarjeta. Con el borde ya
+     definiendo el contorno, la sombra sólo tiene que despegarla del fondo. */
+  box-shadow: var(--shadow-sm);
+  /* Sólo lo que cambia en hover. Un `transition: all` acá obliga al navegador a
+     vigilar cada propiedad de la tarjeta, y es lo que hace que los hovers se
+     sientan pesados (ya documentado en el bloque de theme-switching). */
+  transition: box-shadow 0.22s ease, border-color 0.22s ease;
+
+  &:hover {
+    /* La tarjeta NO se levanta: nada de translateY. El efecto es de color —
+       borde lila, el icono encendido y la sombra un escalón más arriba en la
+       misma escala, que se nota sin volverse lo primero que ves. */
+    box-shadow: var(--shadow-md);
+    border-color: rgba(142, 122, 230, 0.55);
+
+    /* El icono es el único punto de color de la tarjeta: invertirlo es lo que
+       de verdad la "enciende", más que el borde solo. */
+    .benefitIconWrapper {
+      background: var(--lila-principal, #8e7ae6);
+      border-color: transparent;
+      color: #fff;
+    }
+  }
+
+  /* Teclado: el hover no existe navegando con tab, y sin esto la tarjeta no da
+     ninguna señal. `:focus-within` porque el foco cae en algo de adentro. */
+  &:focus-within {
+    border-color: rgba(142, 122, 230, 0.55);
+  }
 
   :global(html.dark) & {
     background: var(--grafito-elevado, #2e2a3a);
     border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      /* --shadow-md ya tiene su variante oscura (globals.css:433), así que el
+         hover no necesita nada propio acá. El peso lo cargan el borde y el
+         icono: el lila sube al suave (#b59cf8) para contrastar con el grafito. */
+      border-color: rgba(181, 156, 248, 0.55);
+
+      .benefitIconWrapper {
+        background: var(--lila-suave, #b59cf8);
+        color: var(--lila-profundo, #2e294e);
+      }
+    }
   }
 
   @media (max-width: 900px) {
-    flex: 1 1 auto;
     padding: 1.75rem 1.5rem;
   }
 }
 
-.benefitIndex {
-  font-family: var(--font-heading), system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: var(--gris-medio, #8a8599);
-  margin-bottom: 1.75rem;
+
+/* Icono a la izquierda, eyebrow + título a la derecha. */
+.benefitHead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.benefitHeadText {
+  /* min-width: 0 deja que el título corte línea dentro del flex en vez de
+     empujar la columna y desbordar la tarjeta. */
+  min-width: 0;
 }
 
 .benefitIconWrapper {
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  margin-bottom: 1.5rem;
+  /* flex-shrink: 0 — sin esto el icono se achata cuando el título es largo. */
+  flex: 0 0 48px;
+  height: 48px;
+  border-radius: 10px;
   background: var(--icon-bg);
   border: var(--icon-border);
   color: var(--lila-profundo, #2e294e);
+  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
 
   :global(html.dark) & {
     color: var(--lila-suave, #b59cf8);
@@ -150,16 +182,18 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--lila-principal, #8e7ae6);
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.25rem;
 }
 
 .benefitTitle {
   font-family: var(--font-heading), system-ui, sans-serif;
-  font-size: 1.45rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 1.2rem;
+  /* 600 y no 700: el eyebrow de arriba ya va en 700, y con los dos en el mismo
+     peso la jerarquía dentro de la tarjeta se aplanaba. */
+  font-weight: 600;
+  line-height: 1.25;
   color: var(--lila-profundo, #2e294e);
-  margin: 0 0 0.9rem;
+  margin: 0;
 
   :global(html.dark) & {
     color: var(--text-color-dark-mode, #edecec);
@@ -178,29 +212,5 @@
 
   :global(html.dark) & {
     color: rgba(237, 236, 236, 0.72);
-  }
-}
-
-/* ── Reduced motion ─────────────────────────────────────────────────────────
-   El JS ya no monta el pin en este caso; esto acomoda el layout para que las
-   tres tarjetas convivan en una grilla estática y legible. */
-@media (prefers-reduced-motion: reduce) {
-  .viewport {
-    width: auto;
-    margin-left: 0;
-    padding-inline: 0;
-    overflow: visible;
-  }
-
-  .track {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    gap: 1.5rem;
-    transform: none !important;
-    will-change: auto;
-  }
-
-  .benefitCard {
-    flex: 1 1 auto;
   }
 }

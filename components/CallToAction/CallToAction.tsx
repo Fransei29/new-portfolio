@@ -22,7 +22,15 @@ export default function CallToAction() {
 
     // Si ya vive dentro de un .assemble, ese wrapper lo dispara: no hace falta
     // un segundo observer compitiendo por el mismo elemento.
-    if (el.closest('.assemble')) return;
+    //
+    // Se busca desde el PADRE: `el.closest()` se incluye a sí mismo y este
+    // <section> lleva su propia clase `assemble`, así que siempre encontraba
+    // una coincidencia y salía sin registrar nada. En la home no se notaba
+    // porque un wrapper externo con .assemble recibe `visible` del observer de
+    // la página; en /services y /about, donde ese wrapper no existe, el CTA se
+    // quedaba en opacity:0 para siempre — justo el caso que este observer
+    // existe para cubrir.
+    if (el.parentElement?.closest('.assemble')) return;
 
     const observer = new IntersectionObserver(
       (entries) => {

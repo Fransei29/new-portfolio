@@ -169,20 +169,13 @@
   }
 }
 
-/* La tarjeta activa: borde lila lleno y un filete arriba. No usa `transform`
-   para destacarse, porque compite con el hover de las otras. */
+/* La tarjeta activa: borde lila lleno y sombra. Tuvo un filete de color arriba
+   que se sacó — contra el radio de 10px de la tarjeta quedaba cortado en las
+   esquinas, y el borde lila ya la distingue de sobra. No usa `transform` para
+   destacarse, porque compite con el hover de las otras. */
 .cardActive {
   border-color: var(--lila-principal);
   box-shadow: var(--shadow-md);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -1px -1px auto;
-    height: 3px;
-    border-radius: var(--br) var(--br) 0 0;
-    background: var(--lila-principal);
-  }
 
   .iconWrapper {
     background: var(--icon-bg-hover);
@@ -191,10 +184,6 @@
 
   :global(html.dark) & {
     border-color: var(--lila-suave);
-
-    &::before {
-      background: var(--lila-suave);
-    }
   }
 }
 
@@ -667,179 +656,4 @@
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-// --------------------------------------------------------------- Proceso
-.processSection {
-  background-image: var(--background-colorB-gradient);
-  background-color: var(--background-colorB);
-  padding: 4.5rem 0;
-
-  :global(html.dark) & {
-    background-image: none;
-    background-color: var(--wave-b);
-  }
-
-  @media (max-width: 768px) {
-    padding: 2.25rem 0;
-  }
-}
-
-.sectionSubtitle {
-  font-size: var(--subtitle-font-size);
-  color: var(--subtitle-color);
-  line-height: var(--subtitle-line-height);
-  margin: var(--subtitle-spacing-top) 0 0;
-  max-width: 60ch;
-
-  :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.7);
-  }
-
-  @media (max-width: 768px) {
-    font-size: var(--subtitle-font-size-mobile);
-  }
-}
-
-.processGrid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin: 2rem 0 0;
-  padding: 0;
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-    margin-top: 1.25rem;
-  }
-}
-
-.processStep {
-  background-color: var(--card-bg);
-  border: 1px solid rgba(142, 122, 230, 0.25);
-  border-radius: var(--br);
-  padding: 1.25rem;
-
-  :global(html.dark) & {
-    background-color: var(--card-bg-soft);
-    border-color: rgba(181, 156, 248, 0.28);
-  }
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-}
-
-.stepNumber {
-  display: block;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--lila-principal);
-  margin-bottom: 0.55rem;
-
-  :global(html.dark) & {
-    color: var(--lila-suave);
-  }
-}
-
-.stepTitle {
-  font-size: var(--card-title-font-size);
-  font-weight: var(--card-title-font-weight);
-  color: var(--text-color);
-  margin: 0 0 0.45rem;
-
-  :global(html.dark) & {
-    color: var(--text-color-dark-mode);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.98rem;
-  }
-}
-
-.stepDescription {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: var(--text-color-light);
-  margin: 0;
-
-  :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.65);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
-}
-
-// ------------------------------------------------------------------ FAQ
-.faqSection {
-  padding: 4.5rem 0 1rem;
-
-  @media (max-width: 768px) {
-    padding: 2.5rem 0 0.5rem;
-  }
-}
-
-// Dos columnas: las seis preguntas entran en tres filas, sin acordeón.
-.faqGrid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 2.5rem;
-  margin: 2rem 0 0;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.1rem;
-    margin-top: 1.25rem;
-  }
-}
-
-.faqQuestion {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ink);
-  margin: 0 0 0.4rem;
-
-  :global(html.dark) & {
-    color: var(--text-color-dark-mode);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-}
-
-.faqAnswer {
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--text-color-light);
-  margin: 0;
-
-  :global(html.dark) & {
-    color: rgba(235, 235, 235, 0.68);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.82rem;
-  }
-}
-
-// ------------------------------------------------------------- CTA final
-.ctaWrap {
-  padding: 2rem 1.5rem 4rem;
-
-  @media (max-width: 768px) {
-    padding: 1rem 1rem 2.5rem;
-  }
 }

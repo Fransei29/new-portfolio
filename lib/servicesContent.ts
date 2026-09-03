@@ -46,15 +46,6 @@ export interface ServicesPageContent {
     cta: string;
   };
   services: ServiceDetail[];
-  process: {
-    title: string;
-    subtitle: string;
-    steps: { title: string; description: string }[];
-  };
-  faq: {
-    title: string;
-    items: { q: string; a: string }[];
-  };
   cta: { title: string; description: string; button: string };
 }
 
@@ -93,8 +84,6 @@ export function getServicesContent(lang: ServiceLanguage = 'en'): ServicesPageCo
       slug: teasers?.[key]?.slug ?? '',
       ...raw.items[key],
     })),
-    process: raw.process,
-    faq: raw.faq,
     cta: raw.cta,
   };
 }
