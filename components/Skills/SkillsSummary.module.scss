@@ -110,13 +110,15 @@
   gap: 1rem;
   margin-bottom: 2rem;
   /* Full-bleed: rompe el max-width del contenedor y ocupa todo el ancho del
-     viewport, igual que el carrusel de Testimonials. */
-  width: 100vw;
+     viewport, igual que el carrusel de Testimonials.
+     `--page-w` y no `100vw`: 100vw incluye la barra de scroll (ver --page-w en
+     globals.css). */
+  width: var(--page-w);
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin-left: calc(var(--page-w) / -2);
+  margin-right: calc(var(--page-w) / -2);
   padding-top: 1rem;
   overflow: hidden;
 

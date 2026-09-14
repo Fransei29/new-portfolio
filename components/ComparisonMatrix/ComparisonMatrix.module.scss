@@ -77,6 +77,15 @@
      la última carta llega arriba justo cuando la sección ya terminó y el efecto
      se corta a la mitad. */
   padding-bottom: 22vh;
+
+  /* En mobile las cartas son mucho más altas (el contenido se apila en una
+     columna), así que el mazo termina de acumularse bastante antes de agotar
+     ese 22vh — el resto queda como un hueco blanco enorme entre la última
+     carta y el wave que abre la sección siguiente. Con 6vh el recorrido sigue
+     alcanzando y el hueco desaparece. */
+  @media (max-width: 768px) {
+    padding-bottom: 6vh;
+  }
 }
 
 .card {
@@ -175,6 +184,19 @@
   }
 }
 
+/* El icono acompaña al título: mismo color que el nombre de la carta, así el
+   bloque icono + texto se lee como una sola unidad apagada y no como un icono
+   a todo lila encabezando un título que ya cedió el primer plano.
+   Los iconos son SVG de lucide con stroke="currentColor", así que alcanza con
+   el color del contenedor. */
+.card:not(.cardFeatured) .rowIcon {
+  color: #413c57;
+
+  :global(html.dark) & {
+    color: rgba(237, 236, 236, 0.8);
+  }
+}
+
 .rowText {
   min-width: 0;
 }
@@ -182,13 +204,31 @@
 .rowName {
   font-family: var(--font-heading), system-ui, sans-serif;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.25;
-  color: var(--lila-profundo, #2e294e);
+  /* Más cerca del negro que el lila profundo de marca, pero conservando el
+     tinte violeta. Solo pinta la carta destacada: las alternativas lo pisan
+     más abajo con mayor especificidad. */
+  color: #1d1a30;
   margin: 0 0 0.25rem;
 
   :global(html.dark) & {
     color: var(--text-color-dark-mode, #edecec);
+  }
+}
+
+/* Todas las cartas comparten el peso (500): la jerarquía ahora la lleva el
+   COLOR, no el grosor. Las alternativas se apagan hacia el gris y la propuesta
+   se queda con el lila profundo, así sigue siendo la que tira del ojo sin que
+   ninguna tenga que gritar más fuerte que el resto. */
+.card:not(.cardFeatured) .rowName {
+  /* A mitad de camino entre el lila profundo y el gris medio: se apaga lo
+     justo para ceder el primer plano, pero conserva el tinte violeta de la
+     marca en vez de caer en un gris neutro que se lee como texto deshabilitado. */
+  color: #413c57;
+
+  :global(html.dark) & {
+    color: rgba(237, 236, 236, 0.8);
   }
 }
 

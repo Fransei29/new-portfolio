@@ -92,7 +92,12 @@
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
+  /* 1024 y no 768: el menú completo mide ~963px y, sumado al imagotipo y al
+     bloque derecho, no entra en la barra por debajo de ~1330px. Estrechar el
+     gap alcanzaba hasta 1100px, pero a 1024 seguía saliéndose 79px por la
+     derecha (medido). A partir de acá manda el menú hamburguesa, que es el
+     que sí entra. */
+  @media (max-width: 1024px) {
     display: none;
   }
 }
@@ -100,7 +105,11 @@
 .mobileOnly {
   display: none;
 
-  @media (max-width: 768px) {
+  /* Mismo corte que .desktopOnly (1024): son las dos caras del mismo switch.
+     Si este quedaba en 768 y aquél pasaba a 1024, entre 769 y 1024 no se veía
+     NI el menú de escritorio ni el hamburguesa — la barra quedaba sin
+     navegación. */
+  @media (max-width: 1024px) {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -159,7 +168,9 @@
 .mobileMenuButton {
   display: none;
 
-  @media (max-width: 768px) {
+  /* 1024, igual que .desktopOnly y .mobileOnly: el botón que abre el menú
+     tiene que aparecer exactamente donde desaparece el menú de escritorio. */
+  @media (max-width: 1024px) {
     display: block;
     position: relative;
     z-index: 100;
@@ -250,7 +261,9 @@
 .mobileMenu {
   display: none;
 
-  @media (max-width: 768px) {
+  /* 1024, igual que el botón que lo abre: con el corte en 768 el hamburguesa
+     ya aparecía entre 769 y 1024 pero no abría nada. */
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -454,7 +467,27 @@
   gap: 2.75rem;
   margin-left: auto;
 
-  @media (max-width: 768px) {
+  /* Entre 769px y ~1330px el nav no tenía ningún breakpoint: con
+     --nav-max-width en 1920px, el menú (963px) + el imagotipo + el bloque
+     derecho superaban el ancho de la ventana y se salían por la derecha
+     (medido: +47px a 1280, +303px a 1024). El gap fijo de 2.75rem era la
+     mayor parte del exceso, así que se estrecha por tramos en vez de
+     romper el layout. */
+  @media (max-width: 1330px) {
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 1100px) {
+    gap: 1rem;
+  }
+
+  /* 1024 y no 768: `.centerMenu` lleva también `.desktopOnly`, pero las dos
+     reglas tienen la misma especificidad y ésta gana por orden en el archivo.
+     Con el corte en 768, ocultar `.desktopOnly` a 1024 no alcanzaba: el menú
+     seguía en `flex` y se salía 119px (900px) / 219px (800px) por la derecha,
+     además de convivir con el hamburguesa. El corte va acá, en su propia
+     regla, que es la que manda. */
+  @media (max-width: 1024px) {
     display: none;
     margin-right: 0;
   }

@@ -21,11 +21,14 @@
     --gap: 3rem;
     --visible-count: 2;
     --peek: 7%;
-    --container-inset: max(2rem, calc((100vw - var(--container-max-width)) / 2));
+    --container-inset: max(2rem, calc((var(--page-w) - var(--container-max-width)) / 2));
     position: relative;
-    /* Full-bleed: escapa el max-width del contenedor padre y ocupa todo el ancho del viewport */
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    /* Full-bleed: escapa el max-width del contenedor padre y ocupa todo el ancho
+       del viewport. `--page-w` y no `100vw`: 100vw incluye la barra de scroll y
+       dejaba el carrusel 8px más ancho que el contenido, asomando 4px por la
+       derecha (ver --page-w en globals.css). */
+    width: var(--page-w);
+    margin-left: calc(var(--page-w) / -2 + 50%);
     overflow: hidden;
     /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde.
        Padding vertical amplio (arriba/abajo) para que la sombra de hover de las tarjetas

@@ -267,9 +267,33 @@ html, body {
   }
 }
 
-/* Reservar espacio del scrollbar y evitar layout shift */
-html {
-  scrollbar-gutter: stable;
+/* Reservar espacio del scrollbar y evitar layout shift.
+
+   Sólo donde el puntero es fino (mouse/trackpad), que es donde el navegador
+   dibuja una barra clásica que ocupa ancho real. En táctil la barra es un
+   overlay que no ocupa nada, y reservar el hueco igual dejaba el `body` 4px
+   más angosto que la ventana: una franja blanca por el borde derecho a lo
+   largo de toda la página, visible sobre cualquier sección de fondo oscuro
+   (se veía como una línea clara al costado de "Working methodology" y su
+   wave). */
+@media (pointer: fine) {
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
+/* ── Ancho real de la página, para los full-bleed ──────────────────────────
+   `100vw` incluye el ancho de la barra de scroll; `scrollbar-gutter: stable`
+   (arriba) reserva 8px que NO son parte del área de contenido. Un full-bleed
+   hecho con `width: 100vw; margin-left: calc(-50vw + 50%)` queda entonces 8px
+   más ancho que su lugar y asoma 4px por la derecha: exactamente el scroll
+   horizontal que aparecía SÓLO en la home (es donde viven los cuatro carruseles
+   full-bleed).
+
+   `--page-w` es el ancho del body, que ya excluye la barra. Los full-bleed lo
+   usan en vez de `100vw` y quedan clavados al borde real del contenido. */
+body {
+  --page-w: 100%;
 }
 
 /* En página de detalle de proyecto: sin scroll-snap y body sin overflow propio
@@ -1125,6 +1149,51 @@ html.dark .ctaWrap {
 .assemble-stagger.stagger-alt > *:nth-child(odd)  { transform: translate3d(-30px, 14px, 0); }
 .assemble-stagger.stagger-alt > *:nth-child(even) { transform: translate3d(30px, 14px, 0); }
 
+/* El estado INICIAL de las piezas desplaza hacia la derecha (+30px en los
+   pares de stagger-alt, +36px en .piece-r). Mientras la sección no entró en
+   viewport ese desplazamiento es real y ENSANCHA LA PÁGINA: con el contenido
+   ya a 1440px, la columna derecha pintaba hasta 1446 y aparecía un scroll
+   horizontal de 6px en toda la home.
+
+   No se arregla en html/body: ahí el overflow tiene que seguir siendo
+   `visible` o se rompe el position:sticky de ComparisonMatrix (ver el bloque
+   de html/body al inicio del archivo). Se contiene en el contenedor de la
+   animación, que es donde nace el desborde.
+
+   `clip` y no `hidden`: `hidden` computaría el eje Y como `auto` y convertiría
+   al contenedor en scroll container, anulando el sticky de sus descendientes.
+   Es la misma trampa documentada en html/body y en el media query de mobile. */
+.assemble-stagger.stagger-alt {
+  overflow-x: clip;
+  /* El clip horizontal no debe recortar sombras ni hovers verticales. */
+  overflow-y: visible;
+}
+
+/* Mismo problema que arriba, pero con las piezas SUELTAS: `.piece-r` arranca
+   en translate3d(36px, 0, 0) y, mientras su sección no entró en viewport, ese
+   desplazamiento ensancha la página. En anchos medios (800–900px) los
+   subtítulos de ProjectsSection, SkillsSummary y ComparisonMatrix se salían
+   hasta 20px por la derecha.
+
+   NO se contiene con overflow en `.assemble`: se probó y rompe el apilado de
+   ComparisonMatrix. Cuando un eje es `clip` y el otro `visible`, el `visible`
+   computa `auto` (CSS Overflow 3) — el wrapper pasa a ser scroll container y
+   anula el `position: sticky` de sus descendientes. Es exactamente la trampa
+   documentada en html/body y en el media query de mobile.
+
+   El clip de `.assemble-stagger.stagger-alt` (arriba) sí es seguro: ahí dentro
+   no hay ningún sticky.
+
+   La solución es que la pieza entre desde la IZQUIERDA. Un desplazamiento
+   negativo no genera scroll horizontal (el scroll sólo lo produce el desborde
+   por el lado derecho), así que el efecto de entrada se conserva entero —
+   misma distancia, misma duración — sin ensanchar la página.
+
+   Se probó antes reservar el ancho con `max-width: calc(100% - 36px)`: no
+   arregla los 800px (el subtítulo no es quien define el ancho del bloque) y
+   encima rompía 1440. Medido. */
+.piece-r { transform: translate3d(-36px, 0, 0); }
+
 .assemble.visible .assemble-stagger.stagger-alt > * {
   transform: translate3d(0, 0, 0);
 }
@@ -1424,6 +1493,11 @@ html.hydrated .hero-section .home-textB   { animation-delay: 0.35s; }
 @media (min-width: 768px) and (max-width: 1024px) {
   .containerGeneral, .home-text {
    padding:0 0.5rem;
+   /* `.containerGeneral` es `width: 100%` sin box-sizing propio, así que este
+      padding lateral se SUMABA al 100% y la sección medía 1032px dentro de un
+      viewport de 1024 — un scroll horizontal de 8px en toda la franja
+      768–1024. Con border-box el padding entra dentro del ancho. */
+   box-sizing: border-box;
   }
 }
 
