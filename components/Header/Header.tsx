@@ -9,8 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, Home, FolderOpen, BookOpen, User, Mail, GraduationCap, ArrowUpRight, Layers, PenLine } from 'lucide-react';
-import { SiYoutube } from 'react-icons/si';
+import { X, GraduationCap, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function Header() {
@@ -21,23 +20,37 @@ export default function Header() {
   const { t, language } = useLanguage();
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
-  // Cerrar menú al hacer clic fuera
+  // Cerrar con Escape. El menú ocupa TODA la pantalla, así que el viejo
+  // "cerrar al hacer clic fuera" no tenía un afuera donde hacer clic (y su
+  // overlay está en display:none). Escape es la única salida por teclado.
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (isMobileMenuOpen && !target.closest(`.${styles.mobileMenu}`) && !target.closest(`.${styles.mobileMenuButton}`)) {
-        setIsMobileMenuOpen(false);
-      }
+    if (!isMobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMobileMenuOpen(false);
     };
 
-    if (isMobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
+
+  // Con el menú abierto la página de atrás seguía scrolleando bajo el panel.
+  // Se restaura el valor previo en vez de asumir '': otra parte de la app puede
+  // estar bloqueando el scroll por su cuenta.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [isMobileMenuOpen]);
+
+  // Red de seguridad: si una navegación ocurre por cualquier vía que no sea el
+  // onClick de un link (back/forward del navegador, un redirect), el menú se
+  // cierra igual en vez de quedar tapando la página nueva.
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
@@ -198,45 +211,41 @@ export default function Header() {
           <X size={24} />
         </button>
         
+        {/* Sin iconos: la lista se lee como tipografía sola. El estado activo lo
+            marca el color del link, no un adorno a la izquierda. */}
         <Link href="/" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <Home size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/' ? styles.mobileActive : ''}`}>
             {t('nav.home')}
           </p>
         </Link>
         <Link href="/projects" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <FolderOpen size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/projects' ? styles.mobileActive : ''}`}>
             {t('nav.projects')}
           </p>
         </Link>
         <Link href="/services" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <Layers size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/services' ? styles.mobileActive : ''}`}>
             {t('nav.services')}
           </p>
         </Link>
         <Link href="/blog" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <PenLine size={18} className={styles.mobileNavIcon} />
+          {/* startsWith, igual que en desktop: sigue activo dentro de /blog/[slug] */}
+          <p className={`${styles.mobileNavLink} ${pathname?.startsWith('/blog') ? styles.mobileActive : ''}`}>
             {t('nav.blog')}
           </p>
         </Link>
         <Link href="/tutorials" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <BookOpen size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/tutorials' ? styles.mobileActive : ''}`}>
             {t('nav.tutorials')}
           </p>
         </Link>
         <Link href="/about" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <User size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/about' ? styles.mobileActive : ''}`}>
             {t('nav.about')}
           </p>
         </Link>
         <Link href="/contact" passHref onClick={toggleMobileMenu}>
-          <p className={styles.mobileNavLink}>
-            <Mail size={18} className={styles.mobileNavIcon} />
+          <p className={`${styles.mobileNavLink} ${pathname === '/contact' ? styles.mobileActive : ''}`}>
             {t('nav.contact')}
           </p>
         </Link>
@@ -245,11 +254,10 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={toggleMobileMenu}
-          className={styles.mobileNavLink}
-          aria-label={t('nav.youtube')}
+          className={`${styles.mobileNavLink} ${styles.mobileNavExternal}`}
         >
-          <SiYoutube size={18} className={styles.mobileNavIcon} />
           {t('nav.youtube')}
+          <ArrowUpRight size={15} className={styles.mobileExternalArrow} />
         </a>
 
         <div className={styles.mobileMenuControls}>

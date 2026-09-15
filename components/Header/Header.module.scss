@@ -129,7 +129,9 @@
 .mobileBootcampButton {
   display: none;
 
-  @media (max-width: 768px) {
+  /* 1024, igual que .mobileMenu: en 768 el botón de bootcamp desaparecía entre
+     769 y 1024 y el pie del menú quedaba con un hueco. */
+  @media (max-width: 1024px) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -270,7 +272,13 @@
     background-color: #fff;
     /* Aire arriba para el botón de cerrar; abajo, safe-area del notch/gesture
        bar de iOS, que si no se come la última fila. */
-    padding: clamp(5.5rem, 10vh, 7rem) 2rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    /* Despeja la cabecera fija (logo 46px desde 1.45rem → borde en ~70px) y
+       deja aire antes del primer link. No conviene pasarse: el pie con idioma
+       y tema se posiciona con `margin-top: auto`, así que si el contenido no
+       entra en la pantalla ese auto no tiene sobrante que repartir y los
+       controles quedan abajo del fold, alcanzables sólo scrolleando. Con 8rem
+       eso era justamente lo que pasaba. */
+    padding: clamp(6rem, 11vh, 7rem) 2rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
     /* Los links arrancan bajo el botón de cerrar y el bloque queda alineado
        arriba; el pie lo baja el `margin-top: auto` de los controles. */
     justify-content: flex-start;
@@ -286,11 +294,22 @@
     height: 100dvh;
     width: 100%;
     max-width: none;
+    /* CRÍTICO: el proyecto no tiene reset universal de box-sizing, así que este
+       panel era `content-box` y el padding se SUMABA al alto. Medido: viewport
+       de 844px → panel de 964px (844 + 96 de padding-top + 24 de abajo). El pie
+       con idioma y tema caía en top:876, fuera de la pantalla, y no había scroll
+       que lo alcanzara. Con border-box el alto incluye el padding y el panel
+       mide exactamente la pantalla. Lo mismo para el ancho (era 454px en un
+       viewport de 390). */
+    box-sizing: border-box;
     left: 0;
     z-index: 1001;
     /* El aire entre links lo reparte el gap, uniforme. En vh para que se
        comprima solo en pantallas cortas en vez de empujar el menú a scroll. */
-    gap: clamp(0.9rem, 2.6vh, 1.9rem);
+    /* Nueve items a ~1.5rem: el techo baja de 1.9rem para que la lista entre
+       sin scroll en pantallas cortas. El mínimo sostiene el aire cuando el
+       clamp se comprime. */
+    gap: clamp(0.75rem, 1.9vh, 1.35rem);
     box-shadow: none;
     backdrop-filter: blur(6px);
     transition: transform 0.3s ease-in-out;
@@ -318,55 +337,75 @@
 .mobileMenuLogo {
   display: none;
 
-  @media (max-width: 768px) {
+  /* 1024, igual que .mobileMenu: estaba en 768, así que entre 769 y 1024 el
+     menú abría a pantalla completa sin logo. */
+  @media (max-width: 1024px) {
     display: block;
-    position: absolute;
-    top: 1.5rem;
+    /* `fixed` por lo mismo que .closeButton: el panel scrollea (overflow-y:
+       auto) y un hijo absoluto se desplazaba con el contenido. La cabecera del
+       menú —logo + X— se queda fija. */
+    position: fixed;
+    /* Centrado con la X (44px de alto a 1.5rem): el logo mide 46px, así que
+       arranca un pelo más arriba para que ambos compartan la línea óptica. */
+    top: 1.45rem;
     left: 2rem;
     line-height: 0;
+    z-index: 1002;
 
+    /* `!important` a propósito: estas <img> llevan también la clase .logo, que
+       fija `height: 82px !important` (60px bajo 768) para el imagotipo del
+       header. Sin ganarle, el logo del menú medía 82px de alto y ~220px de
+       ancho, y su caja se comía la franja superior donde vive la X — la cruz
+       quedaba visualmente tragada por el imagotipo aunque estuviera pintada. */
     img {
-      height: 42px;
-      width: auto;
+      height: 58px !important;
+      width: auto !important;
     }
   }
 }
 
+/* OJO: este botón estaba en `@media (max-width: 768px)` mientras que .mobileMenu
+   abre desde 1024. Entre 769 y 1024 el menú ocupaba toda la pantalla y la X
+   quedaba en display:none — sin overlay (está anulado) y sin "afuera" que tocar,
+   el menú no se podía cerrar. El corte va a 1024, igual que el resto. */
 .closeButton {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    /* Alineado con el padding del menú (1.75rem) para que no quede flotando
-       fuera de la grilla del contenido ahora que ocupa toda la pantalla. */
-    top: 1.75rem;
-    right: 1.75rem;
-    background-color: transparent;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    color: var(--primary-color);
-    padding: 0.5rem;
+    /* `fixed`, no `absolute`. El panel tiene `overflow-y: auto`, así que es un
+       contenedor de scroll: un hijo absoluto se ancla a su padding box y se va
+       desplazando con el contenido — la X se salía de la pantalla por arriba.
+       Anclada al viewport se queda quieta, que es lo que un botón de cerrar
+       tiene que hacer. */
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    /* Disco tenue en vez del recuadro viejo: el glifo suelto se perdía contra
+       el blanco del panel (y contra el logo, que queda a su izquierda). El
+       círculo lo ancla como botón sin volver a parecer un control de sistema. */
+    background-color: rgba(46, 41, 78, 0.06);
+    border: none;
+    border-radius: 999px;
+    color: var(--lila-profundo, #2e294e);
+    padding: 0;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
     z-index: 1002;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-color: var(--primary-color);
+    &:active {
+      opacity: 0.45;
     }
 
     :global(html.dark) & {
-      border: 1px solid #424242;
-      color: rgb(226, 226, 226);
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
+      /* El disco lila del modo claro es casi invisible sobre --nav-surface-dark:
+         en oscuro se invierte a un velo claro translúcido. */
+      background-color: rgba(255, 255, 255, 0.09);
+      color: rgb(236, 235, 235);
     }
   }
 }
@@ -387,26 +426,34 @@
   }
 
   /* Pantalla completa: tipografía grande, sin separadores ni cajas. El aire
-     entre items lo reparte el `justify-content` del contenedor, no un borde por
-     link — los separadores daban aspecto de lista de sistema, no de menú. */
-  @media (max-width: 768px) {
-    font-size: clamp(1.05rem, 2.2vh, 1.25rem);
+     entre items lo reparte el `gap` del contenedor, no un borde por link — los
+     separadores daban aspecto de lista de sistema, no de menú.
+     1024 y no 768: el menú abre desde 1024, así que entre 769 y 1024 los links
+     se quedaban con el estilo base (0.875rem, gris) en un panel a pantalla
+     completa. */
+  @media (max-width: 1024px) {
+    /* Display: la lista ES el menú, así que la tipografía puede pesar. Va con
+       la Bricolage de marca, igual que los títulos de sección. */
+    font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(1.25rem, 3vh, 1.5rem);
     font-weight: 500;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-    color: var(--lila-profundo, #2e294e);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    /* Atenuado de entrada: el activo es el que está a plena intensidad (ver
+       .mobileActive). Sin esto los nueve links pesan igual y no hay jerarquía. */
+    color: rgba(46, 41, 78, 0.55);
     text-align: left;
     padding: 0;
     margin: 0;
     width: auto;
-    /* Área táctil sin caja visible: el alto lo da la propia tipografía grande.
-       Nunca baja de 44px, el mínimo táctil recomendado. */
+    /* Área táctil sin caja visible: el alto lo da la propia tipografía. Nunca
+       baja de 44px, el mínimo táctil recomendado. */
     min-height: 2.75rem;
     align-items: center;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, color 0.2s ease;
 
     :global(html.dark) & {
-      color: rgb(236, 235, 235);
+      color: rgba(236, 235, 235, 0.55);
     }
 
     /* Feedback al tocar (en touch no hay hover que valga). */
@@ -416,19 +463,61 @@
   }
 }
 
+/* Sección actual: el único link a plena intensidad. Reemplaza al icono como
+   marca de "estás acá" — por eso no hace falta adorno a la izquierda. */
+.mobileActive {
+  @media (max-width: 1024px) {
+    color: var(--lila-profundo, #2e294e);
+
+    :global(html.dark) & {
+      color: #ffffff;
+    }
+  }
+}
+
+/* Links que salen del sitio (YouTube, Bootcamp): la flecha los distingue de la
+   navegación interna sin necesidad de un logo de marca. */
+.mobileNavExternal {
+  @media (max-width: 1024px) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
+.mobileExternalArrow {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
 .mobileMenuControls {
   display: none;
 
-  @media (max-width: 768px) {
+  /* 1024, igual que .mobileMenu: en 768 los controles desaparecían entre 769 y
+     1024 y el menú quedaba sin idioma ni tema. */
+  @media (max-width: 1024px) {
     display: flex !important;
     align-items: center;
     gap: 0.75rem;
-    /* `auto` empuja los controles al pie de la pantalla en vez de dejarlos
-       pegados al último link con todo el espacio vacío debajo. */
-    margin-top: auto;
-    padding-top: 1.75rem;
+    /* Mismo motivo que .mobileMenu: sin reset universal esto era content-box y
+       el padding-top se sumaba al alto. */
+    box-sizing: border-box;
+    /* Los controles (idioma, tema, bootcamp) medían 0 de ancho: son flex items
+       y el contenedor los comprimía a nada. `flex-shrink: 0` les conserva su
+       caja de 38px. */
+    > * {
+      flex-shrink: 0;
+    }
+    /* Sin `margin-top: auto`: ese auto los mandaba al fondo de la pantalla y
+       dejaba ~200px de hueco entre YouTube y los controles. Ahora el bloque
+       sigue al último link, separado sólo por el padding. */
+    margin-top: 0;
+    padding-top: 2rem;
     width: 100%;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    /* Sin línea divisoria: el `margin-top:auto` ya separa el pie del bloque de
+       links. El borde a todo el ancho era el último resto de "lista de
+       sistema" que quedaba en el panel. */
+    border-top: none;
 
     /* ThemeToggleButton trae `margin-top: -20px` en su propia hoja para el
        contexto del footer; acá lo subía fuera de la fila y quedaba cortado
@@ -439,7 +528,7 @@
     }
 
     :global(html.dark) & {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: none;
     }
   }
 }
@@ -714,22 +803,6 @@
   flex-shrink: 0; // El icono no se encoge
   width: 18px; // Ancho fijo para el icono
   height: 18px; // Altura fija para el icono
-}
-
-.mobileNavIcon {
-  margin-right: 0.7rem;
-  vertical-align: middle;
-  transition: color 0.3s ease;
-
-  @media (max-width: 768px) {
-    /* Los <svg> de lucide traen size=18 en el atributo; el width/height de CSS
-       lo pisa, así que el icono escala sin tocar el TSX. */
-    width: 19px;
-    height: 19px;
-    margin-right: 0.9rem;
-    flex-shrink: 0;
-    opacity: 0.6;
-  }
 }
 
 .externalArrow {
