@@ -16,7 +16,13 @@
 
 .svg {
   width: 100%;
-  height: 52px;
+  // 54px = los 54u del viewBox a escala 1:1. Los 2 últimos son el overshoot del
+  // path (ver WAVE_D): se sacan de vista con el margen negativo, así el borde
+  // antialiaseado del relleno queda TAPADO por la sección de abajo en vez de
+  // dibujarse contra el fondo del .root. La curva visible sigue midiendo 52px,
+  // igual que antes — no se mueve nada del layout.
+  height: 54px;
+  margin-bottom: -2px;
   display: block;
   overflow: hidden;
 }

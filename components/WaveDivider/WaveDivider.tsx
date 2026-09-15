@@ -13,7 +13,17 @@ interface WaveDividerProps {
   variant: WaveDividerVariant;
 }
 
-const WAVE_D = 'M0,26 C480,52 960,0 1440,26 L1440,52 L0,52 Z';
+/**
+ * Curva en 52u + franja 52→54u del mismo fill. Los 2u extra son overshoot: sin
+ * ellos el borde inferior del path cae JUSTO sobre el borde del viewBox y el
+ * navegador lo antialiasea contra el fondo del .root (el lado del que viene la
+ * curva). En mobile, donde el alto de 52px no cae en píxel exacto del device,
+ * esa fila a medias se ve como una línea clara bajo el wave. El mismo truco que
+ * ya usaba WAVE_CTA_D. La curva no se toca: mismos puntos de control, misma
+ * costura — sólo se extiende el relleno fuera de la caja visible.
+ */
+const WAVE_VIEW_H = 54;
+const WAVE_D = 'M0,26 C480,52 960,0 1440,26 L1440,54 L0,54 Z';
 
 /**
  * Curva en 28u + franja 28→30u mismo fill: cubre antialiasing y encaja con margin-top negativo del CTA.
@@ -46,7 +56,7 @@ export default function WaveDivider({ variant }: WaveDividerProps) {
     <div className={`${styles.root} ${variantClass[variant]} wave-static`}>
       <svg
         className={styles.svg}
-        viewBox="0 0 1440 52"
+        viewBox={`0 0 1440 ${WAVE_VIEW_H}`}
         preserveAspectRatio="none"
         aria-hidden="true"
       >
