@@ -97,8 +97,20 @@ export const Services = () => {
         <p className="highlight piece-l piece-delay-0">
           {t('services.title')}
         </p>
+        {/* El `|` del locale marca dónde cortar la línea en mobile, para que la
+            frase no parta en una palabra suelta. En desktop es un espacio más y
+            el texto fluye solo (ver .subtitleBreak en el módulo). */}
         <p className={`${styles.subtitle} piece-r piece-delay-1`}>
-          {t('services.subtitle')}
+          {t('services.subtitle').split('|').map((part, i, arr) => (
+            <span key={i}>
+              {part.trim()}
+              {i < arr.length - 1 && (
+                <>
+                  <br className={styles.subtitleBreak} />{' '}
+                </>
+              )}
+            </span>
+          ))}
         </p>
 
         {/* assemble-stagger: las cards entran en cascada por orden en el DOM,
