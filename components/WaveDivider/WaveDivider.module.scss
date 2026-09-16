@@ -1,6 +1,60 @@
 .root {
   line-height: 0;
-  margin-top: -1px;
+  /* -4px y no -1: el borde SUPERIOR del wave es la otra costura, contra la
+     sección de arriba. Un solo píxel de solape no alcanza cuando el wave y esa
+     sección componen en capas distintas y el zoom o el devicePixelRatio dejan el
+     borde en una fracción de píxel — queda una fila descubierta y se lee como
+     una línea fina sobre la curva. Se nota sobre todo cuando los dos lados
+     contrastan fuerte, como el blanco del .root contra el lila de
+     .section-bg-ink. */
+  margin-top: -4px;
+  /* Para anclar la franja de respaldo del ::after. */
+  position: relative;
+}
+
+/* Franja de respaldo con el color de DESTINO, pegada al borde inferior del .root
+   y DETRÁS del SVG.
+
+   El SVG se pinta en su propia capa y sus bordes redondean a píxeles del
+   dispositivo por su cuenta. Con zoom o devicePixelRatio fraccionario (1.25,
+   1.5, …) ese redondeo no coincide con el del fondo que tiene debajo y queda una
+   fila que nadie pinta: por ahí asoma lo que hay más atrás y se lee como una
+   línea fina cruzando el ancho.
+
+   Va con `inset` negativo abajo para cubrir también los 4px que el SVG desborda
+   del .root (su margin-bottom), que es justo la franja donde caía la fila. Sin
+   `z-index`: el fondo del ::after ya se pinta antes que el contenido del .root
+   por orden natural, y un z-index negativo lo sacaría a otra capa — que es
+   exactamente el problema que se quiere evitar. */
+.root::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -4px;
+  height: 12px;
+}
+
+/* El borde de ARRIBA no lleva franja propia: el `margin-top` negativo ya mete al
+   wave dentro de la sección anterior, así que el solape lo resuelve el layout.
+   Una franja pintada por fuera del wave (inset negativo, sobre la sección de
+   arriba) es contraproducente: si su color no coincide al píxel con el de esa
+   sección —que puede tener un gradiente, no un color plano— la franja DIBUJA la
+   banda en vez de taparla. */
+
+/* El color es el MISMO que rellena el path (ver los bloques de variante más
+   abajo), no el del fondo del .root: la franja continúa la curva hacia abajo,
+   que es el lado por el que asoma la fila descubierta. Tomarlo del lado
+   equivocado pinta una banda del color contrario — se ve en el wave que cierra
+   la sección lila, donde `wave-from-white` deja --wave-b en blanco a propósito. */
+.aToB::after {
+  background: var(--wave-b);
+}
+
+.bToA::after {
+  background: var(--wave-a);
+}
+
+.aToCta::after {
+  background: var(--cta-gradient-top);
 }
 
 /* Marca global que exime al wave del fade-in del bloque que lo contiene (la
@@ -15,6 +69,10 @@
 }
 
 .svg {
+  /* Por encima de la franja del ::after, que es un respaldo de fondo y no debe
+     taparlo. `position: relative` sin z-index alcanza: lo saca del flujo de
+     pintado del fondo sin crear una capa de composición nueva. */
+  position: relative;
   width: 100%;
   // 56px = los 56u del viewBox a escala 1:1. Los 4 últimos son el overshoot del
   // path (ver WAVE_D): se sacan de vista con el margen negativo, así el borde
@@ -89,6 +147,15 @@
    al lado de la de arriba; se sube para que las dos se lean igual. */
 .aToB path {
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Al revés que el aToB: acá la sombra cae sobre BLANCO PURO, donde cualquier
+   oscurecimiento se lee como una banda gris bajo la curva en vez de como
+   profundidad — se veía en Testimonials y en Tutorials, que son los bToA
+   seguidos de una sección blanca. Más corta y más tenue: sigue habiendo
+   costura, pero deja de leerse como una línea. */
+.bToA path {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
 }
 
 /* Sin sombra en oscuro: dibuja un halo más oscuro que el fondo (#0a0a0f) y
