@@ -26,7 +26,7 @@
     "aiIntegration": {
       "title": "Estrategia",
       "titleAccent": "e Integración de IA",
-      "description": "La IA como palanca de crecimiento — no como buzzword. Definimos una estrategia e integramos soluciones que mueven ventas, margen y escalabilidad, no demos.",
+      "description": "Convertí la IA en un motor de crecimiento. Definimos la estrategia e integramos soluciones que aumentan las ventas, mejoran el margen y habilitan operaciones escalables.",
       "tags": [
         "LLM OPS",
         "RAG",
@@ -92,7 +92,7 @@
     "hero": {
       "eyebrow": "Servicios",
       "title": "Software que hace funcionar tu operación",
-      "subtitle": "Plataformas a medida, automatizaciones e integraciones de IA para equipos cuya operación ya no entra en planillas ni en herramientas genéricas. Trabajás directo con quien programa tu software — sin intermediarios ni traspasos.",
+      "subtitle": "Plataformas a medida, automatizaciones e integraciones de IA para equipos cuya operación ya no entra en planillas ni en herramientas genéricas. | Trabajás directo con quien programa tu software.",
       "ctaPrimary": "Agendar una llamada",
       "ctaSecondary": "Ver casos de estudio"
     },
@@ -120,8 +120,8 @@
     "items": {
       "aiIntegration": {
         "name": "Estrategia e Integración de IA",
-        "tagline": "IA como palanca de crecimiento, no como demo.",
-        "description": "Arrancamos por el caso de negocio — dónde la IA mueve ventas, margen o capacidad de verdad — y llevamos la integración a los sistemas que tu equipo ya usa. Nada de un chatbot pegado a una landing.",
+        "tagline": "IA que se gana su lugar en el negocio.",
+        "description": "Arrancamos por el caso de negocio — dónde la IA mueve ventas, margen o capacidad de verdad — y llevamos la integración a los sistemas que tu equipo ya usa.",
         "includes": [
           "Auditoría de casos de uso y priorización por retorno esperado",
           "RAG sobre tus propios documentos, tickets o catálogo",
@@ -129,7 +129,7 @@
           "Guardrails, evaluación y control de costo por request"
         ],
         "deliverables": [
-          "Una integración funcionando en producción, no un prototipo",
+          "Una integración funcionando en producción",
           "Capa de prompts y retrieval documentada y versionada",
           "Panel de uso y costos"
         ],
@@ -199,7 +199,7 @@
           "Diseño de interfaz y flujos de interacción",
           "Renderizado en servidor para SEO real",
           "Responsive en mobile, tablet y desktop",
-          "Core Web Vitals y accesibilidad medidos, no asumidos"
+          "Core Web Vitals y accesibilidad medidos en cada release"
         ],
         "deliverables": [
           "Aplicación deployada con su dominio y analytics",
@@ -270,7 +270,7 @@
       "steps": [
         {
           "title": "Llamada",
-          "description": "Treinta minutos para entender el problema, no para vender. Te vas con una primera lectura de alcance y viabilidad aunque no trabajemos juntos."
+          "description": "Treinta minutos para entender el problema. Te vas con una primera lectura de alcance y viabilidad aunque no trabajemos juntos."
         },
         {
           "title": "Propuesta",

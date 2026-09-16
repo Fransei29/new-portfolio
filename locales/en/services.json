@@ -26,7 +26,7 @@
     "aiIntegration": {
       "title": "AI Strategy",
       "titleAccent": "& Integration",
-      "description": "AI as a growth lever — not a buzzword. We define a strategy and ship integrations that move sales, margin and scalability, not demos.",
+      "description": "Turn AI into a growth engine. We define the strategy and ship integrations that increase sales, improve margins, and unlock scalable operations.",
       "tags": [
         "LLM OPS",
         "RAG",
@@ -91,7 +91,7 @@
     "hero": {
       "eyebrow": "Services",
       "title": "Software that runs your operation",
-      "subtitle": "Custom platforms, automations and AI integrations for teams whose operations have outgrown spreadsheets and off-the-shelf tools. You work directly with the developer building your software — no account managers, no handoffs.",
+      "subtitle": "Custom platforms, automations and AI integrations for teams whose operations have outgrown spreadsheets and off-the-shelf tools. | You work directly with the developer building your software.",
       "ctaPrimary": "Book a call",
       "ctaSecondary": "See case studies"
     },
@@ -119,8 +119,8 @@
     "items": {
       "aiIntegration": {
         "name": "AI Strategy & Integration",
-        "tagline": "AI as a growth lever, not a demo.",
-        "description": "We start from the business case — where AI actually moves sales, margin or capacity — and ship the integration into the systems your team already uses. No chatbot bolted onto a landing page.",
+        "tagline": "AI that earns its place in the business.",
+        "description": "We start from the business case — where AI actually moves sales, margin or capacity — and ship the integration into the systems your team already uses.",
         "includes": [
           "Use-case audit and prioritization by expected return",
           "RAG over your own documents, tickets or catalog",
@@ -128,7 +128,7 @@
           "Guardrails, evaluation and cost control per request"
         ],
         "deliverables": [
-          "A working integration in production, not a prototype",
+          "A working integration running in production",
           "Prompt and retrieval layer documented and versioned",
           "Usage and cost dashboard"
         ],
@@ -193,12 +193,12 @@
       "webApplications": {
         "name": "Web Applications",
         "tagline": "Fast, clear, built to convert.",
-        "description": "Applications your users understand on the first visit. Performance, accessibility and SEO are part of the build, not a cleanup pass at the end.",
+        "description": "Applications your users understand on the first visit. Performance, accessibility and SEO are built in from the first commit.",
         "includes": [
           "Interface design and interaction flows",
           "Server rendering for real SEO",
           "Responsive on mobile, tablet and desktop",
-          "Core Web Vitals and accessibility measured, not assumed"
+          "Core Web Vitals and accessibility measured on every release"
         ],
         "deliverables": [
           "Application deployed with its domain and analytics",
@@ -269,7 +269,7 @@
       "steps": [
         {
           "title": "Call",
-          "description": "Thirty minutes to understand the problem, not to pitch. You leave with a first read on scope and feasibility even if we do not work together."
+          "description": "Thirty minutes to understand the problem. You leave with a first read on scope and feasibility even if we do not work together."
         },
         {
           "title": "Proposal",
