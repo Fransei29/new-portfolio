@@ -204,16 +204,6 @@
   }
 }
 
-/* Primera frase de cada beneficio (la que enumera lo que no pasa) y su salto:
-   en mobile se ocultan las dos y queda sólo la afirmación, para que la sección
-   no sea un muro de texto en una columna angosta. */
-.benefitDescLead,
-.benefitDescBreak {
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
 .benefitDescription {
   font-size: 0.98rem;
   line-height: 1.65;
@@ -222,5 +212,13 @@
 
   :global(html.dark) & {
     color: rgba(237, 236, 236, 0.72);
+  }
+
+  /* En mobile la tarjeta queda en icono + eyebrow + título: el título ya dice
+     el beneficio ("You own everything") y la descripción sólo lo desarrolla,
+     así que en una columna angosta esas dos frases por tarjeta convertían la
+     sección en un muro de texto. */
+  @media (max-width: 768px) {
+    display: none;
   }
 }
