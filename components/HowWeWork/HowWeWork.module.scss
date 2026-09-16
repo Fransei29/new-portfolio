@@ -30,8 +30,13 @@ $step-column-gap: 10rem;
   @media (max-width: 768px) {
     /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
        ya aporta su altura y 3rem dejaban una banda muerta antes del título.
-       Abajo se mantiene el 4.5rem, que esta sección necesita para su cierre. */
-    padding: 1rem 0 4.5rem;
+
+       Abajo 2.5rem y no 4.5: el aire extra de desktop compensa el zigzag, que
+       deja la última tarjeta corrida a un lado y ópticamente más cerca del
+       corte. En mobile las tarjetas van en una sola columna —sin zigzag que
+       compensar— y ese margen quedaba como un hueco lila entre la última
+       tarjeta y el wave. */
+    padding: 1rem 0 2.5rem;
   }
 }
 
