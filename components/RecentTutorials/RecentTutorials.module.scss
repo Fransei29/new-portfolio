@@ -29,11 +29,20 @@
        dejaba el carrusel 8px más ancho que el contenido, asomando 4px por la
        derecha (ver --page-w en globals.css). */
     width: var(--page-w);
-    margin-left: calc(var(--page-w) / -2 + 50%);
+    /* Misma fórmula que Testimonials (la única que llega a la pared en todos los
+       anchos): `left: 50%` centra el borde en el padre y los dos márgenes negativos
+       lo estiran a ambos lados. Con `margin-left: calc(... + 50%)` y sin `left`, el
+       carrusel quedaba capado al ancho del padre (236px adentro a 1920px). */
+    left: 50%;
+    right: 50%;
+    margin-left: calc(var(--page-w) / -2);
+    margin-right: calc(var(--page-w) / -2);
     overflow: hidden;
-    /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde.
-       Padding vertical amplio para que la sombra de hover de las tarjetas respire. */
-    padding: 2.5rem 0 2.5rem var(--container-inset);
+    /* Solo padding vertical, para que la sombra de hover de las tarjetas respire.
+       El inset lateral NO va acá: un padding no recorta, así que el slide saliente
+       quedaba visible en esa franja. Va en `.viewportInner`, que tiene su propio
+       `overflow: hidden` (misma estructura que el carrusel de Testimonials). */
+    padding: 2.5rem 0;
     box-sizing: border-box;
 
     /* Solo desktop: en mobile usamos el .mobileStack */
@@ -64,10 +73,20 @@
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
-    /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde.
-       Padding vertical para que la sombra de hover no se recorte contra el borde:
-       se achica pero no se saca, si va a 0 la sombra queda cortada por overflow:hidden. */
-    padding: 0.5rem 0 0.5rem 1.25rem;
+    /* Solo padding vertical (si va a 0 la sombra queda cortada por overflow:hidden).
+       El inset lateral va en `.mobileViewportInner`, igual que en desktop. */
+    padding: 0.5rem 0;
+}
+
+/* Mismo patrón que `.viewportInner`: el inset como margin, con su propio recorte. */
+.mobileViewportInner {
+    margin-left: 1.25rem;
+    /* Igual que `.viewportInner`: hidden en ambos ejes y el aire para la sombra
+       con padding vertical compensado por margen negativo. */
+    overflow: hidden;
+    padding: 0.5rem 0;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
 }
 
 .mobileTrack {
@@ -86,6 +105,20 @@
     min-width: 0;
     box-sizing: border-box;
     padding-right: 1.25rem;
+}
+
+/* El inset lateral va acá y no en `.viewport`: este elemento tiene su propio
+   `overflow: hidden`, así que recorta el track en el borde del container y el
+   slide saliente no asoma. Es la estructura del carrusel de Testimonials. */
+.viewportInner {
+    margin-left: var(--container-inset);
+    /* `overflow: hidden` en los dos ejes: `overflow-x: clip` + `overflow-y: visible`
+       no es fiable entre navegadores. El aire para la sombra de hover se hace con
+       padding vertical acá adentro, compensado con margen negativo. */
+    overflow: hidden;
+    padding: 2.5rem 0;
+    margin-top: -2.5rem;
+    margin-bottom: -2.5rem;
 }
 
 .track {

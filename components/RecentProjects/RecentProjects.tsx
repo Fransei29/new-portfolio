@@ -107,18 +107,20 @@ const RecentProjects = () => {
           '--peek': `${peekPercent}%`,
         } as React.CSSProperties}
       >
-        <div
-          className={styles.track}
-          style={{
-            transform: `translateX(-${offset * stepPercent}%)`,
-            transition,
-          }}
-        >
-          {trackItems.map((project, i) => (
-            <div key={`${project.title}-${i}`} className={styles.slide}>
-              <ProjectCard project={project} />
-            </div>
-          ))}
+        <div className={styles.viewportInner}>
+          <div
+            className={styles.track}
+            style={{
+              transform: `translateX(-${offset * stepPercent}%)`,
+              transition,
+            }}
+          >
+            {trackItems.map((project, i) => (
+              <div key={`${project.title}-${i}`} className={styles.slide}>
+                <ProjectCard project={project} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -131,18 +133,20 @@ const RecentProjects = () => {
       >
         {[0, 1].map((rowOffset) => (
           <div className={styles.mobileViewport} key={`row-${rowOffset}`}>
-            <div
-              className={styles.mobileTrack}
-              style={{
-                transform: `translateX(-${(offset + rowOffset) * mobileStepPercent}%)`,
-                transition,
-              }}
-            >
-              {trackItems.map((project, i) => (
-                <div key={`${project.title}-${i}-${rowOffset}`} className={styles.mobileSlide}>
-                  <ProjectCard project={project} />
-                </div>
-              ))}
+            <div className={styles.mobileViewportInner}>
+              <div
+                className={styles.mobileTrack}
+                style={{
+                  transform: `translateX(-${(offset + rowOffset) * mobileStepPercent}%)`,
+                  transition,
+                }}
+              >
+                {trackItems.map((project, i) => (
+                  <div key={`${project.title}-${i}-${rowOffset}`} className={styles.mobileSlide}>
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}

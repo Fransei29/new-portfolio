@@ -290,10 +290,23 @@ html, body {
    horizontal que aparecía SÓLO en la home (es donde viven los cuatro carruseles
    full-bleed).
 
-   `--page-w` es el ancho del body, que ya excluye la barra. Los full-bleed lo
-   usan en vez de `100vw` y quedan clavados al borde real del contenido. */
-body {
-  --page-w: 100%;
+   `--page-w` es el ancho real de la página, sin la barra. Los full-bleed lo usan
+   en vez de `100vw` y quedan clavados al borde real del contenido.
+
+   OJO: tiene que ser una LONGITUD, no un porcentaje. Una custom property guarda
+   el token tal cual, así que `--page-w: 100%` no era "el ancho del body": cada
+   consumidor resolvía ese `100%` contra SU propio padre. Cuando el padre se capa
+   en --container-max-width (1440px), `width: var(--page-w)` daba 1440 y
+   `margin-left: calc(var(--page-w)/-2 + 50%)` daba 0: el full-bleed dejaba de
+   llegar a la pared (a 1920px quedaba 236px adentro) y `--container-inset` se
+   clavaba siempre en su piso de 2rem.
+
+   Se calcula en `:root`, que es el único lugar donde `100%` es el ancho del
+   bloque inicial y no el de un padre capado. `--scrollbar-w` sale de la
+   diferencia entre `100vw` (incluye la barra) y ese `100%` (no la incluye). */
+:root {
+  --scrollbar-w: calc(100vw - 100%);
+  --page-w: calc(100vw - var(--scrollbar-w));
 }
 
 /* En página de detalle de proyecto: sin scroll-snap y body sin overflow propio

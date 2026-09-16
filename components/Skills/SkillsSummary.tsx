@@ -89,9 +89,14 @@ const SkillsSummary: React.FC = () => {
           {t('skills.summarySubtitle')}
         </p>
 
-        {/* piece-u y no piece-l/r: el marquee ya se desplaza en horizontal por
-            su cuenta, así que una entrada lateral pelea con ese movimiento. */}
-        <div className="piece-u piece-delay-2">
+      </div>
+
+      {/* El marquee va FUERA de `.skillsSummarySection`: ese div tiene
+          `max-width: 1440px` y un full-bleed no puede escapar de un ancestro
+          capado (a 1920px quedaba 236px adentro en vez de llegar a la pared).
+          piece-u y no piece-l/r: el marquee ya se desplaza en horizontal por
+          su cuenta, así que una entrada lateral pelea con ese movimiento. */}
+      <div className="piece-u piece-delay-2">
           <div className={styles.marquee}>
             {skillRows.map((row, r) => {
               // Filas pares (0,2) → izquierda; impares (1,3) → derecha
@@ -113,6 +118,7 @@ const SkillsSummary: React.FC = () => {
           </div>
         </div>
 
+      <div className={styles.skillsSummarySection}>
         <div className={styles.buttonWrapper}>
           <Button href="/about" label={t('skills.viewFullStack')} variant="secondary" />
         </div>

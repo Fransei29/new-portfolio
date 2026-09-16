@@ -25,11 +25,15 @@ const ProjectsSection = ({ variant = 'projects' }: ProjectsSectionProps) => {
         <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t(subtitleKey)}
         </p>
-        <div className={styles.singleColumn}>
-          <section className="piece-u piece-delay-2">
-            {isTutorials ? <RecentTutorials /> : <RecentProjects />}
-          </section>
-        </div>
+      </div>
+      {/* El carrusel va FUERA de `.projectsSection`: ese div tiene
+          `max-width: 1440px` y un full-bleed no puede escapar de un ancestro
+          capado (a 1920px quedaba 236px adentro en vez de llegar a la pared).
+          El título sigue adentro, capado como corresponde. */}
+      <div className={styles.singleColumn}>
+        <section className="piece-u piece-delay-2">
+          {isTutorials ? <RecentTutorials /> : <RecentProjects />}
+        </section>
       </div>
     </section>
   );
