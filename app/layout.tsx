@@ -77,9 +77,16 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  /* Los assets viven en /FAVICON (ver esa carpeta). El .ico se deja también en
+     la raíz porque los navegadores lo piden por defecto en /favicon.ico, sin
+     mirar el <link>. */
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/FAVICON/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/FAVICON/android-chrome-512x512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/FAVICON/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
 };
