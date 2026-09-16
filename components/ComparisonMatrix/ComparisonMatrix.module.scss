@@ -3,7 +3,10 @@
 .container {
   width: 100%;
   background-color: var(--background-colorA);
-  padding: 5.5rem 0;
+  /* Abajo menos que arriba: el mazo ya trae su propio aire (el padding-bottom
+     del .stack, que le da recorrido al sticky), así que 5.5rem de este lado se
+     sumaban a ese y dejaban un hueco blanco grande antes del wave. */
+  padding: 5.5rem 0 2rem;
 
   :global(html.dark) & {
     background-color: var(--dark-light);
@@ -75,8 +78,10 @@
 
   /* El aire de abajo es lo que le da al mazo recorrido para acumularse: sin él
      la última carta llega arriba justo cuando la sección ya terminó y el efecto
-     se corta a la mitad. */
-  padding-bottom: 22vh;
+     se corta a la mitad. Con 22vh sobraba: el mazo terminaba de apilarse bastante
+     antes de agotarlo y quedaban ~210px de hueco blanco entre la última carta y
+     el wave. 8vh alcanza para el recorrido sin dejar ese hueco. */
+  padding-bottom: 8vh;
 
   /* En mobile las cartas son mucho más altas (el contenido se apila en una
      columna), así que el mazo termina de acumularse bastante antes de agotar
