@@ -11,7 +11,9 @@
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título. */
+    padding: 1rem 0 3rem;
   }
 }
 
@@ -36,7 +38,8 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1.5rem;
+    /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
   }
 }
 

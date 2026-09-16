@@ -25,6 +25,14 @@
   @media (max-width: 900px) {
     padding: 3rem 0;
   }
+
+  /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave ya
+     aporta su altura y 3rem dejaban una banda muerta antes del título. Va en su
+     propia media query de 768 —y no en la de 900 de arriba— para no tocar la
+     franja tablet, donde el aire de 3rem sigue estando bien. */
+  @media (max-width: 768px) {
+    padding: 1rem 0 3rem;
+  }
 }
 
 .container {
@@ -50,6 +58,20 @@
   @media (max-width: 900px) {
     margin-bottom: 1.75rem;
   }
+
+  /* En mobile la grilla pasa a una sola columna y el bloque ocupa todo el ancho:
+     ahí el alineado a la izquierda deja de tener con qué alinearse y el par
+     título + subtítulo se lee descolgado del resto de las secciones, que van
+     centradas. Se vuelve al centrado sólo en este breakpoint; en desktop las
+     tres columnas siguen justificando la alineación izquierda de arriba. */
+  @media (max-width: 768px) {
+    max-width: none;
+    text-align: center;
+
+    :global(.highlight) {
+      text-align: center;
+    }
+  }
 }
 
 .subtitle {
@@ -61,6 +83,11 @@
 
   @media (max-width: 900px) {
     font-size: var(--subtitle-font-size-mobile);
+  }
+
+  @media (max-width: 768px) {
+    /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+    margin-top: var(--subtitle-spacing-top-mobile);
   }
 }
 

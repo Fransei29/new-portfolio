@@ -14,9 +14,11 @@
   }
 
   @media (max-width: 768px) {
-    /* Abajo un poco menos que en desktop: las cartas son más altas y el mazo
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título.
+       Abajo un poco menos que en desktop: las cartas son más altas y el mazo
        termina de apilarse antes, así que el mismo aire se nota más. */
-    padding: 3rem 0 2rem;
+    padding: 1rem 0 2rem;
   }
 }
 
@@ -62,7 +64,8 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1.5rem;
+    /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
   }
 }
 

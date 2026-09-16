@@ -15,7 +15,12 @@
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    /* Arriba 1rem y no 3: el wave ya aporta su propia altura, así que sumarle
+       48px dejaba una banda muerta entre la curva y el título. 1rem es el mismo
+       aire que usa Case Studies (.projectsSectionContainer), que es la
+       referencia para todas las secciones en mobile. Abajo se mantiene el 3rem,
+       que separa del wave siguiente. */
+    padding: 1rem 0 3rem;
   }
 }
 
@@ -24,7 +29,9 @@
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 0.5rem;
+    /* Sólo a los lados: el padding de arriba se sumaba al de la sección y
+       corría el título 8px más abajo que en el resto. */
+    padding: 0 0.5rem;
   }
 }
 
@@ -50,7 +57,9 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1.5rem;
+    /* El título y el subtítulo son una sola unidad de lectura: van cerca, y el
+       aire grande queda debajo del par. Mismo token que ya usaba HowWeWork. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
   }
 }
 

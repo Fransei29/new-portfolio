@@ -27,7 +27,9 @@
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título. */
+    padding: 1rem 0 3rem;
   }
 }
 

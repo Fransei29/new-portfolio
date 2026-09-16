@@ -51,7 +51,8 @@
 
       @media (max-width: 768px) {
         font-size: var(--subtitle-font-size-mobile);
-        margin: 0.75rem auto 1rem;
+        /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+        margin: var(--subtitle-spacing-top-mobile) auto 1rem;
       }
     }
   }

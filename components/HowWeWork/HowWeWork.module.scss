@@ -28,7 +28,10 @@ $step-column-gap: 10rem;
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0 4.5rem;
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título.
+       Abajo se mantiene el 4.5rem, que esta sección necesita para su cierre. */
+    padding: 1rem 0 4.5rem;
   }
 }
 
