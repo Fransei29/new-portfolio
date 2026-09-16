@@ -81,8 +81,13 @@ const WhyChooseUs = () => {
                   .split('\n')
                   .map((line, i, lines) => (
                     <React.Fragment key={i}>
-                      {line}
-                      {i < lines.length - 1 && <br />}
+                      {/* La primera frase enumera lo que NO pasa; la segunda
+                          afirma. En mobile queda sólo la afirmación (ver
+                          .benefitDescLead en el módulo). */}
+                      <span className={i === 0 ? styles.benefitDescLead : undefined}>
+                        {line}
+                      </span>
+                      {i < lines.length - 1 && <br className={styles.benefitDescBreak} />}
                     </React.Fragment>
                   ))}
               </p>

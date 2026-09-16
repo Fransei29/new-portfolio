@@ -245,7 +245,16 @@ const HowWeWork = () => {
                   </div>
                 </div>
                 <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepDescription}>{step.description}</p>
+                {/* Las dos líneas del copy van en spans separados: en mobile se
+                    oculta la segunda (la de detalle) para que la sección no sea
+                    un muro de texto. Ver .stepDescription en el módulo. */}
+                <p className={styles.stepDescription}>
+                  {step.description.split('\n').map((line, li) => (
+                    <span key={li} className={li === 0 ? styles.stepDescLead : styles.stepDescDetail}>
+                      {line}
+                    </span>
+                  ))}
+                </p>
               </div>
             );
           })}

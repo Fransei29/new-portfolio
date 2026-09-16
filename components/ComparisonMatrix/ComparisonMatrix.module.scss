@@ -6,7 +6,7 @@
   /* Abajo menos que arriba: el mazo ya trae su propio aire (el padding-bottom
      del .stack, que le da recorrido al sticky), así que 5.5rem de este lado se
      sumaban a ese y dejaban un hueco blanco grande antes del wave. */
-  padding: 5.5rem 0 2rem;
+  padding: 5.5rem 0 3.5rem;
 
   :global(html.dark) & {
     background-color: var(--dark-light);
@@ -14,7 +14,18 @@
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    /* Abajo un poco menos que en desktop: las cartas son más altas y el mazo
+       termina de apilarse antes, así que el mismo aire se nota más. */
+    padding: 3rem 0 2rem;
+  }
+}
+
+/* En mobile se oculta "Hiring in-house" (4ª del STACK_ORDER): las cartas son
+   mucho más altas y el mazo se hace largo de recorrer. Quedan las cuatro que
+   sostienen el argumento y la propuesta como cierre. */
+@media (max-width: 768px) {
+  .stack > li:nth-child(4) {
+    display: none;
   }
 }
 

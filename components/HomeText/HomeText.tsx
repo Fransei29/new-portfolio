@@ -36,7 +36,23 @@ const HomeText: React.FC = () => {
         </h1>
     </section>
     <section className="hero-piece hero-piece-2">
-       <h2 className={styles.subTitle}>{t('hero.description')}</h2>
+       {/* El `|` del locale marca dónde cortar la línea, para que la frase no
+           parta en una palabra suelta. */}
+       <h2 className={styles.subTitle}>
+         {t('hero.description').split('|').map((part, i, arr) => (
+           <span key={i}>
+             {part.trim()}
+             {i < arr.length - 1 && (
+               <>
+                 {/* En mobile el corte forzado dejaba la primera línea a medias
+                     y la frase pasaba a 4 renglones: ahí el texto fluye solo y
+                     entra en 3. El salto queda para desktop. */}
+                 <br className={styles.descBreak} />{' '}
+               </>
+             )}
+           </span>
+         ))}
+       </h2>
     </section>
     <section className="hero-piece hero-piece-3">
         {t('about.description') && (

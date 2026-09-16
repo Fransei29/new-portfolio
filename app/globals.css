@@ -685,13 +685,19 @@ html.dark .hero-section::after {
 /* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
    ENCIMA de la curva sea transparente y deje ver al panda que está detrás. Solo
    el relleno gris de la curva (opaco) tapa la base del panda, siguiendo la curva
-   exacta. Sin fondo blanco → sin franja blanca. La sombra del wave se quita
-   porque dibujaría una línea sobre el panda. */
+   exacta. Sin fondo blanco → sin franja blanca.
+
+   La sombra del SVG (feDropShadow dy=8 blur=8) se reemplaza en vez de quitarse:
+   ese blur se expande ~8px en TODAS las direcciones, también hacia arriba, y ahí
+   dibujaba una línea sobre el panda. Un drop-shadow con más desplazamiento y
+   menos desenfoque queda por debajo de la curva —donde el panda ya está tapado
+   por el relleno gris— así que la costura se lee igual que los demás waves sin
+   ensuciar al panda. */
+.toolsWave [class*="WaveDivider_root"] path {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.36)) !important;
+}
 .toolsWave [class*="WaveDivider_root"] {
   background: transparent !important;
-}
-.toolsWave [class*="WaveDivider_root"] path {
-  filter: none !important;
 }
 
 /* El panda se ancla al borde superior del host (top:0 ≈ cresta de la curva) y

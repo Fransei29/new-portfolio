@@ -85,6 +85,15 @@ p.greeting {
   }
 }
 
+/* El corte del subtítulo sólo en desktop: en mobile el ancho es tan angosto que
+   el salto forzado dejaba la primera línea a medias y la frase ocupaba 4
+   renglones en vez de 3. */
+.descBreak {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
 .subTitle {
   font-size: 1.25rem;
   font-weight: var(--h2-font-weight);

@@ -204,6 +204,16 @@
   }
 }
 
+/* Primera frase de cada beneficio (la que enumera lo que no pasa) y su salto:
+   en mobile se ocultan las dos y queda sólo la afirmación, para que la sección
+   no sea un muro de texto en una columna angosta. */
+.benefitDescLead,
+.benefitDescBreak {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
 .benefitDescription {
   font-size: 0.98rem;
   line-height: 1.65;

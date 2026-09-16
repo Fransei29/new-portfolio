@@ -45,6 +45,17 @@
   }
 }
 
+/* Punto de corte del subtítulo: en desktop el texto fluye y este <br> no existe;
+   en mobile fuerza el salto donde lo marca el `|` del locale, así la frase no
+   corta en una palabra suelta. */
+.subtitleBreak {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline;
+  }
+}
+
 .heroSubtitle {
   font-size: var(--subtitle-font-size);
   line-height: var(--subtitle-line-height);

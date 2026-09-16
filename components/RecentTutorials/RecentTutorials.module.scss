@@ -10,7 +10,9 @@
 }
 
 .recentProjects {
-    padding: 1.5rem 0;
+    /* Sin padding arriba: el .viewport ya aporta 2.5rem para la sombra de hover,
+       y sumados dejaban un hueco grande entre el subtítulo y las tarjetas. */
+    padding: 0 0 1.5rem;
     width: 100%;
 
     @media (max-width: 768px) {

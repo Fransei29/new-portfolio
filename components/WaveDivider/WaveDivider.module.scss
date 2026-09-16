@@ -64,6 +64,13 @@
   flood-color: rgba(0, 0, 0, 0.22);
 }
 
+/* La sombra del aToB cae sobre el gris (--wave-b) y la del bToA sobre el blanco
+   (--wave-a). Sobre el gris, un 0.22 casi no contrasta y la costura se ve plana
+   al lado de la de arriba; se sube para que las dos se lean igual. */
+.aToB .waveDrop {
+  flood-color: rgba(0, 0, 0, 0.34);
+}
+
 /* Sin sombra en oscuro: el drop-shadow dibuja un halo más oscuro que el fondo (#0a0a0f) y “rompe” el match */
 :global(html.dark) {
   .aToB path,

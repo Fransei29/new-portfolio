@@ -65,7 +65,23 @@ export default function ServicesView({ initialContent }: Props) {
         <section className={styles.hero}>
           <div className={styles.container}>
             <h1 className="highlight">{hero.eyebrow}</h1>
-            <p className={styles.heroSubtitle}>{hero.subtitle}</p>
+            {/* El subtítulo lleva un punto de corte marcado con `|` en el locale:
+                en mobile ahí va el salto de línea (ver .heroSubtitle en el
+                módulo); en desktop es un espacio más y el texto fluye solo. */}
+            <p className={styles.heroSubtitle}>
+              {hero.subtitle.split('|').map((part, i, arr) => (
+                <span key={i}>
+                  {part.trim()}
+                  {i < arr.length - 1 && (
+                    <>
+                      {/* En desktop el <br> no aplica y este espacio mantiene la
+                          frase como una sola línea corrida. */}
+                      <br className={styles.subtitleBreak} />{' '}
+                    </>
+                  )}
+                </span>
+              ))}
+            </p>
           </div>
         </section>
 

@@ -31,7 +31,11 @@
 .projectsSection {
   max-width: var(--container-max-width);
   margin-inline: auto;
-  padding: 2.5rem 0;
+  /* Sin padding abajo: acá ya sólo vive el título + subtítulo (el carrusel pasó
+     a ser hermano de este div para poder escapar del max-width), así que ese
+     padding quedaba como un hueco entre el subtítulo y las tarjetas. El aire lo
+     pone el carrusel con su propio padding. */
+  padding: 2.5rem 0 0;
 }
 
 .subtitle {
@@ -55,7 +59,9 @@
 }
 
 .singleColumn {
-  padding-top: 0.75rem;
+  /* Sin aire propio: el carrusel ya trae el suyo (padding del .viewport, que es
+     el que deja respirar la sombra de hover de las tarjetas). */
+  padding-top: 0;
 }
 
 @media (max-width: 768px) {

@@ -633,9 +633,12 @@ $step-column-gap: 10rem;
   // Por encima de la marca de agua (ver .stepNumber).
   position: relative;
   z-index: 1;
-  // Respeta los \n de los locales: cada descripción está partida en dos frases
-  // a propósito, para que la tarjeta no sea un bloque compacto de texto.
-  white-space: pre-line;
+  // Cada descripción está partida en dos frases a propósito, para que la
+  // tarjeta no sea un bloque compacto de texto. Antes el salto lo daba el \n
+  // del locale con `pre-line`; ahora cada frase es un span (ver el componente)
+  // y el salto lo da el `display: block`, que además permite ocultar sólo la
+  // segunda en mobile.
+  white-space: normal;
 
   :global(html.dark) & {
     color: var(--text-color-light);
@@ -644,8 +647,20 @@ $step-column-gap: 10rem;
   @media (max-width: 768px) {
     font-size: 0.875rem;
     line-height: 1.5;
-    // En una columna angosta el salto forzado deja huérfanas muy cortas: se
-    // deja fluir el texto y que corte donde entre.
-    white-space: normal;
+  }
+}
+
+// Las dos frases del copy. En desktop cada una ocupa su renglón; en mobile
+// queda sólo la primera, que es la que dice qué pasa en esa etapa: la segunda
+// es detalle y sumaba cuatro bloques de texto a una pantalla angosta.
+.stepDescLead {
+  display: block;
+}
+
+.stepDescDetail {
+  display: block;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }
