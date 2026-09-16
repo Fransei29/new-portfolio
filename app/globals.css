@@ -108,8 +108,16 @@
      eran los lila viejos (#f4f3f7/#f8f7fa) y, como `background-image` se pinta
      ENCIMA de `background-color`, el gradiente tapaba el fondo B en todas las
      secciones — el cambio de variable sólo se veía en los waves.
-     El tramo del medio es un punto más claro, para el mismo degradé sutil. */
-  --background-colorB-gradient: linear-gradient(180deg, #f9f9fa 0%, #fcfcfd 50%, #f9f9fa 100%);
+     El tramo del medio es un punto más claro, para el mismo degradé sutil.
+
+     El primer tramo se mantiene plano en el tono del wave (#f9f9fa) hasta 12%:
+     arriba de esta sección suele haber un wave, cuyo relleno es ese color PLANO.
+     Si el gradiente empieza a aclarar desde 0% ya llegó a un tono visiblemente
+     más claro a los pocos píxeles de la costura, y ese salto se lee como una
+     línea fina cruzando el ancho (se veía en Tools y en Case Studies). Con el
+     tramo plano la unión es continua y el degradé arranca cuando ya se despegó
+     del wave. */
+  --background-colorB-gradient: linear-gradient(180deg, #f9f9fa 0%, #f9f9fa 12%, #fcfcfd 50%, #f9f9fa 100%);
   /* anterior (main):  linear-gradient(180deg, #faf9f8 0%, #fdfcfb 50%, #faf9f8 100%); */
   /* anterior (lila):  linear-gradient(180deg, #f4f3f7 0%, #f8f7fa 50%, #f4f3f7 100%); */
   --background-ivory: rgb(255, 255, 255);
@@ -680,6 +688,13 @@ html.dark .hero-section::after {
 .toolsPandaHost {
   position: relative;
   isolation: isolate;
+  /* Fondo de respaldo, del color de la sección que este bloque contiene
+     (SkillsSummary). isolation:isolate hace que el bloque componga en su propia
+     capa, y con zoom o devicePixelRatio fraccionario el borde entre el wave y la
+     sección puede caer en una fracción de píxel: ahí queda una fila que ninguno
+     de los dos pinta del todo. Sin este fondo, por esa fila se ve el blanco del
+     body y se lee como una línea fina cruzando el ancho, justo sobre "Tools". */
+  background-color: var(--wave-b);
 }
 
 /* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
@@ -687,18 +702,18 @@ html.dark .hero-section::after {
    el relleno gris de la curva (opaco) tapa la base del panda, siguiendo la curva
    exacta. Sin fondo blanco → sin franja blanca.
 
-   La sombra del SVG (feDropShadow dy=8 blur=8) se reemplaza en vez de quitarse:
-   ese blur se expande ~8px en TODAS las direcciones, también hacia arriba, y ahí
-   dibujaba una línea sobre el panda. Un drop-shadow con más desplazamiento y
-   menos desenfoque queda por debajo de la curva —donde el panda ya está tapado
-   por el relleno gris— así que la costura se lee igual que los demás waves sin
-   ensuciar al panda. */
+   La sombra base (ver WaveDivider.module.scss) se reemplaza por una con más
+   desplazamiento y menos desenfoque: acá el wave va sobre el panda, y un blur
+   que se expande hacia arriba dibujaría una línea sobre él. Desplazada queda por
+   debajo de la curva —donde el panda ya está tapado por el relleno gris— así que
+   la costura se lee igual que en los demás waves sin ensuciar al panda. */
 .toolsWave [class*="WaveDivider_root"] path {
   filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.36)) !important;
 }
 .toolsWave [class*="WaveDivider_root"] {
   background: transparent !important;
 }
+
 
 /* El panda se ancla al borde superior del host (top:0 ≈ cresta de la curva) y
    asoma hacia arriba. Va DETRÁS del wave (z-index:-1): el relleno gris de la
