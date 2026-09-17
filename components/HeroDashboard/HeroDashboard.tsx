@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Image from 'next/image';
 import styles from './HeroDashboard.module.scss';
 
 const prefersReducedMotion = () =>
@@ -65,44 +64,6 @@ function useAnimatedNumber(target: number, { duration = 1100, delay = 0 } = {}) 
 
   return value;
 }
-
-const TESTIMONIALS = [
-  {
-    name: 'Edison, DevOps',
-    quote: 'Exceptional attention to detail.',
-    image: '/img/img/Testimonials/Edi.webp',
-  },
-  {
-    name: 'Matias, Frontend',
-    quote: 'Always delivered high-quality code.',
-    image: '/img/img/Testimonials/Mati.webp',
-  },
-  {
-    name: 'Adrian, Developer',
-    quote: 'Proactive, reflective, reliable.',
-    image: '/img/img/Testimonials/Adrian.webp',
-  },
-  {
-    name: 'Tomas, Web Dev',
-    quote: 'Key developer on our scaling work.',
-    image: '/img/img/Testimonials/tomi.webp',
-  },
-  {
-    name: 'Franklin, Full Stack',
-    quote: 'Mastery in React and TypeScript.',
-    image: '/img/img/Testimonials/frank.webp',
-  },
-  {
-    name: 'Valentin, Backend',
-    quote: 'Proactive and efficient. Fully recommended.',
-    image: '/img/img/Testimonials/vale.webp',
-  },
-  {
-    name: 'Ismael, Software Dev',
-    quote: 'Exceptional full stack developer.',
-    image: '/img/img/Testimonials/isma.webp',
-  },
-];
 
 // ---------------------------------------------------------------------------
 // Sparkline de conversion
@@ -231,21 +192,6 @@ const HeroDashboard = () => {
     };
   }, []);
   const currentTask = TASKS[taskIndex];
-
-  // Rotating testimonials with fade transition
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [testimonialFading, setTestimonialFading] = useState(false);
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTestimonialFading(true);
-      setTimeout(() => {
-        setTestimonialIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-        setTestimonialFading(false);
-      }, 800);
-    }, 8000);
-    return () => clearInterval(id);
-  }, []);
-  const currentTestimonial = TESTIMONIALS[testimonialIndex];
 
   // Stats driven by current task. El delay escalonado hace que la fila se
   // actualice de izquierda a derecha en vez de saltar los tres a la vez.
@@ -493,27 +439,6 @@ const HeroDashboard = () => {
         </div>
       </div>
 
-      {/* Floating testimonial pill (bottom-right, breaks the frame) */}
-      <div
-        className={`${styles.floatingPill} ${styles.testimonialPill} ${testimonialFading ? styles.testimonialFading : ''}`}
-        data-explode-piece="testimonial-pill"
-      >
-        {/* next/image sirve el avatar redimensionado a 24px en vez del .webp
-            completo. Los demás <img> de este archivo son SVG, que el
-            optimizador no procesa — ahí no aportaría nada. */}
-        <Image
-          className={styles.avatarImg}
-          src={currentTestimonial.image}
-          alt={currentTestimonial.name}
-          width={24}
-          height={24}
-          loading="lazy"
-        />
-        <span className={styles.testimonialText}>
-          <span className={styles.testimonialName}>{currentTestimonial.name}</span>
-          <span className={styles.testimonialQuote}>&ldquo;{currentTestimonial.quote}&rdquo;</span>
-        </span>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 {
   "contact": {
     "title": "Get in Touch",
-    "subtitle": "We are always open to hearing about new ideas and work opportunities.",
-    "description": "If you are looking for a developer passionate about building effective solutions,",
+    "subtitle": "Tell us what you need and we'll come back with a concrete proposal.",
+    "description": "If you're looking for a team to take your project end to end,",
     "reachOut": "reach out.",
     "email": "seilerfranco317@gmail.com",
     "copyEmail": "Copy email",
@@ -18,8 +18,8 @@
   },
   "contactPage": {
     "title": "Contact",
-    "subtitle": "Open to strategic collaborations and projects that generate real impact.",
-    "description": "If you are looking for a developer passionate about building effective solutions, reach out.",
+    "subtitle": "Open to new projects and collaborations that make a real impact.",
+    "description": "If you're looking for a team to take your project end to end, reach out.",
     "email": "Email"
   }
 }

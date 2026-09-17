@@ -11,7 +11,7 @@
         "after": "listo para crecer."
       }
     },
-    "description": "Con más de 4 años de experiencia, ayudamos a startups | y equipos a lanzar plataformas confiables que se adaptan al crecimiento del negocio.",
+    "description": "Ayudamos a startups y equipos a diseñar y construir | plataformas confiables que acompañan el crecimiento de su negocio.",
     "cta": {
       "projects": "Explorá nuestro trabajo",
       "contact": "Empezá tu proyecto",
@@ -21,19 +21,19 @@
     "socialProof": {
       "label": "Confían en nosotros founders y equipos de ingeniería",
       "headline": "Confían en nosotros founders y equipos de ingeniería",
-      "sub": "15 clientes confían en nuestro trabajo",
-      "projects": "Proyectos entregados"
+      "projects": "Proyectos entregados",
+      "clients": "Clientes internacionales confían en nosotros"
     }
   },
   "about": {
-    "title": "Sobre nosotros",
+    "title": "Quiénes construyen tu producto",
     "description": "",
     "experience": "Años de experiencia",
     "projects": "Proyectos completados",
     "technologies": "Tecnologías dominadas",
     "whoIAm": "Con quién vas a trabajar",
-    "personalStory": "Llevo los proyectos de punta a punta, desde la primera idea hasta producción. Trabajás directamente con quienes construyen tu software, sin capas de intermediarios ni traspasos innecesarios.",
-    "teamNote": "Mantengo el equipo chico y sumo especialistas de confianza cuando el proyecto lo pide.\nEso significa atención senior sin la estructura pesada de una agencia.",
+    "personalStory": "Llevamos los proyectos de punta a punta, desde la primera idea hasta producción. Trabajás directamente con quienes construyen tu software, sin capas de intermediarios ni traspasos innecesarios.",
+    "teamNote": "Mantenemos el equipo chico y sumamos especialistas de confianza cuando el proyecto lo pide.\nEso significa atención senior sin la estructura pesada de una agencia grande.",
     "newChapter": "Desde Córdoba, Argentina, trabajando con equipos de Estados Unidos, Canadá y Europa.\nConstruimos software a medida y automatizaciones para negocios cuya operación ya no entra en planillas y procesos manuales.",
     "dedicationTitle": "Años construyendo",
     "dedication": "4+",
@@ -107,10 +107,10 @@
       "label": "Años de experiencia"
     },
     "technologies": {
-      "label": "Tecnologías dominadas"
+      "label": "Clientes satisfechos"
     },
     "commitment": {
-      "label": "Compromiso"
+      "label": "Soporte post-lanzamiento"
     }
   }
 }

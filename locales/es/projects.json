@@ -11,7 +11,7 @@
     "projects": "Casos de estudio",
     "projectsSubtitle": "Una selección de trabajos recientes construidos de punta a punta.",
     "tutorials": "Tutoriales",
-    "tutorialsSubtitle": "Recorridos breves de decisiones reales que tomé construyendo software.",
+    "tutorialsSubtitle": "Recorridos breves de decisiones reales que tomamos construyendo software.",
     "goToProjects": "Ver todos los casos",
     "goToTutorials": "Ver Tutoriales",
     "back": "Atrás",
@@ -246,9 +246,9 @@
         "learnings": [
           "Implementamos lógica de recomendación usando datos JSON y algoritmos del lado del cliente.",
           "Construimos una arquitectura frontend escalable y mantenible con Next.js y TypeScript.",
-          "Apliqué SCSS modular para estilos limpios y reutilizables.",
+          "Aplicamos SCSS modular para estilos limpios y reutilizables.",
           "Optimizamos el rendimiento de la aplicación y la experiencia de usuario mediante el manejo eficiente de datos y diseño UI.",
-          "Creé un panel de administración para la gestión de propiedades del usuario y seguimiento de favoritos."
+          "Creamos un panel de administración para la gestión de propiedades del usuario y seguimiento de favoritos."
         ],
         "role": "Full-stack",
         "industry": "Inmobiliario",
@@ -264,8 +264,8 @@
           "Construimos una aplicación Next.js full-stack usando componentes de servidor y cliente.",
           "Diseñamos un esquema de base de datos relacional para e-commerce.",
           "Implementamos autenticación con NextAuth.js.",
-          "Gestioné estado y efectos secundarios con hooks de React.",
-          "Usé Prisma ORM para operaciones de base de datos.",
+          "Gestionamos estado y efectos secundarios con hooks de React.",
+          "Usamos Prisma ORM para operaciones de base de datos.",
           "Configuramos Docker para desarrollo local y desplegamos en Vercel."
         ],
         "role": "Full-stack",
@@ -281,11 +281,11 @@
           "Desarrollamos una aplicación TypeScript full-stack con frontend (Next.js) y backend (NestJS) desacoplados.",
           "Diseñamos un esquema de base de datos relacional con entidades y relaciones de clave foránea.",
           "Construimos APIs RESTful con validación completa y manejo de errores usando class-validator y pipes de NestJS.",
-          "Usé Turso SQLite con tokens de autenticación para persistencia alojada en la nube.",
+          "Usamos Turso SQLite con tokens de autenticación para persistencia alojada en la nube.",
           "Implementamos validación de formularios del lado del cliente y servidor con componentes reutilizables.",
           "Probé servicios principales y casos límite con tests unitarios e integración.",
           "Diseñamos una UI responsive y accesible con Tailwind y toggle de modo oscuro.",
-          "Gestioné configuración de entorno para despliegue en Render y Vercel."
+          "Gestionamos configuración de entorno para despliegue en Render y Vercel."
         ],
         "role": "Full-stack",
         "engagement": "Proyecto de práctica",
@@ -299,11 +299,11 @@
         "problemSolved": "Los usuarios necesitaban una forma simple pero poderosa de gestionar sus tareas con autenticación segura.\nEsta aplicación proporciona una solución confiable con gestión de tareas específica del usuario, almacenamiento seguro de datos\ny un diseño responsive que funciona en todos los dispositivos.",
         "learnings": [
           "Implementamos autenticación de usuarios con NextAuth.js.",
-          "Creé un esquema de base de datos relacional para usuarios y tareas.",
+          "Creamos un esquema de base de datos relacional para usuarios y tareas.",
           "Construimos endpoints API RESTful para operaciones CRUD.",
           "Configuramos Docker para entorno de desarrollo local.",
           "Implementamos diseño responsive con CSS Modules.",
-          "Gestioné estado y llamadas API con Axios."
+          "Gestionamos estado y llamadas API con Axios."
         ],
         "role": "Full-stack",
         "engagement": "Proyecto de práctica"
@@ -317,10 +317,10 @@
         "learnings": [
           "Construimos una aplicación full-stack usando Node.js y Express.",
           "Implementamos renderizado del lado del servidor con plantillas Pug.",
-          "Creé una interfaz de usuario responsive e interactiva.",
+          "Creamos una interfaz de usuario responsive e interactiva.",
           "Configuramos Docker para containerización y despliegue.",
           "Implementamos características en tiempo real para interacción social.",
-          "Desplegué la aplicación en Vercel."
+          "Desplegamos la aplicación en Vercel."
         ],
         "role": "Full-stack",
         "engagement": "Proyecto de práctica"
@@ -334,10 +334,10 @@
         "learnings": [
           "Construimos una interfaz e-commerce responsive con React.",
           "Implementamos autenticación segura de usuarios con JWT.",
-          "Creé una experiencia intuitiva de navegación de productos.",
+          "Creamos una experiencia intuitiva de navegación de productos.",
           "Desarrollamos APIs RESTful con Node.js y Express.",
-          "Gestioné operaciones de base de datos con PostgreSQL.",
-          "Desplegué la aplicación en Vercel.",
+          "Gestionamos operaciones de base de datos con PostgreSQL.",
+          "Desplegamos la aplicación en Vercel.",
           "Implementamos prácticas modernas de UI/UX."
         ],
         "role": "Frontend",
@@ -364,10 +364,10 @@
         "problemSolved": "Los creadores de contenido y lectores necesitaban una plataforma unificada para acceder tanto a feeds RSS externos como a contenido de blog personalizado.\nEsta aplicación proporciona una experiencia fluida combinando el análisis de feeds RSS con la integración de Airtable,\npermitiendo a los usuarios gestionar y mostrar contenido de múltiples fuentes en un solo lugar.",
         "learnings": [
           "Implementamos análisis e integración de feeds RSS.",
-          "Integré la API de Airtable para gestión de contenido.",
+          "Integramos la API de Airtable para gestión de contenido.",
           "Construimos enrutamiento dinámico con Next.js.",
-          "Creé un diseño responsive con Tailwind CSS.",
-          "Gestioné renderizado del lado del servidor para rendimiento óptimo.",
+          "Creamos un diseño responsive con Tailwind CSS.",
+          "Gestionamos renderizado del lado del servidor para rendimiento óptimo.",
           "Desarrollamos una interfaz de usuario limpia e intuitiva."
         ]
       },
@@ -379,10 +379,10 @@
         "problemSolved": "Los practicantes de terapias alternativas necesitaban una presencia online profesional para mostrar sus servicios y conectar con clientes.\nEste sitio web proporciona una solución elegante con descripciones claras de servicios, testimonios de clientes\ny opciones de reserva fáciles, todo presentado en un diseño limpio y profesional.",
         "learnings": [
           "Construimos un sitio web estático con HTML y CSS.",
-          "Utilicé Sass para capacidades de estilo mejoradas.",
-          "Creé un diseño profesional e informativo.",
+          "Utilizamos Sass para capacidades de estilo mejoradas.",
+          "Creamos un diseño profesional e informativo.",
           "Implementamos testimonios de clientes y características de reserva.",
-          "Me enfoqué en la experiencia del usuario y presentación profesional."
+          "Nos enfocamos en la experiencia del usuario y presentación profesional."
         ]
       },
       "greengrocery": {
@@ -394,10 +394,10 @@
         "learnings": [
           "Construimos una interfaz e-commerce responsive con React.",
           "Implementamos pruebas exhaustivas con Jest.",
-          "Creé una experiencia de carrito de compras optimizada.",
+          "Creamos una experiencia de carrito de compras optimizada.",
           "Desarrollamos interacciones API con Axios.",
           "Estilicé la aplicación con Tailwind CSS.",
-          "Me enfoqué en la experiencia del usuario y optimización de conversión."
+          "Nos enfocamos en la experiencia del usuario y optimización de conversión."
         ]
       },
       "lexmax": {
@@ -409,9 +409,9 @@
         "learnings": [
           "Construimos una aplicación full-stack con React y Vite para un rendimiento óptimo.",
           "Implementamos autenticación segura usando tokens JWT.",
-          "Integré capacidades de IA para detección inteligente de eventos y sugerencias de acciones.",
+          "Integramos capacidades de IA para detección inteligente de eventos y sugerencias de acciones.",
           "Desarrollamos sistemas de notificación automatizados con Google OAuth y API de Telegram.",
-          "Creé funcionalidad avanzada de filtrado y búsqueda para recuperación eficiente de datos.",
+          "Creamos funcionalidad avanzada de filtrado y búsqueda para recuperación eficiente de datos.",
           "Construimos un dashboard integral con estadísticas y visualización de datos.",
           "Diseñamos una arquitectura escalable con Node.js y Express en el backend.",
           "Implementamos diseño responsive con SCSS para una experiencia de usuario óptima."
@@ -429,11 +429,11 @@
         "learnings": [
           "Construimos una landing page moderna con Next.js para SEO y rendimiento óptimos.",
           "Implementamos diseño responsive con Tailwind CSS y SCSS para estilos flexibles.",
-          "Creé un formulario de contacto interactivo con funcionalidad de copiar al portapapeles.",
+          "Creamos un formulario de contacto interactivo con funcionalidad de copiar al portapapeles.",
           "Diseñamos una sección hero con estadísticas animadas e impacto visual.",
           "Desarrollamos componentes modulares reutilizables para una estructura de código mantenible.",
           "Implementamos navegación responsive con menú hamburguesa para dispositivos móviles.",
-          "Creé efectos visuales y animaciones para mejorar la participación del usuario.",
+          "Creamos efectos visuales y animaciones para mejorar la participación del usuario.",
           "Optimizamos el rendimiento de la página y tiempos de carga con optimizaciones de Next.js."
         ],
         "role": "Frontend · Landing de producto",
@@ -448,13 +448,13 @@
         "problemSolved": "Crear una presencia web que muestre las instalaciones, servicios y eventos del club, facilitando la información a miembros y visitantes.\nEl sitio integra un CMS para que el equipo actualice contenido sin intervención técnica, manteniendo la información actualizada sobre eventos, servicios, planes de membresía y el equipo.",
         "learnings": [
           "Construimos un sitio web corporativo con Next.js para rendimiento y SEO óptimos.",
-          "Integré Strapi CMS para gestión de contenido headless.",
-          "Creé un sistema de eventos dinámico con actualizaciones automáticas.",
+          "Integramos Strapi CMS para gestión de contenido headless.",
+          "Creamos un sistema de eventos dinámico con actualizaciones automáticas.",
           "Desarrollamos diseño responsive con Tailwind CSS y SCSS.",
           "Implementamos carruseles de banners y componentes interactivos.",
           "Optimizamos para exportación estática y tiempos de carga rápidos.",
           "Diseñamos componentes modulares para fácil mantenimiento.",
-          "Creé un sistema de navegación intuitivo para mejor experiencia de usuario."
+          "Creamos un sistema de navegación intuitivo para mejor experiencia de usuario."
         ],
         "role": "Full-stack · CMS con Strapi",
         "industry": "Deportes y fitness",
@@ -469,13 +469,13 @@
         "learnings": [
           "Construimos una plataforma full-stack con Next.js, React y TypeScript para seguridad de tipos y rendimiento óptimo.",
           "Desarrollamos un proceso de onboarding complejo de 13 pasos con validación en tiempo real y funcionalidad de auto-guardado.",
-          "Integré Stripe para procesamiento seguro de pagos con tarjetas de crédito y débito.",
+          "Integramos Stripe para procesamiento seguro de pagos con tarjetas de crédito y débito.",
           "Implementamos mapas interactivos con Leaflet para visualización de ubicación de venues.",
-          "Creé un sistema integral de gestión de contratos que soporta formatos PDF, Word y SVG.",
+          "Creamos un sistema integral de gestión de contratos que soporta formatos PDF, Word y SVG.",
           "Desarrollamos cálculo de precios en tiempo real basado en espacio, amenidades y paquetes de catering.",
           "Implementamos Google Cloud Storage para gestión eficiente de imágenes y documentos.",
           "Construimos características de accesibilidad asegurando cumplimiento ADA/ACA en toda la plataforma.",
-          "Creé una suite completa de pruebas con Jest, React Testing Library y Playwright.",
+          "Creamos una suite completa de pruebas con Jest, React Testing Library y Playwright.",
           "Diseñamos un sistema de doble interfaz (portal de administración y sitio web público) con componentes compartidos.",
           "Implementamos funcionalidad de auto-guardado para prevenir pérdida de datos durante la completación de formularios.",
           "Desarrollamos un sistema completo de coordinación de eventos con gestión de disponibilidad."

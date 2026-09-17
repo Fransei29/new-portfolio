@@ -15,7 +15,7 @@ import { SITE_URL } from '../lib/site';
 
 const title = 'Franco Seiler | Custom Software & Business Automation';
 const description =
-  'Full-stack developer building custom software and automations for teams whose operations have outgrown spreadsheets. You work directly with the developer building your software.';
+  'Software studio building custom platforms and automations for teams whose operations have outgrown spreadsheets. You work directly with the team building your software.';
 
 export const metadata: Metadata = {
   title,

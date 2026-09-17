@@ -50,7 +50,7 @@ export default function ServicesPage() {
   const serviceList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Services — Franco Seiler',
+    name: 'Services — Franco Seiler Software Studio',
     numberOfItems: content.services.length,
     itemListElement: content.services.map((service, index) => ({
       '@type': 'ListItem',
@@ -62,7 +62,7 @@ export default function ServicesPage() {
         url: `${SITE_URL}/services#${service.key}`,
         serviceType: service.name,
         provider: {
-          '@type': 'Person',
+          '@type': 'Organization',
           name: 'Franco Seiler',
           url: SITE_URL,
         },

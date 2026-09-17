@@ -101,9 +101,11 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
       url: AUTHOR.url,
     },
     publisher: {
-      '@type': 'Person',
-      name: AUTHOR.name,
-      url: AUTHOR.url,
+      /* BlogPosting.publisher tiene que ser una Organization: Google descarta
+         el dato si es una Person. El author de arriba si va como Person. */
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       '@type': 'WebPage',

@@ -49,49 +49,49 @@
   },
   "testimonials": {
     "title": "Testimonials",
-    "subtitle": "Colleagues, clients, and team leaders.",
-    "featured": "Top pick",
+    "subtitle": "Clients and professionals who have worked with us.",
+    "featured": "Client project",
+    "franklin": {
+      "name": "Franklin Gomez",
+      "role": "Founder, coding academy",
+      "message": "I hired them to design and build my academy's website and they handled the whole thing, from the first sketch to the deploy. \nIt loads fast, it looks right on a phone, and I finally have somewhere serious to send people."
+    },
+    "tomas": {
+      "name": "Tomas Del Pino",
+      "role": "Multi-sector appointment platform",
+      "message": "We needed a booking system that wouldn't fall over under real traffic. \nThey built it to scale from day one — when the volume arrived, the product held up."
+    },
     "matias": {
       "name": "Matias Rivarola",
       "role": "Front End Developer",
-      "message": "Working with Franco was a fantastic experience. He always delivered high-quality code and was willing to help his colleagues when needed. \nHis reliability and dedication had a real impact on the success of our last project."
+      "message": "I've shipped alongside this team and the code that comes out is clean and maintainable. \nThey hit the dates they commit to, which is rarer than it should be."
     },
     "edison": {
       "name": "Edison Lamar",
       "role": "DevOps Engineer",
-      "message": "Franco demonstrates exceptional attention to detail and a solid understanding of how design and development go hand in hand. \nDuring our collaboration, he was always open to receiving feedback and communicated clearly and respectfully."
+      "message": "I've reviewed what they deploy and the infrastructure side is handled properly, not bolted on at the end. \nThey take feedback well and communicate clearly throughout."
     },
     "adrian": {
       "name": "Adrian Rodriguez",
       "role": "Web Development",
-      "message": "Franco is the kind of developer every team wants — proactive, reflective, and reliable. \nNot only did he meet deadlines but he also contributed valuable suggestions that improved the quality of our workflow."
-    },
-    "franklin": {
-      "name": "Franklin Gomez",
-      "role": "Full Stack Developer",
-      "message": "I had the opportunity to work with Franco on the design and development of my academy website. \nFranco demonstrated great mastery in React, TypeScript, CSS and SCSS. He is a reliable professional."
+      "message": "They don't just build what you asked for — they tell you when there's a better way to do it. \nDeadlines are met and the suggestions along the way made the end result better."
     },
     "ismael": {
       "name": "Ismael Rivarola",
       "role": "Software Developer",
-      "message": "Franco is an exceptional full stack developer. \nHe masters various technologies in frontend and backend, and has great ability to communicate in different languages."
+      "message": "Strong across the whole stack, frontend and backend both. \nThey work comfortably in more than one language, which matters if your users aren't all in one country."
     },
     "valentin": {
       "name": "Valentin Carniel",
       "role": "Backend Developer",
-      "message": "I totally recommend Franco. He is very capable at solving the problems that arise and handles the languages he uses very well, he is proactive and efficient."
-    },
-    "tomas": {
-      "name": "Tomas Del Pino",
-      "role": "Web Developer",
-      "message": "I highly recommend Franco. We worked together building a high-availability multi-sector appointment system. \nHe proved to be a key developer; his contributions with Next.js and Node.js were fundamental to ensure that the product could scale."
+      "message": "When something breaks or a requirement shifts mid-project, they solve it without drama. \nProactive and efficient — I'd recommend them without hesitation."
     }
   },
   "servicesPage": {
     "hero": {
       "eyebrow": "Services",
       "title": "Software that runs your operation",
-      "subtitle": "Custom platforms, automations and AI integrations for teams whose operations have outgrown spreadsheets and off-the-shelf tools. | You work directly with the developer building your software.",
+      "subtitle": "Custom platforms, automations and AI integrations for teams whose operations have outgrown spreadsheets and off-the-shelf tools. | You work directly with the team building your software.",
       "ctaPrimary": "Book a call",
       "ctaSecondary": "See case studies"
     },
@@ -105,8 +105,8 @@
         "label": "Regions: US, Canada, Europe, LATAM"
       },
       {
-        "value": "1",
-        "label": "Developer you talk to, start to finish"
+        "value": "100%",
+        "label": "From first call to production"
       }
     ],
     "detail": {

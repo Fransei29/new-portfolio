@@ -5,7 +5,7 @@ const SITE_URL = 'https://www.francoseiler.com';
 export const metadata: Metadata = {
   title: 'About | Franco Seiler',
   description:
-    'Full-stack developer based in Córdoba, Argentina, working with teams across the US, Canada and Europe. I lead projects end to end — you work directly with the person building your software.',
+    'Software studio based in Córdoba, Argentina, working with teams across the US, Canada and Europe. We take projects end to end — you work directly with the team building your software.',
   alternates: {
     canonical: `${SITE_URL}/about`,
     languages: {
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About | Franco Seiler',
     description:
-      'Full-stack developer based in Córdoba, Argentina, working with teams across the US, Canada and Europe.',
+      'Software studio based in Córdoba, Argentina, working with teams across the US, Canada and Europe.',
     url: `${SITE_URL}/about`,
-    type: 'profile',
+    type: 'website',
   },
 };
 

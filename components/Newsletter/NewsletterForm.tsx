@@ -8,7 +8,7 @@ import styles from './NewsletterForm.module.scss';
 const COPY = {
   es: {
     heading: 'Recibí los artículos por mail',
-    body: 'Un mail cuando publico algo nuevo. Sin spam, sin promociones, y te das de baja en un clic.',
+    body: 'Un mail cuando publicamos algo nuevo. Sin spam, sin promociones, y te das de baja en un clic.',
     placeholder: 'tu@email.com',
     submit: 'Suscribirme',
     sending: 'Enviando…',
@@ -18,7 +18,7 @@ const COPY = {
   },
   en: {
     heading: 'Get new articles by email',
-    body: 'One email when I publish something new. No spam, no promotions, unsubscribe in one click.',
+    body: 'One email when we publish something new. No spam, no promotions, unsubscribe in one click.',
     placeholder: 'you@email.com',
     submit: 'Subscribe',
     sending: 'Sending…',

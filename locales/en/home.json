@@ -11,7 +11,7 @@
         "after": "ready to scale."
       }
     },
-    "description": "With more than 4 years of experience, we help startups | and teams launch reliable platforms that adapt to business growth.",
+    "description": "We help startups and teams design and build | reliable platforms that support their business growth.",
     "cta": {
       "projects": "Explore our work",
       "contact": "Start your project",
@@ -21,19 +21,19 @@
     "socialProof": {
       "label": "Trusted by founders and engineering teams",
       "headline": "Trusted by founders and engineering teams",
-      "sub": "15 clients trust our work",
-      "projects": "Projects shipped"
+      "projects": "Projects shipped",
+      "clients": "International clients trust our work"
     }
   },
   "about": {
-    "title": "About us",
+    "title": "Who builds your product",
     "description": "",
     "experience": "Years of experience",
     "projects": "Completed projects",
     "technologies": "Technologies mastered",
     "whoIAm": "Who you'll work with",
-    "personalStory": "I lead projects end to end, from the first idea to production. You work directly with the people building your software — without layers of account managers or unnecessary handoffs.",
-    "teamNote": "I keep the core team small and bring in trusted specialists when a project calls for them.\nThat means senior-level attention without the overhead of a traditional agency.",
+    "personalStory": "We take projects end to end, from the first idea to production. You work directly with the people building your software, with no layers of middlemen and no unnecessary handoffs.",
+    "teamNote": "We keep the team small and bring in trusted specialists when the project calls for it.\nThat means senior attention without the heavy structure of a large agency.",
     "newChapter": "Based in Córdoba, Argentina, working with teams across the US, Canada, and Europe.\nWe build custom software and automations for businesses whose operations have outgrown spreadsheets and manual processes.",
     "dedicationTitle": "Years building",
     "dedication": "4+",
@@ -107,10 +107,10 @@
       "label": "Years of experience"
     },
     "technologies": {
-      "label": "Technologies mastered"
+      "label": "Happy clients"
     },
     "commitment": {
-      "label": "Commitment"
+      "label": "Post-launch support"
     }
   }
 }

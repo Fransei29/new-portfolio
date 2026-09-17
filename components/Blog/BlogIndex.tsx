@@ -13,7 +13,7 @@ const COPY = {
   es: {
     title: 'Blog',
     subtitle:
-      'Notas sobre desarrollo web, arquitectura y las decisiones técnicas detrás de los productos que construyo.',
+      'Notas sobre desarrollo web, arquitectura y las decisiones técnicas detrás de los productos que construimos.',
     all: 'Todos',
     empty: 'Todavía no hay artículos publicados en esta categoría.',
     emptyAll: 'Los primeros artículos están en camino.',
@@ -22,7 +22,7 @@ const COPY = {
   en: {
     title: 'Blog',
     subtitle:
-      'Notes on web development, architecture, and the technical decisions behind the products I build.',
+      'Notes on web development, architecture, and the technical decisions behind the products we build.',
     all: 'All',
     empty: 'No articles published in this category yet.',
     emptyAll: 'The first articles are on their way.',

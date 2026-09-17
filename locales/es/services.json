@@ -50,49 +50,49 @@
   },
   "testimonials": {
     "title": "Testimonios",
-    "subtitle": "Colaboradores, clientes y líderes de equipo.",
-    "featured": "Top recomendado",
+    "subtitle": "Clientes y profesionales que trabajaron con nosotros.",
+    "featured": "Proyecto de cliente",
+    "franklin": {
+      "name": "Franklin Gomez",
+      "role": "Fundador, academia",
+      "message": "Les encargué el diseño y desarrollo de la web de mi academia y se ocuparon de todo, del primer boceto al deploy. \nCarga rápido, se ve bien en el celular y por fin tengo un lugar serio a donde mandar a la gente."
+    },
+    "tomas": {
+      "name": "Tomas Del Pino",
+      "role": "Plataforma de turnos multi-rubro",
+      "message": "Necesitábamos un sistema de turnos que no se cayera con tráfico real. \nLo construyeron para escalar desde el día uno — cuando llegó el volumen, el producto respondió."
+    },
     "matias": {
       "name": "Matias Rivarola",
       "role": "Desarrollador Front End",
-      "message": "Trabajar con Franco fue una experiencia fantástica. Siempre entregó código de alta calidad y estuvo dispuesto a ayudar a sus compañeros. \nSu confiabilidad y dedicación tuvieron un impacto real en el éxito de nuestro último proyecto."
+      "message": "Trabajé codo a codo con este equipo y el código que sale es limpio y mantenible. \nCumplen las fechas que se comprometen, algo más raro de lo que debería."
     },
     "edison": {
       "name": "Edison Lamar",
       "role": "Ingeniero DevOps",
-      "message": "Franco tiene una gran visión para los detalles y una sólida comprensión de cómo el diseño y el desarrollo van de la mano. \nDurante nuestra colaboración, siempre estuvo abierto a recibir feedback y se comunicó de manera clara y respetuosa."
+      "message": "Revisé lo que despliegan y la parte de infraestructura está bien resuelta, no pegada al final. \nReciben feedback sin problema y comunican con claridad durante todo el proceso."
     },
     "adrian": {
       "name": "Adrian Rodriguez",
       "role": "Desarrollo Web",
-      "message": "Franco es el tipo de desarrollador que todo equipo quiere — proactivo, reflexivo y confiable. \nNo solo cumplió con los plazos sino que también contribuyó con valiosas sugerencias que mejoraron la calidad de nuestro flujo de trabajo."
-    },
-    "franklin": {
-      "name": "Franklin Gomez",
-      "role": "Full Stack Developer",
-      "message": "Tuve la oportunidad de trabajar con Franco en el diseño y desarrollo de mi web de academia. \nFranco demostró gran dominio en React, TypeScript, CSS y SCSS. Es un profesional confiable."
+      "message": "No construyen solamente lo que pediste — te avisan cuando hay una forma mejor de hacerlo. \nCumplen los plazos y las sugerencias que aportan en el camino mejoran el resultado final."
     },
     "ismael": {
       "name": "Ismael Rivarola",
       "role": "Software Developer",
-      "message": "Franco es un desarrollador full stack excepcional. \nDomina varias tecnologías en frontend y backend, y tiene gran capacidad para comunicarse en diferentes idiomas."
+      "message": "Sólidos en todo el stack, tanto frontend como backend. \nSe manejan en más de un idioma, algo que importa si tus usuarios no están todos en un solo país."
     },
     "valentin": {
       "name": "Valentin Carniel",
       "role": "Backend Developer",
-      "message": "Recomiendo totalmente a Franco. Es muy capaz de resolver los problemas que se le presentan y maneja muy bien los lenguajes que utiliza, es proactivo y eficiente."
-    },
-    "tomas": {
-      "name": "Tomas Del Pino",
-      "role": "Desarrollador Web",
-      "message": "Recomiendo mucho a Franco. Trabajamos juntos construyendo un turnero multi-rubro de alta disponibilidad. \nDemostró ser un desarrollador clave; sus aportes con Next.js y Node.js fueron fundamentales para asegurar que el producto pudiera escalar."
+      "message": "Cuando algo se rompe o cambia un requerimiento a mitad del proyecto, lo resuelven sin drama. \nProactivos y eficientes — los recomiendo sin dudarlo."
     }
   },
   "servicesPage": {
     "hero": {
       "eyebrow": "Servicios",
       "title": "Software que hace funcionar tu operación",
-      "subtitle": "Plataformas a medida, automatizaciones e integraciones de IA para equipos cuya operación ya no entra en planillas ni en herramientas genéricas. | Trabajás directo con quien programa tu software.",
+      "subtitle": "Plataformas a medida, automatizaciones e integraciones de IA para equipos cuya operación ya no entra en planillas ni en herramientas genéricas. | Trabajás directo con el equipo que construye tu software.",
       "ctaPrimary": "Agendar una llamada",
       "ctaSecondary": "Ver casos de estudio"
     },
@@ -106,8 +106,8 @@
         "label": "Regiones: EE.UU., Canadá, Europa, LATAM"
       },
       {
-        "value": "1",
-        "label": "Desarrollador de principio a fin"
+        "value": "100%",
+        "label": "Del primer llamado a producción"
       }
     ],
     "detail": {
@@ -265,7 +265,7 @@
       }
     },
     "process": {
-      "title": "Cómo se trabaja",
+      "title": "Cómo trabajamos",
       "subtitle": "Los mismos cuatro pasos en todos los proyectos, sea del tamaño que sea.",
       "steps": [
         {
@@ -298,7 +298,7 @@
           "a": "Una automatización o una landing: de una a tres semanas. Una aplicación completa: de seis a doce semanas según el alcance. La propuesta lo divide en fases con fechas."
         },
         {
-          "q": "¿Trabajás sobre código existente?",
+          "q": "¿Trabajan sobre código existente?",
           "a": "Sí. Auditorías, migraciones y nuevas funcionalidades sobre código que escribió otro equipo son parte habitual del trabajo."
         },
         {
@@ -310,14 +310,14 @@
           "a": "Todos los proyectos incluyen una ventana de soporte. Después, el mantenimiento se puede tomar como plan mensual o por pedido."
         },
         {
-          "q": "¿Con qué zonas horarias trabajás?",
+          "q": "¿Con qué zonas horarias trabajan?",
           "a": "Con base en Córdoba, Argentina, trabajando con equipos de EE.UU., Canadá, Europa y Latinoamérica. La superposición con horario de EE.UU. es total y con Europa, la mañana."
         }
       ]
     },
     "cta": {
       "title": "¿No sabés cuál necesitás?",
-      "description": "La mayoría de los proyectos arrancan siendo una cosa y terminan siendo otra. Contame el problema y le encontramos la forma juntos.",
+      "description": "La mayoría de los proyectos arrancan siendo una cosa y terminan siendo otra. Contanos el problema y le encontramos la forma juntos.",
       "button": "Agendar una llamada"
     }
   }

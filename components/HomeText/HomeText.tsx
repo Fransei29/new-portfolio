@@ -99,9 +99,13 @@ const HomeText: React.FC = () => {
               className={styles.avatarCircle}
             />
           </div>
-          <p className={styles.socialProofCopy}>
-            <span className={styles.socialProofPlus}>+</span>
-            <span>{t('hero.socialProof.sub')}</span>
+          {/* Los dos datos comparten estructura (numero + etiqueta) para que
+              se lean como un par. Antes el 15 venia dentro del string de
+              traduccion y heredaba estilo de texto corrido, asi que pesaba
+              menos que el 22+ de al lado. */}
+          <p className={styles.socialProofStat}>
+            <span className={styles.socialProofStatNumber}>15+</span>
+            <span className={styles.socialProofStatLabel}>{t('hero.socialProof.clients')}</span>
           </p>
           <span className={styles.socialProofDivider} aria-hidden />
           <p className={styles.socialProofStat}>

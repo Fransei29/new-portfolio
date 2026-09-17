@@ -22,8 +22,8 @@
         "description": "More control, but slower and more expensive."
       },
       "agency": {
-        "name": "Development agency",
-        "description": "Experienced teams, but less direct and more costly."
+        "name": "Large agency",
+        "description": "Broad teams, with more layers between you and who builds it."
       },
       "nocode": {
         "name": "No-code tools",

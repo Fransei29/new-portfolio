@@ -14,12 +14,12 @@ const COPY: Record<Status, Record<'es' | 'en', { title: string; body: string; ct
   confirmed: {
     es: {
       title: '¡Listo! Ya estás suscrito',
-      body: 'Vas a recibir un mail cada vez que publique un artículo nuevo. Sin spam y sin promociones — solo los posts.',
+      body: 'Vas a recibir un mail cada vez que publiquemos un artículo nuevo. Sin spam y sin promociones — solo los posts.',
       cta: 'Ir al blog',
     },
     en: {
       title: "You're in",
-      body: "You'll get an email whenever I publish a new article. No spam, no promotions — just the posts.",
+      body: "You'll get an email whenever we publish a new article. No spam, no promotions — just the posts.",
       cta: 'Go to the blog',
     },
   },
@@ -50,12 +50,12 @@ const COPY: Record<Status, Record<'es' | 'en', { title: string; body: string; ct
   error: {
     es: {
       title: 'Algo salió mal',
-      body: 'No pudimos procesar tu pedido. Probá de nuevo en un rato; si sigue fallando, escribime y lo resuelvo a mano.',
+      body: 'No pudimos procesar tu pedido. Probá de nuevo en un rato; si sigue fallando, escribinos y lo resolvemos a mano.',
       cta: 'Contacto',
     },
     en: {
       title: 'Something went wrong',
-      body: "We couldn't process your request. Try again shortly; if it keeps failing, drop me a line and I'll sort it out.",
+      body: "We couldn't process your request. Try again shortly; if it keeps failing, drop us a line and we'll sort it out.",
       cta: 'Contact',
     },
   },

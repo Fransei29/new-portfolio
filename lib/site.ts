@@ -19,8 +19,8 @@ export const BLOG_TITLE: Record<'es' | 'en', string> = {
 };
 
 export const BLOG_DESCRIPTION: Record<'es' | 'en', string> = {
-  es: 'Artículos sobre desarrollo web, arquitectura de software y las decisiones técnicas detrás de los productos que construyo.',
-  en: 'Articles on web development, software architecture, and the technical decisions behind the products I build.',
+  es: 'Artículos sobre desarrollo web, arquitectura de software y las decisiones técnicas detrás de los productos que construimos.',
+  en: 'Articles on web development, software architecture, and the technical decisions behind the products we build.',
 };
 
 /** URL canónica de un post. El idioma va como query param para no romper el routing actual. */

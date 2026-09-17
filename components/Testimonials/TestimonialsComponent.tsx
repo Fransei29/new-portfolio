@@ -28,6 +28,26 @@ export default function Testimonials() {
   const animationRef2 = useRef<any>(null); // Animación para segunda fila
 
   const testimonials: Testimonial[] = [
+    // Clientes que nos contrataron un proyecto: van primero y llevan el badge.
+    {
+      name: t('testimonials.franklin.name'),
+      role: t('testimonials.franklin.role'),
+      message: t('testimonials.franklin.message'),
+      image: "/img/img/Testimonials/frank.webp",
+      linkedin: "https://www.linkedin.com/in/franklingp/",
+      rating: 5,
+      featured: true,
+    },
+    {
+      name: t('testimonials.tomas.name'),
+      role: t('testimonials.tomas.role'),
+      message: t('testimonials.tomas.message'),
+      image: "/img/img/Testimonials/tomi.webp",
+      linkedin: "https://www.linkedin.com/in/tomas-del-pino-0234932a7/",
+      rating: 5,
+      featured: true,
+    },
+    // Profesionales del rubro que trabajaron con el equipo: respaldo tecnico.
     {
       name: t('testimonials.matias.name'),
       role: t('testimonials.matias.role'),
@@ -35,7 +55,6 @@ export default function Testimonials() {
       image: "/img/img/Testimonials/Mati.webp",
       linkedin: "https://www.linkedin.com/in/matirivarola1/",
       rating: 5,
-      featured: true,
     },
     {
       name: t('testimonials.edison.name'),
@@ -51,15 +70,6 @@ export default function Testimonials() {
       message: t('testimonials.adrian.message'),
       image: "/img/img/Testimonials/Adrian.webp",
       linkedin: "https://www.linkedin.com/in/adrian-rodriguez-053020304/",
-      rating: 5,
-      featured: true,
-    },
-    {
-      name: t('testimonials.franklin.name'),
-      role: t('testimonials.franklin.role'),
-      message: t('testimonials.franklin.message'),
-      image: "/img/img/Testimonials/frank.webp",
-      linkedin: "https://www.linkedin.com/in/franklingp/",
       rating: 5,
     },
     {
@@ -77,15 +87,6 @@ export default function Testimonials() {
       image: "/img/img/Testimonials/vale.webp",
       linkedin: "https://www.linkedin.com/in/valentin-carniel-139043300/",
       rating: 5,
-    },
-    {
-      name: t('testimonials.tomas.name'),
-      role: t('testimonials.tomas.role'),
-      message: t('testimonials.tomas.message'),
-      image: "/img/img/Testimonials/tomi.webp",
-      linkedin: "https://www.linkedin.com/in/tomas-del-pino-0234932a7/",
-      rating: 5,
-      featured: true,
     },
   ];
 

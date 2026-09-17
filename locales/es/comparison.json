@@ -22,8 +22,8 @@
         "description": "Más control, pero más lento y más caro."
       },
       "agency": {
-        "name": "Agencia de desarrollo",
-        "description": "Equipos con experiencia, pero menos directo y más costoso."
+        "name": "Agencia grande",
+        "description": "Equipos amplios, con más capas entre vos y quien construye."
       },
       "nocode": {
         "name": "Herramientas no-code",

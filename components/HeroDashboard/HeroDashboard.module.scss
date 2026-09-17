@@ -1,7 +1,11 @@
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 458px;
+  // Desktop: 500 (antes 458). El panda no necesita compensacion porque esta
+  // anclado al borde IZQUIERDO del wrapper (left: -145px), asi que al crecer
+  // el ancho el asomo sigue siendo el mismo; lo que se corre es el borde
+  // derecho. Los breakpoints de abajo mantienen sus valores.
+  max-width: 500px;
   // Alineado a la derecha de su columna (estilo panel de producto Vercel).
   margin-inline: auto;
   // Desktop: corrido un poco a la izquierda del borde derecho de su columna.
@@ -16,6 +20,12 @@
   // Hover casi imperceptible — leve elevación, sin rotar.
   &:hover .browser {
     transform: translateY(-2px);
+  }
+
+  // Entre 1201 y 1400 los 500px hacen que el panda (que asoma 144px hacia la
+  // izquierda) se monte sobre la columna de texto. Ahi vuelve al ancho previo.
+  @media (max-width: 1400px) {
+    max-width: 458px;
   }
 
   @media (max-width: 1200px) {
@@ -770,34 +780,44 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  color: #ffffff;
+  // Antes era blanco sobre un grafito saturado: tres bloques oscuros que se
+  // llevaban la mirada antes que los datos. Ahora el glifo va en gris medio
+  // sobre un fondo apenas insinuado.
+  color: rgba(110, 94, 190, 0.55);
   flex-shrink: 0;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  :global(html.dark) & {
+    color: rgba(181, 156, 248, 0.6);
+  }
 }
 
 // Tres íconos con el MISMO gradiente delicado neutro — parejos, sin abrumar.
 .stackIconFrontend {
-  background: linear-gradient(135deg, #6f6a80 0%, var(--grafito-elevado, #2e2a3a) 100%);
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
 
   :global(html.dark) & {
-    background: linear-gradient(135deg, #3d3a4e 0%, #5a566e 100%);
+    background: rgba(181, 156, 248, 0.12);
   }
 }
 
 .stackIconBackend {
-  background: linear-gradient(135deg, #6f6a80 0%, var(--grafito-elevado, #2e2a3a) 100%);
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
 
   :global(html.dark) & {
-    background: linear-gradient(135deg, #3d3a4e 0%, #5a566e 100%);
+    background: rgba(181, 156, 248, 0.12);
   }
 }
 
 .stackIconInfra {
   // Mismo gradiente delicado que Backend — parejo, sin abrumar.
-  background: linear-gradient(135deg, #6f6a80 0%, var(--grafito-elevado, #2e2a3a) 100%);
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
 
   :global(html.dark) & {
-    background: linear-gradient(135deg, #3d3a4e 0%, #5a566e 100%);
+    background: rgba(181, 156, 248, 0.12);
   }
 }
 
@@ -916,14 +936,23 @@
 }
 
 .progressDone {
-  // Clarito a la izquierda → más oscuro a la derecha.
-  background: linear-gradient(90deg, var(--lila-suave, #b59cf8) 0%, var(--lila-principal, #8e7ae6) 100%);
+  // Clarito a la izquierda → más oscuro a la derecha. Atenuado: el lila a
+  // plena saturacion competia con los iconos ya calmados y con el grafico.
+  background: linear-gradient(90deg, rgba(181, 156, 248, 0.38) 0%, rgba(142, 122, 230, 0.48) 100%);
+
+  :global(html.dark) & {
+    background: linear-gradient(90deg, rgba(181, 156, 248, 0.34) 0%, rgba(142, 122, 230, 0.44) 100%);
+  }
 }
 
 .progressLive {
   // Clarito a la izquierda → más oscuro a la derecha. El verde queda sólo al badge LIVE.
-  background: linear-gradient(90deg, var(--lila-suave, #b59cf8) 0%, var(--lila-principal, #8e7ae6) 100%);
+  background: linear-gradient(90deg, rgba(181, 156, 248, 0.38) 0%, rgba(142, 122, 230, 0.48) 100%);
   position: relative;
+
+  :global(html.dark) & {
+    background: linear-gradient(90deg, rgba(181, 156, 248, 0.34) 0%, rgba(142, 122, 230, 0.44) 100%);
+  }
 
   &::after {
     content: '';
@@ -1025,126 +1054,3 @@
   font-weight: 700;
 }
 
-// Testimonial pill (bottom-right) — más chico y más afuera para no tapar el dashboard
-.testimonialPill {
-  bottom: -5%;
-  right: -7%;
-  padding: 0.35rem 0.7rem 0.35rem 0.35rem;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 1px solid rgba(46, 41, 78, 0.08);
-  z-index: 5;
-  // Sombra más suave que floatingPill: se apoya, no grita.
-  box-shadow:
-    0 4px 14px rgba(46, 41, 78, 0.1),
-    0 1px 4px rgba(46, 41, 78, 0.06);
-  animation: testimonialFloat 11s ease-in-out infinite;
-  animation-delay: -5s;
-  transition:
-    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.7s ease,
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
-
-  &:hover {
-    border-color: rgba(46, 41, 78, 0.16);
-    box-shadow: 0 6px 16px rgba(46, 41, 78, 0.14);
-  }
-
-  // Cross-fade más tranqui: apenas se desvanece y baja un pelín.
-  &.testimonialFading {
-    opacity: 0;
-    filter: blur(1.5px);
-    transform: translateY(3px);
-  }
-
-  :global(html.dark) & {
-    background: #1a1e36;
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 4px 14px rgba(0, 0, 0, 0.35),
-      0 1px 4px rgba(0, 0, 0, 0.25);
-  }
-
-  :global(html.dark) &:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  @media (max-width: 768px) {
-    /* Anclado por `left` y NO por `right`.
-
-       Con `right` el pill no se movía: es `position: absolute` sin `left`, así
-       que su ancho lo da el contenido, y al empujarlo con un `right` grande
-       topaba contra el borde izquierdo del contenedor y se COMPRIMÍA en vez de
-       desplazarse. Fijando `left` (y soltando `right`) el borde izquierdo queda
-       determinado y la tarjeta se mueve manteniendo su ancho. */
-    left: -5%;
-    right: auto;
-    bottom: -10%;
-    padding: 0.3rem 0.6rem 0.3rem 0.3rem;
-  }
-}
-
-@keyframes testimonialFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-2px); }
-}
-
-.avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #b59cf8 100%);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.78rem;
-  flex-shrink: 0;
-}
-
-.avatarImg {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1.5px solid rgba(46, 41, 78, 0.08);
-
-  :global(html.dark) & {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-.testimonialText {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  font-size: 0.68rem;
-
-  @media (max-width: 768px) {
-    font-size: 0.63rem;
-    gap: 0.28rem;
-  }
-}
-
-.testimonialName {
-  color: rgba(0, 0, 0, 0.75);
-  font-weight: 600;
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.85);
-  }
-}
-
-.testimonialQuote {
-  color: rgba(0, 0, 0, 0.55);
-  font-style: italic;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.6);
-  }
-}

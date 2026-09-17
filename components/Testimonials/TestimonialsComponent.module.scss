@@ -453,8 +453,12 @@
   }
   
   
+  /* flex: 1 1 0 (no 1 1 auto): con base auto el bloque se estira hasta el
+     ancho del rol mas largo antes de que actue el ellipsis y termina
+     empujando el icono de LinkedIn fuera de la tarjeta. Con base 0 el
+     texto se trunca dentro del espacio que sobra. */
   .author {
-    flex: 1;
+    flex: 1 1 0;
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
@@ -479,7 +483,6 @@
       @media (max-width: 768px) {
         font-weight: 500;
         font-size: 0.7rem;
-        max-width: calc(100% - 20px); // Deja espacio para el icono
       }
     }
   
@@ -493,7 +496,6 @@
 
       @media (max-width: 768px) {
         font-size: 0.6rem;
-        max-width: calc(100% - 20px); // Deja espacio para el icono
       }
     }
   }

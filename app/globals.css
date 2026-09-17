@@ -693,8 +693,23 @@ html.dark .hero-section::after {
      capa, y con zoom o devicePixelRatio fraccionario el borde entre el wave y la
      sección puede caer en una fracción de píxel: ahí queda una fila que ninguno
      de los dos pinta del todo. Sin este fondo, por esa fila se ve el blanco del
-     body y se lee como una línea fina cruzando el ancho, justo sobre "Tools". */
-  background-color: var(--wave-b);
+     body y se lee como una línea fina cruzando el ancho, justo sobre "Tools".
+
+     Va como gradiente de corte duro y no como color plano porque el host
+     empieza ARRIBA de la curva (el wave ocupa sus primeros ~56px) y por ahi
+     asoma el panda: pintar todo el host de --wave-b dejaba esa banda superior
+     de otro color que la seccion de la que viene, y se recortaba como una
+     franja detras del panda (bien visible en dark, donde --wave-a #292833 y
+     --wave-b #181c33 no se parecen). Arriba del corte sigue el color de la
+     seccion anterior; debajo, el de esta. El corte a 52px cae dentro del
+     relleno opaco de la curva, asi que la costura queda tapada igual. */
+  background-image: linear-gradient(
+    to bottom,
+    var(--wave-a) 0,
+    var(--wave-a) 52px,
+    var(--wave-b) 52px,
+    var(--wave-b) 100%
+  );
 }
 
 /* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
@@ -811,7 +826,11 @@ html.dark .ctaWrap {
 .home-textA {
   display: flex;
   flex-direction: column;
-  flex: 0 1 46%;
+  /* La flex-basis es la que fija el ancho real (flex-grow es 0, asi que el
+     max-width de abajo no llega a actuar). 50 y no 46: con 46% la columna
+     daba 644px y la segunda linea del subtitulo en castellano, que pide
+     667px, caia a un tercer renglon. */
+  flex: 0 1 48%;
   min-width: 0;
   align-items: flex-start;
 }
@@ -819,7 +838,10 @@ html.dark .ctaWrap {
 @media (min-width: 769px) {
   .home-textA {
     min-width: 42%;
-    max-width: 46%;
+    /* 50 y no 46: con 46% la columna daba 644px y la segunda linea del
+       subtitulo en castellano (que pide 667px) caia a un tercer renglon.
+       El dashboard de al lado cede unos puntos y no se nota. */
+    max-width: 48%;
   }
 }
 

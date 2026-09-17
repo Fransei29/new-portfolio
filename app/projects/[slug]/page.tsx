@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     project.subtitle ??
     project.whatIs?.split('\n')[0]?.slice(0, 300) ??
-    `${project.title} — case study by Franco Seiler.`;
+    `${project.title} — case study by Franco Seiler Software Studio.`;
 
   const url = `${SITE_URL}/projects/${project.slug}`;
 
@@ -79,8 +79,8 @@ export default async function ProjectPage({ params }: Props) {
     headline: project.title,
     description: project.subtitle ?? project.whatIs?.split('\n')[0],
     url: `${SITE_URL}/projects/${project.slug}`,
-    author: { '@type': 'Person', name: 'Franco Seiler', url: SITE_URL },
-    creator: { '@type': 'Person', name: 'Franco Seiler', url: SITE_URL },
+    author: { '@type': 'Organization', name: 'Franco Seiler', url: SITE_URL },
+    creator: { '@type': 'Organization', name: 'Franco Seiler', url: SITE_URL },
     ...(project.year ? { dateCreated: project.year } : {}),
     ...(project.industry ? { genre: project.industry } : {}),
     ...(project.techStack?.length
