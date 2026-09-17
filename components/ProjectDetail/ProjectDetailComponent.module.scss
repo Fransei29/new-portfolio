@@ -72,6 +72,18 @@
     // así que llegabas al proyecto sin saber de cuál se trataba.
     .leftColumn { order: 1; }
     .rightColumn { order: 2; }
+
+    // Apilado en `flex-direction: column` el eje principal es el vertical, asi
+    // que el `min-width: 0` de cada columna no limita nada en horizontal: el
+    // ancho lo fijaba el contenido (el carrusel y la fila de tabs) y las dos
+    // columnas salian mas anchas que el contenedor — 391px y 517px dentro de
+    // 370 — arrastrando toda la pagina al scroll horizontal.
+    > * {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
   }
 }
 

@@ -126,47 +126,6 @@
 }
 
 
-.mobileBootcampButton {
-  display: none;
-
-  /* 1024, igual que .mobileMenu: en 768 el botón de bootcamp desaparecía entre
-     769 y 1024 y el pie del menú quedaba con un hueco. */
-  @media (max-width: 1024px) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-radius: var(--br);
-    color: var(--text-color-light);
-    text-decoration: none;
-    transition: color 0.25s ease;
-    flex-shrink: 0;
-
-    &:hover {
-      color: var(--primary-color);
-    }
-
-    :global(html.dark) & {
-      color: rgb(223, 222, 222);
-
-      &:hover {
-        color: #b59cf8;
-      }
-    }
-  }
-}
-
-.mobileBootcampIcon {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  color: inherit;
-}
-
 .mobileMenuButton {
   display: none;
 
@@ -497,8 +456,13 @@
      1024 y el menú quedaba sin idioma ni tema. */
   @media (max-width: 1024px) {
     display: flex !important;
-    align-items: center;
-    gap: 0.75rem;
+    /* En columna y no en fila: en el panel mobile todo lo demas se apila, y
+       los dos controles sueltos en horizontal quedaban como un bloque ajeno.
+       Alineados al arranque para que compartan el margen izquierdo de los
+       navlinks en vez de quedar centrados en el panel. */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
     /* Mismo motivo que .mobileMenu: sin reset universal esto era content-box y
        el padding-top se sumaba al alto. */
     box-sizing: border-box;
@@ -525,6 +489,17 @@
     > * {
       margin-top: 0 !important;
       margin-bottom: 0 !important;
+    }
+
+    /* 46 y no los 36 que traen de su hoja propia: en el panel a pantalla
+       completa quedaban chicos al lado de los links. Se apunta al boton y no
+       solo al wrapper: el selector de idioma envuelve el suyo, asi que
+       agrandar el contenedor lo dejaba igual de chico que antes. */
+    > *,
+    > * > button,
+    > * > a {
+      width: 46px !important;
+      height: 46px !important;
     }
 
     :global(html.dark) & {

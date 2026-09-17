@@ -179,6 +179,13 @@
   /* Ancho fijo: sin esto "01" y "05" corren los iconos de cada carta a una x
      distinta y el mazo se ve desalineado al apilarse. */
   flex: 0 0 1.6rem;
+
+  /* En mobile se oculta: es decorativo (ya va con aria-hidden) y esos 1.6rem
+     mas el gap son ancho que le hace falta al titulo y la descripcion. Al
+     desaparecer para todas las cartas por igual, el mazo sigue alineado. */
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .cardFeatured .cardIndex {
@@ -218,6 +225,10 @@
 
 .rowText {
   min-width: 0;
+  /* Ocupa el ancho que sobra en la cabecera. Sin esto (flex-grow 0 por defecto)
+     el espacio que libera el indice oculto en mobile quedaba muerto a la
+     derecha en vez de ir al titulo y la descripcion. */
+  flex: 1 1 auto;
 }
 
 .rowName {
