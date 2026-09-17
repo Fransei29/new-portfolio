@@ -77,7 +77,7 @@
   },
   "whyChooseUs": {
     "title": "Por qué trabajar así",
-    "subtitle": "Tres cosas que no vas a encontrar en una agencia ni en una herramienta no-code.",
+    "subtitle": "Tres cosas que hacen diferente nuestro enfoque.",
     "expertise": {
       "eyebrow": "Sin intermediarios",
       "title": "Hablás con quien construye",
@@ -86,7 +86,7 @@
     "delivery": {
       "eyebrow": "Sin ataduras",
       "title": "Todo es tuyo",
-      "description": "Tu código. Tu repositorio. Tu documentación.\nTus accesos. Desde el primer día, es tuyo."
+      "description": "Tu repositorio. Tu documentación.\nTus accesos. Desde el primer día, es tuyo."
     },
     "collaboration": {
       "eyebrow": "Sin sorpresas",
