@@ -785,14 +785,37 @@ html.dark .ctaWrap {
 }
 
 @media (max-width: 768px) {
-  .ctaWrap > * {
-    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
+  /* Full-bleed: el CTA va de pared a pared y el panda asoma desde el borde
+     mismo de la pantalla. Sin redondeo ni sombra lateral, que a ancho completo
+     delatan la caja en vez de integrarla.
+     `--page-w` y no `100vw`: 100vw incluye la barra de scroll y dejaria el
+     bloque unos pixeles mas ancho que el contenido (ver --page-w mas arriba).
+     El `left: 50%` + margenes negativos es el mismo patron que usan los
+     carruseles para escapar del ancho del contenedor padre. */
+  .ctaWrap {
+    width: var(--page-w);
+    max-width: none;
+    position: relative;
+    left: 50%;
+    margin-left: calc(var(--page-w) / -2);
+    margin-right: calc(var(--page-w) / -2);
+    /* Casi pegado al footer: el CTA cierra la pagina y los 3.5rem de abajo
+       dejaban una franja de fondo que cortaba la continuidad entre los dos
+       bloques oscuros. */
+    margin-block: 1.5rem 1.75rem;
+    /* Mismo redondeo eliptico que el footer (24/16), aplicado a las cuatro
+       esquinas porque el CTA es un bloque suelto y no se apoya en el borde
+       inferior de la pagina. */
+    border-radius: 24px / 16px;
+    box-shadow: none;
   }
 
-  .ctaWrap {
-    margin-inline: 0.6rem;
-    margin-block: 1.5rem 3.5rem;
-    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
+  .ctaWrap > * {
+    border-radius: 24px / 16px;
+  }
+
+  html.dark .ctaWrap {
+    box-shadow: none;
   }
 }
 

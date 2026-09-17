@@ -231,7 +231,7 @@ const HeroDashboard = () => {
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={`${styles.peekPanda} ${styles.peekPandaLight}`}
-        src="/isotipo-panda.svg"
+        src="/NewBrand/SVG (Curvas_Canva)/Isotipo-Programando-Oscuro.svg"
         alt=""
         aria-hidden
         loading="lazy"

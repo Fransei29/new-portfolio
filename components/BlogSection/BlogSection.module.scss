@@ -164,9 +164,11 @@
   background: rgba(142, 122, 230, 0.06);
 
   /* En mobile la tarjeta ocupa todo el ancho, así que la banda se achata más
-     todavía: sigue anclando la tarjeta pero deja el texto arriba del pliegue. */
+     todavía: sigue anclando la tarjeta pero deja el texto arriba del pliegue.
+     16/5 y no 12/5: a lo ancho de la pantalla la banda seguia llevandose 150px
+     de alto y la tarjeta quedaba mas grande de lo que el contenido pide. */
   @media (max-width: 768px) {
-    aspect-ratio: 12 / 5;
+    aspect-ratio: 16 / 5;
   }
 
   /* Velo de marca sobre la portada: las imágenes vienen de fuentes distintas y
@@ -215,8 +217,8 @@
   flex: 1;
 
   @media (max-width: 768px) {
-    padding: 1.1rem 1.1rem 1.15rem;
-    gap: 0.55rem;
+    padding: 0.85rem 1rem 0.95rem;
+    gap: 0.4rem;
   }
 }
 
@@ -278,6 +280,13 @@
     color: rgba(235, 235, 235, 0.75);
   }
 
+  /* Fuera en mobile: es lo que mas alto ocupa del cuerpo y ademas se corta a
+     media frase, asi que no llega a aportar. Con fecha, titulo, tag y el CTA
+     alcanza para decidir si entrar. */
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.875rem;
     /* De 3 a 2 líneas: con la tarjeta más compacta, la 3ra línea era lo que
@@ -300,7 +309,7 @@
   padding-top: 1.1rem;
 
   @media (max-width: 768px) {
-    padding-top: 0.9rem;
+    padding-top: 0.7rem;
   }
 }
 

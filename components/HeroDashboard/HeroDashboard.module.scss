@@ -55,8 +55,12 @@
     // de separación real; el 7.5rem de antes venía de cuando el panda salía
     // mucho más y dejaba un hueco enorme sobre el dashboard.
     /* El margen inferior (antes 1rem) separa el dashboard de la sección que
-       sigue: con 1rem quedaban casi pegados. */
-    margin: 3rem auto 2.5rem;
+       sigue: con 1rem quedaban casi pegados.
+       El superior baja de 3rem a 1.75rem para acercarlo a los stats. El aire
+       que necesita la cabeza del panda no se toca: el panda se posiciona
+       respecto al browser (translateY sobre su borde superior), asi que sube
+       con el dashboard y sigue asomando lo mismo. */
+    margin: 1.4rem auto 2.5rem;
   }
 
   // Pantallas muy angostas: un poco más chico todavía.
@@ -99,12 +103,20 @@
   transform: translateY(-50%) rotate(-52deg);
   transform-origin: center right;
   pointer-events: none;
-  filter: drop-shadow(-6px 8px 14px rgba(46, 41, 78, 0.22));
+  /* Dos capas cortas en vez de un unico blur ancho: una de contacto, pegada
+     a la silueta, que es la que da el volumen, y otra apenas mas abierta para
+     despegarlo del fondo. El blur de 14px al 22% se leia como una mancha gris
+     alrededor del panda en vez de una sombra. */
+  filter:
+    drop-shadow(-1px 2px 2px rgba(46, 41, 78, 0.16))
+    drop-shadow(-3px 6px 9px rgba(46, 41, 78, 0.1));
 
   // La sombra lila apenas se nota sobre grafito: en dark va negra y más densa
   // para que el panda siga despegándose del fondo.
   :global(html.dark) & {
-    filter: drop-shadow(-6px 8px 16px rgba(0, 0, 0, 0.45));
+    filter:
+      drop-shadow(-1px 2px 2px rgba(0, 0, 0, 0.4))
+      drop-shadow(-3px 6px 10px rgba(0, 0, 0, 0.3));
   }
 
   @media (max-width: 1024px) {
@@ -122,11 +134,11 @@
   // la barra de URL). El translate vertical negativo lo saca por encima del
   // browser dejando visible sólo la cabeza.
   @media (max-width: 768px) {
-    width: 92px;
+    width: 134px;
     top: 0;
     left: auto;
     // Menos `right` = más cerca de la esquina derecha del browser.
-    right: 0.75rem;
+    right: -0.85rem;
     // Casi derecho: apenas -2° para que no se lea como un isotipo pegado en
     // ángulo, pero sin quedar perfectamente vertical (rígido).
     //
@@ -134,17 +146,18 @@
     // propio panda, así que al agrandarlo salía MÁS afuera aunque el porcentaje
     // subiera. En px, "cuánto asoma" queda fijo sin importar el tamaño.
     // Menos negativo = el panda BAJA y se esconde MÁS detrás del browser.
-    // -57px sobre un panda de 92px deja ~4px de cabeza a la vista: apenas un
-    // guiño espiando desde atrás, no un isotipo apoyado arriba.
-    transform: translateY(-57px) rotate(-2deg);
+    // El desplazamiento acompana al tamano para que "cuanto asoma" no cambie.
+    // El valor sale de medir en el navegador y no de escalar el anterior: la
+    // rotacion agranda la caja del elemento, asi que la proporcion no alcanza.
+    transform: translateY(-77px) rotate(-2deg);
     transform-origin: center bottom;
   }
 
   @media (max-width: 420px) {
-    width: 80px;
-    right: 0.5rem;
-    // Mismo criterio: sobre 80px, -50px deja ~3px de cabeza asomando.
-    transform: translateY(-50px) rotate(-2deg);
+    width: 120px;
+    right: -0.75rem;
+    // Mismo criterio, tambien medido en el navegador.
+    transform: translateY(-79px) rotate(-2deg);
   }
 }
 

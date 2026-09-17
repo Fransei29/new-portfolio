@@ -139,9 +139,9 @@
     display: grid;
     // col 1: el icono, al ancho que ocupe. col 2: el texto, el resto.
     grid-template-columns: auto 1fr;
-    // El título se apoya en la BASE del icono en vez de centrarse: así la
-    // primera línea de texto arranca al ras de abajo del cuadrado.
-    align-items: end;
+    // Centrado respecto al icono: apoyado en su base (`end`) el titulo quedaba
+    // unos pixeles mas abajo y la fila se leia desalineada.
+    align-items: center;
     // Fila 1: icono + título. Filas siguientes: descripción, orbital, footer,
     // todos cruzando las dos columnas.
     column-gap: 0.75rem;
@@ -175,10 +175,9 @@
       font-size: 1rem;
     }
 
-    // La featured sigue siendo la destacada, así que su título no baja hasta
-    // 1rem — sólo lo justo para convivir con el icono en la misma fila.
+    // Mismo tamano que las demas tarjetas en esta fila con el icono.
     .featuredTitle {
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
 
     .cardDescription,
@@ -275,23 +274,17 @@
 }
 
 .featuredTitle {
-  font-size: 1.65rem;
+  /* Mismo tamano que `.cardTitle`: la destacada se distingue por el orbital,
+     el CTA y su caja, no por un titulo mas grande que el de las demas. */
+  font-size: 1.05rem;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.25;
   color: var(--text-color);
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 
   :global(html.dark) & {
     color: var(--text-color-dark-mode);
-  }
-
-  @media (max-width: 1024px) {
-    font-size: 1.45rem;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
   }
 }
 
