@@ -22,7 +22,11 @@
       "label": "Confían en nosotros founders y equipos de ingeniería",
       "headline": "Confían en nosotros founders y equipos de ingeniería",
       "projects": "Proyectos entregados",
-      "clients": "Clientes internacionales confían en nosotros"
+      "clients": "Clientes internacionales confían en nosotros",
+      "clientsShort": "clientes",
+      "projectsShort": "proyectos",
+      "yearsShort": "años",
+      "years": "Años de trayectoria"
     }
   },
   "about": {

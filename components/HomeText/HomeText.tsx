@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './HomeText.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StartIcon from '../../public/NewBrand/icons/star-arrow-right-start-20-regular.svg';
@@ -76,41 +75,42 @@ const HomeText: React.FC = () => {
           </Link>
         </div>
         <div className={styles.socialProof} aria-label={t('hero.socialProof.label') ?? 'Trusted by clients'}>
-          <div className={styles.avatarStack}>
-            <Image
-              src="/img/img/Testimonials/tomi.webp"
-              alt="Tomás"
-              width={40}
-              height={40}
-              className={styles.avatarCircle}
-            />
-            <Image
-              src="/img/img/Testimonials/Edi.webp"
-              alt="Edison"
-              width={40}
-              height={40}
-              className={styles.avatarCircle}
-            />
-            <Image
-              src="/img/img/Testimonials/isma.webp"
-              alt="Ismael"
-              width={40}
-              height={40}
-              className={styles.avatarCircle}
-            />
-          </div>
           {/* Los dos datos comparten estructura (numero + etiqueta) para que
               se lean como un par. Antes el 15 venia dentro del string de
               traduccion y heredaba estilo de texto corrido, asi que pesaba
               menos que el 22+ de al lado. */}
+          {/* Dos redacciones de la misma etiqueta: la larga en desktop y una de
+              una palabra en mobile, donde las dos frases completas saturaban el
+              bloque. Se eligen por CSS y no por un `isMobile` de JS para que el
+              primer render ya salga con la correcta. */}
           <p className={styles.socialProofStat}>
             <span className={styles.socialProofStatNumber}>15+</span>
-            <span className={styles.socialProofStatLabel}>{t('hero.socialProof.clients')}</span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelLong}`}>
+              {t('hero.socialProof.clients')}
+            </span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelShort}`}>
+              {t('hero.socialProof.clientsShort')}
+            </span>
           </p>
           <span className={styles.socialProofDivider} aria-hidden />
           <p className={styles.socialProofStat}>
             <span className={styles.socialProofStatNumber}>22+</span>
-            <span className={styles.socialProofStatLabel}>{t('hero.socialProof.projects')}</span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelLong}`}>
+              {t('hero.socialProof.projects')}
+            </span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelShort}`}>
+              {t('hero.socialProof.projectsShort')}
+            </span>
+          </p>
+          <span className={styles.socialProofDivider} aria-hidden />
+          <p className={styles.socialProofStat}>
+            <span className={styles.socialProofStatNumber}>4+</span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelLong}`}>
+              {t('hero.socialProof.years')}
+            </span>
+            <span className={`${styles.socialProofStatLabel} ${styles.labelShort}`}>
+              {t('hero.socialProof.yearsShort')}
+            </span>
           </p>
         </div>
     </section>
