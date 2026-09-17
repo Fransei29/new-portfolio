@@ -1,17 +1,20 @@
 .scrollToTop {
   position: fixed;
   bottom: 20px;
-  right: calc(5px + 2.5rem + 0.5rem);
-  border: none;
-  background-color: transparent;
+  right: 1rem;
+  /* Solido y con contorno en vez de transparente con sombra: el boton se
+     muestra siempre, asi que tiene que leerse sobre cualquier fondo por el que
+     pase el scroll sin apoyarse en una sombra que lo despegue. */
+  border: 1px solid rgba(46, 41, 78, 0.16);
+  background-color: #ffffff;
   color: var(--primary-color);
   border-radius: var(--br);
-  width: 2.7rem;
-  height: 2.7rem;
+  width: 2.3rem;
+  height: 2.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(46, 41, 78, 0.07);
   cursor: pointer;
   z-index: 2000;
   transition: all 0.3s ease;
@@ -19,25 +22,25 @@
   outline: none;
 
   :global(html.dark) & {
-    background-color: rgba(24, 28, 51, 0.9);
-    border-color: rgba(181, 156, 248, 0.5);
+    background-color: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(181, 156, 248, 0.32);
     color: rgb(226, 226, 226);
   }
 
   @media (max-width: 768px) {
-    left: 0.5rem;
-    right: auto;
-    bottom: 0.5rem;
-    width: 3rem;
-    height: 3rem;
+    right: 0.75rem;
+    left: auto;
+    bottom: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   &:hover {
-    background-color: rgba(253, 184, 219, 0.25);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    border-color: rgba(142, 122, 230, 0.55);
+    box-shadow: 0 2px 6px rgba(46, 41, 78, 0.12);
 
     :global(html.dark) & {
-      background-color: rgba(181, 156, 248, 0.2);
+      border-color: rgba(181, 156, 248, 0.55);
     }
   }
 

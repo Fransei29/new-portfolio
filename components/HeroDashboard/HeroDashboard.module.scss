@@ -95,8 +95,12 @@
   // `left` MÁS negativo = el panda se corre a la izquierda = asoma MÁS afuera.
   // Lo que queda tapado por el browser es (width - |left|): con 180/-145 unos
   // ~35px quedan detrás, así que asoma bien pero sin despegarse del panel.
-  left: -145px;
-  width: 180px;
+  /* 165 y no 180: un punto mas chico para que no compita con el panel.
+     El `left` sube de -145 a -133 porque el isotipo nuevo lleva el globito
+     `</>` sobre la cabeza: con el asomo anterior salia el globito entero y
+     el panda se leia despegado del panel en vez de espiando desde atras. */
+  left: -162px;
+  width: 202px;
   height: auto;
   z-index: 0; // DETRÁS del browser (z-index: 1): se asoma desde atrás
   // Bien cruzado, quieto (sin flotar). Centrado vertical vía translateY(-50%).

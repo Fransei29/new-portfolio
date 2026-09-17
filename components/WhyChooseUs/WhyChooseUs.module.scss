@@ -118,7 +118,9 @@
   padding: 1.75rem 1.6rem;
   border-radius: 12px;
   background: var(--card-bg, #fff);
-  border: var(--borderB);
+  /* Lila tenue en reposo y no el gris generico: el hover sube al mismo color
+     al 55%, asi que el contorno ya se insinua antes de pasar el mouse. */
+  border: 1px solid rgba(142, 122, 230, 0.28);
   /* --shadow-sm y no --shadow-lg: sobre el fondo lila de la sección una sombra
      de 12px de blur ensucia el color alrededor de cada tarjeta. Con el borde ya
      definiendo el contorno, la sombra sólo tiene que despegarla del fondo. */
