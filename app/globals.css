@@ -139,10 +139,30 @@
   --br: 10px;
   --br-sm: 6px;
   --br-lg: 14px;
+  /* Valor base: rige por debajo de 1600px. */
   --container-max-width: 1440px;
   /* El nav va más ancho que el contenido a propósito (ver Header.module.scss):
-     la barra enmarca la página en vez de alinearse con ella. */
-  --nav-max-width: 1920px;
+     la barra enmarca la página en vez de alinearse con ella.
+
+     REGLA QUE NO SE ROMPE: el nav SIEMPRE tiene que ser más ancho que el
+     contenido, nunca más angosto. Si queda por dentro, deja de leerse como
+     marco y pasa a parecer una caja más de la página.
+
+     Por eso se deriva del contenedor en vez de ser un número suelto: se define
+     una sola vez como "el contenido + 85px por lado" y acompaña solo a los
+     escalones de --container-max-width (1440 → 1560 → 1680), sin que haya que
+     acordarse de actualizar dos valores a mano.
+
+     El número se calibró mirando dónde cae el LOGO, que es lo que se compara
+     contra el título del hero — no el borde del nav. Ojo que el nav tiene
+     además su propio `padding-inline: 1.25rem`, así que el logo entra 20px
+     más que el borde de la barra.
+
+     Con +160 por lado el cálculo daba 2000px, más que un monitor de 1920: el
+     max-width no llegaba a actuar y el nav quedaba pegado a las dos paredes.
+     Con +80 el logo todavía caía 60px afuera del título y la barra se leía
+     despegada de la página. */
+  --nav-max-width: calc(var(--container-max-width) + 170px);
   --section-py: 8rem;
   /* Más aire vertical entre secciones: con la tipografía más chica, el espacio
      es lo que marca dónde termina un bloque y empieza el siguiente. */
@@ -230,15 +250,25 @@
   --description-line-height: 1.4;
 }
 
-@media (min-width: 1400px) {
+/* El contenedor crece por escalones en pantallas grandes en vez de quedarse
+   clavado en 1440px. Con un monitor de 1920px, 1440 dejaba 240px muertos de
+   cada lado: el hero se leía apretado contra el centro y el dashboard y el
+   título peleaban por el mismo ancho. Los dos breakpoints de acá abajo ya
+   existían pero repetían el mismo 1440, así que no hacían nada. */
+@media (min-width: 1600px) {
   :root {
+    /* 1440 y no 1560: con 1560 el contenido quedaba casi tan ancho como el nav
+       y sin aire a los costados. Es el escalón que rige en la mayoría de los
+       monitores de escritorio, así que es el que se nota. */
     --container-max-width: 1440px;
   }
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1900px) {
   :root {
-    --container-max-width: 1440px;
+    /* Mismo criterio que el escalón de 1600: baja de 1680 a 1560 para que el
+       contenido no se coma todo el ancho y el nav siga leyéndose por fuera. */
+    --container-max-width: 1560px;
   }
 }
 
@@ -275,20 +305,22 @@ html, body {
   }
 }
 
-/* Reservar espacio del scrollbar y evitar layout shift.
+/* SIN `scrollbar-gutter: stable`.
 
-   Sólo donde el puntero es fino (mouse/trackpad), que es donde el navegador
-   dibuja una barra clásica que ocupa ancho real. En táctil la barra es un
-   overlay que no ocupa nada, y reservar el hueco igual dejaba el `body` 4px
-   más angosto que la ventana: una franja blanca por el borde derecho a lo
-   largo de toda la página, visible sobre cualquier sección de fondo oscuro
-   (se veía como una línea clara al costado de "Working methodology" y su
-   wave). */
-@media (pointer: fine) {
-  html {
-    scrollbar-gutter: stable;
-  }
-}
+   La reserva del hueco choca con los navegadores que dibujan la barra como
+   OVERLAY (GNOME/Linux, macOS, y cualquier touch): ahí la barra no ocupa
+   ancho, pero el gutter reserva 8px igual. El resultado es un `body` 8px más
+   angosto que la ventana y una franja vertical con el blanco del `html`
+   pegada al borde derecho, a lo largo de toda la página — se ve sobre todo en
+   pantallas grandes y sobre las secciones de fondo oscuro.
+
+   Antes esto estaba acotado a `pointer: fine` pensando que el overlay era sólo
+   cosa de táctil, pero un mouse en Linux/macOS también reporta `fine` y también
+   dibuja overlay, así que la franja seguía apareciendo.
+
+   El layout shift que el gutter evitaba no es un problema acá: las páginas del
+   sitio son todas más altas que el viewport, así que la barra está siempre
+   presente y no hay salto al navegar entre ellas. */
 
 /* ── Ancho real de la página, para los full-bleed ──────────────────────────
    `100vw` incluye el ancho de la barra de scroll; `scrollbar-gutter: stable`
@@ -868,6 +900,7 @@ html.dark .ctaWrap {
   }
 }
 
+
 .home-textB {
   display: flex;
   flex-direction: column;
@@ -880,6 +913,63 @@ html.dark .ctaWrap {
 @media (max-width: 768px) {
   .home-textB {
     align-items: center;
+  }
+}
+
+/* En pantallas grandes el hero reparte el ancho extra entre las dos columnas y
+   se da más aire vertical, en vez de dejar el contenido apretado en el centro
+   con margen muerto a los lados. El gap crece con el contenedor: con 2rem fijo,
+   a 1680px las dos columnas quedaban casi pegadas. */
+@media (min-width: 1600px) {
+  .hero-section > .home-text {
+    gap: 4rem;
+    /* Sin padding lateral: el hero ya está capado por el mismo
+       --container-max-width que el resto, así que cualquier padding acá lo mete
+       hacia adentro y su título arranca más a la derecha que los títulos de
+       Services, Blog y HowWeWork. Con 2rem el desfase era de 32px y con 1rem
+       de 16px; a 0 la columna izquierda de la página queda alineada de punta
+       a punta. */
+    padding-inline: 0;
+  }
+
+  .home-text {
+    padding: 3rem 0;
+  }
+
+  /* OJO con la suma de las dos columnas: `.home-text` es `flex-wrap: wrap`, así
+     que basis(A) + basis(B) + gap tiene que entrar en el 100% o el dashboard se
+     va a un segundo renglón, debajo del texto. Por eso los porcentajes se
+     calculan descontando el gap con calc() en vez de ponerlos a ojo. */
+  .home-textA {
+    /* Un punto más que en 1440: el texto es lo que gana con el ancho nuevo,
+       el dashboard ya se lee bien y no necesita crecer al mismo ritmo. */
+    flex-basis: calc(52% - 2rem);
+    max-width: calc(52% - 2rem);
+  }
+
+  .home-textB {
+    flex-basis: calc(48% - 2rem);
+  }
+}
+
+@media (min-width: 1900px) {
+  .hero-section > .home-text {
+    gap: 4rem;
+  }
+
+  .home-text {
+    padding: 4rem 0;
+  }
+
+  /* Mismo criterio que arriba: el descuento acompaña al gap de este
+     breakpoint para que las dos columnas sigan entrando en un renglón. */
+  .home-textA {
+    flex-basis: calc(52% - 2rem);
+    max-width: calc(52% - 2rem);
+  }
+
+  .home-textB {
+    flex-basis: calc(48% - 2rem);
   }
 }
 

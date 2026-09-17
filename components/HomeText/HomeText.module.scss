@@ -518,3 +518,114 @@ p.greeting {
 
 
 
+
+/* ── Pantallas grandes (≥1600px) ───────────────────────────────────────────
+   Todo lo de acá abajo vive dentro de `min-width` a propósito: en el monitor
+   chico el hero ya estaba bien y no se toca.
+
+   El problema que resuelve: con --container-max-width creciendo a 1560/1680px,
+   la columna de texto pasa a tener bastante más ancho, pero los tamaños y los
+   márgenes seguían calculados para 1440. El título quedaba amontonado arriba
+   (tres renglones muy juntos) y el resto del bloque —subtítulo, botones,
+   métricas— apelotonado debajo, con todo el aire sobrando a los costados en
+   vez de repartido entre las piezas. */
+@media (min-width: 1600px) {
+  /* `.highlight` ("digital product") lleva su propio font-size fijo, así que no
+     acompaña al del h1: si se achica uno solo, la línea del medio queda mucho
+     más grande que las otras dos. Se escala junto al título y en el mismo
+     tramo 1600–1899. */
+  .highlight {
+    font-size: 3.5rem;
+  }
+
+  .mainTitle {
+    /* Sólo afecta el tramo 1600–1899: de 1900 para arriba manda el bloque de
+       más abajo, que mantiene 3.9rem. Se achica acá y no allá para no tocar
+       los monitores de 1920+. */
+    font-size: 3.5rem;
+    /* Más APRETADO que en pantalla chica, no más suelto: el interlineado es un
+       múltiplo del tamaño de fuente, así que a 68px un 1.16 abre un hueco de
+       ~11px entre renglones y las tres líneas del título se leen como tres
+       bloques sueltos en vez de como una frase. Los títulos grandes piden menos
+       line-height, no más — pero 1.02 se pasaba para el otro lado y las tres
+       líneas quedaban encimadas. */
+    line-height: 1.1;
+    margin-bottom: 1.75rem;
+    max-width: 100%;
+  }
+
+  .subTitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    /* Acompaña el ancho nuevo de la columna: con 680px clavado, la frase
+       cortaba mucho antes que el título y el bloque quedaba escalonado. */
+    max-width: 780px;
+    margin-bottom: 2.25rem;
+  }
+
+  .ctaButtons {
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+
+    /* Tramo 1600–1899: un escalón por debajo del base (3.4rem/1.05rem), que en
+       esta franja se veían grandes contra el título ya achicado. De 1900 para
+       arriba manda el bloque de más abajo. */
+    a {
+      height: 3.25rem;
+      padding: 0 1.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  .socialProof {
+    margin-top: 2rem;
+  }
+
+  .socialProofStatNumber {
+    font-size: 1.05rem;
+  }
+
+  .socialProofStatLabel {
+    font-size: 0.875rem;
+  }
+
+  .socialProofDivider {
+    height: 1.6rem;
+    margin: 0 1.15rem;
+  }
+}
+
+@media (min-width: 1900px) {
+  /* Vuelve al tamaño del título de este tramo: sin esto heredaría el 3.25rem
+     del bloque de 1600 y la línea del medio quedaría más chica que las otras. */
+  .highlight {
+    font-size: 3.9rem;
+  }
+
+  .mainTitle {
+    font-size: 3.9rem;
+    /* Un punto menos todavía que en 1600: a 76px el mismo múltiplo abre más
+       hueco en px, así que el interlineado se vuelve a apretar para que la
+       frase siga leyéndose de corrido. */
+    line-height: 1.07;
+    margin-bottom: 2rem;
+  }
+
+  /* Recupera el tamaño de este tramo: sin esto heredaría el botón achicado del
+     bloque de 1600 y quedaría chico para un monitor de 1920+. */
+  .ctaButtons a {
+    height: 3.7rem;
+    padding: 0 1.75rem;
+    font-size: 1.1rem;
+  }
+
+  .subTitle {
+    font-size: 1.22rem;
+    max-width: 860px;
+    margin-bottom: 2.5rem;
+  }
+
+  .socialProof {
+    margin-top: 2.25rem;
+  }
+}
