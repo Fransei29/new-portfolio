@@ -456,13 +456,10 @@
      1024 y el menú quedaba sin idioma ni tema. */
   @media (max-width: 1024px) {
     display: flex !important;
-    /* En columna y no en fila: en el panel mobile todo lo demas se apila, y
-       los dos controles sueltos en horizontal quedaban como un bloque ajeno.
-       Alineados al arranque para que compartan el margen izquierdo de los
-       navlinks en vez de quedar centrados en el panel. */
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    /* Uno al lado del otro y alineados al margen izquierdo de los navlinks. */
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
     /* Mismo motivo que .mobileMenu: sin reset universal esto era content-box y
        el padding-top se sumaba al alto. */
     box-sizing: border-box;
@@ -476,7 +473,8 @@
        dejaba ~200px de hueco entre YouTube y los controles. Ahora el bloque
        sigue al último link, separado sólo por el padding. */
     margin-top: 0;
-    padding-top: 2rem;
+    /* Mas cerca del ultimo navlink: con 2rem el pie quedaba despegado. */
+    padding-top: 1rem;
     width: 100%;
     /* Sin línea divisoria: el `margin-top:auto` ya separa el pie del bloque de
        links. El borde a todo el ancho era el último resto de "lista de

@@ -22,7 +22,11 @@
       "label": "Trusted by founders and engineering teams",
       "headline": "Trusted by founders and engineering teams",
       "projects": "Projects shipped",
-      "clients": "International clients trust our work"
+      "clients": "International clients trust our work",
+      "clientsShort": "clients",
+      "projectsShort": "projects",
+      "yearsShort": "years",
+      "years": "Years of track record"
     }
   },
   "about": {
