@@ -247,14 +247,19 @@
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  width: 0;
   vertical-align: bottom;
+  /* max-width animado y no `width`: el `width: 30ch` fijo estaba calculado
+     para la URL vieja, y con una mas corta sobraba un hueco entre el final del
+     texto y el caret. Con max-width el segmento no pasa de su ancho natural,
+     asi que el caret queda pegado a la ultima letra en los dos idiomas (que
+     ademas no miden lo mismo). */
+  max-width: 0;
   animation: urlType 3.2s steps(30, end) 0.4s forwards;
 }
 
 @keyframes urlType {
-  from { width: 0; }
-  to   { width: 30ch; }
+  from { max-width: 0; }
+  to   { max-width: 100%; }
 }
 
 .urlCaret {
@@ -265,14 +270,18 @@
   background: var(--primary-color);
   vertical-align: -2px;
   flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(142, 122, 230, 0.55);
-  animation: caretBlink 0.7s steps(2, end) infinite;
+  /* Sin glow y con un parpadeo lento que nunca llega a apagarse del todo: el
+     `steps(2)` de 0.7s prendia y apagaba de golpe y tiraba del ojo justo donde
+     no hay nada para leer. Ahora solo insinua que la barra esta viva. */
+  opacity: 0.35;
+  animation: caretBlink 2.8s ease-in-out infinite;
 }
 
 @keyframes caretBlink {
-  0%, 49%   { opacity: 1; }
-  50%, 100% { opacity: 0; }
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.12; }
 }
+
 
 .urlLight {
   color: rgba(0, 0, 0, 0.42);
@@ -284,7 +293,9 @@
 
 .urlAccent {
   color: var(--primary-color);
-  font-weight: 600;
+  /* Sin peso propio: en negrita el placeholder competia con la marca del
+     dashboard. El color ya alcanza para distinguirlo del resto de la URL. */
+  font-weight: 400;
 }
 
 // ---------- Content ----------

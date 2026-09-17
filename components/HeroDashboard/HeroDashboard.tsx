@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './HeroDashboard.module.scss';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
@@ -167,6 +168,11 @@ const TASKS = [
 ];
 
 const HeroDashboard = () => {
+  const { language } = useLanguage();
+  // El dominio de la barra es un placeholder para que el visitante se vea a si
+  // mismo, asi que se traduce como cualquier otro texto de la interfaz.
+  const demoDomain = language === 'es' ? 'TuNegocio' : 'YourBusiness';
+
   // Rotating "shipped tasks" — strike-through cycle
   const [taskIndex, setTaskIndex] = useState(0);
   const [taskPhase, setTaskPhase] = useState<'enter' | 'striking' | 'done' | 'leave'>('enter');
@@ -251,9 +257,8 @@ const HeroDashboard = () => {
           <div className={styles.urlBar} data-explode-piece="url-bar">
             <span className={styles.urlTyped}>
               <span className={styles.urlTypedSegment}>
-                <span className={styles.urlLight}>app.</span>
-                <span className={styles.urlAccent}>francoseiler</span>
-                <span className={styles.urlLight}>.com/dashboard</span>
+                <span className={styles.urlAccent}>{demoDomain}</span>
+                <span className={styles.urlLight}>.com/analytics</span>
               </span>
               <span className={styles.urlCaret} aria-hidden />
             </span>
@@ -291,7 +296,7 @@ const HeroDashboard = () => {
               <div className={styles.statValue}>
                 −{Math.round(latency)}<span className={styles.statUnit}>ms</span>
               </div>
-              <div className={styles.statLabel}>P95 LATENCY</div>
+              <div className={styles.statLabel}>LATENCY</div>
             </div>
             <div className={styles.statCard} data-explode-piece="stat-card" data-explode-index="2">
               <div className={styles.statValue}>{Math.round(incidents)}</div>

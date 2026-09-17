@@ -145,7 +145,13 @@
     display: flex;
     justify-content: flex-end;
     text-align: right;
-    padding: 1rem 0;
+    /* El boton vive fuera de `.viewport`, asi que no hereda el
+       `--container-inset` que ese bloque define para el carrusel: sin esto se
+       pegaba al borde derecho de la pagina en vez de frenar donde termina el
+       contenido. Misma formula, redeclarada en este scope. El carrusel no se
+       toca: sigue sangrando hasta la pared como hasta ahora. */
+    --container-inset: max(2rem, calc((var(--page-w) - var(--container-max-width)) / 2));
+    padding: 1rem var(--container-inset) 1rem 0;
 
     @media (max-width: 768px) {
         padding: 0 1.25rem;

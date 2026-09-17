@@ -341,6 +341,9 @@
   @media (max-width: 768px) {
     padding: 2rem 1rem;
     font-size: 0.85rem;
+    /* En mobile el resto del footer va centrado; alineado a la derecha esta
+       linea quedaba descolgada contra el borde. */
+    text-align: center;
   }
 
   p {

@@ -9,7 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import { X, GraduationCap, ArrowUpRight } from 'lucide-react';
+import { X, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function Header() {
@@ -250,6 +250,16 @@ export default function Header() {
           </p>
         </Link>
         <a
+          href={`https://bootcamp.francoseiler.com/${language}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMobileMenu}
+          className={`${styles.mobileNavLink} ${styles.mobileNavExternal}`}
+        >
+          {t('nav.bootcamp')}
+          <ArrowUpRight size={15} className={styles.mobileExternalArrow} />
+        </a>
+        <a
           href="https://www.youtube.com/@francoseiler1710"
           target="_blank"
           rel="noopener noreferrer"
@@ -261,16 +271,6 @@ export default function Header() {
         </a>
 
         <div className={styles.mobileMenuControls}>
-          <a
-            href={`https://bootcamp.francoseiler.com/${language}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.mobileBootcampButton}
-            aria-label={t('nav.bootcamp')}
-            title={t('nav.bootcamp')}
-          >
-            <GraduationCap size={16} className={styles.mobileBootcampIcon} />
-          </a>
           <LanguageSelector />
           <ThemeToggleButton />
         </div>

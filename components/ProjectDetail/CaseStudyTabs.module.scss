@@ -79,9 +79,19 @@
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  // El scroll se detiene en cada tab y no a mitad de uno.
+  scroll-snap-type: x proximity;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  // Sin esto los cinco tabs (~525px contra 370 de pantalla) se comprimian para
+  // entrar en la caja en vez de dejar scrollear, y los dos ultimos terminaban
+  // fuera del viewport igual. El contenedor ya tiene overflow-x: auto.
+  > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 }
 
