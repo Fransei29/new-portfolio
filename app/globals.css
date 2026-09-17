@@ -1,50 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+/* Tipografías de marca cargadas vía next/font en app/layout.tsx.
+   Exponen las CSS vars --font-heading (Bricolage Grotesque, títulos) y
+   --font-body (Plus Jakarta Sans, texto) en el elemento <html>. */
 
 :root {
-  /* Paleta de colores */
-  --primary-color:rgb(180, 0, 90);
-  --primary-colorA:#b4035c;
-  --primary-color-light:#fdb6da;
-  --dark:#090a16;
-  --dark-light:#0f1326;
-  --text-color: #111111;
+  /* ============================================================
+     PALETA DE MARCA — Franco Seiler (Lila + Verde acento)
+     Lila Suave    #b59cf8  hovers, fondos suaves, glows, ilustraciones
+     Lila Principal#8e7ae6  links, iconos interactivos, acentos
+     Lila Profundo #2e294e  CTAs, textos con peso, presencia sobria
+     Verde Menta   #d1f0d1  superficies de acento / estados positivos
+     Verde Bosque  #58876e  contraste funcional sobre verde
+     Blanco Arena  #f3f2f4  fondo principal claro
+     Negro Grafito #292833  fondo principal oscuro
+     Grafito Elev. #2e2a3a  superficies elevadas en oscuro
+     Gris Medio    #8a8599  textos secundarios, bordes, dividers
+     ============================================================ */
+
+  /* Marca lila */
+  --lila-suave: #b59cf8;
+  --lila-principal: #8e7ae6;
+  /* Lila Corporativo: tono extra (fuera del manual original) entre el Principal
+     y el Profundo. Da presencia más seria/business sin perder vida.
+     Ajustado a #7d68d8: más violeta y un punto menos fuerte que el #6d5dd3
+     inicial (que tiraba a azul). */
+  --lila-corporativo: #7d68d8;
+  --lila-profundo: #2e294e;
+  /* Verde acento (uso acotado) */
+  --verde-menta: #d1f0d1;
+  --verde-bosque: #58876e;
+  /* Neutros de marca */
+  --arena: #f3f2f4;
+  --grafito: #292833;
+  --grafito-elevado: #2e2a3a;
+  --gris-medio: #8a8599;
+  /* Grisecito: neutro un punto más frío/marcado que el arena, para variar fondos B */
+  --grisecito: #eeedf1;
+  /* Superficie compartida por el navbar y las secciones B: el "papel" de la marca.
+     Valores tomados de `main`: blanco cálido en light y azul profundo en dark.
+     Reemplazan al par lila (#f4f3f7 / #2e2a3a) que tenía la rama.
+
+     OJO: la variable no es sólo del navbar — alimenta --background-colorB y
+     --wave-b, así que también define el fondo de las secciones B y el color de
+     las ondas divisorias en todo el sitio. */
+  /* #faf9f8 (de `main`) tiraba a crema: su rojo iba 2 puntos por encima del
+     azul y contra la paleta lila se leía amarillento. #f9f9fa invierte ese
+     sesgo apenas (azul 1 punto arriba del rojo) manteniendo el mismo tono y
+     prácticamente el mismo brillo — calma la crema sin volverse gris plano. */
+  /* Alto del header fijo. Medido en el navegador: 103.8px en un viewport de
+     900px de alto. Se declara como variable para que quien necesite dejarle
+     espacio (p. ej. la cabecera sticky de la tabla comparativa) no tenga que
+     adivinar con un `vh`, que no coincide en todos los altos de pantalla. */
+  --header-h: 104px;
+  --nav-surface: #f9f9fa;      /* anterior: #faf9f8 (main) · #f4f3f7 (lila) */
+  --nav-surface-dark: #181c33; /* anterior (lila): #2e2a3a */
+  /* Lila Velo: lila MUY tenue (más suave que --lila-suave), pensado como fondo
+     de sección grande. Se lee como "gris con calidez lila" sin invadir. */
+  --lila-velo: #f2effb;
+  /* Variante oscura del lila velo, para fondos de sección en dark mode */
+  --lila-velo-dark: #262336;
+
+  /* Paleta de colores (tokens de compatibilidad → ahora lila)
+     PROTAGONISTA = Lila Profundo (#2e294e): fuerte, con peso, para
+     links/iconos/acentos. Lila Principal (#8e7ae6) = hover/secundario.
+     Lila Suave (#b59cf8) = uso estratégico y sutil (fondos/glows). */
+  --primary-color: var(--lila-profundo);
+  --primary-colorA: #2e294e;
+  --primary-color-light: var(--lila-suave);
+  /* Acento secundario para hovers y estados interactivos medios */
+  --primary-accent: var(--lila-principal);
+  --dark: #211f2b;
+  --dark-light: #292833;
+  --text-color: #1c1a2e;
   --text-color-B: #333333;
   --text-color-light: #6b6b6b;
   --text-color-dark: #0a0a0a;
   --text-color-dark-mode: rgb(237, 236, 236);
-  /* Ink: color funcional negro para CTAs, iconos, elementos estructurales */
-  --ink: #0a0a0a;
-  --ink-hover: #1f1f1f;
-  --ink-soft: rgba(0, 0, 0, 0.05);
-  --ink-soft-hover: rgba(0, 0, 0, 0.08);
+  /* Ink: color funcional para CTAs, iconos, elementos estructurales */
+  --ink: #2e294e;
+  --ink-hover: #3d3768;
+  --ink-soft: rgba(46, 41, 78, 0.06);
+  --ink-soft-hover: rgba(46, 41, 78, 0.1);
+  /* Fondo de iconos de tarjetas (services, why-choose-us, how-we-work):
+     violeta de marca suave con un toque grisáceo. Una sola fuente de verdad
+     para mantener consistencia visual entre secciones. */
+  --icon-bg: rgba(134, 118, 190, 0.1);
+  --icon-bg-hover: rgba(134, 118, 190, 0.18);
+  --icon-border: 1px solid rgba(134, 118, 190, 0.28);
+  --icon-border-hover: 1px solid rgba(134, 118, 190, 0.42);
   /* Card backgrounds: blanco puro y off-white para crear jerarquía sutil */
   --card-bg: #ffffff;
   --card-bg-soft: #fafafa;
-  --button-color:rgba(248, 152, 200, 0.8);
-  --button-color-hover:rgb(245, 84, 165, 0.9);
+  /* Botón protagonista: relleno Lila Profundo, hover se aclara a Lila Principal */
+  --button-color: #2e294e;
+  --button-color-hover: #8e7ae6;
     background-color: rgb(255, 255, 255);
-  --border: 1px solid rgba(233, 7, 120, 0.5);
+  --border: 1px solid rgba(142, 122, 230, 0.5);
   --borderB: 1px solid rgba(0, 0, 0, 0.08);
-  --borderA: 1px solid rgba(233, 7, 120, 0.4);
+  --borderA: 1px solid rgba(142, 122, 230, 0.4);
   --borderC: 1px solid rgba(0, 0, 0, 0.06);
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --background-colorA: rgb(255, 255, 255);
-  --background-colorB: rgb(249, 248, 246);
-  --background-colorB-gradient: linear-gradient(180deg, #faf9f7 0%, #fdfcfb 35%, #ffffff 50%, #fdfcfb 65%, #faf9f7 100%);
+  --background-colorB: var(--nav-surface);
+  /* Los tonos van derivados de --nav-surface (#faf9f8) y no hardcodeados: antes
+     eran los lila viejos (#f4f3f7/#f8f7fa) y, como `background-image` se pinta
+     ENCIMA de `background-color`, el gradiente tapaba el fondo B en todas las
+     secciones — el cambio de variable sólo se veía en los waves.
+     El tramo del medio es un punto más claro, para el mismo degradé sutil.
+
+     El primer tramo se mantiene plano en el tono del wave (#f9f9fa) hasta 12%:
+     arriba de esta sección suele haber un wave, cuyo relleno es ese color PLANO.
+     Si el gradiente empieza a aclarar desde 0% ya llegó a un tono visiblemente
+     más claro a los pocos píxeles de la costura, y ese salto se lee como una
+     línea fina cruzando el ancho (se veía en Tools y en Case Studies). Con el
+     tramo plano la unión es continua y el degradé arranca cuando ya se despegó
+     del wave. */
+  --background-colorB-gradient: linear-gradient(180deg, #f9f9fa 0%, #f9f9fa 12%, #fcfcfd 50%, #f9f9fa 100%);
+  /* anterior (main):  linear-gradient(180deg, #faf9f8 0%, #fdfcfb 50%, #faf9f8 100%); */
+  /* anterior (lila):  linear-gradient(180deg, #f4f3f7 0%, #f8f7fa 50%, #f4f3f7 100%); */
   --background-ivory: rgb(255, 255, 255);
-  --bg-hover: rgba(245, 84, 165, 0.9);
-  --cta-bg: #032e8b;
-  --cta-bg-hover: #1D4ED8;
+  --bg-hover: rgba(142, 122, 230, 0.9);
+  --cta-bg: #2e294e;
+  --cta-bg-hover: #3d3768;
   /* CTA: mismo token en gradiente, wave y fallback */
-  --cta-gradient-top: #0a1230;
-  --cta-gradient-mid: #131a2b;
+  --cta-gradient-top: #2e294e;
+  --cta-gradient-mid: #3a3460;
   --cta-bg-gradient: linear-gradient(
     180deg,
     var(--cta-gradient-top) 0%,
@@ -57,93 +139,106 @@
   --br: 10px;
   --br-sm: 6px;
   --br-lg: 14px;
-  --container-max-width: 1350px;
+  --container-max-width: 1440px;
+  /* El nav va más ancho que el contenido a propósito (ver Header.module.scss):
+     la barra enmarca la página en vez de alinearse con ella. */
+  --nav-max-width: 1920px;
   --section-py: 8rem;
-  --section-py-mobile: 4rem;
+  /* Más aire vertical entre secciones: con la tipografía más chica, el espacio
+     es lo que marca dónde termina un bloque y empieza el siguiente. */
+  --section-py-mobile: 5rem;
 
   /* Wave dividers (home): deben alinear con --background-colorA / B y CTA */
   --wave-a: rgb(255, 255, 255);
-  --wave-b: #faf9f7;
+  --wave-b: var(--nav-surface);
 
   /* Variables para títulos y subtítulos - Sistema global */
   
   /* H1 - Título principal (Hero) */
   --h1-font-size: 3.5rem;
-  --h1-font-size-mobile: 2.25rem;
+  /* Escala mobile más contenida: los títulos bajan bastante y el aire pasa a
+     hacer el trabajo que antes hacía el tamaño. Es el ajuste que separa una
+     tipografía "agrandada para que se vea" de una escala moderna. */
+  --h1-font-size-mobile: 1.9rem;
   --h1-font-weight: 500;
   --h1-line-height: 1.1;
   --h1-letter-spacing: -0.01em;
   
   /* H1 Highlight - Título destacado (nombre, etc.) */
   --h1-highlight-font-size: 4.5rem;
-  --h1-highlight-font-size-mobile: 3.25rem;
+  --h1-highlight-font-size-mobile: 2.6rem;
   --h1-highlight-font-weight: 700;
   --h1-highlight-letter-spacing: -0.02em;
   
   /* H2 - Subtítulo principal */
   --h2-font-size: 1.25rem;
-  --h2-font-size-mobile: 0.975rem;
+  --h2-font-size-mobile: 0.925rem;
   --h2-font-weight: 400;
   --h2-line-height: 1.4;
   --h2-letter-spacing: 0.01em;
   
   /* H3 - Título de sección */
   --h3-font-size: 2rem;
-  --h3-font-size-mobile: 1.5rem;
+  --h3-font-size-mobile: 1.28rem;
   --h3-font-weight: 450;
   --h3-color: var(--text-color);
   --h3-spacing: 0.5rem;
-  --h3-spacing-mobile: 0.5rem;
+  --h3-spacing-mobile: 0.4rem;
   --h3-letter-spacing: -0.015em;
 
   /* Subtítulo de sección */
+  /* Separación título → subtítulo. Las dos líneas son una sola unidad de
+     lectura, así que van cerca: el aire grande va DEBAJO del par, separándolo
+     del contenido. Antes cada sección repetía 1.25rem a mano. */
+  --subtitle-spacing-top: 0.5rem;
+  --subtitle-spacing-top-mobile: 0.35rem;
   --subtitle-font-size: 1.125rem;
-  --subtitle-font-size-mobile: 0.9rem;
+  --subtitle-font-size-mobile: 0.875rem;
   --subtitle-font-weight: 400;
   --subtitle-color: #4a4a4a;
   --subtitle-line-height: 1.6;
   
   /* Título de tarjeta/card */
   --card-title-font-size: 1.25rem;
-  --card-title-font-size-mobile: 0.95rem;
+  --card-title-font-size-mobile: 0.9rem;
   --card-title-font-weight: 500;
   --card-title-line-height: 1;
   
   /* Título de proyecto */
   --project-title-font-size: 1.5rem;
-  --project-title-font-size-mobile: 1rem;
+  --project-title-font-size-mobile: 0.95rem;
   --project-title-font-weight: 500;
   
   /* Título secundario (h2 dentro de contenido) */
   --h2-content-font-size: 1.15rem;
-  --h2-content-font-size-mobile: 0.95rem;
+  --h2-content-font-size-mobile: 0.9rem;
   --h2-content-font-weight: 500;
   
   /* Título terciario (h3 dentro de contenido) */
   --h3-content-font-size: 1rem;
-  --h3-content-font-size-mobile: 0.975rem;
+  --h3-content-font-size-mobile: 0.9rem;
   --h3-content-font-weight: 500;
   
   /* Greeting/Saludo */
   --greeting-font-size: 1.5rem;
-  --greeting-font-size-mobile: 1.125rem;
+  --greeting-font-size-mobile: 1rem;
   --greeting-font-weight: 400;
   
   /* Descripción */
   --description-font-size: 1.25rem;
-  --description-font-size-mobile: 0.975rem;
+  --description-font-size-mobile: 0.925rem;
   --description-line-height: 1.4;
 }
 
 @media (min-width: 1400px) {
   :root {
-    --container-max-width: 1350px;
+    --container-max-width: 1440px;
   }
 }
 
 @media (min-width: 1800px) {
   :root {
-    --container-max-width: 1350px;
+    --container-max-width: 1440px;
   }
 }
 
@@ -164,9 +259,14 @@ html, body {
   width: 100%;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
-  overflow: auto; 
-  overflow-x: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* SIN overflow en ningún eje. Verificado con Chrome + CDP: el body computaba
+     `overflow: clip visible` y eso, aunque `clip` por sí solo no crea scroll
+     container, SÍ establece un containing block — que anula el
+     `position: sticky` de la cabecera de la tabla comparativa.
+     (Antes fue `overflow: auto`, que lo rompía por la vía del scroll container.)
+     El desborde horizontal lo contienen los propios componentes con su
+     `max-width` y `min-width: 0`; no hace falta recortarlo acá. */
+  font-family: var(--font-body), 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-color-light);
   transition: background-color 0.4s ease, color 0.4s ease;
   
@@ -175,9 +275,46 @@ html, body {
   }
 }
 
-/* Reservar espacio del scrollbar y evitar layout shift */
-html {
-  scrollbar-gutter: stable;
+/* Reservar espacio del scrollbar y evitar layout shift.
+
+   Sólo donde el puntero es fino (mouse/trackpad), que es donde el navegador
+   dibuja una barra clásica que ocupa ancho real. En táctil la barra es un
+   overlay que no ocupa nada, y reservar el hueco igual dejaba el `body` 4px
+   más angosto que la ventana: una franja blanca por el borde derecho a lo
+   largo de toda la página, visible sobre cualquier sección de fondo oscuro
+   (se veía como una línea clara al costado de "Working methodology" y su
+   wave). */
+@media (pointer: fine) {
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
+/* ── Ancho real de la página, para los full-bleed ──────────────────────────
+   `100vw` incluye el ancho de la barra de scroll; `scrollbar-gutter: stable`
+   (arriba) reserva 8px que NO son parte del área de contenido. Un full-bleed
+   hecho con `width: 100vw; margin-left: calc(-50vw + 50%)` queda entonces 8px
+   más ancho que su lugar y asoma 4px por la derecha: exactamente el scroll
+   horizontal que aparecía SÓLO en la home (es donde viven los cuatro carruseles
+   full-bleed).
+
+   `--page-w` es el ancho real de la página, sin la barra. Los full-bleed lo usan
+   en vez de `100vw` y quedan clavados al borde real del contenido.
+
+   OJO: tiene que ser una LONGITUD, no un porcentaje. Una custom property guarda
+   el token tal cual, así que `--page-w: 100%` no era "el ancho del body": cada
+   consumidor resolvía ese `100%` contra SU propio padre. Cuando el padre se capa
+   en --container-max-width (1440px), `width: var(--page-w)` daba 1440 y
+   `margin-left: calc(var(--page-w)/-2 + 50%)` daba 0: el full-bleed dejaba de
+   llegar a la pared (a 1920px quedaba 236px adentro) y `--container-inset` se
+   clavaba siempre en su piso de 2rem.
+
+   Se calcula en `:root`, que es el único lugar donde `100%` es el ancho del
+   bloque inicial y no el de un padre capado. `--scrollbar-w` sale de la
+   diferencia entre `100vw` (incluye la barra) y ese `100%` (no la incluye). */
+:root {
+  --scrollbar-w: calc(100vw - 100%);
+  --page-w: calc(100vw - var(--scrollbar-w));
 }
 
 /* En página de detalle de proyecto: sin scroll-snap y body sin overflow propio
@@ -188,12 +325,95 @@ html.project-detail-page body {
   scroll-snap-type: none !important;
 }
 
+/* El overflow tiene que volver a `visible` en html Y en body. Con `overflow:
+   auto` en html, el elemento raíz se vuelve el contenedor de scroll y cualquier
+   position:sticky de adentro se mide contra él en vez de contra el viewport —
+   por eso el índice del case study no se pegaba. */
+html.project-detail-page,
 html.project-detail-page body {
   overflow: visible;
+  overflow-x: clip; /* sigue conteniendo desbordes horizontales, sin crear scroll container */
 }
 
-* {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+/* La transición de tema NO va en `*` de forma permanente: eso obliga al
+   navegador a vigilar background/color/border de cada nodo del DOM todo el
+   tiempo, y encima hace que cualquier hover de 0.2s quede pisado por estos
+   0.4s (por eso los hovers se sentían pesados, no sólo el cambio de tema).
+   En vez de eso, la clase se activa sólo durante el swap de tema y se saca. */
+html.theme-switching * {
+  transition:
+    background-color 0.28s ease,
+    color 0.28s ease,
+    border-color 0.28s ease !important;
+  /* El shorthand pisa cualquier transition propia del componente mientras dura
+     el swap, y eso es deliberado: hay elementos (el header, por ejemplo) que
+     animan backdrop-filter o box-shadow, que son las propiedades caras de
+     repintar. Durante el cambio de tema sólo interesan los colores. */
+}
+
+/* Quien pide no animar, no anima: el swap pasa instantáneo. */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-switching * {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   VIEW TRANSITIONS — cambio de tema
+   El tema nuevo entra recortado por un círculo que crece desde el botón
+   (ver hooks/useThemeTransition.ts). El clip-path lo anima JS porque el
+   origen depende de dónde esté el botón en pantalla.
+   ============================================================ */
+
+/* El navegador, por defecto, hace crossfade de las dos capas. Eso arruina el
+   círculo: la capa vieja se desvanece y el recorte deja de leerse como un
+   borde nítido. Las dos capas se muestran a opacidad plena y el único efecto
+   es el clip-path. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* El grupo es el contenedor de las dos capas y trae su propia animación de
+   morph (~250ms). Como acá las dos capas ocupan el viewport entero y no hay
+   nada que morphear, esa animación sólo compite con el círculo: termina antes
+   y puede cortar el recorte a mitad de camino. */
+::view-transition-group(root) {
+  animation: none;
+}
+
+/* La capa nueva va ENCIMA: es la que se revela. Sin este orden, el snapshot
+   viejo taparía al tema nuevo y no se vería nada crecer. */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Durante la transición el header queda capturado dentro del snapshot de la
+   página; su backdrop-filter sobre el pseudo-elemento genera repintados caros
+   y bordes sucios en el arco del círculo. */
+html.theme-transition-active header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* La View Transition congela la página: cualquier scroll durante esos ~620ms
+   desincroniza el snapshot viejo del contenido real y se ve un salto al
+   terminar. */
+html.theme-transition-active,
+html.theme-transition-active body {
+  overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }
 
 /* Page transition: scale down + fade content when navigating */
@@ -215,35 +435,76 @@ h1, .highlight, .socialmedia {
 }
 
 html.dark {
-  background-color: var(--dark-light);
+  background-color: var(--grafito);
   /* Alias usado por secciones con gradiente claro en light; evita fondos inválidos si se referencia sin definir */
-  --background-colorA-dark: var(--dark-light);
-  /* Mismo token que las secciones; el match en dark fallaba sobre todo por el drop-shadow del SVG (ver WaveDivider) */
-  --wave-a: var(--dark-light);
-  --wave-b: var(--dark-light);
+  --background-colorA-dark: var(--grafito);
+  /* Alternancia de fondo por sección en dark (igual que en light, pero con tonos
+     oscuros). Las secciones B usan var(--wave-b) como fondo para que la costura
+     del wave calce. El drop-shadow del SVG se desactiva en dark (ver WaveDivider)
+     para no romperla.
+
+     OJO — la alternancia quedó INVERTIDA respecto del diseño original: B fue
+     pensado como "un punto más claro" que A, y con el #2e2a3a anterior lo era
+     (luminancia 0.0254 contra 0.0223 de A). El #181c33 traído de `main` es más
+     OSCURO que A (0.0126), así que ahora las secciones B se hunden en vez de
+     elevarse. Si el resultado no convence, el arreglo es cambiar A o volver B
+     a un tono por encima de #292833. */
+  --wave-a: var(--grafito);            /* #292833 — fondo A */
+  --wave-b: var(--nav-surface-dark);   /* #181c33 — fondo B, mismo tono que el navbar */
+  --background-colorB: var(--nav-surface-dark);
+  /* En dark el protagonista se aclara: #2e294e no contrasta sobre grafito,
+     así que Lila Principal toma el rol primario y Lila Suave el acento. */
+  /* Los rellenos sólidos (botones) bajan al Lila Corporativo para que el texto
+     blanco encima llegue a 4.6:1; el Lila Principal se reserva para acentos
+     sobre fondo oscuro, donde no carga texto blanco arriba. */
+  --primary-color: var(--lila-corporativo);
+  --primary-colorA: #5c4dbe;
+  --primary-accent: var(--lila-suave);
+  /* Texto secundario: #6b6b6b es un gris de light mode y sobre grafito queda
+     ilegible (2.2:1). Lo subimos a un gris claro que mantiene la jerarquía
+     respecto del texto principal sin desaparecer contra el fondo. */
+  --text-color-light: #b8b5c4;
+  /* Botón en dark: el relleno se oscurece un punto respecto del Lila Principal
+     (#8e7ae6 daba 2.9:1 con texto blanco, por debajo del mínimo AA de 4.5:1).
+     Este lila corporativo llega a 4.6:1 y el texto blanco se lee limpio. */
+  --button-color: #6d5dd3;
+  --button-color-hover: #5c4dbe;
   /* Mismos valores que :root: el wave CTA usa var(--cta-gradient-top) en CSS; re-declarar evita cascadas raras en SVG */
-  --cta-gradient-top: #070d22;
-  --cta-gradient-mid: #131a2b;
+  --cta-gradient-top: #232040;
+  --cta-gradient-mid: #2e294e;
+  --cta-bg: #2e294e;
+  --cta-bg-hover: #3d3768;
   /* Sombras delicadas adaptadas a fondo oscuro */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0, 0, 0, 0.35);
   --borderB: 1px solid rgba(255, 255, 255, 0.08);
   --borderC: 1px solid rgba(255, 255, 255, 0.06);
-  /* En dark, "ink" se invierte: el blanco actúa como el negro */
+  /* En dark, "ink" usa lila claro para acentos interactivos */
   --ink: #f5f5f5;
   --ink-hover: #ffffff;
   --ink-soft: rgba(255, 255, 255, 0.06);
   --ink-soft-hover: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-bg-soft: rgba(255, 255, 255, 0.05);
+  /* En dark el violeta de icono se aclara para leerse sobre grafito */
+  --icon-bg: rgba(158, 144, 205, 0.1);
+  --icon-bg-hover: rgba(158, 144, 205, 0.18);
+  --icon-border: 1px solid rgba(158, 144, 205, 0.3);
+  --icon-border-hover: 1px solid rgba(158, 144, 205, 0.45);
+  --card-bg: var(--grafito-elevado);
+  --card-bg-soft: #35304a;
 }
 
 html.dark .svg-duo {
   opacity: 0.9;
 }
 
-html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .socialmedia i,html.dark .scroll-arrow {
+/* Los títulos suben un punto respecto del cuerpo: sin llegar al blanco puro
+   (que vibra sobre grafito), pero con presencia suficiente para encabezar. */
+html.dark h1, html.dark h2, html.dark h3 {
+  color: rgb(245, 244, 248) !important;
+}
+
+html.dark p, html.dark li, html.dark .socialmedia i, html.dark .scroll-arrow {
   color: rgb(233, 233, 233) !important;
 }
 
@@ -265,7 +526,7 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
 .highlight {
   display: block;
   position: relative;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
   font-size: var(--h3-font-size);
   font-weight: var(--h3-font-weight);
   color: var(--h3-color);
@@ -288,6 +549,51 @@ html.dark p, html.dark h1, html.dark h2, html.dark h3,html.dark li,html.dark .so
    tutorials) keep the title left-aligned. */
 .ContainerGeneralComplete .highlight {
   text-align: center;
+}
+
+/* Section background theming: reasigna el "fondo B" (gris/arena) por un tono lila
+   muy tenue en una franja concreta. Al redefinir --wave-b y --background-colorB
+   localmente, los WaveDivider de entrada/salida heredan el color y la costura calza. */
+.section-bg-lila {
+  /* Lila de sección: el Principal (#8e7ae6) muy diluido en blanco para bajar
+     saturación sin perder identidad. Fondo lila claro, cómodo para franja grande. */
+  /* Usa --lila-velo, el mismo lila tenue del bloque de newsletter, en vez del
+     --lila-seccion más saturado que tenía antes: así la franja lila del home y
+     la del blog son el mismo color y no dos lilas parecidos pero distintos. */
+  --lila-seccion: var(--lila-velo);
+  --wave-b: var(--lila-seccion);
+  --background-colorB: var(--lila-seccion);
+  /* Plano, sin gradiente: el velo es tan tenue que la "respiración" del
+     gradiente anterior sólo agregaba una banda sucia al medio. */
+  --background-colorB-gradient: none;
+}
+
+html.dark .section-bg-lila {
+  --wave-b: var(--lila-velo-dark);
+  --background-colorB: var(--lila-velo-dark);
+}
+
+/* Sección "ink" (fondo lila profundo #2e294e, como el CTA). Redefine --wave-a
+   localmente para que los WaveDivider de entrada/salida hereden el color oscuro
+   y la costura calce, igual que .section-bg-lila hace con --wave-b. */
+.section-bg-ink {
+  --wave-a: #2e294e;
+}
+
+/* Para un bToA cuya sección de ARRIBA es blanca (fondo A) en vez de gris (B).
+   bToA pinta su franja con --wave-b; si la sección previa es blanca, ese gris
+   aparece como una banda suelta. Acá --wave-b pasa a blanco para que la franja
+   continúe el color de arriba y sólo se vea la curva. */
+.wave-from-white {
+  --wave-b: var(--background-colorA);
+}
+
+html.dark .wave-from-white {
+  --wave-b: var(--dark-light);
+}
+
+html.dark .section-bg-ink {
+  --wave-a: #2e294e;
 }
 
 /* --- HOME PAGE --- */
@@ -321,11 +627,172 @@ html.dark .hero-section::before {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
 }
 
+/* Aurora minimalista: un resplandor lila muy tenue a un costado, que se
+   desplaza muy lento. Apenas perceptible; solo da algo de profundidad. */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  filter: blur(70px);
+  pointer-events: none;
+  will-change: transform;
+  /* Aurora lila muy sutil: derecha (lila principal) e izquierda (lila suave) */
+  background:
+    radial-gradient(42vw 42vw at 104% 92%, rgba(142, 122, 230, 0.1), transparent 60%),
+    radial-gradient(34vw 34vw at -10% 78%, rgba(181, 156, 248, 0.14), transparent 60%);
+  animation: heroAurora 52s ease-in-out infinite alternate;
+}
+
+html.dark .hero-section::after {
+  background:
+    radial-gradient(42vw 42vw at 104% 92%, rgba(142, 122, 230, 0.12), transparent 60%),
+    radial-gradient(34vw 34vw at -10% 78%, rgba(181, 156, 248, 0.16), transparent 60%);
+}
+
+@keyframes heroAurora {
+  from { transform: translate(0, -50%); }
+  to { transform: translate(-3%, -54%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section::after {
+    filter: blur(52px);
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     min-height: auto !important;
     padding: 1.5rem 0 0;
     align-items: flex-start;
+  }
+}
+
+/* Host del panda "programando": el bloque wave(aToB) + SkillsSummary. Relative
+   para anclar el panda a su borde SUPERIOR (donde vive el wave).
+
+   isolation:isolate es OBLIGATORIO, no decorativo: el panda usa z-index:-1 para
+   meterse detrás del wave. Sin un contexto de apilado propio acá, ese -1 sube a
+   buscar el del ancestro y el panda se hunde DETRÁS del fondo de la sección,
+   que lo recorta. Antes esto funcionaba de casualidad, porque el host llevaba
+   `fade-in-left` y su `will-change: transform` creaba el contexto como efecto
+   colateral; al pasar a `.assemble` (que a propósito no transforma nada) ese
+   apoyo desapareció. Ahora la condición queda declarada donde se necesita. */
+.toolsPandaHost {
+  position: relative;
+  isolation: isolate;
+  /* Fondo de respaldo, del color de la sección que este bloque contiene
+     (SkillsSummary). isolation:isolate hace que el bloque componga en su propia
+     capa, y con zoom o devicePixelRatio fraccionario el borde entre el wave y la
+     sección puede caer en una fracción de píxel: ahí queda una fila que ninguno
+     de los dos pinta del todo. Sin este fondo, por esa fila se ve el blanco del
+     body y se lee como una línea fina cruzando el ancho, justo sobre "Tools".
+
+     Va como gradiente de corte duro y no como color plano porque el host
+     empieza ARRIBA de la curva (el wave ocupa sus primeros ~56px) y por ahi
+     asoma el panda: pintar todo el host de --wave-b dejaba esa banda superior
+     de otro color que la seccion de la que viene, y se recortaba como una
+     franja detras del panda (bien visible en dark, donde --wave-a #292833 y
+     --wave-b #181c33 no se parecen). Arriba del corte sigue el color de la
+     seccion anterior; debajo, el de esta. El corte a 52px cae dentro del
+     relleno opaco de la curva, asi que la costura queda tapada igual. */
+  background-image: linear-gradient(
+    to bottom,
+    var(--wave-a) 0,
+    var(--wave-a) 52px,
+    var(--wave-b) 52px,
+    var(--wave-b) 100%
+  );
+}
+
+/* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
+   ENCIMA de la curva sea transparente y deje ver al panda que está detrás. Solo
+   el relleno gris de la curva (opaco) tapa la base del panda, siguiendo la curva
+   exacta. Sin fondo blanco → sin franja blanca.
+
+   La sombra base (ver WaveDivider.module.scss) se reemplaza por una con más
+   desplazamiento y menos desenfoque: acá el wave va sobre el panda, y un blur
+   que se expande hacia arriba dibujaría una línea sobre él. Desplazada queda por
+   debajo de la curva —donde el panda ya está tapado por el relleno gris— así que
+   la costura se lee igual que en los demás waves sin ensuciar al panda. */
+.toolsWave [class*="WaveDivider_root"] path {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.36)) !important;
+}
+.toolsWave [class*="WaveDivider_root"] {
+  background: transparent !important;
+}
+
+
+/* El panda se ancla al borde superior del host (top:0 ≈ cresta de la curva) y
+   asoma hacia arriba. Va DETRÁS del wave (z-index:-1): el relleno gris de la
+   curva lo tapa por abajo; la zona transparente sobre la curva lo deja ver. */
+.toolsPanda {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: 292px;
+  height: auto;
+  transform: translateY(-54%) rotate(-1.25deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    width: 185px;
+    /* Pegado al borde izquierdo: el negativo deja que el hombro del panda se
+       recorte contra el borde en vez de quedar flotando en el medio. */
+    left: -30px;
+    /* Menos negativo = el panda BAJA y queda más tapado por el relleno de la
+       curva. -52% dejaba asomar casi medio cuerpo; -49% lo esconde apenas más. */
+    transform: translateY(-49%) rotate(-1.25deg);
+  }
+}
+
+/* CTA del final del home como contenedor separado: ancho contenido (igual que
+   el resto de las secciones), centrado con márgenes laterales y esquinas
+   redondeadas. El .ctaContainer usa filter/will-change en sus pseudos → capa
+   compuesta que puede ignorar el clip del padre, por eso el redondeo va DIRECTO
+   sobre el .ctaContainer, además del overflow del wrap. */
+.ctaWrap {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  margin-block: 2.75rem 6rem;
+  /* Esquinas superiores apenas tendidas (elíptico sutil), inferiores iguales. */
+  border-radius: 34px 34px 24px 24px / 22px 22px 24px 24px;
+  overflow: hidden;
+  isolation: isolate;
+  /* Sombra delicada para despegar e integrar el CTA en la pantalla. */
+  box-shadow: 0 18px 50px -20px rgba(46, 41, 78, 0.35),
+    0 6px 18px -12px rgba(46, 41, 78, 0.25);
+}
+
+html.dark .ctaWrap {
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.55),
+    0 6px 18px -12px rgba(0, 0, 0, 0.4);
+}
+
+.ctaWrap > * {
+  margin-top: 0;
+  border-radius: 34px 34px 24px 24px / 22px 22px 24px 24px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .ctaWrap > * {
+    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
+  }
+
+  .ctaWrap {
+    margin-inline: 0.6rem;
+    margin-block: 1.5rem 3.5rem;
+    border-radius: 24px 24px 18px 18px / 16px 16px 18px 18px;
   }
 }
 
@@ -359,7 +826,11 @@ html.dark .hero-section::before {
 .home-textA {
   display: flex;
   flex-direction: column;
-  flex: 0 1 46%;
+  /* La flex-basis es la que fija el ancho real (flex-grow es 0, asi que el
+     max-width de abajo no llega a actuar). 50 y no 46: con 46% la columna
+     daba 644px y la segunda linea del subtitulo en castellano, que pide
+     667px, caia a un tercer renglon. */
+  flex: 0 1 48%;
   min-width: 0;
   align-items: flex-start;
 }
@@ -367,17 +838,26 @@ html.dark .hero-section::before {
 @media (min-width: 769px) {
   .home-textA {
     min-width: 42%;
-    max-width: 46%;
+    /* 50 y no 46: con 46% la columna daba 644px y la segunda linea del
+       subtitulo en castellano (que pide 667px) caia a un tercer renglon.
+       El dashboard de al lado cede unos puntos y no se nota. */
+    max-width: 48%;
   }
 }
 
 .home-textB {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   flex: 0 1 50%;
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .home-textB {
+    align-items: center;
+  }
 }
 
 .svg-duo {
@@ -397,7 +877,7 @@ html.dark .hero-section::before {
   transform: translate(-50%, -50%);
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(204, 2, 103, 0.1) 0%, rgba(204, 2, 103, 0.035) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(181, 156, 248, 0.1) 0%, rgba(181, 156, 248, 0.035) 50%, transparent 70%);
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
@@ -436,13 +916,13 @@ html.dark .hero-section::before {
   top: 100px;
   left: 40px;
   z-index: 1;
-  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
+  filter: drop-shadow(0 15px 20px rgba(181, 156, 248, 0.3)) drop-shadow(0 0 28px rgba(181, 156, 248, 0.1));
   animation: floatA 4.5s ease-in-out infinite;
   transition: filter 0.4s ease;
 }
 
 .shape-a:hover {
-  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 16px 24px rgba(181, 156, 248, 0.42)) drop-shadow(0 0 42px rgba(181, 156, 248, 0.2));
 }
 
 .shape-b {
@@ -451,14 +931,14 @@ html.dark .hero-section::before {
   top: 80px;
   left: 135px;
   z-index: 2;
-  filter: drop-shadow(0 15px 20px rgba(204, 2, 103, 0.3)) drop-shadow(0 0 28px rgba(204, 2, 103, 0.1));
+  filter: drop-shadow(0 15px 20px rgba(181, 156, 248, 0.3)) drop-shadow(0 0 28px rgba(181, 156, 248, 0.1));
   animation: floatB 3.8s ease-in-out infinite;
   animation-delay: -1.8s;
   transition: filter 0.4s ease;
 }
 
 .shape-b:hover {
-  filter: drop-shadow(0 16px 24px rgba(204, 2, 103, 0.42)) drop-shadow(0 0 42px rgba(204, 2, 103, 0.2));
+  filter: drop-shadow(0 16px 24px rgba(181, 156, 248, 0.42)) drop-shadow(0 0 42px rgba(181, 156, 248, 0.2));
 }
 
 
@@ -559,6 +1039,289 @@ html.dark .hero-section::before {
   transform: translateX(0);
 }
 
+/* El WaveDivider NUNCA se anima, aunque viva dentro de un bloque .fade-in-*.
+   Es la costura entre dos fondos, no contenido: si se desliza desde un lado o
+   entra con opacity, se ve el corte entre secciones aparecer a destiempo.
+   Queda DENTRO del bloque (y no como hermano suelto) para no romper la
+   sincronía de abajo: el bloque es el que observa el scroll, y sacar el wave
+   afuera lo dejaba pintado desde el arranque mientras su sección seguía
+   haciendo fade — desfasados. Acá el wave se exime del fade pero conserva su
+   lugar en el flujo, pegado a la sección que abre. */
+.fade-in-left > .wave-static,
+.fade-in-right > .wave-static {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Sincronización wave ↔ contenido: cuando un bloque externo (el que contiene el
+   wave) se vuelve .visible, sus hijos .fade-in-* internos (título, subtítulo,
+   cards de HowWeWork / WhyChooseUs) entran AL MISMO TIEMPO que el wave, en vez de
+   esperar su propio IntersectionObserver (que los desfasaba). El stagger se
+   conserva con transition-delay escalonado por posición. */
+.visible .fade-in-left,
+.visible .fade-in-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.visible .fade-in-left,
+.visible .fade-in-right {
+  transition-delay: 0.05s;
+}
+.visible .fade-in-left:nth-of-type(2),
+.visible .fade-in-right:nth-of-type(2) {
+  transition-delay: 0.12s;
+}
+.visible .fade-in-left:nth-of-type(3),
+.visible .fade-in-right:nth-of-type(3) {
+  transition-delay: 0.19s;
+}
+.visible .fade-in-left:nth-of-type(4),
+.visible .fade-in-right:nth-of-type(4) {
+  transition-delay: 0.26s;
+}
+.visible .fade-in-left:nth-of-type(5),
+.visible .fade-in-right:nth-of-type(5) {
+  transition-delay: 0.33s;
+}
+
+
+/* ============================================================================
+   ASSEMBLE — entrada compuesta por piezas
+   ============================================================================
+   Antes cada sección entraba como UN bloque: el wrapper .fade-in-* llevaba el
+   translateX y arrastraba a todo su subárbol, así que título, subtítulo y cards
+   viajaban pegados desde el mismo costado.
+
+   Acá el wrapper (.assemble) ya NO se mueve: sólo observa el scroll y reparte
+   el trigger. Cada pieza interna declara de dónde viene (.piece-l / .piece-r /
+   .piece-u / .piece-d / .piece-pop) y entra por su cuenta, escalonada, así la
+   sección se ARMA en vez de deslizarse.
+
+   Uso:
+     <div className="assemble">           ← observado por useScrollAnimation
+       <p className="piece-l">título</p>
+       <p className="piece-r">subtítulo</p>
+       <div className="assemble-stagger">  ← escalona a sus hijos directos
+         <article className="piece-u">card</article>
+         ...
+   ============================================================================ */
+
+/* El wrapper no se transforma nunca: un transform en el padre crea un
+   containing block y arrastraría a las piezas, que es exactamente el problema
+   que este sistema resuelve. */
+.assemble {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Piezas: estado inicial ─────────────────────────────────────────────── */
+
+.piece-l,
+.piece-r,
+.piece-u,
+.piece-d,
+.piece-pop {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.piece-l   { transform: translate3d(-36px, 0, 0); }
+.piece-r   { transform: translate3d(36px, 0, 0); }
+.piece-u   { transform: translate3d(0, 28px, 0); }
+.piece-d   { transform: translate3d(0, -24px, 0); }
+.piece-pop { transform: translate3d(0, 24px, 0) scale(0.96); }
+
+/* ── Piezas: estado final ───────────────────────────────────────────────── */
+
+.assemble.visible .piece-l,
+.assemble.visible .piece-r,
+.assemble.visible .piece-u,
+.assemble.visible .piece-d,
+.assemble.visible .piece-pop {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Una pieza suelta fuera de un .assemble (o el propio wrapper marcado como
+   pieza) se anima con su propio observer. */
+.piece-l.visible,
+.piece-r.visible,
+.piece-u.visible,
+.piece-d.visible,
+.piece-pop.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ── Stagger manual por orden de aparición ──────────────────────────────────
+   Las piezas nombradas (título, subtítulo, CTA) llevan su delay explícito para
+   que el orden no dependa de dónde estén en el DOM. */
+.assemble.visible .piece-delay-0 { transition-delay: 0s; }
+.assemble.visible .piece-delay-1 { transition-delay: 0.07s; }
+.assemble.visible .piece-delay-2 { transition-delay: 0.14s; }
+.assemble.visible .piece-delay-3 { transition-delay: 0.21s; }
+.assemble.visible .piece-delay-4 { transition-delay: 0.28s; }
+.assemble.visible .piece-delay-5 { transition-delay: 0.35s; }
+
+/* ── Stagger automático para grids y listas ─────────────────────────────────
+   Marcá el CONTENEDOR del grid con .assemble-stagger y sus hijos directos
+   entran en cascada, sin tener que numerar card por card (útil cuando las
+   cards salen de un .map()). Base 0.14s = arranca después del título y el
+   subtítulo.
+
+   El contenedor también da el ESTADO INICIAL a sus hijos, así una card que
+   sale de un .map() no necesita llevar .piece-* propia. */
+.assemble .assemble-stagger > * {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.assemble.visible .assemble-stagger > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.assemble.visible .assemble-stagger > *:nth-child(1)  { transition-delay: 0.14s; }
+.assemble.visible .assemble-stagger > *:nth-child(2)  { transition-delay: 0.20s; }
+.assemble.visible .assemble-stagger > *:nth-child(3)  { transition-delay: 0.26s; }
+.assemble.visible .assemble-stagger > *:nth-child(4)  { transition-delay: 0.32s; }
+.assemble.visible .assemble-stagger > *:nth-child(5)  { transition-delay: 0.38s; }
+.assemble.visible .assemble-stagger > *:nth-child(6)  { transition-delay: 0.44s; }
+.assemble.visible .assemble-stagger > *:nth-child(7)  { transition-delay: 0.50s; }
+.assemble.visible .assemble-stagger > *:nth-child(8)  { transition-delay: 0.56s; }
+.assemble.visible .assemble-stagger > *:nth-child(n+9) { transition-delay: 0.62s; }
+
+/* Alterna la dirección de origen en un grid: impares desde la izquierda,
+   pares desde la derecha. Da la sensación de piezas convergiendo al centro. */
+.assemble-stagger.stagger-alt > *:nth-child(odd)  { transform: translate3d(-30px, 14px, 0); }
+.assemble-stagger.stagger-alt > *:nth-child(even) { transform: translate3d(30px, 14px, 0); }
+
+/* El estado INICIAL de las piezas desplaza hacia la derecha (+30px en los
+   pares de stagger-alt, +36px en .piece-r). Mientras la sección no entró en
+   viewport ese desplazamiento es real y ENSANCHA LA PÁGINA: con el contenido
+   ya a 1440px, la columna derecha pintaba hasta 1446 y aparecía un scroll
+   horizontal de 6px en toda la home.
+
+   No se arregla en html/body: ahí el overflow tiene que seguir siendo
+   `visible` o se rompe el position:sticky de ComparisonMatrix (ver el bloque
+   de html/body al inicio del archivo). Se contiene en el contenedor de la
+   animación, que es donde nace el desborde.
+
+   `clip` y no `hidden`: `hidden` computaría el eje Y como `auto` y convertiría
+   al contenedor en scroll container, anulando el sticky de sus descendientes.
+   Es la misma trampa documentada en html/body y en el media query de mobile. */
+.assemble-stagger.stagger-alt {
+  overflow-x: clip;
+  /* El clip horizontal no debe recortar sombras ni hovers verticales. */
+  overflow-y: visible;
+}
+
+/* Mismo problema que arriba, pero con las piezas SUELTAS: `.piece-r` arranca
+   en translate3d(36px, 0, 0) y, mientras su sección no entró en viewport, ese
+   desplazamiento ensancha la página. En anchos medios (800–900px) los
+   subtítulos de ProjectsSection, SkillsSummary y ComparisonMatrix se salían
+   hasta 20px por la derecha.
+
+   NO se contiene con overflow en `.assemble`: se probó y rompe el apilado de
+   ComparisonMatrix. Cuando un eje es `clip` y el otro `visible`, el `visible`
+   computa `auto` (CSS Overflow 3) — el wrapper pasa a ser scroll container y
+   anula el `position: sticky` de sus descendientes. Es exactamente la trampa
+   documentada en html/body y en el media query de mobile.
+
+   El clip de `.assemble-stagger.stagger-alt` (arriba) sí es seguro: ahí dentro
+   no hay ningún sticky.
+
+   La solución es que la pieza entre desde la IZQUIERDA. Un desplazamiento
+   negativo no genera scroll horizontal (el scroll sólo lo produce el desborde
+   por el lado derecho), así que el efecto de entrada se conserva entero —
+   misma distancia, misma duración — sin ensanchar la página.
+
+   Se probó antes reservar el ancho con `max-width: calc(100% - 36px)`: no
+   arregla los 800px (el subtítulo no es quien define el ancho del bloque) y
+   encima rompía 1440. Medido. */
+.piece-r { transform: translate3d(-36px, 0, 0); }
+
+.assemble.visible .assemble-stagger.stagger-alt > * {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ── Anti-anidado ───────────────────────────────────────────────────────────
+   Una pieza dentro de otra pieza viajaría dos veces (el transform del padre se
+   suma al propio) y el recorrido se duplica. La de adentro se neutraliza: la
+   externa ya la lleva puesta. */
+.piece-l .piece-l, .piece-l .piece-r, .piece-l .piece-u, .piece-l .piece-d, .piece-l .piece-pop,
+.piece-r .piece-l, .piece-r .piece-r, .piece-r .piece-u, .piece-r .piece-d, .piece-r .piece-pop,
+.piece-u .piece-l, .piece-u .piece-r, .piece-u .piece-u, .piece-u .piece-d, .piece-u .piece-pop,
+.piece-d .piece-l, .piece-d .piece-r, .piece-d .piece-u, .piece-d .piece-d, .piece-d .piece-pop,
+.piece-pop .piece-l, .piece-pop .piece-r, .piece-pop .piece-u, .piece-pop .piece-d,
+.piece-l .assemble-stagger > *,
+.piece-r .assemble-stagger > *,
+.piece-u .assemble-stagger > *,
+.piece-d .assemble-stagger > *,
+.piece-pop .assemble-stagger > * {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* El wave es la costura entre dos fondos, no contenido: nunca se anima.
+   Mismo criterio que .wave-static arriba, repetido acá porque una pieza puede
+   envolverlo sin querer. */
+.assemble .wave-static,
+.assemble > .waveDivider {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────
+   Recorrido horizontal más corto: 36px sobre un viewport de 360px se lee como
+   un salto, y además cualquier desborde lateral dispara scroll horizontal.
+   El eje vertical se conserva, que es el que da la sensación de armado. */
+@media (max-width: 768px) {
+  .piece-l   { transform: translate3d(-18px, 10px, 0); }
+  .piece-r   { transform: translate3d(18px, 10px, 0); }
+  .piece-u   { transform: translate3d(0, 22px, 0); }
+  .piece-d   { transform: translate3d(0, -16px, 0); }
+  .piece-pop { transform: translate3d(0, 20px, 0) scale(0.97); }
+
+  .assemble-stagger.stagger-alt > *:nth-child(odd),
+  .assemble-stagger.stagger-alt > *:nth-child(even) {
+    transform: translate3d(0, 22px, 0);
+  }
+
+  /* Stagger más corto: en mobile las cards se ven de a una y los delays
+     largos se sienten como lag, no como coreografía. */
+  .assemble.visible .assemble-stagger > *:nth-child(1)  { transition-delay: 0.08s; }
+  .assemble.visible .assemble-stagger > *:nth-child(2)  { transition-delay: 0.13s; }
+  .assemble.visible .assemble-stagger > *:nth-child(3)  { transition-delay: 0.18s; }
+  .assemble.visible .assemble-stagger > *:nth-child(4)  { transition-delay: 0.23s; }
+  .assemble.visible .assemble-stagger > *:nth-child(n+5) { transition-delay: 0.28s; }
+}
+
+/* Accesibilidad: sin movimiento, sólo el fade. */
+@media (prefers-reduced-motion: reduce) {
+  .piece-l,
+  .piece-r,
+  .piece-u,
+  .piece-d,
+  .piece-pop,
+  .assemble-stagger.stagger-alt > *:nth-child(odd),
+  .assemble-stagger.stagger-alt > *:nth-child(even) {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+}
+
 /* --- HERO ENTRANCE ---
    El hero está siempre en viewport en el primer paint, así que no debería
    esperar al IntersectionObserver. Arranca invisible y se anima recién
@@ -586,6 +1349,52 @@ html.hydrated .hero-section .fade-in-left {
   animation: heroFadeIn 0.8s ease forwards;
 }
 
+/* El hero también se ARMA en vez de aparecer entero: título, subtítulo y
+   bloque de CTAs entran desde lados alternados, escalonados. El dashboard de
+   la derecha llega último, como pieza que cierra la composición.
+   No usa .assemble/.piece-* porque el hero no espera al IntersectionObserver:
+   su trigger es html.hydrated, el mismo que el header. */
+@keyframes heroPieceIn {
+  from { opacity: 0; transform: translate3d(var(--hp-x, 0), var(--hp-y, 0), 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.hero-section .hero-piece,
+.hero-section .home-textB {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.hero-section .hero-piece-1 { --hp-x: -32px; }
+.hero-section .hero-piece-2 { --hp-x: 32px; }
+.hero-section .hero-piece-3 { --hp-x: -26px; --hp-y: 12px; }
+.hero-section .home-textB   { --hp-x: 40px; }
+
+html.hydrated .hero-section .hero-piece,
+html.hydrated .hero-section .home-textB {
+  animation: heroPieceIn 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+html.hydrated .hero-section .hero-piece-1 { animation-delay: 0.05s; }
+html.hydrated .hero-section .hero-piece-2 { animation-delay: 0.15s; }
+html.hydrated .hero-section .hero-piece-3 { animation-delay: 0.25s; }
+html.hydrated .hero-section .home-textB   { animation-delay: 0.35s; }
+
+@media (max-width: 768px) {
+  .hero-section .hero-piece-1 { --hp-x: -16px; --hp-y: 10px; }
+  .hero-section .hero-piece-2 { --hp-x: 16px; --hp-y: 10px; }
+  .hero-section .hero-piece-3 { --hp-x: -14px; --hp-y: 12px; }
+  .hero-section .home-textB   { --hp-x: 0; --hp-y: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section .hero-piece,
+  .hero-section .home-textB {
+    --hp-x: 0;
+    --hp-y: 0;
+  }
+}
+
 /* Prevenir problemas de scrollbar en mobile durante animaciones */
 @media (max-width: 768px) {
   .fade-in-left,
@@ -602,7 +1411,13 @@ html.hydrated .hero-section .fade-in-left {
 @media (max-width: 768px) {
 
   html, body {
-    overflow-x: hidden; 
+    /* `clip` y no `hidden`: los dos contienen el desborde horizontal, pero
+       `overflow-x: hidden` computa el eje Y como `auto` y convierte al body en
+       scroll container — y un ancestro con scroll anula el `position: sticky`
+       de sus descendientes. Es la misma trampa ya documentada arriba (ver el
+       bloque de html/body cerca del inicio del archivo); acá se colaba de nuevo
+       sólo en mobile, y rompía el apilado de las cartas de ComparisonMatrix. */
+    overflow-x: clip;
     width: 100%;    
     margin: 0;   
     padding: 0;
@@ -655,7 +1470,12 @@ html.hydrated .hero-section .fade-in-left {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem 0 0 0; /* aire arriba para separarlo del social proof */
+    /* Margen negativo para absorber el gap de .home-text (0.35rem) y pegar el
+       dashboard al social proof: el hero mobile entra más arriba del fold.
+       Pasado el gap, el resto del negativo lo mete por debajo del bloque de
+       arriba. El grueso de la separación la maneja el margin-top del
+       .wrapper del dashboard, no este margen. */
+    margin: -0.35rem 0 0 0;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -686,8 +1506,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
-    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
   }
   
   .shape-b {
@@ -701,8 +1521,8 @@ html.hydrated .hero-section .fade-in-left {
     will-change: auto;
     opacity: 1;
     /* Reducir o simplificar el filter en mobile para evitar problemas de renderizado */
-    filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
-    -webkit-filter: drop-shadow(0 6px 5px rgba(204, 2, 103, 0.15));
+    filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
+    -webkit-filter: drop-shadow(0 6px 5px rgba(181, 156, 248, 0.15));
   }
 
   .parallax-shape {
@@ -729,6 +1549,11 @@ html.hydrated .hero-section .fade-in-left {
 @media (min-width: 768px) and (max-width: 1024px) {
   .containerGeneral, .home-text {
    padding:0 0.5rem;
+   /* `.containerGeneral` es `width: 100%` sin box-sizing propio, así que este
+      padding lateral se SUMABA al 100% y la sección medía 1032px dentro de un
+      viewport de 1024 — un scroll horizontal de 8px en toda la franja
+      768–1024. Con border-box el padding entra dentro del ancho. */
+   box-sizing: border-box;
   }
 }
 

@@ -11,11 +11,12 @@ export default function LoadingSpinner() {
         <div className={styles.circle}></div>
       </div>
       <Image
-          src="/Logo.svg"
-          alt="Logo"
+          src="/brand-isotipo.svg"
+          alt="Franco Seiler"
           width={55}
           height={55}
           className={styles.logo}
+          unoptimized
         />
     </div>
   )

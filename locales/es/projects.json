@@ -1,18 +1,18 @@
 {
   "projects": {
-    "title": "Mis Proyectos",
-    "subtitle": "Algunos de los proyectos en los que he trabajado",
+    "title": "Nuestros Proyectos",
+    "subtitle": "Algunos de los proyectos en los que hemos trabajado",
     "learnMore": "Ver más",
-    "viewProject": "Ver proyecto",
+    "viewProject": "Ver caso",
     "viewCode": "Ver código",
     "viewDemo": "Ver demo",
     "recentWork": "Trabajo Reciente",
     "recentTutorials": "Tutoriales Recientes",
-    "projects": "Proyectos",
+    "projects": "Casos de estudio",
     "projectsSubtitle": "Una selección de trabajos recientes construidos de punta a punta.",
     "tutorials": "Tutoriales",
-    "tutorialsSubtitle": "Recorridos breves de decisiones reales que tomé construyendo software.",
-    "goToProjects": "Ver Proyectos",
+    "tutorialsSubtitle": "Recorridos breves de decisiones reales que tomamos construyendo software.",
+    "goToProjects": "Ver todos los casos",
     "goToTutorials": "Ver Tutoriales",
     "back": "Atrás",
     "overview": "Resumen",
@@ -20,6 +20,8 @@
     "goal": "Objetivo",
     "builtWith": "Construido con",
     "learnings": "Entregables clave",
+    "sectionsNav": "Secciones",
+    "context": "Contexto",
     "links": "Enlaces",
     "githubRepository": "Repositorio de GitHub",
     "liveDemo": "Demo en Vivo",
@@ -39,11 +41,11 @@
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Plataforma de Compliance y Document Intelligence para Flotas",
-        "description": "Plataforma SaaS de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan onboardear, verificar y gestionar de forma continua la documentación de los conductores a gran escala. Desarrollada en conjunto con un equipo de ingeniería de Canadá, es una de las plataformas más grandes y complejas de mi portafolio — arquitectura multi-tenant, autenticación enterprise con Keycloak, suscripciones con Stripe, flujos de documentos profundos y una superficie B2B productiva confiada para operar flotas reales.",
+        "description": "Plataforma SaaS de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan onboardear, verificar y gestionar de forma continua la documentación de los conductores a gran escala. Desarrollada en conjunto con un equipo de ingeniería de Canadá, es una de las plataformas más grandes y complejas de nuestro portafolio — arquitectura multi-tenant, autenticación enterprise con Keycloak, suscripciones con Stripe, flujos de documentos profundos y una superficie B2B productiva confiada para operar flotas reales.",
         "whatIs": "Comply DQ es una plataforma de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan onboardear, verificar y gestionar de forma continua la documentación de los conductores (CDL, certificaciones médicas, pólizas y más) a gran escala.\nEl producto combina workspaces conscientes de rol, datos acotados por empresa y un billing basado en suscripciones para que los operadores pasen de planillas y herramientas legacy a una única fuente de verdad, con flujos pensados para auditoría.\nDesarrollada en conjunto con un equipo de ingeniería de Canadá, Comply DQ es una de las plataformas más grandes y complejas en las que participé — un verdadero SaaS enterprise con arquitectura multi-tenant profunda, cientos de páginas de tooling operativo y los requisitos de compliance B2B en el centro de cada decisión.",
-        "problemSolved": "Los programas de transporte y compliance suelen lidiar con archivos fragmentados, control de acceso inconsistente y renovaciones manuales — lo que aumenta el riesgo y demora las auditorías.\nComply DQ aborda esto centralizando perfiles de conductores, ciclo de vida de los documentos y administración de empresas en una arquitectura multi-tenant segura, con separación clara entre las organizaciones cliente y la supervisión a nivel de plataforma.\nLa plataforma se construyó codo a codo con un equipo senior basado en Canadá, combinando su expertise en compliance de transporte de US y Canadá con ingeniería hands-on para entregar un producto de nivel productivo, confiado para manejar flotas reales y presión regulatoria real — no un prototipo ni un side project de un solo desarrollador.",
+        "problemSolved": "Los programas de transporte y compliance suelen lidiar con archivos fragmentados, control de acceso inconsistente y renovaciones manuales — lo que aumenta el riesgo y demora las auditorías.\nComply DQ aborda esto centralizando perfiles de conductores, ciclo de vida de los documentos y administración de empresas en una arquitectura multi-tenant segura, con separación clara entre las organizaciones cliente y la supervisión a nivel de plataforma.\nLa plataforma se construyó codo a codo con un equipo senior basado en Canadá, combinando su expertise en compliance de transporte de US y Canadá con ingeniería hands-on para entregar un producto de nivel productivo, confiado para manejar flotas reales y presión regulatoria real.",
         "learnings": [
-          "Colaboración con un equipo de ingeniería de Canadá en una de las plataformas más grandes de mi portafolio — un SaaS enterprise real entregado a empresas de transporte y equipos de compliance que operan en toda Norteamérica.",
+          "Colaboración con un equipo de ingeniería de Canadá en una de las plataformas más grandes de nuestro portafolio — un SaaS enterprise real entregado a empresas de transporte y equipos de compliance que operan en toda Norteamérica.",
           "Modelo de producto multi-tenant con resolución de tenant, tipos de empresa (jerarquías estilo D2C / MSP) y control de acceso basado en roles para administradores y usuarios operativos.",
           "Flujos de documentos de extremo a extremo: librería de documentos, uploads, lógica de deduplicación y almacenamiento en la nube alineado a una capa moderna de API.",
           "Pagos y monetización: integración con Stripe para suscripciones y flujos relacionados a facturación, incluyendo rutas server-side basadas en webhooks para eventos de billing confiables.",
@@ -52,7 +54,10 @@
           "UI responsive y productizada: Next.js App Router, Redux para estado de cliente complejo, stacks de componentes Ant Design / MUI / Radix, y layouts optimizados para dashboards de escritorio + tareas operativas mobile-friendly.",
           "Excelencia operacional: logging estructurado, guards de API conscientes del tenant y configuración orientada a despliegue para paridad staging/producción.",
           "Diseño responsive pixel-perfect en toda la superficie del admin — se ve impecable desde tablets de operador en ruta hasta dashboards de compliance ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · Multi-tenant",
+        "industry": "Compliance de transporte",
+        "engagement": "Colaboración con equipo"
       },
       "acer0": {
         "title": "Acer0",
@@ -69,7 +74,10 @@
           "Endurecimiento de seguridad con Helmet, express-rate-limit, validación con Zod en cada endpoint, Google reCAPTCHA en todos los formularios públicos y sanitización de inputs en la capa proxy del BFF.",
           "Containerización de todo el stack con Docker Compose (PostgreSQL 17, backend, frontend) y despliegue automatizado en VPS con PM2 en modo cluster para releases sin downtime.",
           "UI mobile-first totalmente responsive y pixel-perfect con módulos SCSS y breakpoints en 480px, 640px, 768px y 900px — se ve impecable en cualquier dispositivo, desde teléfonos chicos hasta desktops ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · Arquitectura",
+        "industry": "Manufactura y retail",
+        "engagement": "Trabajo para cliente"
       },
       "bellum": {
         "title": "Bellum",
@@ -87,7 +95,10 @@
           "Sistema de emails transaccionales con Resend para envíos de contacto y notificaciones de propuestas, con plantillas con branding totalmente editables desde el panel de administración.",
           "Implementación SEO completa: sitemap dinámico, robots.txt, metadata Open Graph, JSON-LD para FAQ y datos estructurados de Organización — regenerados automáticamente cada vez que se cambia contenido desde el panel.",
           "Arquitectura SCSS mobile-first con diseño modular de componentes, tipografía responsive fluida, hero carousel con crossfade suave y un sistema de diseño consistente con variables y mixins propios — impecable desde teléfonos de 320px hasta desktops ultra-wide."
-        ]
+        ],
+        "role": "Full-stack · CMS a medida",
+        "industry": "Administración de consorcios",
+        "engagement": "Trabajo para cliente"
       },
       "grupo-el-triunfo": {
         "title": "Grupo El Triunfo",
@@ -104,7 +115,10 @@
           "Página institucional multi-sección con línea de tiempo histórica, misión/visión, estadísticas, galería y valores de marca.",
           "Layout responsive mobile-first pixel-perfect con breakpoints custom, tipografía fluida y entrega optimizada de imágenes mediante Next.js <Image> — se ve impecable en cualquier dispositivo, desde teléfonos chicos hasta monitores 4K.",
           "Página de contacto con formulario, tarjetas de información e integración de Google Maps embebido."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Agroindustria",
+        "engagement": "Trabajo para cliente"
       },
       "home-trades-online": {
         "title": "Home Trades Online",
@@ -120,7 +134,10 @@
           "Infraestructura de internacionalización completa con ruteo por prefijo de URL, formato de moneda según país y traducción completa al español de Argentina — habilitando expansión a 9+ países con esfuerzo mínimo.",
           "UX mobile-first impecable, diseñada al detalle para uso en exteriores y obra: áreas táctiles de 48px+, diseño de alto contraste, operación real con una sola mano, inputs aptos para guantes y generación de propuestas con streaming y skeletons progresivos — perfecta desde teléfonos chicos hasta tablets grandes.",
           "Pipeline de despliegue productivo con Docker Compose, Gunicorn, Nginx como reverse proxy, SSL de Let's Encrypt y CI en GitHub Actions (tests unitarios + E2E con Playwright)."
-        ]
+        ],
+        "role": "Full-stack · SaaS",
+        "industry": "Construcción y oficios",
+        "engagement": "Trabajo para cliente"
       },
       "salesforpro": {
         "title": "Home Trades Online Landing",
@@ -137,7 +154,10 @@
           "Integración de Django i18n con tags {% trans %} en todo el contenido de marketing para un cambio sin fricciones entre inglés y español mediante ruteo por prefijo de URL (/ar/).",
           "Buenas prácticas de accesibilidad: media query prefers-reduced-motion deshabilitando animaciones, etiquetas ARIA, HTML semántico, focus rings visibles y regiones aria-live para estados de carga.",
           "Efecto shimmer en CTA con barrido de gradiente solo con CSS, divisores en forma de ola con paths SVG inline y estados de carga con skeletons animados en el preview de generación de propuestas."
-        ]
+        ],
+        "role": "Frontend · Landing de producto",
+        "industry": "Construcción y oficios",
+        "engagement": "Trabajo para cliente"
       },
       "starton": {
         "title": "StartOn ",
@@ -146,14 +166,17 @@
         "whatIs": "StartOn es una plataforma innovadora que conecta desarrolladores, diseñadores y profesionales de tecnología con empresas y startups que buscan talento excepcional.\nLa plataforma democratiza el acceso a oportunidades laborales de calidad, facilitando el crecimiento profesional y el desarrollo de empresas innovadoras.\nLas características incluyen paneles diferenciados por roles, sistema de mensajería interna, networking de fundadores, blogs, filtros avanzados y paneles responsivos.",
         "problemSolved": "El sector tecnológico carece de plataformas confiables que conecten eficientemente el talento emergente con startups y empresas.\nStartOn resuelve este problema al permitir que estudiantes, fundadores y empresas se encuentren de manera segmentada, segura y rápida, fomentando la colaboración y el crecimiento profesional.",
         "learnings": [
-          "Implementé un sistema multi-rol (estudiantes, fundadores, reclutadores, trabajadores de startups) con autorización diferenciada.",
+          "Implementamos un sistema multi-rol (estudiantes, fundadores, reclutadores, trabajadores de startups) con autorización diferenciada.",
           "Google OAuth 2.0 y manejo avanzado de JWT con actualización automática.",
           "Desarrollo de backend en Supabase Edge Functions para eficiencia y escalabilidad.",
           "Diseño de componentes UI/UX modulares con SCSS y arquitectura reutilizable en Next.js.",
           "Sistema de mensajería privada persistente y filtros avanzados por ciudad, tecnología y tipo de empresa.",
           "Optimización UX/UI: mobile-first, animaciones suaves, tipografía escalable y paleta de colores consistente.",
           "Implementación de blogs, páginas de servicios y sistema de networking de fundadores."
-        ]
+        ],
+        "role": "Full-stack",
+        "industry": "Empleo tech",
+        "engagement": "Producto propio"
       },
       "mi-agenda": {
         "title": "Mi Agenda",
@@ -170,7 +193,10 @@
           "Sincronización con Google Calendar para marcar bloques ocupados y evitar solapamiento de turnos.",
           "Actualizaciones en tiempo real mediante WebSockets (Socket.io con adaptador Redis) para reservas y notificaciones.",
           "PWA «Mi agenda»: instalable, página offline, notificaciones push y atajos de app."
-        ]
+        ],
+        "role": "Full-stack · Pagos e integraciones",
+        "industry": "Servicios con turnos",
+        "engagement": "Trabajo para cliente"
       },
       "tecnomar": {
         "title": "TecnoMar",
@@ -185,7 +211,10 @@
           "Cotizador online en ruta dedicada y enlaces a Contacto; CTAs diferenciados (cotizador vs contacto) en Approach y Process.",
           "Diseño mobile-first: hamburger animado (líneas → X), tarjetas de contacto alineadas, logos de clientes con tamaños desktop/mobile por archivo y carga prioritaria en la primera fila.",
           "Loading overlay con logo fijo y spinner; integración de mapa en la sección de contacto."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Industrial",
+        "engagement": "Trabajo para cliente"
       },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
@@ -203,7 +232,10 @@
           "Viewport y meta configurados para consistencia entre desarrollo y producción en móviles.",
           "Despliegue en Vercel con un único proyecto conectado al repositorio.",
           "Arquitectura preparada para escalar en un shop (compra de planes, área de miembros) si el cliente amplía el producto."
-        ]
+        ],
+        "role": "Full-stack · Sitio corporativo",
+        "industry": "Fitness y entrenamiento",
+        "engagement": "Trabajo para cliente"
       },
       "property-recommender": {
         "title": "Habita",
@@ -212,12 +244,15 @@
         "whatIs": "Una aplicación web que recomienda propiedades inmobiliarias basándose en las preferencias del usuario y algoritmos de similitud.\nPermite a los usuarios filtrar, ordenar y descubrir propiedades que coincidan con sus necesidades a través de una interfaz limpia y responsive.\nConstruida con Next.js 15 y TypeScript, con SCSS modular para estilos escalables y optimizada para carga rápida y experiencia de usuario.\nIncluye un panel de administración donde los usuarios pueden ver y gestionar sus propiedades favoritas.",
         "problemSolved": "Muchas plataformas inmobiliarias abruman a los usuarios con demasiadas listas sin filtrado efectivo o sugerencias personalizadas.\nEsta aplicación resuelve eso proporcionando recomendaciones dirigidas, mejorando la satisfacción del usuario y la eficiencia en la toma de decisiones.\nEl panel de administración permite a los usuarios rastrear y gestionar fácilmente sus propiedades favoritas en un lugar centralizado.",
         "learnings": [
-          "Implementé lógica de recomendación usando datos JSON y algoritmos del lado del cliente.",
-          "Construí una arquitectura frontend escalable y mantenible con Next.js y TypeScript.",
-          "Apliqué SCSS modular para estilos limpios y reutilizables.",
-          "Optimicé el rendimiento de la aplicación y la experiencia de usuario mediante el manejo eficiente de datos y diseño UI.",
-          "Creé un panel de administración para la gestión de propiedades del usuario y seguimiento de favoritos."
-        ]
+          "Implementamos lógica de recomendación usando datos JSON y algoritmos del lado del cliente.",
+          "Construimos una arquitectura frontend escalable y mantenible con Next.js y TypeScript.",
+          "Aplicamos SCSS modular para estilos limpios y reutilizables.",
+          "Optimizamos el rendimiento de la aplicación y la experiencia de usuario mediante el manejo eficiente de datos y diseño UI.",
+          "Creamos un panel de administración para la gestión de propiedades del usuario y seguimiento de favoritos."
+        ],
+        "role": "Full-stack",
+        "industry": "Inmobiliario",
+        "engagement": "Producto propio"
       },
       "ecommerce": {
         "title": "Quiero Sport",
@@ -226,13 +261,15 @@
         "whatIs": "Una plataforma e-commerce completa para artículos deportivos con navegación de productos, gestión de carrito y checkout seguro.\nLas características incluyen autenticación de usuarios (NextAuth.js), almacenamiento de pedidos (PostgreSQL & Prisma), rutas API backend (Next.js 13), configuración local con Docker y despliegue en Vercel.",
         "problemSolved": "Los usuarios tenían problemas con sitios e-commerce de artículos deportivos lentos, inseguros e inconsistentes.\nEsta aplicación ofrece una UX rápida y moderna con autenticación segura, manejo confiable de datos (Prisma) y desarrollo simplificado (Docker).",
         "learnings": [
-          "Construí una aplicación Next.js full-stack usando componentes de servidor y cliente.",
-          "Diseñé un esquema de base de datos relacional para e-commerce.",
-          "Implementé autenticación con NextAuth.js.",
-          "Gestioné estado y efectos secundarios con hooks de React.",
-          "Usé Prisma ORM para operaciones de base de datos.",
-          "Configuré Docker para desarrollo local y desplegué en Vercel."
-        ]
+          "Construimos una aplicación Next.js full-stack usando componentes de servidor y cliente.",
+          "Diseñamos un esquema de base de datos relacional para e-commerce.",
+          "Implementamos autenticación con NextAuth.js.",
+          "Gestionamos estado y efectos secundarios con hooks de React.",
+          "Usamos Prisma ORM para operaciones de base de datos.",
+          "Configuramos Docker para desarrollo local y desplegamos en Vercel."
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "healthcare-crm": {
         "title": "Medicare ",
@@ -241,15 +278,18 @@
         "whatIs": "Una aplicación web full-stack para gestionar pacientes, medicamentos y asignaciones de tratamientos en un flujo de trabajo de salud digital.\nIncluye vistas de panel, formularios reutilizables, validación de entrada, modo oscuro y un backend NestJS completamente probado.\nConstruida con seguridad de tipos, integración API y estándares modernos de UI/UX.",
         "problemSolved": "Gestionar tratamientos de salud manualmente es propenso a errores e ineficiente.\nEsta aplicación simplifica el proceso ofreciendo operaciones CRUD estructuradas, seguimiento de asignaciones y cálculo automático de días restantes para tratamientos activos.\nAsegura confiabilidad con validación full-stack y alta cobertura de pruebas.",
         "learnings": [
-          "Desarrollé una aplicación TypeScript full-stack con frontend (Next.js) y backend (NestJS) desacoplados.",
-          "Diseñé un esquema de base de datos relacional con entidades y relaciones de clave foránea.",
-          "Construí APIs RESTful con validación completa y manejo de errores usando class-validator y pipes de NestJS.",
-          "Usé Turso SQLite con tokens de autenticación para persistencia alojada en la nube.",
-          "Implementé validación de formularios del lado del cliente y servidor con componentes reutilizables.",
+          "Desarrollamos una aplicación TypeScript full-stack con frontend (Next.js) y backend (NestJS) desacoplados.",
+          "Diseñamos un esquema de base de datos relacional con entidades y relaciones de clave foránea.",
+          "Construimos APIs RESTful con validación completa y manejo de errores usando class-validator y pipes de NestJS.",
+          "Usamos Turso SQLite con tokens de autenticación para persistencia alojada en la nube.",
+          "Implementamos validación de formularios del lado del cliente y servidor con componentes reutilizables.",
           "Probé servicios principales y casos límite con tests unitarios e integración.",
-          "Diseñé una UI responsive y accesible con Tailwind y toggle de modo oscuro.",
-          "Gestioné configuración de entorno para despliegue en Render y Vercel."
-        ]
+          "Diseñamos una UI responsive y accesible con Tailwind y toggle de modo oscuro.",
+          "Gestionamos configuración de entorno para despliegue en Render y Vercel."
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica",
+        "industry": "Salud"
       },
       "taskmanager": {
         "title": "Task Manager",
@@ -258,13 +298,15 @@
         "whatIs": "Una aplicación integral de gestión de tareas construida con Next.js y PostgreSQL.\nLas características incluyen autenticación de usuarios, operaciones CRUD para tareas y una interfaz limpia e intuitiva.\nLa aplicación usa NextAuth.js para autenticación segura y Sequelize ORM para operaciones de base de datos.",
         "problemSolved": "Los usuarios necesitaban una forma simple pero poderosa de gestionar sus tareas con autenticación segura.\nEsta aplicación proporciona una solución confiable con gestión de tareas específica del usuario, almacenamiento seguro de datos\ny un diseño responsive que funciona en todos los dispositivos.",
         "learnings": [
-          "Implementé autenticación de usuarios con NextAuth.js.",
-          "Creé un esquema de base de datos relacional para usuarios y tareas.",
-          "Construí endpoints API RESTful para operaciones CRUD.",
-          "Configuré Docker para entorno de desarrollo local.",
-          "Implementé diseño responsive con CSS Modules.",
-          "Gestioné estado y llamadas API con Axios."
-        ]
+          "Implementamos autenticación de usuarios con NextAuth.js.",
+          "Creamos un esquema de base de datos relacional para usuarios y tareas.",
+          "Construimos endpoints API RESTful para operaciones CRUD.",
+          "Configuramos Docker para entorno de desarrollo local.",
+          "Implementamos diseño responsive con CSS Modules.",
+          "Gestionamos estado y llamadas API con Axios."
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "flipper": {
         "title": "Flipper",
@@ -273,13 +315,15 @@
         "whatIs": "Un clon de Twitter completo construido con Node.js y plantillas Pug, estilizado con Tailwind CSS.\nLas características incluyen autenticación de usuarios, publicaciones en tiempo real, me gusta y comentarios.\nLa aplicación usa un stack tecnológico moderno con Docker para containerización y Vercel para despliegue.",
         "problemSolved": "Los usuarios necesitaban una plataforma social para compartir pensamientos e interactuar con otros.\nEsta aplicación proporciona una experiencia familiar similar a Twitter con características esenciales\ncomo publicar, dar me gusta y comentar, todo envuelto en una interfaz limpia y responsive.",
         "learnings": [
-          "Construí una aplicación full-stack usando Node.js y Express.",
-          "Implementé renderizado del lado del servidor con plantillas Pug.",
-          "Creé una interfaz de usuario responsive e interactiva.",
-          "Configuré Docker para containerización y despliegue.",
-          "Implementé características en tiempo real para interacción social.",
-          "Desplegué la aplicación en Vercel."
-        ]
+          "Construimos una aplicación full-stack usando Node.js y Express.",
+          "Implementamos renderizado del lado del servidor con plantillas Pug.",
+          "Creamos una interfaz de usuario responsive e interactiva.",
+          "Configuramos Docker para containerización y despliegue.",
+          "Implementamos características en tiempo real para interacción social.",
+          "Desplegamos la aplicación en Vercel."
+        ],
+        "role": "Full-stack",
+        "engagement": "Proyecto de práctica"
       },
       "vestire": {
         "title": "Vestiré",
@@ -288,14 +332,16 @@
         "whatIs": "Una plataforma e-commerce elegante y moderna para moda y accesorios, construida con React y estilizada con CSS.\nLas características incluyen autenticación de usuarios, navegación de productos, funcionalidad de carrito de compras y un diseño limpio y responsive.\nLa aplicación muestra una colección de artículos de ropa, zapatillas y accesorios con información detallada del producto.\nIncluye autenticación segura de usuarios y gestión de sesiones para una experiencia de compra personalizada.",
         "problemSolved": "Los minoristas de moda locales necesitaban una presencia online moderna para llegar a los clientes.\nEsta aplicación proporciona una solución elegante con una experiencia de compra intuitiva,\nmostrando productos con imágenes de alta calidad y descripciones detalladas.\nLa autenticación segura asegura que los usuarios puedan gestionar de forma segura sus cuentas y pedidos.",
         "learnings": [
-          "Construí una interfaz e-commerce responsive con React.",
-          "Implementé autenticación segura de usuarios con JWT.",
-          "Creé una experiencia intuitiva de navegación de productos.",
-          "Desarrollé APIs RESTful con Node.js y Express.",
-          "Gestioné operaciones de base de datos con PostgreSQL.",
-          "Desplegué la aplicación en Vercel.",
-          "Implementé prácticas modernas de UI/UX."
-        ]
+          "Construimos una interfaz e-commerce responsive con React.",
+          "Implementamos autenticación segura de usuarios con JWT.",
+          "Creamos una experiencia intuitiva de navegación de productos.",
+          "Desarrollamos APIs RESTful con Node.js y Express.",
+          "Gestionamos operaciones de base de datos con PostgreSQL.",
+          "Desplegamos la aplicación en Vercel.",
+          "Implementamos prácticas modernas de UI/UX."
+        ],
+        "role": "Frontend",
+        "engagement": "Proyecto de práctica"
       },
       "trip-planner": {
         "title": "Trip Planner",
@@ -306,7 +352,9 @@
         "learnings": [
           "Configuración con Next.js App Router y create-next-app.",
           "Desplegado en Vercel (trip-planner-c.vercel.app)."
-        ]
+        ],
+        "role": "Frontend",
+        "engagement": "Proyecto de práctica"
       },
       "dynamic-blog": {
         "title": "Dynamic Blog",
@@ -315,12 +363,12 @@
         "whatIs": "Una aplicación de blog responsive que obtiene publicaciones de un feed RSS (TechCrunch) y contenido generado por usuarios desde Airtable.\nLas características incluyen enrutamiento dinámico, gestión de blogs de usuarios y un diseño limpio y responsive.\nConstruida con Next.js para renderizado del lado del servidor y Tailwind CSS para estilos.\nLa aplicación analiza feeds RSS e integra con la API de Airtable para gestionar contenido.",
         "problemSolved": "Los creadores de contenido y lectores necesitaban una plataforma unificada para acceder tanto a feeds RSS externos como a contenido de blog personalizado.\nEsta aplicación proporciona una experiencia fluida combinando el análisis de feeds RSS con la integración de Airtable,\npermitiendo a los usuarios gestionar y mostrar contenido de múltiples fuentes en un solo lugar.",
         "learnings": [
-          "Implementé análisis e integración de feeds RSS.",
-          "Integré la API de Airtable para gestión de contenido.",
-          "Construí enrutamiento dinámico con Next.js.",
-          "Creé un diseño responsive con Tailwind CSS.",
-          "Gestioné renderizado del lado del servidor para rendimiento óptimo.",
-          "Desarrollé una interfaz de usuario limpia e intuitiva."
+          "Implementamos análisis e integración de feeds RSS.",
+          "Integramos la API de Airtable para gestión de contenido.",
+          "Construimos enrutamiento dinámico con Next.js.",
+          "Creamos un diseño responsive con Tailwind CSS.",
+          "Gestionamos renderizado del lado del servidor para rendimiento óptimo.",
+          "Desarrollamos una interfaz de usuario limpia e intuitiva."
         ]
       },
       "holistic-portal": {
@@ -330,11 +378,11 @@
         "whatIs": "Un sitio web informativo que muestra terapias alternativas, ofreciendo descripciones, testimonios de clientes y opciones de reserva.\nSe enfoca en la interacción del usuario y presentación profesional.\nEl sitio está construido con HTML y CSS, utilizando Sass para capacidades de estilo mejoradas.",
         "problemSolved": "Los practicantes de terapias alternativas necesitaban una presencia online profesional para mostrar sus servicios y conectar con clientes.\nEste sitio web proporciona una solución elegante con descripciones claras de servicios, testimonios de clientes\ny opciones de reserva fáciles, todo presentado en un diseño limpio y profesional.",
         "learnings": [
-          "Construí un sitio web estático con HTML y CSS.",
-          "Utilicé Sass para capacidades de estilo mejoradas.",
-          "Creé un diseño profesional e informativo.",
-          "Implementé testimonios de clientes y características de reserva.",
-          "Me enfoqué en la experiencia del usuario y presentación profesional."
+          "Construimos un sitio web estático con HTML y CSS.",
+          "Utilizamos Sass para capacidades de estilo mejoradas.",
+          "Creamos un diseño profesional e informativo.",
+          "Implementamos testimonios de clientes y características de reserva.",
+          "Nos enfocamos en la experiencia del usuario y presentación profesional."
         ]
       },
       "greengrocery": {
@@ -344,12 +392,12 @@
         "whatIs": "Una tienda online especializada en verduras frescas con carrito de compras y una experiencia de compra optimizada.\nIncorpora pruebas con Jest, asegurando funcionalidad fluida y mayores tasas de conversión para los usuarios.\nEl frontend está desarrollado con React, utilizando Axios para interacciones API y Tailwind CSS para estilos.",
         "problemSolved": "Los clientes necesitaban una plataforma confiable y fácil de usar para comprar verduras frescas online.\nEsta aplicación proporciona una experiencia de compra fluida con una interfaz intuitiva, gestión eficiente del carrito\ny pruebas exhaustivas para asegurar confiabilidad y satisfacción del usuario.",
         "learnings": [
-          "Construí una interfaz e-commerce responsive con React.",
-          "Implementé pruebas exhaustivas con Jest.",
-          "Creé una experiencia de carrito de compras optimizada.",
-          "Desarrollé interacciones API con Axios.",
+          "Construimos una interfaz e-commerce responsive con React.",
+          "Implementamos pruebas exhaustivas con Jest.",
+          "Creamos una experiencia de carrito de compras optimizada.",
+          "Desarrollamos interacciones API con Axios.",
           "Estilicé la aplicación con Tailwind CSS.",
-          "Me enfoqué en la experiencia del usuario y optimización de conversión."
+          "Nos enfocamos en la experiencia del usuario y optimización de conversión."
         ]
       },
       "lexmax": {
@@ -359,15 +407,18 @@
         "whatIs": "LEXMAX es una plataforma web para la gestión de expedientes judiciales que automatiza tareas y mejora la productividad de estudios jurídicos.\nIncluye gestión integral de expedientes, seguimiento de cédulas y operaciones, monitoreo de eventos con IA que detecta eventos relevantes y sugiere acciones, gestión de escritos, notificaciones automatizadas vía Gmail y Telegram, filtros avanzados y capacidades de búsqueda, un dashboard con estadísticas y gráficos, y un sistema de autenticación seguro.\nLa plataforma centraliza toda la información judicial y facilita el seguimiento eficiente de casos.",
         "problemSolved": "Los estudios jurídicos enfrentan dificultades para organizar y seguir expedientes, cédulas y operaciones.\nLEXMAX resuelve esto centralizando la información, automatizando notificaciones, usando IA para detectar eventos relevantes y proponer acciones, y ofreciendo filtros avanzados y búsquedas para encontrar información rápidamente, mejorando la eficiencia y reduciendo errores.",
         "learnings": [
-          "Construí una aplicación full-stack con React y Vite para un rendimiento óptimo.",
-          "Implementé autenticación segura usando tokens JWT.",
-          "Integré capacidades de IA para detección inteligente de eventos y sugerencias de acciones.",
-          "Desarrollé sistemas de notificación automatizados con Google OAuth y API de Telegram.",
-          "Creé funcionalidad avanzada de filtrado y búsqueda para recuperación eficiente de datos.",
-          "Construí un dashboard integral con estadísticas y visualización de datos.",
-          "Diseñé una arquitectura escalable con Node.js y Express en el backend.",
-          "Implementé diseño responsive con SCSS para una experiencia de usuario óptima."
-        ]
+          "Construimos una aplicación full-stack con React y Vite para un rendimiento óptimo.",
+          "Implementamos autenticación segura usando tokens JWT.",
+          "Integramos capacidades de IA para detección inteligente de eventos y sugerencias de acciones.",
+          "Desarrollamos sistemas de notificación automatizados con Google OAuth y API de Telegram.",
+          "Creamos funcionalidad avanzada de filtrado y búsqueda para recuperación eficiente de datos.",
+          "Construimos un dashboard integral con estadísticas y visualización de datos.",
+          "Diseñamos una arquitectura escalable con Node.js y Express en el backend.",
+          "Implementamos diseño responsive con SCSS para una experiencia de usuario óptima."
+        ],
+        "role": "Full-stack · Automatización con IA",
+        "industry": "Legal",
+        "engagement": "Trabajo para cliente"
       },
       "lexmax-landing": {
         "title": "LexMax Landing",
@@ -376,15 +427,18 @@
         "whatIs": "LEXMAX es una landing page profesional para una plataforma de automatización jurídica que conecta despachos legales con soluciones tecnológicas inteligentes.\nLa página presenta servicios de automatización legal, incluyendo gestión de expedientes, bots inteligentes, generación de escritos masivos y análisis con IA.\nLas características incluyen sección hero con estadísticas de impacto, presentación de 6 servicios principales, sección sobre la empresa con propósito y visión, formulario de contacto interactivo con funcionalidad de copiar datos, navegación responsive con menú hamburguesa, diseño moderno con efectos visuales y componentes modulares reutilizables.",
         "problemSolved": "El sector legal tradicional carece de presencia digital efectiva para comunicar soluciones tecnológicas innovadoras.\nLEXMAX resuelve este problema al proporcionar una landing page que presenta de manera clara y profesional las capacidades de automatización legal, facilitando la conversión de visitantes en clientes potenciales mediante un diseño atractivo, información estructurada y call-to-actions estratégicos que destacan los beneficios de la plataforma.",
         "learnings": [
-          "Construí una landing page moderna con Next.js para SEO y rendimiento óptimos.",
-          "Implementé diseño responsive con Tailwind CSS y SCSS para estilos flexibles.",
-          "Creé un formulario de contacto interactivo con funcionalidad de copiar al portapapeles.",
-          "Diseñé una sección hero con estadísticas animadas e impacto visual.",
-          "Desarrollé componentes modulares reutilizables para una estructura de código mantenible.",
-          "Implementé navegación responsive con menú hamburguesa para dispositivos móviles.",
-          "Creé efectos visuales y animaciones para mejorar la participación del usuario.",
-          "Optimicé el rendimiento de la página y tiempos de carga con optimizaciones de Next.js."
-        ]
+          "Construimos una landing page moderna con Next.js para SEO y rendimiento óptimos.",
+          "Implementamos diseño responsive con Tailwind CSS y SCSS para estilos flexibles.",
+          "Creamos un formulario de contacto interactivo con funcionalidad de copiar al portapapeles.",
+          "Diseñamos una sección hero con estadísticas animadas e impacto visual.",
+          "Desarrollamos componentes modulares reutilizables para una estructura de código mantenible.",
+          "Implementamos navegación responsive con menú hamburguesa para dispositivos móviles.",
+          "Creamos efectos visuales y animaciones para mejorar la participación del usuario.",
+          "Optimizamos el rendimiento de la página y tiempos de carga con optimizaciones de Next.js."
+        ],
+        "role": "Frontend · Landing de producto",
+        "industry": "Legal",
+        "engagement": "Trabajo para cliente"
       },
       "the-club-northfield": {
         "title": "The Club at Northfield",
@@ -393,15 +447,18 @@
         "whatIs": "Sitio web corporativo para The Club at Northfield, un club de deportes de raqueta y fitness en Kitchener-Waterloo, Ontario, Canadá.\nIncluye integración con CMS Strapi para gestión de contenido, sistema de eventos dinámico, secciones de servicios y atletismo, planes de membresía, FAQ interactiva y diseño completamente responsivo.\nEl sitio está optimizado para exportación estática y ofrece una experiencia de usuario fluida con carruseles de banners, navegación intuitiva y componentes modulares que aseguran actualizaciones de contenido fáciles sin intervención técnica.",
         "problemSolved": "Crear una presencia web que muestre las instalaciones, servicios y eventos del club, facilitando la información a miembros y visitantes.\nEl sitio integra un CMS para que el equipo actualice contenido sin intervención técnica, manteniendo la información actualizada sobre eventos, servicios, planes de membresía y el equipo.",
         "learnings": [
-          "Construí un sitio web corporativo con Next.js para rendimiento y SEO óptimos.",
-          "Integré Strapi CMS para gestión de contenido headless.",
-          "Creé un sistema de eventos dinámico con actualizaciones automáticas.",
-          "Desarrollé diseño responsive con Tailwind CSS y SCSS.",
-          "Implementé carruseles de banners y componentes interactivos.",
-          "Optimicé para exportación estática y tiempos de carga rápidos.",
-          "Diseñé componentes modulares para fácil mantenimiento.",
-          "Creé un sistema de navegación intuitivo para mejor experiencia de usuario."
-        ]
+          "Construimos un sitio web corporativo con Next.js para rendimiento y SEO óptimos.",
+          "Integramos Strapi CMS para gestión de contenido headless.",
+          "Creamos un sistema de eventos dinámico con actualizaciones automáticas.",
+          "Desarrollamos diseño responsive con Tailwind CSS y SCSS.",
+          "Implementamos carruseles de banners y componentes interactivos.",
+          "Optimizamos para exportación estática y tiempos de carga rápidos.",
+          "Diseñamos componentes modulares para fácil mantenimiento.",
+          "Creamos un sistema de navegación intuitivo para mejor experiencia de usuario."
+        ],
+        "role": "Full-stack · CMS con Strapi",
+        "industry": "Deportes y fitness",
+        "engagement": "Trabajo para cliente"
       },
       "event-scheduler": {
         "title": "Event Scheduler",
@@ -410,50 +467,64 @@
         "whatIs": "Event Scheduler es una plataforma full-stack que conecta organizadores de eventos con venues (espacios para eventos).\nLa plataforma incluye dos interfaces: un portal de administración para que los venues configuren sus espacios mediante un proceso de onboarding de 13 pasos con validación y auto-guardado, y un sitio web público donde los usuarios pueden descubrir, configurar y reservar espacios para sus eventos.\nLas características incluyen gestión de espacios y amenidades, cálculo de precios en tiempo real, integración de mapas interactivos con Leaflet, galerías de imágenes con Google Cloud Storage, paquetes de catering personalizables, gestión de proveedores preferidos, sistema de políticas y restricciones, gestión y visualización de contratos (PDF, Word, SVG) con aceptación de términos, procesamiento de pagos con Stripe y tarjetas de crédito/débito, auto-guardado con protección contra pérdida de datos, validación en tiempo real en todos los formularios, sistema de accesibilidad (ADA/ACA compliance), gestión de horarios y disponibilidad, coordinación de eventos, preview completo antes de finalizar, y diseño completamente responsivo.",
         "problemSolved": "El mercado de reserva de espacios para eventos carece de plataformas integrales que faciliten tanto la gestión de venues como la experiencia de reserva para clientes.\nEvent Scheduler resuelve este problema al ofrecer un sistema dual que permite a los propietarios de venues configurar completamente sus espacios mediante un proceso guiado paso a paso con validación y auto-guardado, mientras que los organizadores de eventos pueden descubrir y reservar espacios de manera intuitiva, con información detallada sobre capacidad, amenidades, precios, disponibilidad, políticas y contratos, todo en una sola plataforma con procesamiento de pagos seguro.",
         "learnings": [
-          "Construí una plataforma full-stack con Next.js, React y TypeScript para seguridad de tipos y rendimiento óptimo.",
-          "Desarrollé un proceso de onboarding complejo de 13 pasos con validación en tiempo real y funcionalidad de auto-guardado.",
-          "Integré Stripe para procesamiento seguro de pagos con tarjetas de crédito y débito.",
-          "Implementé mapas interactivos con Leaflet para visualización de ubicación de venues.",
-          "Creé un sistema integral de gestión de contratos que soporta formatos PDF, Word y SVG.",
-          "Desarrollé cálculo de precios en tiempo real basado en espacio, amenidades y paquetes de catering.",
-          "Implementé Google Cloud Storage para gestión eficiente de imágenes y documentos.",
-          "Construí características de accesibilidad asegurando cumplimiento ADA/ACA en toda la plataforma.",
-          "Creé una suite completa de pruebas con Jest, React Testing Library y Playwright.",
-          "Diseñé un sistema de doble interfaz (portal de administración y sitio web público) con componentes compartidos.",
-          "Implementé funcionalidad de auto-guardado para prevenir pérdida de datos durante la completación de formularios.",
-          "Desarrollé un sistema completo de coordinación de eventos con gestión de disponibilidad."
-        ]
+          "Construimos una plataforma full-stack con Next.js, React y TypeScript para seguridad de tipos y rendimiento óptimo.",
+          "Desarrollamos un proceso de onboarding complejo de 13 pasos con validación en tiempo real y funcionalidad de auto-guardado.",
+          "Integramos Stripe para procesamiento seguro de pagos con tarjetas de crédito y débito.",
+          "Implementamos mapas interactivos con Leaflet para visualización de ubicación de venues.",
+          "Creamos un sistema integral de gestión de contratos que soporta formatos PDF, Word y SVG.",
+          "Desarrollamos cálculo de precios en tiempo real basado en espacio, amenidades y paquetes de catering.",
+          "Implementamos Google Cloud Storage para gestión eficiente de imágenes y documentos.",
+          "Construimos características de accesibilidad asegurando cumplimiento ADA/ACA en toda la plataforma.",
+          "Creamos una suite completa de pruebas con Jest, React Testing Library y Playwright.",
+          "Diseñamos un sistema de doble interfaz (portal de administración y sitio web público) con componentes compartidos.",
+          "Implementamos funcionalidad de auto-guardado para prevenir pérdida de datos durante la completación de formularios.",
+          "Desarrollamos un sistema completo de coordinación de eventos con gestión de disponibilidad."
+        ],
+        "role": "Full-stack",
+        "industry": "Eventos y espacios",
+        "engagement": "Producto propio"
       },
       "ateevo-wholesale": {
-      "title": "Ateevo Wholesale",
-      "subtitle": "Plataforma B2B de Comercio Electrónico para Moda",
-      "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nArquitecturada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
-      "whatIs": "Ateevo Wholesale es una plataforma B2B de comercio electrónico para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\n\nLa plataforma permite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a los administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\n\nArquitectura SaaS multi-tenant soportando múltiples marcas independientes con aislamiento completo de datos y branding white-label personalizable.\n\nCaracterísticas Clave:\n\n• Arquitectura Multi-Tenant con bases de datos PostgreSQL aisladas y branding personalizable\n• Contratos Digitales con firmas capturadas en canvas y generación automática de PDF\n• Notificaciones en Tiempo Real con centro de alertas y notificaciones persistentes\n• Reportes Avanzados: Availability y Margin Reports con soporte multi-moneda (USD, CAD, MXN)\n• Gestión de Temporadas con fechas de disponibilidad, pre-orders y fechas estimadas de envío\n• Precios Multi-Moneda (USD, CAD, MXN) con MSRP y conversión automática\n• Gestión Completa de Pedidos desde New hasta Invoice Paid con exportación PDF\n• Sistema Avanzado de Inventario con múltiples métricas (On Hand, Available to Sell, Available to Ship)\n• Catálogo de Productos con múltiples imágenes, variantes automáticas y códigos SKU/MFC\n• Gestión de Clientes con múltiples direcciones, facturación e historial completo\n• Dashboard y Analytics con métricas configurables y gráficos de tendencias\n• Panel de Super Administración para gestión de múltiples tenants y creación de bases de datos\n• Seguridad Empresarial con autenticación JWT, passwords hasheados y permisos por rol",
-      "problemSolved": "El sector de la moda mayorista carece de plataformas modernas que conecten eficientemente a marcas con sus clientes mayoristas.\n\nAteevo Wholesale resuelve este problema permitiendo a las marcas gestionar su catálogo, inventario y pedidos de forma centralizada, mientras que los clientes pueden navegar, ordenar y hacer seguimiento de sus compras de manera intuitiva, todo con contratos digitales firmados y reportes avanzados de márgenes y disponibilidad.\n\nLa arquitectura multi-tenant permite escalar el negocio soportando múltiples marcas en una sola plataforma con seguridad y personalización completa.\n\nEsta plataforma entrega una solución completa de comercio electrónico B2B para la industria de la moda. Las marcas pueden gestionar su negocio mayorista de extremo a extremo, desde catálogo hasta facturación, mientras que los clientes disfrutan de una experiencia de compra moderna, intuitiva y completamente personalizada. El sistema de contratos digitales, reportes avanzados y arquitectura multi-tenant hacen de Ateevo Wholesale una solución enterprise-ready que escala con el crecimiento del negocio.",
-      "learnings": [
-        "Arquitectura multi-tenant con PostgreSQL aislado por tenant y branding white-label (logo, colores, storefront dinámico).",
-        "Contratos digitales con firma en canvas, PDF automático y estados (pending → fully_signed); múltiples contratos por pedido.",
-        "Notificaciones en tiempo real, centro de alertas y avisos de firma de contrato con navegación al pedido.",
-        "Availability Report: productos disponibles, qué clientes ordenaron cada producto, reasignación de ítems entre pedidos.",
-        "Margin Report: márgenes por producto, multi-moneda (USD/CAD), identificación de productos sin costo.",
-        "Gestión de temporadas: fechas de disponibilidad, pre-order y fechas estimadas de envío por temporada.",
-        "Multi-moneda (USD, CAD, MXN), MSRP por moneda y conversión automática según país del cliente.",
-        "Workflow de pedidos completo (New → Invoice Paid), edición por admins, PO opcional, export PDF e historial.",
-        "Inventario: On Hand, Available to Sell, Available to Ship, variantes por color/talla y filtros avanzados.",
-        "Catálogo: múltiples imágenes, variantes automáticas, SKU/MFC, categorías y asignación a temporadas.",
-        "Panel de clientes: direcciones, facturación, activación de cuentas, historial de pedidos y reset de contraseña.",
-        "Dashboard con ventas, pedidos, clientes activos, gráficos de tendencias y productos más vendidos.",
-        "Super admin: múltiples tenants, creación de DB automática, impersonación y activación/desactivación.",
-        "Diseño responsive para desktop, tablet y móvil.",
-        "Seguridad: JWT, bcrypt, roles (Customer/Admin/Super Admin), base de datos aislada por tenant."
-      ]
+        "title": "Ateevo Wholesale",
+        "subtitle": "Plataforma B2B de Comercio Electrónico para Moda",
+        "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nArquitecturada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
+        "whatIs": "Ateevo Wholesale es una plataforma B2B de comercio electrónico para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\n\nLa plataforma permite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a los administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\n\nArquitectura SaaS multi-tenant soportando múltiples marcas independientes con aislamiento completo de datos y branding white-label personalizable.\n\nCaracterísticas Clave:\n\n• Arquitectura Multi-Tenant con bases de datos PostgreSQL aisladas y branding personalizable\n• Contratos Digitales con firmas capturadas en canvas y generación automática de PDF\n• Notificaciones en Tiempo Real con centro de alertas y notificaciones persistentes\n• Reportes Avanzados: Availability y Margin Reports con soporte multi-moneda (USD, CAD, MXN)\n• Gestión de Temporadas con fechas de disponibilidad, pre-orders y fechas estimadas de envío\n• Precios Multi-Moneda (USD, CAD, MXN) con MSRP y conversión automática\n• Gestión Completa de Pedidos desde New hasta Invoice Paid con exportación PDF\n• Sistema Avanzado de Inventario con múltiples métricas (On Hand, Available to Sell, Available to Ship)\n• Catálogo de Productos con múltiples imágenes, variantes automáticas y códigos SKU/MFC\n• Gestión de Clientes con múltiples direcciones, facturación e historial completo\n• Dashboard y Analytics con métricas configurables y gráficos de tendencias\n• Panel de Super Administración para gestión de múltiples tenants y creación de bases de datos\n• Seguridad Empresarial con autenticación JWT, passwords hasheados y permisos por rol",
+        "problemSolved": "El sector de la moda mayorista carece de plataformas modernas que conecten eficientemente a marcas con sus clientes mayoristas.\n\nAteevo Wholesale resuelve este problema permitiendo a las marcas gestionar su catálogo, inventario y pedidos de forma centralizada, mientras que los clientes pueden navegar, ordenar y hacer seguimiento de sus compras de manera intuitiva, todo con contratos digitales firmados y reportes avanzados de márgenes y disponibilidad.\n\nLa arquitectura multi-tenant permite escalar el negocio soportando múltiples marcas en una sola plataforma con seguridad y personalización completa.\n\nEsta plataforma entrega una solución completa de comercio electrónico B2B para la industria de la moda. Las marcas pueden gestionar su negocio mayorista de extremo a extremo, desde catálogo hasta facturación, mientras que los clientes disfrutan de una experiencia de compra moderna, intuitiva y completamente personalizada. El sistema de contratos digitales, reportes avanzados y arquitectura multi-tenant hacen de Ateevo Wholesale una solución enterprise-ready que escala con el crecimiento del negocio.",
+        "learnings": [
+          "Arquitectura multi-tenant con PostgreSQL aislado por tenant y branding white-label (logo, colores, storefront dinámico).",
+          "Contratos digitales con firma en canvas, PDF automático y estados (pending → fully_signed); múltiples contratos por pedido.",
+          "Notificaciones en tiempo real, centro de alertas y avisos de firma de contrato con navegación al pedido.",
+          "Availability Report: productos disponibles, qué clientes ordenaron cada producto, reasignación de ítems entre pedidos.",
+          "Margin Report: márgenes por producto, multi-moneda (USD/CAD), identificación de productos sin costo.",
+          "Gestión de temporadas: fechas de disponibilidad, pre-order y fechas estimadas de envío por temporada.",
+          "Multi-moneda (USD, CAD, MXN), MSRP por moneda y conversión automática según país del cliente.",
+          "Workflow de pedidos completo (New → Invoice Paid), edición por admins, PO opcional, export PDF e historial.",
+          "Inventario: On Hand, Available to Sell, Available to Ship, variantes por color/talla y filtros avanzados.",
+          "Catálogo: múltiples imágenes, variantes automáticas, SKU/MFC, categorías y asignación a temporadas.",
+          "Panel de clientes: direcciones, facturación, activación de cuentas, historial de pedidos y reset de contraseña.",
+          "Dashboard con ventas, pedidos, clientes activos, gráficos de tendencias y productos más vendidos.",
+          "Super admin: múltiples tenants, creación de DB automática, impersonación y activación/desactivación.",
+          "Diseño responsive para desktop, tablet y móvil.",
+          "Seguridad: JWT, bcrypt, roles (Customer/Admin/Super Admin), base de datos aislada por tenant."
+        ],
+        "role": "Full-stack · B2B e-commerce",
+        "industry": "Moda mayorista",
+        "engagement": "Trabajo para cliente"
       }
-    }
+    },
+    "tabOverview": "Overview",
+    "tabPayments": "Pagos",
+    "tabDeliverables": "Entregables",
+    "tabEngineering": "Ingeniería",
+    "sectionArchitecture": "Arquitectura del sistema",
+    "sectionInfra": "Infraestructura y deploy",
+    "clientLocation": "Ubicación del cliente",
+    "tabTools": "Herramientas"
   },
   "pages": {
     "projects": {
-      "title": "Proyectos",
-      "subtitle": "Una selección curada de trabajos entregados de punta a punta — de la arquitectura a producción."
+      "title": "Casos de estudio",
+      "subtitle": "Trabajos entregados de punta a punta — el problema, las decisiones técnicas y lo que quedó funcionando en producción."
     },
     "tutorials": {
       "title": "Tutoriales",

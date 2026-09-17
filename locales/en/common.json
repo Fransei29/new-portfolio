@@ -2,7 +2,9 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "projects": "Projects",
+    "projects": "Case Studies",
+    "services": "Services",
+    "blog": "Blog",
     "tutorials": "Tutorials",
     "contact": "Contact",
     "bootcamp": "Bootcamp",
@@ -16,17 +18,27 @@
     "contact": "Contact"
   },
   "ai": {
-    "placeholder": "Ask me about Franco...",
+    "placeholder": "Ask anything…",
     "send": "Send",
     "thinking": "Thinking...",
-    "error": "Sorry, I'm having technical issues. You can contact Franco directly at seilerfranco317@gmail.com"
+    "error": "Sorry, I'm having technical issues. You can reach us directly at seilerfranco317@gmail.com",
+    "title": "Assistant",
+    "welcome": "Hi — I'm the studio's assistant. Tell me what you need for your project.",
+    "suggestedTitle": "For example",
+    "q1": "What kind of projects do you take on?",
+    "q2": "How long does a project take?",
+    "q3": "How do you price a project?",
+    "q4": "Are you taking on new projects?",
+    "refProject": "Case study",
+    "refArticle": "Article",
+    "refOpen": "Open"
   },
   "skills": {
     "title": "Tools",
     "frontend": "Frontend",
     "backend": "Backend",
     "tools": "Tools",
-    "summarySubtitle": "Tools and frameworks I work with to build scalable solutions",
+    "summarySubtitle": "Tools and frameworks we work with to build scalable solutions",
     "dragHint": "You can drag the cards to arrange them to your liking",
     "viewFullStack": "View full stack"
   }

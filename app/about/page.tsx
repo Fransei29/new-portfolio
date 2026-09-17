@@ -17,17 +17,17 @@ export default function AboutPage() {
 
         <div className={styles.containerContent}>
           {/* About section */}
-          <div ref={(el) => { elementsRef.current[0] = el; }} className="fade-in-right">
+          <div ref={(el) => { elementsRef.current[0] = el; }} className="assemble">
             <About />
           </div>
 
           {/* Experience section */}
-          <div ref={(el) => { elementsRef.current[1] = el; }} className="fade-in-left">
+          <div ref={(el) => { elementsRef.current[1] = el; }} className="assemble">
             <Experience />
           </div>
           
           {/* Skills section */}
-          <div ref={(el) => { elementsRef.current[2] = el; }} className="fade-in-right">
+          <div ref={(el) => { elementsRef.current[2] = el; }} className="assemble">
             <Skills />
           </div>
         </div>

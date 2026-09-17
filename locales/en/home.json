@@ -1,88 +1,102 @@
 {
   "hero": {
-    "title": "Hi, I'm Franco",
+    "title": "We",
     "subtitle": {
-      "before": "I build powerful ",
-      "highlight": "digital products",
+      "before": "Build your ",
+      "highlight": "digital product",
       "after": "ready to scale.",
       "mobile": {
-        "before": "I build powerful",
-        "highlight": "digital products",
+        "before": "Build your",
+        "highlight": "digital product",
         "after": "ready to scale."
       }
     },
-    "description": "With more than 3 years of experience, I help startups and teams launch reliable platforms that adapt to business growth.",
+    "description": "We help startups and teams design and build | reliable platforms that support their business growth.",
     "cta": {
-      "projects": "Explore my work",
-      "contact": "Book a 15 min call",
-      "bootcamp": "Go to my Bootcamp",
+      "projects": "Explore our work",
+      "contact": "Start your project",
+      "bootcamp": "Go to our Bootcamp",
       "youtube": "YouTube"
     },
     "socialProof": {
       "label": "Trusted by founders and engineering teams",
       "headline": "Trusted by founders and engineering teams",
-      "sub": "15 clients trust my work",
-      "projects": "Projects shipped"
+      "projects": "Projects shipped",
+      "clients": "International clients trust our work"
     }
   },
   "about": {
-    "title": "About me",
+    "title": "Who builds your product",
     "description": "",
     "experience": "Years of experience",
     "projects": "Completed projects",
     "technologies": "Technologies mastered",
-    "whoIAm": "Who I Am",
-    "personalStory": "Full-stack developer with over 3 years of experience building solutions for startups and companies. Based in Amsterdam, I work with modern technologies to create products that generate real impact.",
-    "newChapter": "Specialized in scalable architectures and quality code. I develop web applications that grow with the business, prioritizing maintainability and performance.",
-    "dedicationTitle": "Engineering principles",
-    "dedication": "Ship small, measure, iterate.",
-    "interestsTitle": "What I care about",
-    "interests": "Building things people actually use."
+    "whoIAm": "Who you'll work with",
+    "personalStory": "We take projects end to end, from the first idea to production. You work directly with the people building your software, with no layers of middlemen and no unnecessary handoffs.",
+    "teamNote": "We keep the team small and bring in trusted specialists when the project calls for it.\nThat means senior attention without the heavy structure of a large agency.",
+    "newChapter": "Based in Córdoba, Argentina, working with teams across the US, Canada, and Europe.\nWe build custom software and automations for businesses whose operations have outgrown spreadsheets and manual processes.",
+    "dedicationTitle": "Years building",
+    "dedication": "4+",
+    "interestsTitle": "Case studies",
+    "interests": "20+",
+    "reachTitle": "US · Canada · Europe · Latin America",
+    "reach": "Global"
   },
   "aboutPage": {
     "buttonText": "Ready to start your project?",
     "buttonTextMobile": "Ready to\nstart your project?",
-    "description": "Let's work together to bring your idea to life. From concept to launch, I'm here to help you.",
-    "buttonLabel": "Let's connect"
+    "description": "Let's build something great together.",
+    "buttonLabel": "Get in Touch"
   },
   "howWeWork": {
     "title": "Working methodology",
-    "subtitle": "A clear, collaborative process to take your idea from concept to launch.",
+    "subtitle": "A clear process to take your idea from concept to launch.",
     "discovery": {
       "title": "Discovery",
-      "description": "We align on your business, goals, and users. We define scope, priorities, and a plan that works for you."
+      "description": "We align on your business, goals, and users.\nWe define scope, priorities, and a plan that works for you."
     },
     "design": {
       "title": "Design & planning",
-      "description": "We structure the solution: architecture, flows, and UX. We validate with you before writing code so there are no surprises."
+      "description": "We structure the solution: architecture, flows, and UX.\nWe validate with you before writing code so there are no surprises."
     },
     "development": {
       "title": "Development",
-      "description": "Iterative build with quality code. Regular updates and incremental deliveries so you can track progress."
+      "description": "Iterative build with quality code.\nRegular updates and incremental deliveries so you can track progress."
     },
     "launch": {
       "title": "Launch & support",
-      "description": "Deploy, documentation, and post-launch support. You get everything you need to maintain or scale the product."
+      "description": "Deploy, documentation, and post-launch support.\nYou get everything you need to maintain or scale the product."
     },
     "cta": {
       "text": "Discuss your project"
     }
   },
   "whyChooseUs": {
-    "title": "Backed by data",
-    "subtitle": "Added value I bring to every project to achieve exceptional results.",
+    "title": "Why work this way",
+    "subtitle": "Three things you won't get from an agency or a no-code tool.",
     "expertise": {
-      "title": "Technical Expertise",
-      "description": "Over 3 years developing scalable solutions with modern technologies and industry best practices."
+      "eyebrow": "No middlemen",
+      "title": "You talk to the builder",
+      "description": "No account managers. No communication layers.\nYou talk directly to the person building it."
     },
     "delivery": {
-      "title": "Efficient Delivery",
-      "description": "Committed to realistic timelines and clear communication. Every project is delivered with clean code and documentation."
+      "eyebrow": "No lock-in",
+      "title": "You own everything",
+      "description": "Your code. Your repository. Your documentation.\nYour access. From day one, it's yours."
     },
     "collaboration": {
-      "title": "Collaborative Approach",
-      "description": "I work closely with teams and clients, prioritizing understanding of business needs and objectives."
+      "eyebrow": "No surprises",
+      "title": "You see it working",
+      "description": "You don't wait until the end to find out if it's right.\nWorking releases throughout the build."
     }
+  },
+  "blogSection": {
+    "title": "Behind the build",
+    "subtitle": "Architecture, engineering decisions, and what we learn shipping real products.",
+    "readMore": "Read article",
+    "viewAll": "Read the blog",
+    "readingSuffix": "min read",
+    "empty": "New articles are on the way."
   },
   "statsNumbers": {
     "heading": "Results that back the work",
@@ -93,10 +107,10 @@
       "label": "Years of experience"
     },
     "technologies": {
-      "label": "Technologies mastered"
+      "label": "Happy clients"
     },
     "commitment": {
-      "label": "Commitment"
+      "label": "Post-launch support"
     }
   }
 }

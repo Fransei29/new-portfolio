@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Globe } from 'lucide-react';
+import LanguageIcon from '../../public/NewBrand/icons/language.svg';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './LanguageSelector.module.scss';
 
@@ -20,7 +20,7 @@ const LanguageSelector: React.FC = () => {
         title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
         aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
       >
-        <Globe size={16} className={styles.globeIcon} />
+        <LanguageIcon className={styles.globeIcon} />
       </button>
     </div>
   );

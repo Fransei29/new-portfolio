@@ -1,13 +1,9 @@
 'use client';
 
-import { useScrollAnimation } from '../../hooks/Scroll';
 import Image from 'next/image';
 import styles from './SkillsSummary.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
-import { Hand } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-import Sortable from 'sortablejs';
 
 // SVG importados como componentes
 import JavascriptIcon from '../icons/javascript.svg';
@@ -53,63 +49,76 @@ const mainSkills: Skill[] = [
   { name: "Nest.js", icon: NestIcon },
 ];
 
-const SkillsSummary: React.FC = () => {
-  const elementsRef = useScrollAnimation() as React.MutableRefObject<(HTMLDivElement | null)[]>;
-  const { t } = useLanguage();
-  const gridRef = useRef<HTMLDivElement>(null);
+// Reparte los skills en 4 filas (de a 4). Cada fila se desliza en marquee
+// automático, alternando dirección: izq, der, izq, der.
+const ROWS = 4;
+const skillRows: Skill[][] = Array.from({ length: ROWS }, (_, r) =>
+  mainSkills.filter((_, i) => i % ROWS === r)
+);
 
-  useEffect(() => {
-    // Configurar Sortable para el grid de skills summary
-    if (gridRef.current) {
-      Sortable.create(gridRef.current, {
-        group: 'summary',
-        animation: 150,
-        ghostClass: styles.sortableGhost,
-        chosenClass: styles.sortableChosen,
-        dragClass: styles.sortableDrag,
-      });
-    }
-  }, []);
+const SkillCardItem: React.FC<{ skill: Skill }> = ({ skill }) => {
+  const isComponent = typeof skill.icon !== 'string';
+  return (
+    <div className={styles.skillsCard}>
+      {isComponent ? (
+        <skill.icon className={styles.skillsIconA} />
+      ) : (
+        <Image
+          src={typeof skill.icon === 'string' ? skill.icon : ''}
+          alt={`${skill.name} Icon`}
+          width={24}
+          height={24}
+          className={styles.skillIcon}
+        />
+      )}
+      <span className={styles.skillName}>{skill.name}</span>
+    </div>
+  );
+};
+
+const SkillsSummary: React.FC = () => {
+  const { t } = useLanguage();
 
   return (
     <section className={styles.skillsSummaryContainer}>
       <div className={styles.skillsSummarySection}>
-        <p className="highlight">
+        <p className="highlight piece-l piece-delay-0">
           {t('skills.title')}
         </p>
-        <p className={styles.subtitle}>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t('skills.summarySubtitle')}
         </p>
-        <p className={styles.dragHint}>
-          <Hand className={styles.dragHintIcon} size={18} aria-hidden />
-          {t('skills.dragHint')}
-        </p>
 
-        <div ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-left">
-          <div className={styles.skillsGrid} ref={gridRef}>
-            {mainSkills.map((skill, index) => {
-              const isComponent = typeof skill.icon !== 'string';
+      </div>
 
+      {/* El marquee va FUERA de `.skillsSummarySection`: ese div tiene
+          `max-width: 1440px` y un full-bleed no puede escapar de un ancestro
+          capado (a 1920px quedaba 236px adentro en vez de llegar a la pared).
+          piece-u y no piece-l/r: el marquee ya se desplaza en horizontal por
+          su cuenta, así que una entrada lateral pelea con ese movimiento. */}
+      <div className="piece-u piece-delay-2">
+          <div className={styles.marquee}>
+            {skillRows.map((row, r) => {
+              // Filas pares (0,2) → izquierda; impares (1,3) → derecha
+              const dirClass = r % 2 === 0 ? styles.toLeft : styles.toRight;
+              // Repetimos la fila para llenar el ancho (evita huecos en desktop),
+              // luego duplicamos ese bloque para que el loop a -50% no tenga costura.
+              const base = [...row, ...row, ...row];
+              const loop = [...base, ...base];
               return (
-                <div className={styles.skillsCard} key={index}>
-                  {isComponent ? (
-                    <skill.icon className={styles.skillsIconA} />
-                  ) : (
-                    <Image
-                      src={typeof skill.icon === 'string' ? skill.icon : ''}
-                      alt={`${skill.name} Icon`}
-                      width={24}
-                      height={24}
-                      className={styles.skillIcon}
-                    />
-                  )}
-                  <span className={styles.skillName}>{skill.name}</span>
+                <div className={styles.marqueeRow} key={r}>
+                  <div className={`${styles.marqueeTrack} ${dirClass}`}>
+                    {loop.map((skill, i) => (
+                      <SkillCardItem skill={skill} key={`${r}-${i}`} />
+                    ))}
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
 
+      <div className={styles.skillsSummarySection}>
         <div className={styles.buttonWrapper}>
           <Button href="/about" label={t('skills.viewFullStack')} variant="secondary" />
         </div>

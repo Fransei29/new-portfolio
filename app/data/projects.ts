@@ -1,15 +1,62 @@
 // src/data/projects.ts
-export const projects = [
+import type { CaseStudyDeepDive, CaseStudyOutcome, CaseStudyTestimonial } from './caseStudy';
+
+/**
+ * Forma de una entrada. Se declara explícitamente para que los campos de case
+ * study existan en el tipo aunque todavía no se hayan cargado en cada proyecto;
+ * si no, TypeScript infiere el tipo del literal y solo conoce las claves que ya
+ * aparecen en algún objeto.
+ */
+export interface Project {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  whatIs?: string;
+  problemSolved?: string;
+  techStack?: string[];
+  learnings?: string[];
+  screenshots?: string[];
+  videoUrl?: string;
+  githubLink?: string | null;
+  liveDemoLink?: string | null;
+  // Case study — ver CASE_STUDIES.md
+  role?: string;
+  engagement?: string;
+  duration?: string;
+  client?: string;
+  industry?: string;
+  year?: string;
+  /** Dónde opera el proyecto. Ej: 'Argentina'. Chip con pin en el header. */
+  location?: string;
+  locationFlag?: string;
+  /** Varios lugares, cada uno con su bandera. Un chip por entrada. */
+  locations?: { flag?: string; label: string }[];
+  outcomes?: CaseStudyOutcome[];
+  testimonial?: CaseStudyTestimonial;
+  // Profundidad técnica. Cada uno es opcional y se renderiza como sección
+  // propia del case study, con entrada en el índice de navegación.
+  architecture?: CaseStudyDeepDive;
+  payments?: CaseStudyDeepDive;
+  infra?: CaseStudyDeepDive;
+  deliverables?: CaseStudyDeepDive;
+}
+
+export const projects: Project[] = [
   {
     slug: 'acer0',
+    role: 'Full-stack Engineer',
+    engagement: 'Client Project',
+    industry: 'Manufacturing\nE-commerce',
+    location: 'Buenos Aires, Argentina',
+    locationFlag: '🇦🇷',
     title: 'Acer0',
     subtitle: 'Custom E-Commerce Platform',
-    whatIs: `a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.
+    whatIs: `a.cer0 is a fully custom e-commerce platform designed and built from scratch for a manufacturing and retail company. It combines a high-performance storefront with a complete back-office system, letting the business manage products, orders, payments, customers, and day-to-day operations from a single platform.
 
-Features include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.`,
-    problemSolved: `The client needed a tailor-made digital storefront that reflected their brand identity while handling the full complexity of Argentine e-commerce — including Mercado Pago integration, bank transfer confirmation workflows, and a bilingual admin experience.
+The solution includes a responsive shopping experience, advanced product search and filtering, customer accounts, order tracking, Mercado Pago and bank transfer payments, promotional coupons, sales analytics, and a custom administration panel tailored to the client's workflow.`,
+    problemSolved: `Off-the-shelf platforms couldn't provide the flexibility the business required. The client needed complete ownership of the platform, seamless integration with Argentine payment methods, custom operational workflows, and a user experience aligned with their brand.
 
-Off-the-shelf solutions couldn't deliver the custom UX, performance, and control required, so a purpose-built platform was the answer — giving the client total ownership of their data, branding, and operations, with a backend tuned exactly to their workflow.`,
+The solution was to architect a fully custom platform, giving the client complete control over payments, infrastructure, branding, and future scalability.`,
     techStack: [
       'Next.js 15',
       'React 19',
@@ -25,16 +72,136 @@ Off-the-shelf solutions couldn't deliver the custom UX, performance, and control
       'Docker',
       'PM2'
     ],
-    learnings: [
-      'Architected a full-stack monorepo with Next.js 15 (App Router) frontend proxying to an Express/TypeScript backend via a secure BFF (Backend-for-Frontend) pattern.',
-      'Integrated Mercado Pago as the primary payment gateway with webhook-driven order status sync, plus a parallel bank transfer flow with admin confirmation/rejection.',
-      'Implemented JWT authentication with token versioning for instant revocation, Google OAuth 2.0 sign-in, and role-based access control (customer/admin).',
-      'Built a comprehensive admin panel: product and category CRUD with image uploads, order management with fulfillment tracking, coupon engine, review moderation, and real-time sales statistics dashboard.',
-      'Designed a customer account area with order history, wishlist/favorites, profile and security settings, and password recovery via transactional email (Nodemailer).',
-      'Hardened security with Helmet, express-rate-limit, Zod validation on every endpoint, Google reCAPTCHA on all public forms, and input sanitization across the BFF proxy layer.',
-      'Containerized the entire stack with Docker Compose (PostgreSQL 17, backend, frontend) and automated VPS deployment with PM2 cluster mode for zero-downtime releases.',
-      'Delivered a pixel-perfect mobile-first responsive UI with SCSS modules and breakpoints at 480px, 640px, 768px, and 900px — looks impeccable on every device, from small phones to ultra-wide desktops.'
-    ],
+    architecture: {
+      body: `The platform is structured as a full-stack monorepo. A Next.js storefront handles presentation, an Express API owns all write operations, and a Backend-for-Frontend layer mediates between them, keeping payment credentials and administrative endpoints server-side.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Full-stack monorepo built with Next.js 15 (App Router), Express, and PostgreSQL.',
+            'Backend-for-Frontend layer separating public storefront APIs from private administrative operations.',
+            'End-to-end type safety through TypeScript and Prisma ORM, surfacing schema changes at compile time.',
+            'Docker-based development and production environments for consistent behaviour across stages.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Product catalog with categories, advanced filtering, reviews, and wishlists.',
+            'Customer accounts covering authentication, order history, profile management, and password recovery via transactional email.',
+            'Administrative dashboard for products, orders, coupons, review moderation, and sales analytics.',
+            'Responsive mobile-first interface supporting viewports from 480px through ultra-wide desktops.',
+          ],
+        },
+        {
+          title: 'Security',
+          body: 'Public surfaces are validated and rate-limited, with immediate credential revocation available to administrators.',
+          chips: [
+            'JWT + token versioning',
+            'Google OAuth 2.0',
+            'Role-based access control',
+            'Helmet',
+            'Rate limiting',
+            'Zod validation',
+            'reCAPTCHA',
+          ],
+        },
+      ],
+    },
+    payments: {
+      body: `Argentine e-commerce requires support for both Mercado Pago and bank transfers. Each method follows its own confirmation path, and both converge on a single order lifecycle to keep fulfillment and reconciliation consistent.`,
+      groups: [
+        {
+          title: 'Payment Architecture',
+          body: 'Order state is determined server-side through webhook notifications, independent of the browser session.',
+          bullets: [
+            'Mercado Pago notifications are re-verified against the payment API before any order mutation.',
+            'Webhook processing is idempotent, ensuring duplicate notifications resolve to a single confirmation.',
+            'Payment preferences are created server-side, with amounts and line items computed on the backend.',
+          ],
+        },
+        {
+          title: 'Checkout Flow',
+          bullets: [
+            'Mercado Pago Checkout Pro handles card and wallet transactions.',
+            'Bank transfer flow supports proof-of-payment upload with administrative confirmation or rejection.',
+            'Both methods resolve into the same order lifecycle, keeping fulfillment logic unified.',
+            'Coupons are validated at preference creation and re-validated at confirmation to prevent expired or redeemed codes from applying.',
+          ],
+        },
+        {
+          title: 'Order Lifecycle',
+          body: 'Orders progress through an explicit state machine with server-side transition guards.',
+          bullets: [
+            'States: pending, paid, fulfilled, cancelled, and refunded.',
+            'The administrative panel can trigger only the transitions permitted by the state machine.',
+            'Line items capture product name and price at purchase time, preserving historical order accuracy through catalog changes.',
+          ],
+        },
+        {
+          title: 'Validation & Testing',
+          bullets: [
+            'End-to-end testing in the Mercado Pago sandbox using dedicated test buyer and seller accounts.',
+            'Coverage across approved, rejected, and pending payment outcomes.',
+            'Final verification against live credentials prior to launch.',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `The client retains full ownership of the stack and its hosting. Deployment was therefore designed for reproducibility, allowing the platform to be provisioned from a clean VPS through documented, automated steps.`,
+      groups: [
+        {
+          title: 'Deployment',
+          bullets: [
+            'Full stack containerized with Docker Compose, covering PostgreSQL 17, the Express backend, and the Next.js frontend.',
+            'PM2 cluster mode provides zero-downtime reloads and automatic recovery on process failure.',
+            'Automated VPS deployment reduces releases to a single command.',
+          ],
+          chips: ['Docker Compose', 'PM2 cluster mode', 'VPS', 'Zero-downtime releases'],
+        },
+        {
+          title: 'Database',
+          body: 'Data integrity is enforced at the database layer through constraints and referential rules.',
+          bullets: [
+            'PostgreSQL schema modelled in Prisma across products, variants, categories, orders, order items, coupons, reviews, and users.',
+            'Foreign keys and constraints enforced by the database engine.',
+            'Migrations tracked in version control, making every schema change reviewable and reproducible.',
+            'Seed scripts enable staging environments that mirror production structure.',
+          ],
+        },
+        {
+          title: 'Operational Security',
+          bullets: [
+            'API keys and payment credentials remain server-side behind the BFF proxy.',
+            'Rate limiting applied to authentication and checkout routes.',
+            'Token versioning allows immediate revocation of all issued tokens for a given user.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `The engagement delivered a platform under full client ownership, deployed to infrastructure they control and free of recurring licensing.`,
+      groups: [
+        {
+          title: 'Delivered',
+          bullets: [
+            'Public storefront with catalog, search, filtering, cart, and checkout.',
+            'Customer area covering accounts, order tracking, wishlists, and profile management.',
+            'Administrative panel for products, orders, coupons, reviews, and sales analytics.',
+            'Production deployment on client-owned infrastructure with a reproducible Docker configuration.',
+          ],
+        },
+        {
+          title: 'Handover',
+          bullets: [
+            'Complete source ownership with no licensing or per-seat platform fees.',
+            'Documented deployment procedure enabling future teams to provision the stack independently.',
+            'Seed and migration scripts for staging environments matching production structure.',
+          ],
+        },
+      ],
+    },
     screenshots: [
       '/img/img/Acero-web/acero-01.webp',
       '/img/img/Acero-web/acero-02.webp',
@@ -60,6 +227,9 @@ Off-the-shelf solutions couldn't deliver the custom UX, performance, and control
   },
   {
     slug: 'bellum',
+    role: 'Full-stack · Custom CMS',
+    engagement: 'Client work',
+    industry: 'HOA management',
     title: 'Bellum',
     subtitle: 'HOA Financial Management Platform',
     whatIs: `Bellum is a professional-grade platform built for HOA and condominium associations seeking to outsource their financial management, reporting, and back-office operations.
@@ -135,18 +305,25 @@ Bellum solves both sides: associations get a clear, segmented service catalog wi
   },
   {
     slug: 'comply-dq',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Transportation • Compliance SaaS',
+    locations: [
+      { flag: '🇨🇦', label: 'Ontario, Canada' },
+      { flag: '🇺🇸', label: 'United States' },
+    ],
     title: 'Comply DQ',
     subtitle: 'Fleet Compliance & Document Intelligence Platform',
     whatIs: `Comply DQ is an enterprise-grade platform tailored for motor carriers and compliance teams that need to onboard, verify, and continuously manage driver documentation (CDL, medical certs, policies, and more) at scale.
 
 The product combines role-aware workspaces, company-scoped data, and subscription-aware billing so operators can move from spreadsheets and legacy tools to a single source of truth with audit-friendly workflows.
 
-Developed in partnership with a Canadian engineering team, Comply DQ is one of the largest and most complex platforms I've contributed to — a true enterprise SaaS with deep multi-tenant architecture, hundreds of pages of operational tooling, and B2B compliance requirements as the core of every decision.`,
+Developed in partnership with a Canadian engineering team, Comply DQ represents one of the largest platforms in this portfolio: an enterprise SaaS built on multi-tenant architecture, with extensive operational tooling and B2B compliance requirements shaping every architectural decision.`,
     problemSolved: `Transportation and compliance programs often juggle fragmented files, inconsistent access control, and manual renewals — which increases risk and slows audits.
 
 Comply DQ addresses this by centralizing driver profiles, document lifecycles, and company administration in a secure, multi-tenant architecture with clear separation between customer organizations and platform-level oversight.
 
-The platform was built side by side with a senior team based in Canada, combining their domain expertise in US/Canadian transportation compliance with hands-on engineering to ship a production-grade product trusted to handle real fleets and real regulatory pressure — not a prototype, not a single-developer side project.`,
+The platform was developed alongside a senior team based in Canada, combining their domain expertise in US and Canadian transportation compliance with hands-on engineering to deliver a production system serving active fleet operations.`,
     techStack: [
       'Next.js',
       'React',
@@ -170,11 +347,125 @@ The platform was built side by side with a senior team based in Canada, combinin
       'End-to-end document workflows: document library, uploads, deduplication logic, and cloud-backed storage aligned with a modern API layer.',
       'Payments & monetization: Stripe integration for subscriptions and invoice-related flows, including webhook-driven server paths for reliable billing events.',
       'Auth at enterprise standards: Keycloak (OIDC) + credential flows, JWT access/refresh handling, and session hardening patterns suited to B2B SaaS.',
-      'Data platform: PostgreSQL with Prisma for schema-safe access, plus controlled legacy migration tooling (CSV-driven pipelines, validation, and operational scripts) for real-world cutovers — not toy demos.',
+      'Data platform: PostgreSQL with Prisma for schema-safe access, plus controlled legacy migration tooling (CSV-driven pipelines, validation, and operational scripts) supporting production cutovers.',
       'Responsive, productized UI: Next.js App Router, Redux for complex client state, Ant Design / MUI / Radix-style component stacks, and layouts optimized for desktop dashboards + mobile-friendly operator tasks.',
       'Operational excellence: structured logging, tenant-aware API guards, and deployment-oriented configuration for staging/production parity.',
       'Pixel-perfect responsive design across the entire admin surface — looks impeccable from operator tablets on the road up to ultra-wide compliance dashboards.'
     ],
+    architecture: {
+      body: `Comply DQ enforces multi-tenancy at the data layer. Every query is scoped to a tenant and every API route validates that scope server-side, maintaining strict separation between customer organizations.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Next.js App Router frontend with Redux Toolkit managing operational client state.',
+            'NestJS backend with Prisma over PostgreSQL, typed end to end.',
+            'Multi-tenant model with tenant resolution and company-type hierarchies covering direct and managed-service structures.',
+            'Role-based access separating platform-level oversight from customer-organization administrators and operators.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Driver onboarding and verification workflows for CDL, medical certificates, and policy documentation.',
+            'Document library with upload handling, deduplication, and S3-backed storage.',
+            'Expiry tracking and renewal workflows supporting regulatory compliance requirements.',
+            'Operator dashboards optimized for desktop compliance review and tablet use in the field.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          body: 'Identity management follows enterprise standards to meet the requirements of B2B procurement and IT review.',
+          chips: [
+            'Keycloak (OIDC)',
+            'JWT access/refresh',
+            'Session hardening',
+            'Tenant-aware API guards',
+            'RBAC',
+          ],
+        },
+      ],
+    },
+    payments: {
+      body: `Subscription billing operates at the organization level, where plan changes occur mid-cycle and entitlement must remain synchronized with billing state across the platform.`,
+      groups: [
+        {
+          title: 'Billing Architecture',
+          body: 'Stripe serves as the authoritative source for subscription state, with platform entitlement derived from it.',
+          bullets: [
+            'Stripe subscriptions scoped per tenant, aligning billing boundaries with data boundaries.',
+            'Webhook-driven lifecycle handling across creation, updates, successful payments, failed payments, and cancellation.',
+            'Plan state enforced at the API guard level, applying entitlement changes server-side.',
+          ],
+        },
+        {
+          title: 'Operator Experience',
+          bullets: [
+            'Invoice and subscription status surfaced within the compliance workspace.',
+            'Failed-payment states presented explicitly to support timely resolution.',
+          ],
+        },
+        {
+          title: 'Validation & Testing',
+          bullets: [
+            'Automated coverage focused on document lifecycle transitions, expiry calculations, and tenant isolation guards.',
+            'Explicit testing of cross-tenant access boundaries.',
+            'TypeScript with Prisma-generated types, surfacing schema changes at compile time across API and client.',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `The platform replaced spreadsheets and legacy systems carriers had operated for years, making data migration a primary delivery requirement alongside the application itself.`,
+      groups: [
+        {
+          title: 'Data Migration',
+          bullets: [
+            'CSV-driven pipelines transferring production customer records from legacy systems.',
+            'Validation passes preceding load, surfacing malformed records for reconciliation.',
+            'Operational scripts supporting repeatable cutovers with dry-run capability against staging.',
+          ],
+        },
+        {
+          title: 'Database',
+          bullets: [
+            'PostgreSQL with Prisma providing schema-safe access across a large operational surface.',
+            'Migrations tracked in version control to keep schema evolution reviewable.',
+            'Tenant scoping enforced in the data layer, maintaining isolation and audit traceability.',
+          ],
+        },
+        {
+          title: 'Operations',
+          bullets: [
+            'Structured logging across API layers supporting reproducible diagnostics against production data.',
+            'Tenant-aware API guards enforced server-side on all routes.',
+            'Deployment configuration maintaining parity between staging and production environments.',
+          ],
+          chips: ['AWS S3', 'Keycloak', 'Structured logging', 'Staging parity'],
+        },
+      ],
+    },
+    deliverables: {
+      body: `Delivered as part of a senior engineering team serving motor carriers across North America, on a platform operating under active regulatory requirements.`,
+      groups: [
+        {
+          title: 'Delivered',
+          bullets: [
+            'Driver onboarding and document verification workflows in production use.',
+            'Multi-tenant administrative surface for carriers, including platform-level oversight tooling.',
+            'Stripe-backed subscription billing integrated with feature entitlement.',
+            'Legacy data migrations executed against production customer records.',
+          ],
+        },
+        {
+          title: 'Engagement Model',
+          bullets: [
+            'Collaborative development alongside a Canadian engineering team, combining transportation-compliance domain expertise with implementation.',
+            'Code review and staged releases across staging and production environments.',
+          ],
+        },
+      ],
+    },
     screenshots: [
       '/img/img/cdq-web/cdq-01.webp',
       '/img/img/cdq-web/cdq-02.webp',
@@ -194,6 +485,9 @@ The platform was built side by side with a senior team based in Canada, combinin
   },
   {
     slug: 'grupo-el-triunfo',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Agribusiness',
     title: 'Grupo El Triunfo',
     subtitle: 'Corporate Agribusiness Platform',
     whatIs: `Grupo El Triunfo is a corporate website for an agribusiness holding company based in Oncativo, Córdoba, Argentina, with over 36 years of experience in the agricultural sector.
@@ -243,6 +537,9 @@ The website solves this by unifying six distinct business units under a cohesive
   },
   {
     slug: 'home-trades-online',
+    role: 'Full-stack · SaaS',
+    engagement: 'Client work',
+    industry: 'Construction & trades',
     title: 'Home Trades Online',
     subtitle: 'Contractor Proposal Platform (SaaS)',
     whatIs: `Home Trades Online is a mobile-first SaaS platform that empowers contractors and tradespeople to generate AI-powered professional proposals in under 30 seconds. The platform bridges the gap between contractors working on job sites and the administrative work of creating, sending, and managing client proposals.
@@ -288,6 +585,9 @@ Home Trades Online solves this by enabling contractors to describe a job in plai
   },
   {
     slug: 'salesforpro',
+    role: 'Frontend · Product landing',
+    engagement: 'Client work',
+    industry: 'Construction & trades',
     title: 'Home Trades Online Landing',
     subtitle: 'Marketing Landing Page & Website',
     whatIs: `SalesForPro is the public-facing marketing website for Home Trades Online, designed to convert visiting contractors into users through an interactive product demo experience.
@@ -327,6 +627,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
   },
   {
     slug: 'starton',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Tech recruiting',
     title: 'StartOn ',
     subtitle: 'Talent-Startup Connection Platform',
     whatIs: `
@@ -373,6 +676,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
   },
   {
     slug: 'mi-agenda',
+    role: 'Full-stack · Payments & integrations',
+    engagement: 'Client work',
+    industry: 'Appointment-based services',
     title: 'Mi Agenda',
     subtitle: 'Online Booking & Appointments Platform',
     whatIs: `Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with MercadoPago (one-time and subscriptions), notifications (email, push, and optionally SMS/WhatsApp), and an installable PWA ("Mi agenda") with reminders and offline access.
@@ -433,6 +739,9 @@ The solution centralizes recurring and one-off availability, payments, reminders
   },
   {
     slug: 'augusto-fit-program',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Fitness & training',
     title: 'Augusto Fit Program',
     subtitle: 'Personal Trainer Corporate Website',
     whatIs: `Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training plans, and a contact form integrated with EmailJS. Dark design with GSAP animations, next/font typography and mobile-first responsive experience.
@@ -479,6 +788,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
   },
   {
     slug: 'tecnomar',
+    role: 'Full-stack · Corporate site',
+    engagement: 'Client work',
+    industry: 'Industrial services',
     title: 'TecnoMar',
     subtitle: 'Industrial Pumps Corporate Website',
     whatIs: `Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.`,
@@ -524,6 +836,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
   },
   {
     slug: 'ateevo-wholesale',
+    role: 'Full-stack · B2B e-commerce',
+    engagement: 'Client work',
+    industry: 'Wholesale fashion',
     title: 'Ateevo Wholesale',
     subtitle: 'B2B E-Commerce Platform for Fashion',
     whatIs: `Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.
@@ -612,6 +927,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'lexmax',
+    role: 'Full-stack · AI automation',
+    engagement: 'Client work',
+    industry: 'Legal',
     title: 'LexMax',
     subtitle: 'Judicial Case Management Platform',
     whatIs: `
@@ -660,6 +978,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'property-recommender',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Real estate',
     title: 'Property Recommender',
     subtitle: 'Property Recommendation System',
     whatIs: `
@@ -699,6 +1020,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'event-scheduler',
+    role: 'Full-stack',
+    engagement: 'Own product',
+    industry: 'Events & venues',
     title: 'Event Scheduler',
     subtitle: 'Event Booking & Venue Management Platform',
     whatIs: `
@@ -762,6 +1086,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'the-club-northfield',
+    role: 'Full-stack · Strapi CMS',
+    engagement: 'Client work',
+    industry: 'Sports & fitness',
     title: 'The Club at Northfield',
     subtitle: 'Corporate Website for Sports & Fitness Club - Ontario, Canada',
     whatIs: `
@@ -806,6 +1133,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'lexmax-landing',
+    role: 'Frontend · Product landing',
+    engagement: 'Client work',
+    industry: 'Legal',
     title: 'LexMax Landing',
     subtitle: 'Legal Automation Landing Page',
     whatIs: `
@@ -846,6 +1176,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },  
   {
     slug: 'ecommerce',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Quiero Sport',
     subtitle: 'Modern E-Commerce Platform',
     whatIs: `
@@ -888,6 +1220,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'healthcare-crm',
+    role: 'Full-stack',
+    engagement: 'Practice project',
+    industry: 'Healthcare',
     title: 'Medicare ',
     subtitle: 'Healthcare Treatment Management',
     whatIs: `
@@ -935,6 +1270,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },  
   {
     slug: 'taskmanager',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Task Manager',
     subtitle: 'Full Stack Task Management App',
     whatIs: `
@@ -977,6 +1314,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'flipper',
+    role: 'Full-stack',
+    engagement: 'Practice project',
     title: 'Flipper',
     subtitle: 'Twitter Clone Platform',
     whatIs: `
@@ -1016,6 +1355,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'vestire',
+    role: 'Frontend',
+    engagement: 'Practice project',
     title: 'Vestiré',
     subtitle: 'Fashion E-Commerce Platform',
     whatIs: `
@@ -1060,6 +1401,8 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
   },
   {
     slug: 'trip-planner',
+    role: 'Frontend',
+    engagement: 'Practice project',
     title: 'Trip Planner',
     subtitle: 'Simple Trip Planning App',
     whatIs: `Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.`,

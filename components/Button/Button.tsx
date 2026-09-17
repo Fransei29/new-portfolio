@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
+import { HiArrowRight } from 'react-icons/hi';
 import styles from './Button.module.scss';
 
 type ButtonVariant = 'primary' | 'secondary';
@@ -37,6 +38,7 @@ const Button: React.FC<ReusableButtonProps> = ({
   const buttonContent = (
     <p className={buttonClass}>
       {label}
+      <HiArrowRight className={styles.arrow} />
     </p>
   );
 

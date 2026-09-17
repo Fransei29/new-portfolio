@@ -49,7 +49,8 @@ const loadTranslationsSync = (lang: string): Translations => {
         'contact',
         'services',
         'bootcamp',
-        'automation'
+        'automation',
+        'comparison'
       ];
 
       const loadedTranslations: Translations = {};
@@ -100,6 +101,20 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     document.documentElement.classList.add('hydrated');
     setIsHydrated(true);
   }, []);
+
+  // Mantiene <html lang> en sincronía con el idioma activo.
+  //
+  // El layout lo sirve como "en" porque es un Server Component y el idioma se
+  // resuelve recién en el cliente. Sin esta corrección, una página leída en
+  // español queda declarada como inglés: los lectores de pantalla la pronuncian
+  // con fonética equivocada y los buscadores la clasifican mal.
+  //
+  // Es un parche, no la solución de raíz — el HTML inicial sigue diciendo "en".
+  // Lo correcto sería rutas /es y /en, pero eso implica cambiar todas las URLs.
+  // (El blog no tiene este problema: se renderiza en el servidor.)
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

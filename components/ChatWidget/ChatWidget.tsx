@@ -1,25 +1,73 @@
 'use client';
 
-// ChatWidget con IA comentado - reemplazado por botón de WhatsApp
-/*
-import { useState, useEffect, useRef } from 'react';
-import { Send, MessageCircle, X } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback, Fragment } from 'react';
+import { Send, Sparkles, X, ArrowUpRight, FileText, Layers } from 'lucide-react';
 import styles from './ChatWidget.module.scss';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-interface Message {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
+interface ChatReference {
+  kind: 'project' | 'article';
+  title: string;
+  subtitle: string;
+  url: string;
 }
 
-const SUGGESTED_QUESTIONS = [
-  { en: "What are Franco's main skills?", es: "¿Cuáles son las principales habilidades de Franco?" },
-  { en: "Tell me about his projects", es: "Cuéntame sobre sus proyectos" },
-  { en: "What's his work experience?", es: "¿Cuál es su experiencia laboral?" },
-  { en: "How can I contact him?", es: "¿Cómo puedo contactarlo?" },
-];
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  text: string;
+  timestamp: Date;
+  reference?: ChatReference | null;
+}
+
+const MAX_MESSAGE_LENGTH = 500;
+const SUGGESTION_KEYS = ['ai.q1', 'ai.q2', 'ai.q3', 'ai.q4'] as const;
+
+const URL_PATTERN = /(https?:\/\/[^\s<>()]+[^\s<>().,;:!?])|([\w.+-]+@[\w-]+\.[\w.]+)/g;
+
+/** Convierte urls y emails sueltos del texto en enlaces clicables. */
+function renderWithLinks(text: string) {
+  const lines = text.split('\n');
+
+  return lines.map((line, lineIndex) => {
+    const parts: React.ReactNode[] = [];
+    // La regex es global y guarda lastIndex entre llamadas; se instancia por
+    // línea para que cada una arranque desde cero.
+    const pattern = new RegExp(URL_PATTERN.source, 'g');
+    let cursor = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = pattern.exec(line)) !== null) {
+      const value = match[0];
+      const start = match.index;
+
+      if (start > cursor) parts.push(line.slice(cursor, start));
+
+      const isEmail = !value.startsWith('http');
+      parts.push(
+        <a
+          key={`${lineIndex}-${start}`}
+          href={isEmail ? `mailto:${value}` : value}
+          target={isEmail ? undefined : '_blank'}
+          rel={isEmail ? undefined : 'noopener noreferrer'}
+          className={styles.messageLink}
+        >
+          {value}
+        </a>
+      );
+      cursor = start + value.length;
+    }
+
+    if (cursor < line.length) parts.push(line.slice(cursor));
+
+    return (
+      <Fragment key={lineIndex}>
+        {parts}
+        {lineIndex < lines.length - 1 && <br />}
+      </Fragment>
+    );
+  });
+}
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,108 +76,121 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
-  const scrollToBottom = () => {
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const autoResizeTextarea = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
-    }
-  };
+  }, [messages, isLoading]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  useEffect(() => {
-    autoResizeTextarea();
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
   }, [inputValue]);
 
-  const handleSendMessage = async (suggestedQuestion?: string) => {
-    const messageText = suggestedQuestion || inputValue.trim();
-    if (!messageText || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: messageText,
-      isUser: true,
-      timestamp: new Date(),
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
     };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isOpen]);
 
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
-    setIsLoading(true);
+  const sendMessage = useCallback(
+    async (raw?: string) => {
+      const text = (raw ?? inputValue).trim().slice(0, MAX_MESSAGE_LENGTH);
+      if (!text || isLoading) return;
 
-    // Reset textarea height
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-    }
+      const userMessage: Message = {
+        id: `${Date.now()}-user`,
+        role: 'user',
+        text,
+        timestamp: new Date(),
+      };
 
-    try {
-      const response = await fetch('/api/ask', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userMessage.text }),
-      });
+      // El historial se arma antes de actualizar el estado: setMessages es
+      // asíncrono y leer `messages` acá daría la lista sin este mensaje.
+      const history = [...messages, userMessage].map((m) => ({
+        role: m.role,
+        content: m.text,
+      }));
 
-      if (!response.ok) {
-        throw new Error('Response error');
+      // El servidor no guarda sesión, así que las referencias ya mostradas
+      // viajan con el request para que no se repita el mismo link.
+      const usedUrls = messages
+        .map((m) => m.reference?.url)
+        .filter((u): u is string => Boolean(u));
+
+      setMessages((prev) => [...prev, userMessage]);
+      setInputValue('');
+      setIsLoading(true);
+
+      if (textareaRef.current) textareaRef.current.style.height = 'auto';
+
+      try {
+        const res = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history, usedUrls }),
+        });
+
+        const data = await res.json();
+
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}-assistant`,
+            role: 'assistant',
+            text: data.response || t('ai.error'),
+            timestamp: new Date(),
+            reference: data.reference ?? null,
+          },
+        ]);
+      } catch {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}-error`,
+            role: 'assistant',
+            text: t('ai.error'),
+            timestamp: new Date(),
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
       }
+    },
+    [inputValue, isLoading, messages, t]
+  );
 
-      const data = await response.json();
-      
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: data.response,
-        isUser: false,
-        timestamp: new Date(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: t('ai.error'),
-        isUser: false,
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      sendMessage();
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputValue(e.target.value);
   };
 
   return (
     <div className={styles.chatWidget}>
       <button
         className={styles.chatButton}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Open chat"
+        onClick={() => setIsOpen((v) => !v)}
+        aria-label={t('ai.title')}
+        aria-expanded={isOpen}
       >
-        {isOpen ? <X size={24} className={styles.chatIcon} /> : <MessageCircle size={24} className={styles.chatIcon} />}
+        {isOpen ? (
+          <X size={22} className={styles.chatIcon} />
+        ) : (
+          <Sparkles size={22} className={styles.chatIcon} />
+        )}
       </button>
 
       {isOpen && (
-        <div className={styles.chatWindow}>
+        <div className={styles.chatWindow} role="dialog" aria-label={t('ai.title')}>
           <div className={styles.chatHeader}>
-            <h3>AI Assistant</h3>
+            <h3>{t('ai.title')}</h3>
             <button
               onClick={() => setIsOpen(false)}
               className={styles.closeButton}
@@ -142,56 +203,81 @@ export default function ChatWidget() {
           <div className={styles.messagesContainer}>
             {messages.length === 0 && (
               <>
-                <div className={styles.welcomeMessage}>
-                  {t('ai.placeholder')}
-                </div>
+                <div className={styles.welcomeMessage}>{t('ai.welcome')}</div>
                 <div className={styles.suggestedQuestions}>
-                  <p className={styles.suggestedTitle}>
-                    {language === 'es' ? 'Preguntas sugeridas:' : 'Suggested questions:'}
-                  </p>
-                  {SUGGESTED_QUESTIONS.map((question, index) => (
+                  <p className={styles.suggestedTitle}>{t('ai.suggestedTitle')}</p>
+                  {SUGGESTION_KEYS.map((key) => (
                     <button
-                      key={index}
+                      key={key}
                       className={styles.suggestedQuestion}
-                      onClick={() => handleSendMessage(question[language as 'en' | 'es'])}
+                      onClick={() => sendMessage(t(key))}
                       disabled={isLoading}
                     >
-                      {question[language as 'en' | 'es']}
+                      {t(key)}
                     </button>
                   ))}
                 </div>
               </>
             )}
-            
+
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`${styles.message} ${message.isUser ? styles.userMessage : styles.assistantMessage}`}
+                className={`${styles.message} ${
+                  message.role === 'user' ? styles.userMessage : styles.assistantMessage
+                }`}
               >
-                <div className={styles.messageContent}>
-                  {message.text.split('\n').map((line, i) => (
-                    <span key={i}>
-                      {line}
-                      {i < message.text.split('\n').length - 1 && <br />}
+                <div className={styles.messageContent}>{renderWithLinks(message.text)}</div>
+
+                {message.reference && (
+                  <a
+                    href={message.reference.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.referenceCard}
+                  >
+                    <span className={styles.referenceKind}>
+                      {message.reference.kind === 'article' ? (
+                        <FileText size={13} aria-hidden />
+                      ) : (
+                        <Layers size={13} aria-hidden />
+                      )}
+                      {message.reference.kind === 'article'
+                        ? t('ai.refArticle')
+                        : t('ai.refProject')}
                     </span>
-                  ))}
-                </div>
+                    <span className={styles.referenceTitle}>{message.reference.title}</span>
+                    {message.reference.subtitle && (
+                      <span className={styles.referenceSubtitle}>
+                        {message.reference.subtitle}
+                      </span>
+                    )}
+                    <span className={styles.referenceAction}>
+                      {t('ai.refOpen')}
+                      <ArrowUpRight size={14} aria-hidden />
+                    </span>
+                  </a>
+                )}
+
                 <div className={styles.messageTime}>
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {message.timestamp.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className={`${styles.message} ${styles.assistantMessage}`}>
-                <div className={styles.typingIndicator}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div className={styles.typingIndicator} aria-label={t('ai.thinking')}>
+                  <span />
+                  <span />
+                  <span />
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -199,15 +285,16 @@ export default function ChatWidget() {
             <textarea
               ref={textareaRef}
               value={inputValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyPress}
+              onChange={(e) => setInputValue(e.target.value.slice(0, MAX_MESSAGE_LENGTH))}
+              onKeyDown={handleKeyDown}
               placeholder={t('ai.placeholder')}
               className={styles.input}
               rows={1}
+              maxLength={MAX_MESSAGE_LENGTH}
               disabled={isLoading}
             />
             <button
-              onClick={() => handleSendMessage()}
+              onClick={() => sendMessage()}
               disabled={!inputValue.trim() || isLoading}
               className={styles.sendButton}
               aria-label={t('ai.send')}
@@ -220,33 +307,3 @@ export default function ChatWidget() {
     </div>
   );
 }
-*/
-
-// Botón de WhatsApp
-import styles from './ChatWidget.module.scss';
-
-export default function ChatWidget() {
-  const whatsappNumber = '+31620375952';
-  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`;
-
-  return (
-    <div className={styles.chatWidget}>
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.chatButton}
-        aria-label="Contact on WhatsApp"
-      >
-        <svg
-          className={styles.whatsappIcon}
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-      </a>
-    </div>
-  );
-} 

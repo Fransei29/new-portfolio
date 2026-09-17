@@ -9,7 +9,8 @@
 
     :global(html.dark) & {
       background-image: none;
-      background-color: var(--dark-light);
+      /* Sección B en dark: fondo elevado (calza con --wave-b) */
+      background-color: var(--wave-b);
       color: rgb(236, 235, 235);
     }
 
@@ -28,7 +29,7 @@
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 2rem;
+  margin: var(--subtitle-spacing-top) auto 2rem;
   text-align: center;
   font-weight: var(--subtitle-font-weight);
   line-height: var(--subtitle-line-height);
@@ -40,40 +41,10 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1rem;
+    /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1rem;
     padding: 0;
   }
-}
-
-.dragHint {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--subtitle-color);
-  margin: -0.5rem 0 1.5rem 0;
-  font-weight: 400;
-
-  :global(html.dark) & {
-    color: rgba(200, 200, 210, 0.85);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-}
-
-.dragHintIcon {
-  flex-shrink: 0;
-  color: var(--primary-color);
-  animation: handShake 1.5s ease-in-out infinite;
-}
-
-@keyframes handShake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(14deg); }
-  75% { transform: rotate(-14deg); }
 }
 
 .skillsTitle {
@@ -81,9 +52,12 @@
 }
 
 .skillIcon, .skillsIconA {
-  color: rgb(151, 0, 76);
+  color: rgb(46, 41, 78);
   width: 24px;
   height: 24px;
+  /* Sin esto el flex lo comprime por debajo de 24px cuando la tarjeta pasa a
+     width:auto en mobile: el icono queda aplastado y desalineado del texto. */
+  flex-shrink: 0;
   fill: currentColor;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: iconFloatSkills 6s ease-in-out infinite;
@@ -118,37 +92,113 @@
   font-size: 0.95rem;
   font-weight: 400;
   padding-left: 1rem;
-}
-
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+  /* El marquee mide por contenido: si el nombre corta en dos líneas la tarjeta
+     crece en alto y desalinea toda la fila. Que la tarjeta sea más ancha. */
+  white-space: nowrap;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
+  }
+}
+
+/* Marquee de 4 filas que se deslizan en direcciones alternas (izq/der/izq/der).
+   Cada .marqueeTrack contiene la fila duplicada 2× y se anima con translateX;
+   al desplazarse exactamente el 50% (una copia completa) el loop es imperceptible. */
+.marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  /* Full-bleed: rompe el max-width del contenedor y ocupa todo el ancho del
+     viewport, igual que el carrusel de Testimonials.
+     `--page-w` y no `100vw`: 100vw incluye la barra de scroll (ver --page-w en
+     globals.css). */
+  width: var(--page-w);
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: calc(var(--page-w) / -2);
+  margin-right: calc(var(--page-w) / -2);
+  padding-top: 1rem;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
     gap: 0.75rem;
     margin-bottom: 0.5rem;
-    padding: 0.25rem 1.25rem;
+  }
+}
+
+.marqueeRow {
+  overflow: hidden;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  will-change: transform;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+}
+
+/* La fila está duplicada 2×; desplazar -50% mueve exactamente una copia,
+   así el punto de reset coincide con el inicio y no se ve costura. */
+.toLeft {
+  animation: marqueeLeft 150s linear infinite;
+}
+
+.toRight {
+  animation: marqueeRight 150s linear infinite;
+}
+
+/* Pausa delicada al pasar el mouse por encima de la sección */
+.marquee:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toLeft,
+  .toRight {
+    animation: none;
   }
 }
 
 .skillsCard {
-  background-color: transparent;
+  background-color: #ffffff;
   border: none;
   color: var(--text-color-light);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  /* En el marquee las tarjetas no deben encogerse ni estirarse. El ancho es el
+     mismo que tenían en el grid original: (1440 − 3×16px gap) / 4 = 348px.
+     El padding/alto no cambian. */
+  flex-shrink: 0;
+  width: 312px;
+  box-sizing: border-box;
   padding: 1.1rem 1.75rem;
   margin: 0;
   text-align: center;
   border-radius: var(--br);
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra delicada y minimalista (dos capas suaves) para integrar la tarjeta. */
+  box-shadow: 0 1px 2px rgba(46, 41, 78, 0.06),
+    0 8px 20px -10px rgba(46, 41, 78, 0.16);
   border: 1px solid transparent;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   background-clip: padding-box;
   overflow: visible;
@@ -161,11 +211,11 @@
     padding: 1px;
     background: linear-gradient(
       90deg,
-      rgba(247, 86, 166, 0.3) 0%,
-      rgba(247, 86, 166, 0.3) 30%,
-      rgba(247, 86, 166, 0.4) 50%,
-      rgba(247, 86, 166, 0.3) 70%,
-      rgba(247, 86, 166, 0.3) 100%
+      rgba(181, 156, 248, 0.3) 0%,
+      rgba(181, 156, 248, 0.3) 30%,
+      rgba(181, 156, 248, 0.4) 50%,
+      rgba(181, 156, 248, 0.3) 70%,
+      rgba(181, 156, 248, 0.3) 100%
     );
     background-size: 200% 100%;
     background-position: -200% 0;
@@ -185,19 +235,35 @@
   }
     
   :global(html.dark) & {
-    background-color: #181c33;
+    /* Fondo de sección ahora es --wave-b (#2e2a3a); la tarjeta sube a
+       --card-bg-soft (#35304a) para despegarse y leerse. */
+    background-color: var(--card-bg-soft);
     color: white;
+    /* Sombra negra que sí contrasta sobre el fondo oscuro. */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2),
+      0 8px 20px -10px rgba(0, 0, 0, 0.38);
 
     &::before {
       background: linear-gradient(
         90deg,
         rgba(248, 248, 248, 0.1) 0%,
         rgba(248, 248, 248, 0.1) 30%,
-        rgba(250, 81, 166, 0.3) 50%,
+        rgba(181, 156, 248, 0.3) 50%,
         rgba(248, 248, 248, 0.1) 70%,
         rgba(248, 248, 248, 0.1) 100%
       );
     }
+  }
+
+  @media (max-width: 768px) {
+    /* Compactas pero de ancho FIJO, como en desktop. Con `width: auto` cada
+       tarjeta se ajustaba a su propio texto (el track es `max-content`), así que
+       "Go" quedaba diminuta al lado de "React Native" y la fila se veía
+       despareja — que es lo que se leía como roto. Un ancho único las vuelve a
+       alinear; el texto se centra dentro. */
+    width: 172px;
+    padding: 0.7rem 0.9rem;
+    justify-content: center;
   }
 }
 
@@ -214,9 +280,12 @@
 }
 
 .skillsCard:hover {
-  background-color: rgb(241, 194, 218, 0.25);
-  transform: translateY(-1px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(134, 118, 190, 0.08);
+  box-shadow: 0px 4px 10px rgba(46, 41, 78, 0.08);
+
+  :global(html.dark) & {
+    background-color: rgba(158, 144, 205, 0.14);
+  }
 }
 
 @media (max-width: 768px) {
@@ -225,55 +294,27 @@
   }
 
   .skillsCard {
-    margin: 0.25rem 0rem;
-    width: 70%;
-    padding: 0.9rem 1.5rem;
+    margin: 0;
+    /* Ancho FIJO, no porcentual. Las tarjetas son flex items de .marqueeTrack,
+       que mide `width: max-content`: un % ahí es circular (el track mide según
+       los hijos y los hijos según el track), y las tarjetas colapsaban vacías.
+       Se mantiene el criterio del ancho fijo de desktop, sólo que más chico. */
+    width: 190px;
+    padding: 0.75rem 1rem;
   }
 
   .skillName {
-    font-size: 0.95rem;
-    padding-left: 1rem;
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
   }
   
-  .skillsIconA {
-    width: 24px;
-    height: 24px;
-  }
-
+  /* 24px era el tamaño de desktop: en una tarjeta de 190px se comía el espacio
+     del nombre. flex-shrink 0 para que el icono no se deforme si el texto es largo. */
+  .skillsIconA,
   .skillIcon {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-// Estilos para SortableJS
-.sortableGhost {
-  opacity: 0.5;
-  transform: rotate(5deg);
-  transition: all 0.2s ease;
-}
-
-.sortableChosen {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-}
-
-.sortableDrag {
-  opacity: 0.8;
-  transform: scale(1.1);
-  z-index: 1000;
-  transition: all 0.2s ease;
-}
-
-// Hover effect para indicar que es arrastrable
-.skillsGrid {
-  &:hover .skillsCard {
-    cursor: grab;
-    
-    &:active {
-      cursor: grabbing;
-    }
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 }
 

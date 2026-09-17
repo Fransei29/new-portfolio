@@ -9,7 +9,9 @@
 }
 
 .recentProjects {
-    padding: 1.5rem 0;
+    /* Sin padding arriba: el .viewport ya aporta 2.5rem para la sombra de hover,
+       y sumados dejaban un hueco grande entre el subtítulo y las tarjetas. */
+    padding: 0 0 1.5rem;
     width: 100%;
 
     @media (max-width: 768px) {
@@ -21,14 +23,27 @@
     --gap: 3rem;
     --visible-count: 2;
     --peek: 7%;
-    --container-inset: max(2rem, calc((100vw - var(--container-max-width)) / 2));
+    --container-inset: max(2rem, calc((var(--page-w) - var(--container-max-width)) / 2));
     position: relative;
-    /* Full-bleed: escapa el max-width del contenedor padre y ocupa todo el ancho del viewport */
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    /* Full-bleed: escapa el max-width del contenedor padre y ocupa todo el ancho
+       del viewport. `--page-w` y no `100vw`: 100vw incluye la barra de scroll y
+       dejaba el carrusel 8px más ancho que el contenido, asomando 4px por la
+       derecha (ver --page-w en globals.css). */
+    width: var(--page-w);
+    /* Misma fórmula que Testimonials (la única que llega a la pared en todos los
+       anchos): `left: 50%` centra el borde en el padre y los dos márgenes negativos
+       lo estiran a ambos lados. Con `margin-left: calc(... + 50%)` y sin `left`, el
+       carrusel quedaba capado al ancho del padre (236px adentro a 1920px). */
+    left: 50%;
+    right: 50%;
+    margin-left: calc(var(--page-w) / -2);
+    margin-right: calc(var(--page-w) / -2);
     overflow: hidden;
-    /* El primer slide arranca alineado al container; el lado derecho queda libre hasta el borde */
-    padding: 2rem 0 0.75rem var(--container-inset);
+    /* El inset lateral NO va acá: un padding no recorta, así que el slide saliente
+       quedaba visible en esa franja. Va en `.viewportInner`, que tiene su propio
+       `overflow: hidden` (misma estructura que el carrusel de Testimonials), y que
+       también se encarga del aire vertical para la sombra de hover. */
+    padding: 2.5rem 0;
     box-sizing: border-box;
 
     /* Solo desktop: en mobile usamos el .mobileStack */
@@ -44,9 +59,13 @@
     @media (max-width: 1024px) {
         display: flex;
         flex-direction: column;
-        gap: 1.75rem;
+        /* El gap se suma al padding vertical de cada .mobileViewport, así que
+           el hueco real entre filas era gap + 1.5 + 1.5rem. Se baja el gap y
+           se recorta ese padding (abajo) para acercar las dos filas. */
+        gap: 0.25rem;
         width: 100%;
-        padding: 1.5rem 0 0.5rem;
+        /* padding-top bajo: la primera fila queda más cerca del subtítulo. */
+        padding: 0.25rem 0 0.5rem;
         box-sizing: border-box;
     }
 }
@@ -55,8 +74,20 @@
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
-    /* El primer card de cada fila arranca alineado al container, lado derecho llega al borde */
-    padding-left: 1.25rem;
+    /* Solo padding vertical (si va a 0 la sombra queda cortada por overflow:hidden).
+       El inset lateral va en `.mobileViewportInner`, igual que en desktop. */
+    padding: 0.5rem 0;
+}
+
+/* Mismo patrón que `.viewportInner`: el inset como margin, con su propio recorte. */
+.mobileViewportInner {
+    margin-left: 1.25rem;
+    /* Igual que `.viewportInner`: hidden en ambos ejes y el aire para la sombra
+       con padding vertical compensado por margen negativo. */
+    overflow: hidden;
+    padding: 0.5rem 0;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
 }
 
 .mobileTrack {
@@ -77,6 +108,27 @@
     padding-right: 1.25rem;
 }
 
+
+/* El inset lateral va acá y no en `.viewport`: este elemento tiene su propio
+   `overflow: hidden`, así que recorta el track en el borde del container y el
+   slide saliente no asoma. Es la estructura del carrusel de Testimonials. */
+.viewportInner {
+    /* Arranca en el inset y llega hasta el borde de la página: su borde izquierdo
+       es exactamente donde arrancan las tarjetas, y ahí recorta. El inset como
+       `margin-left` (no `padding-left`): el padding queda del lado visible del
+       recorte y era justo lo que dejaba asomar el slide saliente.
+       `clip` solo en X: en Y hay que dejar pasar la sombra de hover, que se sale
+       de la caja (con `hidden` en ambos ejes quedaba recortada arriba y abajo). */
+    margin-left: var(--container-inset);
+    /* `overflow: hidden` en los dos ejes: `overflow-x: clip` + `overflow-y: visible`
+       no es fiable entre navegadores (si un eje es visible y el otro no, el visible
+       pasa a auto). El aire para la sombra de hover se hace con padding vertical
+       acá adentro, compensado con el mismo margen negativo para no mover el layout. */
+    overflow: hidden;
+    padding: 2.5rem 0;
+    margin-top: -2.5rem;
+    margin-bottom: -2.5rem;
+}
 
 .track {
     display: flex;

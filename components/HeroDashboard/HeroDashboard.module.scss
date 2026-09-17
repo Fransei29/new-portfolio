@@ -1,53 +1,150 @@
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 478px; // was 520 * 0.92 — bake the scale into max-width so type stays crisp
-  // Keep the dashboard to the right of its column (its intended look), but
-  // leave a small right gutter so the floating pills (right:-8%) have room to
-  // sit without pushing past the viewport and adding a horizontal scrollbar.
-  // The .stage clips horizontal overflow as a safety net.
-  margin-left: auto;
-  margin-right: 4.5rem;
-  transform-origin: top right;
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-  // Sharper text + smoother edges across the whole dashboard.
+  // Desktop: 500 (antes 458). El panda no necesita compensacion porque esta
+  // anclado al borde IZQUIERDO del wrapper (left: -145px), asi que al crecer
+  // el ancho el asomo sigue siendo el mismo; lo que se corre es el borde
+  // derecho. Los breakpoints de abajo mantienen sus valores.
+  max-width: 500px;
+  // Alineado a la derecha de su columna (estilo panel de producto Vercel).
+  margin-inline: auto;
+  // Desktop: corrido un poco a la izquierda del borde derecho de su columna.
+  @media (min-width: 769px) {
+    margin-right: 4rem;
+  }
+  font-family: var(--font-body), 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  @media (max-width: 520px) {
-    margin-inline: auto;
-    transform-origin: top center;
-  }
-
-  // Subtle hover — just a tiny Z rotation
+  // Hover casi imperceptible — leve elevación, sin rotar.
   &:hover .browser {
-    transform: rotate(-0.3deg);
+    transform: translateY(-2px);
   }
 
-  :global(html.dark) &:hover .browser {
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.58),
-      0 38px 74px rgba(0, 0, 0, 0.68),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+  // Entre 1201 y 1400 los 500px hacen que el panda (que asoma 144px hacia la
+  // izquierda) se monte sobre la columna de texto. Ahi vuelve al ancho previo.
+  @media (max-width: 1400px) {
+    max-width: 458px;
   }
 
   @media (max-width: 1200px) {
-    max-width: 432px;
+    max-width: 402px;
   }
 
   @media (max-width: 1024px) {
-    max-width: 396px;
+    max-width: 374px;
   }
 
+  // Mobile: el dashboard aprovecha todo el ancho disponible. El panda ya no
+  // asoma por el costado —ahí robaba ancho justo donde más falta— sino por
+  // arriba, así que el wrapper vuelve a centrarse y sólo deja los márgenes
+  // laterales mínimos.
+  // El margen lateral lo pone el propio wrapper: el contenedor padre (.stage)
+  // no aporta padding horizontal en mobile.
   @media (max-width: 768px) {
-    max-width: 360px;
-    margin: 1rem auto;
-    transform-origin: top center;
+    // Mucho más chico: en vez de ocupar todo el ancho (`max-width: none`), el
+    // dashboard se limita a 385px y queda centrado. Un ancho tope en px —y no
+    // un `transform: scale()`— porque el scale deja el hueco del tamaño
+    // original reservado en el layout y habría que compensarlo con márgenes
+    // negativos; el max-width achica de verdad.
+    max-width: 385px;
+    // Aire arriba SÓLO el que necesita la cabeza del panda: con translateY(-86px)
+    // sobre un panda de 126px asoman ~10px por encima del browser (~14px con el
+    // giro), así que la cabeza pide poco. 3rem le da ese aire más un respiro
+    // de separación real; el 7.5rem de antes venía de cuando el panda salía
+    // mucho más y dejaba un hueco enorme sobre el dashboard.
+    /* El margen inferior (antes 1rem) separa el dashboard de la sección que
+       sigue: con 1rem quedaban casi pegados. */
+    margin: 3rem auto 2.5rem;
+  }
+
+  // Pantallas muy angostas: un poco más chico todavía.
+  @media (max-width: 420px) {
+    max-width: 335px;
+  }
+}
+
+// ---------- Isotipo panda que se asoma ----------
+// Los dos isotipos comparten posición exacta y sólo se alterna cuál se ve.
+// El de contorno lleva un borde claro que lo despega del grafito; en light ese
+// mismo borde se perdería contra el fondo blanco, así que ahí sigue el plano.
+.peekPandaDark {
+  display: none;
+}
+
+:global(html.dark) {
+  .peekPandaLight {
+    display: none;
+  }
+
+  .peekPandaDark {
+    display: block;
+  }
+}
+
+.peekPanda {
+  position: absolute;
+  // Asomado por el borde IZQUIERDO, a media altura. La mitad derecha del panda
+  // queda DETRÁS del browser; sólo asoma la cabeza hacia la izquierda, cruzado.
+  top: 16%;
+  // `left` MÁS negativo = el panda se corre a la izquierda = asoma MÁS afuera.
+  // Lo que queda tapado por el browser es (width - |left|): con 180/-145 unos
+  // ~35px quedan detrás, así que asoma bien pero sin despegarse del panel.
+  left: -145px;
+  width: 180px;
+  height: auto;
+  z-index: 0; // DETRÁS del browser (z-index: 1): se asoma desde atrás
+  // Bien cruzado, quieto (sin flotar). Centrado vertical vía translateY(-50%).
+  transform: translateY(-50%) rotate(-52deg);
+  transform-origin: center right;
+  pointer-events: none;
+  filter: drop-shadow(-6px 8px 14px rgba(46, 41, 78, 0.22));
+
+  // La sombra lila apenas se nota sobre grafito: en dark va negra y más densa
+  // para que el panda siga despegándose del fondo.
+  :global(html.dark) & {
+    filter: drop-shadow(-6px 8px 16px rgba(0, 0, 0, 0.45));
+  }
+
+  @media (max-width: 1024px) {
+    width: 152px;
+    left: -122px;
+  }
+
+  // Mobile: el panda deja de asomar por el costado y pasa a asomar por ARRIBA,
+  // desde atrás del borde superior del browser. Por el costado obligaba a
+  // achicar el dashboard justo donde el ancho es el recurso escaso; arriba no
+  // le quita ni un píxel de ancho.
+  //
+  // `top`/`left` se resetean porque el posicionamiento pasa a ser por la
+  // derecha (el panda se apoya cerca de la esquina superior derecha, sin tapar
+  // la barra de URL). El translate vertical negativo lo saca por encima del
+  // browser dejando visible sólo la cabeza.
+  @media (max-width: 768px) {
+    width: 92px;
+    top: 0;
+    left: auto;
+    // Menos `right` = más cerca de la esquina derecha del browser.
+    right: 0.75rem;
+    // Casi derecho: apenas -2° para que no se lea como un isotipo pegado en
+    // ángulo, pero sin quedar perfectamente vertical (rígido).
+    //
+    // El desplazamiento va en px y NO en %: el % se calcula sobre el alto del
+    // propio panda, así que al agrandarlo salía MÁS afuera aunque el porcentaje
+    // subiera. En px, "cuánto asoma" queda fijo sin importar el tamaño.
+    // Menos negativo = el panda BAJA y se esconde MÁS detrás del browser.
+    // -57px sobre un panda de 92px deja ~4px de cabeza a la vista: apenas un
+    // guiño espiando desde atrás, no un isotipo apoyado arriba.
+    transform: translateY(-57px) rotate(-2deg);
+    transform-origin: center bottom;
   }
 
   @media (max-width: 420px) {
-    max-width: 320px;
+    width: 80px;
+    right: 0.5rem;
+    // Mismo criterio: sobre 80px, -50px deja ~3px de cabeza asomando.
+    transform: translateY(-50px) rotate(-2deg);
   }
 }
 
@@ -56,46 +153,39 @@
   position: relative;
   width: 100%;
   background: #ffffff;
-  border-radius: 16px;
-  // Tighter contact shadow + ambient + crisp hairline ring = more definition.
+  border-radius: 12px;
+  // Borde marcado pero no duro — delimita el dashboard con presencia suave.
+  border: 1.5px solid rgba(46, 41, 78, 0.3);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.06),
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 35px 70px rgba(0, 0, 0, 0.16),
-    0 0 0 1px rgba(0, 0, 0, 0.04);
+    0 0 0 1px rgba(46, 41, 78, 0.06),
+    0 1px 2px rgba(46, 41, 78, 0.05),
+    0 10px 28px rgba(46, 41, 78, 0.1);
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  transform: rotate(-1.2deg);
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1s ease;
-
-  @media (max-width: 768px) {
-    transform: rotate(-0.8deg);
-  }
+  transform: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   z-index: 1;
 
   :global(html.dark) & {
-    background: #14172a;
-    border-color: rgba(255, 255, 255, 0.08);
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(181, 156, 248, 0.4);
     box-shadow:
-      0 2px 6px rgba(0, 0, 0, 0.5),
-      0 10px 30px rgba(0, 0, 0, 0.58),
-      0 35px 70px rgba(0, 0, 0, 0.68),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+      0 0 0 1px rgba(0, 0, 0, 0.25),
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 10px 28px rgba(0, 0, 0, 0.5);
   }
 }
 
 .browserChrome {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: #f7f7f8;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  gap: 0.7rem;
+  padding: 0.65rem 0.85rem;
+  background: #faf9fc;
+  border-bottom: 1px solid rgba(46, 41, 78, 0.08);
 
   :global(html.dark) & {
-    background: #0f1226;
-    border-bottom-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -119,18 +209,29 @@
 .urlBar {
   flex: 1;
   min-width: 0;
-  padding: 0.45rem 0.95rem;
-  background: #ffffff;
-  border-radius: 7px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 0.82rem;
+  padding: 0.4rem 0.85rem;
+  background: #fbfbfc;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  font-size: 0.78rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   white-space: nowrap;
   overflow: hidden;
+  text-align: left;
 
   :global(html.dark) & {
-    background: #1a1e36;
-    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Ruta discreta y centrada (sin efecto typing, más calmo)
+.urlPath {
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.01em;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
@@ -164,7 +265,7 @@
   background: var(--primary-color);
   vertical-align: -2px;
   flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(204, 2, 103, 0.55);
+  box-shadow: 0 0 6px rgba(142, 122, 230, 0.55);
   animation: caretBlink 0.7s steps(2, end) infinite;
 }
 
@@ -188,14 +289,18 @@
 
 // ---------- Content ----------
 .content {
-  padding: 0.95rem 1.1rem 1.1rem;
+  /* Mas ancho y mas bajo: el recorte va en el eje vertical (padding y gap),
+     el horizontal se mantiene porque ahora sobra ancho. */
+  padding: 0.75rem 1.1rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
 
+  // Dashboard más bajo en mobile: el recorte va en el eje vertical (padding y
+  // gap entre bloques), no en el horizontal, que ahora tiene ancho de sobra.
   @media (max-width: 768px) {
-    padding: 0.55rem 0.65rem 0.65rem;
-    gap: 0.4rem;
+    padding: 0.5rem 0.8rem 0.6rem;
+    gap: 0.3rem;
     font-size: 0.85rem;
   }
 }
@@ -219,13 +324,14 @@
   position: relative;
   display: inline-block;
   font-size: 0.95rem;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  // Menos negro: no roba atención al rotar entre proyectos.
+  color: rgba(0, 0, 0, 0.55);
   line-height: 1.1;
   transition: opacity 0.35s ease, transform 0.35s ease, color 0.5s ease;
 
   :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.62);
   }
 }
 
@@ -252,8 +358,8 @@
 // Phase: enter — task just appeared, full color, no strike
 .task_enter {
   opacity: 0;
-  transform: translateY(4px);
-  animation: taskEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(3px);
+  animation: taskEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes taskEnter {
@@ -288,8 +394,8 @@
 .task_leave {
   color: rgba(0, 0, 0, 0.42);
   opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(-3px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
   .strikeLine {
     transform: scaleX(1);
@@ -320,34 +426,35 @@
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #0a7a4d;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 999px;
+  // Dos verdes de marca: bosque para el texto, menta para el fondo.
+  color: var(--verde-bosque, #58876e);
+  background: var(--verde-menta, #d1f0d1);
+  border: 1px solid rgba(88, 135, 110, 0.28);
+  border-radius: 8px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   flex-shrink: 0;
   animation: liveGlow 2.4s ease-in-out infinite;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background: rgba(16, 185, 129, 0.18);
+    background: #c3e9c3;
   }
 
   :global(html.dark) & {
-    color: #6ee7a8;
-    background: rgba(16, 185, 129, 0.14);
-    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--verde-menta, #d1f0d1);
+    background: rgba(88, 135, 110, 0.22);
+    border-color: rgba(88, 135, 110, 0.4);
   }
 }
 
 @keyframes liveGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-    border-color: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 0 0 0 rgba(88, 135, 110, 0);
+    border-color: rgba(88, 135, 110, 0.28);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.14);
-    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 0 4px rgba(88, 135, 110, 0.16);
+    border-color: rgba(88, 135, 110, 0.55);
   }
 }
 
@@ -356,14 +463,14 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10b981;
+  background: var(--verde-bosque, #58876e);
 
   &::before {
     content: '';
     position: absolute;
     inset: -3px;
     border-radius: 50%;
-    background: #10b981;
+    background: var(--verde-bosque, #58876e);
     opacity: 0.45;
     animation: liveRing 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
@@ -387,37 +494,21 @@
   gap: 0.6rem;
 }
 
-// Flash highlight when task changes
-.statsFlash .statCard {
-  animation: statFlash 0.5s ease;
-}
-
-.statsFlash .statCard:nth-child(1) { animation-delay: 0s; }
-.statsFlash .statCard:nth-child(2) { animation-delay: 0.08s; }
-.statsFlash .statCard:nth-child(3) { animation-delay: 0.16s; }
-
-@keyframes statFlash {
-  0%   { background: rgba(0, 0, 0, 0.07); border-color: rgba(0, 0, 0, 0.14); }
-  100% { background: rgba(0, 0, 0, 0.025); border-color: rgba(0, 0, 0, 0.05); }
-}
-
-:global(html.dark) .statsFlash .statCard {
-  animation: statFlashDark 0.5s ease;
-}
-
-@keyframes statFlashDark {
-  0%   { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.18); }
-  100% { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); }
-}
-
 .statCard {
-  background: rgba(0, 0, 0, 0.025);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  // Fondo más clarito para no ensuciar la vista.
+  background: rgba(46, 41, 78, 0.015);
+  border: 1px solid rgba(46, 41, 78, 0.06);
   border-radius: 8px;
-  padding: 0.55rem 0.75rem;
+  padding: 0.45rem 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.6rem;
+    gap: 0.15rem;
+  }
+
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease,
@@ -427,9 +518,9 @@
 
   &:hover {
     transform: translateY(-1px);
-    background: rgba(0, 0, 0, 0.045);
-    border-color: rgba(0, 0, 0, 0.12);
-    box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.25);
+    background: rgba(46, 41, 78, 0.035);
+    border-color: rgba(46, 41, 78, 0.12);
+    box-shadow: 0 6px 14px -8px rgba(46, 41, 78, 0.22);
   }
 
   :global(html.dark) & {
@@ -445,22 +536,27 @@
 }
 
 .statValue {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: rgba(0, 0, 0, 0.9);
+  // Más finitos y un cachín más chicos: informan sin gritar.
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  // Cifras de ancho fijo: al contar, el número no se ensancha ni corre a la
+  // etiqueta de al lado. Es la diferencia entre "anima" y "tiembla".
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  color: rgba(0, 0, 0, 0.82);
   line-height: 1;
   transition: color 0.3s ease;
 
   :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 
 .statUnit {
   color: var(--primary-color);
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-weight: 500;
+  font-size: 0.78rem;
   margin-left: 0.08rem;
 }
 
@@ -478,18 +574,25 @@
 
 // ---------- Chart ----------
 .chartCard {
-  background: rgba(0, 0, 0, 0.025);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  // Fondo más clarito, igual que las stat cards.
+  background: rgba(46, 41, 78, 0.015);
+  border: 1px solid rgba(46, 41, 78, 0.04);
   border-radius: 8px;
   padding: 0.6rem 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+
+  @media (max-width: 768px) {
+    padding: 0.45rem 0.7rem;
+    gap: 0.25rem;
+  }
+
   transition: background 0.3s ease, border-color 0.3s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(46, 41, 78, 0.035);
+    border-color: rgba(46, 41, 78, 0.12);
   }
 
   :global(html.dark) & {
@@ -525,39 +628,70 @@
 
 .chartSvg {
   width: 100%;
-  height: 54px;
+  height: auto;
   display: block;
+  // Deja respirar el punto final para que su halo no se recorte.
+  overflow: visible;
 
-  @media (max-width: 768px) {
-    height: 34px;
+  // El viewBox es 400x58 (relación ~7:1), así que a ancho completo de mobile el
+  // gráfico queda en 40-48px de alto. No necesita techo propio: no es el bloque
+  // que estira el dashboard.
+}
+
+// Grilla de fondo muy tenue: da cuerpo al gráfico sin ensuciar.
+.chartGrid {
+  opacity: 0;
+  animation: chartGridIn 1s ease 0.3s forwards;
+
+  line {
+    opacity: 0.08;
+  }
+
+  :global(html.dark) & line {
+    opacity: 0.12;
   }
 }
 
-.chartLine {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: chartDraw 2.2s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
-  transition: filter 0.35s ease;
+@keyframes chartGridIn {
+  to { opacity: 1; }
 }
 
+// Área bajo la curva — degradado suave que aparece tras dibujarse la línea.
 .chartFill {
   opacity: 0;
-  animation: chartFadeIn 1.2s ease 1.4s forwards;
+  animation: chartFadeIn 0.9s ease 0.75s forwards;
+}
+
+.chartLine {
+  /* 1200 cubre la curva más larga que puede generar seriesToPath; si queda
+     corto la línea aparece cortada al final del trazado. */
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: chartDraw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+  transition: filter 0.35s ease;
 }
 
 .chartDot {
   opacity: 0;
-  animation: chartDotIn 0.4s ease 2.6s forwards;
-  transform-origin: 398px 8px;
-  filter: drop-shadow(0 0 4px rgba(204, 2, 103, 0.6));
+  animation: chartDotIn 0.4s ease 1.5s forwards;
+  /* Antes era `392px 11px`, la posición fija del dot viejo. Ahora el dot se
+     mueve con la serie, así que el origen se toma del propio círculo. */
+  transform-origin: center;
+  transform-box: fill-box;
   transition: filter 0.35s ease;
 }
 
 .chartDotOuter {
   opacity: 0;
-  transform-origin: 398px 8px;
+  transform-origin: center;
   transform-box: fill-box;
-  animation: chartDotIn 0.4s ease 2.6s forwards;
+  animation: chartDotPing 2.4s ease-out 1.5s infinite;
+}
+
+@keyframes chartDotPing {
+  0%   { opacity: 0.18; transform: scale(1); }
+  70%  { opacity: 0;    transform: scale(2.4); }
+  100% { opacity: 0;    transform: scale(2.4); }
 }
 
 @keyframes chartDraw {
@@ -573,27 +707,45 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-@keyframes chartDotPing {
-  0%   { opacity: 0.4; transform: scale(1); transform-origin: center; }
-  80%  { opacity: 0; transform: scale(2.5); }
-  100% { opacity: 0; transform: scale(2.5); }
-}
-
 // ---------- Stack rows ----------
 .stackRows {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+
+  @media (max-width: 768px) {
+    gap: 0.25rem;
+  }
 }
 
 .stackRow {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 0.7rem;
+  padding: 0.4rem 0.7rem;
   background: rgba(0, 0, 0, 0.025);
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+
+  // Filas más bajas: el recorte va en el padding vertical. El horizontal se
+  // mantiene, que ahora hay ancho de sobra.
+  @media (max-width: 768px) {
+    padding: 0.35rem 0.7rem;
+  }
+
+  /* En mobile el dashboard muestra sólo dos filas de stack: con tres, el panel
+     crecía en alto justo donde el espacio vertical es el recurso escaso. Se va
+     la primera (Frontend & UI) y quedan Backend & APIs e Infra & DevOps.
+
+     Va anidada dentro de .stackRow (→ `.stackRow.hideOnMobile`, dos clases) y
+     NO como `.hideOnMobile` suelta: el elemento lleva ambas clases, así que a
+     igual especificidad ganaba `.stackRow { display: flex }` y la fila seguía
+     visible. */
+  &.hideOnMobile {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease,
@@ -628,25 +780,45 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  color: #ffffff;
+  // Antes era blanco sobre un grafito saturado: tres bloques oscuros que se
+  // llevaban la mirada antes que los datos. Ahora el glifo va en gris medio
+  // sobre un fondo apenas insinuado.
+  color: rgba(110, 94, 190, 0.55);
   flex-shrink: 0;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  :global(html.dark) & {
+    color: rgba(181, 156, 248, 0.6);
+  }
 }
 
+// Tres íconos con el MISMO gradiente delicado neutro — parejos, sin abrumar.
 .stackIconFrontend {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
+
+  :global(html.dark) & {
+    background: rgba(181, 156, 248, 0.12);
+  }
 }
 
 .stackIconBackend {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
 
   :global(html.dark) & {
-    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    background: rgba(181, 156, 248, 0.12);
   }
 }
 
 .stackIconInfra {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  // Mismo gradiente delicado que Backend — parejo, sin abrumar.
+  // Lila de marca muy diluido: aporta identidad sin volver a pesar.
+  background: rgba(142, 122, 230, 0.1);
+
+  :global(html.dark) & {
+    background: rgba(181, 156, 248, 0.12);
+  }
 }
 
 .stackInfo {
@@ -696,13 +868,9 @@
 .stackChecksCount {
   color: #10b981;
   font-weight: 600;
-  animation: checksFlicker 4.5s ease-in-out infinite;
-}
-
-@keyframes checksFlicker {
-  0%, 100% { opacity: 1; }
-  97% { opacity: 1; }
-  98%, 99% { opacity: 0.4; }
+  font-variant-numeric: tabular-nums;
+  // Antes tenía un parpadeo infinito. Era movimiento sin dato detrás: el
+  // número ya cambia cuando cambia la tarea, no hace falta llamar la atención.
 }
 
 .stackPercent {
@@ -722,11 +890,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  color: #0a7a4d;
+  // Lila, no verde: el verde vive sólo en el badge LIVE.
+  color: var(--primary-color);
   text-transform: uppercase;
 
   :global(html.dark) & {
-    color: #6ee7a8;
+    color: var(--lila-suave, #b59cf8);
   }
 }
 
@@ -734,8 +903,8 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  background: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(46, 41, 78, 0.18);
   animation: livePulse 1.6s ease-in-out infinite;
 }
 
@@ -767,12 +936,23 @@
 }
 
 .progressDone {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #f472b6 100%);
+  // Clarito a la izquierda → más oscuro a la derecha. Atenuado: el lila a
+  // plena saturacion competia con los iconos ya calmados y con el grafico.
+  background: linear-gradient(90deg, rgba(181, 156, 248, 0.38) 0%, rgba(142, 122, 230, 0.48) 100%);
+
+  :global(html.dark) & {
+    background: linear-gradient(90deg, rgba(181, 156, 248, 0.34) 0%, rgba(142, 122, 230, 0.44) 100%);
+  }
 }
 
 .progressLive {
-  background: linear-gradient(90deg, #10b981 0%, #6ee7a8 100%);
+  // Clarito a la izquierda → más oscuro a la derecha. El verde queda sólo al badge LIVE.
+  background: linear-gradient(90deg, rgba(181, 156, 248, 0.38) 0%, rgba(142, 122, 230, 0.48) 100%);
   position: relative;
+
+  :global(html.dark) & {
+    background: linear-gradient(90deg, rgba(181, 156, 248, 0.34) 0%, rgba(142, 122, 230, 0.44) 100%);
+  }
 
   &::after {
     content: '';
@@ -813,22 +993,25 @@
     0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-// Metric pill (top-left)
+// Metric pill (top-left) — en lila profundo de marca, no negro
 .metricPill {
   top: 4%;
   left: -6%;
-  padding: 0.6rem 0.9rem;
-  background: #0b0d12;
+  padding: 0.55rem 0.85rem;
+  background: var(--lila-profundo, #2e294e);
   color: #ffffff;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transform: rotate(-4deg);
-  animation: metricFloat 6s ease-in-out infinite;
+  border: 1px solid rgba(181, 156, 248, 0.22);
+  box-shadow:
+    0 6px 18px rgba(46, 41, 78, 0.28),
+    0 2px 6px rgba(46, 41, 78, 0.16);
+  transform: rotate(-3deg);
+  animation: metricFloat 7s ease-in-out infinite;
   transition: box-shadow 0.35s ease, border-color 0.35s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-color: rgba(181, 156, 248, 0.4);
+    box-shadow: 0 8px 20px rgba(46, 41, 78, 0.32);
   }
 
   @media (max-width: 768px) {
@@ -840,8 +1023,8 @@
 }
 
 @keyframes metricFloat {
-  0%, 100% { transform: translateY(0) rotate(-4deg); }
-  50%      { transform: translateY(-4px) rotate(-4deg); }
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-3px) rotate(-3deg); }
 }
 
 .metricValue {
@@ -871,108 +1054,3 @@
   font-weight: 700;
 }
 
-// Testimonial pill (bottom-right)
-.testimonialPill {
-  bottom: 6%;
-  right: -8%;
-  padding: 0.45rem 0.85rem 0.45rem 0.45rem;
-  background: #ffffff;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  z-index: 5;
-  animation: testimonialFloat 6s ease-in-out infinite;
-  animation-delay: -3s;
-  transition:
-    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.45s ease,
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
-
-  &:hover {
-    border-color: rgba(0, 0, 0, 0.12);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  &.testimonialFading {
-    opacity: 0;
-    filter: blur(2px);
-  }
-
-  :global(html.dark) & {
-    background: #1a1e36;
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-
-  :global(html.dark) &:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.38);
-  }
-
-  @media (max-width: 768px) {
-    right: 0%;
-    padding: 0.35rem 0.65rem 0.35rem 0.35rem;
-  }
-}
-
-@keyframes testimonialFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-
-.avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #f472b6 100%);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.78rem;
-  flex-shrink: 0;
-}
-
-.avatarImg {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1.5px solid rgba(0, 0, 0, 0.06);
-
-  :global(html.dark) & {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-.testimonialText {
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-  font-size: 0.74rem;
-
-  @media (max-width: 768px) {
-    font-size: 0.68rem;
-    gap: 0.3rem;
-  }
-}
-
-.testimonialName {
-  color: rgba(0, 0, 0, 0.75);
-  font-weight: 600;
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.85);
-  }
-}
-
-.testimonialQuote {
-  color: rgba(0, 0, 0, 0.55);
-  font-style: italic;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.6);
-  }
-}

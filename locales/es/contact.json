@@ -1,9 +1,9 @@
 {
   "contact": {
     "title": "Ponte en contacto",
-    "subtitle": "Siempre estoy abierto a escuchar nuevas ideas y oportunidades de trabajo.",
-    "description": "Si buscas un desarrollador apasionado por construir soluciones efectivas,",
-    "reachOut": "contáctame.",
+    "subtitle": "Contanos qué necesitás y te respondemos con una propuesta concreta.",
+    "description": "Si estás buscando un equipo que se ocupe de tu proyecto de punta a punta,",
+    "reachOut": "escribinos.",
     "email": "seilerfranco317@gmail.com",
     "copyEmail": "Copiar email",
     "form": {
@@ -18,8 +18,8 @@
   },
   "contactPage": {
     "title": "Contacto",
-    "subtitle": "Abierto a colaboraciones estratégicas y proyectos que generen impacto real.",
-    "description": "Si buscas un desarrollador apasionado por construir soluciones efectivas, contáctame.",
+    "subtitle": "Abiertos a nuevos proyectos y colaboraciones que generen impacto real.",
+    "description": "Si estás buscando un equipo que se ocupe de tu proyecto de punta a punta, escribinos.",
     "email": "Email"
   }
 }

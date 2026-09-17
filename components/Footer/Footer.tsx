@@ -29,16 +29,19 @@ const Footer = () => {
         {/* Brand Section */}
         <div className={styles.brandSection}>
           <div className={styles.brand}>
-            <Image src='/Logo.svg' alt="Franco Seiler Logo" width={44} height={44} className={styles.logo} />
-            <span className={styles.brandBlock}>
-              <span className={styles.brandName}>Franco Seiler</span>
-              <span className={styles.brandRole}>Software Solutions</span>
-            </span>
+            <Image
+              src="/brand-header-dark.svg"
+              alt="Franco Seiler — Software Studio"
+              width={430}
+              height={160}
+              className={styles.logo}
+              unoptimized
+            />
           </div>
           <p className={styles.brandTagline}>{t('footer.tagline')}</p>
           <div className={styles.socials}>
             <a 
-              href="https://github.com/francoseiler" 
+              href="https://github.com/Fransei29" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub"
@@ -67,6 +70,12 @@ const Footer = () => {
             </Link>
             <Link href="/projects" className={styles.navLink}>
               {t('nav.projects')}
+            </Link>
+            <Link href="/services" className={styles.navLink}>
+              {t('nav.services')}
+            </Link>
+            <Link href="/blog" className={styles.navLink}>
+              {t('nav.blog')}
             </Link>
             <Link href="/tutorials" className={styles.navLink}>
               {t('nav.tutorials')}
@@ -97,6 +106,16 @@ const Footer = () => {
       <div className={styles.bottomBar}>
         <p>&copy; 2026 {t('footer.by')}. All rights reserved.</p>
       </div>
+
+      {/* Wordmark de marca, grande y muy tenue, asomando en el borde inferior */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
+      <img
+        className={styles.footerWordmark}
+        src="/footer-wordmark.svg"
+        alt=""
+        aria-hidden
+        loading="lazy"
+      />
     </footer>
   );
 };

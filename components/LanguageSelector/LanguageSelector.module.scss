@@ -11,44 +11,54 @@
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: none;
+  // Mismo borde y misma caja que el toggle de tema: los dos controles del
+  // navbar se leen como una pareja.
+  border: 1px solid rgba(46, 41, 78, 0.16);
   cursor: pointer;
-  transition: opacity 0.25s ease, color 0.25s ease;
+  transition: color 0.25s ease, border-color 0.25s ease,
+    background-color 0.25s ease;
   color: rgb(73, 73, 73);
   opacity: 1;
   border-radius: var(--br);
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
   padding: 0;
 
   &:hover {
     opacity: 1;
-    background-color: transparent;
+    background-color: rgba(142, 122, 230, 0.06);
+    border-color: rgba(142, 122, 230, 0.4);
     color: #000000;
   }
 
+  // .active no fija fondo ni color propios: el botón lleva .active siempre
+  // (es un único toggle), así que declararlos acá pisaría los del hover por
+  // venir después con la misma especificidad.
   &.active {
     opacity: 1;
-    color: rgb(73, 73, 73);
-    background-color: transparent;
   }
 
   :global(html.dark) & {
     color: rgb(210, 210, 210);
+    border-color: rgba(255, 255, 255, 0.16);
 
     &:hover {
-      background-color: transparent;
+      background-color: rgba(181, 156, 248, 0.1);
+      border-color: rgba(181, 156, 248, 0.45);
       color: #ffffff;
     }
 
-    &.active {
-      color: rgb(210, 210, 210);
-      background-color: transparent;
-    }
   }
 }
 
 .globeIcon {
+  // Glifo macizo de un solo path: se lee bien en chico, a diferencia del
+  // language-line (bocadillos de trazo fino) que se empastaba.
+  // No es cuadrado —su viewBox es 1536×1792, más alto que ancho—, así que el
+  // alto lo fija font-size y el ancho sale de la proporción del propio SVG.
+  font-size: 20px;
+  width: auto;
+  height: 1em;
   vertical-align: middle;
   flex-shrink: 0;
   transition: color 0.3s ease;
@@ -62,7 +72,11 @@
   }
 
   .languageButton {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .globeIcon {
+    font-size: 18px;
   }
 }

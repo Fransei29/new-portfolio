@@ -1,0 +1,87 @@
+// app/newsletter/[status]/status.module.scss
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 4rem 1.5rem;
+  background-color: var(--background-colorA);
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 30rem;
+}
+
+.mark {
+  width: 96px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+// En los estados de error el panda se atenúa, para no celebrar un fallo.
+.markMuted {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+.title {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--ink);
+
+  :global(html.dark) & {
+    color: rgb(243, 242, 248);
+  }
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-color-light);
+  margin: 0;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.75);
+  }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.8rem 1.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--cta-text);
+  background: var(--cta-bg);
+  border-radius: var(--br);
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--cta-bg-hover);
+  }
+
+  :global(html.dark) & {
+    color: #16141f;
+    background: rgb(235, 235, 235);
+
+    &:hover {
+      background: #ffffff;
+    }
+  }
+}

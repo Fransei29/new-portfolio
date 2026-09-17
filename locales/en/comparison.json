@@ -1,0 +1,38 @@
+{
+  "comparison": {
+    "title": "There's more than one way to build it.",
+    "subtitle": "Here's how the options compare.",
+    "criteria": {
+      "option": "Option",
+      "speed": "Speed",
+      "cost": "Cost",
+      "maintainable": "Maintainable",
+      "scales": "Scales",
+      "ownership": "You own it"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "rows": {
+      "me": {
+        "name": "Custom development",
+        "description": "Built for your needs, with full control."
+      },
+      "inhouse": {
+        "name": "Hiring in-house",
+        "description": "More control, but slower and more expensive."
+      },
+      "agency": {
+        "name": "Large agency",
+        "description": "Broad teams, with more layers between you and who builds it."
+      },
+      "nocode": {
+        "name": "No-code tools",
+        "description": "Quick to start, but limited as you grow."
+      },
+      "manual": {
+        "name": "Keeping it manual",
+        "description": "Easy to start, but costly in time."
+      }
+    }
+  }
+}

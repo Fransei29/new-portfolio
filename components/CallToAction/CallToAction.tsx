@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { HiArrowRight } from 'react-icons/hi';
@@ -9,6 +9,44 @@ import styles from './CallToAction.module.scss';
 export default function CallToAction() {
   const { t } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
+
+  // Observer propio en vez de depender del wrapper de la página: este CTA se
+  // reutiliza en la home (dentro de un .assemble) y en /services y /about
+  // (donde no hay ninguno). Sin esto la pieza se quedaba en opacity:0 para
+  // siempre en esas páginas.
+  const ctaRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+
+    // Si ya vive dentro de un .assemble, ese wrapper lo dispara: no hace falta
+    // un segundo observer compitiendo por el mismo elemento.
+    //
+    // Se busca desde el PADRE: `el.closest()` se incluye a sí mismo y este
+    // <section> lleva su propia clase `assemble`, así que siempre encontraba
+    // una coincidencia y salía sin registrar nada. En la home no se notaba
+    // porque un wrapper externo con .assemble recibe `visible` del observer de
+    // la página; en /services y /about, donde ese wrapper no existe, el CTA se
+    // quedaba en opacity:0 para siempre — justo el caso que este observer
+    // existe para cubrir.
+    if (el.parentElement?.closest('.assemble')) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '0px 0px -12% 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -25,8 +63,18 @@ export default function CallToAction() {
     : (t('aboutPage.buttonText') ?? '');
 
   return (
-    <section className={styles.ctaContainer}>
-      <div className={styles.ctaContent}>
+    <section ref={ctaRef} className={`${styles.ctaContainer} assemble`}>
+      {/* Panda asomándose por el borde derecho del contenedor; el overflow:hidden
+          del ctaContainer lo recorta en ese borde. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
+      <img
+        className={styles.peekPanda}
+        src="/isotipo-panda-contorno.svg"
+        alt=""
+        aria-hidden
+        loading="lazy"
+      />
+      <div className={`${styles.ctaContent} piece-pop piece-delay-1`}>
         <p className={styles.ctaText}>
           {buttonText.split('\n').map((line, index) => (
             <React.Fragment key={index}>
@@ -40,7 +88,7 @@ export default function CallToAction() {
             {t('aboutPage.description')}
           </p>
         )}
-        <Link href="/about" className={styles.ctaButton}>
+        <Link href="/contact" className={styles.ctaButton}>
           {t('aboutPage.buttonLabel') ?? ''}
           <HiArrowRight className={styles.arrow} />
         </Link>

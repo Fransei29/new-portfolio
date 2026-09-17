@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './HomeText.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { HiArrowRight } from 'react-icons/hi';
+import StartIcon from '../../public/NewBrand/icons/star-arrow-right-start-20-regular.svg';
+import SearchIcon from '../../public/NewBrand/icons/search.svg';
 
 const HomeText: React.FC = () => {
-  const elementsRef = useScrollAnimation();
   const { t, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -27,8 +26,7 @@ const HomeText: React.FC = () => {
 
   return (
   <section className={styles.homeTextContainer}>
-    <section ref={(el) => {elementsRef.current[0] = el;}} className="fade-in-right">
-        <p className={styles.greeting}>{t('hero.title')}</p>
+    <section className="hero-piece hero-piece-1">
         <h1 className={styles.mainTitle}>
           {subtitleBefore}
           <br />
@@ -37,29 +35,45 @@ const HomeText: React.FC = () => {
           {subtitleAfter}
         </h1>
     </section>
-    <section ref={(el) => {elementsRef.current[1] = el;}} className="fade-in-left">
-       <h2 className={styles.subTitle}>{t('hero.description')}</h2>
+    <section className="hero-piece hero-piece-2">
+       {/* El `|` del locale marca dónde cortar la línea, para que la frase no
+           parta en una palabra suelta. */}
+       <h2 className={styles.subTitle}>
+         {t('hero.description').split('|').map((part, i, arr) => (
+           <span key={i}>
+             {part.trim()}
+             {i < arr.length - 1 && (
+               <>
+                 {/* En mobile el corte forzado dejaba la primera línea a medias
+                     y la frase pasaba a 4 renglones: ahí el texto fluye solo y
+                     entra en 3. El salto queda para desktop. */}
+                 <br className={styles.descBreak} />{' '}
+               </>
+             )}
+           </span>
+         ))}
+       </h2>
     </section>
-    <section ref={(el) => {elementsRef.current[2] = el;}} className="fade-in-right">
+    <section className="hero-piece hero-piece-3">
         {t('about.description') && (
           <p className={styles.description}>
             {t('about.description')}
           </p>
         )}
         <div className={styles.ctaButtons}>
-          <Link href="/projects" className={styles.btnPrimary}>
-            {t('hero.cta.projects')}
-            <HiArrowRight className={styles.arrow} />
-          </Link>
           <a
             href="https://calendly.com/seilerfranco317/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.btnSecondary}
+            className={styles.btnPrimary}
           >
             {t('hero.cta.contact')}
-            <HiArrowRight className={styles.arrow} />
+            <StartIcon className={styles.ctaIcon} />
           </a>
+          <Link href="/projects" className={styles.btnSecondary}>
+            {t('hero.cta.projects')}
+            <SearchIcon className={styles.ctaIcon} />
+          </Link>
         </div>
         <div className={styles.socialProof} aria-label={t('hero.socialProof.label') ?? 'Trusted by clients'}>
           <div className={styles.avatarStack}>
@@ -85,9 +99,13 @@ const HomeText: React.FC = () => {
               className={styles.avatarCircle}
             />
           </div>
-          <p className={styles.socialProofCopy}>
-            <span className={styles.socialProofPlus}>+</span>
-            <span>{t('hero.socialProof.sub')}</span>
+          {/* Los dos datos comparten estructura (numero + etiqueta) para que
+              se lean como un par. Antes el 15 venia dentro del string de
+              traduccion y heredaba estilo de texto corrido, asi que pesaba
+              menos que el 22+ de al lado. */}
+          <p className={styles.socialProofStat}>
+            <span className={styles.socialProofStatNumber}>15+</span>
+            <span className={styles.socialProofStatLabel}>{t('hero.socialProof.clients')}</span>
           </p>
           <span className={styles.socialProofDivider} aria-hidden />
           <p className={styles.socialProofStat}>

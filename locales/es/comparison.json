@@ -1,0 +1,38 @@
+{
+  "comparison": {
+    "title": "Hay más de una forma de construirlo.",
+    "subtitle": "Así se comparan las opciones.",
+    "criteria": {
+      "option": "Opción",
+      "speed": "Velocidad",
+      "cost": "Costo",
+      "maintainable": "Mantenible",
+      "scales": "Escala",
+      "ownership": "Es tuyo"
+    },
+    "yes": "Sí",
+    "no": "No",
+    "rows": {
+      "me": {
+        "name": "Desarrollo a medida",
+        "description": "Hecho a tu medida, con control total."
+      },
+      "inhouse": {
+        "name": "Contratar in-house",
+        "description": "Más control, pero más lento y más caro."
+      },
+      "agency": {
+        "name": "Agencia grande",
+        "description": "Equipos amplios, con más capas entre vos y quien construye."
+      },
+      "nocode": {
+        "name": "Herramientas no-code",
+        "description": "Rápido de arrancar, pero limitado cuando crecés."
+      },
+      "manual": {
+        "name": "Seguir a mano",
+        "description": "Fácil de empezar, pero caro en tiempo."
+      }
+    }
+  }
+}

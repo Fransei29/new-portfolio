@@ -1,0 +1,434 @@
+@import '../../app/styles/utilities.scss';
+
+.blogSection {
+  margin: 0;
+  width: 100%;
+  padding: 5.5rem 0;
+
+  /* Fondo B (gris) que se desvanece a blanco en el último tramo, en vez de
+     cerrar con un wave. Abajo viene el CTA en su contenedor flotante: una curva
+     dura chocaría con esa forma, mientras que el degradado lo deja aparecer
+     sobre blanco limpio. El corte se mantiene en 65% para que el gris tenga
+     presencia real detrás de las tarjetas y sólo se disuelva al final. */
+  background-image: linear-gradient(
+    180deg,
+    var(--background-colorB) 0%,
+    var(--background-colorB) 65%,
+    var(--background-colorA) 100%
+  );
+
+  :global(html.dark) & {
+    background-image: linear-gradient(
+      180deg,
+      var(--wave-b) 0%,
+      var(--wave-b) 65%,
+      var(--dark-light) 100%
+    );
+  }
+
+  @media (max-width: 768px) {
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título. */
+    padding: 1rem 0 3rem;
+  }
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: var(--subtitle-spacing-top) auto 3rem;
+  text-align: center;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  max-width: 60ch;
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin: 0.75rem 0 1.75rem;
+    max-width: none;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  align-items: stretch;
+
+  // Con pocos posts la grilla se centra en vez de estirar las tarjetas: una
+  // sola tarjeta a 3 columnas se ve como un banner, no como una tarjeta.
+  &.gridSingle {
+    grid-template-columns: minmax(0, 420px);
+    justify-content: center;
+  }
+
+  &.gridPair {
+    grid-template-columns: repeat(2, minmax(0, 420px));
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+
+    &.gridSingle,
+    &.gridPair {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Mobile: se muestran sólo 2 posts. El endpoint pide 3 (los usa desktop), así
+     que la tercera tarjeta se oculta acá en vez de recortar el fetch, para no
+     cambiar el markup que ya viene armado. */
+  @media (max-width: 768px) {
+    gap: 1.1rem;
+
+    .card:nth-child(3) {
+      display: none;
+    }
+  }
+}
+
+/* Tarjeta minimalista: superficie plana, sin gradiente ni sombras apiladas.
+   Sobre el fondo gris de la sección el blanco plano ya separa la tarjeta —
+   las cuatro capas de sombra teñida que había antes sólo agregaban ruido.
+   Todo el peso visual lo lleva la imagen; el resto es tipografía sobre blanco. */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(46, 41, 78, 0.16);
+  /* --br-lg (14px) es token compartido: se pisa acá, local a la tarjeta, para
+     no cambiarle el radio al resto del sitio. */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  :global(html.dark) & {
+    background: var(--card-bg-soft);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  /* Un solo gesto en hover: el borde toma el lila y aparece una sombra suave.
+     La tarjeta no se mueve; la flecha del enlace es la que señala el destino. */
+  &:hover {
+    border-color: rgba(142, 122, 230, 0.55);
+    box-shadow: 0 12px 28px -18px rgba(46, 41, 78, 0.3);
+
+    :global(html.dark) & {
+      border-color: rgba(181, 156, 248, 0.55);
+      box-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Ahora que es un botón, el hover de la tarjeta también le marca la caja:
+       si sólo se moviera la flecha, el borde quedaría inerte. */
+    .readMore {
+      border-color: rgba(142, 122, 230, 0.75);
+      background-color: rgba(142, 122, 230, 0.07);
+
+      :global(html.dark) & {
+        border-color: rgba(181, 156, 248, 0.75);
+        background-color: rgba(181, 156, 248, 0.1);
+      }
+    }
+
+    .readMore .arrow {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Banda superior achatada: la imagen ancla la tarjeta sin robarle espacio al
+   texto, que es lo que sostiene la lectura. Venía de 2/1 y ocupaba demasiado
+   alto en la fila del home. */
+.coverWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  overflow: hidden;
+  background: rgba(142, 122, 230, 0.06);
+
+  /* En mobile la tarjeta ocupa todo el ancho, así que la banda se achata más
+     todavía: sigue anclando la tarjeta pero deja el texto arriba del pliegue. */
+  @media (max-width: 768px) {
+    aspect-ratio: 12 / 5;
+  }
+
+  /* Velo de marca sobre la portada: las imágenes vienen de fuentes distintas y
+     cada una tira a un color propio, así que la fila se veía despareja. Un tinte
+     lila muy tenue las lleva a un rango común sin taparlas — con `multiply` el
+     tinte se apoya en los medios/oscuros y deja los claros casi intactos, que es
+     lo que mantiene la foto legible en vez de lavarla.
+     Va en ::after (no un div): .coverWrap ya es `position: relative`. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    background: linear-gradient(
+      160deg,
+      rgba(181, 156, 248, 0.16) 0%,
+      rgba(125, 104, 216, 0.1) 55%,
+      rgba(46, 41, 78, 0.14) 100%
+    );
+  }
+
+  /* En dark el `multiply` sobre una foto ya oscura la hunde de más: se cambia a
+     un velo plano del morado profundo, que iguala sin apagar. */
+  :global(html.dark) &::after {
+    mix-blend-mode: normal;
+    background: linear-gradient(
+      160deg,
+      rgba(46, 41, 78, 0.28) 0%,
+      rgba(46, 41, 78, 0.14) 55%,
+      rgba(125, 104, 216, 0.16) 100%
+    );
+  }
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.75rem 1.6rem 1.85rem;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 1.1rem 1.1rem 1.15rem;
+    gap: 0.55rem;
+  }
+}
+
+/* La meta pasa a mayúsculas chicas con tracking: se lee como etiqueta y deja
+   de competir con el título, que es lo único que tiene que destacar arriba. */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6f6a85;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.55);
+  }
+}
+
+.metaDot {
+  opacity: 0.6;
+}
+
+.cardTitle {
+  font-size: var(--card-title-font-size);
+  /* Sube a 600: con la tarjeta despojada de gradiente y píldoras, el título es
+     el ancla visual y a 500 quedaba flotando entre la meta y la descripción. */
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--card-title-font-size-mobile);
+  }
+}
+
+.cardDescription {
+  // Mismo tono que la descripción de "Backed by data": el gris estándar pierde
+  // contraste contra el velo lila del pie de la tarjeta.
+  color: #4a4560;
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.95rem;
+  // Se recorta a 3 líneas para que tarjetas con descripciones de largo distinto
+  // no descuadren la altura de la fila.
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.75);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    /* De 3 a 2 líneas: con la tarjeta más compacta, la 3ra línea era lo que
+       más la estiraba en alto. */
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Envuelve tags + "read article". El `margin-top: auto` vive acá ahora (antes
+   estaba en .readMore): es este bloque el que se empuja al fondo de la tarjeta. */
+.cardFooter {
+  /* Tags a la izquierda y botón a la derecha en la MISMA línea, en todos los
+     breakpoints: ahorra un renglón de alto y empareja la lectura del pie. */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+
+  @media (max-width: 768px) {
+    padding-top: 0.9rem;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+
+  /* Sin margen propio: la línea la alinea el flex del footer. `min-width: 0`
+     deja que los tags se recorten antes de empujar al botón fuera. */
+  margin: 0;
+  min-width: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* Tags como texto, no como píldoras: rellenas con fondo y borde eran el
+   elemento más pesado de la tarjeta y competían con el título. Acá sólo
+   informan, y el separador tenue alcanza para leerlas como lista. */
+.tag {
+  font-size: 0.75rem;
+  color: var(--text-color-light);
+
+  &:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.4rem;
+    opacity: 0.45;
+  }
+
+  :global(html.dark) & {
+    /* 0.5 daba 4.2:1, apenas por debajo de AA. Subimos a 0.62 sin perder el
+       rol secundario del tag frente al título del post. */
+    color: rgba(235, 235, 235, 0.62);
+  }
+}
+
+/* Botón de contorno: al compartir línea con los tags, sin caja se leía como un
+   tag más. Contorno y no relleno a propósito — el botón sólido de la sección es
+   el "View all" de abajo, y dos sólidos competirían. */
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid rgba(142, 122, 230, 0.45);
+  border-radius: var(--br);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  white-space: nowrap;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+    border-color: rgba(181, 156, 248, 0.45);
+  }
+
+  /* Desplazamiento lateral en vez de rotación: acompaña la dirección de la
+     flecha en lugar de convertirla en otro icono. */
+  .arrow {
+    transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
+  }
+}
+
+.ctaContainer {
+  display: flex;
+  // Pegado a la derecha, alineado con el borde de la grilla de tarjetas.
+  justify-content: flex-end;
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
+}
+
+// Mismas medidas y radio que el resto de los CTA de la plataforma
+// (ver HowWeWork/CallToAction): 3rem de alto, padding 0 2rem, --br.
+// Antes era una píldora de 999px, el único botón con esa forma.
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 2rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border-radius: var(--br);
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+
+  .arrow {
+    transform-origin: center center;
+    transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
+  }
+
+  &:hover {
+    box-shadow: 1px 2px 4px -1px rgba(46, 41, 78, 0.2),
+      4px 10px 22px -10px rgba(46, 41, 78, 0.4);
+
+    .arrow {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .ctaButton,
+  .arrow {
+    transition: none;
+  }
+
+  .arrow {
+    transform: none;
+  }
+}

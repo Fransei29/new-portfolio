@@ -2,7 +2,6 @@
 
 import React from 'react';
 import styles from './AutomationComparison.module.scss';
-import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
   Clock,
@@ -17,25 +16,27 @@ import {
 
 const INDICES = [0, 1, 2, 3];
 
+// El cuarto ítem de cada lado se oculta en mobile (clase `.hideOnMobile`): con
+// las dos columnas apiladas, 4 + 4 filas obligaban a un scroll largo para un
+// argumento que ya cierra con 3. En desktop siguen estando los cuatro.
+const MOBILE_HIDDEN_FROM = 3;
+
 // Distinct minimal icons per row
 const WITHOUT_ICONS = [Clock, AlertTriangle, UserMinus, FileWarning];
 const WITH_ICONS = [RefreshCw, CheckCheck, FileCheck2, LayoutGrid];
 
 const AutomationComparison = () => {
-  const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   return (
     <section className={styles.container}>
       <div className={styles.section}>
-        <p className="highlight">{t('automation.title')}</p>
-        <p className={styles.subtitle}>
-          {t('automation.subtitleLine1')}
-          <br />
+        <p className="highlight piece-l piece-delay-0">{t('automation.title')}</p>
+        <p className={`${styles.subtitle} piece-r piece-delay-1`}>
           {t('automation.subtitleLine2')}
         </p>
 
-        <div ref={(el) => { elementsRef.current[0] = el; }} className={styles.grid}>
+        <div className={`${styles.grid} assemble-stagger stagger-alt`}>
           {/* WITHOUT side */}
           <div className={styles.column}>
             <div className={styles.headerRow}>
@@ -60,7 +61,10 @@ const AutomationComparison = () => {
               {INDICES.map((index) => {
                 const Icon = WITHOUT_ICONS[index];
                 return (
-                  <li key={index} className={styles.listItem}>
+                  <li
+                    key={index}
+                    className={`${styles.listItem} ${index >= MOBILE_HIDDEN_FROM ? styles.hideOnMobile : ''}`}
+                  >
                     <span className={`${styles.itemIcon} ${styles.itemIconWithout}`}>
                       <Icon size={16} aria-hidden />
                     </span>
@@ -77,13 +81,8 @@ const AutomationComparison = () => {
             </ul>
           </div>
 
-          {/* Center divider */}
-          <div className={styles.divider} aria-hidden="true">
-            <span className={styles.dividerBadge}>vs.</span>
-          </div>
-
           {/* WITH side */}
-          <div className={styles.column}>
+          <div className={`${styles.column} ${styles.columnWith}`}>
             <div className={styles.headerRow}>
               <div className={`${styles.eyebrow} ${styles.eyebrowWith}`}>
                 <span className={styles.eyebrowDot} />
@@ -106,7 +105,10 @@ const AutomationComparison = () => {
               {INDICES.map((index) => {
                 const Icon = WITH_ICONS[index];
                 return (
-                  <li key={index} className={styles.listItem}>
+                  <li
+                    key={index}
+                    className={`${styles.listItem} ${index >= MOBILE_HIDDEN_FROM ? styles.hideOnMobile : ''}`}
+                  >
                     <span className={`${styles.itemIcon} ${styles.itemIconWith}`}>
                       <Icon size={16} aria-hidden />
                     </span>

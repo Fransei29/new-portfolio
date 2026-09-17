@@ -16,7 +16,7 @@
       }
     
       :global(html.dark) & {
-        background-color: #181c33;
+        background-color: #2e2a3a;
         color: rgb(228, 227, 227);
         border: 1px solid rgba(248, 248, 248, 0.3);
       }
@@ -51,13 +51,13 @@
 
 .contactForm  input:focus,
 .contactForm textarea:focus {
-    border-color: rgb(219, 55, 137); 
+    border-color: rgb(142, 122, 230); 
     outline: none; 
 }
 
 .contactForm button {
     background-color:transparent;
-    border: 1px solid rgb(151, 0, 76, 0.2);
+    border: 1px solid rgb(46, 41, 78, 0.2);
     box-shadow: var(--box-shadow);
     color: var(--text-color-light);
     border-radius: var(--br); 
@@ -66,14 +66,14 @@
     cursor: pointer; 
     transition: background-color 0.3s ease, transform 0.3s ease; 
     :global(html.dark) & {
-        background-color: #181c33;
+        background-color: #2e2a3a;
         color: rgb(228, 227, 227);
         border: 1px solid rgba(248, 248, 248, 0.3);
       }
 }
 
 .contactForm button:hover {
-    background-color: rgb(219, 55, 137, 0.2); 
+    background-color: rgb(142, 122, 230, 0.2); 
     cursor: pointer;
 }
 
@@ -90,7 +90,7 @@
 
 .successMessage {
     font-size: 21px;
-    color: rgb(219, 55, 137); 
+    color: rgb(142, 122, 230); 
 }
 
 .errorMessage {

@@ -1,0 +1,41 @@
+// Capa de fondo del hero. Es puramente decorativa: no recibe eventos y no
+// participa del flujo, así que sacarla no mueve ni un píxel del contenido.
+
+.layer {
+  position: absolute;
+  inset: 0;
+  // NO puede ser -1: el patrón de puntos y la aurora del hero (::before y
+  // ::after) también son -1 y, al empatar dentro del mismo stacking context,
+  // gana el que se pinta último — o sea ellos, y el canvas quedaba tapado.
+  // Con 0 queda por encima de ambos y por debajo del contenido, que al ser
+  // posicionado (.home-text es relative) se pinta después.
+  z-index: 0;
+  // Crítico: el mouse tiene que seguir llegando al dashboard y a los links del
+  // hero. El canvas escucha el puntero a nivel window, no necesita capturarlo.
+  pointer-events: none;
+  // Sin esto el canvas puede desbordar durante un resize y ensanchar la página.
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  // El fade de entrada evita el "pop" del primer frame: three tarda un par de
+  // cientos de ms en cargar y montar, y sin esto el campo aparece de golpe
+  // cuando el resto del hero ya se leyó.
+  opacity: 0;
+  transition: opacity 1.2s ease-out;
+}
+
+.visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  // Defensa en profundidad: el componente ni siquiera monta el canvas con
+  // reduced-motion, pero si alguna vez se monta por otra vía, que no anime.
+  .canvas {
+    transition: none;
+  }
+}

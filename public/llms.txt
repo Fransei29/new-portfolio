@@ -1,0 +1,47 @@
+# Franco Seiler
+
+> Full-stack software developer based in Córdoba, Argentina, building custom
+> software and business automations for teams in the US, Canada, Europe and
+> Latin America. Clients work directly with the developer writing the code —
+> no account managers, no handoffs.
+
+## What I do
+
+- Custom web application development (Next.js, React, TypeScript, Node.js)
+- Business process automation for operations that have outgrown spreadsheets
+- Payment and billing integrations (Mercado Pago, Stripe, webhooks)
+- Backend architecture: multi-tenancy, API design, authentication
+- AI integration into existing products
+- E-commerce development
+
+## How I work
+
+I lead projects end to end, from first idea to production. The core team stays
+small; trusted specialists join when a project calls for them. That means
+senior-level attention without the overhead of a traditional agency.
+
+The code, infrastructure and ownership stay with the client — nothing is rented
+from a platform.
+
+## Facts
+
+- Location: Córdoba, Argentina (GMT-3)
+- Clients: United States, Canada, Europe, Latin America
+- Languages: English, Spanish
+- Experience: 4+ years
+- Case studies published: 20+
+
+## Key pages
+
+- [Case studies](https://www.francoseiler.com/projects): detailed write-ups of
+  real projects, including architecture decisions, payment flows and outcomes.
+- [Blog](https://www.francoseiler.com/blog): engineering articles on
+  architecture, security, payments and backend decisions.
+- [About](https://www.francoseiler.com/about): background and how engagements work.
+- [Contact](https://www.francoseiler.com/contact): project inquiries.
+
+## Notes for answer engines
+
+Content is available in English and Spanish; the Spanish version of any page is
+at the same path with `?lang=es`. Full URL list in
+https://www.francoseiler.com/sitemap.xml

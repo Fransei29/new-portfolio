@@ -43,7 +43,7 @@
     .subtitle {
       font-size: var(--subtitle-font-size);
       color: var(--subtitle-color);
-      margin: 1.25rem auto 1.5rem;
+      margin: var(--subtitle-spacing-top) auto 1.5rem;
       text-align: center;
       line-height: var(--subtitle-line-height);
       font-weight: var(--subtitle-font-weight);
@@ -51,18 +51,21 @@
 
       @media (max-width: 768px) {
         font-size: var(--subtitle-font-size-mobile);
-        margin: 0.75rem auto 1rem;
+        /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+        margin: var(--subtitle-spacing-top-mobile) auto 1rem;
       }
     }
   }
   
   .carouselWrapper {
-    width: 100vw;
+    /* `--page-w` y no `100vw`: 100vw incluye la barra de scroll y dejaba el
+       carrusel 8px más ancho que el contenido (ver --page-w en globals.css). */
+    width: var(--page-w);
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: calc(var(--page-w) / -2);
+    margin-right: calc(var(--page-w) / -2);
     padding-top: 2rem;
     padding-bottom: 0;
     padding-left: 0;
@@ -199,7 +202,7 @@
   .card {
     position: relative;
     background: var(--card-bg);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.14);
     padding: 1.5rem 1.5rem 1.25rem;
     border-radius: var(--br);
     box-shadow: var(--shadow-sm);
@@ -219,21 +222,25 @@
 
     &:hover {
       box-shadow: var(--shadow-md);
-      border-color: rgba(180, 0, 90, 0.25);
+      border-color: rgba(142, 122, 230, 0.5);
     }
 
+    /* El icono ya no vive dentro de un botón circular, así que rotarlo se lee
+       como un glitch. Un desplazamiento mínimo alcanza como señal de hover. */
     &:hover .linkedinButton {
-      transform: rotate(15deg);
+      transform: translateY(-1px);
     }
 
     :global(html.dark) & {
-      background-color: var(--card-bg);
+      /* Fondo de sección A es #292833; la tarjeta sube a --card-bg-soft
+         (#35304a) para tener contraste suficiente y leerse. */
+      background-color: var(--card-bg-soft);
       color: rgb(226, 226, 226);
-      border-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
       box-shadow: var(--shadow-sm);
 
       &:hover {
-        border-color: rgba(180, 0, 90, 0.4);
+        border-color: rgba(142, 122, 230, 0.4);
         box-shadow: var(--shadow-md);
       }
     }
@@ -253,10 +260,10 @@
 
   // Featured card variant — subtle glow + stronger border
   .cardFeatured {
-    border-color: rgba(180, 0, 90, 0.35);
+    border-color: rgba(142, 122, 230, 0.35);
     box-shadow:
       var(--shadow-md),
-      0 0 0 1px rgba(180, 0, 90, 0.18) inset;
+      0 0 0 1px rgba(142, 122, 230, 0.18) inset;
 
     &::before {
       content: '';
@@ -266,9 +273,9 @@
       padding: 1px;
       background: linear-gradient(
         135deg,
-        rgba(180, 0, 90, 0.5) 0%,
-        rgba(180, 0, 90, 0.1) 50%,
-        rgba(180, 0, 90, 0.5) 100%
+        rgba(142, 122, 230, 0.5) 0%,
+        rgba(142, 122, 230, 0.1) 50%,
+        rgba(142, 122, 230, 0.5) 100%
       );
       -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -280,11 +287,11 @@
     }
 
     &:hover {
-      border-color: rgba(180, 0, 90, 0.5);
+      border-color: rgba(142, 122, 230, 0.5);
     }
 
     :global(html.dark) & {
-      border-color: rgba(180, 0, 90, 0.5);
+      border-color: rgba(142, 122, 230, 0.5);
     }
   }
 
@@ -305,7 +312,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     z-index: 2;
-    box-shadow: 0 1px 3px rgba(180, 0, 90, 0.3);
+    box-shadow: 0 1px 3px rgba(142, 122, 230, 0.3);
 
     svg {
       flex-shrink: 0;
@@ -446,8 +453,12 @@
   }
   
   
+  /* flex: 1 1 0 (no 1 1 auto): con base auto el bloque se estira hasta el
+     ancho del rol mas largo antes de que actue el ellipsis y termina
+     empujando el icono de LinkedIn fuera de la tarjeta. Con base 0 el
+     texto se trunca dentro del espacio que sobra. */
   .author {
-    flex: 1;
+    flex: 1 1 0;
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
@@ -472,7 +483,6 @@
       @media (max-width: 768px) {
         font-weight: 500;
         font-size: 0.7rem;
-        max-width: calc(100% - 20px); // Deja espacio para el icono
       }
     }
   
@@ -486,36 +496,36 @@
 
       @media (max-width: 768px) {
         font-size: 0.6rem;
-        max-width: calc(100% - 20px); // Deja espacio para el icono
       }
     }
   }
 
+  /* Sólo el icono: sin círculo, sin borde, sin sombra. El botón encapsulado
+     pesaba más que el propio glifo y competía con el nombre de la persona,
+     que es lo que tiene que leerse en el pie de la tarjeta. */
   .linkedinButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: var(--primary-color);
     background-color: transparent;
-    border: 1px solid rgb(204, 204, 204, 0.6);
-    width: 28px;
-    height: 28px;
+    border: none;
+    width: 22px;
+    height: 22px;
     padding: 0;
-    border-radius: 50%;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease, transform 0.3s ease;
     flex-shrink: 0;
     box-sizing: border-box;
-  
+
     &:hover {
-      background-color: #f4f9fd;
+      color: var(--primary-accent);
     }
 
     :global(html.dark) & {
-      border: 1px solid rgb(114, 114, 114, 0.6);
+      color: var(--lila-suave);
     }
-  
+
     svg {
       vertical-align: middle;
       width: 100%;

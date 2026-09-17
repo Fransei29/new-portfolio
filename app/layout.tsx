@@ -1,21 +1,46 @@
 // app/layout.tsx
 import './globals.css';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+
+// Tipografías de marca: Bricolage Grotesque (títulos) + Plus Jakarta Sans (texto)
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-heading',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+});
 import Footer from '../components/Footer/Footer'; 
 import Header from '../components/Header/Header';
 import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
 import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
 import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
+// Oculto temporalmente — ver el comentario en el body.
+// import ChatWidget from '../components/ChatWidget/ChatWidget';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
+import GoogleAnalytics from '../components/Analytics/GoogleAnalytics';
+import SiteJsonLd from '../components/Seo/SiteJsonLd';
 import type { Metadata } from 'next';
 
 const siteUrl = 'https://www.francoseiler.com';
 
 export const metadata: Metadata = {
-  title: 'Franco Seiler | Soluciones de Software',
-  description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
-  keywords: ['Franco Seiler', 'Full-Stack Developer', 'Web Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
+  // Base para resolver URLs relativas en metadata. Sin esto, las imágenes que
+  // genera opengraph-image.tsx se anuncian con el host del request — en un
+  // preview de Vercel saldría la URL del preview, y los scrapers de LinkedIn y
+  // Twitter cachearían esa dirección efímera en lugar del dominio real.
+  metadataBase: new URL(siteUrl),
+  title: 'Franco Seiler | Estudio de Software',
+  description: 'Estudio de software a medida y automatizaciones para negocios que necesitan crecer.',
+  keywords: ['desarrollo de software a medida', 'automatización de procesos', 'aplicaciones web', 'integración de IA', 'estudio de software', 'Franco Seiler'],
   authors: [{ name: 'Franco Seiler' }],
   creator: 'Franco Seiler',
   openGraph: {
@@ -23,21 +48,21 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     url: siteUrl,
     siteName: 'Franco Seiler',
-    title: 'Franco Seiler | Soluciones de Software',
-    description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
+    title: 'Franco Seiler | Estudio de Software',
+    description: 'Estudio de software a medida y automatizaciones para negocios que necesitan crecer.',
     images: [
       {
         url: `${siteUrl}/share123.png`,
         width: 1200,
         height: 630,
-        alt: 'Franco Seiler - Soluciones de Software',
+        alt: 'Franco Seiler - Estudio de Software',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Franco Seiler | Soluciones de Software',
-    description: 'Descubre soluciones innovadoras y mi experiencia en tecnología.',
+    title: 'Franco Seiler | Estudio de Software',
+    description: 'Estudio de software a medida y automatizaciones para negocios que necesitan crecer.',
     images: [`${siteUrl}/share123.png`],
     creator: '@francoseiler',
   },
@@ -52,9 +77,16 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  /* Los assets viven en /FAVICON (ver esa carpeta). El .ico se deja también en
+     la raíz porque los navegadores lo piden por defecto en /favicon.ico, sin
+     mirar el <link>. */
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/FAVICON/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/FAVICON/android-chrome-512x512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/FAVICON/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
 };
@@ -64,13 +96,20 @@ import { ReactNode } from 'react';
 export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${bricolage.variable} ${jakarta.variable}`}>
       <head>
         <link 
           rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
         />
         <link rel="stylesheet" href="https://geisthub.vercel.app/font.css" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Blog | Franco Seiler"
+          href="/blog/rss.xml"
+        />
+        <SiteJsonLd />
       </head>
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
@@ -82,9 +121,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ThemeTransitionOverlay />
           <NavigationLoader />
           <ScrollToTop />
+          {/* Oculto temporalmente: se retoma cuando mejoremos el asistente.
+              El componente y su API siguen en el repo intactos. */}
+          {/* <ChatWidget /> */}
         </LanguageProvider>
       </ThemeProvider>
       <Analytics />
+      <GoogleAnalytics />
       </body>
     </html>
   );

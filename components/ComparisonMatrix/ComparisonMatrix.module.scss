@@ -1,0 +1,341 @@
+@import '../../app/styles/utilities.scss';
+
+.container {
+  width: 100%;
+  background-color: var(--background-colorA);
+  /* Abajo menos que arriba: el mazo ya trae su propio aire (el padding-bottom
+     del .stack, que le da recorrido al sticky), así que 5.5rem de este lado se
+     sumaban a ese y dejaban un hueco blanco grande antes del wave. */
+  padding: 5.5rem 0 3.5rem;
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    /* Arriba 1rem, igual que Case Studies (.projectsSectionContainer): el wave
+       ya aporta su altura y 3rem dejaban una banda muerta antes del título.
+       Abajo un poco menos que en desktop: las cartas son más altas y el mazo
+       termina de apilarse antes, así que el mismo aire se nota más. */
+    padding: 1rem 0 2rem;
+  }
+}
+
+/* En mobile se oculta "Hiring in-house" (4ª del STACK_ORDER): las cartas son
+   mucho más altas y el mazo se hace largo de recorrer. Quedan las cuatro que
+   sostienen el argumento y la propuesta como cierre. */
+@media (max-width: 768px) {
+  .stack > li:nth-child(4) {
+    display: none;
+  }
+}
+
+.section {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  margin: var(--subtitle-spacing-top) auto 2.5rem;
+  text-align: center;
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  max-width: 60ch;
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
+  }
+}
+
+/* ── El mazo ────────────────────────────────────────────────────────────────
+   El apilado es `position: sticky` puro. Cada carta se clava al llegar arriba
+   y la siguiente le pasa por encima; el resultado es que el mazo se acumula a
+   medida que bajás.
+
+   POR QUÉ NO HAY JS: sticky lo resuelve el compositor del navegador. Un
+   equivalente con ScrollTrigger costaría un pin por carta, un recálculo por
+   resize y un salto de scroll cada vez que cambia la altura del documento —
+   para llegar exactamente al mismo píxel. Cuando el CSS alcanza, el CSS gana.
+
+   REQUISITO FRÁGIL: ningún ancestro puede tener `overflow` distinto de
+   `visible` ni un `transform` (aunque sea la identidad). Cualquiera de los dos
+   convierte al ancestro en el contenedor contra el que se mide el sticky y el
+   efecto muere en silencio. Por eso el <ol> no lleva clases de entrada.
+*/
+.stack {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1080px;
+
+  /* El aire de abajo es lo que le da al mazo recorrido para acumularse: sin él
+     la última carta llega arriba justo cuando la sección ya terminó y el efecto
+     se corta a la mitad. Con 22vh sobraba: el mazo terminaba de apilarse bastante
+     antes de agotarlo y quedaban ~210px de hueco blanco entre la última carta y
+     el wave. 8vh alcanza para el recorrido sin dejar ese hueco. */
+  padding-bottom: 8vh;
+
+  /* En mobile las cartas son mucho más altas (el contenido se apila en una
+     columna), así que el mazo termina de acumularse bastante antes de agotar
+     ese 22vh — el resto queda como un hueco blanco enorme entre la última
+     carta y el wave que abre la sección siguiente. Con 6vh el recorrido sigue
+     alcanzando y el hueco desaparece. */
+  @media (max-width: 768px) {
+    padding-bottom: 6vh;
+  }
+}
+
+.card {
+  position: sticky;
+  /* --i es el índice: cada carta se clava 14px más abajo que la anterior, así
+     el borde de las de abajo sigue asomando y se ve el mazo. El offset base
+     deja pasar la altura del header fijo del sitio. */
+  top: calc(var(--header-h, 104px) + 1.5rem + var(--i) * 14px);
+
+  /* Las cartas de más abajo tienen que dibujarse ENCIMA de las anteriores.
+     El orden natural del DOM ya hace exactamente eso mientras nadie declare
+     z-index, así que no hay ninguno acá a propósito. */
+
+  /* Cada carta arranca separada de la anterior; ese margen es el scroll que
+     hay que recorrer para que la siguiente alcance a la que está clavada. */
+  & + & {
+    margin-top: 2.5rem;
+  }
+}
+
+.cardInner {
+  background: var(--card-bg, #fff);
+  border: var(--borderB);
+  border-radius: 20px;
+  padding: 2rem 2.25rem;
+  /* La sombra es lo que vende el apilado: sin ella las cartas se ven pegadas y
+     planas, y no se lee que una pasa POR ENCIMA de la otra. */
+  box-shadow: 0 -2px 20px rgba(46, 41, 78, 0.06), var(--shadow-lg);
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+
+  :global(html.dark) & {
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+/* La carta de la propuesta: es la que queda arriba de todo al final del
+   recorrido, y se distingue del resto sin gritar. */
+.cardFeatured .cardInner {
+  border: 1px solid var(--lila-principal, #8e7ae6);
+  background: linear-gradient(180deg, var(--lila-velo, #f2effb) 0%, var(--card-bg, #fff) 100%);
+
+  :global(html.dark) & {
+    border-color: var(--lila-principal, #8e7ae6);
+    background: linear-gradient(180deg, var(--lila-velo-dark, #262336) 0%, var(--grafito-elevado, #2e2a3a) 100%);
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.cardIndex {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gris-medio, #8a8599);
+  /* Ancho fijo: sin esto "01" y "05" corren los iconos de cada carta a una x
+     distinta y el mazo se ve desalineado al apilarse. */
+  flex: 0 0 1.6rem;
+}
+
+.cardFeatured .cardIndex {
+  color: var(--lila-principal, #8e7ae6);
+}
+
+.rowIcon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  color: var(--lila-profundo, #2e294e);
+
+  :global(html.dark) & {
+    color: var(--lila-suave, #b59cf8);
+  }
+
+  img {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* El icono acompaña al título: mismo color que el nombre de la carta, así el
+   bloque icono + texto se lee como una sola unidad apagada y no como un icono
+   a todo lila encabezando un título que ya cedió el primer plano.
+   Los iconos son SVG de lucide con stroke="currentColor", así que alcanza con
+   el color del contenedor. */
+.card:not(.cardFeatured) .rowIcon {
+  color: #413c57;
+
+  :global(html.dark) & {
+    color: rgba(237, 236, 236, 0.8);
+  }
+}
+
+.rowText {
+  min-width: 0;
+}
+
+.rowName {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.25;
+  /* Más cerca del negro que el lila profundo de marca, pero conservando el
+     tinte violeta. Solo pinta la carta destacada: las alternativas lo pisan
+     más abajo con mayor especificidad. */
+  color: #1d1a30;
+  margin: 0 0 0.25rem;
+
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode, #edecec);
+  }
+}
+
+/* Todas las cartas comparten el peso (500): la jerarquía ahora la lleva el
+   COLOR, no el grosor. Las alternativas se apagan hacia el gris y la propuesta
+   se queda con el lila profundo, así sigue siendo la que tira del ojo sin que
+   ninguna tenga que gritar más fuerte que el resto. */
+.card:not(.cardFeatured) .rowName {
+  /* A mitad de camino entre el lila profundo y el gris medio: se apaga lo
+     justo para ceder el primer plano, pero conserva el tinte violeta de la
+     marca en vez de caer en un gris neutro que se lee como texto deshabilitado. */
+  color: #413c57;
+
+  :global(html.dark) & {
+    color: rgba(237, 236, 236, 0.8);
+  }
+}
+
+.rowDescription {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-color-light, #6b6b6b);
+  margin: 0;
+
+  :global(html.dark) & {
+    color: rgba(237, 236, 236, 0.7);
+  }
+}
+
+/* ── Los criterios ─────────────────────────────────────────────────────────── */
+
+.criteria {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+
+  @media (max-width: 900px) {
+    justify-content: flex-start;
+  }
+}
+
+.criterion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.criterionOn {
+  background: rgba(88, 135, 110, 0.1);
+  color: var(--verde-bosque, #58876e);
+
+  :global(html.dark) & {
+    background: rgba(88, 135, 110, 0.2);
+    color: #8fc4a5;
+  }
+}
+
+/* El "no" se apaga en vez de gritar en rojo: la sección compara opciones
+   legítimas, no denuncia a la competencia. Un ✕ rojo en cuatro de las cinco
+   cartas leería como ataque y le restaría credibilidad a la quinta. */
+.criterionOff {
+  background: rgba(138, 133, 153, 0.1);
+  color: var(--gris-medio, #8a8599);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(237, 236, 236, 0.5);
+  }
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.criterionLabel {
+  line-height: 1;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────────
+   El apilado es movimiento producido por el scroll, exactamente lo que esta
+   preferencia pide apagar. Las cartas pasan a ser una lista normal: mismo
+   contenido, mismo orden, sin nada que se mueva. */
+@media (prefers-reduced-motion: reduce) {
+  .stack {
+    padding-bottom: 0;
+  }
+
+  .card {
+    position: static;
+  }
+
+  .card + .card {
+    margin-top: 1.25rem;
+  }
+}

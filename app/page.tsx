@@ -1,93 +1,46 @@
-'use client';
+// app/page.tsx
+// Server Component a propósito: la home es la página más importante del sitio y
+// necesita su propio title, description y canonical. Un componente cliente no
+// puede exportar `metadata`, así que la UI (que sí es interactiva: scroll,
+// idioma, animaciones) vive en components/HomeContent y esta capa solo declara
+// los metadatos.
+//
+// Sin esto la home heredaba el title y la description del layout raíz, que es
+// exactamente lo que prohíbe la regla de "metadatos únicos por ruta": la página
+// que más tiene para decir era la única sin canonical propio.
 
-import React from 'react';
-import ClientLayout from '../components/ClientLayout/ClientLayout';
-import './globals.css';
-import SkillsSummary from '../components/Skills/SkillsSummary';
-import { useScrollAnimation } from '../hooks/Scroll';
-import HomeText from '../components/HomeText/HomeText';
-import ScrollExplodeDashboard from '../components/HeroDashboard/ScrollExplodeDashboard';
-import ProjectsSection from '../components/ProjectsSection/ProjectsSection';
-import { Services } from '../components/Services/ServicesComponent';
-import { useLanguage } from '../contexts/LanguageContext';
-import Testimonials from '../components/Testimonials/TestimonialsComponent';
-import CallToAction from '../components/CallToAction/CallToAction';
-import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
-import AutomationComparison from '../components/AutomationComparison/AutomationComparison';
-import HowWeWork from '../components/HowWeWork/HowWeWork';
-import WaveDivider from '../components/WaveDivider/WaveDivider';
+import type { Metadata } from 'next';
+import HomeContent from '../components/HomeContent/HomeContent';
+import { SITE_URL } from '../lib/site';
+
+const title = 'Franco Seiler | Custom Software & Business Automation';
+const description =
+  'Software studio building custom platforms and automations for teams whose operations have outgrown spreadsheets. You work directly with the team building your software.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: SITE_URL,
+    languages: {
+      en: SITE_URL,
+      es: `${SITE_URL}?lang=es`,
+      'x-default': SITE_URL,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title,
+    description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
+};
 
 export default function Home() {
-  const elementsRef = useScrollAnimation();
-  const { t } = useLanguage();
-
-  return (
-    <ClientLayout>
-    <div className='ContainerGeneralComplete'>
-    <section ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right hero-section">
-      <div className="home-text">
-        <div className="home-textA">
-          <HomeText />
-        </div>
-
-        <div className="home-textB">
-          <ScrollExplodeDashboard />
-        </div>
-
-      </div>
-    </section>
-
-
-      <section className="containerGeneral">
-         
-         <div ref={(el) => {elementsRef.current[3] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToB" />
-           <Services />
-          </div>
-
-          <WaveDivider variant="bToA" />
-
-          <div ref={(el) => {elementsRef.current[4] = el;}} className="fade-in-right">
-            <AutomationComparison />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[5] = el;}} className="fade-in-right">
-            <WaveDivider variant="aToB" />
-            <ProjectsSection variant="projects" />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="fade-in-left">
-            <WaveDivider variant="bToA" />
-            <HowWeWork />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[8] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToB" />
-            <WhyChooseUs />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[11] = el;}} className="fade-in-right">
-            <WaveDivider variant="bToA" />
-            <ProjectsSection variant="tutorials" />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[9] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToB" />
-            <SkillsSummary />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[10] = el;}} className="fade-in-right">
-            <WaveDivider variant="bToA" />
-            <Testimonials />
-          </div>
-
-          <div ref={(el) => {elementsRef.current[12] = el;}} className="fade-in-left">
-            <WaveDivider variant="aToCta" />
-            <CallToAction />
-          </div>
-      </section>
-
-    </div>
-    </ClientLayout>
-  );
+  return <HomeContent />;
 }

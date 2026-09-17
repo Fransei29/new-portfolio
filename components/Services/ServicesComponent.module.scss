@@ -9,12 +9,18 @@
 
   :global(html.dark) & {
     background-image: none;
-    background-color: var(--dark-light);
+    /* Fondo B en dark: elevado, para que el wave marque la división (calza con --wave-b) */
+    background-color: var(--wave-b);
     color: rgb(235, 235, 235);
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 0;
+    /* Arriba 1rem y no 3: el wave ya aporta su propia altura, así que sumarle
+       48px dejaba una banda muerta entre la curva y el título. 1rem es el mismo
+       aire que usa Case Studies (.projectsSectionContainer), que es la
+       referencia para todas las secciones en mobile. Abajo se mantiene el 3rem,
+       que separa del wave siguiente. */
+    padding: 1rem 0 3rem;
   }
 }
 
@@ -23,14 +29,27 @@
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 0.5rem;
+    /* Sólo a los lados: el padding de arriba se sumaba al de la sección y
+       corría el título 8px más abajo que en el resto. */
+    padding: 0 0.5rem;
+  }
+}
+
+/* Punto de corte del subtítulo: en desktop el texto fluye y este <br> no
+   existe; en mobile fuerza el salto donde lo marca el `|` del locale, así la
+   frase no corta en una palabra suelta. */
+.subtitleBreak {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline;
   }
 }
 
 .subtitle {
   font-size: var(--subtitle-font-size);
   color: var(--subtitle-color);
-  margin: 1.25rem auto 2rem;
+  margin: var(--subtitle-spacing-top) auto 2rem;
   text-align: center;
   line-height: var(--subtitle-line-height);
   font-weight: var(--subtitle-font-weight);
@@ -38,7 +57,9 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin: 0.75rem auto 1.5rem;
+    /* El título y el subtítulo son una sola unidad de lectura: van cerca, y el
+       aire grande queda debajo del par. Mismo token que ya usaba HowWeWork. */
+    margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
   }
 }
 
@@ -66,7 +87,7 @@
 .card {
   position: relative;
   background: var(--card-bg);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(142, 122, 230, 0.3);
   border-radius: var(--br);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
@@ -81,23 +102,104 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(180, 0, 90, 0.25);
+    border-color: rgba(142, 122, 230, 0.5);
   }
 
   :global(html.dark) & {
-    background-color: var(--card-bg);
+    /* Fondo de sección ahora es --wave-b (#2e2a3a); la tarjeta sube a
+       --card-bg-soft (#35304a) para despegarse y leerse. */
+    background-color: var(--card-bg-soft);
     color: rgb(226, 226, 226);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* En dark el lila principal (#8e7ae6) se apaga contra la card oscura, así
+       que el borde usa --lila-suave (#b59cf8), que es el acento de dark en el
+       resto del sitio. */
+    border: 1px solid rgba(181, 156, 248, 0.32);
     box-shadow: var(--shadow-sm);
 
     &:hover {
-      border-color: rgba(180, 0, 90, 0.4);
+      border-color: rgba(181, 156, 248, 0.55);
     }
   }
 
   @media (max-width: 768px) {
     padding: 1.25rem;
     gap: 0.85rem;
+  }
+}
+
+// Mobile: el icono y el título comparten fila para que la tarjeta deje de ser
+// tan alta. El markup NO cambia — la card pasa a grid de 2 columnas y el
+// contenedor del texto a `display: contents`, así el h3 y el <p> se vuelven
+// items directos del grid y se pueden ubicar por separado.
+//
+// Se aplica a TODAS las cards, incluida la featured: ahí el orbital y el CTA
+// simplemente cruzan las dos columnas.
+@media (max-width: 768px) {
+  .card {
+    display: grid;
+    // col 1: el icono, al ancho que ocupe. col 2: el texto, el resto.
+    grid-template-columns: auto 1fr;
+    // El título se apoya en la BASE del icono en vez de centrarse: así la
+    // primera línea de texto arranca al ras de abajo del cuadrado.
+    align-items: end;
+    // Fila 1: icono + título. Filas siguientes: descripción, orbital, footer,
+    // todos cruzando las dos columnas.
+    column-gap: 0.75rem;
+    row-gap: 0.6rem;
+    padding: 1rem 1.1rem;
+
+    .cardTop {
+      grid-column: 1;
+      width: auto;
+      // `.cardTop` es flex con align-items:flex-start; en la fila del grid ya
+      // no necesita empujar nada hacia arriba.
+      align-items: center;
+    }
+
+    // Deja que el h3 y el <p> sean items del grid de la card.
+    .cardBody,
+    .featuredBody {
+      display: contents;
+    }
+
+    .cardTitle,
+    .featuredTitle {
+      grid-column: 2;
+      // Sin descender extra por debajo de la línea de base del icono.
+      margin-bottom: 0;
+    }
+
+    // Al lado del icono el título compite con menos espacio horizontal:
+    // baja un punto para que no se parta en tres líneas.
+    .cardTitle {
+      font-size: 1rem;
+    }
+
+    // La featured sigue siendo la destacada, así que su título no baja hasta
+    // 1rem — sólo lo justo para convivir con el icono en la misma fila.
+    .featuredTitle {
+      font-size: 1.25rem;
+    }
+
+    .cardDescription,
+    .featuredDescription,
+    .cardFooter,
+    .orbital,
+    .featuredCta {
+      grid-column: 1 / -1;
+    }
+
+    .cardFooter {
+      padding-top: 0.25rem;
+    }
+  }
+
+  // El cuadrado del icono también baja: a 42px dominaba la fila y volvía a
+  // estirar la card a lo alto.
+  .card .iconWrapper {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
   }
 }
 
@@ -111,7 +213,9 @@
   @media (max-width: 768px) {
     grid-column: auto;
     grid-row: auto;
-    padding: 1.5rem;
+    // Mismo padding que el resto de las cards en mobile (ver el bloque grid
+    // de arriba): si queda en 1.5rem, la featured se ve inflada al lado.
+    padding: 1rem 1.1rem;
   }
 }
 
@@ -129,22 +233,16 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: rgba(204, 2, 103, 0.08);
+  background: var(--icon-bg);
+  border: var(--icon-border);
   color: var(--primary-color);
   flex-shrink: 0;
-  transition: background 0.25s ease, transform 0.25s ease;
-
-  :global(html.dark) & {
-    background: rgba(204, 2, 103, 0.16);
-  }
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 
   .card:hover & {
-    background: rgba(204, 2, 103, 0.14);
+    background: var(--icon-bg-hover);
+    border: var(--icon-border-hover);
     transform: scale(1.05);
-
-    :global(html.dark) & {
-      background: rgba(204, 2, 103, 0.22);
-    }
   }
 }
 
@@ -461,6 +559,7 @@
       transform: translate(3px, -3px);
       background: var(--primary-color);
       color: #ffffff;
+      opacity: 1;
     }
   }
 }
@@ -484,13 +583,15 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(204, 2, 103, 0.1);
+  background: rgba(142, 122, 230, 0.1);
   color: var(--primary-color);
   flex-shrink: 0;
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  opacity: 0.92;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
+    opacity 0.3s ease;
 
   :global(html.dark) & {
-    background: rgba(204, 2, 103, 0.18);
+    background: rgba(142, 122, 230, 0.18);
   }
 }
 
@@ -514,17 +615,24 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.85);
+  /* Mismo lila que la flecha de la tarjeta destacada (AI Strategy): antes eran
+     negras y quedaban duras contra la paleta. */
+  background: rgba(142, 122, 230, 0.1);
+  color: var(--primary-color);
   flex-shrink: 0;
-  transition: transform 0.3s ease, background 0.3s ease;
+  /* En reposo apenas apagada; llega a opacidad plena cuando se hoverea la
+     tarjeta entera (el selector cuelga de .card:hover, no del propio círculo). */
+  opacity: 0.92;
+  transition: transform 0.3s ease, background 0.3s ease, opacity 0.3s ease;
 
   :global(html.dark) & {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(142, 122, 230, 0.18);
   }
 
   .card:hover & {
     background: var(--primary-color);
     transform: scale(1.1);
+    opacity: 1;
 
     :global(html.dark) & {
       background: var(--primary-color);
@@ -533,11 +641,14 @@
 }
 
 .footerDotIcon {
-  color: #ffffff;
+  /* Lila sobre el círculo lila claro. Era blanco cuando el fondo del .footerDot
+     era negro; sobre el lila nuevo quedaba invisible. En hover el círculo se
+     pinta de --primary-color sólido y ahí sí vuelve a blanco (más abajo). */
+  color: var(--primary-color);
   transition: color 0.3s ease;
 
   :global(html.dark) & {
-    color: #1a1a1a;
+    color: var(--primary-color);
   }
 
   .card:hover & {
