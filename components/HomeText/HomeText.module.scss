@@ -311,17 +311,33 @@ p.greeting {
     font-size: 0.72rem;
   }
 
-  /* Los tres datos en una sola linea con una etiqueta de una palabra cada
-     uno: con las frases completas el bloque ocupaba dos renglones y competia
-     con el subtitulo y los CTA que tiene encima. */
+  /* Dos lineas: clientes y proyectos arriba, anos justo debajo del primero.
+     El contenedor se encoge al ancho de su contenido (`width: max-content`) y
+     se centra con `margin-inline: auto`; asi el bloque queda centrado en la
+     pantalla pero sus hijos se alinean a la izquierda entre si, que es lo que
+     hace que el "4+" caiga exactamente bajo el "15+".
+     Con el contenedor a ancho completo y `justify-content: center`, el tercer
+     renglon se centraba por su cuenta y no coincidia con el de arriba. */
+  /* Dos datos en mobile. Los anos se ocultan: con los tres en una linea el
+     bloque llegaba hasta donde asoma el panda, y en dos renglones el segundo
+     pedia un separador propio que ensuciaba el conjunto. El dato sigue en
+     desktop y en la seccion About. */
   .socialProof {
     flex-wrap: nowrap;
     align-items: center;
-    /* Centrado como el resto del hero en mobile (titulo y subtitulo ya van
-       con text-align: center). */
-    justify-content: center;
+    /* Alineados a la izquierda y no centrados: el "15+" arranca en la misma
+       linea vertical que los botones de CTA de arriba. */
+    justify-content: flex-start;
+    padding-left: 33px;
     gap: 0;
   }
+
+  .statYears,
+  .dividerYears {
+    display: none;
+  }
+
+
 
 
   .labelLong {
