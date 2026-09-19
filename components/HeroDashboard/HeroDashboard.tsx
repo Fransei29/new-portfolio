@@ -167,6 +167,30 @@ const TASKS = [
   },
 ];
 
+/**
+ * Plazas donde hay trabajo entregado.
+ *
+ * Derivadas a mano de las `locations` de app/data/projects.ts — no se importan
+ * de ahí a propósito: ese módulo arrastra el catálogo entero de case studies
+ * (decenas de KB de prosa) y esto es un adorno del hero que sólo necesita seis
+ * strings. El contrato es el comentario: si se suma un país en projects.ts,
+ * se suma acá.
+ *
+ * El orden no es alfabético sino de peso: primero donde más se entregó, para
+ * que las primeras vueltas del ciclo muestren lo más representativo.
+ */
+const MARKETS = [
+  { flag: '🇨🇦', city: 'Ontario', country: 'Canada' },
+  { flag: '🇦🇷', city: 'Buenos Aires', country: 'Argentina' },
+  { flag: '🇺🇸', city: 'California', country: 'United States' },
+  { flag: '🇨🇦', city: 'Vancouver', country: 'Canada' },
+  { flag: '🇪🇸', city: 'Andalusia', country: 'Spain' },
+  { flag: '🇨🇱', city: 'Santiago', country: 'Chile' },
+] as const;
+
+/** Países distintos en MARKETS: el número que acompaña al badge. */
+const MARKET_COUNTRIES = new Set(MARKETS.map((m) => m.country)).size;
+
 const HeroDashboard = () => {
   const { language } = useLanguage();
   // El dominio de la barra es un placeholder para que el visitante se vea a si
@@ -199,6 +223,22 @@ const HeroDashboard = () => {
   }, []);
   const currentTask = TASKS[taskIndex];
 
+  // Plaza activa. Va montada sobre el mismo ciclo de 8s que las tareas en vez
+  // de tener su propio intervalo: dos tempos distintos corriendo a la vez es
+  // exactamente lo que vuelve inquieto un hero que se quiere calmo. Como
+  // MARKETS (6) y TASKS (5) son coprimos, el par tarea/plaza no se repite hasta
+  // la vuelta 30 — sale variado sin tener que aleatorizar nada.
+  const [marketIndex, setMarketIndex] = useState(0);
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const id = setInterval(
+      () => setMarketIndex((prev) => (prev + 1) % MARKETS.length),
+      8000,
+    );
+    return () => clearInterval(id);
+  }, []);
+  const market = MARKETS[marketIndex];
+
   // Stats driven by current task. El delay escalonado hace que la fila se
   // actualice de izquierda a derecha en vez de saltar los tres a la vez.
   const conversion = useAnimatedNumber(currentTask.stats.conversion, { delay: 0 });
@@ -222,7 +262,16 @@ const HeroDashboard = () => {
   const chartKey = `${taskIndex}-chart`;
 
   return (
-    <div className={styles.wrapper} aria-hidden data-explode-root>
+    <div className={styles.wrapper} data-explode-root>
+      {/* El dashboard entero es decorativo (aria-hidden más abajo), pero el
+          alcance sí es información: se expone una vez, como texto plano, para
+          que un lector de pantalla la reciba sin narrar la maqueta. */}
+      <p className={styles.srOnly}>
+        {language === 'es'
+          ? `Proyectos entregados en ${MARKET_COUNTRIES} países.`
+          : `Delivered projects across ${MARKET_COUNTRIES} countries.`}
+      </p>
+      <div className={styles.inner} aria-hidden>
       {/* Isotipo panda que se asoma por el borde derecho — como con vida.
           Van los dos variantes y el CSS muestra uno según el tema: en dark el
           panda plano se funde con el fondo oscuro, así que ahí entra el de
@@ -278,9 +327,27 @@ const HeroDashboard = () => {
                 {currentTask.week} · {taskPhase === 'done' || taskPhase === 'leave' ? 'shipped' : 'in progress'}
               </span>
             </div>
-            <div className={styles.liveBadge} data-explode-piece="live-badge">
-              <span className={styles.liveDot} />
-              LIVE
+            <div className={styles.topRowRight}>
+              {/* Plaza activa. El contador de países es fijo y el que rota es
+                  el lugar: el dato duro queda legible todo el tiempo y el
+                  movimiento pasa sólo en la línea de abajo. El `key` remonta
+                  el nodo en cada cambio y con eso vuelve a disparar el fade
+                  del CSS, sin manejar estado de animación a mano. */}
+              <div className={styles.marketBadge} data-explode-piece="market-badge">
+                <span className={styles.marketCount}>
+                  {MARKET_COUNTRIES} {language === 'es' ? 'países' : 'countries'}
+                </span>
+                <span className={styles.marketPlace}>
+                  <span key={marketIndex} className={styles.marketPlaceInner}>
+                    <span className={styles.marketFlag}>{market.flag}</span>
+                    {market.city}
+                  </span>
+                </span>
+              </div>
+              <div className={styles.liveBadge} data-explode-piece="live-badge">
+                <span className={styles.liveDot} />
+                LIVE
+              </div>
             </div>
           </div>
 
@@ -442,6 +509,7 @@ const HeroDashboard = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
 
     </div>

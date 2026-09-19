@@ -1,3 +1,11 @@
+// Envuelve todo lo decorativo (browser + panda) para poder marcarlo aria-hidden
+// sin ocultar también el párrafo de alcance, que sí tiene que leerse. No
+// introduce contexto de layout propio: hereda posición y tamaño del wrapper,
+// así las reglas que apuntan a .browser y al panda siguen alcanzándolos.
+.inner {
+  display: contents;
+}
+
 .wrapper {
   position: relative;
   width: 100%;
@@ -443,6 +451,112 @@
   :global(html.dark) & {
     color: rgba(255, 255, 255, 0.55);
   }
+}
+
+// Columna derecha del topRow: el badge de plazas arriba, LIVE abajo. En
+// columna y no en fila porque en fila los dos badges compiten por el mismo
+// renglón y en mobile el título del proyecto se queda sin ancho.
+.topRowRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+// Alcance geográfico. Deliberadamente más callado que .liveBadge: sin fondo,
+// sin borde y sin pulso. LIVE es un estado que tiene que saltar; esto es un
+// dato de contexto que se lee cuando el ojo pasa. Si los dos gritan, el hero
+// deja de estar calmo.
+.marketBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.15;
+  // Ancho estable: la plaza más larga no debe empujar el layout al rotar.
+  min-width: 7.5rem;
+}
+
+.marketCount {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(46, 41, 78, 0.5);
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.42);
+  }
+}
+
+// Alto fijo: el contenido de adentro se cruza en el fade (el saliente aún no
+// se fue cuando entra el nuevo), así que sin esto la fila daría un salto de
+// un renglón en cada cambio.
+.marketPlace {
+  position: relative;
+  display: block;
+  height: 1.05rem;
+  overflow: hidden;
+}
+
+.marketPlaceInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(46, 41, 78, 0.82);
+  white-space: nowrap;
+  // Sube apenas mientras aparece: el gesto sugiere una lista que avanza, sin
+  // el desplazamiento largo de un carrusel.
+  animation: marketIn 0.5s ease both;
+
+  :global(html.dark) & {
+    color: rgba(255, 255, 255, 0.76);
+  }
+}
+
+.marketFlag {
+  font-size: 0.8rem;
+  line-height: 1;
+  // Las banderas emoji traen su propio color y sobresalen del gris del badge;
+  // bajarlas un punto las devuelve al mismo plano que el texto.
+  opacity: 0.9;
+}
+
+@keyframes marketIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Sin movimiento: la plaza igual rota (el intervalo se apaga en JS, así que en
+// la práctica queda fija en la primera), pero si algo la cambia no se desliza.
+@media (prefers-reduced-motion: reduce) {
+  .marketPlaceInner {
+    animation: none;
+  }
+}
+
+// Texto sólo para lectores de pantalla: el dashboard es decorativo, pero el
+// alcance es información real y tiene que llegar igual.
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .liveBadge {

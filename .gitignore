@@ -8,3 +8,9 @@ node_modules
 .env.local
 .env.*.local
 !.env.example
+
+# Capturas originales de los case studies. Ya estan convertidas a webp en
+# public/img/img/<proyecto>-web/, que es lo que sirve el sitio. Se dejan en
+# disco por si hay que reprocesarlas, pero no entran al repo: son ~17MB que
+# nadie descarga.
+public/NewProjects/

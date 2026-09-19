@@ -128,12 +128,23 @@
     }
 
     // Basta pasar por cualquier parte de la tarjeta para que el botón se
-    // encienda: deja claro que toda la superficie lleva al mismo lado.
+    // encienda: deja claro que toda la superficie lleva al mismo lado. Ahora
+    // que la preview no reacciona, este es el único acuse de hover de la
+    // tarjeta, así que se pronuncia más: sube un píxel y el halo lila se abre.
     .viewMoreButton {
       background-color: #413a6b;
-      border-color: rgba(181, 156, 248, 0.85);
-      box-shadow: 0 4px 16px -6px rgba(20, 16, 45, 0.9),
-        0 0 0 1px rgba(181, 156, 248, 0.25);
+      border-color: rgba(181, 156, 248, 0.95);
+      box-shadow: 0 7px 20px -6px rgba(20, 16, 45, 0.95),
+        0 0 0 3px rgba(181, 156, 248, 0.22);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Quien pidió menos movimiento no recibe el desplazamiento: el color, el
+  // borde y el halo siguen marcando el estado, que es lo que hace falta.
+  @media (prefers-reduced-motion: reduce) {
+    &:hover .viewMoreButton {
+      transform: none;
     }
   }
 
@@ -247,15 +258,11 @@
   }
 }
 
-// Al hover la imagen recupera color: el proyecto se enciende cuando le prestás
-// atención, mismo criterio que las step cards de Working methodology.
-.projectCard:hover .projectPreview img {
-  filter: saturate(0.95) brightness(1);
-}
-
-.projectCard:hover .projectPreview::after {
-  opacity: 0.5;
-}
+// La preview NO reacciona al hover. Las capturas de los case studies ya traen
+// su propio fondo (el gradiente azul del set), así que virarles saturación y
+// brillo al pasar el mouse leía como un parpadeo de color, no como un gesto.
+// El hover lo comunica el botón de Learn more, que es además el destino real
+// del click. La imagen queda fija: mismo filtro en reposo y en hover.
 
 .projectTitle {
   display: flex;
@@ -470,7 +477,7 @@
   white-space: nowrap;
   box-shadow: 0 2px 12px -6px rgba(20, 16, 45, 0.8);
   transition: background-color 0.2s ease, border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease, transform 0.2s ease;
 
   // Al hover NO cambia de color: el mismo oscuro sube un escalón y el borde
   // lila se define. Mismo criterio que las step cards de Working methodology
