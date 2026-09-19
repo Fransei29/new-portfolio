@@ -484,10 +484,949 @@ The platform was developed alongside a senior team based in Canada, combining th
     liveDemoLink: null as any,
   },
   {
+    slug: 'globaly',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Immersive Collaboration • Virtual Workspace SaaS',
+    locations: [
+      { flag: '🇨🇦', label: 'Ontario, Canada' },
+      { flag: '🌍', label: 'International (EN / FR / ES)' },
+    ],
+    title: 'Globaly',
+    subtitle: 'Multilingual Marketing & Content Site for an Immersive Collaboration Platform',
+    whatIs: `Globaly is the public site for an immersive collaboration platform — digital spaces where distributed teams work, train and present together without being in the same place. The site is not the product: the product lives on separate domains. This is the commercial, editorial and discovery layer around it, explaining the proposition, segmenting by use case and company size, publishing pricing, sustaining a resource centre and capturing leads.
+
+A visitor navigates 33 pages organized into a client-defined information architecture: the platform and its device compatibility, seven solution pages grouped into three families, three pages by company segment, an enterprise hub with trust centre and data residency, a five-plan pricing table rendered in USD or EUR depending on the visitor's country, four comparison pages against the incumbent categories, and a blog with search, category filtering and pagination fed from a shared headless CMS. Two forms — contact and newsletter — validate with Zod on the server and dispatch through Postmark, with confirmation to the sender and an internal notification. All content is translated into English, French and Spanish, with language negotiated by cookie rather than by URL prefix.
+
+The collaboration is documented inside the code itself: comments systematically cite the client's strategy documents by section as justification for information-architecture and product decisions, and the repository includes a three-document SEO·AEO·GEO system with explicit anti-hallucination rules. Several sections are deliberately commented out rather than deleted, at the client's request: the pages still route and build, and reactivating one is uncommenting a line.`,
+    problemSolved: `An immersive collaboration product competes against categories the buyer already knows and against an implicit objection: "I already have video calls." The real problem was not having a site, but having one that could sustain a positioning thesis page by page, in several languages, for several segments, and that would also be discoverable — not only by search engines, but by the answer engines that now mediate part of B2B research. On top of that: prices published in a single currency and hardcoded per language, showing dollars with a decimal point to a European reader and requiring eighteen strings to be edited to change one number.
+
+The system resolves that with concrete decisions. Price is authored once in USD and converted and formatted at render time, so the SoftwareApplication JSON-LD and the visible table read the same constant and cannot drift apart. Currency is decided by a country resolved in middleware from any of four possible geo headers, normalized into an internal header that is deleted before being written so a client cannot spoof its own country. The i18n layer serves all three languages from the same URL with a deep merge over the English catalogue, so a page not yet translated falls back to readable English instead of printing a translation key path. And discovery is treated as engineering: the robots layer explicitly names seven crawlers including the major AI search agents, the sitemap stamps the real content-change date rather than the build date, and the structured-data layer emits Organization, WebSite, Article, BreadcrumbList, FAQPage and SoftwareApplication with offers.
+
+It was built custom rather than on a site builder because half the value sits in things those tools do not provide: geo-sensitive pricing resolved server-side, a 1,689-key i18n catalogue with hierarchical fallback, JSON-LD derived from the same constants as the UI, security headers reasoned one by one, and a deploy pipeline on the studio's own infrastructure.`,
+    techStack: [
+      'TypeScript 5.9',
+      'Next.js 16',
+      'React 19',
+      'Tailwind CSS v4',
+      'next-intl 4',
+      'Strapi',
+      'Axios',
+      'Zod 4',
+      'Postmark',
+      'lucide-react',
+      'next/font',
+      'Google Analytics 4',
+      'Docker',
+      'Bitbucket Pipelines',
+      'Cloudflare',
+      'ESLint 9',
+    ],
+    learnings: [
+      'Build-time versus runtime in Docker and Next.js: public environment variables are inlined into the bundle during the build, but the compose env file only reaches an already-running container. The real symptom was staging loading the production chat widget despite a correct env file. The fix was declaring build args in the Dockerfile, passing them through compose, and sourcing the env file in the shell before invoking the build — with the failure documented in comments across all three files.',
+      'Internationalization without a URL prefix, with hierarchical fallback: serving three languages from the same URL and negotiating by cookie forced three chained decisions — neutralizing the Accept-Language header in middleware only when no cookie exists, deep-merging each locale over the master English catalogue so untranslated pages never print a key path, and emitting the document language attribute from the resolved locale because the URL no longer indicates it. Real coverage: 1,689 keys in English, 1,012 in French and Spanish.',
+      'Geolocated pricing with a single source of truth: one USD price object feeds both the rendered table and the JSON-LD offers simultaneously, eliminating drift between what the user sees and what the crawler reads. The EUR rate is fixed and hand-set on purpose — a live feed would make a published price change between two page loads.',
+      'Trust in geo headers treated as an attack surface: the middleware deletes the internal country header before writing it, because a client can send that header by hand and without the delete the spoofed value would reach the pricing table intact. It reads four provider headers in order of trust, validates the two-letter format, and falls back to USD when none is present.',
+      'CMS resilience as a product requirement: the client has a 3-second timeout so it fails fast rather than hanging, discards placeholder tokens by pattern before sending them, and retries once without the authorization header on a 401 or 403 — because blog reads are public and an expired token should not empty the resources page. The retry is guarded against loops.',
+      'SEO for answer engines, not only search engines: the robots layer explicitly allowlists the major AI search crawlers as a documented per-bot decision, with the note that robots.txt is only one of four checkpoints — the CDN, WAF, anti-bot layer and real HTTP response all have to agree. The sitemap stamps the real content-change date so the crawler is not told the entire site changes every day.',
+      'A measured performance budget rather than a guessed one: the LCP element is server-rendered in the HTML, preloaded at high priority, served in WebP at 5.7 KB against 17 KB as PNG. The chat widget moved to lazy loading after real-user monitoring measured 1784 ms of INP on the hero CTA — a plain anchor that was not responding because the main thread was busy hydrating. Package-import optimization removed roughly 28 KB of unused icon JavaScript.',
+      'A content security policy with its concessions written down: the site moved from a C grade to a full header set, and inline scripts are accepted with an explicit justification — the pre-paint theme script, the overlay critical CSS, the analytics config and the framework hydration payload — documenting that per-request nonces would force dynamic rendering on every page.',
+      'Theme flash eliminated before first paint: an inline head script reads storage and applies the dark class to the document element before React mounts. System preference is deliberately not honoured — the default is always light, and only an explicit user choice moves the theme.',
+      'Feature-parking as a delivery pattern: parked sections and competitor entries are commented with the reason and the reactivation criterion in the same comment, so the pages keep routing and building. A per-comparison verification date records when the facts were checked against the competitor’s own documentation, with the rule that it is bumped on re-verification rather than on edit.',
+    ],
+    architecture: {
+      body: `A Next.js 16 App Router application rendered entirely on the server, with no database of its own. The central decision was to keep structural content in the repository — in typed i18n catalogues and TypeScript constants — and reserve the headless CMS strictly for high-cadence editorial content. That lets 33 pages be composed from a handful of section components parameterized by translation namespace, and lets navigation, pricing, the comparison matrix and the JSON-LD all derive from a single source in code, versioned and reviewable in a pull request.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Next.js 16 App Router with React Server Components; client components are limited to concrete interaction — menus, theme toggle, forms and scroll observers.',
+            'A locale segment with middleware resolving language by cookie, with no prefix in the URL.',
+            'Section pages built as reusable components parameterized by namespace, so a new solution page is a roughly 20-line file plus a translation block.',
+            'Dynamic routes with static params for the comparison pages; article detail renders dynamically because it depends on the live CMS.',
+            'Roughly 13,200 lines of TypeScript across 53 components and 33 pages.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Five pricing plans with currency resolved by geolocation on the server and formatted per locale.',
+            'Blog with search, category filtering, pagination and incremental loading, served through an internal API proxy over the CMS.',
+            'Four comparison pages generated from a typed catalogue carrying a fact-verification stamp.',
+            'Contact and newsletter forms validated with Zod and dispatched through Postmark with a double send — confirmation to the user plus internal notification.',
+            'Flash-free light and dark theming, a choreographed server-rendered intro overlay, a route progress indicator, and reduced-motion support honoured across 19 distinct style blocks.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            'No database of its own — the data model is the contract with the CMS, typed in a dedicated module.',
+            'A raw CMS article shape carrying author, category, tags, SEO fields, localizations and scheduling, mapped by an explicit function into an app-level post type.',
+            'Multi-tenancy on the CMS side: the instance is shared across studio projects and every query filters by project slug. The site is a tenant, not the owner of the CMS.',
+            'Environment separation: published articles are read in production and drafts outside it, derived from the environment flag.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          body: 'The site does not authenticate users: login is an outbound link to the product domain, and the primary call to action opens a demo room with no signup form in front of it. The only credential in the system is the CMS service token, and it is optional by design.',
+          chips: [
+            'No own auth',
+            'External login',
+            'Signup-free demo',
+            'Optional CMS token',
+            'No sessions',
+            'No roles',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Deployed to the studio's own VPS over SSH behind Cloudflare rather than to a managed platform — a choice that conditions real code, since the middleware reads four possible geo headers precisely because it cannot assume a single provider's.`,
+      groups: [
+        {
+          title: 'Containers & Build',
+          bullets: [
+            'Multi-stage Dockerfile on node:21-alpine with development and production targets, selected from the environment in compose.',
+            'Healthcheck every 30 seconds with an initial grace period.',
+            'Public environment variables declared as build args, because the framework inlines them at build time rather than reading them at runtime.',
+            'The production build runs without cache deliberately.',
+          ],
+        },
+        {
+          title: 'CI/CD',
+          bullets: [
+            'Bitbucket Pipelines with four deployment environments pointing at three distinct hosts: production, production alpha, and two staging branches.',
+            'Each step pipes a deploy script over SSH to the corresponding deployer account.',
+            'No credentials in the repository — the deploy script receives its arguments from deployment variables and writes the environment file on the server at each deploy, removing the previous one.',
+            'The analytics measurement ID is configured only in production, so staging deploys with an empty value and the analytics component renders nothing rather than measuring against the real property.',
+          ],
+        },
+        {
+          title: 'Host & Delivery',
+          bullets: [
+            'Non-production deploys automatically point at the development chat widget, derived from the environment flag rather than adding another pipeline argument.',
+            'The deploy script prunes volumes, images and builder cache before each build, creates directories and fixes ownership idempotently, and hard-resets the checkout so it is deterministic.',
+            'Hero media served immutable with versioned URLs; general assets get a day of freshness plus a week of stale-while-revalidate so a same-name replacement propagates on its own.',
+            'Legacy URLs permanently redirected to the approved information architecture.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `A complete three-language marketing and content site delivered with its deploy infrastructure, its structured-data layer and its editorial content system connected.`,
+      groups: [
+        {
+          title: 'Application Surfaces',
+          bullets: [
+            '33 pages: home; platform and device compatibility; seven solution pages; three company-segment pages; enterprise, trust centre and data residency; integrations; pricing; a comparison hub with four competitor pages; a resources hub with article detail; guides, an ROI hub with two case calculators and a proof-of-value guide; research; about; contact; video; privacy and terms.',
+            'Navigation with grouped menus, responsive overflow, mobile menu, language switcher in navbar and footer, section nav with scroll-spy, theme toggle, scroll-to-top and route progress.',
+            'A Tailwind v4 design system with light and dark theme tokens, four self-hosted type families, and roughly 1,970 lines of animation and layout CSS with reduced-motion support.',
+          ],
+        },
+        {
+          title: 'Integrations',
+          bullets: [
+            'Headless CMS with an internal API proxy, typed mapping and graceful degradation to an empty state.',
+            'Postmark transactional email with an explicit mock mode when the token is missing, logging instead of breaking in local and preview environments.',
+            'Conditionally-mounted analytics, and a third-party chat widget in Shadow DOM with an environment-switchable host.',
+          ],
+        },
+        {
+          title: 'Documentation & Internal Tooling',
+          bullets: [
+            'A three-document SEO, answer-engine and generative-engine system covering doctrine, application and process, plus a prompt library, an application report and a schema audit.',
+            'Explicit anti-hallucination rules and an evidence-tagging scheme distinguishing observed, inferred, assumed and recommended claims.',
+            'Art-direction material including hero plate originals and layout candidates.',
+            'The code itself functions as decision documentation: comments cite the client brief sections that justify each information-architecture, copy and call-to-action choice.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/globaly-web/globaly-01.webp',
+      '/img/img/globaly-web/globaly-02.webp',
+      '/img/img/globaly-web/globaly-03.webp',
+      '/img/img/globaly-web/globaly-04.webp',
+      '/img/img/globaly-web/globaly-05.webp',
+      '/img/img/globaly-web/globaly-06.webp',
+      '/img/img/globaly-web/globaly-07.webp',
+      '/img/img/globaly-web/globaly-08.webp',
+      '/img/img/globaly-web/globaly-09.webp',
+      '/img/img/globaly-web/globaly-10.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://getglobaly.com',
+  },
+  {
+    slug: 'red-lizard-studioz',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Marketing Technology • Agency SaaS',
+    locations: [
+      { flag: '🇨🇦', label: 'Ontario, Canada' },
+    ],
+    title: 'Red Lizard Studioz',
+    subtitle: 'Multi-Tenant AI Content & Conversational Sales Platform',
+    whatIs: `Red Lizard Studioz is a multi-tenant platform that a marketing agency operates on behalf of its client businesses. Each client is a tenant: it owns its own blog content, knowledge base, chat agents, brand identity, lead pipeline and — optionally — its own LLM provider and API key. Agency staff work across every tenant from one dashboard; a client logs into the same dashboard and sees only their own business.
+
+Inside the platform, an operator generates SEO articles through a multi-stage writing pipeline (outline → draft → editorial review → revision → branded cover image → optional translation → scheduled publish), maintains a per-tenant knowledge base from uploaded PDFs and Word documents, and configures an embeddable chat widget that answers visitor questions from that knowledge and captures leads. Conversations feed back into the system: questions the assistant could not answer are scored by an importance judge and surfaced as blog ideas, closing the loop between what visitors ask and what gets written.
+
+The control surface is unusually deep for this class of product. Rather than exposing a fixed set of toggles, the platform lets operators edit the system prompts that drive the blog writer, the image agent, the design agents and every chat agent — as layered blocks with a code default, a platform-wide override and a per-tenant override, each block labelled with where its current text came from. Agents are described by a scope/surface/skills taxonomy where "skills" are real server-side tools the model may call, authorized per call rather than promised in prose.`,
+    problemSolved: `An agency running content marketing and web presence for many small businesses hits the same wall repeatedly: every client needs a steady stream of on-brand articles, a website that reflects their actual services, and something to catch the visitors those efforts bring in. Doing this by hand does not scale past a handful of clients, and generic AI writing tools produce copy that is fluent but wrong — inventing services the business does not sell, quoting prices nobody approved, and restating the same idea in every section.
+
+The platform solves it by making the business's own knowledge the source of truth and enforcing that in code rather than in prompt wording. Every tenant's documents, services, FAQs and profile are chunked and embedded into a pgvector store where retrieval requires a non-empty tenant id as the last check before the query runs, and where documents default to secure visibility so the public widget can only ever reach rows explicitly marked public. AI-written articles are deliberately excluded from the factual passages the chatbot reasons over, so a hallucination in one post cannot become a fact the assistant repeats forever. Every chat reply is buffered in full and passed through a compliance verifier before the visitor sees a word of it.
+
+The custom build is justified by exactly the parts an off-the-shelf tool cannot give: tenant-level LLM sovereignty — a client can bring their own provider and key across six providers — prompt-level editability with guardrail blocks that warn before being cleared, and a data model where a lead, a conversation, an article, a keyword and a knowledge document all belong to the same tenant entity and can be reasoned about together.`,
+    techStack: [
+      'TypeScript',
+      'Next.js 15',
+      'React 19',
+      'Tailwind CSS 4',
+      'Radix UI',
+      'TanStack React Query 5',
+      'Tiptap 3',
+      'Node.js 20',
+      'Strapi 5',
+      'PostgreSQL 17',
+      'pgvector',
+      'OpenAI SDK',
+      'AG-UI Protocol (SSE)',
+      'Google OAuth',
+      'JWT',
+      'Postmark',
+      'Docker',
+      'Bitbucket Pipelines',
+      'Linode',
+      'Cloudflare',
+    ],
+    learnings: [
+      'Multi-tenancy enforced at four independent layers: every content type carries a project relation; a tenant-guard service resolves a slug to a published project id as the single source of truth; the RAG retrieval function throws on a non-string tenant id before touching the database; and middleware resolves custom client domains to a tenant subtree so a business can run on its own domain without the app knowing about it.',
+      'Prompt engineering as a first-class product surface: the blog writer’s prompt is decomposed into named blocks with a code default and two override layers (global, then tenant), resolved by precedence and labelled in the UI with their source. Blocks marked guardrail stay editable, but the UI warns before clearing one and reports a cleared guardrail back as a risk.',
+      'Agent capability separated from agent prose: a skills catalogue defines tools in code (save_lead, find_articles, save_knowledge), each declaring which surfaces may offer it. The runtime re-filters by surface at the moment tools are handed to the model, because a stored skill list validated at save time must not be honoured after the surface changed.',
+      'Provider-agnostic LLM layer with per-tenant sovereignty: six providers reached through one OpenAI-compatible code path, including Anthropic via its compatibility endpoint rather than a second SDK. A tenant’s provider only takes effect when it also supplies its own key, so a misconfigured provider degrades to the platform default instead of sending the wrong credential.',
+      'Cross-model parameter normalization discovered through measurement: a utility maps max_tokens vs max_completion_tokens, strips unsupported temperature, and adds reasoning headroom for models that think before answering — after measuring that one provider spent ~630 reasoning tokens producing a 15-token line, so a 60-token cap returned an empty string and every tenant on that provider silently fell back to generic copy.',
+      'Grounding defended in code, not prompt wording: context assembly classifies AI-written articles as linkable but not admissible as evidence about services, prices or guarantees; a compliance verifier reviews the full buffered draft before delivery and fails safe to a neutral reply on any parse error; an offerings whitelist does LLM-judged semantic matching against what the business actually sells.',
+      'Content quality treated as a pipeline problem: articles are planned before they are written, with each outlined section required to introduce an idea no earlier section covered. A second cheap model grades the draft against disqualifying criteria (invented services, fabricated case studies, third-party pricing claims) and triggers one revision pass below a threshold score.',
+      'Cost engineering as an architectural constraint: routing, verification and ice-breakers run on a cheap helper model that deliberately does not inherit the expensive chat model’s configuration; the router sees a clipped six-turn window rather than a whole transcript; and the design pipeline caches each stage against a content hash so unchanged research is not re-purchased.',
+      'Two independent rate-limit ceilings on an endpoint that cannot be authenticated: the widget runs in the visitor’s browser with the tenant slug in the page source, so the chat endpoint is replayable by design. Per-visitor and per-tenant windows bound the two different failure modes — one abuser on one widget, versus a distributed run against the account.',
+      'Failure isolation as a recurring discipline: image generation never fails an article; an optional design pipeline stage that throws is recorded as skipped and the pipeline continues; a per-locale translation failure no longer rolls back the successfully generated English post; and a prompt-config read that fails falls back to code defaults.',
+    ],
+    architecture: {
+      body: `The platform is built as two deployed applications over a shared tenant model: a Strapi 5 backend that owns the data, the AI pipelines and 116 custom endpoints, and a Next.js 15 dashboard that is both the operator console and the public storefront renderer. The decisive choice was to treat Strapi as an application framework rather than a CMS — content types define the tenant-scoped data model, while the behaviour lives in roughly 25,000 lines of custom services covering generation, retrieval, agents, compliance and design.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Strapi 5 backend owning 39 content types and 116 custom REST endpoints, with two in-repo plugins.',
+            'Next.js 15 App Router frontend serving the operator dashboard, public tenant storefronts, and 72 server-side API routes that proxy Strapi with per-route authorization.',
+            'Authenticated same-origin proxy pattern plus a dedicated SSE proxy for streaming generation.',
+            'AG-UI protocol over server-sent events for the agent runtime, so streaming, tool calls and lifecycle events follow a published contract.',
+            'An embeddable widget mounted in Shadow DOM, served from the backend and installable on any external site with a one-line script tag.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Multi-stage article pipeline: outline, draft, editorial review, conditional revision, branded cover image and scheduled publish.',
+            'Per-tenant RAG over uploaded documents, services, FAQs, business profile and ingested website URLs.',
+            'Chat agents with per-call tool authorization, lead capture, and a safety net that rescues contact details the model failed to save.',
+            'Knowledge-gap detection that turns unanswerable visitor questions into scored blog ideas.',
+            'Multi-agent website design pipeline with per-stage caching, graceful degradation and live progress reporting.',
+            'Conversational interviews that populate the business profile, including an invite-link flow for respondents without accounts.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            'A project entity as the tenant root, related to articles, knowledge documents, keywords, leads, conversations, services, testimonials, FAQs, website pages and design records.',
+            'Reusable components for per-tenant configuration: LLM config, compliance rules, widget config, theme, identity, contact, image agent and sales intelligence.',
+            'Knowledge documents carrying a public/secure visibility enum that defaults to secure.',
+            'Conversations modelled with intent, sentiment, outcome, unanswered questions and device attribution; leads with a full lifecycle including status, sub-status and generated summaries.',
+            'Prompt overrides as first-class rows with scope and an optional project relation, where a null project means the global default.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          body: 'Identity spans agency staff working across every tenant and clients scoped to one business.',
+          chips: [
+            'Strapi JWT',
+            'Google OAuth',
+            'Role buckets',
+            'Tenant assignment',
+            'Internal shared secret',
+            'Fail-closed policy',
+            'Owner-only routes',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Both applications ship as Docker images built exclusively on CI runners and pulled by the servers — a policy adopted after an in-place build exhausted memory on a shared production host. Deployment is a Bitbucket pipeline that runs the test suite on every pull request and every branch push, builds against a registry-side BuildKit cache, and SSHes a deploy script to the target machine.`,
+      groups: [
+        {
+          title: 'Hosting & Deploy',
+          bullets: [
+            'Linode host behind Cloudflare, with TLS terminating at the proxy and the app configured for proxy trust.',
+            'Separate dev and production images from distinct Dockerfiles, pinned to different Node majors for documented dependency reasons.',
+            'Next.js standalone output running as a non-root user, with post-deploy image pruning that keeps the newest three tags.',
+          ],
+        },
+        {
+          title: 'CI/CD',
+          bullets: [
+            'Tests run on every pull request and every branch push; a red suite blocks the build and the deploy.',
+            'Backend suite is offline by design — no key, no database, no network — with model-calling tests opt-in behind a --live flag.',
+            'Registry-cached BuildKit builds, commit-SHA and branch tags, and retry logic on registry push races.',
+            'Branch-specific build arguments so each environment bakes its own backend URL, after a build-time constant once pointed a dev deploy at production.',
+          ],
+        },
+        {
+          title: 'Data & Storage',
+          bullets: [
+            'Two PostgreSQL 17 instances: the application database and a pgvector instance for embeddings, the latter not exposed to the host in production.',
+            'SQL migrations for the vector schema, including the visibility column and a visibility-filtered similarity function.',
+            'Connection pooling configured per environment; container logs rotated after an unbounded log reached hundreds of megabytes.',
+          ],
+        },
+        {
+          title: 'Operations',
+          bullets: [
+            'Three scheduled jobs: hourly article generation, five-minute scheduled publishing with a give-up guard, and a configurable daily digest with timezone support.',
+            'Healthcheck on the frontend container, with memory limits and reservations on every service.',
+            'Secrets supplied through CI variables and validated as non-empty before use, after an empty argument once shifted an entire positional list.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `Delivered as a working two-application system with an operator console, public tenant storefronts, an embeddable widget and the AI pipelines behind them.`,
+      groups: [
+        {
+          title: 'Application Surfaces',
+          bullets: [
+            'A 24-section operator dashboard spanning content, business, super-admin and beta areas.',
+            'Design Studio: a full-window AI website design editor with brief, plan, canvas, sections, versions, competitors and references panels.',
+            'Public tenant storefronts with per-tenant routing, custom domain support and incremental revalidation.',
+            'Authentication flows: sign-in, sign-up, Google OAuth, forgot and reset password.',
+            'A public interview flow answerable from an invite link with no account, excluded from search indexing.',
+          ],
+        },
+        {
+          title: 'Integrations',
+          bullets: [
+            'Six LLM providers behind one interface, with a connection test action in the dashboard.',
+            'Postmark transactional email covering lead notifications, daily digests, password resets and interview invitations.',
+            'News retrieval for content ideas, plus integration records for analytics, search console and scheduling with derived connection status.',
+            'An embeddable chat widget installable on external, non-tenant websites.',
+          ],
+        },
+        {
+          title: 'Engineering Deliverables',
+          bullets: [
+            '111 test suites across both repositories, including a live-API suite for behaviour that offline stubs cannot verify.',
+            'CI pipelines gating both applications, with deployment runbooks documented in-repo.',
+            'A documented known-issues log recording root cause and verification for each resolved defect.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/redlizard-web/redlizard-01.webp',
+      '/img/img/redlizard-web/redlizard-02.webp',
+      '/img/img/redlizard-web/redlizard-03.webp',
+      '/img/img/redlizard-web/redlizard-04.webp',
+      '/img/img/redlizard-web/redlizard-05.webp',
+      '/img/img/redlizard-web/redlizard-06.webp',
+      '/img/img/redlizard-web/redlizard-07.webp',
+      '/img/img/redlizard-web/redlizard-08.webp',
+      '/img/img/redlizard-web/redlizard-09.webp',
+      '/img/img/redlizard-web/redlizard-10.webp',
+      '/img/img/redlizard-web/redlizard-11.webp',
+      '/img/img/redlizard-web/redlizard-12.webp',
+      '/img/img/redlizard-web/redlizard-13.webp',
+      '/img/img/redlizard-web/redlizard-14.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
+    slug: 'comply-dq-site',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Transportation • Compliance SaaS',
+    locations: [
+      { flag: '🇺🇸', label: 'Kansas, United States' },
+      { flag: '🇨🇦', label: 'Ontario, Canada' },
+    ],
+    title: 'ComplyDQ — Marketing Site',
+    subtitle: 'DOT Compliance Marketing Site with Interactive Assessment Tools',
+    whatIs: `ComplyDQ's public site is the marketing and lead-generation surface for a DOT Driver Qualification file management platform serving trucking companies, fleet safety managers and DOT compliance consultants. It is deliberately a presentation layer: the authenticated product lives on a separate subdomain and a separate codebase, and every conversion path on this site is an outbound link to it.
+
+Visitors can read the feature set and a searchable 26-question FAQ library, browse a CMS-backed blog, and run three self-contained interactive tools: a DOT Audit Readiness Assessment that scores audit exposure across weighted questions and surfaces specific compliance gaps by tier; an ROI Calculator that models annual administrative cost, FTE-equivalent burden, payback period and net ROI; and a DQ File Checklist derived from 49 CFR Part 391 requirements with per-driver-type grouping. A live pricing calculator mirrors the platform's actual tiered model. All three tools compute entirely in the browser — nothing is submitted, stored or emailed.
+
+The engineering weight of the project sits in delivery rather than application logic. The site runs self-hosted on Next.js 16 behind nginx and Cloudflare, deployed by a blue-green shell script with slot detection, asset-level validation, automatic rollback and Cloudflare cache pre-warming. A substantial share of the repository's documentation is a forensic record of production incidents, each written up with reproduction commands and the reasoning behind the fix.`,
+    problemSolved: `The site migrated from a legacy WordPress install whose search index had been compromised by an SEO spam injection: hundreds of indexed posts of unrelated content in six languages, with only nine pages carrying real content worth preserving. The domain's search presence was actively working against the business.
+
+The rebuild replaces that with a server-rendered Next.js site and treats index hygiene as a deploy-time concern. Rather than blanket-redirecting the old URLs, the migration distinguishes intent: the nine legitimate pages get 301s, while the spam URLs return 410 Gone — a deliberate choice, because a 301 would transfer the spam's accumulated reputation onto the new domain, and a 410 de-indexes faster than a 404 that Google retries. Because the spam posts lived at the domain root rather than under a prefix, prefix matching would have caught legitimate routes, so the exact slug list is generated from the pre-cutover sitemap into an nginx map. Indexability itself is derived from the build's own domain rather than the build mode, and the deploy script asserts it in both directions — production must be indexable, development must not — because a noindex in production produces no visible symptom and only surfaces weeks later as disappearance from search.
+
+Building custom rather than using a site builder follows from two constraints visible in the code. The interactive tools encode domain logic — FMCSA penalty figures cited to their primary source, 49 CFR Part 391 document requirements, a risk-scoring model — and the pricing calculator must stay numerically identical to the platform's real billing, which it achieves by importing the same pricing constants the ROI tool uses. Second, the site is one tenant of a shared multi-client content platform: blog articles and the chat widget are both scoped by a tenant slug, which a hosted marketing product could not have integrated with.`,
+    techStack: [
+      'TypeScript 5',
+      'Next.js 16',
+      'React 19',
+      'CSS Modules',
+      'Strapi 5',
+      'isomorphic-dompurify',
+      'lucide-react',
+      'Docker',
+      'nginx',
+      'Cloudflare',
+      "Let's Encrypt",
+      'Bitbucket Pipelines',
+      'ESLint 9',
+    ],
+    learnings: [
+      'Zero-downtime deploys on single-host infrastructure: blue-green slot rotation where the active slot is derived from the nginx upstream file — the actual source of truth, not assumed script state — validated on its own port before any traffic moves, with the old slot kept alive until after verification, making rollback the act of doing nothing.',
+      'Deploy-time validation beyond the health check: an HTTP 200 on the document proved insufficient for the observed failure mode, so the script extracts a real CSS path from the served HTML and fetches it, confirming the build’s asset graph is complete before the swap — plus post-swap verification through nginx with retries, since an nginx reload is asynchronous and an immediate probe can still be answered by an old worker.',
+      'Cache-correctness at the CDN boundary: Next serves static chunks as immutable with a one-year max-age despite those filenames not being content-addressed, so with CSS Modules a returning visitor’s cached CSS stops matching the new HTML and the page renders unstyled. Diagnosed by hash-comparing the same filename across two deployment IDs, then fixed in nginx — header order matters — scoped so genuinely hashed media keeps immutable.',
+      'Systematic root-causing of an intermittent edge failure: a Cloudflare 520 rate on static assets reduced from roughly 42% to 0.4% across five independent causes — the deploy window, nginx’s default circuit breaker amplifying one timeout on a single-backend upstream, keepalive connections closed server-side, an HTTP/2 declaration inconsistent with sibling vhosts, and the Cloudflare SSL mode. Each step measured, with the residual documented and mitigated by post-deploy cache warming.',
+      'Build-identity-driven client invalidation: the deployment ID is set from the commit SHA so Next appends a version query to assets and forces a full reload when a client’s HTML diverges from the server’s, instead of leaving it requesting chunks that no longer exist.',
+      'Untrusted-HTML pipeline for AI-generated content: blog bodies are model-generated from client material, so they are sanitized server-side through DOMPurify with an explicit denylist as defense-in-depth, a hook that absolutizes CMS-relative image paths and drops images whose source cannot resolve, forced rel="noopener noreferrer" on external links, and hook deregistration afterward because DOMPurify hooks are module-global.',
+      'Tenant isolation against a shared CMS: every query is filtered by a project slug — applied to the by-slug detail query as well as the list, specifically so another client’s article cannot be read by guessing a URL — with a normalization layer that absorbs the CMS’s inconsistent field casing so a rename is a one-function fix.',
+      'Resilient ISR against an external dependency: the CMS client never throws — it returns null on any failure so a CMS outage degrades the blog to an empty state instead of breaking the build or the page, with static params catching and returning an empty list and posts published after the build rendering on demand.',
+      'Data migration artifact handled in the ordering layer: the CMS overwrites the publish timestamp on import, so every article migrated from the old site collapsed to the migration date. The real date travels in a custom field, and because the API sorts nulls high, the effective-date fallback is resolved first and the list re-sorted in application code.',
+      'Hydration-safe theming and derived time: the active theme lives in the DOM, written by a pre-paint inline script to prevent the dark-mode flash, and is read via useSyncExternalStore rather than mirrored into state in an effect — with hydration warnings scoped to the single node that legitimately diverges.',
+      'Structured data constrained to what the page actually asserts: a shared graph with cross-referenced identifiers rather than repeated entities, external profile links deliberately omitted for want of confirmed sources, and postal address limited to region because no street address is published anywhere on the site.',
+    ],
+    architecture: {
+      body: `A content-driven marketing site built almost entirely from React Server Components, where the central decision is that nearly every page is statically rendered with no runtime data dependency, and the only dynamic surface — the blog — is isolated behind a fail-soft ISR client. Interactivity is pushed to narrow, explicitly-bounded client leaves, so page shells, metadata and structured data stay server-rendered while calculators and toggles hydrate independently.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Next.js 16 App Router across 15 routes, all but the blog fully static at build time.',
+            '14 client components scoped to interactive leaves; everything else is a Server Component.',
+            'Blog index, post detail and sitemap share a 60-second ISR revalidation window.',
+            'Content and domain data live in typed modules rather than inline in JSX.',
+            'Standalone output so the runtime image ships only the dependencies it actually resolves.',
+            'Single-source constants: pricing, penalty figures and navigation are defined once and imported by every consumer.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'DOT Audit Readiness Assessment with weighted scoring, exclusive multi-select handling, tiered results and gap surfacing at a defined threshold.',
+            'ROI Calculator computing annual admin hours and cost, FTE equivalent, net ROI and payback in months — deliberately excluding fines to keep the output conservative.',
+            'DQ File Checklist covering 49 CFR Part 391 items grouped by driver type with retention notes.',
+            'Live pricing calculator sharing the platform’s real billing constants.',
+            'Searchable 26-question FAQ library, all answers server-rendered.',
+            'CMS-backed blog with featured posts, categories, authors and per-post noindex control.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            'No database and no persistence in this repository; no auth, no API routes, no server actions.',
+            'One external read-only source: Strapi 5 REST, queried without a token.',
+            'Raw CMS shapes normalized to a view model so the UI never touches the API shape.',
+            'Every query tenant-filtered by project slug — on detail as well as list, to prevent cross-tenant reads by URL guessing.',
+            'Assessment, ROI and checklist state is ephemeral React state; nothing is submitted or stored.',
+          ],
+        },
+        {
+          title: 'SEO & Structured Data',
+          chips: [
+            'JSON-LD @graph',
+            'Organization',
+            'SoftwareApplication',
+            'BlogPosting',
+            'FAQPage',
+            'BreadcrumbList',
+            'Canonical',
+            'OpenGraph',
+            'Dynamic robots.txt',
+            'ISR sitemap',
+            '410 de-indexing',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Self-hosted on a shared VPS running roughly twenty sites, which drives most of the configuration: every resource that could collide between environments or neighbours — ports, compose project names, container names, nginx upstream blocks, server-block filenames — is namespaced explicitly, with the failure mode each collision produces documented at the point of the decision.`,
+      groups: [
+        {
+          title: 'Deploy Pipeline',
+          bullets: [
+            'Bitbucket Pipelines: pull requests and main run install, build, type-check and lint.',
+            'Production deploys are tag-triggered and gated on manual approval, so pushing a tag alone cannot ship.',
+            'The verify step re-runs on the tag rather than trusting the branch’s earlier run, since a tag can point at any commit.',
+            'Rollback is re-running the previous tag’s pipeline; each tag pins an exact commit.',
+          ],
+        },
+        {
+          title: 'Containers & Runtime',
+          bullets: [
+            'Multi-stage Docker build on node:22-alpine, running as a non-root user.',
+            'Public environment variables passed as build args, since Next inlines them at build rather than reading them at runtime.',
+            'Compose healthcheck via native fetch, with a start period excluded from retry counting.',
+            'Slot and port injected by environment so both versions coexist during the swap.',
+          ],
+        },
+        {
+          title: 'nginx & Edge',
+          bullets: [
+            'Per-environment upstream fragments rewritten each deploy, with the circuit breaker disabled on a single-backend upstream and keepalive connections pooled.',
+            'Apex to www redirect; HSTS, a per-origin CSP allowlist, frame and sniffing protections, and a Permissions-Policy denying 18 features.',
+            'Security headers re-declared inside nested location blocks, because one header declaration in a block drops the parent’s.',
+            'Legacy surface handled at the edge: 410 for the spam slug map and legacy WordPress paths, 301 for the nine legitimate pages.',
+            'Post-deploy warming of up to 40 hashed assets, since cache keys are full-URL.',
+          ],
+        },
+        {
+          title: 'Configuration & Guardrails',
+          bullets: [
+            'Environment identity comes from the public site URL, not the build mode — both environments build in production mode.',
+            'Deploy asserts indexability in both directions and warns loudly rather than aborting, since the fix lives in nginx rather than the build.',
+            'Deploy re-verifies that chunk cache headers are not immutable, because that block lives in server config outside the repository.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      groups: [
+        {
+          title: 'Application Surfaces',
+          bullets: [
+            '15 routes: Home, Features, a Resources hub with three tool pages, Blog index and detail, Partners, About, Contact, FAQs, Privacy Policy, Terms of Service and a 404.',
+            'Three interactive domain tools — assessment, ROI calculator and checklist — plus a live pricing calculator.',
+            'Design system of roughly 45 components with token-based CSS Modules, light and dark theming, responsive layout, skip-link and reduced-motion support.',
+          ],
+        },
+        {
+          title: 'Integrations & SEO',
+          bullets: [
+            'Tenant-scoped Strapi client with server-side sanitization and graceful degradation.',
+            'Full SEO and structured-data layer: per-page JSON-LD, dynamic robots, ISR sitemap, canonicals and social cards.',
+          ],
+        },
+        {
+          title: 'Infrastructure & Documentation',
+          bullets: [
+            'Migration assets: a sitemap-to-nginx generator for the de-indexing map, the redirect mapping table, and a written rationale for the approach.',
+            'Infrastructure as code: Dockerfile, Compose, two nginx server blocks, two upstream fragments, the blue-green deploy script and the CI pipeline.',
+            'A roughly 420-line operational README covering both environments, bring-up and teardown runbooks, one-time server prep, and incident post-mortems with reproduction commands.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/cdq-site-web/cdqsite-01.webp',
+      '/img/img/cdq-site-web/cdqsite-02.webp',
+      '/img/img/cdq-site-web/cdqsite-03.webp',
+      '/img/img/cdq-site-web/cdqsite-04.webp',
+      '/img/img/cdq-site-web/cdqsite-05.webp',
+      '/img/img/cdq-site-web/cdqsite-06.webp',
+      '/img/img/cdq-site-web/cdqsite-07.webp',
+      '/img/img/cdq-site-web/cdqsite-08.webp',
+      '/img/img/cdq-site-web/cdqsite-09.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://www.complydq.com',
+  },
+  {
+    slug: 'royal-parking-services',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Parking Management • Property Services',
+    locations: [
+      { flag: '🇨🇦', label: 'British Columbia, Canada' },
+    ],
+    title: 'Royal Parking Services',
+    subtitle: 'Parking Enforcement Website & Client Permit Portal',
+    whatIs: `Royal Parking Services is the public website and client portal for a British Columbia parking enforcement company that manages private lots for strata councils, retail plazas, commercial offices and medical clinics. The system serves two distinct audiences from one Next.js application: drivers who received a violation notice and need to pay it, and property managers who hold a service contract and need to administer their parking permits.
+
+Drivers use a public four-step checkout to look up a notice by licence plate or notice number, review the violation alongside the photographed lot rules that were posted on site, select one or several outstanding notices, and pay by card. Contracted clients sign in to a separate dashboard where they issue parking permits with per-day time programs and multiple registered vehicles, search their permit register by plate, cancel permits, store payment cards through Stripe tokenization, and review their invoice history with links to Stripe-hosted receipts. The marketing surface around both flows covers services, resources, an article system, a contact form with a map, and a blog wired to a headless CMS.
+
+The codebase is roughly 12,800 lines of TypeScript across 129 source files, built over about 182 commits by five contributors. The public payment flow and the client dashboard share one API client, one auth layer and one design system, which is what keeps a consumer-facing checkout and a B2B admin panel coherent inside a single deployment.`,
+    problemSolved: `Private parking enforcement generates two problems at once. Drivers who receive a notice have no self-service way to see the evidence or pay, so every ticket turns into a phone call, a cheque, or a dispute — and disputes are expensive when the enforcement company cannot immediately show the driver the signage that was posted at the lot. Meanwhile property managers under contract have no visibility into their own permit register, so every permit issuance, renewal or cancellation runs through the enforcement company's staff by email.
+
+The system resolves both through one application. The payment flow treats the driver as untrusted by design: the client sends only notice identifiers and a plate, never an amount, and the backend computes the charge and issues a Stripe PaymentIntent. The selection step resolves the amount through a documented fallback chain so a reduced notice in appeals shows the reduction rather than the stale stored figure, and it surfaces the lot rules with signage photos deduplicated by lot — the dispute-prevention evidence, shown before payment rather than after. The confirm endpoint is idempotent, which lets the same call serve both the in-place card path and the 3-D Secure redirect return page without double-recording.
+
+Buying this off the shelf was not viable because the notice lifecycle is the company's own domain model, not a generic product. Notices carry twelve distinct statuses, and payability is a property of that lifecycle rather than a simple paid/unpaid flag — the frontend mirrors the backend's unpayable set as an explicit blacklist, encoding what cannot be paid instead of what can, so the two stay in agreement. Permits carry per-weekday time programs, validity periods and vehicle arrays tied to a company's contract terms. No generic payment page or SaaS admin panel models either of those.`,
+    techStack: [
+      'TypeScript 5',
+      'Next.js 15',
+      'React 19',
+      'Tailwind CSS 3.4',
+      'daisyUI 4',
+      'Redux Toolkit 2.5',
+      'react-hook-form 7',
+      'Yup',
+      'Axios',
+      'Stripe',
+      'Strapi',
+      'Leaflet',
+      'Headless UI',
+      'JWT',
+      'PM2',
+      'nginx',
+      'Bitbucket Pipelines',
+    ],
+    learnings: [
+      'Server-authoritative payments over a public endpoint: the checkout sends only notice identifiers and a plate number; the amount is computed backend-side and returned as a Stripe client secret. The client never proposes a price, which removes the entire class of tampering attacks that a naive pay-this-amount endpoint invites.',
+      'Dual-path 3-D Secure with an idempotent confirm: confirmation runs with redirect-if-required, so non-3DS cards resolve in place while 3DS cards bounce through a dedicated return route. Both paths converge on the same confirm endpoint, made safe by backend idempotency; the return page re-derives canonical status from Stripe rather than trusting the redirect status query parameter.',
+      'Public routes inside an authenticated HTTP client: a single axios instance serves both surfaces, with a public-path allowlist gating both the bearer-token request interceptor and the 401-redirect response interceptor. Without that carve-out, an expired client-portal token in storage would have kicked anonymous drivers out of the checkout mid-payment.',
+      'Domain status modelling driven by a real defect: the payable-notice filter is an explicit blacklist mirroring the backend’s own guard, carrying a comment documenting that a previous whitelist hid notices the backend would have accepted. Encoding what cannot be paid instead of what can made the frontend fail open in the correct direction.',
+      'Dispute prevention as a product surface: the selection step groups each notice’s lot rules with signage photos by lot and deduplicates them, so a driver with four notices in one lot sees the posted rules once, before paying. The evidence that would otherwise surface during an appeal is moved to the top of the funnel.',
+      'Amount resolution with a documented precedence chain preferring the backend’s rule-applied figure over the stored one, so time-limited reductions display what the driver will actually be charged rather than the face value of the ticket.',
+      'Third-party widget suppression across client-side navigation: the CMS chat widget injects a persistent host node that survives App Router transitions, so simply not rendering the script tag on the payment route was insufficient. The component emits a scoped display rule keyed to the tenant attribute — recognising that a third-party script’s DOM outlives React’s tree.',
+      'CMS integration with graceful degradation: articles are fetched with ISR and filtered by project slug for multi-project tenancy on a shared CMS; every failure path returns an empty result, and both the listing and static params fall back to committed local content, so a CMS outage degrades to static posts instead of a broken blog.',
+      'Stripe integrated twice, deliberately differently: the public checkout uses the modern PaymentIntents and Payment Element flow with a card-only intent, keeping wallet prompts out of a one-off driver payment, while the portal’s saved cards use the tokenization API. Two integration styles in one application, each matched to its flow — anonymous one-shot payment versus stored credential on a B2B account.',
+    ],
+    architecture: {
+      body: `The application is a single Next.js App Router deployment serving three audiences from one codebase, separated by route groups rather than by separate apps: a public marketing site and anonymous payment checkout, the credential flows on their own full-screen layout, and the authenticated client portal with its own sidebar shell. All three share one HTTP client, one Redux store and one Tailwind design system, with public-path carve-outs where the anonymous checkout must not inherit authenticated behaviour.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Next.js 15 App Router with three route groups: public, credentials and private dashboard.',
+            'Server Components by default for marketing and article pages, with client components isolated to interactive surfaces.',
+            'A single shared axios instance with request and response interceptors, plus a public-path allowlist so the anonymous checkout skips both token injection and 401 redirects.',
+            'A four-step client-side checkout state machine held in one typed state object, with a separate 3-D Secure return route reconstructing state from URL parameters.',
+            'Hybrid content: CMS with ISR for the blog, committed TypeScript modules for resources and service copy.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Public notice lookup by licence plate or notice number through a single unified search term.',
+            'Multi-notice selection with live total and per-status payability filtering.',
+            'Lot rule display with signage photography, deduplicated per lot.',
+            'Permit issuance with per-weekday time programs and a dynamic vehicle array.',
+            'Debounced server-side permit-number availability checking.',
+            'Saved payment cards with default-card selection and hosted invoice receipts.',
+            'Contact form with phone-number normalisation and a dynamically imported map.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            'Notice — a twelve-value status lifecycle, four distinct amount fields, reduction expiry, repeat-offender flag, plus relations to officer, violation, lot, images and lot rules.',
+            'Permit — type, validity period, holder, value, date range, parking lot relation, program schedule array and vehicle array.',
+            'Company as the tenant root, carrying contract limits, pricing fields, billing period and admin profile.',
+            'Invoice and PaymentMethod, Stripe-backed, with receipt URLs and card metadata.',
+            'A consistent paginated envelope across list endpoints.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          chips: [
+            'JWT Bearer',
+            'Axios interceptors',
+            '401 auto-logout',
+            'Route guard',
+            'Surface disambiguation',
+            'Open-redirect sanitisation',
+            'Forgot / reset password',
+            'Public-path exemptions',
+          ],
+        },
+      ],
+    },
+    payments: {
+      body: `Two Stripe integrations coexist, each matched to its flow. The anonymous driver checkout uses PaymentIntents with the Payment Element; the authenticated portal stores cards through the tokenization API. Amount authority is entirely server-side in both.`,
+      groups: [
+        {
+          title: 'Public Checkout',
+          bullets: [
+            'One-off payment against one or more outstanding violation notices — no subscriptions, no marketplace, no split payments.',
+            'The create-intent endpoint receives notice identifiers and a plate number and no amount; the returned client secret mounts the Payment Element.',
+            'The intent is pinned to card server-side, which suppresses wallet prompts and save-card offers — an intentional choice for an anonymous one-off payment.',
+            'Currency is CAD, formatted for the en-CA locale, with the Stripe Elements locale pinned to prevent browser-language leakage into an English-only site.',
+          ],
+        },
+        {
+          title: 'Strong Customer Authentication',
+          bullets: [
+            'Confirmation runs with redirect-if-required: non-redirect payments resolve in place, redirect payments land on a dedicated return route.',
+            'The return route retrieves the PaymentIntent to obtain canonical status rather than trusting the redirect status parameter.',
+            'The confirm endpoint is idempotent by backend contract, so the synchronous and 3-D Secure return paths can both call it safely.',
+            'Confirm re-validates notice identifiers and plate server-side, so parameters forwarded through the return URL are explicitly not a trust boundary.',
+          ],
+        },
+        {
+          title: 'Order States & Saved Cards',
+          bullets: [
+            'Order state is driven by the notice status lifecycle — new, partial payment and paid in full, plus reminder and appeal states.',
+            'Three statuses are non-payable online and are filtered before selection.',
+            'Outcome surface: confirmation number plus optional hosted receipt URL on both the in-place success step and the return page.',
+            'Portal saved cards use tokenization against a card element, posting only the token — card numbers never reach the application backend.',
+            'A custom Stripe appearance theme matched to the brand palette across both flows.',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Self-hosted on a Linux VPS behind PM2, deployed by Bitbucket Pipelines over SSH, with separate backend URLs, CMS credentials and Stripe keys per environment.`,
+      groups: [
+        {
+          title: 'Hosting & Deploy',
+          bullets: [
+            'Node 20 process managed by PM2 serving the Next.js production server on a dedicated port.',
+            'Bitbucket Pipelines, branch-triggered: main deploys production, develop deploys staging, each piping a deploy script over SSH to a deployer account.',
+            'The deploy script regenerates the environment file from scratch per deploy, installs, builds with a raised heap limit, then restarts or starts under PM2.',
+          ],
+        },
+        {
+          title: 'Secrets & Configuration',
+          bullets: [
+            'All values come from Bitbucket deployment variables, with each validated as non-empty before being written.',
+            'The script was refactored to pass variables by name through the SSH environment rather than positionally, after SSH argument flattening caused one empty value to shift every subsequent argument and silently corrupt the environment.',
+            'The deploy-time environment flag distinguishes production from staging behaviour at runtime.',
+          ],
+        },
+        {
+          title: 'Delivery',
+          bullets: [
+            'Next.js image optimization with AVIF and WebP, and a remote-pattern allowlist restricted to the CMS upload host.',
+            'A shared multi-project CMS instance, with this site scoping its queries by project slug.',
+            'PM2 process logs plus a per-application deployment log directory.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      groups: [
+        {
+          title: 'Public Site & Checkout',
+          bullets: [
+            'Marketing site: Home with animated stat counters and feature carousels, Services with anchor-linked sections, a dedicated mobile-pay page, About, Resources, Blog, article detail, Contact, Privacy Policy and Terms of Use.',
+            'Public payment checkout: a four-step wizard plus a dedicated 3-D Secure return route, with evidence display, multi-notice selection and the Stripe Payment Element.',
+          ],
+        },
+        {
+          title: 'Client Portal',
+          bullets: [
+            'Sign-in, forgot-password and reset-password flows.',
+            'Permit issuance form with programs and multi-vehicle registration.',
+            'Permit register with plate search, detail, edit and cancel dialogs, plus vehicle-count statistics.',
+            'Saved card management, invoice history with hosted receipts, and company settings.',
+          ],
+        },
+        {
+          title: 'Content & Design System',
+          bullets: [
+            'Five long-form resource articles and four blog posts authored as structured TypeScript data with a typed block model, rendered through one shared article component that also renders CMS-sourced HTML.',
+            'A custom Tailwind token layer over daisyUI with reusable banner, FAQ, pagination and select primitives, a route-transition loader and a scroll-to-top control.',
+            'Integrations delivered: Stripe across two flows, the CMS, a chat widget with per-route suppression, and an interactive map.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/royalparking-web/royalparking-01.webp',
+      '/img/img/royalparking-web/royalparking-02.webp',
+      '/img/img/royalparking-web/royalparking-03.webp',
+      '/img/img/royalparking-web/royalparking-04.webp',
+      '/img/img/royalparking-web/royalparking-05.webp',
+      '/img/img/royalparking-web/royalparking-06.webp',
+      '/img/img/royalparking-web/royalparking-07.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
+    slug: 'sophie-callander',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Professional Services • Mediation',
+    locations: [
+      { flag: '🇨🇦', label: 'British Columbia, Canada' },
+    ],
+    title: 'Sophie Callander Consulting',
+    subtitle: 'Multilingual Conflict Resolution Practice Website',
+    whatIs: `Sophie Callander Consulting is the public practice site for an independent mediator and Workplace Fairness Analyst based in British Columbia, Canada. It serves organizations and individuals dealing with workplace conflict who are evaluating a practitioner before making contact — a decision driven by trust and credibility rather than feature comparison. The site's job is to establish that credibility, explain four distinct service offerings, and route qualified visitors into a booked introductory call.
+
+Visitors can read service descriptions for mediation, conflict management coaching, workplace fairness assessments and workplace restoration; follow a narrative journey section covering the practitioner's path from the bar to conflict resolution; review verified qualifications, designations and memberships; read an FAQ; browse blog articles pulled live from a headless CMS; and reach a contact page with email, phone and a booking link. Every one of these surfaces is published in seven languages — English, French, Spanish, Punjabi, Hindi, Simplified Chinese and Persian — with Persian rendering the entire layout right-to-left.
+
+The scale of the work is concentrated in correctness rather than surface area: seven fully translated locales across eight route types, a type-enforced translation system, a comprehensive structured-data and crawler-access layer, and a documented dual-environment Docker deployment behind nginx. The repository contains an unusually detailed SEO and answer-engine audit that records defects found, fixes applied, before and after measurements, and an explicit list of claims that could not be verified from code.`,
+    problemSolved: `An independent practitioner competing on trust has no brand to lean on: the website is the credibility. Two problems compounded that. First, the practice serves a multilingual population — workplace conflict in British Columbia frequently involves people whose first language is Punjabi, Hindi, Mandarin, Persian, Spanish or French — and an English-only site excludes exactly the participants a mediator most needs to reach. Second, an earlier state of the codebase carried SEO defects severe enough to keep the site out of search results entirely: every page declared a canonical URL pointing at the homepage, effectively declaring the whole site duplicate content of its own root; robots and sitemap requests returned server errors because they fell through to the localized route and crashed on an undefined locale; hreflang was declared in config but rendered no tags in the served HTML; and there was no structured data at all.
+
+The system resolves this with per-route metadata resolution that computes canonical, the seven hreflang alternates plus a default, and the social URL from a path each page declares for itself — something the layout provably cannot do, because it does not know its child route. Crawlability artifacts are generated from the routing table rather than hand-maintained, including a machine-readable summary route for AI assistants. Translation correctness is enforced by the compiler: the English dictionary is the type source of truth and all six other locales are typed against it, so a missing or misspelled key fails type checking in CI before it can ship a blank string. English is served without a URL prefix via an internal rewrite so pre-existing URLs and their accrued ranking survive.
+
+Off-the-shelf was rejected for reasons visible in the code. A template builder cannot express the locale-aware font strategy — Chinese deliberately uses a system font stack because Google publishes no Chinese subset, and the framework font loader would otherwise bundle 91 KB of font declarations into the shared CSS chunk and block rendering for visitors who never use it. Nor would it express the structured-data discipline the code enforces: the schema layer emits ProfessionalService rather than LocalBusiness specifically because no physical address is published, following a stated rule that schema must describe visible, accurate content.`,
+    techStack: [
+      'TypeScript 5',
+      'Next.js 16',
+      'React 19',
+      'SCSS Modules',
+      'next/font',
+      'Strapi 5',
+      'ISR',
+      'next/image',
+      'Custom i18n (7 locales, RTL)',
+      'JSON-LD',
+      'lucide-react',
+      'Google Analytics 4',
+      'Docker',
+      'nginx',
+      "Let's Encrypt",
+      'Bitbucket Pipelines',
+      'Linode',
+      'Cloudflare',
+    ],
+    learnings: [
+      'Metadata architecture at the route level, not the layout: canonical, hreflang and social URL are computed by a single helper each page calls with its own path. This fixed a live defect where a canonical declared in the localized layout was inherited by every child route, declaring the entire site duplicate content of its own homepage.',
+      'Compile-time enforcement of translation completeness: the English dictionary is authored as a constant and a mapped type strips its readonly modifiers to produce the shared Dictionary type. The six other locales are typed against it, so the CI type check — which runs before the build — catches a missing key across seven locales rather than shipping an empty string to production.',
+      'Prefix-less default locale via internal rewrite: the proxy rewrites unprefixed paths to the English route without changing the visible URL, keeping all routes under a single localized tree while preserving existing URLs and their accrued ranking. Rewrite rather than redirect, and deliberately no language sniffing, so pages stay statically prerenderable and no visitor is dropped into an unreviewed translation.',
+      'Per-script font loading tuned against a measured regression: all seven locales initially preloaded all six font families, because the font loader injects a preload link per instantiated font without knowing which route uses it — 294 KB, more than the page’s entire JavaScript payload. Disabling preload on the four non-Latin families moved LCP from 5.6 s to 3.8 s and total blocking time from 100 ms to 30 ms.',
+      'Server-first component boundary: five of 27 components are client components. The header is a server shell that resolves locale, dictionary strings and navigation, then hands a fully-resolved props object to the interactive child — dictionaries never cross the network boundary, only rendered HTML does.',
+      'Progressive enhancement as a hard constraint: the reveal component ships content visible in the served HTML and only applies the hidden state client-side when the observer API exists and the user has not requested reduced motion, with a three-second failsafe on the reasoning that losing an animation beats leaving content invisible. The language switcher is real anchors, not router calls, so it works without JavaScript and is crawlable.',
+      'Structured data bounded by what the page actually shows: the schema layer emits a graph of ProfessionalService, Person and WebSite with stable cross-references — but deliberately no address, hours, service area or external profile links, and types the business as ProfessionalService instead of LocalBusiness precisely because no physical address is published.',
+      'Image pipeline tuned to the actual asset set: device sizes cap at 2048 because no source image exceeds that width and the optimizer never upscales, so larger breakpoints were producing byte-identical output while doubling cache entries per photo per format. Minimum cache TTL is raised from four hours to 31 days because AVIF encoding costs roughly 50% more than WebP and the default made the first visitor of each window pay for re-encoding.',
+      'A content security policy that survives static prerendering: the script directive accepts inline as a documented trade-off — per-request nonces would force dynamic rendering and destroy the static prerender the site depends on — while the origin allowlist does the actual work of blocking injected third-party scripts, with eval scoped to development only.',
+      'Accessibility encoded in the token layer: every muted and on-dark color carries its measured WCAG contrast ratio as a comment, and the brand blue is lightened to a separate on-dark token for footer text because the pure brand value fails AA at small sizes. 62 CSS logical-property declarations carry the right-to-left layout for Persian.',
+    ],
+    architecture: {
+      body: `A server-rendered, statically prerendered Next.js 16 App Router application built around a single localized route tree serving seven locales. The central decision is that almost nothing runs on the client: dictionaries, content assembly, structured data and metadata all resolve on the server, and the client bundle carries only five interactive components. Content is split by volatility — durable copy lives in typed TypeScript dictionaries compiled into the build, while blog articles come from a headless CMS through ISR, so the client can publish without a deploy while marketing copy stays under version control and type checking.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'A single localized route tree with static params emitting one static variant per locale.',
+            'Default locale served prefix-less through an internal rewrite, so English and localized routes share one implementation.',
+            'Server shell and client island pattern: the header resolves all data server-side and passes resolved props to its interactive child.',
+            'A content assembly layer joins translated copy with untranslated structure — stable slug identifiers used as URL anchors and icon keys are explicitly never translated.',
+            'Presentational primitives compose every page, with SCSS Modules scoped per component and no UI framework.',
+          ],
+        },
+        {
+          title: 'Internationalization',
+          bullets: [
+            'Seven locales with per-locale language tag, social locale, formatting locale and writing direction in one metadata record.',
+            'Persian drives right-to-left on the document root, carried through 62 CSS logical-property declarations.',
+            'Dictionaries lazy-imported per request so only the active locale reaches the server, and never the client.',
+            'Native internationalization APIs for plural counts and dates, with dates pinned to UTC so a late-night publish does not display the previous day in negative offsets.',
+            'The language switcher renders real anchors with language and direction attributes, working without JavaScript.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            'No database, no ORM and no persistence layer — the site is read-only by design.',
+            'Strapi 5 REST filtered by a project slug tenant key so one CMS serves multiple sites.',
+            'A mapping layer converts every CMS response into site-owned types; the UI never touches the API shape.',
+            'Derived server-side: reading time from body word count, related posts ranked by shared category, and a nesting-aware parser that strips the CMS’s duplicated takeaways block.',
+            'CMS failures degrade to an empty list rather than propagating — an outage costs the blog, not the site.',
+          ],
+        },
+        {
+          title: 'SEO & Answer-Engine Layer',
+          chips: [
+            'hreflang × 7 + x-default',
+            'Per-route canonical',
+            'JSON-LD @graph',
+            'ProfessionalService',
+            'FAQPage',
+            'BreadcrumbList',
+            'Article',
+            'Generated sitemap',
+            'Generated robots',
+            'llms.txt route',
+            'AI crawler allowlist',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Deployed as a self-hosted Docker container behind nginx on a Linode VPS in Toronto rather than a managed platform — a choice that follows from the server already hosting roughly thirteen projects. Development and production are two independent clones of the same repository on the same machine, parameterized entirely through environment variables so neither can collide with the other's container name or port.`,
+      groups: [
+        {
+          title: 'Containers & Build',
+          bullets: [
+            'Three-stage Dockerfile on node:22-alpine, running as a non-root user.',
+            'Standalone output so the runtime image ships only the dependencies actually used.',
+            'Compose healthcheck polling the app every 30 seconds with a start period.',
+            'The public site URL is passed as a build arg, not just runtime env — it is baked at compile time because it signs canonicals, hreflang and the sitemap.',
+          ],
+        },
+        {
+          title: 'CI/CD',
+          bullets: [
+            'Bitbucket Pipelines, with pull requests running the same verification step as main.',
+            'Gate order is install, type-check, lint, build — with type checking ahead of the build so locale key errors surface first.',
+            'Push to main deploys to development, then production, via a remote script that resets to origin, rebuilds, restarts and prunes stale images.',
+            'A documented pipeline gotcha: the production script path is quoted because the CI masks every occurrence of a secured variable’s value in the command string, which was corrupting the path.',
+          ],
+        },
+        {
+          title: 'Environments & Edge',
+          bullets: [
+            'Development and production coexist on one host with distinct directories, container names and ports.',
+            'Development serves a noindex robots header at the nginx layer so it can never compete with production for rankings.',
+            'nginx terminates TLS and forces HTTPS and apex canonicalization with permanent redirects.',
+            'A Cloudflare real-IP snippet restores visitor IPs from the forwarding header, trusted only from published ranges — shipped and documented ahead of enabling the proxy.',
+          ],
+        },
+        {
+          title: 'Observability',
+          bullets: [
+            'Analytics mounted only when a measurement ID is configured — with none set, the site loads nothing from the provider and sets no cookie.',
+            'CMS fetch failures logged server-side with status and URL.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `A complete seven-language marketing site delivered to production with its deployment pipeline, server configuration and a written technical audit.`,
+      groups: [
+        {
+          title: 'Application Surfaces',
+          bullets: [
+            'Home, Services, About, FAQ, Contact, Reflections, Blog index and Blog detail — eight route types across seven locales.',
+            'Header with mobile panel, skip-to-content link and language switcher; footer with full navigation.',
+            'Blog detail with cover image, reading time, key-takeaways block, related posts and per-post CMS-driven metadata.',
+            'Narrative About page with journey timeline, credentials including an explicitly separated in-progress group, and an animated portrait strip.',
+            'Contact page with email, phone and an external booking link.',
+          ],
+        },
+        {
+          title: 'Integrations',
+          bullets: [
+            'Strapi 5 headless CMS for blog content, tenant-filtered.',
+            'An embedded chat widget in Shadow DOM, loaded from the CMS origin with a tenant attribute.',
+            'External booking scheduler and conditionally-mounted analytics.',
+          ],
+        },
+        {
+          title: 'Infrastructure & Documentation',
+          bullets: [
+            'Dockerfile, Compose file, remote deploy script and CI pipeline configuration.',
+            'nginx server blocks for both environments plus the Cloudflare real-IP snippet.',
+            'A written SEO and answer-engine audit documenting five corrected defects with before and after evidence, a phase-by-phase verification table, Lighthouse results, explicitly tagged unverifiable claims, and open questions for the client.',
+            'A runbook for enabling the Cloudflare proxy, including measured latency justification and the required ordering of steps.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/sophie-web/sophie-01.webp',
+      '/img/img/sophie-web/sophie-02.webp',
+      '/img/img/sophie-web/sophie-03.webp',
+      '/img/img/sophie-web/sophie-04.webp',
+      '/img/img/sophie-web/sophie-05.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://sophiecallander.com',
+  },
+  {
     slug: 'grupo-el-triunfo',
     role: 'Full-stack · Corporate site',
     engagement: 'Client work',
     industry: 'Agribusiness',
+    locations: [
+      { flag: '🇦🇷', label: 'Cordoba, Argentina' },
+    ],
     title: 'Grupo El Triunfo',
     subtitle: 'Corporate Agribusiness Platform',
     whatIs: `Grupo El Triunfo is a corporate website for an agribusiness holding company based in Oncativo, Córdoba, Argentina, with over 36 years of experience in the agricultural sector.
@@ -540,6 +1479,9 @@ The website solves this by unifying six distinct business units under a cohesive
     role: 'Full-stack · SaaS',
     engagement: 'Client work',
     industry: 'Construction & trades',
+    locations: [
+      { flag: '🇺🇸', label: 'California, United States' },
+    ],
     title: 'Home Trades Online',
     subtitle: 'Contractor Proposal Platform (SaaS)',
     whatIs: `Home Trades Online is a mobile-first SaaS platform that empowers contractors and tradespeople to generate AI-powered professional proposals in under 30 seconds. The platform bridges the gap between contractors working on job sites and the administrative work of creating, sending, and managing client proposals.
@@ -588,6 +1530,9 @@ Home Trades Online solves this by enabling contractors to describe a job in plai
     role: 'Frontend · Product landing',
     engagement: 'Client work',
     industry: 'Construction & trades',
+    locations: [
+      { flag: '🇺🇸', label: 'California, United States' },
+    ],
     title: 'Home Trades Online Landing',
     subtitle: 'Marketing Landing Page & Website',
     whatIs: `SalesForPro is the public-facing marketing website for Home Trades Online, designed to convert visiting contractors into users through an interactive product demo experience.
@@ -630,6 +1575,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
     role: 'Full-stack',
     engagement: 'Own product',
     industry: 'Tech recruiting',
+    locations: [
+      { flag: '🇨🇱', label: 'Santiago, Chile' },
+    ],
     title: 'StartOn ',
     subtitle: 'Talent-Startup Connection Platform',
     whatIs: `
@@ -679,6 +1627,9 @@ SalesForPro solves this by embedding a live product demo directly into the hero 
     role: 'Full-stack · Payments & integrations',
     engagement: 'Client work',
     industry: 'Appointment-based services',
+    locations: [
+      { flag: '🇦🇷', label: 'Cordoba, Argentina' },
+    ],
     title: 'Mi Agenda',
     subtitle: 'Online Booking & Appointments Platform',
     whatIs: `Turnero (Mi Agenda) is a platform that lets service providers manage their schedule and lets clients book appointments online. It includes a public booking flow by service, Google Calendar integration to avoid conflicts, payments with MercadoPago (one-time and subscriptions), notifications (email, push, and optionally SMS/WhatsApp), and an installable PWA ("Mi agenda") with reminders and offline access.
@@ -742,6 +1693,9 @@ The solution centralizes recurring and one-off availability, payments, reminders
     role: 'Full-stack · Corporate site',
     engagement: 'Client work',
     industry: 'Fitness & training',
+    locations: [
+      { flag: '🇦🇷', label: 'Cordoba, Argentina' },
+    ],
     title: 'Augusto Fit Program',
     subtitle: 'Personal Trainer Corporate Website',
     whatIs: `Corporate website for a personal trainer offering custom training plans, transformation stories, and direct contact. The platform showcases services, testimonials with an infinite carousel on mobile, habits and statistics section, training plans, and a contact form integrated with EmailJS. Dark design with GSAP animations, next/font typography and mobile-first responsive experience.
@@ -791,6 +1745,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
     role: 'Full-stack · Corporate site',
     engagement: 'Client work',
     industry: 'Industrial services',
+    locations: [
+      { flag: '🇦🇷', label: 'Buenos Aires, Argentina' },
+    ],
     title: 'TecnoMar',
     subtitle: 'Industrial Pumps Corporate Website',
     whatIs: `Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.`,
@@ -839,6 +1796,9 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
     role: 'Full-stack · B2B e-commerce',
     engagement: 'Client work',
     industry: 'Wholesale fashion',
+    locations: [
+      { flag: '🇨🇦', label: 'Canada' },
+    ],
     title: 'Ateevo Wholesale',
     subtitle: 'B2B E-Commerce Platform for Fashion',
     whatIs: `Ateevo Wholesale is a B2B e-commerce platform for fashion brands managing wholesale operations. Developed for a client in Canada.
@@ -930,6 +1890,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     role: 'Full-stack · AI automation',
     engagement: 'Client work',
     industry: 'Legal',
+    locations: [
+      { flag: '🇪🇸', label: 'Andalusia, Spain' },
+    ],
     title: 'LexMax',
     subtitle: 'Judicial Case Management Platform',
     whatIs: `
@@ -1023,6 +1986,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     role: 'Full-stack',
     engagement: 'Own product',
     industry: 'Events & venues',
+    locations: [
+      { flag: '🇨🇦', label: 'Canada' },
+    ],
     title: 'Event Scheduler',
     subtitle: 'Event Booking & Venue Management Platform',
     whatIs: `
@@ -1089,6 +2055,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     role: 'Full-stack · Strapi CMS',
     engagement: 'Client work',
     industry: 'Sports & fitness',
+    locations: [
+      { flag: '🇨🇦', label: 'Canada' },
+    ],
     title: 'The Club at Northfield',
     subtitle: 'Corporate Website for Sports & Fitness Club - Ontario, Canada',
     whatIs: `
@@ -1136,6 +2105,9 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     role: 'Frontend · Product landing',
     engagement: 'Client work',
     industry: 'Legal',
+    locations: [
+      { flag: '🇪🇸', label: 'Andalusia, Spain' },
+    ],
     title: 'LexMax Landing',
     subtitle: 'Legal Automation Landing Page',
     whatIs: `
@@ -1173,7 +2145,7 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     ],
     githubLink: null as any,
     liveDemoLink: 'https://lexmaxsoluciones.com/',
-  },  
+  },
   {
     slug: 'ecommerce',
     role: 'Full-stack',
@@ -1267,7 +2239,7 @@ This platform delivers a complete B2B e-commerce solution for the fashion indust
     ],
     githubLink: 'https://github.com/fransei29/interview-challenge',
     liveDemoLink: 'https://interview-challenge-ecru.vercel.app'
-  },  
+  },
   {
     slug: 'taskmanager',
     role: 'Full-stack',
