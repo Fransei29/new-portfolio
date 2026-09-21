@@ -16,10 +16,18 @@ import {
 
 const INDICES = [0, 1, 2, 3];
 
-// El cuarto ítem de cada lado se oculta en mobile (clase `.hideOnMobile`): con
-// las dos columnas apiladas, 4 + 4 filas obligaban a un scroll largo para un
-// argumento que ya cierra con 3. En desktop siguen estando los cuatro.
-const MOBILE_HIDDEN_FROM = 3;
+// Ítems que no se muestran en mobile (clase `.hideOnMobile`), por lado.
+//
+// En mobile las columnas se apilan una debajo de la otra, así que cada lado se
+// lee como su propia lista y no hay pares enfrentados que mantener: por eso se
+// puede ocultar una tarjeta de un lado sin tocar la del otro.
+//
+//   izquierda: se va "Single points of failure" (2) + "Data everywhere" (3)
+//   derecha:   se va "Repetition in the background" (0) + "One place for your data" (3)
+//
+// Quedan 2 tarjetas por lado. En desktop siguen estando las cuatro de cada uno.
+const MOBILE_HIDDEN_WITHOUT = [2, 3];
+const MOBILE_HIDDEN_WITH = [0, 3];
 
 // Distinct minimal icons per row
 const WITHOUT_ICONS = [Clock, AlertTriangle, UserMinus, FileWarning];
@@ -63,7 +71,7 @@ const AutomationComparison = () => {
                 return (
                   <li
                     key={index}
-                    className={`${styles.listItem} ${index >= MOBILE_HIDDEN_FROM ? styles.hideOnMobile : ''}`}
+                    className={`${styles.listItem} ${MOBILE_HIDDEN_WITHOUT.includes(index) ? styles.hideOnMobile : ''}`}
                   >
                     <span className={`${styles.itemIcon} ${styles.itemIconWithout}`}>
                       <Icon size={16} aria-hidden />
@@ -107,7 +115,7 @@ const AutomationComparison = () => {
                 return (
                   <li
                     key={index}
-                    className={`${styles.listItem} ${index >= MOBILE_HIDDEN_FROM ? styles.hideOnMobile : ''}`}
+                    className={`${styles.listItem} ${MOBILE_HIDDEN_WITH.includes(index) ? styles.hideOnMobile : ''}`}
                   >
                     <span className={`${styles.itemIcon} ${styles.itemIconWith}`}>
                       <Icon size={16} aria-hidden />

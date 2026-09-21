@@ -78,10 +78,10 @@
   pointer-events: none;
   z-index: 0;
 
+  // Igual que en /projects: en mobile se montaba sobre los filtros, así que
+  // se oculta. El panda queda como guiño de desktop.
   @media (max-width: 768px) {
-    width: 150px;
-    height: 200px;
-    right: 6px;
+    display: none;
   }
 }
 

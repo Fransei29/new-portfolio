@@ -132,7 +132,6 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     previewImage: '/img/img/royalparking-web/royalparking-01.webp',
     technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'daisyUI', 'Redux Toolkit', 'react-hook-form', 'Stripe', 'Strapi', 'Leaflet', 'JWT', 'PM2', 'nginx'],
     category: 'platform',
-    status: 'latest',
     featured: true,
   },
   {
@@ -145,7 +144,6 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     previewImage: '/img/img/sophie-web/sophie-01.webp',
     technologies: ['Next.js 16', 'React 19', 'TypeScript', 'SCSS Modules', 'Strapi 5', 'Custom i18n (7 locales)', 'JSON-LD', 'Docker', 'nginx', 'Linode', 'Cloudflare'],
     category: 'landing',
-    status: 'latest',
     featured: true,
   },
   {
@@ -158,7 +156,6 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     previewImage: '/img/img/eltriunfo-web/eltriunfo-01.webp',
     technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'GSAP', 'ScrollTrigger', 'Radix UI', 'Lucide React'],
     category: 'landing',
-    status: 'latest',
     featured: true,
   },
   {

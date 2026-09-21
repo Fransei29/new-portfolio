@@ -1402,7 +1402,14 @@ html.dark .ctaWrap {
    El eje vertical se conserva, que es el que da la sensación de armado. */
 @media (max-width: 768px) {
   .piece-l   { transform: translate3d(-18px, 10px, 0); }
-  .piece-r   { transform: translate3d(18px, 10px, 0); }
+  /* NEGATIVO, igual que la regla de escritorio de más arriba: un +18px acá
+     desplaza la pieza hacia la DERECHA mientras su sección no entró en
+     viewport, y eso ensancha el body (medido: 400px sobre un viewport de 390).
+     Ese scroll horizontal de 10px es el que dejaba a las tarjetas de
+     Operational Architecture cortadas contra el borde, sin su borde derecho.
+     Un desplazamiento negativo no genera scroll — el scroll sólo lo produce el
+     desborde por la derecha — así que la entrada se conserva entera. */
+  .piece-r   { transform: translate3d(-18px, 10px, 0); }
   .piece-u   { transform: translate3d(0, 22px, 0); }
   .piece-d   { transform: translate3d(0, -16px, 0); }
   .piece-pop { transform: translate3d(0, 20px, 0) scale(0.97); }
@@ -1410,6 +1417,18 @@ html.dark .ctaWrap {
   .assemble-stagger.stagger-alt > *:nth-child(odd),
   .assemble-stagger.stagger-alt > *:nth-child(even) {
     transform: translate3d(0, 22px, 0);
+  }
+
+  /* En mobile el stagger de arriba es PURAMENTE VERTICAL, así que no hay nada
+     horizontal que contener y el `overflow-x: clip` heredado sólo hace daño:
+     el contenedor termina en la misma x que sus tarjetas, y el recorte se come
+     el borde derecho de 1px y trunca la esquina redondeada. Es lo que se veía
+     en Operational Architecture, cuyo grid lleva estas clases.
+     `visible` en los dos ejes: dejar uno en `clip` y el otro en `visible`
+     computaría `auto` y convertiría al contenedor en scroll container. */
+  .assemble-stagger.stagger-alt {
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
   /* Stagger más corto: en mobile las cards se ven de a una y los delays
