@@ -148,12 +148,6 @@ const TASKS = [
     series: [9, 10, 14, 13, 16, 18, 17, 21, 24],
   },
   {
-    slug: 'checkout-optimization',
-    week: 'Week 4 of 4',
-    stats: { conversion: 33, latency: 152, incidents: 0, checks: 58, infraProgress: 99 },
-    series: [14, 16, 15, 20, 23, 26, 25, 30, 33],
-  },
-  {
     slug: 'dashboard-v2',
     week: 'Week 8 of 8',
     stats: { conversion: 25, latency: 165, incidents: 1, checks: 74, infraProgress: 96 },
@@ -172,23 +166,30 @@ const TASKS = [
  *
  * Derivadas a mano de las `locations` de app/data/projects.ts — no se importan
  * de ahí a propósito: ese módulo arrastra el catálogo entero de case studies
- * (decenas de KB de prosa) y esto es un adorno del hero que sólo necesita seis
- * strings. El contrato es el comentario: si se suma un país en projects.ts,
- * se suma acá.
+ * (decenas de KB de prosa) y esto es un adorno del hero que sólo necesita un
+ * puñado de strings. El contrato es el comentario: si se suma un país en
+ * projects.ts, se suma acá.
  *
  * El orden no es alfabético sino de peso: primero donde más se entregó, para
- * que las primeras vueltas del ciclo muestren lo más representativo.
+ * que las primeras vueltas del ciclo muestren lo más representativo. Igual se
+ * alternan los países, que dos ciudades seguidas de la misma bandera se leen
+ * como un cambio a medias.
+ *
+ * Lo que se muestra es `city` + bandera; `country` sólo alimenta el conteo del
+ * texto de lector de pantalla.
  */
 const MARKETS = [
-  { flag: '🇨🇦', city: 'Ontario', country: 'Canada' },
+  { flag: '🇨🇦', city: 'Toronto', country: 'Canada' },
   { flag: '🇦🇷', city: 'Buenos Aires', country: 'Argentina' },
   { flag: '🇺🇸', city: 'California', country: 'United States' },
+  { flag: '🇮🇹', city: 'Torino', country: 'Italy' },
+  { flag: '🇪🇸', city: 'Andalucía', country: 'Spain' },
   { flag: '🇨🇦', city: 'Vancouver', country: 'Canada' },
-  { flag: '🇪🇸', city: 'Andalusia', country: 'Spain' },
   { flag: '🇨🇱', city: 'Santiago', country: 'Chile' },
+  { flag: '🇦🇷', city: 'Córdoba', country: 'Argentina' },
 ] as const;
 
-/** Países distintos en MARKETS: el número que acompaña al badge. */
+/** Países distintos en MARKETS: sólo para el texto de lector de pantalla. */
 const MARKET_COUNTRIES = new Set(MARKETS.map((m) => m.country)).size;
 
 const HeroDashboard = () => {
@@ -197,69 +198,116 @@ const HeroDashboard = () => {
   // mismo, asi que se traduce como cualquier otro texto de la interfaz.
   const demoDomain = language === 'es' ? 'TuNegocio' : 'YourBusiness';
 
-  // Rotating "shipped tasks" — strike-through cycle
-  const [taskIndex, setTaskIndex] = useState(0);
+  // ---------------------------------------------------------------------
+  // Un solo reloj para todo el dashboard.
+  //
+  // Antes había dos intervalos sueltos — tareas cada 8s, plazas cada 3s — y al
+  // no ser múltiplos, los cambios caían en momentos arbitrarios: mientras se
+  // tachaba una tarea saltaba el país, y un rato después los números. Eso es lo
+  // que hacía sentir el panel "revuelto": no era la cantidad de movimiento sino
+  // que nada estaba sincronizado.
+  //
+  // Ahora hay un único tick de 8s que ordena todo por fases dentro del ciclo:
+  //
+  //   t=0.0s  entra la tarea nueva y CAMBIA LA PLAZA (mismo instante)
+  //   t=2.0s  arranca el tachado
+  //   t=3.2s  tachado completo
+  //   t=4.0s  cambia la plaza otra vez (mitad exacta del ciclo)
+  //   t=7.3s  la tarea se va
+  //   t=8.0s  siguiente vuelta
+  //
+  // La plaza va al doble de frecuencia que el resto, pero derivada del MISMO
+  // reloj: 4s es la mitad exacta de 8s, así que cada cambio cae en el tick o
+  // justo en el medio, nunca en un punto arbitrario. Es la diferencia con los
+  // 3s de antes, que contra un ciclo de 8 no cerraban nunca.
+  //
+  // Las stats no siguen este ciclo: se actualizan cada STATS_EVERY vueltas
+  // (24s) para que los números sean el dato que cambia "de vez en cuando" y no
+  // otra cosa parpadeando cada 8 segundos.
+  // ---------------------------------------------------------------------
+  const CYCLE_MS = 8000;
+  const STATS_EVERY = 3;
+
+  const [tick, setTick] = useState(0);
+  // Contador de medios ciclos: sólo lo usa la plaza, que rota al doble.
+  const [halfTick, setHalfTick] = useState(0);
   const [taskPhase, setTaskPhase] = useState<'enter' | 'striking' | 'done' | 'leave'>('enter');
-  // Ciclo tranquilo: más reposo entre cambios para que no se sienta "movido".
+
   useEffect(() => {
+    // Sin movimiento: queda la primera tarea y la primera plaza, fijas. El
+    // dashboard sigue leyéndose entero, sólo que no rota.
+    if (prefersReducedMotion()) {
+      setTaskPhase('done');
+      return;
+    }
+
     const timeouts: ReturnType<typeof setTimeout>[] = [];
     const run = () => {
+      // Tarea y plaza entran juntas: un solo cambio que leer, no dos.
       setTaskPhase('enter');
       timeouts.push(setTimeout(() => setTaskPhase('striking'), 2000));
       timeouts.push(setTimeout(() => setTaskPhase('done'), 3200));
       timeouts.push(setTimeout(() => setTaskPhase('leave'), 7300));
-      // El cambio de tarea ya se comunica por el conteo animado de las stats;
-      // el flash de fondo que había acá encima sumaba parpadeo, no información.
+      // Segundo cambio de plaza, a mitad del ciclo.
+      timeouts.push(setTimeout(() => setHalfTick((prev) => prev + 1), CYCLE_MS / 2));
       timeouts.push(setTimeout(() => {
-        setTaskIndex((prev) => (prev + 1) % TASKS.length);
-      }, 8000));
+        setHalfTick((prev) => prev + 1);
+        setTick((prev) => prev + 1);
+      }, CYCLE_MS));
     };
     run();
-    const id = setInterval(run, 8000);
+    const id = setInterval(run, CYCLE_MS);
     return () => {
       clearInterval(id);
       timeouts.forEach(clearTimeout);
     };
   }, []);
-  const currentTask = TASKS[taskIndex];
 
-  // Plaza activa. Va montada sobre el mismo ciclo de 8s que las tareas en vez
-  // de tener su propio intervalo: dos tempos distintos corriendo a la vez es
-  // exactamente lo que vuelve inquieto un hero que se quiere calmo. Como
-  // MARKETS (6) y TASKS (5) son coprimos, el par tarea/plaza no se repite hasta
-  // la vuelta 30 — sale variado sin tener que aleatorizar nada.
-  const [marketIndex, setMarketIndex] = useState(0);
-  useEffect(() => {
-    if (prefersReducedMotion()) return;
-    const id = setInterval(
-      () => setMarketIndex((prev) => (prev + 1) % MARKETS.length),
-      8000,
-    );
-    return () => clearInterval(id);
-  }, []);
-  const market = MARKETS[marketIndex];
+  const currentTask = TASKS[tick % TASKS.length];
+  // La plaza avanza cada medio ciclo (4s): una vez junto con la tarea y otra a
+  // mitad de camino, cuando el tachado ya terminó y no hay nada más en curso.
+  const market = MARKETS[halfTick % MARKETS.length];
+  // La plaza saliente, para cruzarla con la entrante. Renderizar las dos a la
+  // vez es lo que convierte el cambio en un relevo: antes el `key` reemplazaba
+  // el nodo y la ciudad vieja se cortaba de golpe mientras la nueva entraba
+  // sola, que es de donde venía la sensación de salto.
+  const prevMarket = MARKETS[(halfTick - 1 + MARKETS.length) % MARKETS.length];
+  // Primer render: no hay de dónde venir, así que no se cruza nada.
+  const isFirst = halfTick === 0;
+  // La bandera sólo se anima si el emoji efectivamente cambia. Entre dos
+  // ciudades del mismo país (Toronto → Vancouver) el glifo es el mismo y
+  // re-animarlo se veía como un parpadeo sin causa.
+  const flagChanged = !isFirst && prevMarket.flag !== market.flag;
 
-  // Stats driven by current task. El delay escalonado hace que la fila se
-  // actualice de izquierda a derecha en vez de saltar los tres a la vez.
-  const conversion = useAnimatedNumber(currentTask.stats.conversion, { delay: 0 });
-  const latency = useAnimatedNumber(currentTask.stats.latency, { delay: 180 });
-  const incidents = useAnimatedNumber(currentTask.stats.incidents, { delay: 360 });
-  const infraProgress = useAnimatedNumber(currentTask.stats.infraProgress, {
+  // Stats: cambian cada 3 vueltas (24s). Se congela el índice dividiendo el
+  // tick, así que entre actualizaciones los números quedan realmente quietos.
+  const statsTask = TASKS[Math.floor(tick / STATS_EVERY) % TASKS.length];
+
+  // El delay escalonado hace que la fila se actualice de izquierda a derecha en
+  // vez de saltar los tres a la vez.
+  const conversion = useAnimatedNumber(statsTask.stats.conversion, { delay: 0 });
+  const latency = useAnimatedNumber(statsTask.stats.latency, { delay: 180 });
+  const incidents = useAnimatedNumber(statsTask.stats.incidents, { delay: 360 });
+  const infraProgress = useAnimatedNumber(statsTask.stats.infraProgress, {
     duration: 2600,
     delay: 500,
   });
-  const checksCount = currentTask.stats.checks;
+  const checksCount = statsTask.stats.checks;
 
-  // Curva derivada de la serie de la tarea activa (useMemo: recalcular en cada
-  // render no aporta nada, la serie sólo cambia al rotar de tarea).
-  const chartPath = React.useMemo(() => seriesToPath(currentTask.series), [currentTask.series]);
+  // Curva derivada de la MISMA serie que alimenta las stats, no de la tarea en
+  // pantalla: la línea y el número de conversion son el mismo dato, así que si
+  // la curva se moviera cada 8s contradiría al número que está quieto. Las dos
+  // cambian juntas cada STATS_EVERY vueltas (useMemo: recalcular en cada render
+  // no aporta nada).
+  const chartPath = React.useMemo(() => seriesToPath(statsTask.series), [statsTask.series]);
   const chartArea = React.useMemo(() => pathToArea(chartPath), [chartPath]);
-  const chartEnd = React.useMemo(() => seriesEndPoint(currentTask.series), [currentTask.series]);
+  const chartEnd = React.useMemo(() => seriesEndPoint(statsTask.series), [statsTask.series]);
 
-  // Animación de trazado: se relanza en cada cambio de tarea reiniciando la
-  // animación CSS. El key remonta el <path>, que es la forma barata de volver a
-  // disparar un stroke-dashoffset sin tocar el DOM a mano.
-  const chartKey = `${taskIndex}-chart`;
+  // El trazado ya no se relanza en cada tarea: antes un `key` derivado de
+  // taskIndex remontaba los <path> y el barrido de 1.4s se repetía cada 8s sin
+  // parar. Sin remount, los nodos persisten y el cambio de serie se resuelve
+  // con la transición CSS del atributo `d` — el dato se actualiza, el gráfico
+  // no se rearma.
 
   return (
     <div className={styles.wrapper} data-explode-root>
@@ -328,19 +376,39 @@ const HeroDashboard = () => {
               </span>
             </div>
             <div className={styles.topRowRight}>
-              {/* Plaza activa. El contador de países es fijo y el que rota es
-                  el lugar: el dato duro queda legible todo el tiempo y el
-                  movimiento pasa sólo en la línea de abajo. El `key` remonta
-                  el nodo en cada cambio y con eso vuelve a disparar el fade
-                  del CSS, sin manejar estado de animación a mano. */}
+              {/* Plaza activa: bandera y ciudad, nada más. El conteo de países
+                  salió de acá — se dice una sola vez, en el texto de lector de
+                  pantalla de arriba. El `key` remonta el nodo en cada cambio y
+                  con eso vuelve a disparar el fade del CSS, sin manejar estado
+                  de animación a mano. */}
               <div className={styles.marketBadge} data-explode-piece="market-badge">
-                <span className={styles.marketCount}>
-                  {MARKET_COUNTRIES} {language === 'es' ? 'países' : 'countries'}
-                </span>
                 <span className={styles.marketPlace}>
-                  <span key={marketIndex} className={styles.marketPlaceInner}>
-                    <span className={styles.marketFlag}>{market.flag}</span>
-                    {market.city}
+                  {/* La bandera vive fuera de los nodos con `key`: no se
+                      remonta ni se desplaza al rotar. Es la ranura fija contra
+                      la que se lee el cambio. Sólo hace su micro-gesto cuando
+                      el emoji cambia de verdad. */}
+                  <span
+                    key={`flag-${flagChanged ? halfTick : 'steady'}`}
+                    className={`${styles.marketFlag} ${flagChanged ? styles.marketFlagSwap : ''}`}
+                  >
+                    {market.flag}
+                  </span>
+                  <span className={styles.marketCityViewport}>
+                    {/* Dos capas superpuestas: la saliente se va hacia arriba
+                        mientras la entrante sube desde abajo. Se cruzan en el
+                        medio, así que la ranura nunca queda vacía. */}
+                    {!isFirst && (
+                      <span
+                        key={`out-${halfTick}`}
+                        className={`${styles.marketPlaceInner} ${styles.marketOut}`}
+                        aria-hidden
+                      >
+                        {prevMarket.city}
+                      </span>
+                    )}
+                    <span key={`in-${halfTick}`} className={styles.marketPlaceInner}>
+                      {market.city}
+                    </span>
                   </span>
                 </span>
               </div>
@@ -398,7 +466,6 @@ const HeroDashboard = () => {
 
               {/* Área bajo la curva — degradado suave, curva bezier */}
               <path
-                key={`${chartKey}-fill`}
                 className={styles.chartFill}
                 d={chartArea}
                 fill="url(#heroChartFill)"
@@ -406,7 +473,6 @@ const HeroDashboard = () => {
 
               {/* Línea de conversión — curva suave */}
               <path
-                key={`${chartKey}-line`}
                 className={styles.chartLine}
                 d={chartPath}
                 fill="none"
@@ -418,7 +484,6 @@ const HeroDashboard = () => {
 
               {/* Punto final — con margen para que no se corte */}
               <circle
-                key={`${chartKey}-dot-outer`}
                 className={styles.chartDotOuter}
                 cx={chartEnd.x}
                 cy={chartEnd.y}
@@ -427,7 +492,6 @@ const HeroDashboard = () => {
                 opacity="0.18"
               />
               <circle
-                key={`${chartKey}-dot`}
                 className={styles.chartDot}
                 cx={chartEnd.x}
                 cy={chartEnd.y}
@@ -441,8 +505,10 @@ const HeroDashboard = () => {
 
           {/* Work area rows — live progress indicators */}
           <div className={styles.stackRows}>
-            {/* Frontend & UI se oculta en mobile: ahí sólo entran dos filas sin
-                que el dashboard se estire de más (ver .hideOnMobile en el scss). */}
+            {/* En mobile queda sólo Infra & DevOps: es la única fila con dato
+                vivo (el % contando y los checks), así que las dos de 100% fijo
+                se ocultan y el panel no se estira (ver .hideOnMobile en el
+                scss). En desktop van las tres. */}
             <div className={`${styles.stackRow} ${styles.hideOnMobile}`} data-explode-piece="stack-row" data-explode-index="0">
               <div className={`${styles.stackIcon} ${styles.stackIconFrontend}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -460,7 +526,7 @@ const HeroDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.stackRow} data-explode-piece="stack-row" data-explode-index="1">
+            <div className={`${styles.stackRow} ${styles.hideOnMobile}`} data-explode-piece="stack-row" data-explode-index="1">
               <div className={`${styles.stackIcon} ${styles.stackIconBackend}`}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <ellipse cx="12" cy="5" rx="9" ry="3" />

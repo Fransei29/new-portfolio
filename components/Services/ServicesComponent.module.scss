@@ -79,7 +79,11 @@
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     gap: 1.5rem;
-    padding: 0.75rem 1.25rem;
+    // El grid ya viene con 8px laterales del contenedor, así que acá van 12px
+    // (0.75rem) y no 20: 8 + 12 = 20px de margen real hasta el borde de la
+    // tarjeta, el mismo que usa el bloque de Operational Architecture. Antes
+    // sumaban 28px y las dos secciones no arrancaban en la misma línea.
+    padding: 0.75rem;
   }
 }
 
@@ -203,6 +207,14 @@
 }
 
 // ---------- Featured card ----------
+// El icono de arriba y el CTA de abajo también se elevan sobre la marca de
+// agua; si no, en mobile el trazo les pasa por encima.
+.featuredCard > .cardTop,
+.featuredCard > .featuredCta {
+  position: relative;
+  z-index: 1;
+}
+
 .featuredCard {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
@@ -271,6 +283,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  // Por encima de .orbitBg (z-index 0): el orbit es fondo y el texto tiene
+  // que leerse limpio sobre él.
+  position: relative;
+  z-index: 1;
 }
 
 .featuredTitle {
@@ -332,6 +348,122 @@
 }
 
 // ---------- Orbital visual ----------
+// ---- Orbit de fondo (sólo mobile) ----
+//
+// Cuarta versión. Las tres anteriores fallaron así: curvas sueltas sangrando
+// por el borde (recorte roto), una miniatura prolija en la esquina
+// (calcomanía) y un fondo grande centrado — ese último ENSUCIABA, porque las
+// curvas pasaban por detrás del párrafo y ahí el ojo lee.
+//
+// Dos reglas que salieron de esos intentos:
+//   1. El fondo no invade la zona del texto. Se ancla al ángulo inferior
+//      derecho, la única región libre (última línea corta + el CTA no llega).
+//   2. Se mueve. Un trazo quieto no explica nada; los pulsos viajando hacia el
+//      núcleo son los que hacen legible la idea de integraciones convergiendo.
+.orbitBg {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    // Anclado abajo a la derecha y saliendo por el borde: el recorte de .card
+    // corta parte de la figura, y eso la mantiene en registro de fondo.
+    right: -26%;
+    bottom: -34%;
+    width: 74%;
+    aspect-ratio: 1;
+    z-index: 0;
+    pointer-events: none;
+    // Se desvanece hacia arriba y a la izquierda, o sea hacia el texto: donde
+    // podría estorbar, ya no hay nada que ver.
+    -webkit-mask-image: radial-gradient(circle at 68% 68%, #000 34%, transparent 72%);
+    mask-image: radial-gradient(circle at 68% 68%, #000 34%, transparent 72%);
+    opacity: 0;
+    animation: orbitBgIn 1.1s ease 0.3s forwards;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  }
+}
+
+@keyframes orbitBgIn {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitBg {
+    animation: none;
+    opacity: 1;
+  }
+
+  // Sin pulsos viajando: queda la geometría quieta.
+  .bgPulse,
+  .bgCoreDot {
+    animation: none;
+    display: none;
+  }
+}
+
+.bgRing {
+  stroke: rgba(46, 41, 78, 0.07);
+  stroke-width: 0.6;
+  stroke-dasharray: 2 4;
+  stroke-linecap: round;
+
+  :global(html.dark) & {
+    stroke: rgba(255, 255, 255, 0.09);
+  }
+}
+
+.bgLine {
+  stroke: rgba(110, 86, 207, 0.12);
+  stroke-width: 0.7;
+  stroke-linecap: round;
+
+  :global(html.dark) & {
+    stroke: rgba(201, 184, 245, 0.14);
+  }
+}
+
+// El pulso es lo único con algo de color: es el que cuenta la historia, así
+// que se le permite leerse. Igual está lejos del texto.
+.bgPulse {
+  fill: var(--primary-color);
+  opacity: 0.26;
+}
+
+.bgNode {
+  fill: var(--primary-color);
+  opacity: 0.13;
+}
+
+.bgCore {
+  fill: none;
+  stroke: rgba(110, 86, 207, 0.13);
+  stroke-width: 0.6;
+
+  :global(html.dark) & {
+    stroke: rgba(201, 184, 245, 0.22);
+  }
+}
+
+// Latido del núcleo, al ritmo con que llegan los pulsos.
+.bgCoreDot {
+  fill: var(--primary-color);
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: bgCorePulse 5.6s ease-in-out infinite;
+}
+
+@keyframes bgCorePulse {
+  0%, 100% { opacity: 0.09; transform: scale(0.9); }
+  50%      { opacity: 0.22; transform: scale(1.1); }
+}
+
 .orbital {
   position: relative;
   width: 100%;
@@ -358,7 +490,9 @@
   transform: translate(-50%, -50%);
 }
 
-// A single, faint guide ring — modern and quiet, not a sci-fi double orbit.
+// Anillo guía. El 66% del stage = radio 33 en unidades SVG, que es el mismo
+// R_RING donde terminan las curvas y se apoyan los labels (ver el TSX). Si se
+// cambia uno hay que cambiar el otro, o el dibujo deja de cerrar.
 .orbitRing {
   position: absolute;
   top: 50%;
@@ -367,10 +501,10 @@
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px dashed rgba(0, 0, 0, 0.09);
+  border: 1px dashed rgba(46, 41, 78, 0.16);
 
   :global(html.dark) & {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.14);
   }
 }
 
@@ -385,13 +519,16 @@
   overflow: visible;
 }
 
+// Las conexiones, en el lila de marca. Antes eran gris neutro a 0.5 de ancho:
+// a ese peso se leían como rayas sueltas en vez de como un circuito que
+// converge en el núcleo.
 .orbitLine {
-  stroke: rgba(0, 0, 0, 0.22);
-  stroke-width: 0.5;
+  stroke: rgba(110, 86, 207, 0.38);
+  stroke-width: 0.85;
   stroke-linecap: round;
 
   :global(html.dark) & {
-    stroke: rgba(255, 255, 255, 0.22);
+    stroke: rgba(201, 184, 245, 0.42);
   }
 }
 
@@ -453,8 +590,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  // base centering; the rotate/translate is added inline per node
-  margin: -13px 0 0 -19px;
+  // El centrado va por translate(-50%, -50%) dentro del transform inline, NO
+  // por este margin. El margin negativo asumía un ancho fijo de 38px, pero los
+  // labels miden distinto (IO vs RAG), así que cada uno quedaba a un radio
+  // diferente del centro — medido: de 108px a 127px — y el conjunto se veía
+  // torcido. Centrando por el centro real del nodo, los cinco caen sobre la
+  // misma circunferencia.
   min-width: 38px;
   height: 26px;
   padding: 0 0.55rem;

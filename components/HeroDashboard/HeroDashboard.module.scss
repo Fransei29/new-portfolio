@@ -375,19 +375,35 @@
   display: inline-block;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.88rem;
+  // Una sola línea siempre. En mobile un slug largo se partía en dos renglones
+  // y el tachado quedaba cruzando el vacío del segundo. Si algún slug futuro no
+  // entra, se recorta — pero la fila no cambia de alto.
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 }
 
-// Animated strike-through line (scales from left)
+// Línea de tachado, en voz baja.
+//
+// Antes: 1.5px a opacity .55 barriendo en 0.9s con una curva que aceleraba
+// fuerte en el medio. En una fila chica eso leía como un latigazo y se llevaba
+// la vista por encima del resto del panel. Ahora es más fina, más tenue y
+// barre parejo: sigue comunicando "tachado" sin ser lo primero que se mira.
 .strikeLine {
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
-  height: 1.5px;
+  height: 1px;
   background: currentColor;
   transform-origin: left center;
   transform: scaleX(0);
-  opacity: 0.55;
+  opacity: 0.3;
   pointer-events: none;
 }
 
@@ -404,7 +420,8 @@
 
 // Phase: striking — the line is drawing
 .task_striking .strikeLine {
-  animation: strikeGrow 0.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  // ease-out parejo en vez de la curva con acelerón al medio.
+  animation: strikeGrow 1.2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 @keyframes strikeGrow {
@@ -422,7 +439,7 @@
 
   .strikeLine {
     transform: scaleX(1);
-    opacity: 0.55;
+    opacity: 0.3;
   }
 }
 
@@ -435,7 +452,7 @@
 
   .strikeLine {
     transform: scaleX(1);
-    opacity: 0.35;
+    opacity: 0.2;
   }
 
   :global(html.dark) & {
@@ -471,56 +488,104 @@
 .marketBadge {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.1rem;
+  // `stretch` y no `flex-end`: .marketPlace es la grilla que sostiene la
+  // ranura de la ciudad, y si el badge la encoge a su contenido esa ranura
+  // queda en 0 y el texto desaparece bajo su propio overflow.
+  align-items: stretch;
+  justify-content: center;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1.15;
-  // Ancho estable: la plaza más larga no debe empujar el layout al rotar.
+  // Ancho estable: la ciudad más larga (Buenos Aires) no debe empujar el
+  // layout al rotar, y ahora rota cada 3s.
   min-width: 7.5rem;
-}
-
-.marketCount {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: rgba(46, 41, 78, 0.5);
-
-  :global(html.dark) & {
-    color: rgba(255, 255, 255, 0.42);
-  }
 }
 
 // Alto fijo: el contenido de adentro se cruza en el fade (el saliente aún no
 // se fue cuando entra el nuevo), así que sin esto la fila daría un salto de
 // un renglón en cada cambio.
+//
+// Además fija la bandera. Antes bandera y ciudad eran un solo inline-flex
+// alineado a la derecha: al rotar, una ciudad más larga empujaba la bandera
+// hacia la izquierda y el emoji parecía moverse solo. Ahora es una grilla de
+// dos columnas — la ciudad crece hacia la izquierda dentro de su ranura y la
+// bandera se queda clavada en la derecha.
 .marketPlace {
   position: relative;
+  display: grid;
+  // La ciudad ocupa el resto de la fila y la bandera su ancho natural: el
+  // emoji queda clavado a la derecha pase lo que pase con el texto.
+  grid-template-columns: minmax(0, 1fr) auto;
+  // Fila única explícita. La bandera va primero en el DOM pero ocupa la
+  // columna 2, y el auto-placement mandaba la ciudad a una segunda fila en vez
+  // de volver a la columna 1: quedaban una arriba de la otra.
+  grid-template-rows: 1fr;
+  grid-auto-flow: dense;
+  align-items: center;
+  gap: 0.28rem;
+  height: 1.05rem;
+  width: 100%;
+}
+
+// Ranura de la ciudad: ancho fijo y recorte propio. El texto entrante y el
+// saliente se superponen durante el fade, así que se apilan acá adentro en vez
+// de empujarse en el flujo.
+.marketCityViewport {
+  position: relative;
+  // Columna 1 explícita: la bandera va primero en el DOM, así que sin esto se
+  // quedaba ella con el 1fr y la ranura colapsaba a 0 (ciudad invisible).
+  grid-column: 1;
   display: block;
   height: 1.05rem;
   overflow: hidden;
+  min-width: 0;
 }
 
+// Relevo de plazas.
+//
+// La entrante sube desde abajo mientras la saliente se va hacia arriba: las dos
+// capas se cruzan en el medio, así que la ranura nunca queda vacía y el cambio
+// se lee como una lista que avanza, no como un texto que se reemplaza.
+//
+// El recorrido es corto (5px) y la curva sale suave y frena suave — sin
+// rebote, que a este tamaño se vería nervioso. El blur de 1.5px sólo aparece
+// en el tramo de viaje: da la sensación de movimiento real y desaparece antes
+// de que el texto se detenga, así que nunca se lee borroso.
 .marketPlaceInner {
+  position: absolute;
+  right: 0;
+  top: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.28rem;
+  height: 1.05rem;
   font-size: 0.72rem;
   font-weight: 500;
   color: rgba(46, 41, 78, 0.82);
   white-space: nowrap;
-  // Sube apenas mientras aparece: el gesto sugiere una lista que avanza, sin
-  // el desplazamiento largo de un carrusel.
-  animation: marketIn 0.5s ease both;
+  animation: marketIn 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+  // El texto rota en su lugar: sin esto, la sub-pixel del blur lo hace bailar.
+  will-change: transform, opacity, filter;
 
   :global(html.dark) & {
     color: rgba(255, 255, 255, 0.76);
   }
 }
 
+// Capa saliente: mismo tempo, en espejo. Se va un poco más rápido de lo que
+// entra la nueva, para que el ojo aterrice en la ciudad nueva y no en la vieja.
+.marketOut {
+  animation: marketOut 0.5s cubic-bezier(0.4, 0, 1, 1) both;
+  pointer-events: none;
+}
+
+// Columna 2, ancho natural: no se mueve aunque cambie el largo de la ciudad.
 .marketFlag {
+  grid-column: 2;
+  justify-self: end;
   font-size: 0.8rem;
   line-height: 1;
+  // Centro propio: el pestañeo escala desde el medio del glifo, no desde el
+  // borde de la celda.
+  transform-origin: center center;
   // Las banderas emoji traen su propio color y sobresalen del gris del badge;
   // bajarlas un punto las devuelve al mismo plano que el texto.
   opacity: 0.9;
@@ -529,19 +594,65 @@
 @keyframes marketIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(5px);
+    filter: blur(1.5px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
+}
+
+@keyframes marketOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-5px);
+    filter: blur(1.5px);
+  }
+}
+
+// Micro-gesto de la bandera: sólo cuando el emoji cambia de verdad.
+//
+// Sólo opacidad, deliberadamente. Un `scale` acá parece inofensivo pero
+// modifica la caja del elemento, y medido en el navegador la bandera pasaba a
+// ocupar 12 posiciones distintas en vez de una: rompía el "icono fijo" que es
+// todo el punto de esta ranura. Un atenuado breve alcanza para acusar el
+// cambio sin mover nada.
+@keyframes marketFlagSwap {
+  0%   { opacity: 0.9; }
+  45%  { opacity: 0.32; }
+  100% { opacity: 0.9; }
+}
+
+.marketFlagSwap {
+  animation: marketFlagSwap 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 // Sin movimiento: la plaza igual rota (el intervalo se apaga en JS, así que en
 // la práctica queda fija en la primera), pero si algo la cambia no se desliza.
+// El punto del LIVE también deja de respirar: queda encendido y fijo.
 @media (prefers-reduced-motion: reduce) {
-  .marketPlaceInner {
+  .marketPlaceInner,
+  .marketFlagSwap,
+  .liveDot {
     animation: none;
+  }
+
+  // La capa saliente no se anima, así que se esconde: sin esto quedaría
+  // pisada sobre la entrante.
+  .marketOut {
+    animation: none;
+    display: none;
   }
 }
 
@@ -575,7 +686,6 @@
   border-radius: 8px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   flex-shrink: 0;
-  animation: liveGlow 2.4s ease-in-out infinite;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
@@ -589,39 +699,34 @@
   }
 }
 
-@keyframes liveGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(88, 135, 110, 0);
-    border-color: rgba(88, 135, 110, 0.28);
-  }
-  50% {
-    box-shadow: 0 0 0 4px rgba(88, 135, 110, 0.16);
-    border-color: rgba(88, 135, 110, 0.55);
-  }
-}
-
+// El punto del LIVE, en voz baja.
+//
+// Antes lanzaba un anillo que se expandía a 2.4x cada 1.6s: en una esquina
+// quieta del dashboard eso es lo único que se mueve, así que se llevaba la
+// mirada por encima de los números, que son el contenido real. Ahora el anillo
+// no crece — apenas respira de opacidad, lento y con poco recorrido. Sigue
+// leyéndose como "está vivo" pero deja de competir con las stats.
 .liveDot {
   position: relative;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--verde-bosque, #58876e);
+  animation: liveBreathe 3.2s ease-in-out infinite;
 
   &::before {
     content: '';
     position: absolute;
-    inset: -3px;
+    inset: -2px;
     border-radius: 50%;
     background: var(--verde-bosque, #58876e);
-    opacity: 0.45;
-    animation: liveRing 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    opacity: 0.18;
   }
 }
 
-@keyframes liveRing {
-  0%   { transform: scale(0.8); opacity: 0.55; }
-  80%  { transform: scale(2.4); opacity: 0; }
-  100% { transform: scale(2.4); opacity: 0; }
+@keyframes liveBreathe {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
 }
 
 @keyframes livePulse {
@@ -682,6 +787,13 @@
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+
+  // En mobile la cifra pesaba de más: tres tarjetas angostas en fila y el
+  // número era lo único grande del panel. Bajarlo lo devuelve al nivel del
+  // resto sin perder legibilidad.
+  @media (max-width: 768px) {
+    font-size: 0.88rem;
+  }
   // Cifras de ancho fijo: al contar, el número no se ensancha ni corre a la
   // etiqueta de al lado. Es la diferencia entre "anima" y "tiembla".
   font-variant-numeric: tabular-nums;
@@ -700,6 +812,12 @@
   font-weight: 500;
   font-size: 0.78rem;
   margin-left: 0.08rem;
+
+  // Acompaña a .statValue: si la cifra baja y la unidad no, el % queda
+  // desproporcionado al lado del número.
+  @media (max-width: 768px) {
+    font-size: 0.66rem;
+  }
 }
 
 .statLabel {
@@ -802,20 +920,32 @@
 .chartFill {
   opacity: 0;
   animation: chartFadeIn 0.9s ease 0.75s forwards;
+  // Acompaña a .chartLine: el área se deforma junto con la curva.
+  transition: d 0.9s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
+// La curva se traza una sola vez, al entrar.
+//
+// Antes el <path> se remontaba en cada cambio de tarea (cada 8s) y volvía a
+// dibujarse de cero: un barrido de 1.4s repitiéndose sin parar, que es
+// exactamente lo que se siente molesto. Ahora el trazado es de bienvenida y
+// los cambios de serie se resuelven interpolando el atributo `d`, que se lee
+// como el dato actualizándose en vez de como el gráfico rearmándose.
 .chartLine {
   /* 1200 cubre la curva más larga que puede generar seriesToPath; si queda
      corto la línea aparece cortada al final del trazado. */
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
   animation: chartDraw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
-  transition: filter 0.35s ease;
+  transition: filter 0.35s ease, d 0.9s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .chartDot {
   opacity: 0;
   animation: chartDotIn 0.4s ease 1.5s forwards;
+  // Se desliza hasta el nuevo extremo de la serie en lugar de saltar.
+  transition: filter 0.35s ease, cx 0.9s cubic-bezier(0.33, 1, 0.68, 1),
+    cy 0.9s cubic-bezier(0.33, 1, 0.68, 1);
   /* Antes era `392px 11px`, la posición fija del dot viejo. Ahora el dot se
      mueve con la serie, así que el origen se toma del propio círculo. */
   transform-origin: center;
@@ -823,17 +953,22 @@
   transition: filter 0.35s ease;
 }
 
+// Halo del punto final: quieto.
+//
+// Antes se expandía a 2.4x cada 2.4s, infinito. Sumado al trazado que se
+// repetía, el gráfico nunca terminaba de asentarse. Ahora aparece una vez y se
+// queda; el movimiento del chart pasa sólo cuando cambia el dato.
 .chartDotOuter {
   opacity: 0;
   transform-origin: center;
   transform-box: fill-box;
-  animation: chartDotPing 2.4s ease-out 1.5s infinite;
+  animation: chartFadeInHalo 0.6s ease 1.5s forwards;
+  transition: cx 0.9s cubic-bezier(0.33, 1, 0.68, 1),
+    cy 0.9s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-@keyframes chartDotPing {
-  0%   { opacity: 0.18; transform: scale(1); }
-  70%  { opacity: 0;    transform: scale(2.4); }
-  100% { opacity: 0;    transform: scale(2.4); }
+@keyframes chartFadeInHalo {
+  to { opacity: 0.18; }
 }
 
 @keyframes chartDraw {
@@ -875,9 +1010,10 @@
     padding: 0.35rem 0.7rem;
   }
 
-  /* En mobile el dashboard muestra sólo dos filas de stack: con tres, el panel
-     crecía en alto justo donde el espacio vertical es el recurso escaso. Se va
-     la primera (Frontend & UI) y quedan Backend & APIs e Infra & DevOps.
+  /* En mobile queda una sola fila de stack: con tres, el panel crecía en alto
+     justo donde el espacio vertical es el recurso escaso. Se van Frontend & UI
+     y Backend & APIs — las dos marcan 100% fijo — y queda Infra & DevOps, que
+     es la única con movimiento real (el % contando y los checks).
 
      Va anidada dentro de .stackRow (→ `.stackRow.hideOnMobile`, dos clases) y
      NO como `.hideOnMobile` suelta: el elemento lleva ambas clases, así que a

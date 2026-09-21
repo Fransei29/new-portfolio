@@ -24,7 +24,7 @@ p.greeting {
   @media (max-width: 768px) {
     max-width: 100%;
     font-size: 0.95rem !important;
-    margin: 0 0 0.75rem 0;
+    margin: 0 0 0.35rem 0;
     text-align: center;
     width: 100%;
   }
@@ -75,8 +75,13 @@ p.greeting {
   }
 
   @media (max-width: 768px) {
-    /* Más aire entre el H1 y el subtítulo (antes 0.15rem). */
-    margin: 0 0 0.7rem 0;
+    /* Título y subtítulo, más cerca: son una sola unidad de lectura, así que
+       el aire entre ellos tiene que ser menor que el que los separa del resto
+       del bloque.
+       El margin no alcanza por sí solo: el line-height de 1.08 sobre 2.2rem
+       deja ~3px de aire fantasma bajo la última línea, que se suman al hueco
+       visible. Por eso el valor acá es más chico de lo que parece necesario. */
+    margin: 0 0 0.75rem 0;
     padding: 0;
     line-height: 1.08;
     font-size: 2.2rem;
@@ -112,7 +117,6 @@ p.greeting {
    @media (max-width: 768px) {
     font-size: 0.95rem;
     margin: 0;
-    margin-top: 0.1rem;
     line-height: 1.45;
     min-width: 0 !important;
     max-width: 100%;
@@ -181,13 +185,18 @@ p.greeting {
   padding: 0 2.15rem;
   font-size: 1.05rem;
   font-weight: 600;
-  box-shadow: 0 8px 22px rgba(46, 41, 78, 0.22);
+  /* Sombra discreta. Antes `0 8px 22px / 0.22` levantaba el botón como si
+     flotara sobre la página, y al lado del secundario —que no tiene sombra—
+     el contraste era brusco. Se acerca a ese registro sin igualarlo del todo:
+     conserva un apoyo mínimo, que es lo que lo sigue marcando como la acción
+     principal. */
+  box-shadow: 0 2px 8px rgba(46, 41, 78, 0.12);
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
   &:hover {
     background-color: var(--primary-colorA);
     border-color: var(--primary-colorA);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 
     // Los CTA del hero ya no llevan flecha sino iconos con forma propia
     // (estrella y lupa): girarlos -45° no significaría nada. Crecen apenas.
@@ -444,9 +453,13 @@ p.greeting {
 
   .ctaButtons {
     flex-direction: column;
-    gap: 0.65rem;
-    /* Más aire entre el subtítulo y los botones (antes 0.5rem arriba). */
-    margin: 1.1rem 0 1rem;
+    /* Apilados en vertical los botones necesitan más separación que en fila:
+       a 0.65rem se leían como un bloque pegado y costaba distinguir dónde
+       termina uno y empieza el otro. */
+    gap: 0.85rem;
+    /* 1.2rem arriba: mismo hueco que deja el H1 sobre el subtítulo, para que
+       los dos espacios del hero se lean iguales (antes 1.1 contra 0.8). */
+    margin: 1.2rem 0 1rem;
     width: 100%;
     max-width: 100%;
     padding-bottom: 0;

@@ -23,7 +23,12 @@
   padding: 0 1rem;
 
   @media (max-width: 768px) {
-    padding: 0 0.75rem;
+    // 1.25rem (20px) y no 0.75: es el mismo margen lateral que usan las
+    // tarjetas de servicios en la home, así que los dos bloques arrancan y
+    // terminan en la misma línea vertical. Antes automation iba a 366px de
+    // ancho y servicios a 334px, y esos 32px de diferencia se leían como
+    // secciones desalineadas.
+    padding: 0 1.25rem;
   }
 }
 
@@ -40,6 +45,10 @@
     font-size: var(--subtitle-font-size-mobile);
     /* Ver el comentario del token: título y subtítulo van juntos en mobile. */
     margin: var(--subtitle-spacing-top-mobile) auto 1.5rem;
+    /* Más angosto que el bloque: una medida de lectura corta corta la frase en
+       renglones más parejos y la centra mejor bajo el título. 34ch queda por
+       debajo del ancho disponible en cualquier teléfono. */
+    max-width: 34ch;
   }
 }
 
@@ -100,7 +109,23 @@
   }
 
   @media (max-width: 768px) {
-    padding: 1.25rem 1.1rem;
+    // Menos aire lateral que antes (1.1rem): el .listItem de adentro suma su
+    // propio padding, y entre los dos dejaban al texto con ~30px por lado
+    // sobre una pantalla de 390. Con 0.85rem el contenido gana ancho real y
+    // el bloque deja de verse apretado contra la derecha.
+    padding: 1.25rem 0.85rem;
+
+    // Borde más marcado en mobile. A rgba(0,0,0,0.07) el trazo se pinta
+    // (medido: rgb(237,237,237), idéntico de los dos lados), pero 7% de negro
+    // sobre el lila muy claro del fondo de la página queda por debajo del
+    // umbral visible en una pantalla chica, y la tarjeta parece abierta del
+    // lado derecho — donde el fondo asoma más. Al 14% el contorno cierra sin
+    // volverse una caja pesada.
+    border-color: rgba(46, 41, 78, 0.14);
+
+    :global(html.dark) & {
+      border-color: rgba(255, 255, 255, 0.14);
+    }
   }
 }
 
@@ -386,13 +411,15 @@
 
   @media (max-width: 768px) {
     grid-template-columns: auto 1fr;
-    gap: 0.7rem;
-    padding: 0.7rem 0.75rem;
+    gap: 0.6rem;
+    // Padding lateral parejo y algo menor: junto con el de .column, el texto
+    // arranca y termina a la misma distancia de los bordes de la tarjeta.
+    padding: 0.7rem 0.7rem;
   }
 }
 
-// Cuarto ítem de cada lista: fuera en mobile. Ver el comentario de
-// MOBILE_HIDDEN_FROM en AutomationComparison.tsx.
+// Ítems ocultos en mobile. Cuáles son y por qué, en los comentarios de
+// MOBILE_HIDDEN_WITHOUT / MOBILE_HIDDEN_WITH en AutomationComparison.tsx.
 //
 // Va DESPUÉS de `.listItem` y doblando la clase (`.listItem.hideOnMobile`):
 // `.listItem` setea `display: grid` y las reglas `:has()` de más abajo suben a

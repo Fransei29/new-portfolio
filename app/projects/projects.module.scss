@@ -87,10 +87,11 @@
     pointer-events: none;
     z-index: 0;
 
+    // En mobile no entra: 150px de panda sobre 390px de pantalla se montaban
+    // encima de los filtros y tapaban las etiquetas. El guiño de marca no vale
+    // romper la navegación, así que ahí no se muestra.
     @media (max-width: 768px) {
-      width: 150px;
-      height: 200px;
-      right: 6px;
+      display: none;
     }
   }
 
