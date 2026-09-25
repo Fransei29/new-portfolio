@@ -239,6 +239,14 @@ const HowWeWork = () => {
                   {String(index + 1).padStart(2, '0')}
                 </span>
 
+                {/* Foto del paso como textura de fondo; la opacidad y el velo
+                    viven en .stepPhoto. */}
+                <span
+                  className={styles.stepPhoto}
+                  style={{ backgroundImage: `url(/img/step-${step.key}.webp)` }}
+                  aria-hidden
+                />
+
                 <div className={styles.stepHeader}>
                   <div className={styles.iconWrapper}>
                     {step.icon}

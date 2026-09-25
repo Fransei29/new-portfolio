@@ -64,6 +64,9 @@ export default function CallToAction() {
 
   return (
     <section ref={ctaRef} className={`${styles.ctaContainer} assemble`}>
+      {/* Foto de equipo de fondo, bajo un velo lila: le pone caras al cierre
+          de la página justo antes de pedir el contacto. */}
+      <div className={styles.ctaPhoto} aria-hidden />
       {/* Panda asomándose por el borde derecho del contenedor; el overflow:hidden
           del ctaContainer lo recorta en ese borde. */}
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
