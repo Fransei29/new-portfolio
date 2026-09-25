@@ -84,6 +84,27 @@
   }
 }
 
+/* Foto de fondo detrás de la aurora. El velo usa el mismo #2e294e del
+   contenedor para que el texto blanco mantenga contraste sobre cualquier zona
+   de la imagen. */
+.ctaPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(46, 41, 78, 0.8), rgba(46, 41, 78, 0.88)),
+    url('/img/cta-humanity.webp');
+  background-size: cover;
+  background-position: center;
+
+  :global(html.dark) & {
+    background-image:
+      linear-gradient(rgba(35, 32, 64, 0.86), rgba(35, 32, 64, 0.92)),
+      url('/img/cta-humanity.webp');
+  }
+}
+
 /* Movimiento mínimo y muy lento, pegado a los costados. Mantiene el centrado
    vertical (translateY -50%) y solo "respira" un poco en horizontal/vertical. */
 @keyframes ctaAuroraA {

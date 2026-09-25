@@ -568,6 +568,30 @@ $step-column-gap: 10rem;
   }
 }
 
+// Foto del paso detrás de todo el contenido. z-index -1 funciona porque la
+// tarjeta (position:relative + z-index:1) ya es su propio contexto de
+// apilamiento: la foto queda encima del fondo de la tarjeta pero debajo del
+// número, el ícono y el texto. Casi sin color y muy tenue, para que el texto
+// claro siga contrastando igual que sobre el lila liso. Los estados
+// (dormida/activa) siguen mandando con el fondo; la foto sólo agrega textura.
+.stepPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(0.6);
+  opacity: 0.085;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.stepCurrent .stepPhoto,
+.stepDone .stepPhoto {
+  opacity: 0.12;
+}
+
 .iconWrapper {
   display: flex;
   align-items: center;
