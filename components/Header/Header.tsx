@@ -9,6 +9,7 @@ import { useScrollDetection } from '../../hooks/useScrollDetection';
 import styles from './Header.module.scss'; 
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import FunModeButton from '../FunModeButton/FunModeButton';
 import { X, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -165,6 +166,7 @@ export default function Header() {
           <div className={styles.rightContainer}>
             <LanguageSelector />
             <ThemeToggleButton />
+            <FunModeButton placement="header" />
           </div>
         </section>
       </nav>
@@ -273,6 +275,7 @@ export default function Header() {
         <div className={styles.mobileMenuControls}>
           <LanguageSelector />
           <ThemeToggleButton />
+          <FunModeButton />
         </div>
       </div>
     </header>

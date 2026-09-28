@@ -17,13 +17,6 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ['400', '500', '600', '700'],
   variable: '--font-body',
 });
-import Footer from '../components/Footer/Footer'; 
-import Header from '../components/Header/Header';
-import { ScrollToTop } from '../components/ScrollToTop/ScrollToTop';
-import  ThemeTransitionOverlay from '../components/ThemeTransition/ThemeTransitionComponent';
-import NavigationLoader from '../components/NavigationLoader/NavigationLoader';
-// Oculto temporalmente — ver el comentario en el body.
-// import ChatWidget from '../components/ChatWidget/ChatWidget';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
 import GoogleAnalytics from '../components/Analytics/GoogleAnalytics';
@@ -114,16 +107,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="container">
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <LanguageProvider>
-          <Header />
-          <div id="banner"></div>
+          {/* Header, footer y overlays del sitio viven en app/(site)/layout.tsx,
+              así las rutas fuera del grupo (design-exploration) no los heredan. */}
           {children}
-          <Footer />
-          <ThemeTransitionOverlay />
-          <NavigationLoader />
-          <ScrollToTop />
-          {/* Oculto temporalmente: se retoma cuando mejoremos el asistente.
-              El componente y su API siguen en el repo intactos. */}
-          {/* <ChatWidget /> */}
         </LanguageProvider>
       </ThemeProvider>
       <Analytics />

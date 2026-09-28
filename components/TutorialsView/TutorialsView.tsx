@@ -3,7 +3,7 @@
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import styles from '../../app/projects/projects.module.scss';
+import styles from '../../app/(site)/projects/projects.module.scss';
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
 import { useLanguage } from '../../contexts/LanguageContext';
 
