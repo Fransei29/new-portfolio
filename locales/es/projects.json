@@ -41,9 +41,9 @@
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Plataforma de Compliance y Document Intelligence para Flotas",
-        "description": "Plataforma SaaS de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan onboardear, verificar y gestionar de forma continua la documentación de los conductores a gran escala. Desarrollada en conjunto con un equipo de ingeniería de Canadá, es una de las plataformas más grandes y complejas de nuestro portafolio — arquitectura multi-tenant, autenticación enterprise con Keycloak, suscripciones con Stripe, flujos de documentos profundos y una superficie B2B productiva confiada para operar flotas reales.",
-        "whatIs": "Comply DQ es una plataforma de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan onboardear, verificar y gestionar de forma continua la documentación de los conductores (CDL, certificaciones médicas, pólizas y más) a gran escala.\nEl producto combina workspaces conscientes de rol, datos acotados por empresa y un billing basado en suscripciones para que los operadores pasen de planillas y herramientas legacy a una única fuente de verdad, con flujos pensados para auditoría.\nDesarrollada en conjunto con un equipo de ingeniería de Canadá, Comply DQ es una de las plataformas más grandes y complejas en las que participé — un verdadero SaaS enterprise con arquitectura multi-tenant profunda, cientos de páginas de tooling operativo y los requisitos de compliance B2B en el centro de cada decisión.",
-        "problemSolved": "Los programas de transporte y compliance suelen lidiar con archivos fragmentados, control de acceso inconsistente y renovaciones manuales — lo que aumenta el riesgo y demora las auditorías.\nComply DQ aborda esto centralizando perfiles de conductores, ciclo de vida de los documentos y administración de empresas en una arquitectura multi-tenant segura, con separación clara entre las organizaciones cliente y la supervisión a nivel de plataforma.\nLa plataforma se construyó codo a codo con un equipo senior basado en Canadá, combinando su expertise en compliance de transporte de US y Canadá con ingeniería hands-on para entregar un producto de nivel productivo, confiado para manejar flotas reales y presión regulatoria real.",
+        "description": "Plataforma SaaS de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan incorporar, verificar y gestionar de forma continua la documentación de los conductores a gran escala. Desarrollada en conjunto con un equipo de ingeniería de Canadá, es una de las plataformas más grandes y complejas de nuestro portafolio — arquitectura multi-tenant, autenticación enterprise con Keycloak, suscripciones con Stripe, flujos documentales complejos y una plataforma B2B en producción en la que confían operaciones de flotas reales.",
+        "whatIs": "Comply DQ es una plataforma de nivel enterprise diseñada para empresas de transporte y equipos de compliance que necesitan incorporar, verificar y gestionar de forma continua la documentación de los conductores (CDL, certificaciones médicas, pólizas y más) a gran escala.\nEl producto combina workspaces conscientes de rol, datos acotados por empresa y un billing basado en suscripciones para que los operadores pasen de planillas y herramientas legacy a una única fuente de verdad, con flujos pensados para auditoría.\nDesarrollada en conjunto con un equipo de ingeniería de Canadá, Comply DQ es una de las plataformas más grandes y complejas en las que participé — un verdadero SaaS enterprise con arquitectura multi-tenant profunda, cientos de páginas de tooling operativo y los requisitos de compliance B2B en el centro de cada decisión.",
+        "problemSolved": "Los programas de transporte y compliance suelen lidiar con archivos fragmentados, control de acceso inconsistente y renovaciones manuales — lo que aumenta el riesgo y demora las auditorías.\nComply DQ aborda esto centralizando perfiles de conductores, ciclo de vida de los documentos y administración de empresas en una arquitectura multi-tenant segura, con separación clara entre las organizaciones cliente y la supervisión a nivel de plataforma.\nLa plataforma se construyó codo a codo con un equipo senior basado en Canadá, combinando su expertise en compliance de transporte de US y Canadá con ingeniería hands-on para entregar un producto listo para producción, en el que confían flotas reales bajo presión regulatoria real.",
         "learnings": [
           "Colaboración con un equipo de ingeniería de Canadá en una de las plataformas más grandes de nuestro portafolio — un SaaS enterprise real entregado a empresas de transporte y equipos de compliance que operan en toda Norteamérica.",
           "Modelo de producto multi-tenant con resolución de tenant, tipos de empresa (jerarquías estilo D2C / MSP) y control de acceso basado en roles para administradores y usuarios operativos.",
@@ -57,14 +57,136 @@
         ],
         "role": "Full-stack · Multi-tenant",
         "industry": "Compliance de transporte",
-        "engagement": "Colaboración con equipo"
+        "engagement": "Colaboración con equipo",
+        "architecture": {
+          "body": "Comply DQ aplica el modelo multi-tenant en la capa de datos. Cada consulta está acotada a un tenant y cada ruta de la API valida ese alcance del lado del servidor, manteniendo una separación estricta entre las organizaciones clientes.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Frontend en Next.js App Router, con Redux Toolkit para el estado operativo del cliente.",
+                "Backend en NestJS con Prisma sobre PostgreSQL, tipado de punta a punta.",
+                "Modelo multi-tenant con resolución de tenant y jerarquías por tipo de empresa, que cubren estructuras directas y de servicio gestionado.",
+                "Acceso por roles que separa la supervisión a nivel plataforma de los administradores y operadores de cada organización cliente."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Flujos de alta y verificación de conductores para CDL, certificados médicos y documentación de políticas.",
+                "Biblioteca de documentos con manejo de subidas, deduplicación y almacenamiento sobre S3.",
+                "Seguimiento de vencimientos y flujos de renovación para cumplir con los requisitos regulatorios.",
+                "Dashboards para operadores optimizados para la revisión de cumplimiento en desktop y para el uso en tablet en campo."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "body": "La gestión de identidades sigue estándares enterprise para cumplir con los requisitos de compras B2B y las revisiones de IT.",
+              "chips": [
+                "Keycloak (OIDC)",
+                "JWT access/refresh",
+                "Endurecimiento de sesiones",
+                "Guards de API por tenant",
+                "RBAC"
+              ]
+            }
+          ]
+        },
+        "payments": {
+          "body": "La facturación por suscripción funciona a nivel organización: los cambios de plan ocurren a mitad de ciclo y los permisos habilitados tienen que mantenerse sincronizados con el estado de facturación en toda la plataforma.",
+          "groups": [
+            {
+              "title": "Arquitectura de facturación",
+              "body": "Stripe es la fuente de verdad del estado de las suscripciones, y los permisos de la plataforma se derivan de ella.",
+              "bullets": [
+                "Suscripciones de Stripe acotadas por tenant, alineando los límites de facturación con los límites de datos.",
+                "Ciclo de vida manejado por webhooks: creación, actualizaciones, pagos exitosos, pagos fallidos y cancelación.",
+                "El estado del plan se aplica a nivel de guard de la API, así los cambios de permisos se resuelven del lado del servidor."
+              ]
+            },
+            {
+              "title": "Experiencia del operador",
+              "bullets": [
+                "Estado de facturas y suscripciones visible dentro del espacio de trabajo de cumplimiento.",
+                "Los pagos fallidos se muestran de forma explícita para que puedan resolverse a tiempo."
+              ]
+            },
+            {
+              "title": "Validación y testing",
+              "bullets": [
+                "Tests automatizados enfocados en las transiciones del ciclo de vida de los documentos, el cálculo de vencimientos y los guards de aislamiento entre tenants.",
+                "Tests explícitos de los límites de acceso entre tenants.",
+                "TypeScript con tipos generados por Prisma, que hacen visibles los cambios de esquema en tiempo de compilación tanto en la API como en el cliente."
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "La plataforma reemplazó planillas y sistemas legacy que los transportistas venían usando desde hacía años, por lo que la migración de datos fue un requisito central de la entrega, a la par de la aplicación en sí.",
+          "groups": [
+            {
+              "title": "Migración de datos",
+              "bullets": [
+                "Pipelines basados en CSV para transferir registros productivos de clientes desde los sistemas legacy.",
+                "Pasadas de validación previas a la carga, que detectan registros mal formados para su conciliación.",
+                "Scripts operativos que permiten cutovers repetibles, con modo dry-run contra staging."
+              ]
+            },
+            {
+              "title": "Base de datos",
+              "bullets": [
+                "PostgreSQL con Prisma, que da acceso seguro respecto del esquema sobre una superficie operativa amplia.",
+                "Migraciones versionadas en el control de versiones para que la evolución del esquema sea revisable.",
+                "Alcance por tenant aplicado en la capa de datos, manteniendo el aislamiento y la trazabilidad para auditoría."
+              ]
+            },
+            {
+              "title": "Operaciones",
+              "bullets": [
+                "Logging estructurado en todas las capas de la API, que permite diagnósticos reproducibles sobre datos productivos.",
+                "Guards de API por tenant aplicados del lado del servidor en todas las rutas.",
+                "Configuración de despliegue que mantiene la paridad entre los entornos de staging y producción."
+              ],
+              "chips": [
+                "AWS S3",
+                "Keycloak",
+                "Logging estructurado",
+                "Paridad con staging"
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Entregado como parte de un equipo de ingeniería senior que da servicio a transportistas de toda Norteamérica, en una plataforma sujeta a requisitos regulatorios vigentes.",
+          "groups": [
+            {
+              "title": "Entregado",
+              "bullets": [
+                "Flujos de alta de conductores y verificación de documentos en uso productivo.",
+                "Panel administrativo multi-tenant para transportistas, incluidas herramientas de supervisión a nivel plataforma.",
+                "Facturación por suscripción sobre Stripe, integrada con la habilitación de funcionalidades.",
+                "Migraciones de datos legacy ejecutadas sobre registros productivos de clientes."
+              ]
+            },
+            {
+              "title": "Modelo de trabajo",
+              "bullets": [
+                "Desarrollo colaborativo junto a un equipo de ingeniería canadiense, combinando su conocimiento del dominio de cumplimiento en transporte con la implementación.",
+                "Code review y releases escalonados entre los entornos de staging y producción."
+              ]
+            }
+          ]
+        }
       },
       "globaly": {
         "title": "Globaly",
+        "role": "Full-stack Engineer",
+        "industry": "Colaboración inmersiva • SaaS de espacios de trabajo virtuales",
+        "engagement": "Colaboración con equipo",
         "subtitle": "Sitio multilingüe de marketing y contenido para una plataforma de colaboración inmersiva",
         "description": "Sitio público de marketing y contenido de una plataforma de colaboración inmersiva: 33 páginas en tres idiomas, precios geolocalizados resueltos en el servidor desde una única fuente de verdad, un blog con CMS headless acotado por tenant, y una capa de datos estructurados pensada tanto para motores de respuesta como para buscadores.",
         "whatIs": "Globaly es el sitio público de una plataforma de colaboración inmersiva — espacios digitales donde equipos distribuidos trabajan, entrenan y presentan juntos sin estar en el mismo lugar. El sitio no es el producto: es la capa comercial, editorial y de descubrimiento que lo rodea.\nUn visitante recorre 33 páginas: la plataforma y su compatibilidad de dispositivos, siete páginas de soluciones, tres páginas por segmento de empresa, un hub de enterprise con trust center y residencia de datos, una tabla de precios de cinco planes que se renderiza en USD o EUR según el país del visitante, cuatro páginas comparativas, y un blog con búsqueda, filtro por categoría y paginación alimentado desde un CMS headless compartido. Todo el contenido está traducido a inglés, francés y español, con el idioma negociado por cookie en lugar de por prefijo de URL.\nLa colaboración está documentada dentro del propio código: los comentarios citan los documentos de estrategia del cliente por sección como justificación de las decisiones de arquitectura de información, y el repositorio incluye un sistema SEO de tres documentos con reglas explícitas anti-alucinación.",
-        "problemSolved": "Un producto de colaboración inmersiva compite contra categorías que el comprador ya conoce y contra una objeción implícita: \"ya tengo videollamadas\". El problema real no era tener un sitio, sino tener uno que pudiera sostener una tesis de posicionamiento página por página, en varios idiomas, para varios segmentos, y que además fuera encontrable — no sólo por buscadores, sino por los motores de respuesta que hoy median parte de la investigación B2B.\nEl precio se autora una sola vez en USD y se convierte y formatea en el render, de modo que los datos estructurados y la tabla visible leen la misma constante y no pueden desincronizarse. La moneda se decide por un país resuelto en middleware desde cualquiera de cuatro headers de geolocalización posibles, normalizados a un header interno que se borra antes de escribirse para que un cliente no pueda falsear su país. La capa de i18n sirve los tres idiomas desde la misma URL con un deep merge sobre el catálogo inglés, así una página sin traducir cae a inglés legible en vez de imprimir la ruta de la clave.\nSe construyó a medida en vez de usar un builder porque la mitad del valor está en cosas que esas herramientas no dan: precios sensibles a geolocalización resueltos en el servidor, un catálogo de 1.689 claves con fallback jerárquico, datos estructurados derivados de las mismas constantes que la UI, y headers de seguridad razonados uno por uno.",
+        "problemSolved": "Un producto de colaboración inmersiva compite contra categorías que el comprador ya conoce y contra una objeción implícita: \"ya tengo videollamadas\". El problema real no era tener un sitio, sino tener uno que pudiera sostener una tesis de posicionamiento página por página, en varios idiomas, para varios segmentos, y que además fuera encontrable — no sólo por buscadores, sino por los motores de respuesta que hoy median parte de la investigación B2B.\nEl precio se define una sola vez en USD y se convierte y formatea en el render, de modo que los datos estructurados y la tabla visible leen la misma constante y no pueden desincronizarse. La moneda se decide por un país resuelto en middleware desde cualquiera de cuatro headers de geolocalización posibles, normalizados a un header interno que se borra antes de escribirse para que un cliente no pueda falsear su país. La capa de i18n sirve los tres idiomas desde la misma URL con un deep merge sobre el catálogo inglés, así una página sin traducir cae a inglés legible en vez de imprimir la ruta de la clave.\nSe construyó a medida en vez de usar un builder porque la mitad del valor está en cosas que esas herramientas no dan: precios sensibles a geolocalización resueltos en el servidor, un catálogo de 1.689 claves con fallback jerárquico, datos estructurados derivados de las mismas constantes que la UI, y headers de seguridad razonados uno por uno.",
         "learnings": [
           "Build-time contra runtime en Docker y Next.js: las variables públicas se inlinean durante el build, pero el env file de compose sólo llega al contenedor ya corriendo — el síntoma fue staging cargando el widget de producción pese a tener el env correcto.",
           "Internacionalización sin prefijo de URL, con fallback jerárquico sobre 1.689 claves, para que una página sin traducir caiga a inglés legible en vez de imprimir la ruta de la clave.",
@@ -75,13 +197,124 @@
           "Presupuesto de performance medido y no adivinado: el widget de chat pasó a carga diferida después de que el monitoreo real midiera 1784 ms de INP en un CTA del hero que no respondía mientras el main thread hidrataba.",
           "Una política de seguridad de contenido con sus concesiones escritas, documentando por qué los nonces por request forzarían render dinámico en cada página de un sitio de marketing.",
           "Feature-parking como patrón de entrega: las secciones parkeadas llevan su razón y su criterio de reactivación en el mismo comentario, así las páginas siguen ruteando y construyéndose."
-        ]
+        ],
+        "architecture": {
+          "body": "Una aplicación en Next.js 16 App Router renderizada íntegramente en el servidor, sin base de datos propia. La decisión central fue mantener el contenido estructural en el repositorio —en catálogos i18n tipados y constantes de TypeScript— y reservar el CMS headless exclusivamente para el contenido editorial de alta frecuencia. Eso permite componer 33 páginas a partir de un puñado de componentes de sección parametrizados por namespace de traducción, y que la navegación, los precios, la matriz comparativa y el JSON-LD se deriven todos de una única fuente en código, versionada y revisable en un pull request.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Next.js 16 App Router con React Server Components; los componentes cliente se limitan a la interacción concreta: menús, cambio de tema, formularios y observers de scroll.",
+                "Un segmento de locale con middleware que resuelve el idioma por cookie, sin prefijo en la URL.",
+                "Páginas de sección construidas como componentes reutilizables parametrizados por namespace, de modo que una nueva página de solución es un archivo de unas 20 líneas más un bloque de traducciones.",
+                "Rutas dinámicas con params estáticos para las páginas comparativas; el detalle de artículo se renderiza dinámicamente porque depende del CMS en vivo.",
+                "Alrededor de 13.200 líneas de TypeScript repartidas en 53 componentes y 33 páginas."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Cinco planes de precios con la moneda resuelta por geolocalización en el servidor y formateada según el locale.",
+                "Blog con búsqueda, filtro por categoría, paginación y carga incremental, servido a través de un proxy de API interno sobre el CMS.",
+                "Cuatro páginas comparativas generadas a partir de un catálogo tipado que lleva un sello de verificación de datos.",
+                "Formularios de contacto y newsletter validados con Zod y despachados por Postmark con doble envío: confirmación al usuario más notificación interna.",
+                "Tema claro y oscuro sin parpadeo, un overlay de intro coreografiado y renderizado en el servidor, un indicador de progreso entre rutas y soporte de reduced-motion respetado en 19 bloques de estilos distintos."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "Sin base de datos propia: el modelo de datos es el contrato con el CMS, tipado en un módulo dedicado.",
+                "Una forma cruda de artículo del CMS que incluye autor, categoría, tags, campos SEO, localizaciones y programación de publicación, mapeada mediante una función explícita a un tipo de post propio de la aplicación.",
+                "Multi-tenant del lado del CMS: la instancia se comparte entre proyectos del estudio y cada consulta filtra por slug de proyecto. El sitio es un tenant, no el dueño del CMS.",
+                "Separación por entorno: en producción se leen los artículos publicados y fuera de ella los borradores, según el flag de entorno."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "body": "El sitio no autentica usuarios: el login es un link saliente al dominio del producto y el call to action principal abre una sala de demo sin ningún formulario de registro delante. La única credencial del sistema es el token de servicio del CMS, y es opcional por diseño.",
+              "chips": [
+                "Sin auth propia",
+                "Login externo",
+                "Demo sin registro",
+                "Token de CMS opcional",
+                "Sin sesiones",
+                "Sin roles"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Desplegado en el VPS propio del estudio por SSH detrás de Cloudflare, en lugar de una plataforma gestionada; una decisión que condiciona código real, ya que el middleware lee cuatro posibles headers de geolocalización justamente porque no puede asumir los de un único proveedor.",
+          "groups": [
+            {
+              "title": "Contenedores y build",
+              "bullets": [
+                "Dockerfile multi-stage sobre node:21-alpine con targets de desarrollo y producción, seleccionados según el entorno en compose.",
+                "Healthcheck cada 30 segundos con un período de gracia inicial.",
+                "Variables de entorno públicas declaradas como build args, porque el framework las incrusta en tiempo de build en lugar de leerlas en runtime.",
+                "El build de producción corre sin caché de forma deliberada."
+              ]
+            },
+            {
+              "title": "CI/CD",
+              "bullets": [
+                "Bitbucket Pipelines con cuatro entornos de despliegue apuntando a tres hosts distintos: producción, producción alpha y dos ramas de staging.",
+                "Cada step envía por SSH un script de deploy a la cuenta de deployer correspondiente.",
+                "Sin credenciales en el repositorio: el script de deploy recibe sus argumentos desde las variables de despliegue y escribe el archivo de entorno en el servidor en cada deploy, eliminando el anterior.",
+                "El measurement ID de analytics se configura sólo en producción, así que staging se despliega con un valor vacío y el componente de analytics no renderiza nada en lugar de medir contra la propiedad real."
+              ]
+            },
+            {
+              "title": "Host y entrega",
+              "bullets": [
+                "Los despliegues fuera de producción apuntan automáticamente al widget de chat de desarrollo, derivado del flag de entorno en lugar de sumar otro argumento al pipeline.",
+                "El script de deploy limpia volúmenes, imágenes y caché del builder antes de cada build, crea directorios y corrige permisos de forma idempotente, y hace un hard reset del checkout para que sea determinístico.",
+                "Media del hero servida como immutable con URLs versionadas; los assets generales tienen un día de frescura más una semana de stale-while-revalidate, para que un reemplazo con el mismo nombre se propague solo.",
+                "URLs legacy redirigidas de forma permanente a la arquitectura de información aprobada."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Un sitio de marketing y contenido completo en tres idiomas, entregado con su infraestructura de despliegue, su capa de datos estructurados y su sistema de contenido editorial conectado.",
+          "groups": [
+            {
+              "title": "Superficies de la aplicación",
+              "bullets": [
+                "33 páginas: home; plataforma y compatibilidad de dispositivos; siete páginas de soluciones; tres páginas por segmento de empresa; enterprise, trust centre y residencia de datos; integraciones; precios; un hub comparativo con cuatro páginas de competidores; un hub de recursos con detalle de artículo; guías, un hub de ROI con dos calculadoras de casos y una guía de proof-of-value; investigación; nosotros; contacto; video; privacidad y términos.",
+                "Navegación con menús agrupados, overflow responsive, menú mobile, selector de idioma en navbar y footer, navegación por secciones con scroll-spy, cambio de tema, volver arriba y progreso entre rutas.",
+                "Un design system en Tailwind v4 con tokens de tema claro y oscuro, cuatro familias tipográficas self-hosted y alrededor de 1.970 líneas de CSS de animación y layout con soporte de reduced-motion."
+              ]
+            },
+            {
+              "title": "Integraciones",
+              "bullets": [
+                "CMS headless con un proxy de API interno, mapeo tipado y degradación elegante a un estado vacío.",
+                "Email transaccional con Postmark y un modo mock explícito cuando falta el token, que loguea en lugar de romper en entornos locales y de preview.",
+                "Analytics montado de forma condicional y un widget de chat de terceros en Shadow DOM con host configurable por entorno."
+              ]
+            },
+            {
+              "title": "Documentación y herramientas internas",
+              "bullets": [
+                "Un sistema de tres documentos de SEO, answer-engine y generative-engine que cubre doctrina, aplicación y proceso, más una biblioteca de prompts, un reporte de aplicación y una auditoría de schema.",
+                "Reglas explícitas contra alucinaciones y un esquema de etiquetado de evidencia que distingue afirmaciones observadas, inferidas, supuestas y recomendadas.",
+                "Material de dirección de arte, incluidos los originales de las placas del hero y candidatos de layout.",
+                "El propio código funciona como documentación de decisiones: los comentarios citan las secciones del brief del cliente que justifican cada decisión de arquitectura de información, copy y call to action."
+              ]
+            }
+          ]
+        }
       },
       "red-lizard-studioz": {
         "title": "Red Lizard Studioz",
+        "role": "Full-stack Engineer",
+        "industry": "Tecnología de marketing • SaaS para agencias",
+        "engagement": "Colaboración con equipo",
         "subtitle": "Plataforma multi-tenant de contenido con IA y venta conversacional",
-        "description": "Plataforma multi-tenant que una agencia de marketing opera para los negocios de sus clientes. Cada cliente es dueño de su contenido, su base de conocimiento, sus agentes de chat, su pipeline de leads y, opcionalmente, su propio proveedor de LLM. Dos aplicaciones desplegadas sobre un modelo de tenant compartido, con pipelines de escritura por etapas, RAG por tenant y agentes cuyas herramientas se autorizan por llamada.",
-        "whatIs": "Red Lizard Studioz es una plataforma multi-tenant que una agencia de marketing opera en nombre de los negocios de sus clientes. Cada cliente es un tenant: es dueño de su contenido, su base de conocimiento, sus agentes de chat, su identidad de marca, su pipeline de leads y — opcionalmente — su propio proveedor de LLM y su clave.\nDentro de la plataforma, un operador genera artículos SEO a través de un pipeline de escritura por etapas, mantiene una base de conocimiento por tenant a partir de documentos subidos, y configura un widget de chat embebible que responde preguntas de visitantes desde ese conocimiento y captura leads. Las conversaciones retroalimentan el sistema: las preguntas que el asistente no pudo responder se puntean y aparecen como ideas de artículo.\nLa superficie de control es inusualmente profunda para este tipo de producto. Los operadores pueden editar los prompts de sistema que gobiernan al redactor, al agente de imágenes y a cada agente de chat — como bloques en capas con un default de código, una sobreescritura global y otra por tenant.",
+        "description": "Plataforma multi-tenant que una agencia de marketing opera para los negocios de sus clientes. Cada cliente es dueño del contenido de su blog, su base de conocimiento, sus agentes de chat, su pipeline de leads y, opcionalmente, su propio proveedor de LLM y su clave. Dos aplicaciones desplegadas sobre un modelo de tenant compartido, con pipelines de escritura con IA por etapas, RAG por tenant sobre los documentos subidos, y agentes de chat cuyas herramientas se autorizan en cada llamada en lugar de prometerse en el prompt.",
+        "whatIs": "Red Lizard Studioz es una plataforma multi-tenant que una agencia de marketing opera en nombre de los negocios de sus clientes. Cada cliente es un tenant: es dueño de su contenido, su base de conocimiento, sus agentes de chat, su identidad de marca, su pipeline de leads y — opcionalmente — su propio proveedor de LLM y su clave.\nDentro de la plataforma, un operador genera artículos SEO a través de un pipeline de escritura por etapas, mantiene una base de conocimiento por tenant a partir de documentos subidos, y configura un widget de chat embebible que responde preguntas de visitantes desde ese conocimiento y captura leads. Las conversaciones retroalimentan el sistema: las preguntas que el asistente no pudo responder se puntúan y aparecen como ideas de artículo.\nLa superficie de control es inusualmente profunda para este tipo de producto. Los operadores pueden editar los prompts de sistema que gobiernan al redactor, al agente de imágenes y a cada agente de chat — como bloques en capas con un default de código, una sobreescritura global y otra por tenant.",
         "problemSolved": "Una agencia que hace content marketing para muchos negocios chicos choca siempre contra la misma pared: cada cliente necesita artículos alineados a su marca, un sitio que refleje sus servicios reales, y algo que capte a los visitantes que ese esfuerzo trae. Las herramientas genéricas de escritura con IA producen texto fluido pero equivocado — inventan servicios que el negocio no vende y citan precios que nadie aprobó.\nLa plataforma convierte el conocimiento del propio negocio en la fuente de verdad, y lo impone en código en vez de en la redacción del prompt. Documentos, servicios y perfil se embeben en un vector store donde la recuperación exige un id de tenant no vacío antes de ejecutar la consulta. Los artículos escritos por IA quedan excluidos de los pasajes factuales sobre los que razona el chatbot, y cada respuesta pasa por un verificador de cumplimiento antes de que el visitante vea una palabra.\nEl desarrollo a medida se justifica por lo que una herramienta lista no puede dar: soberanía de LLM por tenant entre seis proveedores, edición a nivel de prompt, y un modelo de datos donde un lead, una conversación, un artículo y un documento pertenecen al mismo tenant.",
         "learnings": [
           "Multi-tenancy impuesta en cuatro capas independientes, desde un servicio de guarda hasta una función de recuperación que falla ante un id de tenant no válido antes de tocar la base.",
@@ -92,33 +325,279 @@
           "La calidad de contenido tratada como problema de pipeline, con un segundo modelo barato que puntúa borradores contra criterios descalificantes.",
           "Ingeniería de costos como restricción arquitectónica: modelo auxiliar barato para ruteo y verificación, ventanas de contexto recortadas y caché por hash.",
           "Dos techos independientes de rate limit en un endpoint que no puede autenticarse, acotando tanto el abuso puntual como la corrida distribuida.",
-          "Aislamiento de fallas como disciplina recurrente: la generación de imágenes nunca hace fallar un artículo."
-        ]
+          "Aislamiento de fallas como disciplina recurrente: la generación de imágenes nunca hace fallar un artículo, y una traducción fallida ya no revierte un post generado."
+        ],
+        "architecture": {
+          "body": "La plataforma está construida como dos aplicaciones desplegadas sobre un modelo de tenants compartido: un backend en Strapi 5 que es dueño de los datos, de los pipelines de IA y de 116 endpoints propios, y un dashboard en Next.js 15 que funciona a la vez como consola de operación y como renderizador de los storefronts públicos. La decisión clave fue tratar a Strapi como un framework de aplicación y no como un CMS: los content types definen el modelo de datos acotado por tenant, mientras que el comportamiento vive en unas 25.000 líneas de servicios propios que cubren generación, retrieval, agentes, compliance y diseño.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Backend en Strapi 5 con 39 content types y 116 endpoints REST propios, más dos plugins dentro del repositorio.",
+                "Frontend en Next.js 15 App Router que sirve el dashboard de operación, los storefronts públicos de cada tenant y 72 rutas de API del lado del servidor que hacen de proxy hacia Strapi con autorización por ruta.",
+                "Patrón de proxy autenticado same-origin, más un proxy SSE dedicado para la generación en streaming.",
+                "Protocolo AG-UI sobre server-sent events para el runtime de agentes, de modo que el streaming, las tool calls y los eventos de ciclo de vida siguen un contrato publicado.",
+                "Un widget embebible montado en Shadow DOM, servido desde el backend e instalable en cualquier sitio externo con un script tag de una sola línea."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Pipeline de artículos en varias etapas: outline, borrador, revisión editorial, revisión condicional, imagen de portada con la marca y publicación programada.",
+                "RAG por tenant sobre documentos subidos, servicios, FAQs, perfil del negocio y URLs de sitios web ingestadas.",
+                "Agentes de chat con autorización de herramientas por llamada, captura de leads y una red de seguridad que rescata los datos de contacto que el modelo no llegó a guardar.",
+                "Detección de huecos de conocimiento que convierte las preguntas de visitantes sin respuesta en ideas de blog puntuadas.",
+                "Pipeline multi-agente de diseño de sitios web con caché por etapa, degradación elegante y reporte de progreso en vivo.",
+                "Entrevistas conversacionales que completan el perfil del negocio, incluido un flujo por link de invitación para quienes responden sin tener cuenta."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "Una entidad de proyecto como raíz del tenant, relacionada con artículos, documentos de conocimiento, keywords, leads, conversaciones, servicios, testimonios, FAQs, páginas del sitio y registros de diseño.",
+                "Componentes reutilizables para la configuración de cada tenant: config de LLM, reglas de compliance, config del widget, tema, identidad, contacto, agente de imágenes e inteligencia comercial.",
+                "Documentos de conocimiento con un enum de visibilidad público/seguro que por defecto es seguro.",
+                "Conversaciones modeladas con intención, sentimiento, resultado, preguntas sin responder y atribución de dispositivo; leads con un ciclo de vida completo que incluye estado, subestado y resúmenes generados.",
+                "Overrides de prompts como filas de primera clase, con scope y una relación opcional a proyecto, donde un proyecto null representa el valor global por defecto."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "body": "La identidad abarca tanto al staff de la agencia, que trabaja sobre todos los tenants, como a los clientes, acotados a un solo negocio.",
+              "chips": [
+                "Strapi JWT",
+                "Google OAuth",
+                "Grupos de roles",
+                "Asignación de tenant",
+                "Secreto compartido interno",
+                "Política fail-closed",
+                "Rutas sólo para owners"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Ambas aplicaciones se distribuyen como imágenes Docker construidas exclusivamente en runners de CI y descargadas por los servidores, una política adoptada después de que un build in situ agotara la memoria de un host de producción compartido. El despliegue es un pipeline de Bitbucket que corre la suite de tests en cada pull request y en cada push a una rama, buildea contra una caché de BuildKit en el registry y ejecuta por SSH un script de deploy en la máquina de destino.",
+          "groups": [
+            {
+              "title": "Hosting y despliegue",
+              "bullets": [
+                "Host en Linode detrás de Cloudflare, con TLS terminando en el proxy y la aplicación configurada para confiar en el proxy.",
+                "Imágenes separadas de dev y producción a partir de Dockerfiles distintos, fijadas a versiones mayores de Node diferentes por razones de dependencias documentadas.",
+                "Output standalone de Next.js corriendo con un usuario no root, con limpieza de imágenes post-deploy que conserva los tres tags más recientes."
+              ]
+            },
+            {
+              "title": "CI/CD",
+              "bullets": [
+                "Los tests corren en cada pull request y en cada push a una rama; una suite en rojo bloquea el build y el deploy.",
+                "La suite del backend es offline por diseño —sin key, sin base de datos, sin red—, y los tests que llaman al modelo son opcionales detrás de un flag --live.",
+                "Builds de BuildKit con caché en el registry, tags por SHA de commit y por rama, y lógica de reintento ante race conditions en el push al registry.",
+                "Build args específicos por rama para que cada entorno incorpore su propia URL de backend, después de que una constante de build-time hiciera que un deploy de dev apuntara a producción."
+              ]
+            },
+            {
+              "title": "Datos y almacenamiento",
+              "bullets": [
+                "Dos instancias de PostgreSQL 17: la base de datos de la aplicación y una instancia con pgvector para embeddings, esta última sin exponer al host en producción.",
+                "Migraciones SQL para el esquema vectorial, incluida la columna de visibilidad y una función de similitud filtrada por visibilidad.",
+                "Connection pooling configurado por entorno; rotación de logs de contenedores después de que un log sin límite llegara a cientos de megabytes."
+              ]
+            },
+            {
+              "title": "Operaciones",
+              "bullets": [
+                "Tres jobs programados: generación de artículos cada hora, publicación programada cada cinco minutos con un guard de abandono y un resumen diario configurable con soporte de zonas horarias.",
+                "Healthcheck en el contenedor del frontend, con límites y reservas de memoria en todos los servicios.",
+                "Secretos provistos mediante variables de CI y validados como no vacíos antes de usarse, después de que un argumento vacío desplazara una lista posicional entera."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Entregado como un sistema funcional de dos aplicaciones, con consola de operación, storefronts públicos por tenant, un widget embebible y los pipelines de IA que los sostienen.",
+          "groups": [
+            {
+              "title": "Superficies de la aplicación",
+              "bullets": [
+                "Un dashboard de operación con 24 secciones que abarcan contenido, negocio, super-admin y áreas beta.",
+                "Design Studio: un editor de diseño web con IA a pantalla completa, con paneles de brief, plan, canvas, secciones, versiones, competidores y referencias.",
+                "Storefronts públicos por tenant con ruteo por tenant, soporte de dominios propios y revalidación incremental.",
+                "Flujos de autenticación: inicio de sesión, registro, Google OAuth, olvido y restablecimiento de contraseña.",
+                "Un flujo de entrevista público que se responde desde un link de invitación sin cuenta, excluido de la indexación en buscadores."
+              ]
+            },
+            {
+              "title": "Integraciones",
+              "bullets": [
+                "Seis proveedores de LLM detrás de una única interfaz, con una acción de prueba de conexión en el dashboard.",
+                "Email transaccional con Postmark para notificaciones de leads, resúmenes diarios, restablecimiento de contraseña e invitaciones a entrevistas.",
+                "Obtención de noticias para ideas de contenido, más registros de integración para analytics, Search Console y agenda, con estado de conexión derivado.",
+                "Un widget de chat embebible instalable en sitios web externos que no son tenants."
+              ]
+            },
+            {
+              "title": "Entregables de ingeniería",
+              "bullets": [
+                "111 suites de tests entre ambos repositorios, incluida una suite contra la API en vivo para el comportamiento que los stubs offline no pueden verificar.",
+                "Pipelines de CI que controlan ambas aplicaciones, con runbooks de despliegue documentados en el repositorio.",
+                "Un registro documentado de problemas conocidos con la causa raíz y la verificación de cada defecto resuelto."
+              ]
+            }
+          ]
+        }
       },
       "comply-dq-site": {
         "title": "ComplyDQ — Sitio institucional",
+        "role": "Full-stack Engineer",
+        "industry": "Transporte • SaaS de compliance",
+        "engagement": "Colaboración con equipo",
         "subtitle": "Sitio de compliance DOT con herramientas interactivas de evaluación",
-        "description": "Superficie de marketing y captación de una plataforma de gestión de legajos de conductores DOT para empresas de transporte y equipos de compliance. Tres herramientas de dominio que calculan enteramente en el navegador, un blog con CMS acotado por tenant, y un despliegue blue-green con validación a nivel de assets y rollback automático.",
-        "whatIs": "El sitio público de ComplyDQ es la superficie de marketing y captación de una plataforma de gestión de legajos de conductores DOT, orientada a empresas de transporte, responsables de seguridad de flota y consultores de compliance. Es deliberadamente una capa de presentación: el producto autenticado vive en otro subdominio y otro repositorio.\nLos visitantes pueden usar tres herramientas interactivas autocontenidas: una evaluación de preparación ante auditoría que puntea la exposición con preguntas ponderadas, una calculadora de ROI que modela costo administrativo anual y período de repago, y un checklist de legajo derivado del 49 CFR Parte 391. Las tres calculan enteramente en el navegador — nada se envía ni se almacena.\nEl peso de ingeniería está en la entrega más que en la lógica de aplicación: self-hosted detrás de nginx y un CDN, desplegado por un script blue-green con detección de slot, validación de assets y rollback automático.",
+        "description": "Sitio de marketing y captación de una plataforma de gestión de legajos de conductores DOT para empresas de transporte y equipos de compliance. Tres herramientas de dominio que calculan enteramente en el navegador, un blog con CMS acotado por tenant, y un despliegue blue-green con validación a nivel de assets, rollback automático y precalentamiento de la caché del CDN.",
+        "whatIs": "El sitio público de ComplyDQ es la superficie de marketing y captación de una plataforma de gestión de legajos de conductores DOT, orientada a empresas de transporte, responsables de seguridad de flota y consultores de compliance. Es deliberadamente una capa de presentación: el producto autenticado vive en otro subdominio y otro repositorio.\nLos visitantes pueden usar tres herramientas interactivas autocontenidas: una evaluación de preparación ante auditoría que puntúa la exposición con preguntas ponderadas, una calculadora de ROI que modela costo administrativo anual y período de repago, y un checklist de legajo derivado del 49 CFR Parte 391. Las tres calculan enteramente en el navegador — nada se envía ni se almacena.\nEl peso de ingeniería está en la entrega más que en la lógica de aplicación: self-hosted detrás de nginx y un CDN, desplegado por un script blue-green con detección de slot, validación de assets y rollback automático.",
         "problemSolved": "El sitio migró desde una instalación WordPress heredada cuyo índice de búsqueda había sido comprometido por una inyección de spam SEO, y donde sólo nueve páginas tenían contenido real que valía la pena preservar. La presencia del dominio en buscadores jugaba activamente en contra del negocio.\nLa reconstrucción trata la higiene del índice como una cuestión de despliegue. En vez de redirigir todo en bloque, la migración distingue intención: las páginas legítimas reciben redirecciones permanentes mientras que las URLs de spam devuelven 410 Gone, porque un 301 transferiría la reputación acumulada del spam al dominio nuevo. La indexabilidad se deriva del propio dominio del build y se verifica en ambas direcciones al desplegar, porque un noindex en producción no produce ningún síntoma visible y recién aparece semanas después.\nEl desarrollo a medida se desprende de dos restricciones: las herramientas codifican lógica de dominio real citada a fuentes primarias, y la calculadora de precios debe mantenerse numéricamente idéntica a la facturación real de la plataforma.",
         "learnings": [
           "Despliegues sin downtime sobre infraestructura de un solo host, con el slot activo derivado del archivo de upstream de nginx y no del estado asumido del script.",
           "Validación en el despliegue más allá del health check: el script busca una ruta CSS real en el HTML servido para confirmar que el grafo de assets está completo.",
           "Corrección de caché en el borde del CDN, diagnosticada comparando hashes del mismo nombre de archivo entre dos IDs de despliegue.",
-          "Diagnóstico sistemático de una falla intermitente de borde en cinco causas independientes, cada una medida y documentada.",
+          "Diagnóstico sistemático de la causa raíz de una falla intermitente en el edge, repartida en cinco causas independientes, cada una medida, con el remanente documentado y mitigado.",
           "Invalidación del cliente basada en la identidad del build, para que un cliente desactualizado recargue en vez de pedir chunks que ya no existen.",
           "Pipeline de HTML no confiable para contenido generado por IA, sanitizado del lado del servidor con denylist explícita como defensa en profundidad.",
           "Aislamiento de tenant contra un CMS compartido, aplicado también a la consulta de detalle para que no se pueda leer el artículo de otro cliente adivinando la URL.",
           "ISR resiliente ante una dependencia externa: el cliente del CMS nunca lanza excepción, así una caída degrada el blog en vez de romper el build.",
           "Datos estructurados acotados a lo que la página realmente afirma, omitiendo perfiles externos por falta de fuentes confirmadas."
-        ]
+        ],
+        "architecture": {
+          "body": "Un sitio de marketing orientado a contenido, construido casi por completo con React Server Components. La decisión central es que prácticamente todas las páginas se renderizan de forma estática, sin dependencias de datos en runtime, y la única superficie dinámica —el blog— queda aislada detrás de un cliente ISR que falla de forma controlada. La interactividad se limita a hojas de cliente acotadas y con límites explícitos, de modo que los layouts de página, la metadata y los datos estructurados siguen renderizándose en el servidor mientras las calculadoras y los toggles hidratan de forma independiente.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Next.js 16 App Router con 15 rutas, todas totalmente estáticas en build salvo el blog.",
+                "14 componentes de cliente limitados a las hojas interactivas; todo lo demás es Server Component.",
+                "El índice del blog, el detalle de cada post y el sitemap comparten una ventana de revalidación ISR de 60 segundos.",
+                "El contenido y los datos de dominio viven en módulos tipados, no embebidos en el JSX.",
+                "Output standalone, para que la imagen de runtime incluya sólo las dependencias que realmente resuelve.",
+                "Constantes con una única fuente de verdad: precios, montos de multas y navegación se definen una vez y todos los consumidores los importan."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Evaluación de preparación para auditorías del DOT con puntaje ponderado, manejo de selección múltiple excluyente, resultados por niveles y detección de brechas a partir de un umbral definido.",
+                "Calculadora de ROI que estima horas administrativas y costo anuales, equivalente en FTE, ROI neto y período de repago en meses; excluye las multas a propósito para que el resultado sea conservador.",
+                "Checklist del DQ File que cubre los ítems de 49 CFR Part 391, agrupados por tipo de conductor y con notas de retención.",
+                "Calculadora de precios en vivo que usa las mismas constantes de facturación reales de la plataforma.",
+                "Biblioteca de 26 preguntas frecuentes con búsqueda, con todas las respuestas renderizadas en el servidor.",
+                "Blog alimentado por el CMS con posts destacados, categorías, autores y control de noindex por post."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "Sin base de datos ni persistencia en este repositorio; sin auth, sin API routes, sin server actions.",
+                "Una única fuente externa de sólo lectura: Strapi 5 REST, consultado sin token.",
+                "Las estructuras crudas del CMS se normalizan a un view model, así la UI nunca toca la forma de la API.",
+                "Cada consulta se filtra por tenant según el slug del proyecto —tanto en el detalle como en el listado— para evitar lecturas cruzadas entre tenants adivinando URLs.",
+                "El estado de la evaluación, del ROI y del checklist es estado efímero de React; no se envía ni se guarda nada."
+              ]
+            },
+            {
+              "title": "SEO y datos estructurados",
+              "chips": [
+                "JSON-LD @graph",
+                "Organization",
+                "SoftwareApplication",
+                "BlogPosting",
+                "FAQPage",
+                "BreadcrumbList",
+                "Canonical",
+                "OpenGraph",
+                "robots.txt dinámico",
+                "Sitemap con ISR",
+                "Desindexación con 410"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Self-hosted en un VPS compartido que corre unos veinte sitios, lo que determina buena parte de la configuración: todo recurso que pueda chocar entre entornos o con los vecinos —puertos, nombres de proyecto de Compose, nombres de contenedores, bloques upstream de nginx, nombres de archivo de los server blocks— tiene un namespace explícito, y el modo de falla que produciría cada colisión está documentado en el mismo lugar donde se tomó la decisión.",
+          "groups": [
+            {
+              "title": "Pipeline de despliegue",
+              "bullets": [
+                "Bitbucket Pipelines: los pull requests y main corren install, build, type-check y lint.",
+                "Los despliegues a producción se disparan por tag y requieren aprobación manual, así que pushear un tag por sí solo no alcanza para publicar.",
+                "El paso de verificación se vuelve a correr sobre el tag en lugar de confiar en la corrida anterior de la rama, porque un tag puede apuntar a cualquier commit.",
+                "El rollback consiste en volver a correr el pipeline del tag anterior; cada tag fija un commit exacto."
+              ]
+            },
+            {
+              "title": "Contenedores y runtime",
+              "bullets": [
+                "Build de Docker multi-stage sobre node:22-alpine, corriendo con un usuario no root.",
+                "Las variables de entorno públicas se pasan como build args, porque Next las inyecta en el build en lugar de leerlas en runtime.",
+                "Healthcheck de Compose con fetch nativo, con un start period que no cuenta para los reintentos.",
+                "Slot y puerto inyectados por entorno, para que ambas versiones convivan durante el swap."
+              ]
+            },
+            {
+              "title": "nginx y edge",
+              "bullets": [
+                "Fragmentos upstream por entorno que se reescriben en cada despliegue, con el circuit breaker desactivado en un upstream de un solo backend y conexiones keepalive en pool.",
+                "Redirección del dominio raíz a www; HSTS, una allowlist de CSP por origen, protecciones contra framing y sniffing, y una Permissions-Policy que deniega 18 funcionalidades.",
+                "Los headers de seguridad se vuelven a declarar dentro de los location blocks anidados, porque declarar un solo header en un bloque descarta los del padre.",
+                "La superficie legacy se resuelve en el edge: 410 para el mapa de slugs de spam y las rutas legacy de WordPress, 301 para las nueve páginas legítimas.",
+                "Precalentamiento post-despliegue de hasta 40 assets con hash, porque las claves de caché son la URL completa."
+              ]
+            },
+            {
+              "title": "Configuración y salvaguardas",
+              "bullets": [
+                "La identidad del entorno sale de la URL pública del sitio, no del modo de build: ambos entornos compilan en modo producción.",
+                "El despliegue verifica la indexabilidad en ambos sentidos y avisa de forma visible en lugar de abortar, porque la corrección vive en nginx y no en el build.",
+                "El despliegue vuelve a verificar que los headers de caché de los chunks no sean immutable, porque ese bloque vive en la configuración del servidor, fuera del repositorio."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "groups": [
+            {
+              "title": "Superficies de la aplicación",
+              "bullets": [
+                "15 rutas: Home, Features, un hub de Resources con tres páginas de herramientas, índice y detalle del Blog, Partners, About, Contact, FAQs, Privacy Policy, Terms of Service y un 404.",
+                "Tres herramientas interactivas de dominio —evaluación, calculadora de ROI y checklist— más una calculadora de precios en vivo.",
+                "Design system de unos 45 componentes con CSS Modules basados en tokens, tema claro y oscuro, layout responsive, skip-link y soporte de reduced-motion."
+              ]
+            },
+            {
+              "title": "Integraciones y SEO",
+              "bullets": [
+                "Cliente de Strapi acotado por tenant, con sanitización del lado del servidor y degradación controlada.",
+                "Capa completa de SEO y datos estructurados: JSON-LD por página, robots dinámico, sitemap con ISR, canonicals y tarjetas para redes sociales."
+              ]
+            },
+            {
+              "title": "Infraestructura y documentación",
+              "bullets": [
+                "Recursos de migración: un generador de sitemap a nginx para el mapa de desindexación, la tabla de mapeo de redirecciones y una justificación escrita del enfoque.",
+                "Infraestructura como código: Dockerfile, Compose, dos server blocks de nginx, dos fragmentos upstream, el script de despliegue blue-green y el pipeline de CI.",
+                "Un README operativo de unas 420 líneas que cubre ambos entornos, runbooks de puesta en marcha y baja, la preparación única del servidor y post-mortems de incidentes con comandos para reproducirlos."
+              ]
+            }
+          ]
+        }
       },
       "royal-parking-services": {
         "title": "Royal Parking Services",
+        "role": "Full-stack Engineer",
+        "industry": "Gestión de estacionamientos • Servicios inmobiliarios",
+        "engagement": "Colaboración con equipo",
         "subtitle": "Sitio de control de estacionamiento y portal de permisos",
-        "description": "Sitio público y portal de clientes de una empresa de control de estacionamiento que administra playas privadas. Atiende dos audiencias desde una sola aplicación: conductores que pagan una infracción mediante un checkout con Stripe donde el monto lo decide el servidor, y administradores de propiedades que gestionan permisos, vehículos, tarjetas e facturas.",
-        "whatIs": "Royal Parking Services es el sitio público y el portal de clientes de una empresa de control de estacionamiento de Columbia Británica que administra playas privadas para consorcios, centros comerciales, oficinas y clínicas. El sistema atiende dos audiencias distintas desde una sola aplicación.\nLos conductores usan un checkout público de cuatro pasos para buscar una infracción por patente o número de acta, revisar la infracción junto a las fotos de la cartelalaría del lugar, seleccionar una o varias actas pendientes y pagar con tarjeta. Los clientes con contrato ingresan a un panel donde emiten permisos con programas horarios por día y múltiples vehículos, buscan en su registro de permisos, guardan tarjetas y revisan su historial de facturas.\nEl flujo de pago público y el panel de clientes comparten un cliente HTTP, una capa de autenticación y un design system, que es lo que mantiene coherentes un checkout de consumo masivo y un panel B2B dentro de un mismo despliegue.",
-        "problemSolved": "El control de estacionamiento privado genera dos problemas a la vez. Los conductores que reciben un acta no tienen forma autogestionada de ver la evidencia ni de pagar, así que cada infracción termina en un llamado o en una impugnación — y las impugnaciones salen caras cuando la empresa no puede mostrar de inmediato la cartelalaría que estaba puesta. Al mismo tiempo, los administradores no tienen visibilidad de su propio registro de permisos.\nEl flujo de pago trata al conductor como no confiable por diseño: el cliente envía sólo identificadores de acta y una patente, nunca un monto, y el backend calcula el cargo. El paso de selección muestra las reglas del lugar con fotos deduplicadas por playa — la evidencia que previene impugnaciones, mostrada antes de pagar y no después. El endpoint de confirmación es idempotente, lo que permite que la misma llamada sirva al camino directo y al retorno de 3-D Secure.\nUna solución lista no era viable porque el ciclo de vida del acta es el modelo de dominio propio de la empresa: doce estados donde la pagabilidad es una propiedad del ciclo y no un simple flag.",
+        "description": "Sitio público y portal de clientes de una empresa de control de estacionamiento que administra playas privadas. Atiende dos audiencias desde una sola aplicación: conductores que pagan una infracción mediante un checkout con Stripe donde el monto lo decide el servidor y 3-D Secure se resuelve por dos caminos, y administradores de propiedades que gestionan permisos, vehículos, tarjetas guardadas y facturas.",
+        "whatIs": "Royal Parking Services es el sitio público y el portal de clientes de una empresa de control de estacionamiento de Columbia Británica que administra playas privadas para consorcios, centros comerciales, oficinas y clínicas. El sistema atiende dos audiencias distintas desde una sola aplicación.\nLos conductores usan un checkout público de cuatro pasos para buscar una infracción por patente o número de acta, revisar la infracción junto a las fotos de la cartelería del lugar, seleccionar una o varias actas pendientes y pagar con tarjeta. Los clientes con contrato ingresan a un panel donde emiten permisos con programas horarios por día y múltiples vehículos, buscan en su registro de permisos, guardan tarjetas y revisan su historial de facturas.\nEl flujo de pago público y el panel de clientes comparten un cliente HTTP, una capa de autenticación y un design system, que es lo que mantiene coherentes un checkout de consumo masivo y un panel B2B dentro de un mismo despliegue.",
+        "problemSolved": "El control de estacionamiento privado genera dos problemas a la vez. Los conductores que reciben un acta no tienen forma autogestionada de ver la evidencia ni de pagar, así que cada infracción termina en un llamado o en una impugnación — y las impugnaciones salen caras cuando la empresa no puede mostrar de inmediato la cartelería que estaba puesta. Al mismo tiempo, los administradores no tienen visibilidad de su propio registro de permisos.\nEl flujo de pago trata al conductor como no confiable por diseño: el cliente envía sólo identificadores de acta y una patente, nunca un monto, y el backend calcula el cargo. El paso de selección muestra las reglas del lugar con fotos deduplicadas por playa — la evidencia que previene impugnaciones, mostrada antes de pagar y no después. El endpoint de confirmación es idempotente, lo que permite que la misma llamada sirva al camino directo y al retorno de 3-D Secure.\nUna solución lista no era viable porque el ciclo de vida del acta es el modelo de dominio propio de la empresa: doce estados donde la pagabilidad es una propiedad del ciclo y no un simple flag.",
         "learnings": [
           "Pagos con autoridad en el servidor sobre un endpoint público: el cliente nunca propone un precio, eliminando toda una clase de ataques de manipulación.",
           "3-D Secure por dos caminos con confirmación idempotente, rederivando el estado canónico desde la pasarela en vez de confiar en un parámetro de redirección.",
@@ -128,10 +607,153 @@
           "Supresión de un widget de terceros entre navegaciones del cliente, reconociendo que el DOM de un script externo sobrevive al árbol de React.",
           "Integración con CMS con degradación elegante, cayendo a contenido local versionado para que una caída degrade a posts estáticos.",
           "Stripe integrado dos veces y a propósito distinto: PaymentIntents para el pago anónimo puntual, tokenización para la tarjeta guardada de una cuenta B2B."
-        ]
+        ],
+        "architecture": {
+          "body": "La aplicación es un único despliegue de Next.js App Router que atiende a tres públicos desde un mismo código base, separados por route groups y no por aplicaciones distintas: un sitio de marketing público con checkout de pago anónimo, los flujos de credenciales en su propio layout a pantalla completa, y el portal de clientes autenticado con su propio shell con barra lateral. Los tres comparten un único cliente HTTP, un único store de Redux y un único design system en Tailwind, con excepciones para rutas públicas allí donde el checkout anónimo no debe heredar el comportamiento autenticado.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Next.js 15 App Router con tres route groups: público, credenciales y dashboard privado.",
+                "Server Components por defecto para las páginas de marketing y de artículos, con los componentes de cliente aislados en las superficies interactivas.",
+                "Una única instancia compartida de axios con interceptores de request y response, más una allowlist de rutas públicas para que el checkout anónimo se saltee tanto la inyección del token como las redirecciones por 401.",
+                "Una máquina de estados de checkout de cuatro pasos del lado del cliente, contenida en un único objeto de estado tipado, con una ruta de retorno de 3-D Secure aparte que reconstruye el estado a partir de los parámetros de la URL.",
+                "Contenido híbrido: CMS con ISR para el blog y módulos TypeScript versionados en el repo para los recursos y los textos de servicios."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Búsqueda pública de actas por patente o por número de acta, mediante un único término de búsqueda unificado.",
+                "Selección de varias actas con total en vivo y filtrado de las que se pueden pagar según su estado.",
+                "Visualización de las reglas de cada playa con fotos de la cartelería, deduplicadas por playa.",
+                "Emisión de permisos con programas horarios por día de la semana y un listado dinámico de vehículos.",
+                "Verificación de disponibilidad del número de permiso del lado del servidor, con debounce.",
+                "Tarjetas guardadas con selección de tarjeta predeterminada y comprobantes de factura alojados por Stripe.",
+                "Formulario de contacto con normalización de números de teléfono y un mapa importado dinámicamente."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "Acta: un ciclo de vida de doce estados, cuatro campos de monto distintos, vencimiento de la reducción, marca de reincidente, y relaciones con el inspector, la infracción, la playa, las imágenes y las reglas de la playa.",
+                "Permiso: tipo, período de vigencia, titular, valor, rango de fechas, relación con la playa, array de programas horarios y array de vehículos.",
+                "Company como raíz del tenant, con límites contractuales, campos de precios, período de facturación y perfil de administrador.",
+                "Invoice y PaymentMethod, respaldados por Stripe, con URLs de comprobante y metadata de la tarjeta.",
+                "Un envelope paginado consistente en todos los endpoints de listado."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "chips": [
+                "JWT Bearer",
+                "Interceptores de Axios",
+                "Logout automático ante 401",
+                "Route guard",
+                "Desambiguación de superficies",
+                "Sanitización de open redirects",
+                "Recuperar / restablecer contraseña",
+                "Excepciones para rutas públicas"
+              ]
+            }
+          ]
+        },
+        "payments": {
+          "body": "Conviven dos integraciones de Stripe, cada una adecuada a su flujo. El checkout anónimo del conductor usa PaymentIntents con el Payment Element; el portal autenticado guarda tarjetas a través de la API de tokenización. En ambos casos, la autoridad sobre el monto está íntegramente del lado del servidor.",
+          "groups": [
+            {
+              "title": "Checkout público",
+              "bullets": [
+                "Pago único sobre una o más actas de infracción pendientes: sin suscripciones, sin marketplace, sin pagos divididos.",
+                "El endpoint que crea el intent recibe los identificadores de las actas y la patente, pero ningún monto; el client secret devuelto monta el Payment Element.",
+                "El intent se restringe a tarjeta del lado del servidor, lo que suprime los prompts de billeteras y las ofertas de guardar la tarjeta; es una decisión intencional para un pago único anónimo.",
+                "La moneda es CAD, formateada para el locale en-CA, con el locale de Stripe Elements fijado para evitar que el idioma del navegador se filtre en un sitio que está sólo en inglés."
+              ]
+            },
+            {
+              "title": "Autenticación reforzada del cliente (SCA)",
+              "bullets": [
+                "La confirmación corre con redirect-if-required: los pagos sin redirección se resuelven en el lugar, y los que requieren redirección aterrizan en una ruta de retorno dedicada.",
+                "La ruta de retorno recupera el PaymentIntent para obtener el estado canónico en lugar de confiar en el parámetro de estado de la redirección.",
+                "El endpoint de confirmación es idempotente por contrato del backend, así que tanto el camino sincrónico como el de retorno de 3-D Secure pueden llamarlo sin riesgo.",
+                "La confirmación vuelve a validar los identificadores de las actas y la patente del lado del servidor, de modo que los parámetros que viajan por la URL de retorno explícitamente no son una frontera de confianza."
+              ]
+            },
+            {
+              "title": "Estados de la orden y tarjetas guardadas",
+              "bullets": [
+                "El estado de la orden lo determina el ciclo de vida del acta: nueva, pago parcial y pagada en su totalidad, más estados de recordatorio y de apelación.",
+                "Tres estados no se pueden pagar online y se filtran antes de la selección.",
+                "Resultado: número de confirmación más una URL opcional de comprobante alojado, tanto en el paso de éxito en el lugar como en la página de retorno.",
+                "Las tarjetas guardadas del portal usan tokenización sobre un card element y sólo envían el token: los números de tarjeta nunca llegan al backend de la aplicación.",
+                "Un tema de appearance de Stripe personalizado y alineado con la paleta de la marca en ambos flujos."
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Self-hosted en un VPS Linux detrás de PM2, desplegado por Bitbucket Pipelines vía SSH, con URLs de backend, credenciales del CMS y claves de Stripe separadas por entorno.",
+          "groups": [
+            {
+              "title": "Hosting y despliegue",
+              "bullets": [
+                "Proceso de Node 20 gestionado por PM2 que sirve el servidor de producción de Next.js en un puerto dedicado.",
+                "Bitbucket Pipelines disparado por rama: main despliega producción y develop despliega staging, y cada uno envía por SSH un script de despliegue a una cuenta de deployer.",
+                "El script de despliegue regenera el archivo de entorno desde cero en cada despliegue, instala dependencias, compila con un límite de heap ampliado y después reinicia o arranca el proceso en PM2."
+              ]
+            },
+            {
+              "title": "Secretos y configuración",
+              "bullets": [
+                "Todos los valores salen de las deployment variables de Bitbucket, y cada uno se valida como no vacío antes de escribirse.",
+                "El script se refactorizó para pasar las variables por nombre a través del entorno de SSH en lugar de por posición, después de que el aplanado de argumentos de SSH hiciera que un solo valor vacío corriera todos los argumentos siguientes y corrompiera el entorno en silencio.",
+                "El flag de entorno definido al desplegar distingue en runtime el comportamiento de producción del de staging."
+              ]
+            },
+            {
+              "title": "Entrega",
+              "bullets": [
+                "Optimización de imágenes de Next.js con AVIF y WebP, y una allowlist de remote patterns restringida al host de uploads del CMS.",
+                "Una instancia de CMS compartida entre varios proyectos, en la que este sitio acota sus consultas por el slug del proyecto.",
+                "Logs de procesos de PM2 más un directorio de logs de despliegue por aplicación."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "groups": [
+            {
+              "title": "Sitio público y checkout",
+              "bullets": [
+                "Sitio de marketing: Home con contadores de estadísticas animados y carruseles de funcionalidades, Services con secciones enlazadas por anclas, una página dedicada al pago móvil, About, Resources, Blog, detalle de artículo, Contact, Privacy Policy y Terms of Use.",
+                "Checkout de pago público: un wizard de cuatro pasos más una ruta de retorno dedicada para 3-D Secure, con visualización de evidencia, selección de varias actas y el Payment Element de Stripe."
+              ]
+            },
+            {
+              "title": "Portal de clientes",
+              "bullets": [
+                "Flujos de inicio de sesión, recuperación de contraseña y restablecimiento de contraseña.",
+                "Formulario de emisión de permisos con programas horarios y registro de múltiples vehículos.",
+                "Registro de permisos con búsqueda por patente, diálogos de detalle, edición y cancelación, más estadísticas de cantidad de vehículos.",
+                "Gestión de tarjetas guardadas, historial de facturas con comprobantes alojados y configuración de la empresa."
+              ]
+            },
+            {
+              "title": "Contenido y design system",
+              "bullets": [
+                "Cinco artículos de recursos extensos y cuatro posts de blog escritos como datos estructurados en TypeScript con un modelo de bloques tipado, renderizados por un único componente de artículo compartido que también renderiza el HTML que viene del CMS.",
+                "Una capa de tokens de Tailwind propia sobre daisyUI, con primitivas reutilizables de banner, FAQ, paginación y select, un loader para las transiciones de ruta y un botón para volver arriba.",
+                "Integraciones entregadas: Stripe en dos flujos, el CMS, un widget de chat que se oculta según la ruta y un mapa interactivo."
+              ]
+            }
+          ]
+        }
       },
       "sophie-callander": {
         "title": "Sophie Callander Consulting",
+        "role": "Full-stack Engineer",
+        "industry": "Servicios profesionales • Mediación",
+        "engagement": "Colaboración con equipo",
         "subtitle": "Sitio multilingüe de una práctica de resolución de conflictos",
         "description": "Sitio profesional de una mediadora independiente y analista de equidad laboral, publicado en siete idiomas incluyendo persa de derecha a izquierda. La completitud de las traducciones la impone el compilador, y una capa de metadatos por ruta resuelve canonical, hreflang y datos estructurados que un layout compartido no puede resolver.",
         "whatIs": "Sophie Callander Consulting es el sitio público de una mediadora independiente y analista de equidad laboral radicada en Columbia Británica, Canadá. Se dirige a organizaciones y personas que atraviesan conflictos laborales y están evaluando a una profesional antes de dar el primer paso — una decisión que se toma por confianza y no por comparación de funcionalidades.\nLos visitantes pueden leer cuatro descripciones de servicio, seguir una sección narrativa de trayectoria, revisar credenciales y membresías verificadas, leer un FAQ, recorrer artículos traídos en vivo desde un CMS headless, y llegar a una página de contacto con enlace de agenda. Cada superficie está publicada en siete idiomas — inglés, francés, español, punjabí, hindi, chino simplificado y persa — con el persa renderizando todo el layout de derecha a izquierda.\nLa escala del trabajo está concentrada en la corrección más que en la superficie: siete locales completamente traducidos sobre ocho tipos de ruta, un sistema de traducción verificado por tipos, y una capa integral de datos estructurados y acceso para crawlers.",
@@ -146,7 +768,129 @@
           "Datos estructurados acotados a lo que la página efectivamente muestra, tipados como ProfessionalService precisamente porque no se publica una dirección física.",
           "Pipeline de imágenes ajustado al set real de assets, limitando tamaños donde los breakpoints mayores producían salida idéntica byte a byte.",
           "Accesibilidad codificada en la capa de tokens, con ratios de contraste medidos como comentarios y 62 declaraciones lógicas que sostienen el layout RTL."
-        ]
+        ],
+        "architecture": {
+          "body": "Una aplicación Next.js 16 App Router renderizada en el servidor y prerenderizada de forma estática, construida en torno a un único árbol de rutas localizado que sirve siete idiomas. La decisión central es que casi nada corre en el cliente: diccionarios, armado de contenido, datos estructurados y metadata se resuelven en el servidor, y el bundle de cliente lleva sólo cinco componentes interactivos. El contenido se separa según cuánto cambia: los textos estables viven en diccionarios TypeScript tipados que se compilan en el build, mientras que los artículos del blog vienen de un CMS headless vía ISR. Así la clienta puede publicar sin un despliegue y los textos de marketing siguen bajo control de versiones y chequeo de tipos.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Un único árbol de rutas localizado con static params que genera una variante estática por idioma.",
+                "El idioma por defecto se sirve sin prefijo mediante un rewrite interno, así las rutas en inglés y las localizadas comparten una misma implementación.",
+                "Patrón de shell de servidor e isla de cliente: el header resuelve todos los datos en el servidor y le pasa las props ya resueltas a su hijo interactivo.",
+                "Una capa de armado de contenido combina los textos traducidos con la estructura no traducida: los identificadores de slug estables que se usan como anclas de URL y claves de íconos explícitamente nunca se traducen.",
+                "Todas las páginas se componen con primitivas de presentación, con SCSS Modules acotados por componente y sin framework de UI."
+              ]
+            },
+            {
+              "title": "Internacionalización",
+              "bullets": [
+                "Siete idiomas, cada uno con su language tag, locale para redes sociales, locale de formato y dirección de escritura en un único registro de metadata.",
+                "El persa activa right-to-left en la raíz del documento, sostenido por 62 declaraciones de propiedades lógicas de CSS.",
+                "Los diccionarios se importan de forma lazy por request, así que al servidor sólo llega el idioma activo, y al cliente nunca.",
+                "APIs nativas de internacionalización para plurales y fechas, con las fechas fijadas en UTC para que una publicación de madrugada no muestre el día anterior en zonas con offset negativo.",
+                "El selector de idioma renderiza anclas reales con atributos de idioma y dirección, y funciona sin JavaScript."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "Sin base de datos, sin ORM y sin capa de persistencia: el sitio es de sólo lectura por diseño.",
+                "Strapi 5 REST filtrado por el slug del proyecto como clave de tenant, para que un mismo CMS sirva a varios sitios.",
+                "Una capa de mapeo convierte cada respuesta del CMS en tipos propios del sitio; la UI nunca toca la forma de la API.",
+                "Datos derivados en el servidor: tiempo de lectura a partir de la cantidad de palabras del cuerpo, posts relacionados ordenados por categoría compartida y un parser que respeta el anidamiento y elimina el bloque de conclusiones clave que el CMS duplica.",
+                "Las fallas del CMS se degradan a una lista vacía en lugar de propagarse: una caída se lleva puesto el blog, no el sitio."
+              ]
+            },
+            {
+              "title": "Capa de SEO y answer engines",
+              "chips": [
+                "hreflang × 7 + x-default",
+                "Canonical por ruta",
+                "JSON-LD @graph",
+                "ProfessionalService",
+                "FAQPage",
+                "BreadcrumbList",
+                "Article",
+                "Sitemap generado",
+                "robots generado",
+                "Ruta llms.txt",
+                "Allowlist de crawlers de IA"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Desplegado como un contenedor Docker self-hosted detrás de nginx en un VPS de Linode en Toronto, en lugar de una plataforma gestionada; la elección se explica porque el servidor ya aloja unos trece proyectos. Desarrollo y producción son dos clones independientes del mismo repositorio en la misma máquina, parametrizados por completo con variables de entorno para que ninguno choque con el nombre de contenedor ni el puerto del otro.",
+          "groups": [
+            {
+              "title": "Contenedores y build",
+              "bullets": [
+                "Dockerfile de tres etapas sobre node:22-alpine, corriendo con un usuario no root.",
+                "Output standalone, para que la imagen de runtime incluya sólo las dependencias que realmente se usan.",
+                "Healthcheck de Compose que consulta la app cada 30 segundos, con un start period.",
+                "La URL pública del sitio se pasa como build arg, no sólo como variable de entorno en runtime: queda fijada en tiempo de compilación porque firma los canonicals, el hreflang y el sitemap."
+              ]
+            },
+            {
+              "title": "CI/CD",
+              "bullets": [
+                "Bitbucket Pipelines, con los pull requests corriendo el mismo paso de verificación que main.",
+                "El orden de los controles es install, type-check, lint, build; el chequeo de tipos va antes del build para que los errores de claves de idioma aparezcan primero.",
+                "Un push a main despliega a desarrollo y después a producción, mediante un script remoto que hace reset contra origin, recompila, reinicia y limpia las imágenes viejas.",
+                "Una trampa del pipeline, documentada: la ruta del script de producción va entre comillas porque el CI enmascara cada aparición del valor de una variable protegida en el string del comando, y eso estaba corrompiendo la ruta."
+              ]
+            },
+            {
+              "title": "Entornos y edge",
+              "bullets": [
+                "Desarrollo y producción conviven en un mismo host con directorios, nombres de contenedor y puertos distintos.",
+                "Desarrollo sirve un header robots noindex desde la capa de nginx, para que nunca pueda competir con producción en los rankings.",
+                "nginx termina TLS y fuerza HTTPS y la canonicalización del dominio raíz con redirecciones permanentes.",
+                "Un snippet de real-IP de Cloudflare recupera las IPs de los visitantes desde el header de forwarding, confiando sólo en los rangos publicados; quedó entregado y documentado antes de activar el proxy."
+              ]
+            },
+            {
+              "title": "Observabilidad",
+              "bullets": [
+                "Analytics se monta sólo cuando hay un measurement ID configurado: si no hay ninguno, el sitio no carga nada del proveedor ni setea cookies.",
+                "Las fallas al consultar el CMS se loguean en el servidor con el status y la URL."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Un sitio de marketing completo en siete idiomas, entregado en producción junto con su pipeline de despliegue, la configuración del servidor y una auditoría técnica por escrito.",
+          "groups": [
+            {
+              "title": "Superficies de la aplicación",
+              "bullets": [
+                "Home, Services, About, FAQ, Contact, Reflections, índice del Blog y detalle del Blog: ocho tipos de ruta en siete idiomas.",
+                "Header con panel mobile, link para saltar al contenido y selector de idioma; footer con la navegación completa.",
+                "Detalle del blog con imagen de portada, tiempo de lectura, bloque de conclusiones clave, posts relacionados y metadata por post controlada desde el CMS.",
+                "Página About narrativa con una línea de tiempo de su recorrido, credenciales que incluyen un grupo aparte, explícitamente separado, de formaciones en curso, y una tira animada de retratos.",
+                "Página de contacto con email, teléfono y un link externo para reservar turnos."
+              ]
+            },
+            {
+              "title": "Integraciones",
+              "bullets": [
+                "Strapi 5 como CMS headless para el contenido del blog, filtrado por tenant.",
+                "Un widget de chat embebido en Shadow DOM, cargado desde el origen del CMS con un atributo de tenant.",
+                "Agenda externa de reservas y analytics montado de forma condicional."
+              ]
+            },
+            {
+              "title": "Infraestructura y documentación",
+              "bullets": [
+                "Dockerfile, archivo de Compose, script de despliegue remoto y configuración del pipeline de CI.",
+                "Server blocks de nginx para ambos entornos, más el snippet de real-IP de Cloudflare.",
+                "Una auditoría escrita de SEO y answer engines que documenta cinco defectos corregidos con evidencia del antes y el después, una tabla de verificación fase por fase, resultados de Lighthouse, afirmaciones marcadas explícitamente como no verificables y preguntas abiertas para la clienta.",
+                "Un runbook para activar el proxy de Cloudflare, con la justificación basada en la latencia medida y el orden obligatorio de los pasos."
+              ]
+            }
+          ]
+        }
       },
       "acer0": {
         "title": "Acer0",
@@ -166,7 +910,142 @@
         ],
         "role": "Full-stack · Arquitectura",
         "industry": "Manufactura y retail",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "architecture": {
+          "body": "La plataforma está organizada como un monorepo full-stack. Un storefront en Next.js se ocupa de la presentación, una API en Express concentra todas las operaciones de escritura y una capa Backend-for-Frontend media entre ambos, manteniendo las credenciales de pago y los endpoints administrativos del lado del servidor.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Monorepo full-stack construido con Next.js 15 (App Router), Express y PostgreSQL.",
+                "Capa Backend-for-Frontend que separa las APIs públicas del storefront de las operaciones administrativas privadas.",
+                "Tipado de punta a punta con TypeScript y Prisma ORM, que hace visibles los cambios de esquema en tiempo de compilación.",
+                "Entornos de desarrollo y producción basados en Docker para un comportamiento consistente entre etapas."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Catálogo de productos con categorías, filtros avanzados, reseñas y listas de deseos.",
+                "Cuentas de cliente con autenticación, historial de pedidos, gestión de perfil y recuperación de contraseña por email transaccional.",
+                "Panel administrativo para productos, pedidos, cupones, moderación de reseñas y analítica de ventas.",
+                "Interfaz responsive mobile-first que cubre desde viewports de 480px hasta monitores ultra-wide."
+              ]
+            },
+            {
+              "title": "Seguridad",
+              "body": "Todo lo expuesto públicamente está validado y con rate limiting, y los administradores pueden revocar credenciales de forma inmediata.",
+              "chips": [
+                "JWT + versionado de tokens",
+                "Google OAuth 2.0",
+                "Control de acceso por roles",
+                "Helmet",
+                "Rate limiting",
+                "Validación con Zod",
+                "reCAPTCHA"
+              ]
+            }
+          ]
+        },
+        "payments": {
+          "body": "El e-commerce argentino necesita soportar tanto Mercado Pago como transferencias bancarias. Cada método sigue su propio camino de confirmación y ambos convergen en un único ciclo de vida del pedido, para que el fulfillment y la conciliación se mantengan consistentes.",
+          "groups": [
+            {
+              "title": "Arquitectura de pagos",
+              "body": "El estado del pedido se determina del lado del servidor a partir de las notificaciones por webhook, sin depender de la sesión del navegador.",
+              "bullets": [
+                "Las notificaciones de Mercado Pago se vuelven a verificar contra la API de pagos antes de modificar cualquier pedido.",
+                "El procesamiento de webhooks es idempotente, así que las notificaciones duplicadas terminan en una única confirmación.",
+                "Las preferencias de pago se crean del lado del servidor, con montos e ítems calculados en el backend."
+              ]
+            },
+            {
+              "title": "Flujo de checkout",
+              "bullets": [
+                "Mercado Pago Checkout Pro resuelve las operaciones con tarjeta y billetera.",
+                "El flujo de transferencia bancaria permite subir el comprobante de pago, con confirmación o rechazo desde administración.",
+                "Ambos métodos desembocan en el mismo ciclo de vida del pedido, lo que mantiene unificada la lógica de fulfillment.",
+                "Los cupones se validan al crear la preferencia y se revalidan en la confirmación, para que no se apliquen códigos vencidos o ya utilizados."
+              ]
+            },
+            {
+              "title": "Ciclo de vida del pedido",
+              "body": "Los pedidos avanzan por una máquina de estados explícita, con guardas de transición del lado del servidor.",
+              "bullets": [
+                "Estados: pendiente, pagado, entregado, cancelado y reembolsado.",
+                "El panel administrativo sólo puede disparar las transiciones que permite la máquina de estados.",
+                "Cada ítem guarda el nombre y el precio del producto al momento de la compra, preservando la exactitud del historial de pedidos aunque cambie el catálogo."
+              ]
+            },
+            {
+              "title": "Validación y testing",
+              "bullets": [
+                "Testing end-to-end en el sandbox de Mercado Pago con cuentas de prueba dedicadas de comprador y vendedor.",
+                "Cobertura de los resultados de pago aprobado, rechazado y pendiente.",
+                "Verificación final con credenciales productivas antes del lanzamiento."
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "El cliente conserva la propiedad total del stack y de su hosting. Por eso el despliegue se diseñó para ser reproducible: la plataforma puede levantarse desde un VPS limpio siguiendo pasos documentados y automatizados.",
+          "groups": [
+            {
+              "title": "Despliegue",
+              "bullets": [
+                "Stack completo containerizado con Docker Compose, incluyendo PostgreSQL 17, el backend en Express y el frontend en Next.js.",
+                "PM2 en modo cluster permite recargas sin downtime y recuperación automática ante la caída de un proceso.",
+                "El despliegue automatizado al VPS reduce cada release a un solo comando."
+              ],
+              "chips": [
+                "Docker Compose",
+                "PM2 cluster mode",
+                "VPS",
+                "Releases sin downtime"
+              ]
+            },
+            {
+              "title": "Base de datos",
+              "body": "La integridad de los datos se garantiza en la capa de base de datos mediante constraints y reglas referenciales.",
+              "bullets": [
+                "Esquema de PostgreSQL modelado en Prisma para productos, variantes, categorías, pedidos, ítems de pedido, cupones, reseñas y usuarios.",
+                "Foreign keys y constraints aplicadas por el propio motor de base de datos.",
+                "Migraciones versionadas en el control de versiones, de modo que cada cambio de esquema sea revisable y reproducible.",
+                "Scripts de seed que permiten armar entornos de staging con la misma estructura que producción."
+              ]
+            },
+            {
+              "title": "Seguridad operativa",
+              "bullets": [
+                "Las API keys y las credenciales de pago quedan del lado del servidor, detrás del proxy BFF.",
+                "Rate limiting aplicado a las rutas de autenticación y checkout.",
+                "El versionado de tokens permite revocar de inmediato todos los tokens emitidos para un usuario."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "El proyecto entregó una plataforma que es propiedad total del cliente, desplegada en infraestructura que él controla y sin licencias recurrentes.",
+          "groups": [
+            {
+              "title": "Entregado",
+              "bullets": [
+                "Storefront público con catálogo, búsqueda, filtros, carrito y checkout.",
+                "Área de clientes con cuentas, seguimiento de pedidos, listas de deseos y gestión de perfil.",
+                "Panel administrativo para productos, pedidos, cupones, reseñas y analítica de ventas.",
+                "Despliegue productivo en infraestructura del cliente, con una configuración de Docker reproducible."
+              ]
+            },
+            {
+              "title": "Traspaso",
+              "bullets": [
+                "Propiedad completa del código fuente, sin licencias ni costos de plataforma por usuario.",
+                "Procedimiento de despliegue documentado para que futuros equipos puedan levantar el stack por su cuenta.",
+                "Scripts de seed y migración para entornos de staging con la misma estructura que producción."
+              ]
+            }
+          ]
+        }
       },
       "bellum": {
         "title": "Bellum",
@@ -212,8 +1091,8 @@
       "home-trades-online": {
         "title": "Home Trades Online",
         "subtitle": "Plataforma SaaS de Propuestas para Contratistas",
-        "description": "Plataforma SaaS mobile-first que permite a contratistas y profesionales del rubro generar propuestas profesionales con IA en menos de 30 segundos. Incluye arquitectura multi-tenant con control de acceso basado en roles, generación de propuestas con IA, compartido público de propuestas con firmas digitales, autenticación por magic link para subcontratistas e internacionalización completa (inglés/español).",
-        "whatIs": "Home Trades Online es una plataforma SaaS mobile-first que permite a contratistas y profesionales del rubro generar propuestas profesionales con IA en menos de 30 segundos. La plataforma cierra la brecha entre los contratistas que trabajan en obra y el trabajo administrativo de crear, enviar y gestionar propuestas para clientes.\nLas funcionalidades incluyen propuestas generadas por IA con ítems y precios, compartido público de propuestas mediante enlaces únicos, captura de firma digital, gestión multi-tenant con control de acceso por roles, autenticación por magic link para subcontratistas, internacionalización (inglés/español) y un sistema de referidos/invitaciones.",
+        "description": "Plataforma SaaS mobile-first que permite a contratistas y profesionales del rubro generar propuestas profesionales con IA en menos de 30 segundos. Incluye arquitectura multi-tenant con control de acceso basado en roles, generación de propuestas con IA, propuestas compartibles públicamente con firma digital, autenticación por magic link para subcontratistas e internacionalización completa (inglés/español).",
+        "whatIs": "Home Trades Online es una plataforma SaaS mobile-first que permite a contratistas y profesionales del rubro generar propuestas profesionales con IA en menos de 30 segundos. La plataforma cierra la brecha entre los contratistas que trabajan en obra y el trabajo administrativo de crear, enviar y gestionar propuestas para clientes.\nLas funcionalidades incluyen propuestas generadas por IA con ítems y precios, propuestas compartibles públicamente mediante enlaces únicos, captura de firma digital, gestión multi-tenant con control de acceso por roles, autenticación por magic link para subcontratistas, internacionalización (inglés/español) y un sistema de referidos/invitaciones.",
         "problemSolved": "Los contratistas dedican horas a crear propuestas manualmente, perdiendo trabajos por no poder responder a tiempo. Las herramientas existentes están orientadas a desktop y son complejas, ignorando la realidad de los profesionales que trabajan en obra, muchas veces con una sola mano y conexión móvil inestable.\nHome Trades Online resuelve este problema permitiendo al contratista describir el trabajo en lenguaje natural y recibir una propuesta profesional completa con alcance, precios detallados y términos — lista para enviar al cliente en segundos.",
         "learnings": [
           "Diseño e implementación de una arquitectura multi-tenant con RBAC en 6 capas de defensa en profundidad (BusinessScopedManager, middleware, decoradores, validaciones a nivel de servicio) garantizando aislamiento estricto de datos entre negocios.",
@@ -308,8 +1187,8 @@
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
         "subtitle": "Sitio web para entrenador personal",
-        "description": "Sitio web corporativo para un entrenador personal con planes de entrenamiento personalizados, historias de transformación y contacto directo. Incluye servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes y formulario de contacto con EmailJS. Diseño oscuro con animaciones GSAP y experiencia responsive mobile-first. La arquitectura está preparada para escalar en un shop.",
-        "whatIs": "Sitio web corporativo para un entrenador personal que ofrece planes de entrenamiento personalizados, historias de transformación y contacto directo. La plataforma presenta servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes de entrenamiento y formulario de contacto integrado con EmailJS. El diseño es oscuro, con animaciones (GSAP), tipografía con next/font y experiencia responsive mobile-first.\nLa arquitectura está lista para ser escalada en un shop (por ejemplo compra de planes, área de miembros) si el cliente decide hacer crecer el producto.",
+        "description": "Sitio web corporativo para un entrenador personal con planes de entrenamiento personalizados, historias de transformación y contacto directo. Incluye servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes y formulario de contacto con EmailJS. Diseño oscuro con animaciones GSAP y experiencia responsive mobile-first. La arquitectura está preparada para escalar a una tienda online.",
+        "whatIs": "Sitio web corporativo para un entrenador personal que ofrece planes de entrenamiento personalizados, historias de transformación y contacto directo. La plataforma presenta servicios, testimonios con carrusel infinito en mobile, sección de hábitos y estadísticas, planes de entrenamiento y formulario de contacto integrado con EmailJS. El diseño es oscuro, con animaciones (GSAP), tipografía con next/font y experiencia responsive mobile-first.\nLa arquitectura está lista para ser escalada a una tienda online (por ejemplo compra de planes, área de miembros) si el cliente decide hacer crecer el producto.",
         "problemSolved": "Un entrenador personal necesitaba una presencia web profesional que transmitiera confianza, mostrara resultados reales (testimonios y fotos de transformación) y facilitara que potenciales clientes se contacten o conozcan los planes, sin depender solo de redes sociales.\nAugusto Fit Program resuelve esto con una landing clara, secciones de valor (hábitos, estadísticas), testimonios en carrusel continuo que en mobile mantienen siempre contenido visible en dos filas con direcciones opuestas, y CTA hacia planes y contacto (incluido botón flotante de WhatsApp).",
         "learnings": [
           "Diseño y desarrollo completo del sitio con Next.js (App Router), TypeScript y SCSS Modules.",
@@ -320,7 +1199,7 @@
           "Formulario de contacto con EmailJS y botón flotante de WhatsApp.",
           "Viewport y meta configurados para consistencia entre desarrollo y producción en móviles.",
           "Despliegue en Vercel con un único proyecto conectado al repositorio.",
-          "Arquitectura preparada para escalar en un shop (compra de planes, área de miembros) si el cliente amplía el producto."
+          "Arquitectura preparada para escalar a una tienda online (compra de planes, área de miembros) si el cliente amplía el producto."
         ],
         "role": "Full-stack · Sitio corporativo",
         "industry": "Fitness y entrenamiento",
@@ -383,7 +1262,7 @@
       "taskmanager": {
         "title": "Task Manager",
         "subtitle": "Aplicación de Gestión de Tareas Full Stack",
-        "description": "Una aplicación eficiente de gestión de tareas que permite a los usuarios crear, editar y eliminar tareas.\nIncluye autenticación de usuarios para asegurar una gestión de tareas personalizada.\nEl frontend está desarrollado con React y Next.js, utilizando Axios para solicitudes API.\nEl backend aprovecha PostgreSQL como base de datos relacional, interfazada a través de Sequelize ORM.\nEl estilo se maneja con Sass para una UI limpia y responsive.",
+        "description": "Una aplicación eficiente de gestión de tareas que permite a los usuarios crear, editar y eliminar tareas.\nIncluye autenticación de usuarios para asegurar una gestión de tareas personalizada.\nEl frontend está desarrollado con React y Next.js, utilizando Axios para solicitudes API.\nEl backend usa PostgreSQL como base de datos relacional, a la que accede mediante el ORM Sequelize.\nEl estilo se maneja con Sass para una UI limpia y responsive.",
         "whatIs": "Una aplicación integral de gestión de tareas construida con Next.js y PostgreSQL.\nLas características incluyen autenticación de usuarios, operaciones CRUD para tareas y una interfaz limpia e intuitiva.\nLa aplicación usa NextAuth.js para autenticación segura y Sequelize ORM para operaciones de base de datos.",
         "problemSolved": "Los usuarios necesitaban una forma simple pero poderosa de gestionar sus tareas con autenticación segura.\nEsta aplicación proporciona una solución confiable con gestión de tareas específica del usuario, almacenamiento seguro de datos\ny un diseño responsive que funciona en todos los dispositivos.",
         "learnings": [
@@ -400,7 +1279,7 @@
       "flipper": {
         "title": "Flipper",
         "subtitle": "Plataforma Clon de Twitter",
-        "description": "Una aplicación de redes sociales inspirada en Twitter que soporta funcionalidades como publicar, seguir y actualizaciones en vivo.\nLas interacciones en tiempo real están impulsadas por WebSockets, asegurando capacidad de respuesta y alto compromiso del usuario.\nEl backend está desarrollado con Node.js y Express, utilizando Redis para almacenamiento y recuperación eficiente de datos.\nEl frontend emplea Tailwind CSS para desarrollo rápido de UI.",
+        "description": "Una aplicación de redes sociales inspirada en Twitter que soporta funcionalidades como publicar, seguir y actualizaciones en vivo.\nLas interacciones en tiempo real están impulsadas por WebSockets, lo que asegura una experiencia ágil y un alto nivel de interacción.\nEl backend está desarrollado con Node.js y Express, utilizando Redis para almacenamiento y recuperación eficiente de datos.\nEl frontend emplea Tailwind CSS para desarrollo rápido de UI.",
         "whatIs": "Un clon de Twitter completo construido con Node.js y plantillas Pug, estilizado con Tailwind CSS.\nLas características incluyen autenticación de usuarios, publicaciones en tiempo real, me gusta y comentarios.\nLa aplicación usa un stack tecnológico moderno con Docker para containerización y Vercel para despliegue.",
         "problemSolved": "Los usuarios necesitaban una plataforma social para compartir pensamientos e interactuar con otros.\nEsta aplicación proporciona una experiencia familiar similar a Twitter con características esenciales\ncomo publicar, dar me gusta y comentar, todo envuelto en una interfaz limpia y responsive.",
         "learnings": [
@@ -448,8 +1327,8 @@
       "dynamic-blog": {
         "title": "Dynamic Blog",
         "subtitle": "Aplicación de Blog con Feed RSS",
-        "description": "Una aplicación de blog responsive que obtiene publicaciones de un feed RSS (TechCrunch) y contenido generado por usuarios desde Airtable.\nLas características incluyen enrutamiento dinámico, gestión de blogs de usuarios y un diseño limpio y responsive.\nConstruida con Next.js para renderizado del lado del servidor y Tailwind CSS para estilos.\nLa aplicación analiza feeds RSS e integra con la API de Airtable para gestionar contenido.",
-        "whatIs": "Una aplicación de blog responsive que obtiene publicaciones de un feed RSS (TechCrunch) y contenido generado por usuarios desde Airtable.\nLas características incluyen enrutamiento dinámico, gestión de blogs de usuarios y un diseño limpio y responsive.\nConstruida con Next.js para renderizado del lado del servidor y Tailwind CSS para estilos.\nLa aplicación analiza feeds RSS e integra con la API de Airtable para gestionar contenido.",
+        "description": "Una aplicación de blog responsive que obtiene publicaciones de un feed RSS (TechCrunch) y contenido generado por usuarios desde Airtable.\nLas características incluyen enrutamiento dinámico, gestión de blogs de usuarios y un diseño limpio y responsive.\nConstruida con Next.js para renderizado del lado del servidor y Tailwind CSS para estilos.\nLa aplicación analiza feeds RSS y se integra con la API de Airtable para gestionar contenido.",
+        "whatIs": "Una aplicación de blog responsive que obtiene publicaciones de un feed RSS (TechCrunch) y contenido generado por usuarios desde Airtable.\nLas características incluyen enrutamiento dinámico, gestión de blogs de usuarios y un diseño limpio y responsive.\nConstruida con Next.js para renderizado del lado del servidor y Tailwind CSS para estilos.\nLa aplicación analiza feeds RSS y se integra con la API de Airtable para gestionar contenido.",
         "problemSolved": "Los creadores de contenido y lectores necesitaban una plataforma unificada para acceder tanto a feeds RSS externos como a contenido de blog personalizado.\nEsta aplicación proporciona una experiencia fluida combinando el análisis de feeds RSS con la integración de Airtable,\npermitiendo a los usuarios gestionar y mostrar contenido de múltiples fuentes en un solo lugar.",
         "learnings": [
           "Implementamos análisis e integración de feeds RSS.",
@@ -463,8 +1342,8 @@
       "holistic-portal": {
         "title": "Holistic Portal",
         "subtitle": "Sitio Web de Terapias Alternativas",
-        "description": "Un sitio web informativo que muestra terapias alternativas, ofreciendo descripciones, testimonios de clientes y opciones de reserva.\nSe enfoca en la interacción del usuario y presentación profesional.\nEl sitio está construido con HTML y CSS, utilizando Sass para capacidades de estilo mejoradas.",
-        "whatIs": "Un sitio web informativo que muestra terapias alternativas, ofreciendo descripciones, testimonios de clientes y opciones de reserva.\nSe enfoca en la interacción del usuario y presentación profesional.\nEl sitio está construido con HTML y CSS, utilizando Sass para capacidades de estilo mejoradas.",
+        "description": "Un sitio web informativo que muestra terapias alternativas, ofreciendo descripciones, testimonios de clientes y opciones de reserva.\nSe enfoca en la interacción del usuario y presentación profesional.\nEl sitio está construido con HTML y CSS, con Sass para estilos más mantenibles.",
+        "whatIs": "Un sitio web informativo que muestra terapias alternativas, ofreciendo descripciones, testimonios de clientes y opciones de reserva.\nSe enfoca en la interacción del usuario y presentación profesional.\nEl sitio está construido con HTML y CSS, con Sass para estilos más mantenibles.",
         "problemSolved": "Los practicantes de terapias alternativas necesitaban una presencia online profesional para mostrar sus servicios y conectar con clientes.\nEste sitio web proporciona una solución elegante con descripciones claras de servicios, testimonios de clientes\ny opciones de reserva fáciles, todo presentado en un diseño limpio y profesional.",
         "learnings": [
           "Construimos un sitio web estático con HTML y CSS.",
@@ -531,7 +1410,7 @@
       },
       "the-club-northfield": {
         "title": "The Club at Northfield",
-        "subtitle": "Sitio Web Corporativo para Club Deportivo - Ontario, Canada",
+        "subtitle": "Sitio Web Corporativo para Club Deportivo - Ontario, Canadá",
         "description": "Sitio web corporativo para The Club at Northfield, un club de deportes de raqueta y fitness en Kitchener-Waterloo, Ontario, Canadá.\nIncluye integración con CMS para gestión de contenido, sistema de eventos dinámico, secciones de servicios y atletismo, planes de membresía, FAQ interactiva y diseño responsivo.\nEl sitio está optimizado para exportación estática y ofrece una experiencia de usuario fluida con carruseles de banners, navegación intuitiva y componentes modulares.",
         "whatIs": "Sitio web corporativo para The Club at Northfield, un club de deportes de raqueta y fitness en Kitchener-Waterloo, Ontario, Canadá.\nIncluye integración con CMS Strapi para gestión de contenido, sistema de eventos dinámico, secciones de servicios y atletismo, planes de membresía, FAQ interactiva y diseño completamente responsivo.\nEl sitio está optimizado para exportación estática y ofrece una experiencia de usuario fluida con carruseles de banners, navegación intuitiva y componentes modulares que aseguran actualizaciones de contenido fáciles sin intervención técnica.",
         "problemSolved": "Crear una presencia web que muestre las instalaciones, servicios y eventos del club, facilitando la información a miembros y visitantes.\nEl sitio integra un CMS para que el equipo actualice contenido sin intervención técnica, manteniendo la información actualizada sobre eventos, servicios, planes de membresía y el equipo.",
@@ -576,7 +1455,7 @@
       "ateevo-wholesale": {
         "title": "Ateevo Wholesale",
         "subtitle": "Plataforma B2B de Comercio Electrónico para Moda",
-        "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nArquitecturada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
+        "description": "Plataforma B2B de comercio electrónico diseñada para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\nPermite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\nDiseñada como aplicación SaaS multi-tenant, soportando múltiples marcas independientes con aislamiento completo de datos y branding personalizado por tenant.",
         "whatIs": "Ateevo Wholesale es una plataforma B2B de comercio electrónico para marcas de moda que gestionan operaciones mayoristas. Desarrollada para un cliente en Canadá.\n\nLa plataforma permite a clientes mayoristas navegar catálogos estacionales, realizar pedidos y hacer seguimiento de envíos, mientras proporciona a los administradores herramientas para gestión de productos, inventario, procesamiento de pedidos y relaciones con clientes.\n\nArquitectura SaaS multi-tenant soportando múltiples marcas independientes con aislamiento completo de datos y branding white-label personalizable.\n\nCaracterísticas Clave:\n\n• Arquitectura Multi-Tenant con bases de datos PostgreSQL aisladas y branding personalizable\n• Contratos Digitales con firmas capturadas en canvas y generación automática de PDF\n• Notificaciones en Tiempo Real con centro de alertas y notificaciones persistentes\n• Reportes Avanzados: Availability y Margin Reports con soporte multi-moneda (USD, CAD, MXN)\n• Gestión de Temporadas con fechas de disponibilidad, pre-orders y fechas estimadas de envío\n• Precios Multi-Moneda (USD, CAD, MXN) con MSRP y conversión automática\n• Gestión Completa de Pedidos desde New hasta Invoice Paid con exportación PDF\n• Sistema Avanzado de Inventario con múltiples métricas (On Hand, Available to Sell, Available to Ship)\n• Catálogo de Productos con múltiples imágenes, variantes automáticas y códigos SKU/MFC\n• Gestión de Clientes con múltiples direcciones, facturación e historial completo\n• Dashboard y Analytics con métricas configurables y gráficos de tendencias\n• Panel de Super Administración para gestión de múltiples tenants y creación de bases de datos\n• Seguridad Empresarial con autenticación JWT, passwords hasheados y permisos por rol",
         "problemSolved": "El sector de la moda mayorista carece de plataformas modernas que conecten eficientemente a marcas con sus clientes mayoristas.\n\nAteevo Wholesale resuelve este problema permitiendo a las marcas gestionar su catálogo, inventario y pedidos de forma centralizada, mientras que los clientes pueden navegar, ordenar y hacer seguimiento de sus compras de manera intuitiva, todo con contratos digitales firmados y reportes avanzados de márgenes y disponibilidad.\n\nLa arquitectura multi-tenant permite escalar el negocio soportando múltiples marcas en una sola plataforma con seguridad y personalización completa.\n\nEsta plataforma entrega una solución completa de comercio electrónico B2B para la industria de la moda. Las marcas pueden gestionar su negocio mayorista de extremo a extremo, desde catálogo hasta facturación, mientras que los clientes disfrutan de una experiencia de compra moderna, intuitiva y completamente personalizada. El sistema de contratos digitales, reportes avanzados y arquitectura multi-tenant hacen de Ateevo Wholesale una solución enterprise-ready que escala con el crecimiento del negocio.",
         "learnings": [
@@ -608,7 +1487,20 @@
     "sectionArchitecture": "Arquitectura del sistema",
     "sectionInfra": "Infraestructura y deploy",
     "clientLocation": "Ubicación del cliente",
-    "tabTools": "Herramientas"
+    "tabTools": "Herramientas",
+    "locationLabels": {
+      "Andalusia, Spain": "Andalucía, España",
+      "British Columbia, Canada": "Columbia Británica, Canadá",
+      "Buenos Aires, Argentina": "Buenos Aires, Argentina",
+      "California, United States": "California, Estados Unidos",
+      "Canada": "Canadá",
+      "Cordoba, Argentina": "Córdoba, Argentina",
+      "International (EN / FR / ES)": "Internacional (EN / FR / ES)",
+      "Kansas, United States": "Kansas, Estados Unidos",
+      "Ontario, Canada": "Ontario, Canadá",
+      "Santiago, Chile": "Santiago, Chile",
+      "United States": "Estados Unidos"
+    }
   },
   "pages": {
     "projects": {

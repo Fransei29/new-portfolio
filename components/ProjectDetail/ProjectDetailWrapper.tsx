@@ -5,6 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import ProjectDetailComponent from './ProjectDetailComponent';
 import ScrollProgress from '../ScrollProgress/ScrollProgress';
 import { projects } from '../../app/data/projects';
+import type { CaseStudyDeepDive } from '../../app/data/caseStudy';
 
 // useLayoutEffect runs synchronously before paint (client-only); falls back to useEffect on SSR
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -60,6 +61,35 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
     }
   }
 
+  // Las pestañas técnicas siguen el mismo patrón que learnings: si el locale
+  // trae projects.items.<slug>.<pestaña> como objeto, t() lo devuelve
+  // serializado y reemplaza al inglés del archivo de datos.
+  const getTranslatedDive = (
+    field: 'architecture' | 'payments' | 'infra' | 'deliverables'
+  ): CaseStudyDeepDive | undefined => {
+    const original = project[field];
+    if (!original) return undefined;
+    const key = `projects.items.${slug}.${field}`;
+    const translated = t(key);
+    if (translated && translated !== key && !translated.startsWith('projects.items.')) {
+      try {
+        const parsed = JSON.parse(translated);
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) return parsed;
+      } catch {
+        // queda el original
+      }
+    }
+    return original;
+  };
+
+  // Los nombres de lugar se traducen por etiqueta (projects.locationLabels.<label>);
+  // sin entrada en el locale, queda el texto del archivo de datos.
+  const translateLocation = (label: string): string => {
+    const key = `projects.locationLabels.${label}`;
+    const translated = t(key);
+    return translated && translated !== key && !translated.startsWith('projects.') ? translated : label;
+  };
+
   return (
     <>
     <ScrollProgress />
@@ -87,15 +117,15 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
       year={project.year}
       location={getTranslatedField('location') || project.location}
       locationFlag={project.locationFlag}
-      locations={project.locations}
+      locations={project.locations?.map((loc) => ({ ...loc, label: translateLocation(loc.label) }))}
       outcomes={project.outcomes}
       testimonial={project.testimonial}
-      // Profundidad técnica. Por ahora se sirven en inglés desde el archivo de
-      // datos; cuando haya traducción van a seguir el mismo patrón que el resto.
-      architecture={project.architecture}
-      payments={project.payments}
-      infra={project.infra}
-      deliverables={project.deliverables}
+      // Profundidad técnica: inglés desde el archivo de datos, español desde
+      // locales/es cuando existe la clave.
+      architecture={getTranslatedDive('architecture')}
+      payments={getTranslatedDive('payments')}
+      infra={getTranslatedDive('infra')}
+      deliverables={getTranslatedDive('deliverables')}
     />
     </>
   );
