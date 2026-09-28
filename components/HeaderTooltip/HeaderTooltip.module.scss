@@ -1,0 +1,75 @@
+// El envoltorio no suma tamaño: el botón sigue siendo el que ocupa lugar en la
+// fila, así el header queda igual que antes.
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.tip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  z-index: 20;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--lila-profundo, #2e294e);
+  color: var(--arena, #f3f2f4);
+  font-family: var(--font-body), 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(46, 41, 78, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -4px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+
+  // Flechita apuntando al botón.
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: var(--lila-profundo, #2e294e);
+  }
+}
+
+@media (hover: hover) {
+  .wrap:hover .tip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    // Una pausa corta: si el mouse sólo pasa por encima, no parpadea.
+    transition: opacity 0.16s ease 0.25s, transform 0.16s ease 0.25s, visibility 0s linear 0.25s;
+  }
+}
+
+.wrap:has(:focus-visible) .tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s;
+}
+
+:global(html.dark) .tip {
+  background: var(--arena, #f3f2f4);
+  color: var(--grafito, #292833);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  &::before {
+    border-bottom-color: var(--arena, #f3f2f4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip,
+  .wrap:hover .tip {
+    transform: translate(-50%, 0);
+    transition: none;
+  }
+}
