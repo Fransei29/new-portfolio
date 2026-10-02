@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-700.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-800.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-800.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      @font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      /* Marca: Lila Profundo #2e294e (protagonista), Principal #8e7ae6, Suave #b59cf8,
+         Corporativo #7d68d8, Arena #f3f2f4, Grafito #292833, Grafito Elevado #2e2a3a,
+         Gris Medio #8a8599, Menta #d1f0d1 */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #292833;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 200px 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 48px;
+        box-sizing: border-box;
+        z-index: 2;
+      }
+      .display {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 0.98;
+      }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 30px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .word { display: inline-block; }
+
+      /* ---------- S1: hook ---------- */
+      #s1 { background: #292833; }
+      .grid {
+        position: absolute;
+        inset: -40px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-auto-rows: 120px;
+        z-index: 0;
+      }
+      .cell { border: 1px solid #2f2d3a; }
+      .cell.hot { background: #2c2840; }
+      #s1 .eyebrow { color: #b59cf8; }
+      #s1 .display { font-size: 100px; color: #f3f2f4; }
+      .pains { display: flex; flex-wrap: wrap; gap: 18px; }
+      .pain {
+        font-size: 44px;
+        font-weight: 500;
+        color: #f3f2f4;
+        background: #2e294e;
+        border: 2px solid #4a4380;
+        padding: 16px 30px;
+        border-radius: 999px;
+      }
+      .body { font-size: 46px; font-weight: 400; line-height: 1.35; color: #b59cf8; }
+      #s1 .display .lila { color: #8e7ae6; }
+
+      /* ---------- S2: respuesta + código ---------- */
+      #s2 { background: #f3f2f4; }
+      .brand-pill {
+        align-self: flex-start;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 32px;
+        letter-spacing: 0.06em;
+        color: #f3f2f4;
+        background: #2e294e;
+        padding: 16px 28px;
+        border-radius: 999px;
+      }
+      #s2 .display { font-size: 100px; color: #2e294e; }
+      #s2 .display .lila { color: #7d68d8; }
+      .code {
+        background: #292833;
+        border-radius: 36px;
+        padding: 48px 52px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 34px;
+        line-height: 1.7;
+        color: #f3f2f4;
+        box-shadow: 0 40px 80px rgba(46, 41, 78, 0.25);
+      }
+      .code .dots { display: flex; gap: 14px; margin-bottom: 28px; }
+      .code .dots span { width: 22px; height: 22px; border-radius: 50%; background: #8a8599; }
+      .code .dots span:first-child { background: #8e7ae6; }
+      .code .line { white-space: nowrap; overflow: hidden; }
+      .k { color: #b59cf8; }
+      .f { color: #d1f0d1; }
+      .c { color: #8a8599; }
+
+      /* ---------- S3: servicios ---------- */
+      #s3 { background: #2e294e; }
+      #s3 .eyebrow { color: #b59cf8; }
+      #s3 .display { font-size: 88px; color: #f3f2f4; }
+      .services { display: flex; flex-direction: column; gap: 28px; }
+      .svc {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        padding: 40px 48px;
+        border-radius: 32px;
+        background: #3a3463;
+        border: 2px solid #4a4380;
+      }
+      .svc .num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 30px;
+        color: #b59cf8;
+      }
+      .svc .name {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 500;
+        font-size: 58px;
+        letter-spacing: -0.02em;
+        color: #f3f2f4;
+      }
+      .svc.feature { background: #8e7ae6; border-color: #8e7ae6; }
+      .svc.feature .num { color: #2e294e; }
+      .svc.feature .name { color: #2e294e; }
+
+      /* ---------- S4: números ---------- */
+      #s4 { background: #f3f2f4; }
+      .s4-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 500;
+        font-size: 70px;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: #7d68d8;
+      }
+      .stat { display: flex; flex-direction: column; gap: 8px; }
+      .stat .big {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 500;
+        font-size: 220px;
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        color: #2e294e;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat .label { font-size: 46px; font-weight: 400; color: #2e294e; }
+      .divider { height: 4px; background: #b59cf8; border-radius: 4px; transform-origin: left center; }
+      .flags { display: flex; flex-wrap: wrap; gap: 18px; }
+      .flag {
+        font-size: 38px;
+        font-weight: 500;
+        color: #2e294e;
+        background: #d1f0d1;
+        padding: 16px 30px;
+        border-radius: 999px;
+      }
+
+      /* ---------- S5: cierre ---------- */
+      #s5 { background: #292833; }
+      #s5 .scene-content { align-items: center; text-align: center; gap: 40px; }
+      .glow {
+        position: absolute;
+        left: 50%;
+        top: 38%;
+        width: 1100px;
+        height: 1100px;
+        margin: -550px 0 0 -550px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(142, 122, 230, 0.35) 0%, rgba(142, 122, 230, 0) 65%);
+        z-index: 1;
+      }
+      .badge {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: #f3f2f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .badge img { width: 270px; height: 270px; }
+      #s5 .display { font-size: 76px; color: #f3f2f4; }
+      .sign { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
+      #s5 .sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 30px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #b59cf8;
+      }
+      .cta {
+        background: #8e7ae6;
+        color: #292833;
+        font-weight: 600;
+        font-size: 44px;
+        padding: 32px 60px;
+        border-radius: 999px;
+      }
+      .url { font-size: 40px; font-weight: 400; color: #f3f2f4; }
+
+      /* ---------- wipes ---------- */
+      .wipe {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        transform: translateY(1920px);
+        z-index: 50;
+      }
+      #wipe-a { background: #8e7ae6; }
+      #wipe-b { background: #2e294e; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+
+      <!-- S1 (0–3.4): el problema -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="3.4" data-track-index="1">
+        <div class="grid" id="grid"></div>
+        <div class="scene-content">
+          <div class="display">
+            <span class="word s1w">¿Tu</span> <span class="word s1w">negocio</span> <span class="word s1w">todavía</span> <span class="word s1w">depende</span> <span class="word s1w">de</span> <span class="word s1w lila">procesos</span> <span class="word s1w lila">manuales?</span>
+          </div>
+          <div class="pains">
+            <span class="pain">Planillas.</span>
+            <span class="pain">Emails.</span>
+            <span class="pain">Tareas repetitivas.</span>
+          </div>
+          <div class="body" id="s1-body">Información repartida por todos lados.</div>
+        </div>
+      </div>
+
+      <!-- S2 (3.4–6.4): la solución -->
+      <div id="s2" class="scene clip" data-start="3.4" data-duration="3.0" data-track-index="1">
+        <div class="scene-content">
+          <div class="brand-pill" id="s2-brand">Franco Seiler · Software Studio</div>
+          <div class="display">
+            <span class="word s2w">Diseñamos</span> <span class="word s2w">y</span> <span class="word s2w">desarrollamos</span> <span class="word s2w lila">software</span> <span class="word s2w">para</span> <span class="word s2w">simplificar</span> <span class="word s2w">y</span> <span class="word s2w">hacer</span> <span class="word s2w">crecer</span> <span class="word s2w">tu</span> <span class="word s2w">negocio.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 (6.4–9.8): qué construimos -->
+      <div id="s3" class="scene clip" data-start="6.4" data-duration="3.4" data-track-index="1">
+        <div class="scene-content">
+          <div class="display" id="s3-title">Software hecho para tu negocio</div>
+          <div class="services">
+            <div class="svc" id="svc1"><span class="num">01</span><span class="name">Plataformas a medida</span></div>
+            <div class="svc" id="svc2"><span class="num">02</span><span class="name">Automatizaciones</span></div>
+            <div class="svc" id="svc3"><span class="num">03</span><span class="name">Integraciones y pagos</span></div>
+            <div class="svc feature" id="svc4"><span class="num">04</span><span class="name">Inteligencia artificial</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 (9.8–12.0): experiencia -->
+      <div id="s4" class="scene clip" data-start="9.8" data-duration="2.2" data-track-index="1">
+        <div class="scene-content">
+          <div class="s4-title" id="s4-title">Experiencia internacional</div>
+          <div class="stat">
+            <div class="big"><span id="n1">0</span>+</div>
+            <div class="label" id="l1">proyectos publicados</div>
+          </div>
+          <div class="divider" id="div1"></div>
+          <div class="stat">
+            <div class="big"><span id="n2">0</span>+</div>
+            <div class="label" id="l2">años construyendo software</div>
+          </div>
+          <div class="flags">
+            <span class="flag">EE.UU.</span>
+            <span class="flag">Canadá</span>
+            <span class="flag">Europa</span>
+            <span class="flag">LatAm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 (12.0–15): cierre -->
+      <div id="s5" class="scene clip" data-start="12.0" data-duration="3.0" data-track-index="1">
+        <div class="glow" id="glow"></div>
+        <div class="scene-content">
+          <div class="badge" id="badge"><img src="media/panda-programando.svg" alt="" /></div>
+          <div class="display" id="s5-q">¿Tenés una idea o un proceso que podría funcionar mejor?</div>
+          <div class="cta" id="cta">Construyámoslo.</div>
+          <div class="sign">
+            <div class="sub" id="s5-sub">Franco Seiler · Software Studio</div>
+            <div class="url" id="url">francoseiler.com</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- capa de transiciones -->
+      <div id="wipes" class="clip" data-start="0" data-duration="15" data-track-index="2" data-layout-ignore>
+        <div class="wipe" id="wipe-a"></div>
+        <div class="wipe" id="wipe-b"></div>
+      </div>
+    </div>
+
+    <script>
+      // grilla tipo planilla del hook (determinística)
+      (function () {
+        var grid = document.getElementById("grid");
+        var hot = [8, 27, 45, 70, 87];
+        for (var i = 0; i < 6 * 17; i++) {
+          var c = document.createElement("div");
+          c.className = "cell" + (hot.indexOf(i) > -1 ? " hot" : "");
+          grid.appendChild(c);
+        }
+      })();
+
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      function wipe(T) {
+        tl.fromTo("#wipe-a", { y: 1920 }, { y: 0, duration: 0.3, ease: "power3.inOut", immediateRender: false }, T);
+        tl.fromTo("#wipe-b", { y: 1920 }, { y: 0, duration: 0.3, ease: "power3.inOut", immediateRender: false }, T + 0.06);
+        tl.to("#wipe-a", { y: -1920, duration: 0.3, ease: "power3.inOut" }, T + 0.4);
+        tl.to("#wipe-b", { y: -1920, duration: 0.3, ease: "power3.inOut" }, T + 0.46);
+      }
+
+      /* S1 */
+      tl.from(".cell", { opacity: 0, duration: 0.5, ease: "none", stagger: { each: 0.006, from: "start" } }, 0.05);
+      tl.from(".cell.hot", { backgroundColor: "#292833", duration: 0.6, ease: "sine.inOut", stagger: 0.15 }, 1.0);
+      tl.from(".s1w", { y: 120, opacity: 0, rotation: 5, duration: 0.5, ease: "back.out(1.6)", stagger: 0.08 }, 0.15);
+      tl.from(".pain", { x: -80, opacity: 0, duration: 0.35, ease: "expo.out", stagger: 0.22 }, 1.2);
+      tl.from("#s1-body", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.0);
+
+      /* S2 */
+      wipe(3.15);
+      tl.from("#s2-brand", { opacity: 0, y: 20, scale: 0.9, duration: 0.45, ease: "back.out(1.8)" }, 3.55);
+      tl.from(".s2w", { yPercent: 110, opacity: 0, duration: 0.45, ease: "expo.out", stagger: 0.08 }, 3.6);
+
+      /* S3 */
+      wipe(6.15);
+      tl.from("#s3-title", { y: 80, opacity: 0, duration: 0.6, ease: "expo.out" }, 6.55);
+      tl.from("#svc1", { x: 1100, duration: 0.5, ease: "power4.out" }, 6.95);
+      tl.from("#svc2", { x: -1100, duration: 0.5, ease: "power4.out" }, 7.3);
+      tl.from("#svc3", { x: 1100, duration: 0.5, ease: "power4.out" }, 7.65);
+      tl.from("#svc4", { scale: 0.6, opacity: 0, duration: 0.6, ease: "back.out(2)" }, 8.05);
+      tl.from(".svc .num", { opacity: 0, duration: 0.3, ease: "none", stagger: 0.35 }, 7.2);
+
+      /* S4 */
+      wipe(9.55);
+      tl.from("#s4-title", { opacity: 0, y: 30, duration: 0.45, ease: "power3.out" }, 9.95);
+      var c1 = { v: 0 }, c2 = { v: 0 };
+      tl.to(c1, { v: 20, duration: 0.8, ease: "power3.out", onUpdate: function () { document.getElementById("n1").textContent = Math.round(c1.v); } }, 10.0);
+      tl.to(c2, { v: 4, duration: 0.6, ease: "power2.out", onUpdate: function () { document.getElementById("n2").textContent = Math.round(c2.v); } }, 10.35);
+      tl.from("#s4 .big", { y: 60, opacity: 0, duration: 0.45, ease: "expo.out", stagger: 0.35 }, 9.95);
+      tl.from("#l1", { opacity: 0, x: -30, duration: 0.4, ease: "power2.out" }, 10.2);
+      tl.from("#div1", { scaleX: 0, duration: 0.5, ease: "power3.inOut" }, 10.25);
+      tl.from("#l2", { opacity: 0, x: -30, duration: 0.4, ease: "power2.out" }, 10.55);
+      tl.from(".flag", { scale: 0, opacity: 0, duration: 0.35, ease: "back.out(2.2)", stagger: 0.07 }, 10.85);
+
+      /* S5 */
+      wipe(11.75);
+      tl.from("#glow", { scale: 0.4, opacity: 0, duration: 1.0, ease: "power2.out" }, 12.1);
+      tl.from("#badge", { scale: 0, rotation: -25, duration: 0.6, ease: "back.out(1.8)" }, 12.15);
+      tl.from("#s5-q", { y: 60, opacity: 0, duration: 0.55, ease: "expo.out" }, 12.4);
+      tl.from("#cta", { y: 40, opacity: 0, scale: 0.85, duration: 0.5, ease: "back.out(1.7)" }, 13.2);
+      tl.from("#s5-sub", { opacity: 0, letterSpacing: "0.4em", duration: 0.6, ease: "power3.out" }, 13.5);
+      tl.from("#url", { opacity: 0, duration: 0.4, ease: "power1.out" }, 13.75);
+      tl.to("#cta", { scale: 1.06, duration: 0.25, ease: "power2.inOut", yoyo: true, repeat: 1 }, 14.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
