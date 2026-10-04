@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plan del feed</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("../carrusel-01-bellum/fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("../carrusel-01-bellum/fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("../carrusel-01-bellum/fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      :root { --dark: #2e294e; --ink: #292833; --lilac: #b59cf8; --lilac-2: #8e7ae6; --paper: #f3f2f4; --mist: #e9e7ee; --muted: #8a8599; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #1b1926; color: #fff; font-family: "Plus Jakarta Sans", sans-serif; min-height: 100vh; display: flex; gap: 48px; justify-content: center; align-items: flex-start; padding: 40px 16px; flex-wrap: wrap; }
+
+      /* Celular con el perfil */
+      .phone { width: 430px; background: #fff; color: #111; border-radius: 48px; padding: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); border: 10px solid #0e0d14; }
+      .profile { display: flex; gap: 22px; align-items: center; padding: 26px 14px 12px; }
+      .profile img { width: 86px; height: 86px; border-radius: 50%; object-fit: cover; }
+      .profile .stats { display: flex; gap: 22px; font-size: 13px; text-align: center; }
+      .profile .stats b { display: block; font-size: 16px; }
+      .bio { padding: 4px 14px 16px; font-size: 13px; line-height: 1.45; }
+      .bio b { font-size: 14px; }
+      .bio a { color: #00376b; }
+      .tabs { display: flex; justify-content: space-around; border-top: 1px solid #ddd; padding: 10px 0; font-size: 18px; color: #888; }
+      .tabs span:first-child { color: #111; border-bottom: 2px solid #111; padding-bottom: 6px; }
+
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+      .cell { position: relative; aspect-ratio: 3 / 4; overflow: hidden; cursor: grab; user-select: none; }
+      .cell img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+      .cell.dragging { opacity: 0.35; }
+      .cell.over { outline: 3px solid var(--lilac-2); outline-offset: -3px; }
+      .ph { width: 100%; height: 100%; padding: 12px 10px; display: flex; flex-direction: column; justify-content: center; font-family: "Bricolage Grotesque"; font-size: 15px; line-height: 1.15; letter-spacing: -0.01em; }
+      .ph small { font: 600 8px "Plus Jakarta Sans"; letter-spacing: 0.14em; margin-bottom: 6px; opacity: 0.7; }
+      .bg-dark { background: var(--dark); color: #fff; }
+      .bg-light { background: var(--paper); color: var(--ink); }
+      .bg-mist { background: var(--mist); color: var(--ink); }
+      .bg-photo { background: linear-gradient(160deg, #6f5fb8, #2e294e); color: #fff; }
+      .icon { position: absolute; top: 6px; right: 7px; font-size: 11px; background: rgba(0,0,0,0.45); color: #fff; padding: 2px 6px; border-radius: 6px; }
+      .num { position: absolute; bottom: 6px; left: 7px; font: 600 10px "Plus Jakarta Sans"; background: rgba(255,255,255,0.9); color: var(--ink); padding: 2px 6px; border-radius: 6px; }
+      .dot { position: absolute; bottom: 8px; right: 8px; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid #fff; }
+      .listo { background: #3ecf8e; } .proceso { background: #f5b942; } .pendiente { background: #9a96a8; }
+
+      /* Panel lateral */
+      .side { width: 430px; max-width: 100%; }
+      .side h1 { font: 500 34px "Bricolage Grotesque"; letter-spacing: -0.02em; }
+      .side p.hint { color: rgba(255,255,255,0.6); font-size: 14px; margin: 8px 0 22px; line-height: 1.5; }
+      .legend { display: flex; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 18px; flex-wrap: wrap; }
+      .legend span { display: flex; align-items: center; gap: 6px; }
+      .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+      .list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+      .list li { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 28px 1fr auto; gap: 4px 10px; align-items: center; cursor: pointer; }
+      .list li.sel { border-color: var(--lilac); background: rgba(181,156,248,0.1); }
+      .list li .n { font: 600 13px "Plus Jakarta Sans"; color: var(--lilac); }
+      .list li .t { font-size: 15px; }
+      .list li .k { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.08em; }
+      .list li .note { grid-column: 2 / 4; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.45; display: none; }
+      .list li.sel .note { display: block; }
+      .btns { display: flex; gap: 10px; margin-top: 18px; }
+      button { font: 600 13px "Plus Jakarta Sans"; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+      button:hover { border-color: var(--lilac); }
+    </style>
+  </head>
+  <body>
+    <div class="phone">
+      <div class="profile">
+        <img src="../foto-perfil/foto-perfil.jpg" alt="" />
+        <div class="stats"><div><b>9</b>posts</div><div><b>—</b>seguidores</div><div><b>—</b>seguidos</div></div>
+      </div>
+      <div class="bio"><b>Franco Seiler · Software Studio</b><br />Software a medida para hacer crecer tu negocio.<br /><a>francoseiler.com</a></div>
+      <div class="tabs"><span>▦</span><span>▶</span><span>☺</span></div>
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="side">
+      <h1>Plan del feed</h1>
+      <p class="hint">La grilla se ve como en el perfil: lo último que publicás queda arriba a la izquierda. El número es el orden de publicación. Arrastrá los cuadros para reordenar; el orden se guarda en este navegador.</p>
+      <div class="legend">
+        <span><i class="listo"></i>Listo</span><span><i class="proceso"></i>En proceso</span><span><i class="pendiente"></i>Pendiente</span>
+      </div>
+      <ol class="list" id="list"></ol>
+      <div class="btns"><button id="reset">Volver al orden original</button></div>
+    </div>
+
+    <script>
+      // Orden de publicación: el 1 sale primero (queda abajo a la derecha en la grilla).
+      const POSTS = [
+        { id: "reel-01", type: "Reel", title: "Presentación del estudio", bg: "dark", status: "proceso", thumb: "thumbs/reel-01.jpg", note: "Listo, pero conviene que el primer frame muestre la pregunta completa en vez de escribirla letra por letra." },
+        { id: "car-bellum", type: "Carrusel", title: "Bellum, caso completo", bg: "dark", status: "proceso", thumb: "thumbs/carrusel-01.jpg", note: "9 slides hechos. Faltan las capturas de escritorio mejores que pasa Franco." },
+        { id: "vid-quien", type: "Video", title: "Quién soy y qué hago", bg: "photo", status: "pendiente", note: "Franco a cámara, 30 a 40 s. Primera frase = gancho. Subtítulos con la marca." },
+        { id: "car-senales", type: "Carrusel", title: "5 señales de que tu web te cuesta clientes", bg: "light", status: "pendiente", note: "Educativo, para clientes. Lenguaje simple, nada de jerga." },
+        { id: "reel-02", type: "Reel", title: "Bellum en video", bg: "dark", status: "listo", thumb: "thumbs/reel-02.jpg", note: "Reel-02 v2, aprobado." },
+        { id: "car-proceso", type: "Carrusel", title: "Cómo es trabajar conmigo", bg: "mist", status: "pendiente", note: "Paso a paso: charla, propuesta, diseño, desarrollo, entrega, soporte." },
+        { id: "vid-tip", type: "Video", title: "Un tip para tu negocio", bg: "photo", status: "pendiente", note: "Franco a cámara. Una sola idea, 20 a 30 s." },
+        { id: "car-caso2", type: "Carrusel", title: "Segundo caso de estudio", bg: "dark", status: "pendiente", note: "Elegir el proyecto. Misma plantilla que Bellum." },
+        { id: "reel-caso2", type: "Reel", title: "Segundo caso en video", bg: "light", status: "pendiente", note: "Mismo esqueleto que reel-02." },
+      ];
+      const ICON = { Reel: "▶", Carrusel: "❐", Video: "●" };
+      const KEY = "feed-plan-order";
+      let order;
+      try { order = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+      if (!Array.isArray(order) || order.length !== POSTS.length || !order.every((id) => POSTS.some((p) => p.id === id))) order = POSTS.map((p) => p.id);
+      let selected = null;
+      const byId = (id) => POSTS.find((p) => p.id === id);
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify(order)); } catch (e) {} };
+
+      function render() {
+        const grid = document.getElementById("grid");
+        const list = document.getElementById("list");
+        grid.innerHTML = ""; list.innerHTML = "";
+        // La grilla muestra primero lo más nuevo.
+        [...order].reverse().forEach((id) => {
+          const p = byId(id), n = order.indexOf(id) + 1;
+          const c = document.createElement("div");
+          c.className = "cell" + (p.thumb ? "" : " bg-" + p.bg);
+          c.draggable = true; c.dataset.id = id;
+          c.innerHTML = (p.thumb ? `<img src="${p.thumb}" alt="">` : `<div class="ph bg-${p.bg}"><small>${p.type.toUpperCase()}</small>${p.title}</div>`) +
+            `<span class="icon">${ICON[p.type]}</span><span class="num">#${n}</span><span class="dot ${p.status}"></span>`;
+          c.addEventListener("dragstart", (e) => { c.classList.add("dragging"); e.dataTransfer.setData("text/plain", id); });
+          c.addEventListener("dragend", () => c.classList.remove("dragging"));
+          c.addEventListener("dragover", (e) => { e.preventDefault(); c.classList.add("over"); });
+          c.addEventListener("dragleave", () => c.classList.remove("over"));
+          c.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const from = order.indexOf(e.dataTransfer.getData("text/plain")), to = order.indexOf(id);
+            if (from < 0 || from === to) return render();
+            [order[from], order[to]] = [order[to], order[from]];
+            save(); render();
+          });
+          c.addEventListener("click", () => { selected = id; render(); });
+          grid.appendChild(c);
+        });
+        order.forEach((id, i) => {
+          const p = byId(id);
+          const li = document.createElement("li");
+          if (id === selected) li.className = "sel";
+          li.innerHTML = `<span class="n">#${i + 1}</span><span class="t">${p.title}</span><span class="k">${p.type.toUpperCase()} <i class="dot ${p.status}" style="position:static;display:inline-block;width:8px;height:8px;border:0"></i></span><span class="note">${p.note}</span>`;
+          li.addEventListener("click", () => { selected = selected === id ? null : id; render(); });
+          list.appendChild(li);
+        });
+      }
+      document.getElementById("reset").addEventListener("click", () => { order = POSTS.map((p) => p.id); save(); render(); });
+      render();
+    </script>
+  </body>
+</html>
