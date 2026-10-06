@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrusel Bellum · vista previa</title>
+    <style>
+      body { margin: 0; background: #1b1926; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 30px 16px; }
+      .phone { width: 400px; max-width: 100%; border: 10px solid #0e0d14; border-radius: 40px; overflow: hidden; background: #000; }
+      .track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+      .track > * { flex: 0 0 100%; width: 100%; aspect-ratio: 3 / 4; scroll-snap-align: start; object-fit: cover; display: block; }
+      .dots { display: flex; gap: 6px; }
+      .dots i { width: 7px; height: 7px; border-radius: 50%; background: #555; }
+      .dots i.on { background: #b59cf8; }
+      p { color: #aaa; font-size: 14px; margin: 0; }
+      .all { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 1100px; margin-top: 30px; }
+      .all > * { width: 200px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <p>Deslizá como en Instagram (o con las flechas ← →)</p>
+    <div class="phone"><div class="track" id="t"></div></div>
+    <div class="dots" id="d"></div>
+    <div class="all" id="a"></div>
+    <script>
+      const t = document.getElementById("t"), d = document.getElementById("d"), a = document.getElementById("a");
+      for (let i = 1; i <= 9; i++) {
+        const n = String(i).padStart(2, "0");
+        const make = () => {
+          if (i !== 6) { const im = document.createElement("img"); im.src = `slides/${n}.png`; return im; }
+          const v = document.createElement("video"); v.src = `slides/${n}.mp4`; v.autoplay = v.loop = v.muted = v.playsInline = true; return v;
+        };
+        t.appendChild(make()); a.appendChild(make()); d.appendChild(document.createElement("i"));
+      }
+      const upd = () => { const k = Math.round(t.scrollLeft / t.clientWidth); [...d.children].forEach((x, j) => x.classList.toggle("on", j === k)); };
+      t.addEventListener("scroll", upd); upd();
+      addEventListener("keydown", (e) => { if (e.key === "ArrowRight") t.scrollBy({ left: t.clientWidth, behavior: "smooth" }); if (e.key === "ArrowLeft") t.scrollBy({ left: -t.clientWidth, behavior: "smooth" }); });
+    </script>
+  </body>
+</html>

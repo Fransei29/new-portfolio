@@ -72,26 +72,42 @@
       .list { list-style: none; margin-top: 56px; font-size: 44px; }
       .list li { display: flex; gap: 30px; align-items: baseline; padding: 30px 0; border-top: 2px solid rgba(46,41,78,0.12); font: 500 1em/1.25 "Bricolage Grotesque"; letter-spacing: -0.01em; }
       .list li:last-child { border-bottom: 2px solid rgba(46,41,78,0.12); }
+      .dark .list li, .dark .list li:last-child { border-color: rgba(255,255,255,0.14); }
+      .dark .list li small { color: var(--lilac); }
       .list li small { font: 600 30px "Plus Jakarta Sans"; color: var(--lilac-3); min-width: 56px; letter-spacing: 0.08em; }
+
+      /* Notebook y celu chico (capturas de escritorio y mobile reales) */
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .phone.sm { border-radius: 52px; padding: 13px; height: var(--h); overflow: hidden; z-index: 4; }
+      .phone.sm img { border-radius: 40px; height: calc(var(--h) - 26px); object-fit: cover; object-position: top; }
     </style>
   </head>
   <body>
 
-    <!-- 01 · PORTADA / GANCHO -->
-    <section class="slide dark" id="s1">
+    <!-- 01 · PORTADA: compu + celu, igual que en la grilla -->
+    <section class="slide" id="s1">
       <div class="hud"><span>FRANCO SEILER</span><span class="count">01/09</span></div>
-      <div class="glow" style="width:820px;height:820px;right:-300px;bottom:-200px;background:radial-gradient(circle,rgba(181,156,248,0.38),transparent 65%)"></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
       <div class="copy">
-        <div class="kicker">CASO DE ESTUDIO · BELLUM</div>
-        <h1>La web de una firma que maneja <em>el dinero</em> de sus clientes.</h1>
+        <div class="kicker">CASO DE ESTUDIO</div>
+        <h1>Bellum</h1>
+        <p class="lead">La web y el panel de una firma que administra el dinero de consorcios en EE.UU.</p>
       </div>
-      <div class="phone" style="right:-60px;top:760px;transform:rotate(-6deg)"><img src="media/m-hero.png" alt="" /></div>
+      <div class="laptop" style="left:120px;top:640px;width:800px">
+        <div class="screen"><img src="media/d-light-hero.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:740px;top:760px;width:270px;--h:560px"><img src="media/m-light-hero.png" alt="" /></div>
       <div class="swipe"><span>Deslizá</span><b>→</b></div>
       <div class="progress"><i style="width:11.1%"></i></div>
     </section>
 
     <!-- 02 · EL DESAFÍO -->
-    <section class="slide" id="s2">
+    <section class="slide dark" id="s2">
       <div class="hud"><span>FRANCO SEILER</span><span class="count">02/09</span></div>
       <div class="copy" style="top:260px">
         <div class="kicker">EL DESAFÍO</div>
@@ -111,9 +127,13 @@
       <div class="copy">
         <div class="kicker">01 — EL SITIO</div>
         <h2>Primera impresión: <em>confianza.</em></h2>
-        <p class="lead">Serio, claro y pensado para el celular, que es donde lo abren primero.</p>
+        <p class="lead">Serio y claro en la compu. Y en el celular, que es donde lo abren primero.</p>
       </div>
-      <div class="phone" style="left:228px;top:640px"><img src="media/m-porque.png" alt="" /></div>
+      <div class="laptop" style="left:60px;top:680px;width:820px">
+        <div class="screen"><img src="media/d-light-porque.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:700px;top:700px;width:320px;--h:640px"><img src="media/m-porque.png" alt="" /></div>
       <div class="progress"><i style="width:33.3%"></i></div>
     </section>
 
@@ -124,11 +144,15 @@
         <div class="kicker">02 — SERVICIOS</div>
         <h2>Cada servicio con <em>su propia página.</em></h2>
         <div class="chips" style="margin-top:44px">
-          <span class="chip">Cobranzas</span><span class="chip">Reportes</span><span class="chip">Presupuestos</span><span class="chip">Pagos</span><span class="chip">Comunicación</span><span class="chip">+3 más</span>
+          <span class="chip">Cobranzas</span><span class="chip">Reportes</span><span class="chip">Presupuestos</span><span class="chip">Pagos</span><span class="chip">+4 más</span>
         </div>
       </div>
-      <div class="glow" style="width:760px;height:760px;left:160px;bottom:-260px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
-      <div class="phone" style="left:228px;top:730px"><img src="media/m-cobranzas.png" alt="" /></div>
+      <div class="glow" style="width:900px;height:900px;left:100px;bottom:-300px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
+      <div class="laptop" style="left:60px;top:760px;width:820px">
+        <div class="screen"><img src="media/d-light-servicio.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:720px;top:700px;width:300px;--h:620px"><img src="media/m-cobranzas.png" alt="" /></div>
       <div class="progress"><i style="width:44.4%"></i></div>
     </section>
 
@@ -140,25 +164,29 @@
         <h2>Pedir una propuesta lleva <em>cinco pasos.</em></h2>
         <p class="lead">Un formulario guiado, sin llamadas ni mails de ida y vuelta.</p>
       </div>
-      <div class="phone" style="left:40px;top:700px;width:560px;transform:rotate(-4deg)"><img src="media/m-propuesta.png" alt="" /></div>
-      <div class="phone" style="right:30px;top:780px;width:560px;transform:rotate(4deg)"><img src="media/m-propuesta-form.png" alt="" /></div>
+      <div class="laptop" style="left:60px;top:700px;width:820px">
+        <div class="screen"><img src="media/d-light-propuesta.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:700px;top:720px;width:320px;--h:640px"><img src="media/m-propuesta-form.png" alt="" /></div>
       <div class="progress"><i style="width:55.5%"></i></div>
     </section>
 
-    <!-- 06 · CLARO / OSCURO -->
-    <section class="slide" id="s6" style="background:linear-gradient(90deg,var(--paper) 50%,var(--dark) 50%)">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count" style="color:rgba(255,255,255,0.75)">06/09</span></div>
-      <div class="copy" style="right:560px">
+    <!-- 06 · CLARO / OSCURO. Es un video: wipe.py mezcla esta versión con #s6-dark
+         y una línea que barre la pantalla → slides/06.mp4. Esta versión es la tapa del video. -->
+    <section class="slide" id="s6">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">06/09</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:500px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="copy">
         <div class="kicker">04 — DETALLES</div>
-        <h2 style="font-size:76px">Modo claro</h2>
+        <h2>Claro u oscuro, <em>como prefiera cada uno.</em></h2>
       </div>
-      <div class="copy" style="left:620px;color:#fff">
-        <div class="kicker" style="color:transparent">.</div>
-        <h2 style="font-size:76px;color:var(--lilac)">y oscuro.</h2>
+      <div class="laptop" style="left:60px;top:700px;width:820px">
+        <div class="screen"><img src="media/d-light-servicios.webp" alt="" /></div>
+        <div class="base"></div>
       </div>
-      <div class="phone" style="left:30px;top:520px;width:500px"><img src="media/m-servicios-claro.png" alt="" /></div>
-      <div class="phone" style="left:570px;top:520px;width:500px;background:#0f0d18"><img src="media/m-servicios-oscuro.png" alt="" /></div>
-      <div class="progress" style="background:rgba(142,122,230,0.25)"><i style="width:66.6%"></i></div>
+      <div class="phone sm" style="left:700px;top:700px;width:320px;--h:640px"><img src="media/m-light-servicios-top.png" alt="" /></div>
+      <div class="progress"><i style="width:66.6%"></i></div>
     </section>
 
     <!-- 07 · EL PANEL -->
@@ -205,6 +233,21 @@
       </div>
       <p style="position:absolute;left:0;right:0;bottom:130px;text-align:center;font:500 32px 'Plus Jakarta Sans';color:rgba(255,255,255,0.6);z-index:4">Guardalo para cuando lo necesites ✦</p>
       <div class="progress"><i style="width:100%"></i></div>
+    </section>
+
+    <section class="slide dark alt" id="s6-dark">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">06/09</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:500px;background:radial-gradient(circle,rgba(181,156,248,0.28),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">04 — DETALLES</div>
+        <h2>Claro u oscuro, <em>como prefiera cada uno.</em></h2>
+      </div>
+      <div class="laptop" style="left:60px;top:700px;width:820px">
+        <div class="screen"><img src="media/d-dark-servicios.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:700px;top:700px;width:320px;--h:640px"><img src="media/m-dark-servicios-top.png" alt="" /></div>
+      <div class="progress"><i style="width:66.6%"></i></div>
     </section>
 
   </body>

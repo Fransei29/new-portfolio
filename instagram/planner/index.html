@@ -84,18 +84,18 @@
     <script>
       // Orden de publicación: el 1 sale primero (queda abajo a la derecha en la grilla).
       const POSTS = [
-        { id: "reel-01", type: "Reel", title: "Presentación del estudio", bg: "dark", status: "proceso", thumb: "thumbs/reel-01.jpg", note: "Listo, pero conviene que el primer frame muestre la pregunta completa en vez de escribirla letra por letra." },
-        { id: "car-bellum", type: "Carrusel", title: "Bellum, caso completo", bg: "dark", status: "proceso", thumb: "thumbs/carrusel-01.jpg", note: "9 slides hechos. Faltan las capturas de escritorio mejores que pasa Franco." },
-        { id: "vid-quien", type: "Video", title: "Quién soy y qué hago", bg: "photo", status: "pendiente", note: "Franco a cámara, 30 a 40 s. Primera frase = gancho. Subtítulos con la marca." },
-        { id: "car-senales", type: "Carrusel", title: "5 señales de que tu web te cuesta clientes", bg: "light", status: "pendiente", note: "Educativo, para clientes. Lenguaje simple, nada de jerga." },
-        { id: "reel-02", type: "Reel", title: "Bellum en video", bg: "dark", status: "listo", thumb: "thumbs/reel-02.jpg", note: "Reel-02 v2, aprobado." },
-        { id: "car-proceso", type: "Carrusel", title: "Cómo es trabajar conmigo", bg: "mist", status: "pendiente", note: "Paso a paso: charla, propuesta, diseño, desarrollo, entrega, soporte." },
-        { id: "vid-tip", type: "Video", title: "Un tip para tu negocio", bg: "photo", status: "pendiente", note: "Franco a cámara. Una sola idea, 20 a 30 s." },
-        { id: "car-caso2", type: "Carrusel", title: "Segundo caso de estudio", bg: "dark", status: "pendiente", note: "Elegir el proyecto. Misma plantilla que Bellum." },
-        { id: "reel-caso2", type: "Reel", title: "Segundo caso en video", bg: "light", status: "pendiente", note: "Mismo esqueleto que reel-02." },
+        { id: "reel-01", type: "Reel", title: "Presentación del estudio", bg: "dark", status: "proceso", thumb: "thumbs/v2/01.jpg", note: "Listo, pero conviene que el primer frame muestre la pregunta completa en vez de escribirla letra por letra." },
+        { id: "car-bellum", type: "Carrusel", title: "Bellum, caso completo", bg: "dark", status: "proceso", thumb: "thumbs/v2/02.jpg", note: "9 slides hechos. Faltan las capturas de escritorio mejores que pasa Franco." },
+        { id: "vid-quien", type: "Video", title: "Quién soy y qué hago", bg: "photo", status: "pendiente", thumb: "thumbs/v2/03.jpg", note: "Franco a cámara, 30 a 40 s. Primera frase = gancho. Subtítulos con la marca." },
+        { id: "car-senales", type: "Carrusel", title: "5 señales de que tu web te cuesta clientes", bg: "light", status: "pendiente", thumb: "thumbs/v2/04.jpg", note: "Educativo, para clientes. Lenguaje simple, nada de jerga." },
+        { id: "reel-02", type: "Reel", title: "Bellum en video", bg: "dark", status: "listo", thumb: "thumbs/v2/05.jpg", note: "Reel-02 v2, aprobado." },
+        { id: "car-proceso", type: "Carrusel", title: "Cómo es trabajar conmigo", bg: "mist", status: "pendiente", thumb: "thumbs/v2/06.jpg", note: "Paso a paso: charla, propuesta, diseño, desarrollo, entrega, soporte." },
+        { id: "car-proyectos", type: "Carrusel", title: "Negocios reales, software real", bg: "dark", status: "proceso", thumb: "thumbs/v2/07.jpg", note: "Muro de proyectos: una captura por slide con el nombre del cliente y qué se hizo. Reemplaza al reel del segundo caso, que puede ir en la tanda siguiente." },
+        { id: "car-caso2", type: "Carrusel", title: "Segundo caso de estudio", bg: "dark", status: "pendiente", thumb: "thumbs/v2/08.jpg", note: "Elegir el proyecto. Misma plantilla que Bellum." },
+        { id: "vid-tip", type: "Video", title: "Un tip para tu negocio", bg: "photo", status: "pendiente", thumb: "thumbs/v2/09.jpg", note: "Franco a cámara. Una sola idea, 20 a 30 s." },
       ];
       const ICON = { Reel: "▶", Carrusel: "❐", Video: "●" };
-      const KEY = "feed-plan-order";
+      const KEY = "feed-plan-order-v2";
       let order;
       try { order = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
       if (!Array.isArray(order) || order.length !== POSTS.length || !order.every((id) => POSTS.some((p) => p.id === id))) order = POSTS.map((p) => p.id);

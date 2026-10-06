@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrusel 02 — Acer0</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; }
+
+      /* Formato 3:4 (1080x1440): es lo que muestra la grilla del perfil.
+         Regla de legibilidad en celu: nada de texto propio por debajo de 34px. */
+      :root {
+        --dark: #2e294e;
+        --ink: #292833;
+        --lilac: #b59cf8;
+        --lilac-2: #8e7ae6;
+        --lilac-3: #7d68d8;
+        --paper: #f3f2f4;
+        --mist: #e9e7ee;
+        --muted: #8a8599;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; font-family: "Plus Jakarta Sans", sans-serif; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+      .slide { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: var(--paper); color: var(--ink); }
+      .slide.dark { background: var(--dark); color: #fff; }
+      .slide.mist { background: var(--mist); }
+
+      /* HUD, igual que en los reels */
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
+      .hud .count { font-variant-numeric: tabular-nums; }
+      .dark .hud { color: rgba(255,255,255,0.75); }
+      .hud { color: var(--muted); }
+      .progress { position: absolute; left: 80px; right: 80px; bottom: 56px; height: 4px; background: rgba(142,122,230,0.2); border-radius: 2px; z-index: 2; }
+      .progress i { display: block; height: 100%; background: var(--lilac-2); border-radius: 2px; }
+      .dark .progress { background: rgba(255,255,255,0.12); }
+      .dark .progress i { background: var(--lilac); }
+
+      .copy { position: absolute; left: 80px; right: 80px; top: 170px; z-index: 4; }
+      .kicker { font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac-3); margin-bottom: 28px; }
+      .dark .kicker { color: var(--lilac); }
+      h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 500; letter-spacing: -0.025em; line-height: 1.04; }
+      h1 { font-size: 112px; }
+      h2 { font-size: 84px; }
+      h2 em, h1 em { font-style: normal; color: var(--lilac-2); }
+      .dark h2 em, .dark h1 em { color: var(--lilac); }
+      .lead { font-size: 38px; line-height: 1.4; margin-top: 30px; color: #5c5866; }
+      .dark .lead { color: rgba(255,255,255,0.78); }
+
+      /* Celular: captura real a 390px de ancho, escalada x1.6 */
+      .phone { position: absolute; width: 624px; border-radius: 76px; background: #16141f; padding: 18px; box-shadow: 0 40px 90px rgba(20,16,40,0.35); z-index: 3; }
+      .phone img { display: block; width: 100%; border-radius: 60px; }
+      .dark .phone { background: #0f0d18; box-shadow: 0 40px 100px rgba(0,0,0,0.45); }
+
+      .browser { position: absolute; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.35); z-index: 3; }
+      .browser .bar { height: 60px; background: #ecebf0; display: flex; align-items: center; gap: 12px; padding: 0 26px; }
+      .browser .bar span { width: 16px; height: 16px; border-radius: 50%; background: #cfcbd8; }
+      .browser .crop { overflow: hidden; position: relative; }
+      .browser .crop img { position: absolute; display: block; }
+
+      .glow { position: absolute; border-radius: 50%; filter: blur(10px); z-index: 1; }
+      .swipe { position: absolute; left: 80px; bottom: 120px; font: 600 32px "Plus Jakarta Sans"; display: flex; align-items: center; gap: 16px; z-index: 4; }
+      .swipe b { display: inline-block; width: 64px; height: 64px; border-radius: 50%; background: var(--lilac); color: var(--dark); text-align: center; line-height: 62px; font-size: 34px; }
+
+      .chips { display: flex; flex-wrap: wrap; gap: 14px; }
+      .chip { font: 500 30px "Plus Jakarta Sans"; padding: 14px 26px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(181,156,248,0.35); color: #fff; }
+
+      .list { list-style: none; margin-top: 56px; font-size: 44px; }
+      .list li { display: flex; gap: 30px; align-items: baseline; padding: 30px 0; border-top: 2px solid rgba(46,41,78,0.12); font: 500 1em/1.25 "Bricolage Grotesque"; letter-spacing: -0.01em; }
+      .list li:last-child { border-bottom: 2px solid rgba(46,41,78,0.12); }
+      .dark .list li, .dark .list li:last-child { border-color: rgba(255,255,255,0.14); }
+      .dark .list li small { color: var(--lilac); }
+      .list li small { font: 600 30px "Plus Jakarta Sans"; color: var(--lilac-3); min-width: 56px; letter-spacing: 0.08em; }
+
+      /* Notebook y celu chico (capturas de escritorio y mobile reales) */
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .phone.sm { border-radius: 52px; padding: 13px; height: var(--h); overflow: hidden; z-index: 4; }
+      .phone.sm img { border-radius: 40px; height: calc(var(--h) - 26px); object-fit: cover; object-position: top; }
+      /* Propios de Acer0: tres celus en fila y captura del panel en navegador */
+      .phones3 .phone.sm { top: 640px; }
+      .browser .crop img { width: 100%; }
+    </style>
+  </head>
+  <body>
+
+    <!-- 01 · PORTADA: compu + celu. También sirve de portada en la grilla del perfil. -->
+    <section class="slide" id="s1">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">01/09</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">CASO DE ESTUDIO</div>
+        <h1>Acer0</h1>
+        <p class="lead">La tienda online de una fábrica de muebles y objetos de acero inoxidable.</p>
+      </div>
+      <div class="laptop" style="left:120px;top:660px;width:800px">
+        <div class="screen"><img src="media/d-home.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:740px;top:760px;width:270px;--h:560px"><img src="media/m-home.png" alt="" /></div>
+      <div class="swipe"><span>Deslizá</span><b>→</b></div>
+      <div class="progress"><i style="width:11.1%"></i></div>
+    </section>
+
+    <!-- 02 · EL DESAFÍO -->
+    <section class="slide dark" id="s2">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">02/09</span></div>
+      <div class="copy" style="top:200px">
+        <div class="kicker">EL DESAFÍO</div>
+        <h2 style="font-size:84px">Acer0 diseña y fabrica muebles de acero en Buenos Aires.</h2>
+        <p class="lead" style="font-size:42px;margin-top:40px">Querían vender online con una tienda propia, tan cuidada como sus piezas. Necesitaban:</p>
+        <ul class="list" style="margin-top:50px;font-size:46px">
+          <li><small>01</small><span>Que el producto sea el protagonista.</span></li>
+          <li><small>02</small><span>Cobrar online, sin vueltas.</span></li>
+          <li><small>03</small><span>Manejar los pedidos desde un solo lugar.</span></li>
+        </ul>
+      </div>
+      <div class="progress"><i style="width:22.2%"></i></div>
+    </section>
+
+    <!-- 03 · LA TIENDA -->
+    <section class="slide mist" id="s3">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">03/09</span></div>
+      <div class="copy">
+        <div class="kicker">01 — LA TIENDA</div>
+        <h2>Minimalista, <em>como sus piezas.</em></h2>
+        <p class="lead">Mucho aire y fotos grandes. Nada le roba atención al producto.</p>
+      </div>
+      <div class="laptop" style="left:60px;top:700px;width:820px">
+        <div class="screen"><img src="media/d-tienda.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:700px;top:700px;width:320px;--h:640px"><img src="media/m-tienda.png" alt="" /></div>
+      <div class="progress"><i style="width:33.3%"></i></div>
+    </section>
+
+    <!-- 04 · CADA PRODUCTO -->
+    <section class="slide dark" id="s4">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">04/09</span></div>
+      <div class="copy">
+        <div class="kicker">02 — CADA PRODUCTO</div>
+        <h2>Fotos, medidas y precio, <em>todo a la vista.</em></h2>
+        <div class="chips" style="margin-top:44px">
+          <span class="chip">Galería de fotos</span><span class="chip">Talles</span><span class="chip">Descuento por transferencia</span>
+        </div>
+      </div>
+      <div class="glow" style="width:900px;height:900px;left:100px;bottom:-300px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
+      <div class="laptop" style="left:60px;top:660px;width:820px">
+        <div class="screen"><img src="media/d-producto.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone sm" style="left:720px;top:620px;width:300px;--h:640px"><img src="media/m-producto2.png" alt="" /></div>
+      <div class="progress"><i style="width:44.4%"></i></div>
+    </section>
+
+    <!-- 05 · EL PAGO -->
+    <section class="slide" id="s5">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">05/09</span></div>
+      <div class="copy">
+        <div class="kicker">03 — EL PAGO</div>
+        <h2>Comprar lleva <em>un par de clics.</em></h2>
+        <p class="lead">Con Mercado Pago o por transferencia, como prefiera cada cliente.</p>
+      </div>
+      <div class="browser" style="left:60px;top:640px;width:840px">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:600px"><img src="media/pago.webp" alt="" style="left:0;top:0" /></div>
+      </div>
+      <div class="phone sm" style="left:700px;top:700px;width:320px;--h:640px"><img src="media/m-carrito.png" alt="" /></div>
+      <div class="progress"><i style="width:55.5%"></i></div>
+    </section>
+
+    <!-- 06 · EL PANEL -->
+    <section class="slide dark" id="s6">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">06/09</span></div>
+      <div class="copy">
+        <div class="kicker">04 — EL PANEL</div>
+        <h2>Pedidos, productos y ventas, <em>en un solo lugar.</em></h2>
+        <p class="lead">Cada pedido muestra en qué está: pagado, enviado o cancelado.</p>
+      </div>
+      <div class="browser" style="left:80px;top:700px;width:1100px">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:580px"><img src="media/panel-pedidos.webp" alt="" style="left:0;top:0" /></div>
+      </div>
+      <div class="progress"><i style="width:66.6%"></i></div>
+    </section>
+
+    <!-- 07 · EN EL CELULAR: tres pasos de la compra -->
+    <section class="slide mist phones3" id="s7">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">07/09</span></div>
+      <div class="copy">
+        <div class="kicker">05 — EN EL CELULAR</div>
+        <h2>De verlo a comprarlo, <em>desde el celu.</em></h2>
+      </div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:500px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="phone sm" style="left:70px;width:300px;--h:620px;transform:rotate(-4deg)"><img src="media/m-home.png" alt="" /></div>
+      <div class="phone sm" style="left:390px;width:300px;--h:620px;z-index:5"><img src="media/m-producto.png" alt="" /></div>
+      <div class="phone sm" style="left:710px;width:300px;--h:620px;transform:rotate(4deg)"><img src="media/m-agregado.png" alt="" style="object-position:bottom" /></div>
+      <div class="progress"><i style="width:77.7%"></i></div>
+    </section>
+
+    <!-- 08 · QUÉ INCLUYÓ -->
+    <section class="slide" id="s8">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">08/09</span></div>
+      <div class="copy">
+        <div class="kicker">EN RESUMEN</div>
+        <h2>Qué se llevó Acer0.</h2>
+        <ul class="list">
+          <li><small>01</small><span>Tienda online propia, pensada para celular</span></li>
+          <li><small>02</small><span>Catálogo con buscador y filtros</span></li>
+          <li><small>03</small><span>Pago con Mercado Pago o transferencia</span></li>
+          <li><small>04</small><span>Cuentas de cliente y seguimiento de pedidos</span></li>
+          <li><small>05</small><span>Panel para gestionar pedidos, cupones y ventas</span></li>
+        </ul>
+      </div>
+      <div class="progress"><i style="width:88.8%"></i></div>
+    </section>
+
+    <!-- 09 · CTA -->
+    <section class="slide dark" id="s9">
+      <div class="hud"><span>FRANCO SEILER</span><span class="count">09/09</span></div>
+      <div class="glow" style="width:900px;height:900px;left:90px;top:200px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
+      <img src="media/panda-programando.svg" alt="" style="position:absolute;left:340px;top:250px;width:400px;z-index:3" />
+      <div class="copy" style="top:760px;text-align:center">
+        <h2>¿Tu proyecto es<br /><em>el próximo?</em></h2>
+        <p class="lead" style="margin-top:36px">Escribime por DM o entrá a</p>
+        <p style="font:600 48px 'Plus Jakarta Sans';color:var(--lilac);margin-top:14px">francoseiler.com</p>
+      </div>
+      <p style="position:absolute;left:0;right:0;bottom:130px;text-align:center;font:500 32px 'Plus Jakarta Sans';color:rgba(255,255,255,0.6);z-index:4">Guardalo para cuando lo necesites ✦</p>
+      <div class="progress"><i style="width:100%"></i></div>
+    </section>
+
+  </body>
+</html>

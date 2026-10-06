@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrusel 05 — Cómo es trabajar conmigo</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; }
+
+      /* Formato 3:4 (1080x1440). Nada de texto propio por debajo de 34px
+         (las ilustraciones en CSS pueden tener texto chico: es "la web", no el copy). */
+      :root { --dark: #2e294e; --ink: #292833; --lilac: #b59cf8; --lilac-2: #8e7ae6; --lilac-3: #7d68d8; --paper: #f3f2f4; --mist: #e9e7ee; --muted: #8a8599; --ok: #2f9e6a; --bad: #d4576b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; font-family: "Plus Jakarta Sans", sans-serif; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+      .slide { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: var(--paper); color: var(--ink); }
+      .slide.dark { background: var(--dark); color: #fff; }
+      .slide.mist { background: var(--mist); }
+
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 8; color: var(--muted); }
+      .dark .hud { color: rgba(255,255,255,0.75); }
+      .progress { position: absolute; left: 80px; right: 80px; bottom: 56px; height: 4px; background: rgba(142,122,230,0.2); border-radius: 2px; z-index: 2; }
+      .progress i { display: block; height: 100%; background: var(--lilac-2); border-radius: 2px; }
+      .dark .progress { background: rgba(255,255,255,0.12); }
+      .dark .progress i { background: var(--lilac); }
+
+      .copy { position: absolute; left: 80px; right: 80px; top: 170px; z-index: 6; }
+      .kicker { font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac-3); margin-bottom: 24px; }
+      .dark .kicker { color: var(--lilac); }
+      h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 500; letter-spacing: -0.025em; line-height: 1.04; }
+      h1 { font-size: 112px; letter-spacing: -0.03em; line-height: 1; }
+      h2 { font-size: 92px; }
+      h1 em, h2 em { font-style: normal; color: var(--lilac-2); }
+      .dark h1 em, .dark h2 em { color: var(--lilac); }
+      .lead { font-size: 38px; line-height: 1.4; margin-top: 28px; color: #5c5866; }
+      .dark .lead { color: rgba(255,255,255,0.78); }
+
+      .glow { position: absolute; border-radius: 50%; z-index: 1; }
+      .swipe { position: absolute; left: 80px; bottom: 80px; font: 600 30px "Plus Jakarta Sans"; display: flex; gap: 16px; align-items: center; z-index: 8; }
+      .swipe i { width: 54px; height: 54px; border-radius: 50%; background: var(--lilac-2); color: #fff; display: grid; place-items: center; font-style: normal; }
+
+      /* Caja "Qué hacer": siempre abajo, en positivo */
+      .fix { position: absolute; left: 80px; right: 80px; bottom: 120px; z-index: 6; padding: 36px 44px; border-radius: 32px; background: #fff; box-shadow: 0 20px 50px rgba(46,41,78,0.08); }
+      .dark .fix { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(181,156,248,0.35); box-shadow: none; }
+      .fix b { display: block; font: 600 28px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac-3); margin-bottom: 12px; }
+      .dark .fix b { color: var(--lilac); }
+      .fix p { font: 500 38px/1.35 "Plus Jakarta Sans"; }
+
+      /* Ilustraciones */
+      .stage { position: absolute; left: 80px; right: 80px; z-index: 4; }
+      .win { background: #fff; border-radius: 26px; overflow: hidden; box-shadow: 0 30px 70px rgba(20,16,40,0.18); }
+      .win .bar { height: 52px; background: #ecebf0; display: flex; align-items: center; gap: 12px; padding: 0 24px; }
+      .win .bar span { width: 15px; height: 15px; border-radius: 50%; background: #cfcbd8; }
+      .win .bar .url { flex: 1; height: 26px; margin-left: 18px; border-radius: 13px; background: #fff; }
+      .sk { background: #ebe9f0; border-radius: 10px; }
+      .phone { position: absolute; border-radius: 52px; background: #16141f; padding: 14px; box-shadow: 0 30px 70px rgba(20,16,40,0.3); }
+      .phone .scr { border-radius: 40px; background: #fff; overflow: hidden; height: 100%; position: relative; }
+      .tag { position: absolute; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; font: 700 40px "Plus Jakarta Sans"; color: #fff; z-index: 6; }
+      .tag.no { background: var(--bad); }
+      .tag.yes { background: var(--ok); }
+
+      /* Notebook, navegador y capturas (proyectos reales) */
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .shot { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 70px rgba(10,8,25,0.35); }
+      .shot img { display: block; width: 100%; }
+      .steps .chip { font-size: 27px; padding: 13px 20px; }
+      .chip { display: inline-block; font: 600 30px "Plus Jakarta Sans"; padding: 14px 26px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(181,156,248,0.45); }
+      .card { background: #fff; border-radius: 28px; box-shadow: 0 30px 70px rgba(20,16,40,0.16); color: var(--ink); }
+      .row { display: flex; align-items: center; gap: 22px; font: 500 34px "Plus Jakarta Sans"; padding: 22px 0; border-top: 2px solid #efedf3; }
+      .row:first-child { border-top: 0; }
+      .check { width: 48px; height: 48px; flex: none; border-radius: 50%; background: var(--ok); color: #fff; display: grid; place-items: center; font: 700 26px "Plus Jakarta Sans"; }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- 01 · PORTADA: la de la grilla, con los pasos reales del sitio (/services) -->
+    <section class="slide mist">
+      <div class="hud"><span>FRANCO SEILER</span><span>01/07</span></div>
+      <div class="copy">
+        <div class="kicker">EL PROCESO</div>
+        <h1>Cómo es trabajar <em>conmigo</em></h1>
+      </div>
+      <div class="shot" style="left:60px;top:500px;width:700px;transform:rotate(-3deg)"><img src="media/bellum-hero.webp" alt="" /></div>
+      <div class="shot" style="left:320px;top:760px;width:720px;transform:rotate(2deg);z-index:3"><img src="media/redlizard.webp" alt="" /></div>
+      <div class="steps" style="position:absolute;left:80px;right:60px;top:1250px;display:flex;gap:10px;z-index:5">
+        <span class="chip" style="background:#fff;border-color:#d8d3e8">1 · Llamada</span>
+        <span class="chip" style="background:#fff;border-color:#d8d3e8">2 · Propuesta</span>
+        <span class="chip" style="background:#fff;border-color:#d8d3e8">3 · Construcción</span>
+        <span class="chip" style="background:var(--dark);color:#fff;border-color:var(--dark)">4 · Entrega</span>
+      </div>
+    </section>
+
+    <!-- 02 · LLAMADA -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>02/07</span></div>
+      <div class="copy">
+        <div class="kicker">PASO 1 · LLAMADA</div>
+        <h2>30 minutos para entender <em>tu problema.</em></h2>
+        <p class="lead">Hablás directamente conmigo, que soy quien lo va a construir.</p>
+      </div>
+      <div class="card" style="position:absolute;left:170px;right:170px;top:740px;padding:40px 48px;z-index:4">
+        <div style="display:flex;align-items:center;gap:24px">
+          <div style="width:96px;height:96px;border-radius:24px;background:var(--mist);display:grid;place-items:center;font:600 30px 'Plus Jakarta Sans';color:var(--lilac-3);text-align:center;line-height:1">MAR<br/><span style="font:500 40px 'Bricolage Grotesque';color:var(--ink)">14</span></div>
+          <div><div style="font:500 44px/1.1 'Bricolage Grotesque'">Primera charla</div><div style="font:500 30px 'Plus Jakarta Sans';color:var(--muted);margin-top:8px">Videollamada · 30 min</div></div>
+        </div>
+        <div style="margin-top:34px;height:66px;border-radius:999px;background:var(--dark);color:#fff;display:grid;place-items:center;font:600 30px 'Plus Jakarta Sans'">Confirmar</div>
+      </div>
+      <div class="fix">
+        <b>QUÉ TE LLEVÁS</b>
+        <p>Una primera idea del alcance y de si es viable, aunque después no trabajemos juntos.</p>
+      </div>
+      <div class="progress"><i style="width:28.6%"></i></div>
+    </section>
+
+    <!-- 03 · PROPUESTA -->
+    <section class="slide">
+      <div class="hud"><span>FRANCO SEILER</span><span>03/07</span></div>
+      <div class="copy">
+        <div class="kicker">PASO 2 · PROPUESTA</div>
+        <h2>Todo por escrito, <em>antes de arrancar.</em></h2>
+        <p class="lead">Precio cerrado: sabés el número antes de que empiece nada.</p>
+      </div>
+      <div class="glow" style="width:1000px;height:1000px;left:40px;top:480px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="card" style="position:absolute;left:170px;right:170px;top:600px;padding:34px 48px;z-index:4;transform:rotate(-1.5deg)">
+        <div style="font:600 26px 'Plus Jakarta Sans';letter-spacing:0.14em;color:var(--lilac-3);margin-bottom:6px">PROPUESTA</div>
+        <div class="row" style="padding:18px 0"><span class="check">✓</span>Alcance</div>
+        <div class="row" style="padding:18px 0"><span class="check">✓</span>Fases con fechas</div>
+        <div class="row" style="padding:18px 0"><span class="check">✓</span>Precio cerrado</div>
+      </div>
+      <div class="fix">
+        <b>CUÁNTO TARDA</b>
+        <p>Una landing, de 1 a 3 semanas. Una aplicación completa, de 6 a 12, según el alcance.</p>
+      </div>
+      <div class="progress"><i style="width:42.9%"></i></div>
+    </section>
+
+    <!-- 04 · CONSTRUCCIÓN -->
+    <section class="slide mist">
+      <div class="hud"><span>FRANCO SEILER</span><span>04/07</span></div>
+      <div class="copy">
+        <div class="kicker">PASO 3 · CONSTRUCCIÓN</div>
+        <h2>Lo ves funcionando <em>desde la primera semana.</em></h2>
+      </div>
+      <div class="laptop" style="left:240px;top:560px;width:600px">
+        <div class="screen"><img src="media/d-light-servicio.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div style="position:absolute;left:80px;right:80px;top:1000px;display:flex;justify-content:center;gap:12px;z-index:5">
+        <span class="chip" style="background:var(--dark);color:#fff;border-color:var(--dark)">Semana 1 ✓</span>
+        <span class="chip" style="background:var(--dark);color:#fff;border-color:var(--dark)">Semana 2 ✓</span>
+        <span class="chip" style="background:#fff;border-color:#d8d3e8;color:var(--ink)">Semana 3</span>
+      </div>
+      <div class="fix">
+        <b>QUÉ TE LLEVÁS</b>
+        <p>Avances que podés abrir, probar y comentar. No esperás al final para saber si está bien.</p>
+      </div>
+      <div class="progress"><i style="width:57.1%"></i></div>
+    </section>
+
+    <!-- 05 · ENTREGA -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>05/07</span></div>
+      <div class="copy">
+        <div class="kicker">PASO 4 · ENTREGA</div>
+        <h2>Todo queda <em>a tu nombre.</em></h2>
+        <p class="lead">El sitio publicado, con todo documentado.</p>
+      </div>
+      <div class="card" style="position:absolute;left:170px;right:170px;top:600px;padding:26px 48px;z-index:4">
+        <div class="row"><span class="check">✓</span>Sitio o sistema publicado</div>
+        <div class="row"><span class="check">✓</span>Documentación</div>
+        <div class="row"><span class="check">✓</span>Código y cuentas, tuyos</div>
+      </div>
+      <div class="fix">
+        <b>SIN ATADURAS</b>
+        <p>El código, el hosting y las cuentas son tuyos desde el primer día.</p>
+      </div>
+      <div class="progress"><i style="width:71.4%"></i></div>
+    </section>
+
+    <!-- 06 · DESPUÉS DE PUBLICAR -->
+    <section class="slide">
+      <div class="hud"><span>FRANCO SEILER</span><span>06/07</span></div>
+      <div class="copy">
+        <div class="kicker">DESPUÉS DE PUBLICAR</div>
+        <h2>No te quedás <em>solo.</em></h2>
+        <p class="lead">Todos los proyectos incluyen un tiempo de soporte. Después, mantenimiento mensual o cuando lo necesites.</p>
+      </div>
+      <div class="shot" style="left:80px;top:650px;width:920px;height:400px;transform:rotate(-1.5deg);z-index:3;background:#fff"><img src="media/admin-servicios.webp" alt="" style="width:1500px;margin:-10px 0 0 -10px" /></div>
+      <div class="fix" style="z-index:7">
+        <b>Y SI LO NECESITÁS</b>
+        <p>Un panel para que edites vos el contenido, como el que usa Bellum.</p>
+      </div>
+      <div class="progress"><i style="width:85.7%"></i></div>
+    </section>
+
+    <!-- 07 · CTA -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>07/07</span></div>
+      <div class="glow" style="width:900px;height:900px;left:90px;top:200px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
+      <img src="media/panda-programando.svg" alt="" style="position:absolute;left:340px;top:250px;width:400px;z-index:3" />
+      <div class="copy" style="top:740px;text-align:center">
+        <h2>¿Arrancamos con<br /><em>una llamada?</em></h2>
+        <p class="lead" style="margin-top:36px">Escribime por DM o entrá a</p>
+        <p style="font:600 48px 'Plus Jakarta Sans';color:var(--lilac);margin-top:14px">francoseiler.com</p>
+      </div>
+      <p style="position:absolute;left:0;right:0;bottom:130px;text-align:center;font:500 32px 'Plus Jakarta Sans';color:rgba(255,255,255,0.6);z-index:4">Guardalo para cuando lo necesites ✦</p>
+      <div class="progress"><i style="width:100.0%"></i></div>
+    </section>
+
+  </body>
+</html>

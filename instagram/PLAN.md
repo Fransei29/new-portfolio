@@ -1,13 +1,13 @@
 # Plan de Instagram del estudio
 
-_Última actualización: 2026-10-04_
+_Última actualización: 2026-10-05_
 
 ## Estrategia
 
 - **Reels = alcance** (llegar a gente nueva). El primer frame tiene que decir algo, no mostrar el nombre ni escribirse letra por letra.
 - **Carruseles = profundidad** (se leen, se guardan, convencen al que entra al perfil).
 - **Videos de Franco a cámara = confianza.** La gente le compra a personas.
-- Ritmo: **3 posts por semana**, producidos por tandas.
+- **Lanzamiento**: primero se arma la estructura completa (los 9 posts de la grilla listos) y se publican en 5 a 7 días, uno o dos por día. Recién ahí se difunde la cuenta. Después, ritmo de **3 posts por semana**, con una reserva de 3 a 6 posts listos.
 - Todo pensado **para el celular**: formato 1080×1440 (3:4), texto propio de 34px o más, capturas mobile reales y capturas de escritorio solo recortadas con zoom.
 - **Orgánico y creíble, no genérico**: un tercio de la grilla con Franco, proyectos reales en pantallas reales y nombres de clientes reales.
 
@@ -20,33 +20,41 @@ _Última actualización: 2026-10-04_
 
 ## Primeros 9 posts (orden de publicación)
 
-| # | Tipo | Post | Estado |
-|---|---|---|---|
-| 1 | Reel | Presentación del estudio | Listo; mejorar el primer frame |
-| 2 | Carrusel | Bellum, caso completo | 9 slides; faltan capturas de escritorio |
-| 3 | Video | Quién soy y qué hago | Grabar |
-| 4 | Carrusel | 5 señales de que tu web te cuesta clientes | Pendiente |
-| 5 | Reel | Bellum en video | Listo |
-| 6 | Carrusel | Cómo es trabajar conmigo | Pendiente |
-| 7 | Video | Un tip para tu negocio | Grabar |
-| 8 | Carrusel | Segundo caso (¿El Triunfo?) | Pendiente |
-| 9 | Reel | Segundo caso en video | Pendiente |
+Ver la grilla en `feed-v2/grilla.jpg` o en `planner/index.html`.
+
+| # | Tipo | Post | Estado | Quién |
+|---|---|---|---|---|
+| 1 | Reel | Presentación del estudio | Listo; corregir el primer frame y la portada | Claude |
+| 2 | Carrusel | Bellum, caso completo | **Listo** (el 06 es video claro/oscuro) | — |
+| 3 | Video | Quién soy y qué hago | Grabar, después Claude edita | Franco → Claude |
+| 4 | Carrusel | 5 señales de que tu web te cuesta clientes | Pendiente; Claude propone el texto y Franco lo aprueba | Claude + Franco |
+| 5 | Reel | Bellum en video | Listo; falta la portada nueva | Claude |
+| 6 | Carrusel | Cómo es trabajar conmigo | Pendiente | Claude + Franco |
+| 7 | Carrusel | Muro de proyectos | Pendiente; capturas de los sitios en vivo | Claude |
+| 8 | Carrusel | El Triunfo, caso completo | Pendiente; misma plantilla que Bellum | Claude |
+| 9 | Video | Un tip para tu negocio | Grabar, después Claude edita | Franco → Claude |
+
+Reserva para después del lanzamiento: reel de El Triunfo, casos de ComplyDQ, Royal Parking y Globaly, más carruseles educativos.
+
+## Hoja de ruta
+
+**Etapa 1 · Armar la base (esta semana).** En paralelo:
+- Claude: carruseles 4, 6, 7 y 8, el primer frame del reel 01 y las portadas de los reels.
+- Franco: sesión de fotos y video de 1 hora (guía abajo), revisar los textos de cada carrusel y armar la cuenta (bio, link y foto).
+
+**Etapa 2 · Terminar con material real.** Claude edita los videos 3 y 9 (subtítulos y marca con HyperFrames) y reemplaza las fotos generadas por fotos reales en las portadas. Revisión final de la grilla.
+
+**Etapa 3 · Lanzamiento (una semana).** Publicar los 9 en 6 o 7 días, uno por día y dos en algún día, siempre en el orden de la tabla. Fijar arriba del perfil: "Hola, soy Franco", Bellum y el reel de presentación. Destacadas: Proyectos, Proceso y Sobre mí. Recién después difundir la cuenta: estado de WhatsApp, LinkedIn, clientes y conocidos.
+
+**Etapa 4 · Ritmo.** 3 posts por semana (por ejemplo lunes, miércoles y viernes), siempre con 3 a 6 posts de reserva. Producir por tandas: una sesión cada dos semanas.
 
 ## Dónde está cada cosa
 
-- `carrusel-01-bellum/`: carrusel Bellum. Editar `index.html` y correr `node render.mjs`, que genera `slides/NN.png`.
+- `carrusel-01-bellum/`: carrusel Bellum. `node capturar.mjs` saca capturas del sitio en vivo (claro y oscuro, escritorio y celu) a `capturas/`. Editar `index.html`, correr `node render.mjs` (genera `slides/NN.png`) y `python3 wipe.py` (genera `slides/06.mp4`, el corte claro/oscuro).
+- `feed-v2/`: las 9 portadas de la grilla aprobada (más Franco y más proyectos). `node render.mjs` y `python3 grilla.py`.
 - `portadas/`: portadas con notebook y celular, más la de "Hola, soy Franco". Se renderizan igual y quedan en `out/NN.png`.
 - `planner/index.html`: grilla del perfil para ver y reordenar los posts arrastrándolos.
 - `reel-01-presentacion/`, `reel-02-bellum/`: reels en HyperFrames.
-
-## Pendiente para la próxima sesión
-
-1. Franco pasa las **capturas de escritorio** de Bellum.
-2. Franco hace la **sesión de fotos y video** (guía abajo).
-3. Armar las portadas finales mezclando foto real y diseño.
-4. Ajustar la portada de El Triunfo (le sobra espacio abajo).
-5. Corregir el primer frame del reel-01: que la pregunta aparezca entera desde el inicio.
-6. Actualizar el planner con las portadas nuevas.
 
 ---
 

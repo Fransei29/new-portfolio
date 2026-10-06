@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portadas del feed v2</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; }
+      :root { --dark: #2e294e; --ink: #292833; --lilac: #b59cf8; --lilac-2: #8e7ae6; --lilac-3: #7d68d8; --paper: #f3f2f4; --mist: #e9e7ee; --muted: #8a8599; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; font-family: "Plus Jakarta Sans", sans-serif; }
+
+      .slide { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: var(--paper); color: var(--ink); }
+      .slide.dark { background: var(--dark); color: #fff; }
+      .slide.mist { background: var(--mist); }
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; color: var(--muted); z-index: 8; }
+      .dark .hud { color: rgba(255,255,255,0.75); }
+      .copy { position: absolute; left: 80px; right: 80px; top: 170px; z-index: 6; }
+      .kicker { font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac-3); margin-bottom: 24px; }
+      .dark .kicker { color: var(--lilac); }
+      h1 { font: 500 112px/1 "Bricolage Grotesque"; letter-spacing: -0.03em; }
+      h1 em { font-style: normal; color: var(--lilac-2); }
+      .dark h1 em { color: var(--lilac); }
+      .sub { font: 500 40px/1.3 "Plus Jakarta Sans"; margin-top: 24px; color: #5c5866; }
+      .dark .sub { color: rgba(255,255,255,0.8); }
+
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .phone { position: absolute; border-radius: 56px; background: #0e0d14; padding: 14px; box-shadow: 0 40px 90px rgba(10,8,25,0.45); z-index: 4; overflow: hidden; }
+      .phone img { display: block; width: 100%; border-radius: 44px; }
+      .phone.crop { height: var(--h); }
+      .phone.crop img { height: calc(var(--h) - 28px); object-fit: cover; object-position: top; }
+      .glow { position: absolute; border-radius: 50%; z-index: 1; }
+      .chip { display: inline-block; font: 600 30px "Plus Jakarta Sans"; padding: 14px 26px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(181,156,248,0.45); margin: 0 10px 12px 0; }
+      .swipe { position: absolute; left: 80px; bottom: 80px; font: 600 30px "Plus Jakarta Sans"; display: flex; gap: 16px; align-items: center; z-index: 8; }
+      .swipe i { width: 54px; height: 54px; border-radius: 50%; background: var(--lilac-2); color: #fff; display: grid; place-items: center; font-style: normal; }
+      .shot { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 70px rgba(10,8,25,0.35); }
+      .shot img { display: block; width: 100%; }
+    </style>
+  </head>
+  <body>
+
+    <!-- 01 · Reel presentación: gancho + proyectos reales flotando -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>▶ REEL</span></div>
+      <div class="glow" style="width:1200px;height:1200px;left:-60px;top:500px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 62%)"></div>
+      <div class="copy">
+        <h1 style="font-size:104px">¿Tu negocio todavía depende de <em>planillas?</em></h1>
+      </div>
+      <div class="shot" style="left:-60px;top:760px;width:640px;transform:rotate(-6deg)"><img src="media/acero.webp" alt="" /></div>
+      <div class="shot" style="left:520px;top:700px;width:640px;transform:rotate(5deg)"><img src="media/bellum-admin.webp" alt="" /></div>
+      <div class="shot" style="left:200px;top:1040px;width:700px;transform:rotate(-2deg);z-index:3"><img src="media/cdq.webp" alt="" /></div>
+    </section>
+
+    <!-- 02 · Carrusel Bellum: compu + celu, en claro -->
+    <section class="slide">
+      <div class="hud"><span>FRANCO SEILER</span><span>CASO 01</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">CASO DE ESTUDIO</div>
+        <h1>Bellum</h1>
+        <p class="sub">La web y el panel de una firma que administra el dinero de consorcios en EE.UU.</p>
+      </div>
+      <div class="laptop" style="left:120px;top:640px;width:800px">
+        <div class="screen"><img src="media/bellum-hero.webp" alt="" /></div>
+        <div class="base"></div>
+      </div>
+      <div class="phone crop" style="left:740px;top:760px;width:270px;--h:560px"><img src="media/m-bellum.png" alt="" /></div>
+      <div class="swipe"><i>→</i>Deslizá</div>
+    </section>
+
+    <!-- 03 · Video "Quién soy": foto real tipo polaroid -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>● VIDEO</span></div>
+      <div class="glow" style="width:1000px;height:1000px;left:40px;top:120px;background:radial-gradient(circle,rgba(181,156,248,0.35),transparent 62%)"></div>
+      <div style="position:absolute;left:190px;top:190px;width:700px;padding:30px 30px 110px;background:#fbfaf7;transform:rotate(-3deg);box-shadow:0 40px 90px rgba(0,0,0,0.45);z-index:4">
+        <img src="media/franco-real.jpeg" alt="" style="display:block;width:100%" />
+        <div style="position:absolute;left:0;right:0;bottom:32px;text-align:center;font:500 40px 'Bricolage Grotesque';color:#2e294e">Franco Seiler</div>
+      </div>
+      <div style="position:absolute;left:470px;top:160px;width:150px;height:46px;background:rgba(233,231,238,0.75);transform:rotate(4deg);z-index:5"></div>
+      <div class="copy" style="top:auto;bottom:110px">
+        <h1 style="font-size:116px">Hola, soy <em>Franco.</em></h1>
+        <p class="sub">Hago el software de negocios reales. Te cuento cómo.</p>
+      </div>
+    </section>
+
+    <!-- 04 · Carrusel 5 señales: es la slide 01 del carrusel (carrusel-04-senales), así quedan iguales -->
+    <section class="slide"><img src="../carrusel-04-senales/slides/01.png" alt="" style="display:block;width:100%" /></section>
+
+    <!-- 05 · Reel Bellum: el celu en grande -->
+    <section class="slide dark">
+      <div class="hud"><span>FRANCO SEILER</span><span>▶ REEL</span></div>
+      <div class="glow" style="width:1200px;height:1200px;left:200px;top:300px;background:radial-gradient(circle,rgba(181,156,248,0.32),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">BELLUM</div>
+        <h1 style="font-size:100px">De la idea<br />al sitio<br /><em>en vivo.</em></h1>
+      </div>
+      <div class="shot" style="left:80px;top:860px;width:560px;transform:rotate(-4deg);z-index:2"><img src="media/bellum-serv.webp" alt="" /></div>
+      <div class="phone crop" style="left:560px;top:420px;width:420px;--h:900px;transform:rotate(4deg)"><img src="media/m-bellum.png" alt="" /></div>
+    </section>
+
+    <!-- 06 · Carrusel proceso: es la slide 01 del carrusel (carrusel-05-proceso), así quedan iguales -->
+    <section class="slide"><img src="../carrusel-05-proceso/slides/01.png" alt="" style="display:block;width:100%" /></section>
+
+    <!-- 07 · Carrusel muro de proyectos: es la slide 01 del carrusel (carrusel-03-proyectos), así quedan iguales -->
+    <section class="slide dark"><img src="../carrusel-03-proyectos/slides/01.png" alt="" style="display:block;width:100%" /></section>
+
+    <!-- 08 · Carrusel Acer0: es la slide 01 del carrusel (carrusel-02-acero), así quedan iguales -->
+    <section class="slide"><img src="../carrusel-02-acero/slides/01.png" alt="" style="display:block;width:100%" /></section>
+
+    <!-- 09 · Video tip: Franco a cámara -->
+    <section class="slide dark" style="background:#18244a">
+      <img src="media/franco-1.jpeg" alt="" style="position:absolute;left:-180px;top:260px;width:1440px;z-index:1" />
+      <div style="position:absolute;inset:0;background:linear-gradient(rgba(24,36,74,0.95) 0%,rgba(24,36,74,0.4) 32%,transparent 50%);z-index:2"></div>
+      <div class="hud"><span>FRANCO SEILER</span><span>● VIDEO</span></div>
+      <div class="copy">
+        <div class="kicker">UN TIP EN 30 SEGUNDOS</div>
+        <h1 style="font-size:100px">Tu web tiene <em>3 segundos.</em></h1>
+      </div>
+    </section>
+
+  </body>
+</html>
