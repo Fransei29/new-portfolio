@@ -15,6 +15,13 @@
       .slide { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: var(--paper); color: var(--ink); }
       .slide.dark { background: var(--dark); color: #fff; }
       .slide.mist { background: var(--mist); }
+      /* Portada de reel en 9:16. El perfil muestra solo el centro 3:4 (de y=240 a y=1680): lo importante va ahí. */
+      .slide.tall { height: 1920px; }
+      /* Ventana de navegador con una captura real */
+      .win { position: absolute; z-index: 3; background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 50px 110px rgba(10,8,25,0.45); }
+      .win .bar { height: 46px; background: #ecebf0; display: flex; align-items: center; gap: 10px; padding: 0 22px; }
+      .win .bar i { width: 13px; height: 13px; border-radius: 50%; background: #cfcbd8; }
+      .win img { display: block; width: 100%; }
       .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; color: var(--muted); z-index: 8; }
       .dark .hud { color: rgba(255,255,255,0.75); }
       .copy { position: absolute; left: 80px; right: 80px; top: 170px; z-index: 6; }
@@ -45,34 +52,22 @@
   </head>
   <body>
 
-    <!-- 01 · Reel presentación: gancho + proyectos reales flotando -->
+    <!-- 01 · Reel presentación: gancho + un solo panel real, derecho y centrado -->
     <section class="slide dark">
       <div class="hud"><span>FRANCO SEILER</span><span>▶ REEL</span></div>
-      <div class="glow" style="width:1200px;height:1200px;left:-60px;top:500px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 62%)"></div>
+      <div class="glow" style="width:1300px;height:1300px;left:-110px;top:420px;background:radial-gradient(circle,rgba(181,156,248,0.28),transparent 62%)"></div>
       <div class="copy">
         <h1 style="font-size:104px">¿Tu negocio todavía depende de <em>planillas?</em></h1>
+        <p class="sub" style="margin-top:32px">Lo pasamos a un sistema propio, simple de usar.</p>
       </div>
-      <div class="shot" style="left:-60px;top:760px;width:640px;transform:rotate(-6deg)"><img src="media/acero.webp" alt="" /></div>
-      <div class="shot" style="left:520px;top:700px;width:640px;transform:rotate(5deg)"><img src="media/bellum-admin.webp" alt="" /></div>
-      <div class="shot" style="left:200px;top:1040px;width:700px;transform:rotate(-2deg);z-index:3"><img src="media/cdq.webp" alt="" /></div>
-    </section>
-
-    <!-- 02 · Carrusel Bellum: compu + celu, en claro -->
-    <section class="slide">
-      <div class="hud"><span>FRANCO SEILER</span><span>CASO 01</span></div>
-      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
-      <div class="copy">
-        <div class="kicker">CASO DE ESTUDIO</div>
-        <h1>Bellum</h1>
-        <p class="sub">La web y el panel de una firma que administra el dinero de consorcios en EE.UU.</p>
-      </div>
-      <div class="laptop" style="left:120px;top:640px;width:800px">
-        <div class="screen"><img src="media/bellum-hero.webp" alt="" /></div>
+      <div class="laptop" style="left:110px;top:790px;width:860px">
+        <div class="screen"><img src="media/bellum-dashboard-laptop.webp" alt="" /></div>
         <div class="base"></div>
       </div>
-      <div class="phone crop" style="left:740px;top:760px;width:270px;--h:560px"><img src="media/m-bellum.png" alt="" /></div>
-      <div class="swipe"><i>→</i>Deslizá</div>
     </section>
+
+    <!-- 02 · Carrusel Bellum: es la slide 01 del carrusel (carrusel-01-bellum), así quedan iguales -->
+    <section class="slide"><img src="../carrusel-01-bellum/slides/01.png" alt="" style="display:block;width:100%" /></section>
 
     <!-- 03 · Video "Quién soy": foto real tipo polaroid -->
     <section class="slide dark">
@@ -121,6 +116,20 @@
       <div class="copy">
         <div class="kicker">UN TIP EN 30 SEGUNDOS</div>
         <h1 style="font-size:100px">Tu web tiene <em>3 segundos.</em></h1>
+      </div>
+    </section>
+
+    <!-- Portada 9:16 del reel 01 → out/01-portada-reel.png -->
+    <section class="slide dark tall" id="r01">
+      <div class="glow" style="width:1500px;height:1500px;left:-210px;top:620px;background:radial-gradient(circle,rgba(181,156,248,0.26),transparent 62%)"></div>
+      <div class="hud" style="top:300px"><span>FRANCO SEILER</span><span>▶ REEL</span></div>
+      <div class="copy" style="top:400px">
+        <h1 style="font-size:108px">¿Tu negocio todavía depende de <em>planillas?</em></h1>
+        <p class="sub" style="margin-top:34px">Lo pasamos a un sistema propio, simple de usar.</p>
+      </div>
+      <div class="laptop" style="left:110px;top:1010px;width:860px">
+        <div class="screen"><img src="media/bellum-dashboard-laptop.webp" alt="" /></div>
+        <div class="base"></div>
       </div>
     </section>
 

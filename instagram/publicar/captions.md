@@ -3,7 +3,7 @@
 Orden de publicación: de arriba hacia abajo. Lo último que se publica queda arriba a la izquierda del perfil.
 
 ## 1 · Reel: presentación
-Archivo: `reel-01-presentacion/renders/reel-01-v7.mp4` · Portada: `feed-v2/out/01-portada-reel.jpg`
+Archivo: `reel-01-presentacion/renders/reel-01-v7.mp4` · Portada: `feed-v2/out/01-portada-reel.png`
 
 Planillas, mails que se pierden, la misma tarea copiada a mano todas las semanas.
 Si tu negocio funciona así, hay una forma más simple.
@@ -15,22 +15,15 @@ Contame qué te gustaría simplificar. Escribime por DM 👇
 #softwareamedida #desarrolloweb #automatizacion #emprendedores #pymes
 
 ## 2 · Carrusel: Bellum
-Archivos: `carrusel-01-bellum/slides/01.png` a `09.png` (el 06 va como video: `06.mp4`)
+Archivos: `carrusel-01-bellum/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
 
-Caso de estudio: Bellum 🏢
+Bellum administra las finanzas de asociaciones residenciales en EE.UU. Necesitaban una web que transmita confianza y poder actualizarla sin depender de nadie.
 
-Una firma de Estados Unidos que administra el dinero de consorcios. Cuando manejás plata ajena, tu web tiene que transmitir confianza desde el primer segundo.
+Lo que hicimos: sitio en claro y oscuro, 8 páginas de servicios, pedido de propuesta en 5 pasos, un panel propio y un asistente IA que responde con la info de Bellum y avisa cuando aparece un interesado.
 
-Qué hicimos:
-→ Un sitio serio y claro, pensado para el celular
-→ Una página para cada servicio
-→ Propuestas online en 5 pasos
-→ Modo claro y oscuro
-→ Un panel para que su equipo edite todo sin depender de nadie
+¿Tu proyecto es el próximo? → francoseiler.com
 
-Deslizá para ver cómo quedó →
-
-#casodeestudio #diseñoweb #desarrolloweb #softwareamedida
+#casodeestudio #softwareamedida #inteligenciaartificial #transformaciondigital
 
 ## 4 · Carrusel: 5 señales
 Archivos: `carrusel-04-senales/slides/`
@@ -77,19 +70,17 @@ Algunos de los proyectos del estudio: tiendas online, plataformas, sitios instit
 #portfolio #desarrolloweb #diseñoweb #softwareamedida
 
 ## 8 · Carrusel: Acer0
-Archivos: `carrusel-02-acero/slides/`
+Archivos: `carrusel-02-acero/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
 
-Caso de estudio: Acer0 🛒
+Acer0 diseña y fabrica muebles de acero inoxidable en Buenos Aires.
 
-Acer0 diseña y fabrica muebles y objetos de acero inoxidable en Buenos Aires. Querían vender online con una tienda propia, tan cuidada como sus piezas.
+Necesitaban una tienda propia que estuviera a la altura de sus productos y, al mismo tiempo, les permitiera gestionar la operación sin depender de terceros.
 
-Qué hicimos:
-→ Una tienda minimalista donde el producto es el protagonista
-→ Pago con Mercado Pago o transferencia
-→ Cuentas de cliente y seguimiento de pedidos
-→ Un panel para manejar pedidos, productos, cupones y ventas
+Construimos una experiencia de compra pensada para el celular, con fichas completas de producto, pagos con Mercado Pago o transferencia, cuentas de cliente con seguimiento de pedidos y un panel propio para administrar productos, pedidos, cupones y ventas.
 
-Deslizá para ver cómo quedó →
+Una tienda pensada tanto para vender como para operar.
+
+¿Tu proyecto podría ser el próximo? → francoseiler.com
 
 #ecommerce #tiendaonline #casodeestudio #desarrolloweb
 

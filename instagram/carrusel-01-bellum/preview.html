@@ -23,10 +23,10 @@
     <div class="all" id="a"></div>
     <script>
       const t = document.getElementById("t"), d = document.getElementById("d"), a = document.getElementById("a");
-      for (let i = 1; i <= 9; i++) {
+      for (let i = 1; i <= 7; i++) {
         const n = String(i).padStart(2, "0");
         const make = () => {
-          if (i !== 6) { const im = document.createElement("img"); im.src = `slides/${n}.png`; return im; }
+          if (i !== 2) { const im = document.createElement("img"); im.src = `slides/${n}.png`; return im; }
           const v = document.createElement("video"); v.src = `slides/${n}.mp4`; v.autoplay = v.loop = v.muted = v.playsInline = true; return v;
         };
         t.appendChild(make()); a.appendChild(make()); d.appendChild(document.createElement("i"));

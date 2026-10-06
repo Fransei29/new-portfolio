@@ -7,7 +7,7 @@ HERE = Path(__file__).parent
 ROOT = HERE.parent
 
 POSTS = [
-    (1, 'Reel · Presentación', ['reel-01-presentacion/renders/reel-01-v7.mp4'], 'feed-v2/out/01-portada-reel.jpg'),
+    (1, 'Reel · Presentación', ['reel-01-presentacion/renders/reel-01-v7.mp4'], 'feed-v2/out/01-portada-reel.png'),
     (2, 'Carrusel · Bellum', 'carrusel-01-bellum/slides', None),
     (4, 'Carrusel · 5 señales', 'carrusel-04-senales/slides', None),
     (5, 'Reel · Bellum en video', ['reel-02-bellum/renders/reel-02-v2.mp4'], 'feed-v2/out/05-portada-reel.jpg'),

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Destacadas · vista previa</title>
+    <style>
+      body { margin: 0; background: #1b1926; color: #fff; font-family: sans-serif; padding: 30px 16px; }
+      .covers { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+      .covers figure { margin: 0; text-align: center; font-size: 13px; color: #ccc; }
+      /* Instagram muestra la portada como círculo recortado del centro */
+      .covers img { width: 84px; height: 84px; object-fit: cover; border-radius: 50%; border: 2px solid #444; display: block; margin-bottom: 6px; }
+      h2 { font-size: 15px; color: #b59cf8; margin: 26px 0 10px; }
+      .row { display: flex; gap: 10px; overflow-x: auto; }
+      .row img { width: 180px; aspect-ratio: 9 / 16; border-radius: 8px; flex: none; }
+    </style>
+  </head>
+  <body>
+    <div class="covers" id="c"></div>
+    <div id="r"></div>
+    <script>
+      const G = { "sobre-mi": ["Sobre mí", 4], proyectos: ["Proyectos", 9], proceso: ["Proceso", 7], opiniones: ["Opiniones", 4], preguntas: ["Preguntas", 7] };
+      for (const [g, [name, n]] of Object.entries(G)) {
+        c.insertAdjacentHTML("beforeend", `<figure><img src="out/portadas/${g}.png" />${name}</figure>`);
+        let imgs = "";
+        for (let i = 1; i <= n; i++) imgs += `<img src="out/${g}/${String(i).padStart(2, "0")}.png" />`;
+        r.insertAdjacentHTML("beforeend", `<h2>${name}</h2><div class="row">${imgs}</div>`);
+      }
+    </script>
+  </body>
+</html>

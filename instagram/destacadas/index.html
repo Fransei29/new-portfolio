@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Destacadas del perfil</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; }
+
+      /* Historias 1080x1920. Instagram tapa ~250px arriba (barra de progreso y nombre)
+         y ~300px abajo (responder). Todo el texto vive entre 260 y 1620. Texto propio ≥44px. */
+      :root {
+        --dark: #2e294e;
+        --ink: #292833;
+        --lilac: #b59cf8;
+        --lilac-2: #8e7ae6;
+        --lilac-3: #7d68d8;
+        --lilac-ink: #5b45c4;
+        --paper: #f3f2f4;
+        --mist: #e9e7ee;
+        --muted: #8a8599;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; font-family: "Plus Jakarta Sans", sans-serif; display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; }
+
+      .story, .cover { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); color: var(--ink); flex: none; }
+      .story.dark, .cover { background: var(--dark); color: #fff; }
+      .story.mist { background: var(--mist); }
+
+      /* HUD como en los reels, pero corrido hacia abajo para que no lo tape la interfaz */
+      .hud { position: absolute; top: 262px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--muted); z-index: 6; }
+      .dark .hud { color: rgba(255,255,255,0.7); }
+      .progress { position: absolute; left: 80px; right: 80px; top: 320px; height: 4px; background: rgba(142,122,230,0.2); border-radius: 2px; z-index: 6; }
+      .progress i { display: block; height: 100%; background: var(--lilac-2); border-radius: 2px; }
+      .dark .progress { background: rgba(255,255,255,0.12); }
+      .dark .progress i { background: var(--lilac); }
+
+      .copy { position: absolute; left: 80px; right: 80px; top: 400px; z-index: 5; }
+      .kicker { font: 600 34px "Plus Jakarta Sans"; letter-spacing: 0.14em; color: var(--lilac-ink); margin-bottom: 30px; }
+      .dark .kicker { color: var(--lilac); }
+      h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 500; letter-spacing: -0.025em; line-height: 1.04; }
+      h1 { font-size: 124px; }
+      h2 { font-size: 96px; }
+      h1 em, h2 em { font-style: normal; color: var(--lilac-ink); }
+      .dark h1 em, .dark h2 em { color: var(--lilac); }
+      .lead { font-size: 48px; line-height: 1.35; margin-top: 34px; color: #57535f; }
+      .dark .lead { color: rgba(255,255,255,0.8); }
+
+      .glow { position: absolute; border-radius: 50%; z-index: 1; }
+
+      /* Mockups (mismo estilo que los carruseles) */
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .phone { position: absolute; border-radius: 56px; background: #16141f; padding: 14px; height: var(--h); overflow: hidden; z-index: 4; box-shadow: 0 40px 90px rgba(20,16,40,0.35); }
+      .dark .phone { background: #0f0d18; box-shadow: 0 40px 100px rgba(0,0,0,0.45); }
+      .phone img { display: block; width: 100%; height: calc(var(--h) - 28px); border-radius: 42px; object-fit: cover; object-position: top; }
+
+      .card { background: #fff; color: var(--ink); border-radius: 36px; box-shadow: 0 30px 80px rgba(20,16,40,0.18); padding: 56px; }
+      .dark .card { background: rgba(255,255,255,0.07); color: #fff; border: 2px solid rgba(181,156,248,0.3); box-shadow: none; }
+      .card p { font: 500 50px/1.35 "Plus Jakarta Sans"; }
+      .rows { list-style: none; }
+      .rows li { display: flex; gap: 28px; align-items: baseline; padding: 30px 0; border-top: 2px solid rgba(46,41,78,0.12); font: 500 54px/1.2 "Bricolage Grotesque"; }
+      .dark .rows li { border-color: rgba(255,255,255,0.14); }
+      .rows li small { font: 600 34px "Plus Jakarta Sans"; color: var(--lilac-3); min-width: 64px; letter-spacing: 0.08em; }
+      .dark .rows li small { color: var(--lilac); }
+
+      .stat { display: flex; align-items: baseline; gap: 32px; padding: 34px 0; border-top: 2px solid rgba(46,41,78,0.12); }
+      .stat b { font: 500 120px/1 "Bricolage Grotesque"; color: var(--lilac-ink); min-width: 260px; letter-spacing: -0.03em; }
+      .stat span { font: 500 48px/1.25 "Plus Jakarta Sans"; color: #57535f; }
+      .dark .stat { border-color: rgba(255,255,255,0.14); }
+      .dark .stat b { color: var(--lilac); }
+      .dark .stat span { color: rgba(255,255,255,0.85); }
+
+      .quote .who { display: flex; align-items: center; gap: 30px; margin-top: 44px; }
+      .quote .who img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; }
+      .quote .who b { display: block; font: 500 52px/1.1 "Bricolage Grotesque"; }
+      .quote .who span { font: 500 40px "Plus Jakarta Sans"; color: var(--muted); }
+      .quote .stars { color: var(--lilac-2); font-size: 52px; letter-spacing: 8px; margin-bottom: 26px; }
+      .quote .mark { font: 500 200px/0.6 "Bricolage Grotesque"; color: var(--lilac); height: 90px; }
+
+      .dropzone { position: absolute; left: 80px; right: 80px; top: 820px; height: 780px; border: 5px dashed rgba(91,69,196,0.45); border-radius: 40px; display: grid; place-items: center; text-align: center; font: 500 46px/1.4 "Plus Jakarta Sans"; color: var(--muted); z-index: 4; }
+
+
+      /* Portadas: el ícono va centrado; Instagram recorta un círculo del centro */
+      /* Portadas: el ícono va centrado; Instagram recorta un círculo del centro */
+      .cover { display: grid; place-items: center; }
+      .cover svg { width: 400px; height: 400px; }
+    </style>
+  </head>
+  <body>
+    <!-- Todo se arma desde DATA (abajo). render.mjs exporta cada .story a out/<grupo>/NN.png y cada .cover a out/portadas/<grupo>.png -->
+    <script>
+      const ICONS = {
+        "sobre-mi": '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+        proyectos: '<path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/>',
+        proceso: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+        opiniones: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 12a2 2 0 0 0 2-2V8H8"/><path d="M14 12a2 2 0 0 0 2-2V8h-2"/>',
+        preguntas: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+      };
+
+      // Proyecto: kicker = rubro · país, h = nombre, lead = una línea de qué resolvió.
+      const p = (bg, k, h, lead, d, m) => ({ t: "project", bg, k, h, lead, d, m });
+
+      const DATA = {
+        "sobre-mi": { title: "SOBRE MÍ", stories: [
+          { t: "photo", bg: "dark", h: 'Hola, soy <em>Franco.</em>', lead: "Desarrollo software a medida para negocios que necesitan algo más que una web." },
+          { t: "story", bg: "", k: "MI HISTORIA", h: 'Empecé programando <em>para otras empresas.</em>', paras: ["Primero trabajé en equipos de producto, después para una empresa de Suecia y, en el medio, cofundé mi propia startup.", "En todos esos lugares encontré algo en común: negocios con buenas ideas que terminaban resolviendo demasiado con planillas, procesos manuales y herramientas que no encajaban del todo.", "Hoy, desde Córdoba, construyo el software que reemplaza esa complejidad por herramientas hechas para cada negocio.", "Y trabajo directamente con vos, de principio a fin."] },
+        ]},
+        proyectos: { title: "PROYECTOS", stories: [
+          p("", "FINANZAS · EE.UU.", "Bellum", "Web, panel propio y asistente IA para convertir visitas en oportunidades.", "d-light-hero.webp", "m-light-hero.png"),
+          p("dark", "TIENDA ONLINE · ARGENTINA", "Acer0", "Tienda propia, pagos online y un panel para gestionar toda la operación.", "d-home.webp", "m-home.png"),
+          p("mist", "PRODUCTO DIGITAL · INTERNACIONAL", "Globaly", "Un producto digital que explica su propuesta en tres idiomas y adapta los precios al mercado de cada usuario.", "d-globaly.webp", "m-globaly.webp"),
+          p("dark", "TRANSPORTE · EE.UU.", "ComplyDQ", "Una plataforma que convierte visitas en pruebas gratuitas y automatiza parte del proceso comercial.", "d-complydq.webp", "m-complydq.webp"),
+          p("", "MEDIACIÓN · CANADÁ", "Sophie Callander", "Una presencia digital cálida y profesional, pensada para generar confianza desde el primer contacto.", "d-sophie.webp", "m-sophie.webp"),
+          p("dark", "CLUB DEPORTIVO · CANADÁ", "Northfield", "Eventos, planes y contenido siempre actualizado, con herramientas para que el propio club gestione el sitio.", "d-northfield.webp", "m-northfield.webp"),
+          p("mist", "ENTRENADOR · ARGENTINA", "Augusto Fit", "Una web enfocada en mostrar sus planes y convertir visitantes en consultas.", "d-augusto.webp", "m-augusto.webp"),
+          p("dark", "LEGAL · ESPAÑA", "LexMax", "Servicios legales complejos, explicados de forma clara para que el visitante entienda qué necesita y cómo avanzar.", "d-lexmax.webp", "m-lexmax.webp"),
+        ]},
+        proceso: { title: "PROCESO", stories: [
+          { t: "steps", bg: "mist", k: "EL PROCESO", h: 'Cómo es trabajar <em>conmigo.</em>' },
+          { t: "text", bg: "dark", k: "PASO 1 · LLAMADA", h: '30 minutos para entender <em>tu problema.</em>', card: "Te llevás una primera idea del alcance, aunque después no trabajemos juntos." },
+          { t: "text", bg: "", k: "PASO 2 · PROPUESTA", h: 'Todo por escrito, <em>antes de arrancar.</em>', rows: ["Alcance", "Fases con fechas", "Precio cerrado"] },
+          { t: "text", bg: "mist", k: "PASO 3 · CONSTRUCCIÓN", h: 'Lo ves funcionando <em>desde la primera semana.</em>', laptop: "d-light-servicio.webp", lead: "Avances que podés abrir, probar y comentar." },
+          { t: "text", bg: "dark", k: "PASO 4 · ENTREGA", h: 'Todo queda <em>a tu nombre.</em>', rows: ["Sitio publicado", "Todo documentado", "Las cuentas, tuyas"] },
+          { t: "text", bg: "", k: "DESPUÉS", h: 'No te quedás <em>solo.</em>', card: "Todos los proyectos incluyen un tiempo de soporte. Después, mantenimiento mensual o cuando lo necesites." },
+        ]},
+        opiniones: { title: "OPINIONES", stories: [
+          { t: "quote", bg: "", name: "Franklin Gomez", role: "Fundador de una academia", img: "frank.webp", text: "Se ocuparon de todo, del primer boceto al deploy. Carga rápido, se ve bien en el celular y por fin tengo un lugar serio a donde mandar a la gente." },
+          { t: "quote", bg: "dark", name: "Tomas Del Pino", role: "Plataforma de turnos", img: "tomi.webp", text: "Necesitábamos un sistema de turnos que no se cayera con tráfico real. Cuando llegó el volumen, el producto respondió." },
+          // Colegas que trabajaron con Franco: frases textuales del sitio, recortadas para dejar afuera lo técnico.
+          { t: "quote", bg: "mist", name: "Adrian Rodriguez", role: "Desarrollo web", img: "Adrian.webp", text: "No construyen solamente lo que pediste — te avisan cuando hay una forma mejor de hacerlo. Cumplen los plazos y las sugerencias que aportan en el camino mejoran el resultado final." },
+          { t: "quote", bg: "dark", name: "Valentin Carniel", role: "Desarrollador", img: "vale.webp", text: "Cuando algo se rompe o cambia un requerimiento a mitad del proyecto, lo resuelven sin drama. Proactivos y eficientes — los recomiendo sin dudarlo." },
+          { t: "quote", bg: "", name: "Matias Rivarola", role: "Desarrollador", img: "Mati.webp", text: "Cumplen las fechas que se comprometen, algo más raro de lo que debería." },
+          { t: "quote", bg: "dark", name: "Edison Lamar", role: "Ingeniero DevOps", img: "Edi.webp", text: "Reciben feedback sin problema y comunican con claridad durante todo el proceso." },
+          { t: "quote", bg: "mist", name: "Ismael Rivarola", role: "Desarrollador", img: "isma.webp", text: "Se manejan en más de un idioma, algo que importa si tus usuarios no están todos en un solo país." },
+        ]},
+        preguntas: { title: "PREGUNTAS", stories: [
+          { t: "qa", bg: "dark", h: "¿Cuánto sale?", a: "Precio cerrado según lo que necesitás, definido después de la primera charla. Sabés el número antes de arrancar." },
+          { t: "qa", bg: "", h: "¿Cuánto tarda?", a: "Una landing, de 1 a 3 semanas. Una plataforma completa, de 6 a 12, según el alcance." },
+          { t: "qa", bg: "dark", h: "¿Lo puedo editar yo?", a: "Sí. Si lo necesitás, sumamos un panel para que cambies textos, fotos y servicios sin depender de nadie." },
+          { t: "qa", bg: "mist", h: "¿De quién es todo?", a: "Tuyo. El sitio, el dominio y las cuentas quedan a tu nombre desde el primer día." },
+          { t: "qa", bg: "dark", h: "¿Trabajás con gente de afuera?", a: "Sí. Desde Córdoba, con clientes de EE.UU., Canadá, Europa y Latinoamérica." },
+          { t: "qa", bg: "", h: "¿Y después de entregar?", a: "Tenés un tiempo de soporte incluido. Después, mantenimiento mensual o cuando lo necesites." },
+        ]},
+      };
+
+      const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
+      const glowA = '<div class="glow" style="width:1300px;height:1300px;left:-110px;top:760px;background:radial-gradient(circle,rgba(142,122,230,0.24),transparent 62%)"></div>';
+      const glowB = '<div class="glow" style="width:1100px;height:1100px;left:-10px;top:900px;background:radial-gradient(circle,rgba(181,156,248,0.28),transparent 64%)"></div>';
+      const glow = (bg) => (bg === "dark" ? glowB : glowA);
+
+      function body(s) {
+        const kick = s.k ? `<div class="kicker">${s.k}</div>` : "";
+        switch (s.t) {
+          case "photo":
+            return `${glow(s.bg)}<div class="copy"><h1>${s.h}</h1><p class="lead">${s.lead}</p></div>
+              <img src="media/franco.png" alt="" style="position:absolute;left:0;bottom:0;width:1080px;z-index:3" />`;
+          case "text": {
+            let extra = "";
+            if (s.photo) extra = `<div style="position:absolute;left:280px;top:1020px;width:520px;height:520px;border-radius:50%;overflow:hidden;background:var(--dark);z-index:3;box-shadow:0 40px 90px rgba(20,16,40,0.3)"><img src="media/franco.png" style="width:760px;margin:-60px 0 0 -120px" alt="" /></div>`;
+            if (s.card) extra = `<div class="card" style="position:absolute;left:80px;right:80px;top:1080px;z-index:4"><p>${s.card}</p></div>`;
+            if (s.rows) extra = `<ul class="rows" style="position:absolute;left:80px;right:80px;top:1030px;z-index:4">${s.rows.map((r, i) => `<li><small>✓</small><span>${r}</span></li>`).join("")}</ul>`;
+            if (s.laptop) extra = `<div class="laptop" style="left:170px;top:1060px;width:740px"><div class="screen"><img src="media/${s.laptop}" alt="" /></div><div class="base"></div></div>`;
+            return `${glow(s.bg)}<div class="copy">${kick}<h2>${s.h}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>${extra}`;
+          }
+          case "steps":
+            return `${glow(s.bg)}<div class="copy">${kick}<h1 style="font-size:116px">${s.h}</h1></div>
+              <ul class="rows" style="position:absolute;left:80px;right:80px;top:960px;z-index:4">
+                ${["Llamada", "Propuesta", "Construcción", "Entrega"].map((r, i) => `<li><small>0${i + 1}</small><span>${r}</span></li>`).join("")}
+              </ul>`;
+          case "story":
+            return `${glow(s.bg)}<div class="copy">${kick}<h2 style="font-size:84px">${s.h}</h2>${s.paras.map((t) => `<p class="lead" style="margin-top:30px;font-size:43px">${t}</p>`).join("")}</div>`;
+          case "stats":
+            return `${glow(s.bg)}<div class="copy">${kick}${s.h ? `<h2>${s.h}</h2>` : ""}<div style="margin-top:${s.h ? 90 : 20}px">${s.stats.map(([b, t]) => `<div class="stat"><b>${b}</b><span>${t}</span></div>`).join("")}</div></div>`;
+          case "project":
+            return `${glow(s.bg)}<div class="copy">${kick}<h2>${s.h}</h2><p class="lead">${s.lead}</p></div>
+              <div class="laptop" style="left:90px;top:1060px;width:760px"><div class="screen"><img src="media/${s.d}" alt="" /></div><div class="base"></div></div>
+              <div class="phone" style="left:700px;top:960px;width:300px;--h:620px"><img src="media/${s.m}" alt="" /></div>`;
+          case "quote":
+            return `${glow(s.bg)}<div class="copy"><div class="kicker">LO QUE DICEN</div></div>
+              <div class="card quote" style="position:absolute;left:80px;right:80px;top:560px;z-index:4">
+                <div class="stars">★★★★★</div><div class="mark">“</div>
+                <p>${s.text}</p>
+                <div class="who"><img src="media/${s.img}" alt="" /><div><b>${s.name}</b><span>${s.role}</span></div></div>
+              </div>`;
+          case "drop":
+            return `${glow(s.bg)}<div class="copy">${kick}<h2>${s.h}</h2></div>
+              <div class="dropzone">Pegá acá la captura<br />de un mensaje o reseña</div>`;
+          case "qa":
+            return `${glow(s.bg)}<div class="copy"><div class="kicker">PREGUNTAS FRECUENTES</div><h2>${s.h}</h2></div>
+              <div class="card" style="position:absolute;left:80px;right:80px;top:1000px;z-index:4"><p>${s.a}</p></div>`;
+        }
+      }
+
+      for (const [group, { title, stories }] of Object.entries(DATA)) {
+        const n = stories.length;
+        stories.forEach((s, i) => {
+          const sec = el(`<section class="story ${s.bg}" data-group="${group}"></section>`);
+          sec.innerHTML = `<div class="hud"><span>${title}</span><span>${String(i + 1).padStart(2, "0")}/${String(n).padStart(2, "0")}</span></div>
+            <div class="progress"><i style="width:${(((i + 1) / n) * 100).toFixed(1)}%"></i></div>` + body(s);
+          document.body.appendChild(sec);
+        });
+        document.body.appendChild(el(`<section class="cover" data-group="${group}"><svg viewBox="0 0 24 24" fill="none" stroke="#b59cf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[group]}</svg></section>`));
+      }
+    </script>
+  </body>
+</html>
