@@ -75,7 +75,7 @@ export default function Header() {
                 unoptimized
               />
               <Image
-                src="/brand-header-dark.svg"
+                src="/brand-contorno.svg"
                 alt="Franco Seiler — Software Studio"
                 width={430}
                 height={160}
@@ -185,7 +185,8 @@ export default function Header() {
       >
         {/* Logo dentro del menú: a pantalla completa el header queda tapado, así
             que sin esto se pierde la referencia de marca y el camino al home.
-            Mismas dos variantes light/dark que el header, alternadas por CSS. */}
+            Mismas dos variantes light/dark que el header, alternadas por CSS; en
+            dark va el panda con contorno blanco, que se recorta contra el fondo. */}
         <Link href="/" passHref onClick={toggleMobileMenu} className={styles.mobileMenuLogo}>
           <Image
             src="/brand-header.svg"
@@ -196,7 +197,7 @@ export default function Header() {
             unoptimized
           />
           <Image
-            src="/brand-header-dark.svg"
+            src="/brand-contorno.svg"
             alt="Franco Seiler — Software Studio"
             width={430}
             height={160}

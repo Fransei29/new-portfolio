@@ -25,6 +25,7 @@
     "links": "Enlaces",
     "githubRepository": "Repositorio de GitHub",
     "liveDemo": "Demo en Vivo",
+    "visitSite": "Ver sitio en vivo",
     "badges": {
       "product": "Producto",
       "platform": "Plataforma",
@@ -38,6 +39,325 @@
     "privateProject": "Privado — proyecto de cliente",
     "privateProjectTooltip": "Este proyecto es privado y pertenece a un cliente",
     "items": {
+      "arventa": {
+        "title": "Arventa",
+        "role": "Full-stack Engineer",
+        "industry": "Fintech • SaaS de cuentas por cobrar",
+        "engagement": "Colaboración con equipo",
+        "duration": "6 meses",
+        "subtitle": "Plataforma de automatización de cobranzas con agentes de voz con IA",
+        "description": "Plataforma multi-tenant que automatiza la cobranza de facturas vencidas. Agentes de voz con IA hacen las llamadas salientes, emails redactados con IA hacen el seguimiento, y un motor visual de workflows decide a quién contactar, por qué canal y cuándo. Cada ejecución es una máquina de estados durable en Postgres que queda en pausa mientras espera una llamada, una respuesta o un temporizador, y se reanuda cuando llega el callback.",
+        "whatIs": "Arventa es una plataforma multi-tenant que automatiza el seguimiento de cuentas por cobrar para empresas que persiguen facturas vencidas. Combina agentes de voz con IA que hacen llamadas de cobranza con emails redactados por IA, y un motor visual de workflows decide a quién contactar, por qué canal y cuándo. Los equipos de finanzas tienen un único lugar para gestionar sus cobros y ver cada interacción con cada deudor.\nDentro de la app, los usuarios importan facturas desde CSV o Xero, diseñan workflows de cobranza en un editor de nodos (llamadas, emails, esperas, ramas condicionales según el resultado de la llamada o del email, actualizaciones de registro y escalamiento a una persona) y los lanzan sobre una factura o en lotes de hasta 500. Cada factura tiene una línea de tiempo unificada con transcripciones y grabaciones de llamadas, emails y respuestas, notas e historial de cambios, más un resumen generado por IA sobre el estado de la cuenta y el próximo paso. Las llamadas que el agente no puede resolver pasan a una cola de Action Needed: un cliente que pide hablar con una persona, que quiere negociar, un número equivocado o un deudor inubicable. Los administradores pueden escuchar llamadas en vivo y configurar, para cada organización, el horario de contacto, el agente de voz y los dominios de envío verificados.\nEl sistema es un monorepo con tres partes desplegables: un dashboard en React, un servidor de llamadas en Node.js que además corre el motor de workflows, y un proyecto de Supabase con 74 migraciones SQL y 11 edge functions. Lo construyó un equipo de cinco desarrolladores durante unos seis meses.",
+        "problemSolved": "Cobrar facturas vencidas es un trabajo manual y repetitivo. Los cobradores llaman a los deudores uno por uno, dejan mensajes de voz, mandan recordatorios por email, anotan lo que se prometió y tratan de acordarse cuándo volver a llamar. El contexto termina repartido entre registros de llamadas, bandejas de entrada y planillas; las llamadas a deshoras o a números equivocados son esfuerzo perdido, y para cada cuenta cuesta saber qué se intentó y qué corresponde hacer después.\nArventa convierte ese proceso en workflows durables y auditables. Una máquina de estados sobre Postgres con pg-boss ejecuta cada workflow: pone en pausa la ejecución mientras espera una llamada, una respuesta por email o un temporizador, y la reanuda cuando llega el callback de telefonía o del agente de voz, o el webhook del email entrante. Cada ejecución corre sobre una copia congelada del workflow, así que editarlo nunca afecta a las ejecuciones en curso. Los resultados se clasifican en categorías estructuradas (buzón de voz, número equivocado, promesa de pago, escalamiento y otras) que definen los reintentos y las ramas, y las llamadas y los emails se postergan hasta el horario hábil local del deudor, con la zona horaria deducida del código de área del teléfono.\nEl producto depende de combinar tres cosas en un mismo sistema: llamadas con IA conversacional, workflows configurables por organización y un seguimiento que reacciona al resultado de cada contacto y alimenta una cola de trabajo humano. El código refleja ese núcleo de integraciones: Twilio para telefonía y detección de contestador, ElevenLabs para los agentes conversacionales y sus herramientas, modelos de Claude para clasificar, resumir y redactar emails, y Resend para el envío de emails y las respuestas entrantes.",
+        "learnings": [
+          "Orquestación durable de workflows: un motor basado en grafos donde cada ejecución es una máquina de estados reanudable en Postgres. Los eventos externos (llamadas, respuestas por email, temporizadores) ponen la ejecución en pausa en lugar de bloquear un worker; la toma de trabajo usa FOR UPDATE SKIP LOCKED, y un barrido de reanudación recupera ejecuciones de workers colgados o caídos.",
+          "Concurrencia correcta: fencing con claim token en las escrituras finales, transiciones de paso con compare-and-swap para que los callbacks duplicados pierdan, un índice único parcial que permite un solo paso activo por nodo, y merges del contexto jsonb resueltos en la base de datos.",
+          "Efectos secundarios exactly-once: cada intento lleva una clave de idempotencia que se envía tanto al endpoint de llamadas como a la API de email, y un placeholder pendiente con TTL en la base permite recuperar con seguridad un intento que se cayó.",
+          "Inmutabilidad de las ejecuciones: un trigger de Postgres guarda una copia del grafo del workflow al crear la ejecución y rechaza workflows sin publicar, así que editar un workflow nunca cambia las ejecuciones en curso.",
+          "Reintentos según el resultado: cada resultado tiene su propia política (buzón de voz, 3 reintentos cada 4 horas; ocupado, 4 cada 15 minutos) que cada nodo puede sobrescribir, y los códigos de error de Twilio y SIP se clasifican como definitivos o reintentables.",
+          "Agenda pensada para el cumplimiento normativo: las llamadas y los emails se postergan al horario hábil local del deudor, solo en días de semana. La zona horaria sale de la factura, después del código de área NANP del teléfono y por último de la organización, y ante la duda gana el horario local más tardío. La postergación reutiliza el camino de reintentos, así que no consume un intento.",
+          "Integración de IA de voz: las llamadas salientes pasan por Twilio y se conectan a agentes conversacionales de ElevenLabs con contexto dinámico por llamada, herramientas por webhook para escalar a una persona y detección de buzón de voz tanto en Twilio como en el agente. Los supervisores escuchan en vivo mediante Twilio Media Streams retransmitidos por WebSockets y decodificados en el navegador con Web Audio.",
+          "Resúmenes híbridos con IA: las métricas se calculan en código y solo la narrativa viene del LLM. Una huella del contenido evita regenerar el resumen si nada cambió, y un próximo paso estructurado (responsable, tipo, motivo) puede crear o cerrar tareas de seguimiento humano.",
+          "Multi-tenancy con RLS de Postgres: roles en dos niveles, global (usuario, admin, super admin) y por organización (usuario, admin), apoyados en funciones auxiliares SECURITY DEFINER, con las rutas de storage acotadas por organización en las políticas del bucket privado.",
+          "Ida y vuelta de emails sin una bandeja dedicada: cada ejecución tiene su propia dirección de respuesta más una verificación del dominio remitente. Una respuesta entrante se asigna a su ejecución, la IA la clasifica por intención (promesa de pago, disputa, ya pagado) y el workflow se reanuda, con webhooks verificados mediante firmas Svix y una comparación en tiempo constante."
+        ],
+        "architecture": {
+          "body": "Arventa se divide en un dashboard estático en React, un servidor de llamadas en Node.js con estado y un backend gestionado en Supabase. El dashboard lee y escribe los datos de cada tenant directamente a través de Supabase, protegido por Row-Level Security. Todo lo que toca el mundo exterior o tiene que sobrevivir a un reinicio pasa por el servidor de llamadas (telefonía, webhooks del agente de voz, emails entrantes y el motor de workflows), y su estado vive por completo en Postgres mediante pg-boss y funciones SQL, así que los reinicios y los deploys no necesitan ningún cuidado especial.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Monorepo con tres unidades: un frontend en React/Vite, un servidor de llamadas con Fastify + pg-boss y un proyecto de Supabase con migraciones y edge functions.",
+                "Capa de acceso a datos del frontend con 26 módulos envueltos en hooks de TanStack Query, sin llamadas directas a la base desde los componentes.",
+                "Colas del motor creadas con los reintentos propios de pg-boss desactivados para que el motor controle los reintentos, más barridos programados de disparadores cada 5 minutos y de reanudaciones cada 2.",
+                "Las edge functions concentran la lógica de LLM y del proveedor de email, aisladas del servidor de llamadas."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Editor visual de workflows con 7 tipos de nodo (llamada, email, espera, rama, actualizar registro, escalar, fin), con los grafos validados antes de poder publicarse.",
+                "Lanzamientos en lote sobre hasta 500 facturas, salteando las que ya tienen una ejecución activa.",
+                "Línea de tiempo unificada por factura: llamadas, emails, respuestas, notas e historial de auditoría.",
+                "Cola de Action Needed alimentada por escalamientos, llamadas fallidas, números equivocados y deudores inubicables.",
+                "Historial de teléfonos por factura con seguimiento de números equivocados.",
+                "Escucha de llamadas en vivo y transcripciones."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "29 tablas en 74 migraciones, todas con RLS activado.",
+                "Ejecuciones y pasos de workflow con historial de intentos, claim tokens y plazos de reanudación.",
+                "Una tabla polimórfica de interacciones (llamada, email, texto) con relación muchos a muchos con facturas, para emails que cubren varias facturas.",
+                "Categorías de resultado por organización, con un esquema de campos JSON validado por triggers de la base."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "chips": [
+                "Supabase Auth",
+                "RLS por organización",
+                "Roles globales y por organización",
+                "Funciones SECURITY DEFINER",
+                "Rutas de admin con JWT",
+                "Webhooks Svix",
+                "Firmas de Twilio"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "La puesta en producción mantiene a propósito una huella operativa chica: Supabase aporta Postgres, autenticación, storage y las funciones serverless, y el servidor de llamadas corre como un único proceso de Node de larga duración.",
+          "groups": [
+            {
+              "title": "Hosting y runtime",
+              "bullets": [
+                "PostgreSQL 17 gestionado en Supabase, con proyectos separados para desarrollo y producción.",
+                "Edge Functions sobre Deno 2.",
+                "Servidor de llamadas compilado con tsc y ejecutado con PM2, con reinicio automático y un tope de memoria de 500 MB."
+              ]
+            },
+            {
+              "title": "Confiabilidad",
+              "bullets": [
+                "La cola de trabajos vive en la misma instancia de Postgres, sin un broker adicional.",
+                "Una dead-letter queue para los trabajos fallidos del motor.",
+                "Un proceso de barrido cierra las llamadas cuyo callback del proveedor nunca llegó.",
+                "En producción el servidor no arranca si faltan los secretos de firma de los webhooks."
+              ]
+            },
+            {
+              "title": "Observabilidad",
+              "chips": [
+                "Logs estructurados con Pino",
+                "Contexto de traza con AsyncLocalStorage",
+                "Errores persistidos por ejecución"
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Se entregó un sistema de tres partes funcionando: el dashboard del equipo de finanzas, el servidor de llamadas que corre el motor de workflows y el backend en Supabase detrás de ambos.",
+          "groups": [
+            {
+              "title": "Superficies de la app",
+              "bullets": [
+                "Dashboard, listado y detalle de facturas, editor y plantillas de workflows, campañas y lotes, y detalle de cada ejecución.",
+                "Cola de Action Needed, actividades, cargas de archivos y configuración del horario de contacto.",
+                "Administración de la organización para el agente de voz, los dominios de email y los miembros, más gestión de usuarios.",
+                "Configuración del kick-off del piloto y un reporte final con gráficos."
+              ]
+            },
+            {
+              "title": "Integraciones",
+              "chips": [
+                "Twilio Voice",
+                "ElevenLabs Agents",
+                "Anthropic Claude",
+                "Resend",
+                "Xero"
+              ]
+            },
+            {
+              "title": "Herramientas y documentación",
+              "bullets": [
+                "87 archivos de test con unos 875 casos entre backend y frontend.",
+                "Scripts end-to-end de ejecución manual para el motor y las respuestas por email.",
+                "Una guía de configuración del proveedor de email, una guía de traspaso para desarrolladores y una descripción general del producto.",
+                "Migración del proveedor de email de SendGrid a Resend."
+              ]
+            }
+          ]
+        }
+      },
+      "bgv-mayorista": {
+        "title": "BGV Mayorista",
+        "role": "Full-stack Engineer",
+        "industry": "Distribución mayorista • E-commerce B2B",
+        "engagement": "Trabajo para cliente",
+        "duration": "6 semanas",
+        "subtitle": "E-commerce B2B mayorista con asistente de IA",
+        "description": "Tienda online de una distribuidora de productos para el hogar que vende por bulto cerrado a comercios. El catálogo es público, pero los precios y la compra quedan reservados a cuentas mayoristas aprobadas, con compra mínima, múltiplos de bulto, descuentos por empresa, pagos con Mercado Pago o transferencia, y un asistente de IA que nunca revela precios a visitantes anónimos.",
+        "whatIs": "BGV Mayorista es la tienda online de una distribuidora que vende por bulto cerrado a comercios. El catálogo es público, pero los precios y la compra quedan reservados a las empresas que tienen una cuenta mayorista, así que el sitio hace de vidriera para atraer comercios nuevos y de canal de pedidos para los que ya son clientes. Funciona con reglas propias del rubro: compra mínima, múltiplos de bulto, venta suelta opcional por artículo y descuentos por cliente.\nCualquier visitante puede navegar el catálogo por rubros y buscar por código. Un comercio que se registra (usuario y empresa se crean juntos, con CUIT y condición fiscal) pasa a ver los precios con su descuento propio, arma el carrito por bulto o por unidad suelta y paga con Mercado Pago o por transferencia bancaria, que tiene un 5% de descuento; después sigue sus pedidos desde el perfil. Un asistente de IA responde dudas sobre el catálogo y las condiciones de compra, y guarda como contacto a los comercios interesados.\nEl equipo de BGV administra todo desde un panel: productos con fotos a las que se les recorta el fondo al subirlas, rubros que se ordenan arrastrándolos, pedidos con estado de preparación y envío, cupones, datos bancarios y estadísticas. También editan los textos y las fotos de la web sin pasar por un deploy, y gestionan las conversaciones, los contactos, la base de conocimiento y los ajustes del asistente. El proyecto es un monorepo con dos apps, Next.js y Express, conectadas por npm workspaces.",
+        "problemSolved": "Un mayorista no puede publicar precios abiertos como una tienda minorista. La lista es para comercios, cada cliente puede tener condiciones propias y el pedido tiene reglas que un e-commerce estándar no contempla: compra mínima, venta por bulto cerrado y recargo para la unidad suelta. Al mismo tiempo, el catálogo tiene que ser visible para captar comercios nuevos.\nEl sistema lo resuelve con una única regla de visibilidad de precios que se aplica al serializar los productos. Un middleware que nunca rechaza el request resuelve quién mira, así un visitante anónimo o con un token revocado ve el catálogo sin valores, mientras que para comprar hay otro middleware aparte que exige una empresa aprobada. Las reglas comerciales, como la compra mínima o la aprobación, viven en una tabla de configuración y se cambian sin deploy. El múltiplo de bulto, el precio de la unidad suelta y el descuento de cada empresa se guardan en el modelo y se recalculan en el servidor, y las líneas de pedido guardan el precio y la forma de venta del momento de la compra.\nEl modelo de datos explica por qué se construyó a medida: la empresa está separada del usuario, la forma de venta es un atributo de cada línea del carrito, el descuento es por empresa y el asistente de IA no puede revelar precios. Son reglas difíciles de armar sobre una plataforma de e-commerce genérica.",
+        "learnings": [
+          "Control de acceso por visibilidad de datos y no por ruta: el catálogo es público y los precios no. Lo garantizan un middleware que nunca rechaza y una sola función canViewPrices aplicada en el serializer, separada de canPurchase, y una flag en la base permite cambiar la política de aprobación sin tocar código.",
+          "Modelo de datos B2B: la empresa, con su propio ciclo de vida (pendiente, aprobada, rechazada, suspendida), CUIT y condición fiscal, está separada del usuario, así varios usuarios pueden compartirla. Cada empresa tiene su descuento sobre la lista base, redondeado a peso entero para que los totales no arrastren centavos.",
+          "Reglas mayoristas en el esquema: el múltiplo de bulto, la venta suelta habilitada artículo por artículo y el precio de la unidad suelta son campos del producto. La forma de venta va en cada línea del carrito, para que el mismo artículo pueda estar dos veces con precios distintos, y la línea del pedido guarda cómo se vendió, así el remito no cambia si después se edita el producto.",
+          "Pagos con tres vías de confirmación: el webhook de Mercado Pago verifica la firma HMAC-SHA256 con comparación en tiempo constante, incluido el caso borde de un id que llega por query y se firma en minúsculas. La sincronización cuando el comprador vuelve al sitio y una conciliación cada 5 minutos por external reference convierten al webhook en una optimización y no en un requisito.",
+          "Revocación de sesiones con JWT stateless: cada token lleva una versión que se compara contra la base en cada request, así que cambiar la contraseña o revocar una vinculación con Google invalida todos los tokens anteriores. El login con Google vincula cuentas por mail y manda un token de un solo uso para deshacer la vinculación si no la hizo el usuario.",
+          "Consistencia con PM2 en cluster: con dos procesos de frontend, la caché de Next guardaba las invalidaciones en memoria y un cambio guardado desde el panel aparecía y desaparecía según qué proceso respondiera. Un cache handler propio guarda todo en disco compartido, con un margen para los renders que se cruzan con una invalidación, y por la misma razón los límites del chat viven en Postgres.",
+          "IA sin fuga de datos sensibles: el catálogo que recibe el modelo pasa por el mismo serializer que la web, así que los precios se quitan antes de armar el prompt para quien no tiene cuenta, y los montos de la base de conocimiento también se ocultan. Hay tests que prueban intentos de prompt injection como usuario anónimo, comercio pendiente y token inválido; el proveedor se puede cambiar entre OpenAI y Anthropic, con topes por IP y por día.",
+          "CMS embebido sin migraciones por campo: los textos de la web se guardan en una tabla clave-JSON cuya forma define un registry compartido contra el que valida el backend. Si falta una fila, la web usa el texto por defecto y nunca queda una página vacía, y sumar una sección o un campo no requiere migración.",
+          "Performance de imágenes: con la caché de disco de next/image apagada por el cluster de PM2, Nginx cachea las imágenes optimizadas mediante un script idempotente con backup y rollback. Las fotos subidas se procesan con sharp, que además recorta el fondo, y el límite de memoria del frontend se subió porque optimizar JPGs grandes provocaba reinicios constantes.",
+          "Rate limiting por capas: un techo global más límites distintos para autenticación (5 cada 15 minutos), lectura del catálogo y webhooks, ajustados a cómo navega una visita real. Corregir el proxy de Next para que reenviara la IP del visitante evitó que todo el sitio compartiera un mismo contador."
+        ],
+        "architecture": {
+          "body": "Monorepo con npm workspaces y dos aplicaciones. El frontend en Next.js 15 hace de backend-for-frontend: sus API routes reenvían la sesión y la IP del visitante al backend en Express, que concentra la lógica de negocio, la autenticación y las integraciones. PostgreSQL con Prisma es la única fuente de verdad, y toda regla comercial que BGV necesita ajustar (compra mínima, aprobación, datos bancarios, textos de la web) vive en tablas de configuración, así que cambiarla no requiere un deploy.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "Frontend en Next.js App Router con API routes como proxy al backend, que reenvían la sesión y la IP del visitante.",
+                "Backend en Express con alrededor de 100 handlers REST separados en rutas públicas, de cliente y de administración.",
+                "Persistencia organizada en DAOs por entidad sobre Prisma.",
+                "El asistente de IA es un paquete separado en core y adapters, sincronizado con un script propio.",
+                "El chat responde en streaming a través de un proxy, con un parser de body separado del resto de la API."
+              ]
+            },
+            {
+              "title": "Funcionalidades de la plataforma",
+              "bullets": [
+                "Catálogo público por rubros, con búsqueda por código y precios solo para cuentas aprobadas.",
+                "Alta de cuenta mayorista que crea el usuario y la empresa en una sola transacción.",
+                "Carrito por bulto cerrado o por unidad suelta, con validación de la compra mínima.",
+                "Checkout con Mercado Pago o transferencia (5% de descuento), además de cupones.",
+                "Seguimiento de pedidos con dos estados separados: el del pago y el de preparación y envío.",
+                "Asistente de IA con captura de contactos y base de conocimiento editable.",
+                "SEO: robots, sitemap, canonicals y schema de entidad."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "bullets": [
+                "25 modelos en Prisma y 32 migraciones versionadas.",
+                "Tablas de configuración de una sola fila para datos bancarios, reglas mayoristas y moneda.",
+                "Órdenes con borrado lógico y un id de pago único, lo que da idempotencia ante notificaciones repetidas.",
+                "Rubros con jerarquía (padre e hijos) y orden persistido.",
+                "Conversaciones y contactos del chat guardados como JSON completo, con columnas indexadas para ordenar y deduplicar."
+              ]
+            },
+            {
+              "title": "Autenticación",
+              "chips": [
+                "JWT",
+                "bcrypt",
+                "Google Sign-In",
+                "Versionado de tokens",
+                "Vinculación de cuentas",
+                "Reset de contraseña",
+                "Roles cliente / admin",
+                "Estado de empresa"
+              ]
+            }
+          ]
+        },
+        "payments": {
+          "body": "Cobro único por pedido, en pesos, con Mercado Pago Checkout Pro o transferencia bancaria. El backend recalcula el monto en el servidor y crea una preferencia que lleva el id de la orden como external reference, que es lo que permite conciliar un pago aunque nunca llegue la notificación.",
+          "groups": [
+            {
+              "title": "Mercado Pago",
+              "bullets": [
+                "Preferencias creadas con external reference y URL de notificación; para pagar se exige una cuenta mayorista aprobada.",
+                "El webhook valida la firma HMAC-SHA256 con comparación en tiempo constante y deja en el log el detalle de cada rechazo.",
+                "Si el comprador vuelve al sitio, un endpoint de sincronización actualiza el pago.",
+                "Un proceso concilia cada 5 minutos las órdenes pendientes que tienen entre 5 minutos y 24 horas, de a 20 por corrida.",
+                "Si hay un pedido pendiente, se reutiliza en lugar de crear uno nuevo."
+              ]
+            },
+            {
+              "title": "Transferencia bancaria",
+              "bullets": [
+                "La orden queda pendiente con un 5% de descuento aplicado.",
+                "El cliente recibe los datos bancarios por mail y el equipo de BGV recibe un aviso.",
+                "Si los datos bancarios están incompletos o desactivados, la opción no aparece en el checkout."
+              ]
+            },
+            {
+              "title": "Estados de la orden",
+              "chips": [
+                "Pendiente",
+                "En proceso",
+                "Aprobada",
+                "Rechazada",
+                "Cancelada",
+                "Reembolsada"
+              ]
+            },
+            {
+              "title": "Sandbox y pruebas",
+              "bullets": [
+                "Una guía de pruebas en sandbox y un script que detecta si las credenciales son de prueba o de producción.",
+                "Tests end-to-end del flujo de compra, la transferencia, el webhook y la conciliación."
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Deploy en un VPS propio con Ubuntu 24.04, con releases atómicas y rollback automático, sin servicios gestionados: PostgreSQL 16, Nginx y PM2 corren en el mismo servidor.",
+          "groups": [
+            {
+              "title": "Hosting y deploy",
+              "bullets": [
+                "Cada release se compila en una carpeta nueva; recién después se aplican las migraciones y se cambia el symlink current.",
+                "Si cualquier paso falla, un trap vuelve a la release anterior, y se guardan las últimas 5.",
+                "PM2 corre dos instancias del frontend y dos del backend en modo cluster, con recargas, reinicios con backoff y límite de memoria.",
+                "Nginx como reverse proxy con HTTPS de Let's Encrypt para el dominio con y sin www."
+              ]
+            },
+            {
+              "title": "Secretos y almacenamiento",
+              "bullets": [
+                "Los archivos de entorno van cifrados con dotenvx; las claves viven en una carpeta compartida que cada release vincula.",
+                "Las fotos subidas y sus variantes optimizadas están en una carpeta compartida, así sobreviven a cada deploy.",
+                "Un script de diagnóstico muestra la configuración resuelta sin exponer los valores."
+              ]
+            },
+            {
+              "title": "Logs y monitoreo",
+              "chips": [
+                "Logs de PM2",
+                "Rotación de logs",
+                "Script de diagnóstico"
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Una plataforma de e-commerce mayorista completa: sitio público, área de clientes, panel de administración con asistente de IA, scripts de carga del catálogo e infraestructura de deploy documentada.",
+          "groups": [
+            {
+              "title": "Sitio público y clientes",
+              "bullets": [
+                "Home con hero administrable, rubros, preguntas frecuentes y mapa de cobertura.",
+                "Catálogo y ficha de producto.",
+                "Páginas de Nosotros, Cómo comprar y Contacto.",
+                "Alta de cuenta mayorista, login (también con Google) y recuperación de contraseña.",
+                "Carrito, checkout y pantallas de resultado del pago.",
+                "Perfil con los pedidos y la seguridad de la cuenta."
+              ]
+            },
+            {
+              "title": "Panel de administración",
+              "bullets": [
+                "Dashboard, productos, rubros con orden por arrastre, pedidos con detalle, cupones, estadísticas, datos de transferencia y contenido web.",
+                "Asistente de IA: conversaciones, contactos, preguntas sin respuesta, base de conocimiento y ajustes."
+              ]
+            },
+            {
+              "title": "Herramientas internas",
+              "bullets": [
+                "Extracción del catálogo desde el PDF del proveedor, con mapeo y optimización de fotos.",
+                "Seed del catálogo real.",
+                "Vista previa de los mails y una prueba de punta a punta de la caché compartida."
+              ]
+            },
+            {
+              "title": "Documentación",
+              "chips": [
+                "README",
+                "Deploy en el VPS",
+                "Asistente IA",
+                "Pagos",
+                "Google OAuth",
+                "Seguridad",
+                "SEO"
+              ]
+            }
+          ]
+        }
+      },
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Plataforma de Compliance y Document Intelligence para Flotas",
@@ -589,6 +909,108 @@
           ]
         }
       },
+      "bellum-property-management": {
+        "title": "Bellum Property Management",
+        "role": "Frontend Engineer · Design System y SEO",
+        "industry": "Real estate • Administración de HOAs y condominios",
+        "engagement": "Trabajo para cliente",
+        "duration": "10 semanas",
+        "subtitle": "Sitio institucional para una administradora de consorcios",
+        "description": "Sitio institucional de una administradora de HOAs y condominios de Virginia. El código fuente se recuperó desde el bundle compilado de producción, se migró a Vite, se auditó y se rediseñó sobre un design system propio, con SEO por ruta, datos estructurados y un cuestionario de propuesta accesible.",
+        "whatIs": "Bellum Property Management es el sitio institucional de una empresa que administra asociaciones de propietarios (HOAs) y condominios en Richmond y Northern Virginia. Le habla a un público concreto, los integrantes de las juntas directivas, y tiene un objetivo comercial claro: que una junta pida una propuesta de administración.\nEl usuario puede recorrer los servicios (administración financiera, administración integral, transición desde el desarrollador y consultoría), ver la cobertura de seguros con las aseguradoras asociadas y consultar el protocolo de emergencias 24/7 y una biblioteca de recursos para juntas. El centro del sitio es un cuestionario para clientes nuevos, con validación por campo, que pide los datos de la comunidad, la cantidad de unidades, el tipo de servicio y el rol en la junta. Desde el navbar se llega a los sistemas externos del cliente: el portal de residentes, los documentos de reventa y el sitio de gestión financiera de la misma empresa.\nEl proyecto arrancó de una situación poco común: no había código fuente, solo el bundle compilado en producción. El trabajo fue recuperarlo, migrarlo, auditarlo, rediseñarlo por completo y dejarlo indexable, sin cortar el sitio en vivo.",
+        "problemSolved": "El cliente había heredado un sitio hecho con Create React App del que solo existía el build: un bundle minificado y sus source maps, servidos tal cual desde la raíz del repositorio. Los estilos tenían defectos que no se veían a simple vista (variables CSS que no existían, reglas de CSS Modules que se filtraban y pisaban la tipografía de todo el sitio, un navbar con posiciones fijas que se desarmaba) y el SEO casi no existía: las seis rutas compartían el mismo title, la description era la que trae el framework por defecto, no había robots.txt, el sitemap devolvía el HTML de la app y cualquier URL inventada respondía 200.\nLa solución fue reconstruir el código desde los source maps y montarlo sobre Vite 5, para lo que primero hubo que pasar a imports ESM los require() propios de webpack, que dejaban la pantalla en blanco. Después vino una auditoría con arreglos puntuales y un rediseño completo sobre un design system propio con tokens de color, tipografía fluida con clamp(), espaciado y sombras. En SEO se sumaron metadatos por ruta con un componente propio sin dependencias, un sitemap y un robots.txt reales servidos como archivos estáticos antes del rewrite de la SPA, datos estructurados ProfessionalService y una página 404 con noindex que corta los soft 404.\nAntes del rediseño se hizo una exploración de diseño con ocho direcciones distintas más dos variantes refinadas. Se eligió \"Cornerstone\", una estética editorial de estudio de agrimensura (serif Newsreader, monoespaciada IBM Plex Mono, paleta verde bosque y bronce), aplicada en todas las páginas.",
+        "learnings": [
+          "Recuperación de código desde producción: el código fuente se reconstruyó desde los source maps del bundle de Create React App y se migró a Vite. El caso más delicado fue pasar a imports ESM los require() inline dentro de template strings, una sintaxis que solo resolvía webpack y que en Vite tiraba el render entero.",
+          "Auditoría de CSS heredado: se encontraron y corrigieron variables CSS inexistentes, selectores de etiqueta sin scopear dentro de CSS Modules que pisaban estilos globales, reglas !important que invertían el responsive y una imagen de terceros enlazada directo, con riesgo de licencia.",
+          "Design system desde cero: tokens para la paleta, una escala tipográfica fluida con clamp(), espaciado y tracking, y componentes base (Button, Card, Section, Field, Badge) que reemplazaron los estilos sueltos de cada componente.",
+          "SEO técnico en una SPA sin SSR: un componente PageMeta actualiza en cada navegación title, description, canonical, Open Graph, Twitter y robots, y las rutas desconocidas reciben noindex, follow y un canonical a la home para evitar soft 404.",
+          "Interacción con la infraestructura: el rewrite /* → /index.html que necesita React Router se tragaba el sitemap. Al mover robots.txt y sitemap.xml a public/, se sirven como archivos reales antes del rewrite y con el content-type correcto.",
+          "Señales locales coherentes: el areaServed del JSON-LD declara solo Virginia, porque es lo único que respalda el contenido; declarar una cobertura que el sitio no sostiene puede jugar en contra en búsquedas locales.",
+          "Animaciones accesibles: un hook useReveal con IntersectionObserver y tres estados (static, armed, shown) que respeta prefers-reduced-motion. El contador animado deja el valor final en el DOM para lectores de pantalla, clientes sin JavaScript y capturas.",
+          "Formularios accesibles sin librerías: un componente Field conecta label, ayuda y error con el control mediante aria-describedby y aria-invalid, el foco va al primer campo con error cuando falla la validación, y el envío sigue siendo un POST nativo a Formspree que evita envíos duplicados.",
+          "Compatibilidad con Safari en iOS: las grillas de una columna con 1fr tomaban el min-content en WebKit y desbordaban a 390px. Se pasaron a minmax(0, 1fr), y los reveals de listas largas se hacen por tarjeta en vez de en cascada.",
+          "Ilustración generada por código: el mapa de Virginia es un SVG armado desde coordenadas reales de longitud y latitud con una proyección propia, que muestra las dos zonas de servicio y lleva un title accesible."
+        ],
+        "architecture": {
+          "body": "Una SPA en React servida como sitio estático. El contenido (navegación, contacto, hero, servicios, métricas, aliados) vive en módulos de datos separados de los componentes de presentación, así los textos y enlaces se editan sin tocar la UI, y las páginas se arman con secciones sobre una capa de UI compartida.",
+          "groups": [
+            {
+              "title": "Arquitectura de la aplicación",
+              "bullets": [
+                "React Router con 6 rutas públicas más un catch-all 404, dentro de un layout compartido.",
+                "Una capa ui/ con componentes base, primitivas de formulario y utilidades de animación.",
+                "Contenido centralizado en módulos de datos del sitio, los servicios y los aliados.",
+                "ScrollToTop y PageMeta como componentes sin render que reaccionan al cambio de ruta.",
+                "Un skip link al contenido principal para navegar con teclado."
+              ]
+            },
+            {
+              "title": "Funcionalidades del sitio",
+              "bullets": [
+                "Home con hero, diferenciales, métricas animadas, servicios, sección de sustentabilidad, mapa de cobertura, aliados y llamado a la acción.",
+                "Cuestionario de nuevo cliente con validación por campo.",
+                "Páginas de servicios, seguros, emergencias 24/7, recursos y contacto.",
+                "Enlaces externos marcados al portal de residentes, a los documentos de reventa y al sitio financiero."
+              ]
+            },
+            {
+              "title": "SEO",
+              "chips": [
+                "Meta por ruta",
+                "Canonical",
+                "Open Graph",
+                "JSON-LD",
+                "Sitemap XML",
+                "robots.txt",
+                "404 noindex"
+              ]
+            },
+            {
+              "title": "Accesibilidad",
+              "chips": [
+                "ARIA en formularios",
+                "Reduced motion",
+                "Skip link",
+                "SVG con title",
+                "Foco gestionado"
+              ]
+            }
+          ]
+        },
+        "infra": {
+          "body": "Se publica como sitio estático en Render, con deploy automático en cada push a main. El dominio pasa por Cloudflare, y www redirige al dominio principal con un 301.",
+          "groups": [
+            {
+              "title": "Deploy",
+              "bullets": [
+                "Build con npm install y npm run build, publicando dist/. Se corrigió una configuración que seguía sirviendo el bundle viejo desde la raíz del repo, por eso producción no reflejaba los cambios.",
+                "Regla de rewrite /* → /index.html para el routing del lado del cliente.",
+                "Archivos de SEO servidos como estáticos reales, antes del rewrite.",
+                "Imágenes convertidas a WebP para bajar el peso de la página."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "body": "Un sitio recuperado, rediseñado e indexable, entregado sin interrumpir el sitio en vivo.",
+          "groups": [
+            {
+              "title": "Entregado",
+              "bullets": [
+                "Código fuente recuperado y migrado de Create React App a Vite.",
+                "Auditoría de CSS y layout con los arreglos aplicados.",
+                "Exploración de diseño con 10 direcciones.",
+                "El design system \"Cornerstone\": tokens, tipografía y componentes base.",
+                "Rediseño completo de las 7 vistas (home, servicios, seguros, emergencias, recursos, contacto y 404), más el navbar, el menú móvil y el footer.",
+                "Cuestionario de propuesta accesible integrado con Formspree.",
+                "Paquete de SEO técnico: metadatos por ruta, sitemap, robots, JSON-LD y una 404 real.",
+                "Mapa SVG de cobertura generado desde datos geográficos.",
+                "Configuración de deploy en Render corregida."
+              ]
+            }
+          ]
+        }
+      },
       "royal-parking-services": {
         "title": "Royal Parking Services",
         "role": "Full-stack Engineer",
@@ -896,7 +1318,7 @@
         "title": "Acer0",
         "subtitle": "Plataforma de E-Commerce a Medida",
         "description": "Plataforma de e-commerce totalmente a medida construida desde cero para una marca de manufactura y retail. Entrega una experiencia de compra online completa con navegación de productos, gestión de carrito, pagos con Mercado Pago y transferencia bancaria, cuentas de cliente con seguimiento de pedidos y favoritos, y un potente panel de administración con estadísticas de ventas — todo dentro de un diseño pixel-perfect, mobile-first y totalmente responsive.",
-        "whatIs": "a.cer0 es una plataforma de e-commerce totalmente a medida construida desde cero para una marca de manufactura y retail. El sistema entrega una experiencia de compra online completa — desde la navegación de productos y gestión del carrito hasta un checkout seguro con múltiples métodos de pago — junto con un potente panel de administración para el control total de la operación del negocio.\nLas funcionalidades incluyen catálogo de productos con filtros avanzados, carrito con soporte de cupones, integración de pagos con Mercado Pago, manejo de transferencias bancarias, cuentas de cliente con seguimiento de pedidos y favoritos, dashboard administrativo con estadísticas de ventas y diseño totalmente responsive mobile-first.",
+        "whatIs": "a.cer0 es una plataforma de e-commerce totalmente a medida construida desde cero para una marca de manufactura y retail. El sistema entrega una experiencia de compra online completa — desde la navegación de productos y gestión del carrito hasta un checkout seguro con múltiples métodos de pago — junto con un potente panel de administración para el control total de la operación del negocio.\nLas funcionalidades incluyen catálogo de productos con filtros avanzados, carrito con soporte de cupones, integración de pagos con Mercado Pago, manejo de transferencias bancarias, cuentas de cliente con seguimiento de pedidos y favoritos, dashboard administrativo con estadísticas de ventas y diseño totalmente responsive mobile-first.\nLa tienda también incluye un asistente de IA que responde las consultas de los clientes con los productos publicados, las medidas, los precios, los medios de pago, los envíos y el resto del contenido del sitio, que se actualiza solo cuando algo cambia. Desde el panel, el equipo amplía lo que sabe subiendo documentos, agregando preguntas y respuestas o pegando texto, y sigue sus conversaciones, los contactos que consigue, su tasa de conversión y las preguntas que no supo responder.",
         "problemSolved": "El cliente necesitaba un storefront digital a medida que reflejara su identidad de marca y a la vez manejara toda la complejidad del e-commerce argentino — incluyendo integración con Mercado Pago, flujos de confirmación de transferencias bancarias y una experiencia administrativa bilingüe.\nLas soluciones off-the-shelf no podían entregar el UX custom, la performance y el control requeridos, por lo que la respuesta fue una plataforma a medida — dando al cliente propiedad total sobre sus datos, su branding y su operación, con un backend afinado exactamente a su flujo de trabajo.",
         "learnings": [
           "Arquitectura full-stack en monorepo con frontend Next.js 15 (App Router) que proxea hacia un backend Express/TypeScript mediante un patrón BFF (Backend-for-Frontend) seguro.",
@@ -1033,6 +1455,7 @@
                 "Storefront público con catálogo, búsqueda, filtros, carrito y checkout.",
                 "Área de clientes con cuentas, seguimiento de pedidos, listas de deseos y gestión de perfil.",
                 "Panel administrativo para productos, pedidos, cupones, reseñas y analítica de ventas.",
+                "Asistente de IA con base de conocimiento editable, más vistas en el panel para sus conversaciones, los contactos capturados, la conversión y las preguntas sin respuesta.",
                 "Despliegue productivo en infraestructura del cliente, con una configuración de Docker reproducible."
               ]
             },
@@ -1499,7 +1922,8 @@
       "Kansas, United States": "Kansas, Estados Unidos",
       "Ontario, Canada": "Ontario, Canadá",
       "Santiago, Chile": "Santiago, Chile",
-      "United States": "Estados Unidos"
+      "United States": "Estados Unidos",
+      "Virginia, United States": "Virginia, Estados Unidos"
     }
   },
   "pages": {

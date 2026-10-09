@@ -560,6 +560,11 @@ export default function ProjectDetailComponent({
                 {subtitle && <p className={styles.titleSubtitle}>{subtitle}</p>}
               </div>
 
+              {/* El sitio en vivo va en el header, al lado de la ubicación: es
+                  la prueba más directa del proyecto y al final del Overview,
+                  debajo de dos bloques de texto, casi nadie llegaba a verlo. */}
+              {(locationChips.length > 0 || liveDemoLink) && (
+              <div className={styles.headerAside}>
               {locationChips.length > 0 && (
                 <div className={styles.locationChips}>
                   {locationChips.map((place) => (
@@ -577,6 +582,19 @@ export default function ProjectDetailComponent({
                     </span>
                   ))}
                 </div>
+              )}
+              {liveDemoLink && (
+                <a
+                  href={liveDemoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.liveSiteButton}
+                >
+                  {t('projects.visitSite')}
+                  <ExternalLink size={15} aria-hidden />
+                </a>
+              )}
+              </div>
               )}
             </div>
 
@@ -651,11 +669,8 @@ export default function ProjectDetailComponent({
                           {t('projects.githubRepository')} <Lock className={styles.iconSmall} />
                         </div>
                       ) : null}
-                      {liveDemoLink ? (
-                        <a href={liveDemoLink} target="_blank" rel="noopener noreferrer">
-                          {t('projects.liveDemo')} <ExternalLink className={styles.iconSmall} />
-                        </a>
-                      ) : liveDemoLink === null ? (
+                      {/* Con link público, el sitio en vivo ya está en el header. */}
+                      {liveDemoLink === null ? (
                         <div className={styles.privateLink} title={t('projects.privateProjectTooltip')}>
                           {t('projects.liveDemo')} <Lock className={styles.iconSmall} />
                         </div>

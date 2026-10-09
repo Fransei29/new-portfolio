@@ -28,8 +28,6 @@
   border: 1.5px solid var(--verde-bosque);
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   font-family: var(--font-sans, inherit);
   white-space: nowrap;
   line-height: 1;
@@ -245,13 +243,16 @@
     transition: transform 0.5s ease, filter 0.4s ease;
   }
 
-  // Velo lila de marca: el mismo recurso de .tutorialCard, a un tercio de fuerza.
+  // Velo lila de marca, en mezcla normal. Antes era un multiply, y el multiply
+  // sobre la imagen filtrada, sumado a los backdrop-filter de los badges,
+  // hacía que Chrome redibujara la preview con copias corridas del texto
+  // (sobre todo al hover, cuando el botón se mueve). Estos valores aproximan
+  // el oscurecimiento que daba el multiply.
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(142, 122, 230, 0.14) 0%, rgba(46, 41, 78, 0.1) 100%);
-    mix-blend-mode: multiply;
+    background: linear-gradient(135deg, rgba(90, 70, 170, 0.07) 0%, rgba(46, 41, 78, 0.09) 100%);
     pointer-events: none;
     z-index: 2;
     transition: opacity 0.4s ease;
@@ -556,11 +557,11 @@
   // Calza contra la esquina superior derecha: esa esquina sigue el radio de la
   // tarjeta (--br-lg) y la interior queda apenas menor.
   border-radius: 0 var(--br-lg) 0 10px;
-  background-color: rgba(46, 41, 78, 0.6);
+  // Sin backdrop-filter: el desenfoque sobre la preview es parte del glitch
+  // de repintado (ver .projectPreview::after). Se compensa con más opacidad.
+  background-color: rgba(46, 41, 78, 0.82);
   color: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   box-shadow: none;
   white-space: nowrap;
   line-height: 1;

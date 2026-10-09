@@ -53,7 +53,9 @@ export const projects: Project[] = [
     subtitle: 'Custom E-Commerce Platform',
     whatIs: `a.cer0 is a fully custom e-commerce platform designed and built from scratch for a manufacturing and retail company. It combines a high-performance storefront with a complete back-office system, letting the business manage products, orders, payments, customers, and day-to-day operations from a single platform.
 
-The solution includes a responsive shopping experience, advanced product search and filtering, customer accounts, order tracking, Mercado Pago and bank transfer payments, promotional coupons, sales analytics, and a custom administration panel tailored to the client's workflow.`,
+The solution includes a responsive shopping experience, advanced product search and filtering, customer accounts, order tracking, Mercado Pago and bank transfer payments, promotional coupons, sales analytics, and a custom administration panel tailored to the client's workflow.
+
+The store also includes an AI assistant that answers customer questions using the published products, measurements, prices, payment methods, shipping and the rest of the site's content, updated automatically as it changes. From the admin panel, the team extends what it knows by uploading documents, adding questions and answers or pasting text, and follows its conversations, the leads it captures, its conversion rate and the questions it could not answer.`,
     problemSolved: `Off-the-shelf platforms couldn't provide the flexibility the business required. The client needed complete ownership of the platform, seamless integration with Argentine payment methods, custom operational workflows, and a user experience aligned with their brand.
 
 The solution was to architect a fully custom platform, giving the client complete control over payments, infrastructure, branding, and future scalability.`,
@@ -189,6 +191,7 @@ The solution was to architect a fully custom platform, giving the client complet
             'Public storefront with catalog, search, filtering, cart, and checkout.',
             'Customer area covering accounts, order tracking, wishlists, and profile management.',
             'Administrative panel for products, orders, coupons, reviews, and sales analytics.',
+            'AI assistant with an editable knowledge base, plus admin views for its conversations, captured leads, conversion and unanswered questions.',
             'Production deployment on client-owned infrastructure with a reproducible Docker configuration.',
           ],
         },
@@ -221,15 +224,438 @@ The solution was to architect a fully custom platform, giving the client complet
       '/img/img/Acero-web/acero-16.webp',
       '/img/img/Acero-web/acero-17.webp',
       '/img/img/Acero-web/acero-18.webp',
+      '/img/img/Acero-web/acero-19.webp',
+      '/img/img/Acero-web/acero-20.webp',
+      '/img/img/Acero-web/acero-21.webp',
+      '/img/img/Acero-web/acero-22.webp',
     ],
     githubLink: null as any,
     liveDemoLink: 'https://www.acer0.com.ar/',
+  },
+  {
+    // Nombre de producto ficticio: el cliente no quiere el nombre real en
+    // público. Las capturas también van anonimizadas (logo, organización,
+    // contactos y mails reescritos).
+    slug: 'arventa',
+    role: 'Full-stack Engineer',
+    engagement: 'Team Collaboration',
+    industry: 'Fintech • Accounts Receivable SaaS',
+    locations: [
+      { flag: '🇨🇦', label: 'Canada' },
+      { flag: '🇺🇸', label: 'United States' },
+    ],
+    duration: '6 months',
+    year: '2026',
+    title: 'Arventa',
+    subtitle: 'AI Voice-Agent Accounts Receivable Automation Platform',
+    whatIs: `Arventa is a multi-tenant platform that automates accounts-receivable follow-up for businesses chasing overdue invoices. It combines AI voice agents that place outbound collection calls with AI-drafted emails, and a visual workflow engine decides who gets contacted, through which channel and when. Finance teams get one place to manage receivables and see every interaction with each debtor.
+
+Inside the app, users import invoices from CSV or Xero, design collection workflows in a node-based editor (calls, emails, waits, conditional branches on call or email outcomes, record updates and escalation to a human) and launch them on single invoices or in batches of up to 500. Each invoice gets a unified timeline with call transcripts and recordings, emails and inbound replies, notes and an edit history, plus an AI-generated summary of where the account stands and what should happen next. Calls the agent cannot resolve become follow-up items in an Action Needed queue: a customer asking for a human, wanting to negotiate, a wrong number or an unreachable debtor. Admins can listen to calls live and configure contact hours, the voice agent and verified sending domains for each organization.
+
+The system is a monorepo with three deployable parts: a React dashboard, a Node.js call server that also runs the workflow engine, and a Supabase project with 74 SQL migrations and 11 edge functions. It was built by a five-person engineering team over about six months.`,
+    problemSolved: `Collecting overdue invoices is repetitive, manual work. Collectors call debtors one by one, leave voicemails, send reminder emails, note what was promised and try to remember when to follow up. Context ends up scattered across phone logs, inboxes and spreadsheets, calls placed at the wrong hour or to a wrong number waste effort, and for any given account it is hard to tell what has been tried and what should happen next.
+
+Arventa turns that process into durable, auditable workflows. A Postgres-backed state machine on pg-boss runs each workflow: it parks a run while waiting on a phone call, an email reply or a timer, and resumes it when a telephony or voice-agent callback or an inbound email webhook arrives. Each run executes against a frozen snapshot of the workflow, so editing a workflow never affects runs already in flight. Outcomes are classified into structured categories (voicemail, wrong number, promise to pay, escalation and others) that drive retry policies and branching, and calls and emails are deferred until the debtor's local business hours, with the timezone inferred from the phone's area code.
+
+The product depends on combining three things in one system: conversational AI calling, per-organization configurable workflows, and outcome-aware follow-up that feeds a human action queue. The code reflects that integration-heavy core: Twilio for telephony and answering-machine detection, ElevenLabs for the conversational agents and their tools, Claude models for classification, summaries and email drafting, and Resend for outbound email and inbound replies.`,
+    techStack: [
+      'TypeScript 5.9',
+      'React 19',
+      'Vite 6',
+      'React Router 7',
+      'TanStack Query 5',
+      'Tailwind CSS 4',
+      'React Flow',
+      'Recharts 3',
+      'Node.js',
+      'Fastify 5',
+      'WebSockets',
+      'pg-boss 12',
+      'Supabase',
+      'PostgreSQL 17',
+      'Row-Level Security',
+      'Deno Edge Functions',
+      'Twilio Voice',
+      'ElevenLabs Conversational AI',
+      'Anthropic Claude',
+      'Resend',
+      'Xero API',
+      'Pino',
+      'PM2',
+      'Vitest 4',
+      'Testing Library',
+    ],
+    learnings: [
+      'Durable workflow orchestration: a graph-based engine where runs are resumable state machines in Postgres. External events (calls, email replies, timers) park a run instead of blocking a worker; claiming uses FOR UPDATE SKIP LOCKED, and a resume scan recovers runs from stale or crashed workers.',
+      'Concurrency correctness: claim-token fencing on terminal writes, compare-and-swap step transitions so duplicate webhook callbacks lose, a partial unique index that allows one active step per node, and jsonb context merges done in the database.',
+      'Exactly-once side effects: each step attempt carries an idempotency key forwarded to both the call endpoint and the email API, and a database-side pending placeholder with a TTL lets a crashed attempt be reclaimed safely.',
+      'Run immutability: a Postgres trigger snapshots the workflow graph when a run is created and rejects unpublished workflows, so editing a workflow never changes runs already executing.',
+      'Outcome-aware retry policies: each outcome has its own policy (voicemail retried 3 times every 4 hours, busy 4 times every 15 minutes) that each node can override, and Twilio and SIP error codes are classified as terminal or retriable.',
+      'Compliance-minded scheduling: calls and emails are deferred to the debtor’s local business hours on weekdays only. The timezone comes from the invoice, then the phone’s NANP area code, then the organization, and when in doubt the later local time wins. Deferral reuses the retry path, so it does not use up an attempt.',
+      'Voice AI integration: outbound calls run through Twilio and are bridged to ElevenLabs conversational agents with per-call dynamic context, webhook tools for escalating to a human, and voicemail detection at both the Twilio and the agent level. Supervisors listen live through Twilio Media Streams relayed over WebSockets and decoded in the browser with Web Audio.',
+      'Hybrid AI summaries: metrics are computed in code and only the narrative comes from the LLM. A content fingerprint skips regeneration when nothing changed, and a structured next step (owner, kind, reason) can create or retire human follow-up actions.',
+      'Multi-tenancy through Postgres RLS: roles at two levels, global (user, admin, super admin) and per organization (user, admin), backed by SECURITY DEFINER helper functions, with storage paths scoped by organization in the private bucket policies.',
+      'Email round-trip without a dedicated inbox: each run gets its own reply-to address plus a sender-domain check. An inbound reply is routed to its run, classified by AI into intents (promise to pay, dispute, already paid) and resumes the workflow, with webhooks verified through Svix signatures and a timing-safe compare.',
+    ],
+    architecture: {
+      body: `Arventa is split into a static React dashboard, a stateful Node.js call server and a managed Supabase backend. The dashboard reads and writes tenant data directly through Supabase, protected by Row-Level Security. Everything that touches the outside world or must survive restarts goes through the call server (telephony, voice-agent webhooks, inbound email and the workflow engine), and its state lives entirely in Postgres via pg-boss and SQL functions, so restarts and deploys need no special handling.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Monorepo with three units: a React/Vite frontend, a Fastify + pg-boss call server, and a Supabase project with migrations and edge functions.',
+            'Frontend data-access layer of 26 modules wrapped in TanStack Query hooks, with no direct database calls in components.',
+            'Engine queues created with pg-boss’s own retries disabled so the engine owns retry logic, plus cron scans for scheduled triggers every 5 minutes and resumes every 2.',
+            'Edge functions hold the LLM and email-provider logic, isolated from the call server.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Visual workflow editor with 7 node types (call, email, wait, branch, update record, escalate, end), with graphs validated before they can be published.',
+            'Batch launches over up to 500 invoices, skipping any invoice that already has an active run.',
+            'Unified invoice timeline: calls, emails, replies, notes and audit history.',
+            'Action Needed queue fed by escalations, failed calls, wrong numbers and unreachable debtors.',
+            'Per-invoice phone number history with wrong-number tracking.',
+            'Live call listening and transcripts.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            '29 tables over 74 migrations, all with RLS enabled.',
+            'Workflow runs and run steps with attempt history, claim tokens and resume deadlines.',
+            'A polymorphic interactions table (call, email, text) with a many-to-many link to invoices for emails that cover several invoices.',
+            'Outcome categories per organization, with a JSON field schema enforced by database triggers.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          chips: [
+            'Supabase Auth',
+            'Org-scoped RLS',
+            'Global + org roles',
+            'SECURITY DEFINER helpers',
+            'JWT-verified admin routes',
+            'Svix webhooks',
+            'Twilio signatures',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `The production setup keeps a deliberately small operational footprint: Supabase provides Postgres, auth, storage and the serverless functions, and the call server runs as a single long-lived Node process.`,
+      groups: [
+        {
+          title: 'Hosting & Runtime',
+          bullets: [
+            'Supabase managed PostgreSQL 17 with separate dev and production projects.',
+            'Edge Functions on Deno 2.',
+            'Call server compiled with tsc and run under PM2 with autorestart and a 500 MB memory cap.',
+          ],
+        },
+        {
+          title: 'Reliability',
+          bullets: [
+            'The job queue lives in the same Postgres instance, with no extra broker.',
+            'A dead-letter queue for failed engine jobs.',
+            'A sweeper closes calls whose provider callback never arrived.',
+            'In production the server refuses to boot if webhook signing secrets are missing.',
+          ],
+        },
+        {
+          title: 'Observability',
+          chips: [
+            'Pino structured logs',
+            'AsyncLocalStorage trace context',
+            'Per-run error persistence',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `Delivered as a working three-part system: the finance team’s dashboard, the call server that runs the workflow engine, and the Supabase backend behind both.`,
+      groups: [
+        {
+          title: 'App Surfaces',
+          bullets: [
+            'Dashboard, invoices list and detail, workflow editor and templates, campaigns and batches, and run detail.',
+            'Action Needed queue, activities, uploads and contact-hours settings.',
+            'Organization admin for the voice agent, email domains and members, plus user management.',
+            'Pilot kick-off setup and a final report with charts.',
+          ],
+        },
+        {
+          title: 'Integrations',
+          chips: ['Twilio Voice', 'ElevenLabs Agents', 'Anthropic Claude', 'Resend', 'Xero'],
+        },
+        {
+          title: 'Tooling & Docs',
+          bullets: [
+            '87 test files with about 875 test cases across the backend and the frontend.',
+            'Hand-run end-to-end scripts for the engine and email replies.',
+            'An email provider setup guide, a developer handover guide and a product overview.',
+            'Migration of the email provider from SendGrid to Resend.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/arventa-web/arventa-13.webp',
+      '/img/img/arventa-web/arventa-08.webp',
+      '/img/img/arventa-web/arventa-01.webp',
+      '/img/img/arventa-web/arventa-02.webp',
+      '/img/img/arventa-web/arventa-03.webp',
+      '/img/img/arventa-web/arventa-04.webp',
+      '/img/img/arventa-web/arventa-05.webp',
+      '/img/img/arventa-web/arventa-06.webp',
+      '/img/img/arventa-web/arventa-07.webp',
+      '/img/img/arventa-web/arventa-09.webp',
+      '/img/img/arventa-web/arventa-10.webp',
+      '/img/img/arventa-web/arventa-11.webp',
+      '/img/img/arventa-web/arventa-12.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: null as any,
+  },
+  {
+    slug: 'bgv-mayorista',
+    role: 'Full-stack Engineer',
+    engagement: 'Client work',
+    industry: 'Wholesale distribution • B2B E-commerce',
+    duration: '6 weeks',
+    year: '2026',
+    locations: [
+      { flag: '🇦🇷', label: 'Cordoba, Argentina' },
+    ],
+    title: 'BGV Mayorista',
+    subtitle: 'B2B Wholesale E-Commerce with an AI Assistant',
+    whatIs: `BGV Mayorista is the online store of a household-goods distributor that sells to retailers by the closed pack. The catalog is public, but prices and purchasing are reserved for businesses with an approved wholesale account, so the site works both as a showcase that attracts new retailers and as the ordering channel for existing ones. It runs on the rules of the trade: a minimum order, pack multiples, optional per-item single-unit sales and per-customer discounts.
+
+Any visitor can browse the catalog by category and search by product code. A retailer that signs up (user and company are created together, with tax ID and tax status) starts seeing prices with its own discount, builds a cart by pack or by single unit, and pays with Mercado Pago or by bank transfer with a 5% discount, then follows its orders from the profile. An AI assistant answers questions about the catalog and the purchase conditions, and saves interested retailers as leads.
+
+The BGV team runs everything from an admin panel: products with photos whose background is removed on upload, drag-and-drop category ordering, orders with fulfilment and shipping status, coupons, bank details and statistics. They also edit the site's copy and images without a deploy, and manage the assistant's conversations, leads, knowledge base and settings. The project is a monorepo with two apps, Next.js and Express, connected through npm workspaces.`,
+    problemSolved: `A wholesaler cannot publish open prices like a retail store. The price list is for businesses, each customer can have its own terms, and orders follow rules a standard e-commerce does not cover: a minimum purchase, closed-pack sales and a surcharge for single units. At the same time, the catalog has to stay visible to bring in new retailers.
+
+The system solves it with a single price-visibility rule applied when products are serialized. A viewer middleware that never rejects a request resolves who is looking, so an anonymous visitor or a revoked token sees the catalog without values, while purchasing goes through a separate middleware that requires an approved company. Commercial rules such as the minimum order and approval requirements live in a configuration table and change without a deploy. Pack multiples, single-unit prices and each company's discount are stored in the model and recalculated on the server, and order lines keep the price and sale mode at the moment of purchase.
+
+The data model explains why it was built custom: the company is separate from the user, the sale mode is an attribute of each cart line, discounts are per company, and the AI assistant must never reveal prices. Those rules are hard to build on top of a generic e-commerce platform.`,
+    techStack: [
+      'TypeScript 5',
+      'Next.js 15',
+      'React 19',
+      'SCSS Modules',
+      'Node.js',
+      'Express 4',
+      'PostgreSQL 16',
+      'Prisma 6',
+      'Zod',
+      'JWT',
+      'Google Sign-In',
+      'Mercado Pago',
+      'OpenAI API',
+      'Anthropic Claude',
+      'sharp',
+      'Nodemailer',
+      'Helmet',
+      'dotenvx',
+      'PM2',
+      'Nginx',
+      "Let's Encrypt",
+      'Vitest',
+      'Supertest',
+      'Jest',
+      'Testing Library',
+    ],
+    learnings: [
+      'Access control by data visibility rather than by route: the catalog is public and prices are not. A viewer middleware that never rejects and a single canViewPrices function applied in the serializer, kept apart from canPurchase, enforce it, and a database flag lets the business change its approval policy without touching code.',
+      'B2B data model: the company, with its own lifecycle (pending, approved, rejected, suspended), tax ID and tax status, is separate from the user so several users can share it. Each company has its own discount over the base list, rounded to whole pesos so totals never carry cents.',
+      'Wholesale rules in the schema: pack multiples, per-item single-unit sales and the single-unit price are product fields. The sale mode lives on each cart line, so the same item can appear twice at different prices, and order lines record how they were sold so a delivery note never changes after a product is edited.',
+      'Payments with three confirmation paths: the Mercado Pago webhook verifies an HMAC-SHA256 signature with a timing-safe compare, including the edge case of an id arriving by query and signed in lowercase. A sync when the buyer returns to the site and a reconciliation job every 5 minutes by external reference turn the webhook into an optimization rather than a requirement.',
+      'Session revocation with stateless JWTs: every token carries a token version checked against the database on each request, so changing the password or revoking a Google link invalidates all previous tokens. Google sign-in links accounts by email and sends a one-time token to undo the link if the user did not make it.',
+      'Consistency under a PM2 cluster: with two frontend processes, Next.js kept cache invalidations in memory and a change saved from the admin panel appeared and disappeared depending on which process answered. A custom cache handler stores everything on shared disk, with a margin for renders that cross an invalidation, and the chat limits live in Postgres for the same reason.',
+      'AI without leaking sensitive data: the catalog the model receives goes through the same serializer as the website, so prices are removed before the prompt is built for anyone without an account, and amounts in the knowledge base are masked too. Tests run prompt-injection attempts as an anonymous user, a pending retailer and an invalid token; the provider is switchable between OpenAI and Anthropic, with per-IP and daily caps.',
+      'An embedded CMS without per-field migrations: site copy lives in a key-JSON table whose shape is defined by a shared registry that the backend validates against. A missing row falls back to the default text, so a page is never empty, and adding a section or a field needs no migration.',
+      'Image performance: with the next/image disk cache disabled because of the PM2 cluster, Nginx caches optimized images through an idempotent script with backup and rollback. Uploaded photos are processed with sharp, which also removes the background, and the frontend memory limit was raised after large JPG optimization caused constant restarts.',
+      'Layered rate limiting: a global ceiling plus separate limits for authentication (5 every 15 minutes), catalog reads and webhooks, tuned to how a real visit browses. Fixing the Next.js proxy so it forwarded the visitor’s IP stopped the whole site from sharing a single counter.',
+    ],
+    architecture: {
+      body: `A monorepo with npm workspaces and two applications. The Next.js 15 frontend acts as a backend-for-frontend: its API routes forward the session and the visitor's IP to the Express backend, which owns the business logic, authentication and integrations. PostgreSQL with Prisma is the single source of truth, and every commercial rule BGV needs to adjust (minimum order, approval, bank details, site copy) lives in configuration tables, so changing it needs no deploy.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'Next.js App Router frontend with API routes as a proxy to the backend, forwarding the session and the visitor’s IP.',
+            'Express backend with around 100 REST handlers split into public, customer and admin routes.',
+            'Persistence organized in per-entity DAOs over Prisma.',
+            'The AI assistant is a package split into core and adapters, kept in sync with a dedicated script.',
+            'The chat streams its responses through a proxy, with a body parser separate from the rest of the API.',
+          ],
+        },
+        {
+          title: 'Platform Features',
+          bullets: [
+            'Public catalog by category, with search by product code and prices only for approved accounts.',
+            'Wholesale sign-up that creates the user and the company in a single transaction.',
+            'Cart by closed pack or single unit, with minimum-order validation.',
+            'Checkout with Mercado Pago or bank transfer (5% discount), plus coupons.',
+            'Order tracking with two separate states: payment, and fulfilment and shipping.',
+            'AI assistant with lead capture and an editable knowledge base.',
+            'SEO: robots, sitemap, canonicals and entity schema.',
+          ],
+        },
+        {
+          title: 'Data Model',
+          bullets: [
+            '25 Prisma models and 32 versioned migrations.',
+            'Single-row configuration tables for bank details, wholesale rules and currency.',
+            'Soft-deleted orders and a unique payment id, which makes repeated notifications idempotent.',
+            'Hierarchical categories (parent and children) with persisted ordering.',
+            'Chat conversations and leads stored as full JSON, with indexed columns to sort and deduplicate.',
+          ],
+        },
+        {
+          title: 'Authentication',
+          chips: [
+            'JWT',
+            'bcrypt',
+            'Google Sign-In',
+            'Token versioning',
+            'Account linking',
+            'Password reset',
+            'Customer / admin roles',
+            'Company status',
+          ],
+        },
+      ],
+    },
+    payments: {
+      body: `One-time payment per order, in Argentine pesos, through Mercado Pago Checkout Pro or bank transfer. The backend recalculates the amount on the server and creates a preference that carries the order id as its external reference, which is what makes it possible to reconcile a payment even when the notification never arrives.`,
+      groups: [
+        {
+          title: 'Mercado Pago',
+          bullets: [
+            'Preferences created with external reference and notification URL; paying requires an approved wholesale account.',
+            'The webhook validates the HMAC-SHA256 signature with a constant-time compare and logs the detail of every rejection.',
+            'When the buyer returns to the site, a sync endpoint updates the payment.',
+            'A job reconciles pending orders between 5 minutes and 24 hours old every 5 minutes, 20 at a time.',
+            'An existing pending order is reused instead of creating a new one.',
+          ],
+        },
+        {
+          title: 'Bank Transfer',
+          bullets: [
+            'The order stays pending with a 5% discount applied.',
+            'The customer receives the bank details by email and the BGV team gets a notice.',
+            'If the bank details are incomplete or disabled, the option is hidden at checkout.',
+          ],
+        },
+        {
+          title: 'Order States',
+          chips: ['Pending', 'In process', 'Approved', 'Rejected', 'Cancelled', 'Refunded'],
+        },
+        {
+          title: 'Sandbox & Testing',
+          bullets: [
+            'A sandbox testing guide and a script that detects whether the credentials are test or production.',
+            'End-to-end tests for the purchase flow, bank transfer, webhook and reconciliation.',
+          ],
+        },
+      ],
+    },
+    infra: {
+      body: `Deployed on a dedicated Ubuntu 24.04 VPS with atomic releases and automatic rollback, without managed services: PostgreSQL 16, Nginx and PM2 run on the same server.`,
+      groups: [
+        {
+          title: 'Hosting & Deploy',
+          bullets: [
+            'Each release is built in a new folder; only then are migrations applied and the current symlink switched.',
+            'If any step fails, a trap rolls back to the previous release, and the last 5 releases are kept.',
+            'PM2 runs two frontend and two backend instances in cluster mode, with reloads, backoff restarts and a memory limit.',
+            'Nginx as reverse proxy with Let’s Encrypt HTTPS for the domain with and without www.',
+          ],
+        },
+        {
+          title: 'Secrets & Storage',
+          bullets: [
+            'Environment files encrypted with dotenvx; the keys live in a shared folder that each release links to.',
+            'Uploaded photos and optimized variants live in a shared folder, so they survive every deploy.',
+            'A diagnostics script shows the resolved configuration without exposing values.',
+          ],
+        },
+        {
+          title: 'Logs & Monitoring',
+          chips: ['PM2 logs', 'Log rotation', 'Diagnostics script'],
+        },
+      ],
+    },
+    deliverables: {
+      body: `A complete wholesale e-commerce platform: public site, customer area, admin panel with an AI assistant, catalog loading scripts and documented deploy infrastructure.`,
+      groups: [
+        {
+          title: 'Public Site & Customers',
+          bullets: [
+            'Home with an editable hero, categories, FAQ and coverage map.',
+            'Catalog and product detail pages.',
+            'About, How to buy and Contact pages.',
+            'Wholesale sign-up, login (including Google) and password recovery.',
+            'Cart, checkout and payment result screens.',
+            'Profile with orders and account security.',
+          ],
+        },
+        {
+          title: 'Admin Panel',
+          bullets: [
+            'Dashboard, products, categories with drag-and-drop ordering, orders with detail, coupons, statistics, transfer details and site content.',
+            'AI assistant: conversations, leads, unanswered questions, knowledge base and settings.',
+          ],
+        },
+        {
+          title: 'Internal Tools',
+          bullets: [
+            'Catalog extraction from the supplier’s PDF, with photo mapping and optimization.',
+            'Seed of the real catalog.',
+            'Email previews and an end-to-end check of the shared cache.',
+          ],
+        },
+        {
+          title: 'Documentation',
+          chips: ['README', 'VPS deploy', 'AI assistant', 'Payments', 'Google OAuth', 'Security', 'SEO'],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/bgv-web/bgv-13.webp',
+      '/img/img/bgv-web/bgv-01.webp',
+      '/img/img/bgv-web/bgv-02.webp',
+      '/img/img/bgv-web/bgv-03.webp',
+      '/img/img/bgv-web/bgv-04.webp',
+      '/img/img/bgv-web/bgv-05.webp',
+      '/img/img/bgv-web/bgv-06.webp',
+      '/img/img/bgv-web/bgv-07.webp',
+      '/img/img/bgv-web/bgv-08.webp',
+      '/img/img/bgv-web/bgv-09.webp',
+      '/img/img/bgv-web/bgv-10.webp',
+      '/img/img/bgv-web/bgv-11.webp',
+      '/img/img/bgv-web/bgv-12.webp',
+      '/img/img/bgv-web/bgv-14.webp',
+      '/img/img/bgv-web/bgv-15.webp',
+      '/img/img/bgv-web/bgv-16.webp',
+      '/img/img/bgv-web/bgv-17.webp',
+      '/img/img/bgv-web/bgv-18.webp',
+      '/img/img/bgv-web/bgv-19.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://www.bgvmayorista.com.ar',
   },
   {
     slug: 'bellum',
     role: 'Full-stack · Custom CMS',
     engagement: 'Client work',
     industry: 'HOA management',
+    locations: [
+      { flag: '🇺🇸', label: 'United States' },
+    ],
     title: 'Bellum',
     subtitle: 'HOA Financial Management Platform',
     whatIs: `Bellum is a professional-grade platform built for HOA and condominium associations seeking to outsource their financial management, reporting, and back-office operations.
@@ -481,7 +907,7 @@ The platform was developed alongside a senior team based in Canada, combining th
       '/img/img/cdq-web/cdq-12.webp',
     ],
     githubLink: null as any,
-    liveDemoLink: null as any,
+    liveDemoLink: 'https://my.complydq.com/',
   },
   {
     slug: 'globaly',
@@ -1034,6 +1460,133 @@ Building custom rather than using a site builder follows from two constraints vi
     liveDemoLink: 'https://www.complydq.com',
   },
   {
+    slug: 'bellum-property-management',
+    role: 'Frontend Engineer · Design System & SEO',
+    engagement: 'Client work',
+    industry: 'Real estate • HOA & condominium management',
+    duration: '10 weeks',
+    year: '2026',
+    locations: [
+      { flag: '🇺🇸', label: 'Virginia, United States' },
+    ],
+    title: 'Bellum Property Management',
+    subtitle: 'Corporate Website for an HOA Management Company',
+    whatIs: `Bellum Property Management is the corporate website of a company that manages homeowners associations (HOAs) and condominiums across Richmond and Northern Virginia. It speaks to a specific audience, the members of association boards, and has one clear commercial goal: getting a board to request a management proposal.
+
+Visitors can explore the services (financial management, full-service management, developer transition and consulting), review insurance coverage with the company's insurance partners, and read the 24/7 emergency protocol and a resource library for boards. At the center of the site is a new-client questionnaire with per-field validation that collects the community's details, number of units, service type and the requester's role on the board. From the navigation bar, users reach the client's external systems: the resident portal, the resale documents service and the company's financial management site.
+
+The project started from an unusual situation: there was no source code, only the compiled production bundle. The work was to recover it, migrate it, audit it, redesign it completely and make it indexable, without taking the live site down.`,
+    problemSolved: `The client had inherited a Create React App site that existed only as a build: a minified bundle and its source maps, served as-is from the root of the repository. The styles carried hidden defects (CSS variables that did not exist, CSS Modules rules leaking out and overriding the typography of the whole site, a fixed-position navbar that broke apart) and SEO was almost absent: all six routes shared the same title, the description was the framework default, there was no robots.txt, the sitemap returned the app's HTML, and any invented URL answered 200.
+
+The solution was to rebuild the source from the source maps and move it onto Vite 5, which first required turning webpack-only inline require() calls into ESM imports so the app would render at all. An audit with targeted fixes followed, then a complete redesign on a custom design system with color tokens, fluid typography with clamp(), spacing and shadows. For SEO, the site gained per-route metadata through a dependency-free component, a real sitemap and robots.txt served as static files ahead of the single-page rewrite, ProfessionalService structured data and a noindex 404 page that ends soft 404s.
+
+Before the redesign, a design exploration produced eight distinct directions plus two refined variants. The chosen one, "Cornerstone", is an editorial, surveyor's-studio aesthetic (Newsreader serif, IBM Plex Mono, a forest green and bronze palette) applied across every page.`,
+    techStack: [
+      'JavaScript (ESM)',
+      'React 18',
+      'React Router 6',
+      'Vite 5',
+      'CSS Modules',
+      'Design tokens',
+      'Formspree',
+      'Google Fonts',
+      'GeoJSON → SVG',
+      'Schema.org JSON-LD',
+      'Render',
+      'Cloudflare',
+    ],
+    learnings: [
+      'Recovering source code from production: the source was rebuilt from the source maps of the Create React App bundle and migrated to Vite. The most delicate case was converting inline require() calls inside template strings, a syntax only webpack resolved, into ESM imports, because under Vite they took down the entire render.',
+      'Auditing inherited CSS: undefined CSS variables, unscoped tag selectors inside CSS Modules that overrode global styles, !important rules that inverted the responsive behaviour, and a hot-linked third-party image with licensing risk were found and fixed.',
+      'A design system from scratch: tokens for the palette, a fluid type scale with clamp(), spacing and tracking, and base components (Button, Card, Section, Field, Badge) that replaced ad-hoc styles inside each component.',
+      'Technical SEO in a single-page app without SSR: a PageMeta component updates title, description, canonical, Open Graph, Twitter and robots on every navigation, and unknown routes get noindex, follow and a canonical to the home page to avoid soft 404s.',
+      'Working with the hosting layer: the /* → /index.html rewrite that React Router needs was swallowing the sitemap. Moving robots.txt and sitemap.xml to public/ serves them as real files ahead of the rewrite, with the correct content type.',
+      'Consistent local signals: the JSON-LD areaServed declares only Virginia, because that is all the content supports; declaring coverage the site does not back up can work against it in local search.',
+      'Accessible animation: a useReveal hook built on IntersectionObserver with three states (static, armed, shown) that respects prefers-reduced-motion. The animated counter keeps the final value in the DOM for screen readers, clients without JavaScript and screenshots.',
+      'Accessible forms without libraries: a Field component wires label, hint and error to the control through aria-describedby and aria-invalid, focus moves to the first invalid field when validation fails, and submission stays a native POST to Formspree with duplicate-submit protection.',
+      'Safari on iOS: single-column grids with 1fr took their min-content width in WebKit and overflowed at 390px. Switching them to minmax(0, 1fr) fixed it, and long lists reveal card by card instead of in a cascade.',
+      'Illustration generated in code: the Virginia map is an SVG built from real longitude and latitude coordinates with a custom projection, showing both service areas and carrying an accessible title.',
+    ],
+    architecture: {
+      body: `A React single-page app served as a static site. The content (navigation, contact details, hero, services, metrics, partners) lives in data modules separate from the presentation components, so copy and links can be edited without touching the UI, and pages are composed from sections on top of a shared UI layer.`,
+      groups: [
+        {
+          title: 'Application Architecture',
+          bullets: [
+            'React Router with 6 public routes plus a catch-all 404, inside a shared layout.',
+            'A ui/ layer with base components, form primitives and animation utilities.',
+            'Content centralized in site, services and partners data modules.',
+            'ScrollToTop and PageMeta as render-less components that react to route changes.',
+            'A skip link to the main content for keyboard navigation.',
+          ],
+        },
+        {
+          title: 'Site Features',
+          bullets: [
+            'Home with hero, differentiators, animated metrics, services, sustainability section, coverage map, partners and call to action.',
+            'New-client questionnaire with per-field validation.',
+            'Services, insurance, 24/7 emergencies, resources and contact pages.',
+            'Clearly marked external links to the resident portal, resale documents and the financial management site.',
+          ],
+        },
+        {
+          title: 'SEO',
+          chips: ['Per-route meta', 'Canonical', 'Open Graph', 'JSON-LD', 'XML sitemap', 'robots.txt', 'Noindex 404'],
+        },
+        {
+          title: 'Accessibility',
+          chips: ['ARIA forms', 'Reduced motion', 'Skip link', 'SVG with title', 'Managed focus'],
+        },
+      ],
+    },
+    infra: {
+      body: `Published as a static site on Render with automatic deploys on every push to main. The domain runs through Cloudflare, and www redirects to the main domain with a 301.`,
+      groups: [
+        {
+          title: 'Deploy',
+          bullets: [
+            'Build with npm install and npm run build, publishing dist/. A configuration that kept serving the old bundle from the repository root was corrected, which is why production had not reflected changes.',
+            'A /* → /index.html rewrite rule for client-side routing.',
+            'SEO files served as real static files, ahead of the rewrite.',
+            'Images converted to WebP to reduce page weight.',
+          ],
+        },
+      ],
+    },
+    deliverables: {
+      body: `A recovered, redesigned and indexable website, delivered without interrupting the live site.`,
+      groups: [
+        {
+          title: 'Delivered',
+          bullets: [
+            'Source code recovered and migrated from Create React App to Vite.',
+            'CSS and layout audit with the fixes applied.',
+            'Design exploration with 10 directions.',
+            'The "Cornerstone" design system: tokens, typography and base components.',
+            'Complete redesign of the 7 views (home, services, insurance, emergencies, resources, contact and 404), plus the navbar, mobile menu and footer.',
+            'Accessible proposal questionnaire integrated with Formspree.',
+            'Technical SEO package: per-route metadata, sitemap, robots, JSON-LD and a real 404.',
+            'Coverage map SVG generated from geographic data.',
+            'Corrected deploy configuration on Render.',
+          ],
+        },
+      ],
+    },
+    screenshots: [
+      '/img/img/bellumpm-web/bellumpm-01.webp',
+      '/img/img/bellumpm-web/bellumpm-02.webp',
+      '/img/img/bellumpm-web/bellumpm-03.webp',
+      '/img/img/bellumpm-web/bellumpm-04.webp',
+      '/img/img/bellumpm-web/bellumpm-05.webp',
+      '/img/img/bellumpm-web/bellumpm-06.webp',
+      '/img/img/bellumpm-web/bellumpm-07.webp',
+      '/img/img/bellumpm-web/bellumpm-08.webp',
+      '/img/img/bellumpm-web/bellumpm-09.webp',
+    ],
+    githubLink: null as any,
+    liveDemoLink: 'https://bellumpm.com',
+  },
+  {
     slug: 'royal-parking-services',
     role: 'Full-stack Engineer',
     engagement: 'Team Collaboration',
@@ -1233,7 +1786,7 @@ Buying this off the shelf was not viable because the notice lifecycle is the com
       '/img/img/royalparking-web/royalparking-07.webp',
     ],
     githubLink: null as any,
-    liveDemoLink: null as any,
+    liveDemoLink: 'https://devwebsite.royalparking.ca/',
   },
   {
     slug: 'sophie-callander',
