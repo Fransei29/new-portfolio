@@ -25,6 +25,7 @@
     "links": "Links",
     "githubRepository": "GitHub Repository",
     "liveDemo": "Live Demo",
+    "visitSite": "Visit live site",
     "badges": {
       "product": "Product",
       "platform": "Platform",
@@ -38,6 +39,16 @@
     "privateProject": "Private — client project",
     "privateProjectTooltip": "This project is private and belongs to a client",
     "items": {
+      "arventa": {
+        "title": "Arventa",
+        "subtitle": "AI Voice-Agent Accounts Receivable Automation Platform",
+        "description": "Multi-tenant platform that automates collections on overdue invoices. AI voice agents place outbound calls, AI-drafted emails follow up, and a visual workflow engine decides who gets contacted, through which channel and when. Runs are durable state machines in Postgres that park while waiting on a call, a reply or a timer, and resume when the callback arrives."
+      },
+      "bgv-mayorista": {
+        "title": "BGV Mayorista",
+        "subtitle": "B2B Wholesale E-Commerce with an AI Assistant",
+        "description": "Online store for a household-goods distributor that sells to retailers by the closed pack. The catalog is public while prices and purchasing are reserved for approved wholesale accounts, with minimum orders, pack multiples, per-company discounts, Mercado Pago and bank transfer payments, and an AI assistant that never reveals prices to anonymous visitors."
+      },
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Fleet Compliance & Document Intelligence Platform",
@@ -110,6 +121,11 @@
           "Structured data constrained to what the page actually asserts, with external profile links omitted for want of confirmed sources."
         ]
       },
+      "bellum-property-management": {
+        "title": "Bellum Property Management",
+        "subtitle": "Corporate Website for an HOA Management Company",
+        "description": "Corporate website for an HOA and condominium management company in Virginia. The source code was recovered from the compiled production bundle, migrated to Vite, audited and redesigned on a custom design system, with per-route SEO, structured data and an accessible proposal questionnaire."
+      },
       "royal-parking-services": {
         "title": "Royal Parking Services",
         "subtitle": "Parking Enforcement Website & Client Permit Portal",
@@ -149,7 +165,7 @@
         "title": "Acer0",
         "subtitle": "Custom E-Commerce Platform",
         "description": "Fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. Delivers a complete online shopping experience with product browsing, cart management, Mercado Pago and bank transfer payments, customer accounts with order tracking and wishlists, and a powerful admin panel with sales statistics — all wrapped in a pixel-perfect, mobile-first responsive design.",
-        "whatIs": "a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.\nFeatures include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.",
+        "whatIs": "a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.\nFeatures include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.\nThe store also includes an AI assistant that answers customer questions using the published products, measurements, prices, payment methods, shipping and the rest of the site's content, updated automatically as it changes. From the admin panel, the team extends what it knows by uploading documents, adding questions and answers or pasting text, and follows its conversations, the leads it captures, its conversion rate and the questions it could not answer.",
         "problemSolved": "The client needed a tailor-made digital storefront that reflected their brand identity while handling the full complexity of Argentine e-commerce — including Mercado Pago integration, bank transfer confirmation workflows, and a bilingual admin experience.\nOff-the-shelf solutions couldn't deliver the custom UX, performance, and control required, so a purpose-built platform was the answer — giving the client total ownership of their data, branding, and operations, with a backend tuned exactly to their workflow.",
         "learnings": [
           "Architected a full-stack monorepo with Next.js 15 (App Router) frontend proxying to an Express/TypeScript backend via a secure BFF (Backend-for-Frontend) pattern.",
