@@ -32,7 +32,7 @@
       .slide.mist { background: var(--mist); }
 
       /* HUD, igual que en los reels */
-      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: flex-end; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
       .hud .count { font-variant-numeric: tabular-nums; }
       .dark .hud { color: rgba(255,255,255,0.75); }
       .hud { color: var(--muted); }
@@ -103,7 +103,7 @@
 
     <!-- 01 · PORTADA: compu + celu. También sirve de portada en la grilla del perfil. -->
     <section class="slide" id="s1">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">01/07</span></div>
+      <div class="hud"><span class="count">1</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:400px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">CASO DE ESTUDIO</div>
@@ -122,7 +122,7 @@
     <!-- 02 · LA TIENDA. Es un video: scroll.mjs recorre las páginas dentro de la notebook y el celu
          → slides/02.mp4. Esta versión (arriba de todo) es la tapa del video. -->
     <section class="slide mist" id="s2">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">02/07</span></div>
+      <div class="hud"><span class="count">2</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">01 — LA TIENDA</div>
@@ -140,7 +140,7 @@
 
     <!-- 03 · CADA PRODUCTO -->
     <section class="slide dark" id="s3">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">03/07</span></div>
+      <div class="hud"><span class="count">3</span></div>
       <div class="copy">
         <div class="kicker">02 — CADA PRODUCTO</div>
         <h2>Toda la información <em>para decidir.</em></h2>
@@ -158,7 +158,7 @@
 
     <!-- 04 · EL PAGO -->
     <section class="slide" id="s4">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">04/07</span></div>
+      <div class="hud"><span class="count">4</span></div>
       <div class="copy">
         <div class="kicker">03 — EL PAGO</div>
         <h2>Comprar, <em>sin complicaciones.</em></h2>
@@ -174,7 +174,7 @@
 
     <!-- 05 · EL PANEL -->
     <section class="slide dark" id="s5">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">05/07</span></div>
+      <div class="hud"><span class="count">5</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.25),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">04 — EL PANEL</div>
@@ -191,7 +191,7 @@
 
     <!-- 06 · EN EL CELULAR: tres pasos de la compra -->
     <section class="slide mist phones3" id="s6">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">06/07</span></div>
+      <div class="hud"><span class="count">6</span></div>
       <div class="copy">
         <div class="kicker">05 — EN EL CELULAR</div>
         <h2>La tienda, donde <em>realmente se usa.</em></h2>
@@ -206,7 +206,7 @@
 
     <!-- 07 · CTA -->
     <section class="slide dark" id="s7">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">07/07</span></div>
+      <div class="hud"><span class="count">7</span></div>
       <div class="glow" style="width:900px;height:900px;left:90px;top:200px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
       <img src="media/panda-programando.svg" alt="" style="position:absolute;left:340px;top:250px;width:400px;z-index:3" />
       <div class="copy" style="top:760px;text-align:center">

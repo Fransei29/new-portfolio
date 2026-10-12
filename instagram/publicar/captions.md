@@ -84,5 +84,67 @@ Una tienda pensada tanto para vender como para operar.
 
 #ecommerce #tiendaonline #casodeestudio #desarrolloweb
 
+## 10 · Carrusel: Arventa
+Archivos: `carrusel-06-arventa/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+Cobrar facturas vencidas lleva tiempo: llamar uno por uno, dejar mensajes, enviar recordatorios y registrar qué se habló con cada cliente.
+
+Arventa automatiza ese proceso. Agentes de voz impulsados por IA contactan a cada cliente, interpretan sus respuestas y registran el resultado directamente en la factura.
+
+→ Llamadas automatizadas con agentes de voz con IA
+→ Emails de seguimiento redactados con IA
+→ Flujos de cobranza configurables, bajo las reglas de cada empresa
+→ Casos que necesitan una persona, derivados al equipo
+→ Informes para monitorear resultados
+
+¿Tenés un proceso que podría funcionar mejor con software propio? Hablemos → francoseiler.com
+
+#casodeestudio #inteligenciaartificial #automatizacion #softwareamedida
+
+## 11 · Carrusel: Comply DQ
+Archivos: `carrusel-09-complydq/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+En Estados Unidos y Canadá, cada camionero necesita una carpeta con sus papeles al día: licencia, apto médico, antecedentes y más. Si en una inspección falta uno, la empresa puede recibir una multa importante.
+
+Comply DQ ayuda a las empresas de transporte a tenerlo todo en orden. Trabajamos en dos partes de la misma historia: la plataforma, donde cada empresa ve qué choferes están al día, qué vence pronto y qué falta, y el sitio web, que explica el servicio en palabras simples y suma herramientas gratis para medir qué tan preparada está tu flota.
+
+Los avisos salen solos: antes de que venza un papel, el chofer recibe un mail y lo sube desde el celular. Y el plan se calcula según la cantidad de choferes y se cobra automáticamente cada mes.
+
+Un proyecto en equipo, para un cliente de Canadá y EE.UU.
+
+¿Tu proyecto podría ser el próximo? → francoseiler.com
+
+#casodeestudio #softwareamedida #plataformaweb #transporte #desarrolloweb
+
+## 12 · Carrusel: BGV Mayorista
+Archivos: `carrusel-07-bgv/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+BGV es un distribuidor de artículos para el hogar de Córdoba que le vende por mayor a comercios de todo el país.
+
+Vender por mayor tiene sus propias reglas: una compra mínima, productos que se venden por bulto cerrado, clientes con condiciones propias y una lista de precios que no se muestra a cualquiera.
+
+Construimos una tienda que trabaja así. El catálogo está abierto para atraer comercios nuevos, y los precios aparecen cuando el comercio abre su cuenta. Cada cliente arma su pedido por bulto o por unidad, paga con Mercado Pago o transferencia con descuento y sigue sus pedidos desde su cuenta. Un asistente virtual responde dudas a cualquier hora, y el equipo de BGV maneja productos, pedidos, clientes y los textos de la web desde un panel propio.
+
+Una tienda pensada para que cada comercio vuelva a comprar.
+
+¿Tu proyecto podría ser el próximo? → francoseiler.com
+
+#casodeestudio #ventamayorista #ecommerce #softwareamedida #distribuidora
+
+## 13 · Carrusel: Globaly
+Archivos: `carrusel-08-globaly/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+Globaly es una plataforma de espacios virtuales donde equipos que están en distintos lugares trabajan, aprenden y presentan juntos, como si compartieran la misma oficina.
+
+Una idea nueva necesita un sitio que la explique bien. Trabajamos en el sitio web: cuenta qué es Globaly y para qué sirve en palabras simples, y lleva a cada visitante a probarlo gratis en un clic, sin formularios ni descargas.
+
+Está en inglés, francés y español, muestra los precios en dólares o en euros según desde dónde entra cada persona, y tiene una página para cada tipo de equipo: trabajo remoto, capacitación, ventas y eventos. Además, está preparado para aparecer en Google y para que asistentes como ChatGPT entiendan qué ofrece.
+
+Un proyecto en equipo, para un cliente de Canadá.
+
+¿Tu proyecto podría ser el próximo? → francoseiler.com
+
+#casodeestudio #desarrolloweb #paginaweb #trabajoremoto #softwareamedida
+
 ## 3 y 9 · Videos de Franco a cámara
 Sin grabar todavía. Cuando estén, se publican como los posts más nuevos.

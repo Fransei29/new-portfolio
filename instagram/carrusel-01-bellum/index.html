@@ -32,7 +32,11 @@
       .slide.mist { background: var(--mist); }
 
       /* HUD, igual que en los reels */
-      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: flex-end; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
+      /* Sin el nombre arriba sobra aire: el texto sube, los mockups un poco menos, y el número queda a la altura del kicker. */
+      .slide:has(.kicker) .copy { translate: 0 -80px; }
+      .slide:has(.kicker) > :not(.copy):not(.hud):not(.progress):not(.swipe) { translate: 0 -30px; }
+      .slide:has(.kicker) .hud { top: 96px; }
       .hud .count { font-variant-numeric: tabular-nums; }
       .dark .hud { color: rgba(255,255,255,0.75); }
       .hud { color: var(--muted); }
@@ -95,7 +99,7 @@
 
     <!-- 01 · PORTADA -->
     <section class="slide" id="s1">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">01/07</span></div>
+      <div class="hud"><span class="count">1</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:400px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">CASO DE ESTUDIO</div>
@@ -114,7 +118,7 @@
     <!-- 02 · EL SITIO, CLARO / OSCURO. Es un video: wipe.py mezcla esta versión con #s2-dark
          y una línea que barre la pantalla → slides/02.mp4. Esta versión es la tapa del video. -->
     <section class="slide" id="s2">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">02/07</span></div>
+      <div class="hud"><span class="count">2</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">01 — EL SITIO</div>
@@ -132,7 +136,7 @@
 
     <!-- 03 · SERVICIOS Y PROPUESTAS -->
     <section class="slide dark" id="s3">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">03/07</span></div>
+      <div class="hud"><span class="count">3</span></div>
       <div class="copy">
         <div class="kicker">02 — SERVICIOS</div>
         <h2>8 servicios. <em>Una propuesta clara.</em></h2>
@@ -150,7 +154,7 @@
 
     <!-- 04 · EL PANEL -->
     <section class="slide mist" id="s4">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">04/07</span></div>
+      <div class="hud"><span class="count">4</span></div>
       <div class="copy">
         <div class="kicker">03 — EL PANEL</div>
         <h2>La web <em>la gestionan ellos.</em></h2>
@@ -165,7 +169,7 @@
 
     <!-- 05 · ASISTENTE IA -->
     <section class="slide dark" id="s5">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">05/07</span></div>
+      <div class="hud"><span class="count">5</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.25),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">04 — ASISTENTE IA</div>
@@ -182,7 +186,7 @@
 
     <!-- 06 · LEADS -->
     <section class="slide mist" id="s6">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">06/07</span></div>
+      <div class="hud"><span class="count">6</span></div>
       <div class="copy">
         <div class="kicker">05 — NUEVOS CLIENTES</div>
         <h2>Y detecta <em>nuevas oportunidades.</em></h2>
@@ -198,7 +202,7 @@
 
     <!-- 07 · CTA -->
     <section class="slide dark" id="s7">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">07/07</span></div>
+      <div class="hud"><span class="count">7</span></div>
       <div class="glow" style="width:900px;height:900px;left:90px;top:200px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
       <img src="media/panda-programando.svg" alt="" style="position:absolute;left:340px;top:250px;width:400px;z-index:3" />
       <div class="copy" style="top:760px;text-align:center">
@@ -211,7 +215,7 @@
     </section>
 
     <section class="slide dark alt" id="s2-dark">
-      <div class="hud"><span>FRANCO SEILER</span><span class="count">02/07</span></div>
+      <div class="hud"><span class="count">2</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.28),transparent 62%)"></div>
       <div class="copy">
         <div class="kicker">01 — EL SITIO</div>

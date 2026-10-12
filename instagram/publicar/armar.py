@@ -14,6 +14,10 @@ POSTS = [
     (6, 'Carrusel · Cómo es trabajar conmigo', 'carrusel-05-proceso/slides', None),
     (7, 'Carrusel · Muro de proyectos', 'carrusel-03-proyectos/slides', None),
     (8, 'Carrusel · Acer0', 'carrusel-02-acero/slides', None),
+    (10, 'Carrusel · Arventa', 'carrusel-06-arventa/slides', None),
+    (11, 'Carrusel · Comply DQ', 'carrusel-09-complydq/slides', None),
+    (12, 'Carrusel · BGV Mayorista', 'carrusel-07-bgv/slides', None),
+    (13, 'Carrusel · Globaly', 'carrusel-08-globaly/slides', None),
 ]
 
 def slides(folder):

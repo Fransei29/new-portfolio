@@ -110,8 +110,9 @@
 
       const DATA = {
         "sobre-mi": { title: "SOBRE MÍ", stories: [
-          { t: "photo", bg: "dark", h: 'Hola, soy <em>Franco.</em>', lead: "Desarrollo software a medida para negocios que necesitan algo más que una web." },
-          { t: "story", bg: "", k: "MI HISTORIA", h: 'Empecé programando <em>para otras empresas.</em>', paras: ["Primero trabajé en equipos de producto, después para una empresa de Suecia y, en el medio, cofundé mi propia startup.", "En todos esos lugares encontré algo en común: negocios con buenas ideas que terminaban resolviendo demasiado con planillas, procesos manuales y herramientas que no encajaban del todo.", "Hoy, desde Córdoba, construyo el software que reemplaza esa complejidad por herramientas hechas para cada negocio.", "Y trabajo directamente con vos, de principio a fin."] },
+          { t: "photo", bg: "dark", h: 'Hola,<br>soy <em>Franco.</em>', lead: "Junto con mi equipo desarrollamos software a medida para negocios que necesitan algo más que una web.<br><br>Pero esto empezó mucho antes." },
+          { t: "story", bg: "", h: 'Todo arrancó en 2021, <em>en Ámsterdam.</em>', paras: ["Un amigo me mostró cómo programaba y me enganchó la idea de construir cosas desde una computadora.", "Empecé estudiando por mi cuenta y armando proyectos mientras aprendía.", "Después vinieron los primeros trabajos, equipos de producto, clientes de otros países y una startup que cofundé."] },
+          { t: "story", bg: "dark", h: 'En cada proyecto<br>vi <em>lo mismo.</em>', paras: ["Muchas empresas no necesitan más herramientas, necesitan mejores: menos planillas y procesos manuales, sistemas que hablen entre sí.", "Hoy, desde Córdoba y junto a mi equipo, construimos software para resolver justamente eso.", "Con vos, desde la primera idea hasta que está funcionando."] },
         ]},
         proyectos: { title: "PROYECTOS", stories: [
           p("", "FINANZAS · EE.UU.", "Bellum", "Web, panel propio y asistente IA para convertir visitas en oportunidades.", "d-light-hero.webp", "m-light-hero.png"),
@@ -124,12 +125,10 @@
           p("dark", "LEGAL · ESPAÑA", "LexMax", "Servicios legales complejos, explicados de forma clara para que el visitante entienda qué necesita y cómo avanzar.", "d-lexmax.webp", "m-lexmax.webp"),
         ]},
         proceso: { title: "PROCESO", stories: [
-          { t: "steps", bg: "mist", k: "EL PROCESO", h: 'Cómo es trabajar <em>conmigo.</em>' },
-          { t: "text", bg: "dark", k: "PASO 1 · LLAMADA", h: '30 minutos para entender <em>tu problema.</em>', card: "Te llevás una primera idea del alcance, aunque después no trabajemos juntos." },
-          { t: "text", bg: "", k: "PASO 2 · PROPUESTA", h: 'Todo por escrito, <em>antes de arrancar.</em>', rows: ["Alcance", "Fases con fechas", "Precio cerrado"] },
-          { t: "text", bg: "mist", k: "PASO 3 · CONSTRUCCIÓN", h: 'Lo ves funcionando <em>desde la primera semana.</em>', laptop: "d-light-servicio.webp", lead: "Avances que podés abrir, probar y comentar." },
-          { t: "text", bg: "dark", k: "PASO 4 · ENTREGA", h: 'Todo queda <em>a tu nombre.</em>', rows: ["Sitio publicado", "Todo documentado", "Las cuentas, tuyas"] },
-          { t: "text", bg: "", k: "DESPUÉS", h: 'No te quedás <em>solo.</em>', card: "Todos los proyectos incluyen un tiempo de soporte. Después, mantenimiento mensual o cuando lo necesites." },
+          { t: "steps", bg: "mist", h: 'Cómo es trabajar <em>con nosotros.</em>', lead: "Hablás directo con quien construye.<br>Sin sorpresas, y sabiendo qué estamos haciendo en cada etapa.", rows: ["Charla y propuesta", "Construcción", "Entrega y soporte"] },
+          { t: "text", bg: "dark", h: 'Primero, entendemos <em>el problema.</em>', top: 860, card: "Una llamada de 30 minutos para conocer tu negocio y qué necesitás.<br><br>Después te pasamos por escrito el alcance, las fechas y un precio cerrado. Sin letra chica." },
+          { t: "text", bg: "", h: 'No desaparecemos durante meses para volver con <em>algo terminado.</em>', top: 1040, card: "Desde la primera semana ves el producto funcionando.<br><br>Podés abrirlo, probarlo y darnos feedback mientras lo construimos." },
+          { t: "text", bg: "dark", h: 'El producto queda <em>en tus manos.</em>', rows: ["Sitio publicado", "Todo documentado", "Cuentas y accesos a tu nombre"], foot: "Incluye un período de soporte, y después seguimos con mantenimiento si lo necesitás." },
         ]},
         opiniones: { title: "OPINIONES", stories: [
           { t: "quote", bg: "", name: "Franklin Gomez", role: "Fundador de una academia", img: "frank.webp", text: "Se ocuparon de todo, del primer boceto al deploy. Carga rápido, se ve bien en el celular y por fin tengo un lugar serio a donde mandar a la gente." },
@@ -161,19 +160,19 @@
         switch (s.t) {
           case "photo":
             return `${glow(s.bg)}<div class="copy"><h1>${s.h}</h1><p class="lead">${s.lead}</p></div>
-              <img src="media/franco.png" alt="" style="position:absolute;left:0;bottom:0;width:1080px;z-index:3" />`;
+              <img src="media/franco.png" alt="" style="position:absolute;left:90px;bottom:0;width:900px;z-index:3" />`;
           case "text": {
             let extra = "";
             if (s.photo) extra = `<div style="position:absolute;left:280px;top:1020px;width:520px;height:520px;border-radius:50%;overflow:hidden;background:var(--dark);z-index:3;box-shadow:0 40px 90px rgba(20,16,40,0.3)"><img src="media/franco.png" style="width:760px;margin:-60px 0 0 -120px" alt="" /></div>`;
-            if (s.card) extra = `<div class="card" style="position:absolute;left:80px;right:80px;top:1080px;z-index:4"><p>${s.card}</p></div>`;
-            if (s.rows) extra = `<ul class="rows" style="position:absolute;left:80px;right:80px;top:1030px;z-index:4">${s.rows.map((r, i) => `<li><small>✓</small><span>${r}</span></li>`).join("")}</ul>`;
+            if (s.card) extra = `<div class="card" style="position:absolute;left:80px;right:80px;top:${s.top || 1080}px;z-index:4"><p>${s.card}</p></div>`;
+            if (s.rows) extra = `<div style="position:absolute;left:80px;right:80px;top:1030px;z-index:4"><ul class="rows">${s.rows.map((r, i) => `<li><small>✓</small><span>${r}</span></li>`).join("")}</ul>${s.foot ? `<p class="lead" style="margin-top:50px">${s.foot}</p>` : ""}</div>`;
             if (s.laptop) extra = `<div class="laptop" style="left:170px;top:1060px;width:740px"><div class="screen"><img src="media/${s.laptop}" alt="" /></div><div class="base"></div></div>`;
             return `${glow(s.bg)}<div class="copy">${kick}<h2>${s.h}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>${extra}`;
           }
           case "steps":
-            return `${glow(s.bg)}<div class="copy">${kick}<h1 style="font-size:116px">${s.h}</h1></div>
-              <ul class="rows" style="position:absolute;left:80px;right:80px;top:960px;z-index:4">
-                ${["Llamada", "Propuesta", "Construcción", "Entrega"].map((r, i) => `<li><small>0${i + 1}</small><span>${r}</span></li>`).join("")}
+            return `${glow(s.bg)}<div class="copy">${kick}<h1 style="font-size:116px">${s.h}</h1>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>
+              <ul class="rows" style="position:absolute;left:80px;right:80px;top:${s.lead ? 1110 : 960}px;z-index:4">
+                ${s.rows.map((r, i) => `<li><small>0${i + 1}</small><span>${r}</span></li>`).join("")}
               </ul>`;
           case "story":
             return `${glow(s.bg)}<div class="copy">${kick}<h2 style="font-size:84px">${s.h}</h2>${s.paras.map((t) => `<p class="lead" style="margin-top:30px;font-size:43px">${t}</p>`).join("")}</div>`;
