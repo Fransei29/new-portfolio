@@ -119,15 +119,17 @@ Un proyecto en equipo, para un cliente de Canadá y EE.UU.
 ## 12 · Carrusel: BGV Mayorista
 Archivos: `carrusel-07-bgv/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
 
-BGV es un distribuidor de artículos para el hogar de Córdoba que le vende por mayor a comercios de todo el país.
+Vender por mayor tiene sus propias reglas: compra mínima, venta por bulto, condiciones especiales para cada cliente y una lista de precios que no se muestra a cualquiera.
 
-Vender por mayor tiene sus propias reglas: una compra mínima, productos que se venden por bulto cerrado, clientes con condiciones propias y una lista de precios que no se muestra a cualquiera.
+BGV es un distribuidor de artículos para el hogar de Córdoba que abastece comercios de todo el país. Desarrollamos su tienda online mayorista, pensada para trabajar con esas reglas.
 
-Construimos una tienda que trabaja así. El catálogo está abierto para atraer comercios nuevos, y los precios aparecen cuando el comercio abre su cuenta. Cada cliente arma su pedido por bulto o por unidad, paga con Mercado Pago o transferencia con descuento y sigue sus pedidos desde su cuenta. Un asistente virtual responde dudas a cualquier hora, y el equipo de BGV maneja productos, pedidos, clientes y los textos de la web desde un panel propio.
+→ Catálogo abierto, con precios visibles solo para comercios registrados
+→ Compra mínima y venta por bulto o por unidad
+→ Pagos con Mercado Pago o transferencia bancaria
+→ Panel propio para gestionar productos, pedidos, clientes y ventas
+→ Asistente con IA que responde consultas las 24 horas y registra a cada comercio interesado
 
-Una tienda pensada para que cada comercio vuelva a comprar.
-
-¿Tu proyecto podría ser el próximo? → francoseiler.com
+¿Tenés un proceso que podría funcionar mejor con software propio? Hablemos → francoseiler.com
 
 #casodeestudio #ventamayorista #ecommerce #softwareamedida #distribuidora
 
