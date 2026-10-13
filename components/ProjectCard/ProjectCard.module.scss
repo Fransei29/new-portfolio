@@ -3,6 +3,13 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+
+  // En mobile la tarjeta mide 200px de alto y 14px de radio la redondeaba de
+  // más. Se pisa el token acá y no en cada regla: la tarjeta, el overlay y la
+  // esquina del badge lo leen, así que bajan juntos y siguen calzando.
+  @media (max-width: 768px) {
+    --br-lg: 8px;
+  }
 }
 
 .latestPin {
@@ -39,12 +46,24 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
+  // Versión mínima: en una tarjeta de 200px el pin de desktop pesaba casi como
+  // el título. Sin sombra y con borde de 1px, sigue siendo la única nota verde.
   @media (max-width: 768px) {
-    top: -11px;
-    left: 14px;
-    height: 1.85rem;
-    font-size: 0.7rem;
-    padding: 0 0.85rem;
+    top: -8px;
+    left: 12px;
+    height: 1.25rem;
+    gap: 0.35rem;
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0 0.5rem;
+    border-width: 1px;
+    border-radius: 4px;
+    box-shadow: none;
+
+    :global(html.dark) & {
+      box-shadow: none;
+    }
   }
 }
 
@@ -58,6 +77,11 @@
   // el ritmo: 3.6s en vez de 2.4s. Una animación infinita en cada tarjeta tira
   // del ojo permanentemente; a este paso se lee como algo vivo, no como alerta.
   animation: latestPulse 3.6s ease-in-out infinite;
+
+  @media (max-width: 768px) {
+    width: 5px;
+    height: 5px;
+  }
 }
 
 @keyframes latestPulse {
@@ -573,6 +597,7 @@
     font-size: 0.7rem;
     padding: 0 0.85rem;
     gap: 0.4rem;
+    border-radius: 0 var(--br-lg) 0 6px;
   }
 }
 
