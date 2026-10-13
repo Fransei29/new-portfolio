@@ -36,6 +36,18 @@ const nextConfig = {
     scrollRestoration: true, // Mejora el control de scroll
   },
   reactStrictMode: true, // Asegura que el código esté más optimizado y sin errores
+  // Demos para clientes: URL limpia y fuera de los buscadores
+  async rewrites() {
+    return [{ source: '/demos/:slug', destination: '/demos/:slug.html' }];
+  },
+  async headers() {
+    return [
+      {
+        source: '/demos/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
