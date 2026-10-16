@@ -919,8 +919,10 @@ The platform was developed alongside a senior team based in Canada, combining th
       { flag: '🌍', label: 'International (EN / FR / ES)' },
     ],
     title: 'Globaly',
-    subtitle: 'Multilingual Marketing & Content Site for an Immersive Collaboration Platform',
-    whatIs: `Globaly is the public site for an immersive collaboration platform — digital spaces where distributed teams work, train and present together without being in the same place. The site is not the product: the product lives on separate domains. This is the commercial, editorial and discovery layer around it, explaining the proposition, segmenting by use case and company size, publishing pricing, sustaining a resource centre and capturing leads.
+    subtitle: 'Immersive 3D Website & Multilingual Content Site for a Collaboration Platform',
+    whatIs: `The home is now an immersive 3D website: the visitor walks through a virtual office rendered in real time with Three.js — lighting baked in Blender, avatars that arrive, greet each other and talk with optional spatial audio, a camera driven by scroll, and on mobile the space is explored with a finger or by tilting the phone. Quality adapts to each device's GPU so it runs smoothly on any laptop.
+
+Globaly is the public site for an immersive collaboration platform — digital spaces where distributed teams work, train and present together without being in the same place. The site is not the product: the product lives on separate domains. This is the commercial, editorial and discovery layer around it, explaining the proposition, segmenting by use case and company size, publishing pricing, sustaining a resource centre and capturing leads.
 
 A visitor navigates 33 pages organized into a client-defined information architecture: the platform and its device compatibility, seven solution pages grouped into three families, three pages by company segment, an enterprise hub with trust centre and data residency, a five-plan pricing table rendered in USD or EUR depending on the visitor's country, four comparison pages against the incumbent categories, and a blog with search, category filtering and pagination fed from a shared headless CMS. Two forms — contact and newsletter — validate with Zod on the server and dispatch through Postmark, with confirmation to the sender and an internal notification. All content is translated into English, French and Spanish, with language negotiated by cookie rather than by URL prefix.
 
@@ -934,6 +936,10 @@ It was built custom rather than on a site builder because half the value sits in
       'TypeScript 5.9',
       'Next.js 16',
       'React 19',
+      'Three.js (WebGL)',
+      'Blender (modeling & light baking)',
+      'GSAP',
+      'Web Audio API (spatial audio)',
       'Tailwind CSS v4',
       'next-intl 4',
       'Strapi',
@@ -1069,6 +1075,7 @@ It was built custom rather than on a site builder because half the value sits in
       ],
     },
     screenshots: [
+      '/img/img/globaly-web/globaly-3d.webp',
       '/img/img/globaly-web/globaly-01.webp',
       '/img/img/globaly-web/globaly-02.webp',
       '/img/img/globaly-web/globaly-03.webp',
@@ -2302,18 +2309,26 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
       { flag: '🇦🇷', label: 'Buenos Aires, Argentina' },
     ],
     title: 'TecnoMar',
-    subtitle: 'Industrial Pumps Corporate Website',
-    whatIs: `Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.`,
+    subtitle: 'Immersive 3D Website for an Industrial Pumps Company',
+    whatIs: `An immersive 3D website: the hero is a realistic sanitary pump, modeled in Blender with PBR materials, that disassembles piece by piece as the visitor scrolls, with labels for each part and optional synthesized sound. The product is no longer described — it is shown, in the browser and in real time.
+
+Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.`,
     problemSolved: `The industrial sector needs sites that convey technical solidity and allow direct quotation or contact requests. TecnoMar needed a clear digital presence: explain services and process, showcase experience (+20 years, +50 active clients, +2000 products), and offer a quote form and contact channels without friction.`,
     techStack: [
       'Next.js',
       'React',
       'TypeScript',
+      'Three.js (WebGL)',
+      'Blender (procedural modeling with Python)',
+      'glTF + Draco compression',
+      'GSAP (ScrollTrigger)',
+      'Web Audio API',
       'SCSS (modules)',
       'CSS variables (theme, spacing, typography)',
       'Next/Image (optimization and priority for hero and clients)',
     ],
     learnings: [
+      '3D scroll-driven hero: a pump modeled in Blender (exported to glTF with Draco) disassembles piece by piece, with studio environment, shadows and per-part labels.',
       'Landing with full-screen hero, overlay, and brand-accent typography ("corazón técnico", TECNOMAR).',
       'Sections: Services, Our Approach (cards with background image and overlay), Methodology / Technical Process (steps with images), Why Choose Us (animated metrics), Quote, Contact (copyable cards + map), and Clients (double-row marquee on mobile).',
       'Global design variables (section padding, shadows, radius, brand colors) and reusable components (primaryLight / primaryBlue buttons, clip-path divider between sections).',
@@ -2322,6 +2337,7 @@ Augusto Fit Program addresses this with a clear landing, value sections (habits,
       'Loading overlay with fixed logo and spinner; map integration in contact section.',
     ],
     screenshots: [
+      '/img/img/Tecnomar/tecnomar-3d.webp',
       '/img/img/Tecnomar/A.webp',
       '/img/img/Tecnomar/Screenshot from 2026-03-13 17-52-30.webp',
       '/img/img/Tecnomar/Screenshot from 2026-03-13 17-52-47.webp',

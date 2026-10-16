@@ -9,6 +9,7 @@ import {
   Monitor,
   ShoppingCart,
   Server,
+  Box,
   Check,
   ArrowUpRight,
   ArrowRight,
@@ -28,6 +29,7 @@ import '../../app/styles/utilities.scss';
    idiomas. Son los mismos iconos que usa la sección de la home. */
 const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   aiIntegration: Sparkles,
+  immersive3d: Box,
   businessAutomation: Workflow,
   webDevelopment: Code2,
   webApplications: Monitor,
@@ -47,6 +49,17 @@ export default function ServicesView({ initialContent }: Props) {
      según la tarjeta activa. Arranca en el primer servicio para que el panel
      nunca se vea vacío. */
   const [activeKey, setActiveKey] = useState(initialContent.services[0].key);
+
+  // Las tarjetas de la home linkean a /services#<servicio>: ese queda abierto.
+  useEffect(() => {
+    const pick = () => {
+      const key = window.location.hash.slice(1);
+      if (initialContent.services.some((s) => s.key === key)) setActiveKey(key);
+    };
+    pick();
+    window.addEventListener('hashchange', pick);
+    return () => window.removeEventListener('hashchange', pick);
+  }, [initialContent]);
 
   /* El servidor ya mandó el contenido en inglés. Este efecto solo traduce
      cuando el visitante cambia de idioma — mismo criterio que ProjectsView. */

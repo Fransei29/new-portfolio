@@ -52,6 +52,8 @@ export interface ServicesPageContent {
 /** Orden de la página: primero lo que más se pide, no el orden alfabético. */
 const SERVICE_ORDER = [
   'aiIntegration',
+  // El servicio nuevo va segundo: es el que más queremos que se vea.
+  'immersive3d',
   'businessAutomation',
   'webDevelopment',
   'webApplications',

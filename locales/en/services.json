@@ -5,6 +5,14 @@
     "cta": "Learn More",
     "featuredLabel": "Featured",
     "seeCaseStudies": "See case studies",
+    "immersive3d": {
+      "title": "Immersive",
+      "titleAccent": "3D websites",
+      "description": "Your product in 3D, in real time. Sites people explore by scrolling: custom-built models, animation, light and sound. So they remember you after the first visit.",
+      "slug": "3D",
+      "badge": "New",
+      "cta": "See the service"
+    },
     "webDevelopment": {
       "title": "Software Development",
       "titleAccent": "",
@@ -164,6 +172,30 @@
           "REST APIs"
         ],
         "fit": "Your team copies data between systems, chases spreadsheets, or repeats the same sequence of steps every day."
+      },
+      "immersive3d": {
+        "name": "Immersive 3D websites",
+        "tagline": "A site people explore, not just read.",
+        "description": "Sites where your product or your space is shown in 3D, in real time and in the browser: the visitor scrolls and the scene responds. We model it in Blender, bring it to the web with Three.js and optimize it so it runs smoothly on phones and everyday laptops too.",
+        "includes": [
+          "Custom 3D model of your product, machine or space",
+          "Scroll-guided tour with animation and labels",
+          "Interaction with mouse, touch and phone tilt",
+          "Optional sound and a lighter mode for low-end GPUs"
+        ],
+        "deliverables": [
+          "Deployed site with the 3D experience built in",
+          "Optimized models (glTF + Draco) and their source files",
+          "Static fallback image for browsers without WebGL"
+        ],
+        "stack": [
+          "Three.js",
+          "Blender",
+          "GSAP",
+          "Next.js",
+          "Web Audio"
+        ],
+        "fit": "You sell something that is easier to understand by seeing it — a machine, a space, a physical product — and you want a site that stands apart from the competition in the first few seconds."
       },
       "webDevelopment": {
         "name": "Custom Software Development",
