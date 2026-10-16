@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portada video Chris Clarke</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("../portadas/fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("../portadas/fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("../portadas/fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      :root { --dark: #2e294e; --lilac: #b59cf8; --lilac-2: #8e7ae6; --muted: rgba(255,255,255,0.72); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; font-family: "Plus Jakarta Sans", sans-serif; }
+
+      .slide { position: relative; overflow: hidden; background: var(--dark); color: #fff; }
+      .wide { width: 1920px; height: 1080px; }
+      .tall { width: 1080px; height: 1920px; }
+      .hud { position: absolute; display: flex; justify-content: space-between; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; color: var(--muted); z-index: 6; }
+      .kicker { font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac); margin-bottom: 28px; }
+      h1 { font: 500 112px/1 "Bricolage Grotesque"; letter-spacing: -0.03em; }
+      h1 em { font-style: normal; color: var(--lilac); }
+      .sub { font: 500 38px/1.3 "Plus Jakarta Sans"; margin-top: 28px; color: var(--muted); }
+      .glow { position: absolute; border-radius: 50%; z-index: 1; }
+
+      /* Ventana de navegador */
+      .browser { position: absolute; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(8,6,22,0.55); z-index: 3; }
+      .browser .bar { height: 40px; background: #e9e7ee; display: flex; align-items: center; gap: 9px; padding: 0 16px; }
+      .browser .bar i { width: 12px; height: 12px; border-radius: 50%; background: #c9c5d4; }
+      .browser img { display: block; width: 100%; }
+      .label { position: absolute; z-index: 5; font: 600 24px "Plus Jakarta Sans"; letter-spacing: 0.16em; padding: 10px 22px; border-radius: 999px; }
+      .label.before { background: rgba(255,255,255,0.14); color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+      .label.after { background: var(--lilac); color: var(--dark); }
+
+      /* Cámara */
+      .cam { position: absolute; z-index: 6; border-radius: 50%; padding: 10px; background: var(--lilac); box-shadow: 0 30px 80px rgba(8,6,22,0.6); }
+      .cam img { display: block; width: 100%; border-radius: 50%; }
+      .rec { position: absolute; z-index: 7; display: flex; align-items: center; gap: 12px; font: 600 24px "Plus Jakarta Sans"; letter-spacing: 0.12em; background: #fff; color: var(--dark); padding: 10px 22px; border-radius: 999px; }
+      .rec::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: #e5484d; }
+    </style>
+  </head>
+  <body>
+
+    <!-- LinkedIn / video horizontal 16:9 -->
+    <section class="slide wide" id="wide">
+      <div class="hud" style="top:64px;left:96px;right:96px"><span>FRANCO SEILER</span><span>SOFTWARE STUDIO</span></div>
+      <div class="glow" style="width:1400px;height:1400px;left:700px;top:-120px;background:radial-gradient(circle,rgba(181,156,248,0.35),transparent 62%)"></div>
+
+      <div style="position:absolute;left:96px;top:270px;width:660px;z-index:5">
+        <div class="kicker">REDISEÑO WEB</div>
+        <h1>Antes y después de <em>Chris Clarke</em></h1>
+        <p class="sub">Property management en Vancouver. Te muestro cómo la rediseñé.</p>
+      </div>
+
+      <div class="browser" style="left:900px;top:190px;width:760px;transform:rotate(-4deg);opacity:0.85"><div class="bar"><i></i><i></i><i></i></div><img src="media/antes.png" alt="" /></div>
+      <div class="label before" style="left:930px;top:150px;transform:rotate(-4deg)">ANTES</div>
+
+      <div class="browser" style="left:1060px;top:400px;width:780px"><div class="bar"><i></i><i></i><i></i></div><img src="media/despues.png" alt="" /></div>
+      <div class="label after" style="left:1090px;top:370px">DESPUÉS</div>
+
+      <div class="cam" style="left:780px;top:640px;width:340px"><img src="media/cam29.png" alt="" /></div>
+      <div class="rec" style="left:830px;top:960px">REC</div>
+    </section>
+
+    <!-- Instagram reel 9:16 (lo importante dentro del centro 3:4) -->
+    <section class="slide tall" id="tall">
+      <div class="hud" style="top:300px;left:80px;right:80px"><span>FRANCO SEILER</span><span>REDISEÑO</span></div>
+      <div class="glow" style="width:1300px;height:1300px;left:-110px;top:700px;background:radial-gradient(circle,rgba(181,156,248,0.38),transparent 62%)"></div>
+
+      <div style="position:absolute;left:80px;right:80px;top:390px;z-index:5">
+        <h1 style="font-size:104px">Antes y después de <em>Chris Clarke</em></h1>
+      </div>
+
+      <div class="browser" style="left:60px;top:760px;width:720px;transform:rotate(-5deg);opacity:0.85"><div class="bar"><i></i><i></i><i></i></div><img src="media/antes.png" alt="" /></div>
+      <div class="label before" style="left:90px;top:722px;transform:rotate(-5deg)">ANTES</div>
+
+      <div class="browser" style="left:290px;top:1030px;width:740px"><div class="bar"><i></i><i></i><i></i></div><img src="media/despues.png" alt="" /></div>
+      <div class="label after" style="left:320px;top:1000px">DESPUÉS</div>
+
+      <div class="cam" style="left:70px;top:1250px;width:300px"><img src="media/cam29.png" alt="" /></div>
+      <div class="rec" style="left:110px;top:1540px">REC</div>
+    </section>
+
+  </body>
+</html>

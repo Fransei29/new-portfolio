@@ -85,6 +85,10 @@ for n in [1, 4, 5, 8, 10]:
     window(n).save(OUT / f'd-{n:02d}.png')
     print(f'd-{n:02d}.png')
 
+# Login (portada): 14 es pantalla completa, sin ventana ni fondo azul
+src(14).save(OUT / 'd-login.png')
+print('d-login.png')
+
 # Ficha de factura completa para el video del slide 02: la columna principal de 05, 06 y 07
 # (son tres posiciones de scroll de la misma página) apiladas.
 cols = [src(n).crop((MAIN[0], MAIN[1] + 8, MAIN[2] - 16, MAIN[3])) for n in (5, 6, 7)]

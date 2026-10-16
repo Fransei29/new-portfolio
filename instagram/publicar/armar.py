@@ -12,7 +12,7 @@ POSTS = [
     (4, 'Carrusel · 5 señales', 'carrusel-04-senales/slides', None),
     (5, 'Reel · Bellum en video', ['reel-02-bellum/renders/reel-02-v2.mp4'], 'feed-v2/out/05-portada-reel.jpg'),
     (6, 'Carrusel · Cómo es trabajar conmigo', 'carrusel-05-proceso/slides', None),
-    (7, 'Carrusel · Muro de proyectos', 'carrusel-03-proyectos/slides', None),
+    (7, 'Foto · Muro de proyectos', ['carrusel-03-proyectos/slides/sola.png'], None),
     (8, 'Carrusel · Acer0', 'carrusel-02-acero/slides', None),
     (10, 'Carrusel · Arventa', 'carrusel-06-arventa/slides', None),
     (11, 'Carrusel · Comply DQ', 'carrusel-09-complydq/slides', None),

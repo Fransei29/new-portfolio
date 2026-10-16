@@ -100,6 +100,12 @@
       .laptop .screen .win { position: relative; }
       .laptop .screen .win .scroll { position: absolute; background: #f5f7f9; }
       .laptop .screen .win .scroll img { border-radius: 0; }
+      /* Slide 01 en video: la barra barre la pantalla del login al tablero (wipe.mjs → slides/01.mp4): el login va arriba, recortado a la izquierda de la barra */
+      .wipe { position: relative; border-radius: 6px; overflow: hidden; --o: 1; }
+      .laptop .screen .wipe img { border-radius: 0; }
+      .wipe .after { position: absolute; inset: 0; height: 100%; clip-path: inset(0 calc(100% - var(--p) * 100%) 0 0); }
+      .wipe .handle { position: absolute; top: 0; bottom: 0; left: calc(var(--p) * 100%); width: 4px; margin-left: -2px; background: #fff; box-shadow: 0 0 14px rgba(0,0,0,0.35); opacity: var(--o); }
+      .wipe .handle::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--lilac); color: var(--dark); font: 700 22px/44px "Plus Jakarta Sans"; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.3); }
     </style>
   </head>
   <body>
@@ -108,7 +114,8 @@
          Arventa es un nombre ficticio: el nombre real del producto y del cliente no va en ningún lado.
          No hay sitio público: todo sale de las capturas anonimizadas (componer.py → media/). -->
 
-    <!-- 01 · PORTADA: compu + celu. También sirve de portada en la grilla del perfil. -->
+    <!-- 01 · PORTADA: compu + celu. También sirve de portada en la grilla del perfil. Es un video: wipe.mjs pasa
+         una barra por la notebook del login al tablero → slides/01.mp4. La versión estática (barra al medio) es slides/01.png. -->
     <section class="slide" id="s1">
       <div class="hud"><span class="count">1</span></div>
       <div class="glow" style="width:1100px;height:1100px;left:-10px;top:400px;background:radial-gradient(circle,rgba(142,122,230,0.25),transparent 62%)"></div>
@@ -118,7 +125,7 @@
         <p class="lead">Una plataforma de cobranza automatizada con agentes de voz impulsados por IA.</p>
       </div>
       <div class="laptop" style="left:70px;top:690px;width:860px">
-        <div class="screen"><img src="media/d-01.png" alt="" /></div>
+        <div class="screen"><div class="wipe" style="--p:0.5"><img src="media/d-01.png" alt="" /><img class="after" src="media/d-login.png" alt="" /><i class="handle"></i></div></div>
         <div class="base"></div>
       </div>
       <div class="phone sm" style="left:730px;top:680px;width:300px;--h:620px"><img src="media/m-actividad.png" alt="" /></div>

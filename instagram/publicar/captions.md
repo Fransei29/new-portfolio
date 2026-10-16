@@ -58,14 +58,14 @@ Sin vueltas ni sorpresas: sabés qué pasa en cada etapa y qué recibís.
 
 #procesocreativo #desarrolloweb #softwareamedida #emprendedores
 
-## 7 · Carrusel: muro de proyectos
-Archivos: `carrusel-03-proyectos/slides/`
+## 7 · Foto: muro de proyectos
+Archivo: `carrusel-03-proyectos/slides/sola.png` (va como foto sola; el carrusel completo queda en la misma carpeta, 01.png a 08.png)
 
 Negocios reales, software real ✦
 
-Algunos de los proyectos del estudio: tiendas online, plataformas, sitios institucionales y sistemas a medida para clientes de Argentina, Estados Unidos, Canadá y Europa.
+Tiendas online, plataformas, sitios institucionales y sistemas a medida para clientes de Argentina, Estados Unidos, Canadá y Europa. Cada uno pensado para lo que ese negocio necesita.
 
-¿Cuál te gustó más? Te leo en comentarios 👇
+¿Tenés un proyecto en mente? Escribime por DM o entrá a francoseiler.com 👇
 
 #portfolio #desarrolloweb #diseñoweb #softwareamedida
 
@@ -85,7 +85,7 @@ Una tienda pensada tanto para vender como para operar.
 #ecommerce #tiendaonline #casodeestudio #desarrolloweb
 
 ## 10 · Carrusel: Arventa
-Archivos: `carrusel-06-arventa/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+Archivos: `carrusel-06-arventa/slides/01.png` a `07.png` (el 01 y el 02 van como video: `01.mp4` y `02.mp4`)
 
 Cobrar facturas vencidas lleva tiempo: llamar uno por uno, dejar mensajes, enviar recordatorios y registrar qué se habló con cada cliente.
 

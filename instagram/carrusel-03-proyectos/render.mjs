@@ -8,5 +8,6 @@ await p.goto(pathToFileURL('index.html').href, { waitUntil: 'networkidle' });
 await p.evaluate(() => document.fonts.ready);
 const slides = await p.$$('.slide:not(.alt)');
 for (const [i, s] of slides.entries()) await s.screenshot({ path: `slides/${String(i + 1).padStart(2, '0')}.png` });
+for (const s of await p.$$('.slide.alt')) await s.screenshot({ path: `slides/${await s.getAttribute('id')}.png` });
 console.log(`${slides.length} slides`);
 await b.close();
