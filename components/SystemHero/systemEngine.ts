@@ -396,8 +396,8 @@ export function createSystemEngine(
       else p.removeFromParent();
     }
     scene.add(rig.root);
-    // Se asoma un ratito después de que aparece el sistema.
-    pandaT0 = (performance.now() - t0) / 1000 + 0.5;
+    // Se asoma junto con el sistema, sin esperar.
+    pandaT0 = (performance.now() - t0) / 1000;
     render();
   })();
 
@@ -445,7 +445,7 @@ export function createSystemEngine(
     // el panda se mete atrás (como si entrara a mostrarlo) y se esconde del
     // todo; al volver de frente se asoma de nuevo.
     pandaAt.set(PANDA_FACE.x, T, PANDA_FACE.z).applyMatrix4(front.matrixWorld);
-    const rise = opts.still ? 1 : easeOutBack(clamp((time - pandaT0) / 0.75, 0, 1));
+    const rise = opts.still ? 1 : easeOutBack(clamp((time - pandaT0) / 0.5, 0, 1));
     const peek = rise * smooth(seg(face, 0.55, 1));
     // Atrás de la placa (sobre la línea de mirada, así no cambia dónde se ve) y
     // asomado hacia la izquierda.

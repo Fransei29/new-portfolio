@@ -95,10 +95,11 @@ w = bpy.data.worlds.new('w')
 scn.world = w
 w.use_nodes = True
 w.node_tree.nodes['Background'].inputs[0].default_value = (0.85, 0.83, 0.95, 1)
-w.node_tree.nodes['Background'].inputs[1].default_value = 0.55
+w.node_tree.nodes['Background'].inputs[1].default_value = 0.35
 for loc, en, col, size in (
-    ((-2.2, -2.6, 3.4), 520, (1, 1, 1), 2.6),
-    ((2.6, 1.8, 2.0), 260, (0.8, 0.72, 1.0), 2.0),
+    # key casi cenital: la sombra cae debajo, no en diagonal
+    ((-0.9, -1.2, 4.2), 300, (1, 1, 1), 2.2),
+    ((2.6, 1.8, 2.0), 140, (0.8, 0.72, 1.0), 2.0),
 ):
     ld = bpy.data.lights.new('l', 'AREA')
     ld.energy = en
@@ -113,12 +114,13 @@ cd = bpy.data.cameras.new('cam')
 cd.lens = 60
 cam = bpy.data.objects.new('cam', cd)
 scn.collection.objects.link(cam)
-target = Vector((0, 0, H * 0.75))
-cam.location = target + Vector((0, -1, 0.32)).normalized() * 6.4
+target = Vector((0, 0, H * 0.72))
+cam.location = target + Vector((0, -1, 0.22)).normalized() * 4.3
 cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
 scn.camera = cam
 
 scn.render.engine = 'CYCLES'
+scn.view_settings.view_transform = 'Standard'
 scn.cycles.device = 'CPU'
 scn.cycles.samples = 40
 scn.cycles.use_denoising = True

@@ -211,14 +211,14 @@ p.greeting {
      el foco siga siendo "Start your project". */
   background-color: rgba(255, 255, 255, 0.85);
   color: var(--text-color);
-  border: 1px solid rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(0, 0, 0, 0.09);
   border-radius: 999px;
   padding: 0 1.85rem;
   box-shadow: none;
 
   &:hover {
     background-color: #ffffff;
-    border-color: rgba(0, 0, 0, 0.38);
+    border-color: rgba(0, 0, 0, 0.18);
 
     // Los CTA del hero ya no llevan flecha sino iconos con forma propia
     // (estrella y lupa): girarlos -45° no significaría nada. Crecen apenas.
@@ -230,11 +230,11 @@ p.greeting {
   :global(html.dark) & {
     color: var(--text-color-dark-mode);
     background-color: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.34);
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.24);
     }
   }
 }
