@@ -232,7 +232,10 @@ export default function SystemHero() {
           el.style.opacity = l.opacity.toFixed(3);
           // A la izquierda de la placa; en pantallas angostas no pasa del borde de la página.
           const minLeft = 4 - stage.getBoundingClientRect().left;
-          const left = Math.max(l.x + ox - 14 - el.offsetWidth, minLeft);
+          // En el celu la etiqueta se mete un poco sobre el borde de su placa:
+          // así quedan pegadas al sistema y no contra el borde de la pantalla.
+          const gap = lite ? -18 : 14;
+          const left = Math.max(l.x + ox - gap - el.offsetWidth, minLeft);
           // Píxeles enteros (y el -50% resuelto acá): con medios píxeles el texto se desenfoca.
           const top = Math.round(l.y + oy - el.offsetHeight / 2);
           el.style.transform = `translate(${Math.round(left)}px, ${top}px)`;

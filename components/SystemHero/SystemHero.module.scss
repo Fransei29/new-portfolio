@@ -171,9 +171,13 @@
   // En el celu, arriba tapaba los botones del hero: va abajo del panda, en el
   // lugar libre a la izquierda del dashboard, con la colita hacia arriba.
   @media (max-width: 768px) {
-    // Termina antes del borde izquierdo del dashboard (--dx), sin pisarlo.
-    right: calc(100% - var(--dx, 22%) + 0.35rem);
-    left: auto;
+    // Termina justo antes del dashboard; en pantallas muy angostas no se va
+    // por el borde izquierdo (prefiere pisar apenas la esquina del dashboard).
+    right: auto;
+    left: max(6px, calc(var(--dx, 22%) - 0.35rem - 6.8rem));
+    // Sin esto, si el hueco es angosto el globito se achica y el texto (que no
+    // corta línea) se le sale por la derecha, encima del dashboard.
+    width: max-content;
     top: calc(var(--dy, 14%) + var(--dh, 60%) * 0.6);
     gap: 0.3rem;
     font-size: 0.66rem;
@@ -359,6 +363,11 @@
     }
 
     small {
+      display: none;
+    }
+
+    // Va encima del borde de la placa: sin trazo.
+    &::after {
       display: none;
     }
   }

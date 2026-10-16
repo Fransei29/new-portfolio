@@ -80,7 +80,7 @@ const FACE_SHIFT = { desktop: 0.26, lite: 0.5 };
 const FACE_DIST = { desktop: 7.6, lite: 8.9 };
 // Abierto en el celu: más lejos y corrido a la derecha, para que las etiquetas
 // (a la izquierda) no pisen las capas.
-const OPEN_LITE = { dist: 14.6, shift: 0.95 };
+const OPEN_LITE = { dist: 13.6, shift: 0.6 };
 
 // Encuadres calculados en Blender (camera_fit_coords) para cada estado.
 const VIEW_DIR = new THREE.Vector3(-4.265, 5.0031, 5.5007).normalize();
