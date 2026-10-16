@@ -1,0 +1,19 @@
+// components/Panda3D/PandaBadge.module.scss
+
+// El canvas sobresale del contenedor (el panda ocupa ~52% de su alto): así el
+// panda queda un poco más chico que el isotipo 2D y el salto entra entero.
+.canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 170%;
+  height: 170%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.live {
+  opacity: 1;
+}

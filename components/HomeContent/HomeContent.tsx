@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
 import '../../app/globals.css';
 import SkillsSummary from '../../components/Skills/SkillsSummary';
@@ -22,13 +22,21 @@ import WaveDivider from '../../components/WaveDivider/WaveDivider';
 // en el <section> del hero, más abajo.
 // import HeroParticles from '../../components/HeroParticles/HeroParticles';
 
-export default function HomeContent() {
+type HomeContentProps = {
+  /** Reemplaza el hero (lo usa la ruta de prueba /hero-3d). Sin prop, la home de siempre. */
+  hero?: ReactNode;
+  /** El panda de "cómo trabajamos" en 3D (también de /hero-3d). */
+  panda3d?: boolean;
+};
+
+export default function HomeContent({ hero, panda3d }: HomeContentProps = {}) {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
   return (
     <ClientLayout>
     <div className='ContainerGeneralComplete'>
+    {hero ?? (
     <section ref={(el) => { elementsRef.current[0] = el;}} className="fade-in-right hero-section">
       {/* Campo de partículas que forma el isotipo del panda y se reorganiza en
           un grafo al scrollear. DESMONTADO a propósito: el efecto funciona pero
@@ -49,6 +57,7 @@ export default function HomeContent() {
 
       </div>
     </section>
+    )}
 
 
       <section className="containerGeneral">
@@ -92,7 +101,7 @@ export default function HomeContent() {
               pisa con el lila profundo de HowWeWork. */}
           <div ref={(el) => {elementsRef.current[6] = el;}} className="assemble section-bg-ink wave-from-white">
             <WaveDivider variant="bToA" />
-            <HowWeWork />
+            <HowWeWork panda3d={panda3d} />
           </div>
 
           <div className="section-bg-lila">

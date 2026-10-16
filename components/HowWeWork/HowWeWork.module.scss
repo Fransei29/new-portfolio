@@ -177,9 +177,19 @@ $step-column-gap: 10rem;
   }
 }
 
+// Isotipo 2D dentro del contenedor del panda 3D (mientras carga o sin WebGL):
+// sólo gira; el contenedor es el que baja.
+.railPandaFlat {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.35s cubic-bezier(0.16, 0.62, 0.22, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   // Sin viaje animado: el panda aparece directamente en su posición.
-  .railPanda { transition: none; }
+  .railPanda,
+  .railPandaFlat { transition: none; }
 }
 
 .stepCard {

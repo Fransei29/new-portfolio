@@ -6,6 +6,21 @@
   display: contents;
 }
 
+// Variante para el hero 3D: el contenedor mide lo que la ventana y nada más.
+.wrapper.bare {
+  max-width: none;
+  margin: 0;
+
+  &:hover .browser {
+    transform: none;
+  }
+
+  // En 3D el borde se afina con la perspectiva: un punto más marcado.
+  .browser {
+    border-color: rgba(46, 41, 78, 0.42);
+  }
+}
+
 .wrapper {
   position: relative;
   width: 100%;

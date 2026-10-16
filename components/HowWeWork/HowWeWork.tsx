@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './HowWeWork.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
+import PandaBadge from '../Panda3D/PandaBadge';
 
 interface Step {
   key: string;
@@ -12,7 +13,12 @@ interface Step {
   description: string;
 }
 
-const HowWeWork = () => {
+type HowWeWorkProps = {
+  /** El panda del eje en 3D (lo usa la ruta de prueba /hero-3d). Sin prop, el isotipo 2D. */
+  panda3d?: boolean;
+};
+
+const HowWeWork = ({ panda3d = false }: HowWeWorkProps) => {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
@@ -198,17 +204,39 @@ const HowWeWork = () => {
                 scroll): va a velocidad constante y no tiembla al scrollear
                 rápido. Una vuelta entera por paso (ver pandaSpin): sólo los
                 múltiplos de 360° dejan el isotipo derecho al llegar. */}
-            {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
-            <img
-              className={styles.railPanda}
-              src="/isotipo-panda-contorno.svg"
-              alt=""
-              aria-hidden
-              style={{
-                transform: `translate(-50%, -50%) translateY(${dotTop}px) rotate(${pandaSpin}deg)`,
-                transition: armed ? undefined : 'none',
-              }}
-            />
+            {panda3d ? (
+              // En 3D el contenedor sólo baja; el giro lo hace el panda mismo,
+              // un salto con vuelta sobre su eje en cada paso.
+              <PandaBadge
+                className={styles.railPanda}
+                style={{
+                  transform: `translate(-50%, -50%) translateY(${dotTop}px)`,
+                  transition: armed ? undefined : 'none',
+                }}
+                spinKey={activeStep}
+                fallback={
+                  // eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza
+                  <img
+                    className={styles.railPandaFlat}
+                    src="/isotipo-panda-contorno.svg"
+                    alt=""
+                    style={{ transform: `rotate(${pandaSpin}deg)`, transition: armed ? undefined : 'none' }}
+                  />
+                }
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza
+              <img
+                className={styles.railPanda}
+                src="/isotipo-panda-contorno.svg"
+                alt=""
+                aria-hidden
+                style={{
+                  transform: `translate(-50%, -50%) translateY(${dotTop}px) rotate(${pandaSpin}deg)`,
+                  transition: armed ? undefined : 'none',
+                }}
+              />
+            )}
           </span>
 
           {steps.map((step, index) => {
