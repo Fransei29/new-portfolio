@@ -19,7 +19,20 @@ import HomeText from '../HomeText/HomeText';
 import HeroDashboard from '../HeroDashboard/HeroDashboard';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './SystemHero.module.scss';
-import type { LabelPos, SystemEngine } from './systemEngine';
+import type { HeadPos, LabelPos, SystemEngine } from './systemEngine';
+
+// El motor (three.js) empieza a bajar apenas se carga este módulo, no recién
+// cuando corre el efecto del hero.
+const enginePromise = typeof window === 'undefined' ? null : import('./systemEngine');
+
+// El globito del isotipo programando (public/isotipo-panda-programando.svg).
+const BUBBLE_FILL = 'M777.74,294.42v48.4c0,11-8.92,19.92-19.95,19.92h-134.32c-7.34,13.98-32.23,24.26-61.8,24.26-2.08,0-4.14-.06-6.17-.17,18.98-1.31,34.54-11.11,39.4-24.09h-8.17c-11,0-19.92-8.92-19.92-19.92v-48.4c0-11,8.92-19.95,19.92-19.95h171.05c11.03,0,19.95,8.95,19.95,19.95Z';
+const BUBBLE_OUTLINE = 'M757.79,274.47c11.03,0,19.95,8.95,19.95,19.95v48.4c0,11-8.92,19.92-19.95,19.92h-134.32c-7.33,13.98-32.23,24.26-61.79,24.26-2.08,0-4.14-.06-6.17-.17,18.98-1.31,34.54-11.11,39.4-24.09h-8.17c-11,0-19.92-8.92-19.92-19.92v-48.4c0-11,8.92-19.95,19.92-19.95h171.05M757.79,262.21h-171.05c-17.75,0-32.19,14.45-32.19,32.21v48.4c0,11.85,6.44,22.22,15.99,27.81-4.62,2.15-10.08,3.57-15.88,3.97-6.46.44-11.47,5.84-11.42,12.32.04,6.48,5.12,11.8,11.59,12.16,2.24.12,4.54.19,6.84.19,30.11,0,55.76-9.32,68.23-24.26h127.88c17.76,0,32.21-14.44,32.21-32.18v-48.4c0-17.76-14.45-32.21-32.21-32.21h0Z';
+const BUBBLE_CODE = [
+  'M654.62,338.29l-33.3-14.15v-14.87l33.3-14.06v12.21l-23.6,8.97v1.21l23.6,8.97v11.72Z',
+  'M656.88,350.98l20.05-64.75h10.75l-20.13,64.75h-10.67Z',
+  'M689.94,338.29v-11.72l23.6-8.97v-1.21l-23.6-8.97v-12.21l33.3,14.06v14.87l-33.3,14.15Z',
+];
 
 const LABELS = [
   { title: 'Frontend & UI', es: 'Lo que usan tus clientes', en: 'What your customers use' },
@@ -31,6 +44,9 @@ const LABELS = [
 // las etiquetas a la vista.
 const OPEN_AT = 0.4;
 const OPEN_MS = 1300;
+// Sin interacción, el sistema se abre solo: después de que el panda se asoma
+// y el globito tuvo su rato.
+const AUTO_OPEN_MS = 7000;
 const CLOSE_MS = 1050;
 
 function webglAvailable() {
@@ -58,16 +74,22 @@ export default function SystemHero() {
   const toggleRef = useRef<((open: boolean) => void) | null>(null);
   const hitRef = useRef<((x: number, y: number) => boolean) | null>(null);
   const openRef = useRef(false);
-  const toggle = () => {
+  // Si el usuario ya abrió o cerró, no se abre solo.
+  const touchedRef = useRef(false);
+  // El clic que abrió no tiene que cerrarlo en el listener de toda la página.
+  const handledRef = useRef<Event | null>(null);
+  const toggle = (e?: { nativeEvent: Event }) => {
+    if (e) handledRef.current = e.nativeEvent;
+    touchedRef.current = true;
     openRef.current = !openRef.current;
     setOpen(openRef.current);
     toggleRef.current?.(openRef.current);
   };
   // El globito del panda invita a abrir: al tocarlo, el panda salta y se abre.
   const pokeRef = useRef<(() => void) | null>(null);
-  const openFromPanda = () => {
+  const openFromPanda = (e: React.MouseEvent) => {
     pokeRef.current?.();
-    toggle();
+    toggle(e);
   };
 
   // La pantalla del dashboard es el HeroDashboard de verdad (HTML vivo y
@@ -122,6 +144,7 @@ export default function SystemHero() {
     let t0 = 0;
     let dur = 1;
     let loaded = false;
+    let autoOpen = 0;
     const update = () => {
       engine?.setProgress(p);
       // El póster (la captura) sólo mientras carga el 3D.
@@ -211,7 +234,7 @@ export default function SystemHero() {
       }
     };
 
-    import('./systemEngine').then(({ createSystemEngine }) => {
+    (enginePromise ?? import('./systemEngine')).then(({ createSystemEngine }) => {
       if (disposed) return;
       // ?patitas=0 las saca, para comparar.
       const paws = new URLSearchParams(window.location.search).get('patitas') !== '0';
@@ -224,21 +247,35 @@ export default function SystemHero() {
       engine = e;
       hitRef.current = (x, y) => e.hitPanda(x, y);
       pokeRef.current = () => e.poke();
-      e.onFrame((labels: LabelPos[]) => {
+      // Posición suavizada de cada etiqueta: el sistema flota y se inclina con
+      // el mouse, y seguirlo al píxel entero la hacía temblar.
+      const smoothed: ({ x: number; y: number } | null)[] = [];
+      e.onFrame((labels: LabelPos[], head: HeadPos) => {
         const [ox, oy] = off();
+        // El globito sale de la cabeza del panda: la sigue cuadro a cuadro.
+        stage.style.setProperty('--hx', `${(head.x + ox).toFixed(1)}px`);
+        stage.style.setProperty('--hy', `${(head.y + oy).toFixed(1)}px`);
         labels.forEach((l, i) => {
           const el = labelRefs.current[i];
           if (!el) return;
           el.style.opacity = l.opacity.toFixed(3);
+          if (l.opacity < 0.01) {
+            smoothed[i] = null;
+            return;
+          }
           // A la izquierda de la placa; en pantallas angostas no pasa del borde de la página.
           const minLeft = 4 - stage.getBoundingClientRect().left;
           // En el celu la etiqueta se mete un poco sobre el borde de su placa:
           // así quedan pegadas al sistema y no contra el borde de la pantalla.
-          const gap = lite ? -18 : 14;
-          const left = Math.max(l.x + ox - gap - el.offsetWidth, minLeft);
-          // Píxeles enteros (y el -50% resuelto acá): con medios píxeles el texto se desenfoca.
-          const top = Math.round(l.y + oy - el.offsetHeight / 2);
-          el.style.transform = `translate(${Math.round(left)}px, ${top}px)`;
+          const gap = lite ? -26 : 14;
+          const x = Math.max(l.x + ox - gap - el.offsetWidth, minLeft);
+          const y = l.y + oy - el.offsetHeight / 2;
+          // Al aparecer va directo; después sigue al sistema con retardo.
+          const sm = (smoothed[i] ??= { x, y });
+          sm.x += (x - sm.x) * 0.12;
+          sm.y += (y - sm.y) * 0.12;
+          // Medios píxeles con translate3d: se mueve parejo en vez de a saltos de 1px.
+          el.style.transform = `translate3d(${sm.x.toFixed(2)}px, ${sm.y.toFixed(2)}px, 0)`;
         });
       });
       fit(e);
@@ -256,6 +293,14 @@ export default function SystemHero() {
           loaded = true;
           update();
           setLive(true);
+          // Si nadie lo toca, a los pocos segundos se abre solo, una vez.
+          autoOpen = window.setTimeout(() => {
+            if (touchedRef.current || openRef.current) return;
+            touchedRef.current = true;
+            openRef.current = true;
+            setOpen(true);
+            toggleRef.current?.(true);
+          }, AUTO_OPEN_MS);
         })
         .catch(() => {
           // Si el modelo no carga, queda el póster.
@@ -276,7 +321,18 @@ export default function SystemHero() {
         window.addEventListener('deviceorientation', onTilt);
       }
       window.addEventListener('scroll', onScroll, { passive: true });
+      // Abierto, un clic en cualquier lado de la página lo vuelve a armar.
+      const onDocClick = (ev: MouseEvent) => {
+        if (!openRef.current || handledRef.current === ev) return;
+        touchedRef.current = true;
+        openRef.current = false;
+        setOpen(false);
+        toggleRef.current?.(false);
+      };
+      document.addEventListener('click', onDocClick);
       cleanups.push(() => {
+        document.removeEventListener('click', onDocClick);
+        window.clearTimeout(autoOpen);
         ro.disconnect();
         io.disconnect();
         window.removeEventListener('pointerdown', onTap);
@@ -300,12 +356,13 @@ export default function SystemHero() {
   // Clic en el stage: abre/cierra, salvo que sea el panda (ese salta).
   const onStageClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const t = e.target as HTMLElement;
-    if (t.closest('button') || !live) return;
+    // Abierto, el listener de toda la página lo cierra.
+    if (t.closest('button') || !live || openRef.current) return;
     const r = (canvasRef.current ?? e.currentTarget).getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width) * 2 - 1;
     const y = ((e.clientY - r.top) / r.height) * 2 - 1;
     if (hitRef.current?.(x, y)) return;
-    toggle();
+    toggle(e);
   };
 
   return (
@@ -348,13 +405,30 @@ export default function SystemHero() {
                 </div>
               ))}
               {live && !open && (
-                // El panda "dice" que se puede mirar adentro (como el </> del
-                // isotipo programando). Entra un rato después de que se asoma.
-                <button type="button" className={styles.pandaBubble} onClick={openFromPanda}>
-                  <span className={styles.bubbleCode} aria-hidden="true">
-                    {'</>'}
-                  </span>
-                  {lang === 'es' ? '¿Espiamos?' : 'Peek inside?'}
+                // El globito del isotipo programando, tal cual y sin texto:
+                // abre el sistema. Entra un rato después de que el panda se asoma.
+                <button
+                  type="button"
+                  className={styles.pandaBubble}
+                  onClick={openFromPanda}
+                  aria-label={lang === 'es' ? 'Ver cómo está hecho' : 'See how it is built'}
+                  title={lang === 'es' ? 'Ver cómo está hecho' : 'See how it is built'}
+                >
+                  <svg viewBox="554 262 236 113" overflow="visible" aria-hidden="true">
+                    {/* Espejado: la cabeza está inclinada a la izquierda, así que el
+                        globo se abre hacia arriba a la izquierda (al aire, no sobre
+                        el dashboard) y la colita, abajo a la derecha, sale de la
+                        coronilla. El </> queda derecho. */}
+                    <g transform="translate(1344.5 0) scale(-1 1)">
+                      <path className={styles.bubbleFill} d={BUBBLE_FILL} />
+                      <path className={styles.bubbleInk} d={BUBBLE_OUTLINE} />
+                    </g>
+                    <g className={styles.bubbleInk}>
+                      {BUBBLE_CODE.map((c) => (
+                        <path key={c} d={c} />
+                      ))}
+                    </g>
+                  </svg>
                 </button>
               )}
               {live && open && (

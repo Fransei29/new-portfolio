@@ -33,6 +33,12 @@ declare module 'three' {
     set(x: number, y: number): this;
   }
 
+  export class Box3 {
+    max: Vector3;
+    setFromObject(object: Object3D): this;
+    getCenter(target: Vector3): Vector3;
+  }
+
   export class Raycaster {
     setFromCamera(coords: Vector2, camera: Camera): void;
     intersectObjects(objects: Object3D[], recursive?: boolean): { object: Object3D }[];

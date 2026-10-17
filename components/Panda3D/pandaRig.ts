@@ -71,7 +71,16 @@ export async function loadPandaRig(
     for (const m of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
       const sm = m as THREE.MeshStandardMaterial;
       mats.push(sm);
-      if (m.name === 'panda_ink') ink = sm;
+      if (m.name === 'panda_ink') {
+        ink = sm;
+        // Un poco menos de brillo en el carbón: que se note el volumen, sin reflejo.
+        sm.roughness = 0.62;
+      }
+      // El barniz del modelo hacía brillar mucho los ojos: mate, como el 2D.
+      if (m.name === 'panda_eye') {
+        (sm as unknown as { clearcoat: number }).clearcoat = 0;
+        sm.roughness = 0.6;
+      }
     }
   });
   const eyes = ['panda_eye_l', 'panda_eye_r']

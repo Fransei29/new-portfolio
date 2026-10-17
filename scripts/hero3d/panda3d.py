@@ -336,6 +336,15 @@ for ob in [root, head] + eye_obs + paw_obs:
     ob.select_set(True)
 print('PANDA dims', [round(d, 3) for d in head.dimensions], 'verts', sum(len(o.data.vertices) for o in [head] + eye_obs))
 
+# Liviano para la web: la malla sale muy densa del inflado y el GLB pesaba más
+# que todo el sistema en capas. PANDA_DECIMATE=1 la deja como sale.
+import os
+DECIMATE = float(os.environ.get('PANDA_DECIMATE', '0.3'))
+if DECIMATE < 1:
+    for ob in [head] + eye_obs + paw_obs:
+        mod = ob.modifiers.new('decimate', 'DECIMATE')
+        mod.ratio = DECIMATE
+
 bpy.ops.export_scene.gltf(filepath=OUT, export_format='GLB', use_selection=True,
                           export_draco_mesh_compression_enable=True,
                           export_draco_mesh_compression_level=6, export_apply=True)

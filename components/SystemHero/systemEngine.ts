@@ -25,6 +25,8 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { loadPandaRig, PANDA_HEIGHT, type PandaRig } from '../Panda3D/pandaRig';
 
 export type LabelPos = { x: number; y: number; opacity: number };
+/** La coronilla del panda en px del canvas; visible de 0 (escondido) a 1 (asomado). */
+export type HeadPos = { x: number; y: number; visible: number };
 export type Rect = { x: number; y: number; w: number; h: number };
 
 export type SystemEngine = {
@@ -39,7 +41,7 @@ export type SystemEngine = {
   /** overscan: cuánto más ancho es el canvas que el lugar del encuadre (sobresale parejo). */
   resize: (w: number, h: number, overscan?: number) => void;
   /** Se llama en cada cuadro con la posición en px de cada capa (arriba → abajo). */
-  onFrame: (cb: (labels: LabelPos[]) => void) => void;
+  onFrame: (cb: (labels: LabelPos[], head: HeadPos) => void) => void;
   /** Dónde queda la pantalla del dashboard de frente (px del canvas): ahí va el póster. */
   screenRect: () => Rect;
   /** Coordenadas normalizadas del stage (-1..1, y hacia abajo): ¿está el panda ahí? */
@@ -72,7 +74,7 @@ const PANDA_FACE = { x: -W / 2, z: -D / 2 + D * 0.32 };
 const PAW_SCALE = 0.62;
 // Inclinación de frente (como el 2D, cruzado sacando la cabeza).
 const PANDA_ROLL = 0.85;
-const PANDA_SCALE = { desktop: 0.95, lite: 0.95 };
+const PANDA_SCALE = { desktop: 0.8, lite: 0.8 };
 // De frente, el dashboard se corre a la derecha para dejarle lugar al panda.
 // En el celu el stage ocupa todo el ancho: hay que alejarse más para que el
 // panda no quede cortado por el borde de la pantalla.
@@ -80,7 +82,7 @@ const FACE_SHIFT = { desktop: 0.26, lite: 0.5 };
 const FACE_DIST = { desktop: 7.6, lite: 8.9 };
 // Abierto en el celu: más lejos y corrido a la derecha, para que las etiquetas
 // (a la izquierda) no pisen las capas.
-const OPEN_LITE = { dist: 13.6, shift: 0.6 };
+const OPEN_LITE = { dist: 13.6, shift: 0.85 };
 
 // Encuadres calculados en Blender (camera_fit_coords) para cada estado.
 const VIEW_DIR = new THREE.Vector3(-4.265, 5.0031, 5.5007).normalize();
@@ -213,9 +215,10 @@ export function createSystemEngine(
   },
 ): SystemEngine {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  // Siempre a 2x (aunque la pantalla sea 1x): el texto de la captura del
-  // dashboard se lee mucho mejor dibujado al doble y achicado.
-  renderer.setPixelRatio(2);
+  // Con la captura como textura (celu), siempre a 2x: el texto se lee mucho
+  // mejor dibujado al doble y achicado. Con la pantalla en HTML el texto lo
+  // dibuja el navegador, y a 2x en un monitor 1x el canvas cuesta 4 veces más.
+  renderer.setPixelRatio(opts.screenEl ? Math.min(Math.max(window.devicePixelRatio, 1.25), 2) : 2);
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
 
@@ -253,6 +256,10 @@ export function createSystemEngine(
   const eRoll = new THREE.Euler();
   const pandaAt = new THREE.Vector3();
   const pawAt = new THREE.Vector3();
+  // La coronilla en coordenadas de root (se mide al cargar) y dónde cae en pantalla.
+  const crownLocal = new THREE.Vector3();
+  const crown = new THREE.Vector3();
+  const head: HeadPos = { x: 0, y: 0, visible: 0 };
   const ndc = new THREE.Vector3();
   const ray = new THREE.Raycaster();
   const rayPt = new THREE.Vector2();
@@ -326,7 +333,7 @@ export function createSystemEngine(
   let raf = 0;
   let width = 1;
   let height = 1;
-  let frameCb: ((l: LabelPos[]) => void) | null = null;
+  let frameCb: ((l: LabelPos[], head: HeadPos) => void) | null = null;
   const t0 = performance.now();
 
   const ready = (async () => {
@@ -388,6 +395,10 @@ export function createSystemEngine(
     model.add(gltf.scene);
 
     rig = pandaRig;
+    // root todavía sin mover: la caja está en sus propios ejes (arriba +Y).
+    const box = new THREE.Box3().setFromObject(pandaRig.root);
+    box.getCenter(crownLocal);
+    crownLocal.y = box.max.y;
     rig.setDark(dark);
     // Las patitas van sueltas en la escena: se apoyan en el borde del
     // dashboard, no en la cabeza (que gira para mirar).
@@ -458,6 +469,11 @@ export function createSystemEngine(
     eRoll.set(0, 0, PANDA_ROLL);
     qRoll.setFromEuler(eRoll);
     root.quaternion.copy(qPanda).multiply(qRoll);
+    root.updateMatrixWorld(true);
+    crown.copy(crownLocal).applyMatrix4(root.matrixWorld).project(cam);
+    head.x = ((crown.x + 1) / 2) * width;
+    head.y = ((1 - crown.y) / 2) * height;
+    head.visible = peek;
 
     // Patitas: sobre el borde izquierdo, apenas adentro del dashboard y por
     // delante de la pantalla, los deditos hacia la derecha. Sólo de frente.
@@ -513,7 +529,7 @@ export function createSystemEngine(
     layout(progress, time);
     renderer.render(scene, cam);
     if (html && screenMesh) placeHtml(html, screenMesh);
-    frameCb?.(labels(progress));
+    frameCb?.(labels(progress), head);
   }
 
   /** Calza la ventana HTML sobre la pantalla del modelo (ver opts.screenEl). */

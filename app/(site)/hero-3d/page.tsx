@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
+// Lo que necesita el 3D, pedido desde el HTML: así baja en paralelo con el
+// resto de la página y no recién cuando el hero se hidrata (si no, el panda
+// aparecía bastante después que todo lo demás). Van como fetch con CORS porque
+// GLTFLoader y DRACOLoader los piden con fetch().
+const PRELOAD = ['/hero3d/system.glb', '/hero3d/panda.glb', '/draco/draco_wasm_wrapper.js', '/draco/draco_decoder.wasm'];
+
 export default function Hero3DPage() {
-  return <HomeContent hero={<SystemHero />} panda3d />;
+  return (
+    <>
+      {PRELOAD.map((href) => (
+        <link key={href} rel="preload" as="fetch" href={href} crossOrigin="anonymous" />
+      ))}
+      <link rel="preload" as="image" href="/hero3d/screen.webp" />
+      <HomeContent hero={<SystemHero />} panda3d />
+    </>
+  );
 }

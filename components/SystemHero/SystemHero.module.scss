@@ -107,90 +107,58 @@
   opacity: 1;
 }
 
-// Globito del panda (desktop: arriba de su cabeza, a la izquierda del
-// dashboard). Mismo lenguaje que el </> del isotipo "programando": blanco,
-// borde carbón, colita hacia el panda. Entra un rato después de que el panda
-// se asoma, con un rebote corto, y flota apenas.
+// Globito del panda: el del isotipo "programando", sin texto y espejado. La
+// punta de la colita (abajo a la derecha) cae sobre la coronilla del panda
+// (--hx/--hy, los pone el motor en cada cuadro) y el globo queda arriba a la
+// izquierda de la cabeza, lejos del dashboard. Entra un rato después de que
+// el panda se asoma, con un rebote corto, y flota apenas.
 .pandaBubble {
+  // Ancho del globito; la punta de la colita queda 0.045 anchos a la derecha
+  // del borde derecho y 0.555 anchos debajo del borde de arriba.
+  --bw: 4.4rem;
   position: absolute;
   z-index: 4;
-  // A la izquierda del dashboard (no le tapa la barra) y justo arriba de la
-  // cabeza del panda, con la colita apuntándole.
-  right: calc(100% - var(--dx, 22%) + 0.6rem);
-  top: calc(var(--dy, 14%) - 1.3rem);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.85rem;
-  border: 2px solid #2e2d3b;
-  border-radius: 14px;
-  background: #ffffff;
-  color: #2e2d3b;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  white-space: nowrap;
+  left: calc(var(--hx, 20%) - var(--bw) * 1.045 + 10px);
+  top: calc(var(--hy, 20%) - var(--bw) * 0.555 + 2px);
+  display: block;
+  width: var(--bw);
+  padding: 0;
+  border: 0;
+  background: none;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(46, 41, 78, 0.12);
-  transform-origin: 30% 100%;
-  // Habla y se calla: aparece, queda ~4 s, se va, y vuelve ~7 s después.
+  filter: drop-shadow(0 6px 12px rgba(46, 41, 78, 0.14));
+  // Crece desde la punta de la colita, como si saliera de la cabeza.
+  transform-origin: 104% 116%;
+  // Aparece, queda ~4 s, se va, y vuelve ~7 s después.
   opacity: 0;
   visibility: hidden;
   animation:
     bubbleCycle 11s ease-out 1.6s infinite,
     bubbleFloat 3.2s ease-in-out 2.1s infinite;
-  transition:
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+  transition: filter 0.2s ease;
 
-  // Colita hacia la cabeza del panda (abajo, a la derecha).
-  &::after {
-    content: '';
-    position: absolute;
-    left: 70%;
-    bottom: -9px;
-    width: 14px;
-    height: 14px;
-    background: inherit;
-    border-right: 2px solid #2e2d3b;
-    border-bottom: 2px solid #2e2d3b;
-    border-bottom-right-radius: 4px;
-    transform: rotate(45deg);
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   &:hover {
-    background: #f6f3ff;
-    box-shadow: 0 10px 26px rgba(46, 41, 78, 0.18);
+    filter: drop-shadow(0 8px 16px rgba(46, 41, 78, 0.24));
+
+    .bubbleFill {
+      fill: #f6f3ff;
+    }
   }
 
   &:focus-visible {
     outline: 2px solid #8e7ae6;
     outline-offset: 3px;
+    border-radius: 10px;
   }
 
-  // En el celu, arriba tapaba los botones del hero: va abajo del panda, en el
-  // lugar libre a la izquierda del dashboard, con la colita hacia arriba.
   @media (max-width: 768px) {
-    // Termina justo antes del dashboard; en pantallas muy angostas no se va
-    // por el borde izquierdo (prefiere pisar apenas la esquina del dashboard).
-    right: auto;
-    left: max(6px, calc(var(--dx, 22%) - 0.35rem - 6.8rem));
-    // Sin esto, si el hueco es angosto el globito se achica y el texto (que no
-    // corta línea) se le sale por la derecha, encima del dashboard.
-    width: max-content;
-    top: calc(var(--dy, 14%) + var(--dh, 60%) * 0.6);
-    gap: 0.3rem;
-    font-size: 0.66rem;
-    padding: 0.32rem 0.5rem;
-    border-radius: 11px;
-    transform-origin: 50% 0;
-
-    &::after {
-      left: 62%;
-      top: -9px;
-      bottom: auto;
-      transform: rotate(-135deg);
-    }
+    --bw: 3.2rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -200,10 +168,13 @@
   }
 }
 
-.bubbleCode {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-weight: 800;
-  color: #8e7ae6;
+.bubbleFill {
+  fill: #f3f2f4;
+  transition: fill 0.2s ease;
+}
+
+.bubbleInk {
+  fill: #2e2d3b;
 }
 
 @keyframes bubbleCycle {
@@ -242,16 +213,6 @@
   }
   50% {
     translate: 0 -3px;
-  }
-}
-
-:global(html.dark) .pandaBubble {
-  background: #292833;
-  color: var(--text-color-dark-mode);
-  border-color: #c9c3e6;
-
-  &::after {
-    border-color: #c9c3e6;
   }
 }
 
