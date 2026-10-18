@@ -44,25 +44,39 @@ export default function PandaBadge({ className, style, spinKey, fallback }: Prop
     const cleanups: (() => void)[] = [];
     const onPointer = (e: PointerEvent) => engineRef.current?.setPointer(e.clientX, e.clientY);
 
-    import('./badgeEngine').then(({ createBadgeEngine }) => {
-      if (disposed) return;
-      const e = createBadgeEngine(canvas, { lite });
-      engineRef.current = e;
-      e.resize(canvas.clientWidth, canvas.clientHeight);
-      e.ready.then(() => !disposed && setMode('3d')).catch(() => !disposed && setMode('flat'));
-      const ro = new ResizeObserver(() => e.resize(canvas.clientWidth, canvas.clientHeight));
-      ro.observe(canvas);
-      const io = new IntersectionObserver(([entry]) => e.setRunning(entry.isIntersecting));
-      io.observe(canvas);
-      if (!lite) window.addEventListener('pointermove', onPointer, { passive: true });
-      cleanups.push(() => {
-        ro.disconnect();
-        io.disconnect();
-        window.removeEventListener('pointermove', onPointer);
-        e.dispose();
-        engineRef.current = null;
+    const start = () =>
+      import('./badgeEngine').then(({ createBadgeEngine }) => {
+        if (disposed) return;
+        const e = createBadgeEngine(canvas, { lite });
+        engineRef.current = e;
+        e.resize(canvas.clientWidth, canvas.clientHeight);
+        e.ready.then(() => !disposed && setMode('3d')).catch(() => !disposed && setMode('flat'));
+        const ro = new ResizeObserver(() => e.resize(canvas.clientWidth, canvas.clientHeight));
+        ro.observe(canvas);
+        const io = new IntersectionObserver(([entry]) => e.setRunning(entry.isIntersecting));
+        io.observe(canvas);
+        if (!lite) window.addEventListener('pointermove', onPointer, { passive: true });
+        cleanups.push(() => {
+          ro.disconnect();
+          io.disconnect();
+          window.removeEventListener('pointermove', onPointer);
+          e.dispose();
+          engineRef.current = null;
+        });
       });
-    });
+
+    // Va más abajo en la página: se arma recién cuando se acerca a la vista,
+    // así no le compite la carga al hero 3D del principio.
+    const near = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        near.disconnect();
+        start();
+      },
+      { rootMargin: '600px 0px' },
+    );
+    near.observe(canvas);
+    cleanups.push(() => near.disconnect());
 
     return () => {
       disposed = true;

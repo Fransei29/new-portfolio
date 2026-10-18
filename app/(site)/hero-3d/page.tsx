@@ -25,7 +25,8 @@ export default function Hero3DPage() {
       {PRELOAD.map((href) => (
         <link key={href} rel="preload" as="fetch" href={href} crossOrigin="anonymous" />
       ))}
-      <link rel="preload" as="image" href="/hero3d/screen.webp" />
+      {/* Con CORS, como la pide el TextureLoader (y el póster): una sola descarga. */}
+      <link rel="preload" as="image" href="/hero3d/screen.webp" crossOrigin="anonymous" />
       <HomeContent hero={<SystemHero />} panda3d />
     </>
   );

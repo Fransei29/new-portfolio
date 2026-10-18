@@ -19,10 +19,10 @@
 //   0.70–0.84  se vuelve a armar
 //   0.85–1.00  se para de nuevo de frente
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { loadPandaRig, PANDA_HEIGHT, type PandaRig } from '../Panda3D/pandaRig';
+import { loadPandaRig, PANDA_HEIGHT, PANDA_URL, type PandaRig } from '../Panda3D/pandaRig';
 
 export type LabelPos = { x: number; y: number; opacity: number };
 /** La coronilla del panda en px del canvas; visible de 0 (escondido) a 1 (asomado). */
@@ -56,6 +56,34 @@ export type SystemEngine = {
 const MODEL_URL = '/hero3d/system.glb';
 const SCREEN_URL = '/hero3d/screen.webp';
 
+// Los modelos se piden y se decodifican apenas carga este módulo, sin esperar
+// a que React monte el hero (eso llega más de un segundo después, y el panda
+// tardaba en aparecer por eso). El primer motor se queda con lo ya cargado; si
+// se arma otro (volver a la página), pide todo de nuevo: cada motor libera lo
+// suyo al cerrarse.
+type Assets = { loader: GLTFLoader; system: Promise<GLTF>; screen: Promise<THREE.Texture>; panda: Promise<GLTF> };
+function loadAssets(): Assets {
+  const draco = new DRACOLoader().setDecoderPath('/draco/');
+  const loader = new GLTFLoader().setDRACOLoader(draco);
+  const a = {
+    loader,
+    system: loader.loadAsync(MODEL_URL),
+    screen: new THREE.TextureLoader().loadAsync(SCREEN_URL),
+    panda: loader.loadAsync(PANDA_URL),
+  };
+  const done = () => draco.dispose();
+  Promise.all([a.system, a.panda]).then(done, done);
+  // Si falla, el error le llega al motor; mientras nadie lo pidió, no es "sin atender".
+  for (const pr of [a.system, a.screen, a.panda]) pr.catch(() => {});
+  return a;
+}
+let preloaded = typeof window === 'undefined' ? null : loadAssets();
+function takeAssets() {
+  const a = preloaded ?? loadAssets();
+  preloaded = null;
+  return a;
+}
+
 // Medidas del modelo (las mismas del script de Blender).
 const W = 3.2;
 const D = 2.84;
@@ -72,6 +100,11 @@ const SCREEN = { w: 2.94, d: 2.581, y: 0.142, grow: 1.088 };
 const PANDA_FACE = { x: -W / 2, z: -D / 2 + D * 0.32 };
 // Las patitas, más chicas que en el modelo: se leen como manos agarrándose.
 const PAW_SCALE = 0.62;
+// Dónde agarra cada patita, a lo largo del borde (la de abajo, la de arriba).
+const PAW_Z = [0.36, -0.04];
+// Cuánto se doblan sobre el borde: la palma queda atrás de la placa y los
+// deditos por delante, en vez de apoyadas enteras encima de la pantalla.
+const PAW_WRAP = -0.55;
 // Inclinación de frente (como el 2D, cruzado sacando la cabeza).
 const PANDA_ROLL = 0.85;
 const PANDA_SCALE = { desktop: 0.8, lite: 0.8 };
@@ -256,6 +289,19 @@ export function createSystemEngine(
   const eRoll = new THREE.Euler();
   const pandaAt = new THREE.Vector3();
   const pawAt = new THREE.Vector3();
+  const qWrap = new THREE.Quaternion().setFromEuler(new THREE.Euler().set(0, PAW_WRAP, 0));
+  // Sombrita de contacto de cada patita sobre la pantalla: sin ella parecen
+  // flotar delante del dashboard.
+  const pawShadowTex = shadowTexture();
+  const pawShadows = PAW_Z.map(() => {
+    const m = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1),
+      new THREE.MeshBasicMaterial({ map: pawShadowTex, transparent: true, depthWrite: false, toneMapped: false }),
+    );
+    m.rotation.x = -Math.PI / 2;
+    m.renderOrder = 1;
+    return m;
+  });
   // La coronilla en coordenadas de root (se mide al cargar) y dónde cae en pantalla.
   const crownLocal = new THREE.Vector3();
   const crown = new THREE.Vector3();
@@ -337,14 +383,12 @@ export function createSystemEngine(
   const t0 = performance.now();
 
   const ready = (async () => {
-    const draco = new DRACOLoader().setDecoderPath('/draco/');
-    const loader = new GLTFLoader().setDRACOLoader(draco);
+    const assets = takeAssets();
     const [gltf, screenTex, pandaRig] = await Promise.all([
-      loader.loadAsync(MODEL_URL),
-      new THREE.TextureLoader().loadAsync(SCREEN_URL),
-      loadPandaRig(loader, { scale: pandaScale, still: opts.still }),
+      assets.system,
+      assets.screen,
+      loadPandaRig(assets.loader, { scale: pandaScale, still: opts.still, gltf: assets.panda }),
     ]);
-    draco.dispose();
     screenTex.colorSpace = THREE.SRGBColorSpace;
     screenTex.flipY = false;
     screenTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -392,6 +436,7 @@ export function createSystemEngine(
       }
     });
     for (const name of LAYERS) layers[name] = gltf.scene.getObjectByName(name) ?? undefined;
+    if (opts.paws) for (const s of pawShadows) layers.frontend?.add(s);
     model.add(gltf.scene);
 
     rig = pandaRig;
@@ -475,23 +520,42 @@ export function createSystemEngine(
     head.y = ((1 - crown.y) / 2) * height;
     head.visible = peek;
 
-    // Patitas: sobre el borde izquierdo, apenas adentro del dashboard y por
-    // delante de la pantalla, los deditos hacia la derecha. Sólo de frente.
+    // Patitas: montadas sobre el borde izquierdo, dobladas sobre él (la palma
+    // atrás, los deditos por delante de la pantalla). Sólo de frente. Primero
+    // se asoma la cabeza y después agarran, una y otra, con un apretón al
+    // apoyarse; cuando salta, se levantan con ella.
     const paws = rig.paws;
+    const since = opts.still ? Infinity : time - pandaT0;
     // Se sueltan antes de que la cabeza se esconda: nunca quedan solas en el borde.
-    const grip = smooth(seg(face, 0.82, 1)) * rise;
+    const hold = smooth(seg(face, 0.82, 1));
+    const hop = rig.hopAt(time);
     paws.forEach((p, i) => {
-      pawAt.set(PANDA_FACE.x, T, PANDA_FACE.z + (i === 0 ? 0.36 : -0.04)).applyMatrix4(front.matrixWorld);
+      const k = clamp((since - 0.3 - i * 0.14) / 0.32, 0, 1);
+      const grip = smooth(k) * hold;
+      // El apretón: se aplastan un poco contra la placa justo al agarrar.
+      const press = k > 0 && k < 1 ? 0 : 1;
+      const squash = 1 + 0.14 * Math.sin(Math.PI * clamp((since - 0.5 - i * 0.14) / 0.25, 0, 1)) * press;
+      pawAt.set(PANDA_FACE.x, T, PANDA_FACE.z + PAW_Z[i]).applyMatrix4(front.matrixWorld);
       p.position
         .copy(pawAt)
-        .addScaledVector(toCam, 0.08)
-        .addScaledVector(rightS, 0.07 * pandaScale)
-        .addScaledVector(upS, (1 - grip) * -0.25);
+        .addScaledVector(toCam, 0.03)
+        // Llegan desde atrás del borde (la izquierda) hasta montarse sobre él.
+        .addScaledVector(rightS, lerp(-0.3, 0.05, grip) * pandaScale)
+        // Respiran con la cabeza y suben un poco cuando salta.
+        .addScaledVector(upS, (opts.still ? 0 : Math.sin(time * 0.9 + i) * 0.006) + hop * 0.12 * PANDA_H);
       eRoll.set(0, 0, -Math.PI / 2 + (i === 0 ? -0.15 : 0.12));
       qRoll.setFromEuler(eRoll);
-      p.quaternion.copy(qPanda).multiply(qRoll);
-      p.scale.setScalar(Math.max(grip, 0.0001) * pandaScale * PAW_SCALE);
+      p.quaternion.copy(qPanda).multiply(qWrap).multiply(qRoll);
+      const sc = Math.max(grip, 0.0001) * pandaScale * PAW_SCALE;
+      p.scale.set(sc * squash, sc / squash, sc);
       p.visible = grip > 0.01;
+
+      const sh = pawShadows[i];
+      // Corrida hacia abajo a la derecha, lejos de la luz principal.
+      sh.position.set(PANDA_FACE.x + 0.17 * pandaScale, T + 0.006, PANDA_FACE.z + PAW_Z[i] + 0.05);
+      sh.scale.setScalar(0.32 * pandaScale * (1 + hop * 0.4));
+      (sh.material as THREE.MeshBasicMaterial).opacity = grip * 0.55 * (1 - hop * 0.6);
+      sh.visible = grip > 0.01;
     });
 
     // Mirada: al puntero si hay mouse; si no, pasea. Con el sistema abierto baja

@@ -387,7 +387,7 @@ export default function SystemHero() {
                   </>
                 )}
                 {/* eslint-disable-next-line @next/next/no-img-element -- póster que coincide con el primer cuadro 3D */}
-                <img className={styles.posterScreen} src="/hero3d/screen.webp" alt="" />
+                <img className={styles.posterScreen} src="/hero3d/screen.webp" alt="" crossOrigin="anonymous" />
               </div>
               <div ref={cssLayerRef} className={styles.cssLayer} aria-hidden="true" />
               <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />

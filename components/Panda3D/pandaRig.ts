@@ -9,7 +9,7 @@
 // punto o pasear solo), parpadear, el salto con giro y el modo oscuro.
 // Lo usa el hero 3D (SystemHero).
 import * as THREE from 'three';
-import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import type { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export const PANDA_URL = '/hero3d/panda.glb';
 /** Alto de la cabeza con escala 1, en unidades del modelo. */
@@ -38,6 +38,8 @@ export type PandaRig = {
   update: (time: number, look: { x: number; y: number } | null, pitch?: number, roll?: number) => void;
   /** Salto con giro. hop: altura del salto en unidades de la escena. */
   poke: (time: number) => void;
+  /** Cuánto está subida la cabeza por el salto (0..1): para que las patitas la acompañen. */
+  hopAt: (time: number) => number;
   hit: (ray: THREE.Raycaster) => boolean;
   setDark: (dark: boolean) => void;
   dispose: () => void;
@@ -48,9 +50,10 @@ const smooth = (x: number) => x * x * (3 - 2 * x);
 
 export async function loadPandaRig(
   loader: GLTFLoader,
-  opts: { scale: number; still: boolean; hop?: number },
+  // gltf: el modelo ya pedido (p. ej. apenas cargó el módulo), si lo hay.
+  opts: { scale: number; still: boolean; hop?: number; gltf?: Promise<GLTF> },
 ): Promise<PandaRig> {
-  const gltf = await loader.loadAsync(PANDA_URL);
+  const gltf = await (opts.gltf ?? loader.loadAsync(PANDA_URL));
   const H = PANDA_HEIGHT * opts.scale;
   const hop = opts.hop ?? 0.2 * H;
 
@@ -149,6 +152,10 @@ export async function loadPandaRig(
       const b = blinkT0 < 0 ? 1 : (time - blinkT0) / 0.16;
       const lid = b < 1 ? 1 - 0.88 * Math.sin(Math.PI * b) : 1;
       for (const e of eyes) e.scale.z = lid;
+    },
+    hopAt(time) {
+      const s = spinT0 < 0 ? 1 : clamp((time - spinT0) / SPIN, 0, 1);
+      return s < 1 ? Math.sin(Math.PI * s) : 0;
     },
     poke(time) {
       if (opts.still || (spinT0 >= 0 && time - spinT0 < SPIN)) return;
