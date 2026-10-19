@@ -1,6 +1,14 @@
 // components/SystemHero/SystemHero.module.scss
 // Hero 3D de la home.
 
+// El canvas y la capa CSS sobresalen 15% del stage y en desktop se pasaban del
+// viewport: scroll horizontal en toda la home. La sección ocupa el ancho de la
+// ventana, así que recortar acá es recortar en el borde de la pantalla.
+// `clip` y no `hidden`: `hidden` volvería a la sección scroll container.
+.track {
+  overflow-x: clip;
+}
+
 .stage {
   position: relative;
   width: 100%;

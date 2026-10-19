@@ -366,7 +366,7 @@ export default function SystemHero() {
   };
 
   return (
-    <section ref={trackRef} data-system-hero>
+    <section ref={trackRef} className={styles.track} data-system-hero>
       <div className="hero-section">
         <div className="home-text">
           <div className="home-textA">
