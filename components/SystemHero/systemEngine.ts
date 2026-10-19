@@ -372,8 +372,6 @@ export function createSystemEngine(
   const qp = new THREE.Vector3();
   let screenMesh: THREE.Mesh | null = null;
   let screenMat: THREE.MeshBasicMaterial | null = null;
-  let screenSharp: THREE.Texture | null = null;
-  let screenMip: THREE.Texture | null = null;
   let progress = 0;
   let running = false;
   let raf = 0;
@@ -392,21 +390,16 @@ export function createSystemEngine(
     screenTex.colorSpace = THREE.SRGBColorSpace;
     screenTex.flipY = false;
     screenTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    // Dos versiones de la captura: de frente, sin mipmaps (nítida: con mipmaps
-    // se mezcla con la versión a media resolución y el texto se lava); en
-    // ángulo, con mipmaps (si no, titila).
-    screenSharp = screenTex.clone();
-    screenSharp.generateMipmaps = false;
-    screenSharp.minFilter = THREE.LinearFilter;
-    screenSharp.needsUpdate = true;
-    screenMip = screenTex;
+    // La captura solo se ve en el celu (en desktop la pantalla es el HTML), y
+    // ahí ocupa unos 200px para 1500 de imagen: siempre con mipmaps. Sin ellos,
+    // achicada tanto, el texto se rompe en rayas.
     gltf.scene.traverse((o) => {
       const mesh = o as THREE.Mesh;
       if (!mesh.isMesh) return;
       const mat = mesh.material as THREE.MeshStandardMaterial;
       if (mat.name.startsWith('screen')) {
         // Colores exactos de la captura, sin luz ni tone mapping encima.
-        screenMat = new THREE.MeshBasicMaterial({ map: screenSharp, transparent: true, toneMapped: false });
+        screenMat = new THREE.MeshBasicMaterial({ map: screenTex, transparent: true, toneMapped: false });
         mesh.material = screenMat;
         screenMesh = mesh;
         mesh.geometry.computeBoundingBox();
@@ -478,7 +471,6 @@ export function createSystemEngine(
     pivot.position.y = TARGET_Y.assembled + (opts.still ? 0 : Math.sin(time * 1.1) * 0.03);
     (shadow.material as THREE.MeshBasicMaterial).opacity = (1 - face) * 0.9;
     faceShadowMat.opacity = face * face;
-    if (screenMat) screenMat.map = face > 0.92 ? screenSharp : screenMip;
 
     // Cámara: siempre sobre la misma dirección; cambia la distancia y la altura del foco.
     const dist = lerp(lerp(DIST.assembled, faceDist, face), opts.lite ? OPEN_LITE.dist : DIST.exploded, open);
