@@ -1,0 +1,74 @@
+/* design-exploration/_shared/exploration.css
+   Neutraliza lo que app/globals.css aplica a todo el documento y que ninguna
+   opción debería heredar. Todo va acotado a páginas que contienen .dx-root, así
+   el sitio real no se entera. */
+
+/* globals.css pone scroll-snap obligatorio en html/body: acá rompería el scroll. */
+html:has(.dx-root),
+html:has(.dx-root) body {
+  scroll-snap-type: none !important;
+  background: var(--dx-page-bg, #ffffff);
+}
+
+html:has(.dx-root) body {
+  overflow-x: hidden;
+}
+
+.dx-root {
+  min-height: 100vh;
+  /* Espacio para que la barra flotante no tape el footer. */
+  padding-bottom: 88px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dx-root *,
+.dx-root *::before,
+.dx-root *::after {
+  box-sizing: border-box;
+}
+
+.dx-root img {
+  max-width: 100%;
+  display: block;
+}
+
+/* globals.css quita el outline en :focus de los links. El foco visible es
+   obligatorio: cada opción puede redefinir el color con --dx-focus. */
+.dx-root :focus-visible {
+  outline: 2px solid var(--dx-focus, currentColor) !important;
+  outline-offset: 3px;
+}
+
+/* globals.css bloquea la selección y el cursor en todos los h1. */
+.dx-root h1 {
+  user-select: auto;
+  cursor: auto;
+}
+
+.dx-skip {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 10000;
+  padding: 10px 16px;
+  background: #111;
+  color: #fff !important;
+  border-radius: 8px;
+  font: 600 14px/1 system-ui, sans-serif;
+}
+
+.dx-skip:focus {
+  top: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dx-root *,
+  .dx-root *::before,
+  .dx-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
