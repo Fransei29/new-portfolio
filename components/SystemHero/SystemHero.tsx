@@ -1,7 +1,7 @@
 'use client';
 
 // components/SystemHero/SystemHero.tsx
-// Hero de prueba con el producto en 3D (ruta /hero-3d). El texto es el mismo
+// Hero de la home con el producto en 3D. El texto es el mismo
 // HomeText de la home; a la derecha, en vez del dashboard 2D, el sistema en
 // capas con el panda de la marca asomado atrás. Mientras carga el modelo se ve
 // el póster (la captura del dashboard), ubicado justo donde cae el primer

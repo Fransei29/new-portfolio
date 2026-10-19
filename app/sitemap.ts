@@ -11,8 +11,8 @@ import { absoluteUrl } from '../lib/seo';
  *
  * Cada página traducida aparece una vez por idioma (/services y /es/services),
  * las dos con el mismo bloque de alternates: así lo pide Google para hreflang
- * en sitemaps. Los case studies van solo en inglés: su cuerpo no está traducido
- * y /es/projects/x declara canonical a la versión inglesa.
+ * en sitemaps. Los case studies también: están traducidos en locales/es y cada
+ * versión es su propia canonical.
  *
  * Sin `lastModified` en las rutas fijas y los case studies: la fecha de build
  * cambia en cada deploy aunque el contenido no, y Google aprende a ignorar un
@@ -46,11 +46,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: absoluteUrl('en', `/projects/${project.slug}`),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
+  const projectRoutes: MetadataRoute.Sitemap = projects.flatMap((project) => {
+    const path = `/projects/${project.slug}`;
+    return LOCALES.map((locale) => ({
+      url: absoluteUrl(locale, path),
+      changeFrequency: 'monthly' as const,
+      priority: locale === 'en' ? 0.7 : 0.6,
+      alternates: alternatesFor(path),
+    }));
+  });
 
   /* Los posts sí tienen fecha real de publicación, así que `lastModified` deja
      de ser una aproximación. Cada versión de idioma es una URL propia y declara

@@ -14,7 +14,7 @@ interface Step {
 }
 
 type HowWeWorkProps = {
-  /** El panda del eje en 3D (lo usa la ruta de prueba /hero-3d). Sin prop, el isotipo 2D. */
+  /** El panda del eje en 3D (lo usa la home). Sin prop, el isotipo 2D. */
   panda3d?: boolean;
 };
 

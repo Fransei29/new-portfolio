@@ -11,6 +11,7 @@
 
 import type { Metadata } from 'next';
 import HomeContent from '../../components/HomeContent/HomeContent';
+import SystemHero from '../../components/SystemHero/SystemHero';
 import { isLocale } from '../../lib/i18n';
 import { routeMetadata } from '../../lib/seo';
 
@@ -37,6 +38,21 @@ export async function generateMetadata({
   return routeMetadata({ locale, path: '/', ...META[locale] });
 }
 
+// Lo que necesita el hero 3D, pedido desde el HTML: así baja en paralelo con el
+// resto de la página y no recién cuando el hero se hidrata (si no, el panda
+// aparecía bastante después que todo lo demás). Van como fetch con CORS porque
+// GLTFLoader y DRACOLoader los piden con fetch().
+const PRELOAD = ['/hero3d/system.glb', '/hero3d/panda.glb', '/draco/draco_wasm_wrapper.js', '/draco/draco_decoder.wasm'];
+
 export default function Home() {
-  return <HomeContent />;
+  return (
+    <>
+      {PRELOAD.map((href) => (
+        <link key={href} rel="preload" as="fetch" href={href} crossOrigin="anonymous" />
+      ))}
+      {/* Con CORS, como la pide el TextureLoader (y el póster): una sola descarga. */}
+      <link rel="preload" as="image" href="/hero3d/screen.webp" crossOrigin="anonymous" />
+      <HomeContent hero={<SystemHero />} panda3d />
+    </>
+  );
 }

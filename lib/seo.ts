@@ -19,9 +19,9 @@ interface RouteMetadataInput {
   path: string;
   title: string;
   description: string;
-  /** false cuando el cuerpo de la página no está traducido (case studies): la
-   *  versión /es existe para navegar, pero el canonical apunta a la inglesa y
-   *  no se anuncia como alternate, porque sería contenido duplicado. */
+  /** false cuando el cuerpo de la página no está traducido: la versión /es
+   *  existe para navegar, pero el canonical apunta a la inglesa y no se anuncia
+   *  como alternate, porque sería contenido duplicado. */
   translated?: boolean;
   ogType?: 'website' | 'article';
   images?: { url: string; alt?: string; width?: number; height?: number }[];

@@ -23,9 +23,9 @@ import WaveDivider from '../../components/WaveDivider/WaveDivider';
 // import HeroParticles from '../../components/HeroParticles/HeroParticles';
 
 type HomeContentProps = {
-  /** Reemplaza el hero (lo usa la ruta de prueba /hero-3d). Sin prop, la home de siempre. */
+  /** Reemplaza el hero (la home pasa el hero 3D). Sin prop, el dashboard 2D. */
   hero?: ReactNode;
-  /** El panda de "cómo trabajamos" en 3D (también de /hero-3d). */
+  /** El panda de "cómo trabajamos" en 3D (también de la home). */
   panda3d?: boolean;
 };
 
