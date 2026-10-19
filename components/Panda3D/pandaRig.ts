@@ -51,7 +51,7 @@ const smooth = (x: number) => x * x * (3 - 2 * x);
 export async function loadPandaRig(
   loader: GLTFLoader,
   // gltf: el modelo ya pedido (p. ej. apenas cargó el módulo), si lo hay.
-  opts: { scale: number; still: boolean; hop?: number; gltf?: Promise<GLTF> },
+  opts: { scale: number; still: boolean; hop?: number; gltf?: Promise<GLTF>; maxDown?: number },
 ): Promise<PandaRig> {
   const gltf = await (opts.gltf ?? loader.loadAsync(PANDA_URL));
   const H = PANDA_HEIGHT * opts.scale;
@@ -131,6 +131,9 @@ export async function loadPandaRig(
         sy = Math.sin(time * 0.43) * 0.06 + 0.08;
       }
       sy += pitch;
+      // Con la luz arriba, mirando muy abajo la cara queda en sombra. En el celu
+      // el scroll y la inclinación del teléfono se suman: ahí va con tope.
+      if (opts.maxDown != null) sy = Math.min(sy, opts.maxDown);
       // ...y después en los de la cabeza, que puede estar cruzada.
       const c = Math.cos(roll);
       const sn = Math.sin(roll);

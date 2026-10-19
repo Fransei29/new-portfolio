@@ -107,6 +107,9 @@ const PAW_Z = [0.36, -0.04];
 const PAW_WRAP = -0.55;
 // Inclinación de frente (como el 2D, cruzado sacando la cabeza).
 const PANDA_ROLL = 0.85;
+// Cuánto puede bajar la mirada en el celu (radianes, en ejes de pantalla).
+// Paseando solo llega a ~0.14; más abajo la cara queda en sombra.
+const MOBILE_MAX_DOWN = 0.18;
 const PANDA_SCALE = { desktop: 0.8, lite: 0.8 };
 // De frente, el dashboard se corre a la derecha para dejarle lugar al panda.
 // En el celu el stage ocupa todo el ancho: hay que alejarse más para que el
@@ -248,10 +251,13 @@ export function createSystemEngine(
   },
 ): SystemEngine {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  // Con la captura como textura (celu), siempre a 2x: el texto se lee mucho
-  // mejor dibujado al doble y achicado. Con la pantalla en HTML el texto lo
+  // Con la captura como textura (celu), a la densidad real del teléfono (2x
+  // como mínimo, 3x como máximo): a 2x en un teléfono 3x el navegador estira
+  // el canvas y el texto se ablanda. Con la pantalla en HTML el texto lo
   // dibuja el navegador, y a 2x en un monitor 1x el canvas cuesta 4 veces más.
-  renderer.setPixelRatio(opts.screenEl ? Math.min(Math.max(window.devicePixelRatio, 1.25), 2) : 2);
+  const dpr = window.devicePixelRatio;
+  const pixelRatio = opts.screenEl ? Math.min(Math.max(dpr, 1.25), 2) : Math.min(Math.max(dpr, 2), 3);
+  renderer.setPixelRatio(pixelRatio);
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
 
@@ -372,6 +378,9 @@ export function createSystemEngine(
   const qp = new THREE.Vector3();
   let screenMesh: THREE.Mesh | null = null;
   let screenMat: THREE.MeshBasicMaterial | null = null;
+  let screenMip: THREE.Texture | null = null;
+  let screenFit: THREE.CanvasTexture | null = null;
+  let fitW = 0;
   let progress = 0;
   let running = false;
   let raf = 0;
@@ -385,14 +394,21 @@ export function createSystemEngine(
     const [gltf, screenTex, pandaRig] = await Promise.all([
       assets.system,
       assets.screen,
-      loadPandaRig(assets.loader, { scale: pandaScale, still: opts.still, gltf: assets.panda }),
+      loadPandaRig(assets.loader, {
+        scale: pandaScale,
+        still: opts.still,
+        gltf: assets.panda,
+        ...(html ? {} : { maxDown: MOBILE_MAX_DOWN }),
+      }),
     ]);
     screenTex.colorSpace = THREE.SRGBColorSpace;
     screenTex.flipY = false;
     screenTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
     // La captura solo se ve en el celu (en desktop la pantalla es el HTML), y
-    // ahí ocupa unos 200px para 1500 de imagen: siempre con mipmaps. Sin ellos,
-    // achicada tanto, el texto se rompe en rayas.
+    // ahí ocupa unos 400px para 1500 de imagen. En ángulo va con mipmaps (si
+    // no, titila); de frente, una copia achicada al tamaño exacto en que se ve
+    // (ver fitScreen): con mipmaps se lava y sin ellos se rompe en rayas.
+    screenMip = screenTex;
     gltf.scene.traverse((o) => {
       const mesh = o as THREE.Mesh;
       if (!mesh.isMesh) return;
@@ -583,9 +599,59 @@ export function createSystemEngine(
   function render() {
     const time = (performance.now() - t0) / 1000;
     layout(progress, time);
+    if (!html && screenMesh && screenMat && screenMip) {
+      const sharp = timeline(progress).face > 0.92 ? fitScreen(screenMesh, screenMip) : null;
+      screenMat.map = sharp ?? screenMip;
+    }
     renderer.render(scene, cam);
     if (html && screenMesh) placeHtml(html, screenMesh);
     frameCb?.(labels(progress), head);
+  }
+
+  /**
+   * La captura achicada al ancho en píxeles reales que ocupa la pantalla del
+   * modelo, por pasos de a la mitad (un solo salto grande pierde detalle), y
+   * sin mipmaps: queda casi 1:1 y el texto se lee. Se rehace sólo si ese ancho
+   * cambia bastante (otro tamaño de ventana).
+   */
+  function fitScreen(mesh: THREE.Mesh, tex: THREE.Texture) {
+    if (quadLocal.length < 4) return null;
+    mesh.updateMatrixWorld();
+    const [a, b] = quadLocal.slice(0, 2).map(([x, z]) => {
+      qp.set(x, 0, z).applyMatrix4(mesh.matrixWorld).project(cam);
+      return [((qp.x + 1) / 2) * width, ((1 - qp.y) / 2) * height];
+    });
+    const img = (tex as unknown as { image: HTMLImageElement | ImageBitmap }).image;
+    const w = Math.min(Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) * pixelRatio), img.width);
+    if (w < 16) return null;
+    if (screenFit && Math.abs(w - fitW) / fitW < 0.15) return screenFit;
+
+    let src: CanvasImageSource = img;
+    let sw = img.width;
+    let sh = img.height;
+    const step = (cw: number, ch: number) => {
+      const c = document.createElement('canvas');
+      c.width = cw;
+      c.height = ch;
+      const g = c.getContext('2d')!;
+      g.imageSmoothingQuality = 'high';
+      g.drawImage(src, 0, 0, cw, ch);
+      src = c;
+      sw = cw;
+      sh = ch;
+      return c;
+    };
+    while (sw / 2 >= w) step(Math.round(sw / 2), Math.round(sh / 2));
+    const out = step(w, Math.round((w * img.height) / img.width));
+
+    screenFit?.dispose();
+    screenFit = new THREE.CanvasTexture(out);
+    screenFit.colorSpace = THREE.SRGBColorSpace;
+    screenFit.flipY = false;
+    screenFit.generateMipmaps = false;
+    screenFit.minFilter = THREE.LinearFilter;
+    fitW = w;
+    return screenFit;
   }
 
   /** Calza la ventana HTML sobre la pantalla del modelo (ver opts.screenEl). */
@@ -703,6 +769,8 @@ export function createSystemEngine(
         mat.map?.dispose();
         mat.dispose();
       });
+      screenFit?.dispose();
+      screenMip?.dispose();
       env.dispose();
       renderer.dispose();
     },
