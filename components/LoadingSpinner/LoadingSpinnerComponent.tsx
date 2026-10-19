@@ -1,22 +1,18 @@
 // components/LoadingSpinner.tsx
-import styles from './LoadingSpinner.module.scss' 
+import styles from './LoadingSpinner.module.scss'
 import Image from 'next/image';
 
 export default function LoadingSpinner() {
   return (
     <div className={styles.loadingOverlay}>
-      <div className={styles.spinnerContainer}>
-        <div className={styles.circle}></div>
-        <div className={styles.circle}></div>
-        <div className={styles.circle}></div>
-      </div>
       <Image
-          src="/brand-isotipo.svg"
-          alt="Franco Seiler"
-          width={55}
-          height={55}
-          className={styles.logo}
+          src="/panda-loader.webp"
+          alt="Cargando"
+          width={96}
+          height={96}
+          className={styles.panda}
           unoptimized
+          priority
         />
     </div>
   )

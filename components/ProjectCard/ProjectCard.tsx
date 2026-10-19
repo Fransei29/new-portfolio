@@ -123,7 +123,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
             fill
             className={styles.projectImage}
             sizes="(max-width: 768px) 100vw, 900px"
-            unoptimized
           />
         </div>
       )}

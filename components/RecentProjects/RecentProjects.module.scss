@@ -55,6 +55,10 @@
 .mobileStack {
     --peek: 10%;
     display: none;
+    /* El eje horizontal lo maneja el swipe en JS; el vertical sigue siendo del
+       navegador, así arrastrar sobre las tarjetas para scrollear la página no
+       queda trabado. */
+    touch-action: pan-y;
 
     @media (max-width: 1024px) {
         display: flex;

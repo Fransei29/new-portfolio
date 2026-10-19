@@ -167,6 +167,7 @@
 }
 
 .titleBlock {
+  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -187,6 +188,66 @@
   @media (max-width: 768px) {
     font-size: 0.85rem;
     margin: 0.15rem 0 0;
+  }
+}
+
+.headerAside {
+  // Columna: países arriba, botón debajo. En fila no se achicaba y, con dos
+  // chips, dejaba al título en una columna de una palabra por línea. El tope
+  // de ancho hace que los chips bajen de línea antes de apretar el título.
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex: 0 1 auto;
+  max-width: 55%;
+  margin-top: 0.3rem;
+
+  // Dentro del grupo, los chips ya no necesitan su propio margen.
+  .locationChips {
+    margin-top: 0;
+  }
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    max-width: none;
+    margin-top: 0;
+  }
+}
+
+// Mismo tratamiento que el "Ver más" de las tarjetas: sólido en el oscuro de
+// marca, para que se lea como la acción principal del header y no como otro chip.
+.liveSiteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--br);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #ffffff;
+  background-color: #2e294e;
+  border: 1px solid rgba(181, 156, 248, 0.3);
+  box-shadow: 0 2px 10px -6px rgba(20, 16, 45, 0.8);
+  text-decoration: none !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #413a6b;
+    border-color: rgba(181, 156, 248, 0.85);
+    box-shadow: 0 4px 14px -6px rgba(20, 16, 45, 0.9), 0 0 0 1px rgba(181, 156, 248, 0.25);
+  }
+
+  :global(html.dark) & {
+    border-color: rgba(181, 156, 248, 0.45);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.76rem;
+    padding: 0.42rem 0.8rem;
   }
 }
 

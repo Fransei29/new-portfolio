@@ -123,6 +123,18 @@
   & + & {
     margin-top: 2.5rem;
   }
+
+  /* En mobile el header mide 9vh, no los 104px de --header-h: con el offset de
+     desktop la carta se clavaba con un hueco grande por debajo del header.
+     Ahora se clava pegada a él, y la siguiente arranca más cerca de la clavada,
+     así el empuje empieza antes. */
+  @media (max-width: 768px) {
+    top: calc(9vh + 0.75rem + var(--i) * 10px);
+
+    & + & {
+      margin-top: 1rem;
+    }
+  }
 }
 
 .cardInner {

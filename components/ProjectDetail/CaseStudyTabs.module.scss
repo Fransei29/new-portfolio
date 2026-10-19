@@ -60,6 +60,10 @@
     transform: translateX(-2px);
   }
 
+  :global(html.dark) & {
+    color: var(--text-color-dark-mode);
+  }
+
   :global(html.dark) &:hover {
     background: rgba(181, 156, 248, 0.16);
   }
@@ -132,7 +136,10 @@
     outline-offset: 2px;
   }
 
+  // --text-color no cambia con el tema: sin color propio, los tabs inactivos
+  // quedaban en el texto oscuro del modo claro sobre fondo oscuro.
   :global(html.dark) & {
+    color: var(--text-color-dark-mode);
     background: rgba(255, 255, 255, 0.045);
     border-color: rgba(255, 255, 255, 0.12);
   }

@@ -1,5 +1,5 @@
 // app/services/page.tsx
-// Server Component: los seis servicios, el proceso y las FAQ se arman acá y
+// Server Component: los servicios, el proceso y las FAQ se arman acá y
 // viajan dentro del HTML. Es la página que responde "¿qué hacés y cuánto
 // cuesta trabajar con vos?", así que tiene que ser legible para un crawler que
 // no ejecuta JavaScript — mismo criterio que /projects.
@@ -15,7 +15,7 @@ import { SITE_URL } from '../../../lib/site';
 
 const title = 'Services | Custom Software, Automation & AI Integration';
 const description =
-  'Custom software development, business automation, AI integration, web applications, e-commerce and scalable architecture. Fixed scope, fixed price, and you work directly with the developer building it.';
+  'Custom software development, business automation, AI integration, immersive 3D websites, web applications, e-commerce and scalable architecture. Fixed scope, fixed price, and you work directly with the developer building it.';
 
 export const metadata: Metadata = {
   title,

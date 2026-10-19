@@ -5,6 +5,14 @@
     "cta": "Consultar",
     "featuredLabel": "Destacado",
     "seeCaseStudies": "Ver casos de estudio",
+    "immersive3d": {
+      "title": "Sitios web 3D",
+      "titleAccent": "inmersivos",
+      "description": "Tu producto, en 3D y en tiempo real. Sitios que se recorren con el scroll: modelos hechos a medida, animación, luz y sonido. Para que te recuerden después de la primera visita.",
+      "slug": "3D",
+      "badge": "Nuevo",
+      "cta": "Ver el servicio"
+    },
     "webDevelopment": {
       "title": "Desarrollo de Software",
       "titleAccent": "",
@@ -165,6 +173,30 @@
           "REST APIs"
         ],
         "fit": "Tu equipo copia datos entre sistemas, persigue planillas o repite la misma secuencia de pasos todos los días."
+      },
+      "immersive3d": {
+        "name": "Sitios web 3D inmersivos",
+        "tagline": "Que tu sitio se recorra, no que se lea.",
+        "description": "Sitios donde tu producto o tu espacio se muestran en 3D, en tiempo real y en el navegador: el visitante scrollea y la escena responde. Modelamos a medida en Blender, lo llevamos a la web con Three.js y lo optimizamos para que ande fluido también en celulares y notebooks comunes.",
+        "includes": [
+          "Modelo 3D a medida de tu producto, máquina o espacio",
+          "Recorrido guiado por scroll con animación y etiquetas",
+          "Interacción con mouse, toque e inclinación del teléfono",
+          "Sonido opcional y versión liviana para equipos con poca GPU"
+        ],
+        "deliverables": [
+          "Sitio deployado con la experiencia 3D integrada",
+          "Modelos optimizados (glTF + Draco) y sus archivos fuente",
+          "Imagen fija de respaldo para navegadores sin WebGL"
+        ],
+        "stack": [
+          "Three.js",
+          "Blender",
+          "GSAP",
+          "Next.js",
+          "Web Audio"
+        ],
+        "fit": "Vendés algo que se entiende mejor viéndolo — una máquina, un espacio, un producto físico — y querés un sitio que se diferencie de la competencia en los primeros segundos."
       },
       "webDevelopment": {
         "name": "Desarrollo de Software a Medida",

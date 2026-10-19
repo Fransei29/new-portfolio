@@ -30,7 +30,7 @@ const Footer = () => {
         <div className={styles.brandSection}>
           <div className={styles.brand}>
             <Image
-              src="/brand-header-dark.svg"
+              src="/brand-contorno.svg"
               alt="Franco Seiler — Software Studio"
               width={430}
               height={160}

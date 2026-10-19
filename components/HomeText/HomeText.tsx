@@ -78,7 +78,7 @@ const HomeText: React.FC = () => {
           {/* Los dos datos comparten estructura (numero + etiqueta) para que
               se lean como un par. Antes el 15 venia dentro del string de
               traduccion y heredaba estilo de texto corrido, asi que pesaba
-              menos que el 22+ de al lado. */}
+              menos que el 30+ de al lado. */}
           {/* Dos redacciones de la misma etiqueta: la larga en desktop y una de
               una palabra en mobile, donde las dos frases completas saturaban el
               bloque. Se eligen por CSS y no por un `isMobile` de JS para que el
@@ -94,7 +94,7 @@ const HomeText: React.FC = () => {
           </p>
           <span className={styles.socialProofDivider} aria-hidden />
           <p className={styles.socialProofStat}>
-            <span className={styles.socialProofStatNumber}>22+</span>
+            <span className={styles.socialProofStatNumber}>30+</span>
             <span className={`${styles.socialProofStatLabel} ${styles.labelLong}`}>
               {t('hero.socialProof.projects')}
             </span>

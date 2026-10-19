@@ -25,10 +25,11 @@
     "links": "Links",
     "githubRepository": "GitHub Repository",
     "liveDemo": "Live Demo",
+    "visitSite": "Visit live site",
     "badges": {
       "product": "Product",
       "platform": "Platform",
-      "landing": "Landing",
+      "landing": "Website",
       "latest": "Latest"
     },
     "tabs": {
@@ -38,6 +39,16 @@
     "privateProject": "Private — client project",
     "privateProjectTooltip": "This project is private and belongs to a client",
     "items": {
+      "arventa": {
+        "title": "Arventa",
+        "subtitle": "AI Voice-Agent Accounts Receivable Automation Platform",
+        "description": "Multi-tenant platform that automates collections on overdue invoices. AI voice agents place outbound calls, AI-drafted emails follow up, and a visual workflow engine decides who gets contacted, through which channel and when. Runs are durable state machines in Postgres that park while waiting on a call, a reply or a timer, and resume when the callback arrives."
+      },
+      "bgv-mayorista": {
+        "title": "BGV Mayorista",
+        "subtitle": "B2B Wholesale E-Commerce with an AI Assistant",
+        "description": "Online store for a household-goods distributor that sells to retailers by the closed pack. The catalog is public while prices and purchasing are reserved for approved wholesale accounts, with minimum orders, pack multiples, per-company discounts, Mercado Pago and bank transfer payments, and an AI assistant that never reveals prices to anonymous visitors."
+      },
       "comply-dq": {
         "title": "Comply DQ",
         "subtitle": "Fleet Compliance & Document Intelligence Platform",
@@ -58,9 +69,9 @@
       },
       "globaly": {
         "title": "Globaly",
-        "subtitle": "Multilingual Marketing & Content Site for an Immersive Collaboration Platform",
-        "description": "Public marketing and content site for an immersive collaboration platform: 33 pages across three languages, geolocated pricing resolved server-side from a single source of truth, a tenant-scoped headless CMS blog, and a structured-data layer built for answer engines as well as search engines.",
-        "whatIs": "Globaly is the public site for an immersive collaboration platform — digital spaces where distributed teams work, train and present together without being in the same place. The site is not the product: it is the commercial, editorial and discovery layer around it.\nA visitor navigates 33 pages: the platform and its device compatibility, seven solution pages, three company-segment pages, an enterprise hub with trust centre and data residency, a five-plan pricing table rendered in USD or EUR depending on the visitor's country, four comparison pages, and a blog with search, category filtering and pagination fed from a shared headless CMS. All content is translated into English, French and Spanish, with language negotiated by cookie rather than by URL prefix.\nThe collaboration is documented inside the code itself: comments cite the client's strategy documents by section as justification for information-architecture decisions, and the repository includes a three-document SEO system with explicit anti-hallucination rules.",
+        "subtitle": "Immersive 3D Website & Multilingual Content Site for a Collaboration Platform",
+        "description": "Now an immersive 3D website: a real-time virtual office (Three.js + Blender) explored by scrolling, with avatars and spatial audio. Public marketing and content site for an immersive collaboration platform: 33 pages across three languages, geolocated pricing resolved server-side from a single source of truth, a tenant-scoped headless CMS blog, and a structured-data layer built for answer engines as well as search engines.",
+        "whatIs": "The home is now an immersive 3D website: the visitor walks through a virtual office rendered in real time with Three.js — lighting baked in Blender, avatars that arrive, greet each other and talk with optional spatial audio, a camera driven by scroll, and on mobile the space is explored with a finger or by tilting the phone. Quality adapts to each device's GPU so it runs smoothly on any laptop.\n\nGlobaly is the public site for an immersive collaboration platform — digital spaces where distributed teams work, train and present together without being in the same place. The site is not the product: it is the commercial, editorial and discovery layer around it.\nA visitor navigates 33 pages: the platform and its device compatibility, seven solution pages, three company-segment pages, an enterprise hub with trust centre and data residency, a five-plan pricing table rendered in USD or EUR depending on the visitor's country, four comparison pages, and a blog with search, category filtering and pagination fed from a shared headless CMS. All content is translated into English, French and Spanish, with language negotiated by cookie rather than by URL prefix.\nThe collaboration is documented inside the code itself: comments cite the client's strategy documents by section as justification for information-architecture decisions, and the repository includes a three-document SEO system with explicit anti-hallucination rules.",
         "problemSolved": "An immersive collaboration product competes against categories the buyer already knows and against an implicit objection: \"I already have video calls.\" The real problem was not having a site, but having one that could sustain a positioning thesis page by page, in several languages, for several segments, and that would also be discoverable — not only by search engines, but by the answer engines that now mediate part of B2B research.\nPrice is authored once in USD and converted and formatted at render time, so the structured data and the visible table read the same constant and cannot drift apart. Currency is decided by a country resolved in middleware from any of four possible geo headers, normalized into an internal header that is deleted before being written so a client cannot spoof its own country. The i18n layer serves all three languages from the same URL with a deep merge over the English catalogue, so an untranslated page falls back to readable English instead of printing a key path.\nIt was built custom rather than on a site builder because half the value sits in things those tools do not provide: geo-sensitive pricing resolved server-side, a 1,689-key i18n catalogue with hierarchical fallback, structured data derived from the same constants as the UI, and security headers reasoned one by one.",
         "learnings": [
           "Build-time versus runtime in Docker and Next.js: public environment variables are inlined during the build, but the compose env file only reaches an already-running container — the symptom was staging loading the production chat widget despite a correct env file.",
@@ -110,6 +121,11 @@
           "Structured data constrained to what the page actually asserts, with external profile links omitted for want of confirmed sources."
         ]
       },
+      "bellum-property-management": {
+        "title": "Bellum Property Management",
+        "subtitle": "Corporate Website for an HOA Management Company",
+        "description": "Corporate website for an HOA and condominium management company in Virginia. The source code was recovered from the compiled production bundle, migrated to Vite, audited and redesigned on a custom design system, with per-route SEO, structured data and an accessible proposal questionnaire."
+      },
       "royal-parking-services": {
         "title": "Royal Parking Services",
         "subtitle": "Parking Enforcement Website & Client Permit Portal",
@@ -149,7 +165,7 @@
         "title": "Acer0",
         "subtitle": "Custom E-Commerce Platform",
         "description": "Fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. Delivers a complete online shopping experience with product browsing, cart management, Mercado Pago and bank transfer payments, customer accounts with order tracking and wishlists, and a powerful admin panel with sales statistics — all wrapped in a pixel-perfect, mobile-first responsive design.",
-        "whatIs": "a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.\nFeatures include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.",
+        "whatIs": "a.cer0 is a fully custom e-commerce platform built from the ground up for a manufacturing and retail brand. The system delivers a complete online shopping experience — from product browsing and cart management to secure checkout with multiple payment methods — alongside a powerful admin panel for full business operation control.\nFeatures include a product catalog with advanced filtering, shopping cart with coupon support, Mercado Pago payment integration, bank transfer handling, customer accounts with order tracking and wishlists, an admin dashboard with sales statistics, and a fully responsive mobile-first design.\nThe store also includes an AI assistant that answers customer questions using the published products, measurements, prices, payment methods, shipping and the rest of the site's content, updated automatically as it changes. From the admin panel, the team extends what it knows by uploading documents, adding questions and answers or pasting text, and follows its conversations, the leads it captures, its conversion rate and the questions it could not answer.",
         "problemSolved": "The client needed a tailor-made digital storefront that reflected their brand identity while handling the full complexity of Argentine e-commerce — including Mercado Pago integration, bank transfer confirmation workflows, and a bilingual admin experience.\nOff-the-shelf solutions couldn't deliver the custom UX, performance, and control required, so a purpose-built platform was the answer — giving the client total ownership of their data, branding, and operations, with a backend tuned exactly to their workflow.",
         "learnings": [
           "Architected a full-stack monorepo with Next.js 15 (App Router) frontend proxying to an Express/TypeScript backend via a secure BFF (Backend-for-Frontend) pattern.",
@@ -265,11 +281,12 @@
       },
       "tecnomar": {
         "title": "TecnoMar",
-        "subtitle": "Industrial Pumps Corporate Website",
-        "description": "Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
-        "whatIs": "Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
+        "subtitle": "Immersive 3D Website for an Industrial Pumps Company",
+        "description": "Now an immersive 3D website: a sanitary pump modeled in Blender disassembles piece by piece as you scroll, in real time with Three.js. Corporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
+        "whatIs": "An immersive 3D website: the hero is a realistic sanitary pump, modeled in Blender with PBR materials, that disassembles piece by piece as the visitor scrolls, with labels for each part and optional synthesized sound. The product is no longer described — it is shown, in the browser and in real time.\n\nCorporate website for TecnoMar, a company specializing in diagnosis, repair, and reconditioning of sanitary and industrial pumps. The site showcases services, work methodology and technical process, and brings clients and companies closer through clear CTAs (online quote form and contact). It includes sections for approach, clients with logo marquee, and contact map, with responsive design aligned to brand identity.",
         "problemSolved": "The industrial sector needs sites that convey technical solidity and allow direct quotation or contact requests. TecnoMar needed a clear digital presence: explain services and process, showcase experience (+20 years, +50 active clients, +2000 products), and offer a quote form and contact channels without friction.",
         "learnings": [
+          "3D scroll-driven hero: a pump modeled in Blender (exported to glTF with Draco) disassembles piece by piece, with studio environment, shadows and per-part labels.",
           "Landing with full-screen hero, overlay, and brand-accent typography («corazón técnico», TECNOMAR).",
           "Sections: Services, Our Approach (cards with background image and overlay), Methodology / Technical Process (steps with images), Why Choose Us (animated metrics), Quote, Contact (copyable cards + map), and Clients (double-row marquee on mobile).",
           "Global design variables (section padding, shadows, radius, brand colors) and reusable components (primaryLight / primaryBlue buttons, clip-path divider between sections).",

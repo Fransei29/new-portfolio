@@ -192,7 +192,15 @@ const MARKETS = [
 /** Países distintos en MARKETS: sólo para el texto de lector de pantalla. */
 const MARKET_COUNTRIES = new Set(MARKETS.map((m) => m.country)).size;
 
-const HeroDashboard = () => {
+type HeroDashboardProps = {
+  /**
+   * Sólo la ventana, sin el panda 2D ni márgenes de columna: la usa el hero 3D
+   * como pantalla real (HTML) de su dashboard.
+   */
+  bare?: boolean;
+};
+
+const HeroDashboard = ({ bare = false }: HeroDashboardProps) => {
   const { language } = useLanguage();
   // El dominio de la barra es un placeholder para que el visitante se vea a si
   // mismo, asi que se traduce como cualquier otro texto de la interfaz.
@@ -310,7 +318,7 @@ const HeroDashboard = () => {
   // no se rearma.
 
   return (
-    <div className={styles.wrapper} data-explode-root>
+    <div className={`${styles.wrapper} ${bare ? styles.bare : ''}`} data-explode-root>
       {/* El dashboard entero es decorativo (aria-hidden más abajo), pero el
           alcance sí es información: se expone una vez, como texto plano, para
           que un lector de pantalla la reciba sin narrar la maqueta. */}
@@ -325,6 +333,8 @@ const HeroDashboard = () => {
           panda plano se funde con el fondo oscuro, así que ahí entra el de
           contorno. Se resuelve por CSS y no por estado para que no haya
           parpadeo del isotipo equivocado al cambiar de tema. */}
+      {!bare && (
+        <>
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
       <img
         className={`${styles.peekPanda} ${styles.peekPandaLight}`}
@@ -341,6 +351,8 @@ const HeroDashboard = () => {
         aria-hidden
         loading="lazy"
       />
+        </>
+      )}
 
       {/* Browser window */}
       <div className={styles.browser} data-explode-piece="browser">
