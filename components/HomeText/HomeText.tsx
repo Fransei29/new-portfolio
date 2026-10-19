@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './HomeText.module.scss';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import StartIcon from '../../public/NewBrand/icons/star-arrow-right-start-20-regular.svg';
 import SearchIcon from '../../public/NewBrand/icons/search.svg';
 
 const HomeText: React.FC = () => {
   const { t, language } = useLanguage();
+  const toLocale = useLocalePath();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const HomeText: React.FC = () => {
             {t('hero.cta.contact')}
             <StartIcon className={styles.ctaIcon} />
           </a>
-          <Link href="/projects" className={styles.btnSecondary}>
+          <Link href={toLocale('/projects')} className={styles.btnSecondary}>
             {t('hero.cta.projects')}
             <SearchIcon className={styles.ctaIcon} />
           </Link>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { BlogLanguage, PostMeta } from '../../lib/blog';
+import { localePath } from '../../lib/i18n';
 import styles from './BlogCard.module.scss';
 
 interface Props {
@@ -23,7 +24,7 @@ export const formatDate = (date: string, language: BlogLanguage) =>
   });
 
 export default function BlogCard({ post, language, variant = 'grid' }: Props) {
-  const href = language === 'es' ? `/blog/${post.slug}?lang=es` : `/blog/${post.slug}`;
+  const href = localePath(language, `/blog/${post.slug}`);
   const isLead = variant === 'lead';
 
   return (

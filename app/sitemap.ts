@@ -1,71 +1,76 @@
 import type { MetadataRoute } from 'next';
 import { projects } from './data/projects';
 import { getAllPosts, BLOG_LANGUAGES } from '../lib/blog';
-
-const SITE_URL = 'https://www.francoseiler.com';
+import { LOCALES } from '../lib/i18n';
+import { absoluteUrl } from '../lib/seo';
 
 /**
  * Sitemap generado en build. Sin esto Google tenía que descubrir los ~22 case
  * studies y los posts rastreando enlaces, y las páginas más profundas (un case
  * study concreto) quedaban a varios saltos de la home.
  *
- * El idioma vive en el cliente y se pasa por `?lang=es`, así que cada ruta se
- * declara con sus dos variantes vía `alternates.languages`: es la forma de
- * decirle a Google que la versión en español existe sin cambiar el routing.
+ * Cada página traducida aparece una vez por idioma (/services y /es/services),
+ * las dos con el mismo bloque de alternates: así lo pide Google para hreflang
+ * en sitemaps. Los case studies van solo en inglés: su cuerpo no está traducido
+ * y /es/projects/x declara canonical a la versión inglesa.
+ *
+ * Sin `lastModified` en las rutas fijas y los case studies: la fecha de build
+ * cambia en cada deploy aunque el contenido no, y Google aprende a ignorar un
+ * lastmod que siempre miente. Mejor no mandar nada que mandar ruido.
  */
-const withLanguages = (path: string) => ({
+const alternatesFor = (path: string, locales: readonly ('en' | 'es')[] = LOCALES) => ({
   languages: {
-    en: `${SITE_URL}${path}`,
-    es: `${SITE_URL}${path}${path.includes('?') ? '&' : '?'}lang=es`,
+    ...Object.fromEntries(locales.map((locale) => [locale, absoluteUrl(locale, path)])),
+    'x-default': absoluteUrl('en', path),
   },
 });
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
   // Rutas fijas. La prioridad ordena la importancia relativa dentro del sitio:
   // la home primero, después las que convierten (contacto, case studies).
   const staticRoutes: MetadataRoute.Sitemap = [
-    { path: '', priority: 1, changeFrequency: 'weekly' as const },
+    { path: '/', priority: 1, changeFrequency: 'weekly' as const },
     { path: '/services', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/projects', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/contact', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/about', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/tutorials', priority: 0.6, changeFrequency: 'monthly' as const },
-  ].map(({ path, priority, changeFrequency }) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: now,
-    changeFrequency,
-    priority,
-    alternates: withLanguages(path),
-  }));
+  ].flatMap(({ path, priority, changeFrequency }) =>
+    LOCALES.map((locale) => ({
+      url: absoluteUrl(locale, path),
+      changeFrequency,
+      // La versión en español un escalón abajo: es la secundaria del sitio.
+      priority: locale === 'en' ? priority : Math.round(priority * 0.9 * 10) / 10,
+      alternates: alternatesFor(path),
+    }))
+  );
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${SITE_URL}/projects/${project.slug}`,
-    lastModified: now,
+    url: absoluteUrl('en', `/projects/${project.slug}`),
     changeFrequency: 'monthly',
     priority: 0.7,
-    alternates: withLanguages(`/projects/${project.slug}`),
   }));
 
   /* Los posts sí tienen fecha real de publicación, así que `lastModified` deja
-     de ser una aproximación. Se recorren los dos idiomas y se deduplica por
-     slug: un mismo artículo es una URL con dos variantes de idioma, no dos
-     URLs distintas. */
-  const seen = new Set<string>();
+     de ser una aproximación. Cada versión de idioma es una URL propia y declara
+     solo las traducciones que existen en disco. */
   const postRoutes: MetadataRoute.Sitemap = [];
-
+  const languagesBySlug = new Map<string, ('en' | 'es')[]>();
   for (const language of BLOG_LANGUAGES) {
     for (const post of getAllPosts(language)) {
-      if (seen.has(post.slug)) continue;
-      seen.add(post.slug);
+      languagesBySlug.set(post.slug, [...(languagesBySlug.get(post.slug) ?? []), language]);
+    }
+  }
+  for (const language of BLOG_LANGUAGES) {
+    for (const post of getAllPosts(language)) {
+      const path = `/blog/${post.slug}`;
       postRoutes.push({
-        url: `${SITE_URL}/blog/${post.slug}`,
+        url: absoluteUrl(language, path),
         lastModified: new Date(post.date),
         changeFrequency: 'yearly',
         priority: 0.6,
-        alternates: withLanguages(`/blog/${post.slug}`),
+        alternates: alternatesFor(path, languagesBySlug.get(post.slug)),
       });
     }
   }

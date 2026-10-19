@@ -7,6 +7,7 @@ import type { BlogLanguage, PostMeta } from '../../lib/blog';
 import BlogCard from './BlogCard';
 import BlogSearch from './BlogSearch';
 import NewsletterForm from '../Newsletter/NewsletterForm';
+import { localePath } from '../../lib/i18n';
 import styles from './BlogIndex.module.scss';
 
 const COPY = {
@@ -37,13 +38,10 @@ interface Props {
   language: BlogLanguage;
 }
 
-/** Preserva ?lang= al navegar entre filtros, para no perder el idioma elegido. */
+/** El filtro por tag va en la query; el idioma, en la ruta. */
 const hrefFor = (tag: string | null, language: BlogLanguage) => {
-  const params = new URLSearchParams();
-  if (language === 'es') params.set('lang', 'es');
-  if (tag) params.set('tag', tag);
-  const query = params.toString();
-  return query ? `/blog?${query}` : '/blog';
+  const base = localePath(language, '/blog');
+  return tag ? `${base}?tag=${encodeURIComponent(tag)}` : base;
 };
 
 /** A partir de acá el buscador aporta más de lo que ocupa. */

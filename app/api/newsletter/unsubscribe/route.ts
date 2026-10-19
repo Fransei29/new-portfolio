@@ -56,9 +56,8 @@ export async function GET(request: Request) {
 
   const result = await removeContact(token);
 
-  const target = new URL(`/newsletter/${result}`, url.origin);
-  if (language === 'es') target.searchParams.set('lang', 'es');
-  return Response.redirect(target, 302);
+  const path = `${language === 'es' ? '/es' : ''}/newsletter/${result}`;
+  return Response.redirect(new URL(path, url.origin), 302);
 }
 
 /** One-Click Unsubscribe (RFC 8058). El cliente de correo espera 200, no un redirect. */

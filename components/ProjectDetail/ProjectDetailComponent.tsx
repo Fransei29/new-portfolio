@@ -397,7 +397,10 @@ export default function ProjectDetailComponent({
     const panel = panelsRef.current;
     if (!panel) return;
 
-    const blocks = panel.querySelectorAll(`.${styles.detailSection}, [data-case-section]`);
+    // Solo el panel visible: los demás también están en el DOM (ver tabPanels).
+    const blocks = panel.querySelectorAll(
+      `[role="tabpanel"]:not([hidden]) :is(.${styles.detailSection}, [data-case-section])`
+    );
     if (blocks.length === 0) return;
 
     const ctx = gsap.context(() => {
@@ -609,12 +612,17 @@ export default function ProjectDetailComponent({
               projectTitle={title}
             />
 
+            {/* Todos los paneles se renderizan y los inactivos llevan `hidden`:
+                así el HTML del servidor trae el case study completo (ingeniería,
+                pagos, entregables) y no solo el overview. Es el contenido con
+                más evidencia del sitio y antes un crawler sin JS no lo veía. */}
             <div className={styles.tabPanels} ref={panelsRef}>
               {/* ---------- Overview: qué es y qué había que resolver ---------- */}
-              {activeTab === 'overview' && (
+              {(
                 <div
                   className={styles.tabPanel}
                   role="tabpanel"
+                  hidden={activeTab !== 'overview'}
                   id="panel-overview"
                   aria-labelledby="tab-overview"
                 >
@@ -690,10 +698,11 @@ export default function ProjectDetailComponent({
                   Arquitectura e infraestructura en una sola vista: el diseño
                   del sistema y su operación son la misma historia, y separarlas
                   obligaba a saltar de pestaña para entender una decisión. */}
-              {activeTab === 'engineering' && (architecture || infra) && (
+              {(architecture || infra) && (
                 <div
                   className={styles.tabPanel}
                   role="tabpanel"
+                  hidden={activeTab !== 'engineering'}
                   id="panel-engineering"
                   aria-labelledby="tab-engineering"
                 >
@@ -719,10 +728,11 @@ export default function ProjectDetailComponent({
               )}
 
               {/* ---------- Tools: el stack, en su propia pestaña ---------- */}
-              {activeTab === 'tools' && techStack && techStack.length > 0 && (
+              {techStack && techStack.length > 0 && (
                 <div
                   className={styles.tabPanel}
                   role="tabpanel"
+                  hidden={activeTab !== 'tools'}
                   id="panel-tools"
                   aria-labelledby="tab-tools"
                 >
@@ -762,10 +772,11 @@ export default function ProjectDetailComponent({
               )}
 
               {/* ---------- Payments: cómo se mueve el dinero ---------- */}
-              {activeTab === 'payments' && payments && (
+              {payments && (
                 <div
                   className={styles.tabPanel}
                   role="tabpanel"
+                  hidden={activeTab !== 'payments'}
                   id="panel-payments"
                   aria-labelledby="tab-payments"
                 >
@@ -778,10 +789,11 @@ export default function ProjectDetailComponent({
                   entregas y enlaces, no métricas. Prometer resultados y mostrar
                   links es peor que no prometer nada. Cuando un proyecto cargue
                   `outcomes` reales, aparecen arriba de todo. */}
-              {activeTab === 'deliverables' && (
+              {(
                 <div
                   className={styles.tabPanel}
                   role="tabpanel"
+                  hidden={activeTab !== 'deliverables'}
                   id="panel-deliverables"
                   aria-labelledby="tab-deliverables"
                 >

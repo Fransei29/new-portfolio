@@ -7,7 +7,7 @@ import { FileText, Github, ExternalLink, Lock } from 'lucide-react';
 import { HiArrowRight } from 'react-icons/hi';
 import styles from './ProjectCard.module.scss';
 import React, { JSX, useState } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import JavascriptIcon from '../icons/javascript.svg';
 import TypescriptIcon from '../icons/typescript.svg';
 import ReactIcon from '../icons/react.svg';
@@ -84,6 +84,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = true }) => {
   const [isActive, setIsActive] = useState(false);
   const { t } = useLanguage();
+  const toLocale = useLocalePath();
 
   const toggleDescription = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -195,7 +196,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, showDocumentation = 
             )}
             {project.slug && (
               <Link
-                href={`/projects/${project.slug}`}
+                href={toLocale(`/projects/${project.slug}`)}
                 className={styles.viewMoreButton}
                 onClick={(e) => e.stopPropagation()} 
               >

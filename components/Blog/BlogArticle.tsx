@@ -7,6 +7,7 @@ import NewsletterForm from '../Newsletter/NewsletterForm';
 import ReadingAnalytics from './ReadingAnalytics';
 import TableOfContents from './TableOfContents';
 import { formatDate } from './BlogCard';
+import { localePath } from '../../lib/i18n';
 import styles from './BlogArticle.module.scss';
 
 const COPY = {
@@ -33,7 +34,7 @@ interface Props {
 
 export default function BlogArticle({ post, related }: Props) {
   const copy = COPY[post.language];
-  const backHref = post.language === 'es' ? '/blog?lang=es' : '/blog';
+  const backHref = localePath(post.language, '/blog');
   const otherLanguage = post.language === 'es' ? 'en' : 'es';
   const hasTranslation = post.availableLanguages.includes(otherLanguage);
 
@@ -67,7 +68,7 @@ export default function BlogArticle({ post, related }: Props) {
             {hasTranslation && (
               <Link
                 href={
-                  otherLanguage === 'es' ? `/blog/${post.slug}?lang=es` : `/blog/${post.slug}`
+                  localePath(otherLanguage, `/blog/${post.slug}`)
                 }
                 className={styles.langSwitch}
                 hrefLang={otherLanguage}
@@ -82,11 +83,7 @@ export default function BlogArticle({ post, related }: Props) {
               {(post.tags ?? []).map((tag) => (
                 <li key={tag}>
                   <Link
-                    href={
-                      post.language === 'es'
-                        ? `/blog?lang=es&tag=${encodeURIComponent(tag)}`
-                        : `/blog?tag=${encodeURIComponent(tag)}`
-                    }
+                    href={`${localePath(post.language, '/blog')}?tag=${encodeURIComponent(tag)}`}
                     className={styles.tag}
                   >
                     {tag}
@@ -134,7 +131,7 @@ export default function BlogArticle({ post, related }: Props) {
                 <li key={item.slug}>
                   <Link
                     href={
-                      item.language === 'es' ? `/blog/${item.slug}?lang=es` : `/blog/${item.slug}`
+                      localePath(item.language, `/blog/${item.slug}`)
                     }
                     className={styles.relatedLink}
                   >

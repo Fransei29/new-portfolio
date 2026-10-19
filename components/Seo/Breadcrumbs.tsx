@@ -1,4 +1,5 @@
-import { SITE_URL } from '../../lib/site';
+import type { Locale } from '../../lib/i18n';
+import { absoluteUrl } from '../../lib/seo';
 
 /**
  * BreadcrumbList en JSON-LD.
@@ -18,7 +19,7 @@ export interface Crumb {
   path: string;
 }
 
-export default function Breadcrumbs({ items }: { items: Crumb[] }) {
+export default function Breadcrumbs({ items, locale = 'en' }: { items: Crumb[]; locale?: Locale }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -26,7 +27,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${SITE_URL}${item.path}`,
+      item: absoluteUrl(locale, item.path || '/'),
     })),
   };
 

@@ -16,11 +16,8 @@ import {
 } from 'lucide-react';
 import ClientLayout from '../ClientLayout/ClientLayout';
 import CallToAction from '../CallToAction/CallToAction';
-import { useLanguage } from '../../contexts/LanguageContext';
-import {
-  getServicesContent,
-  type ServicesPageContent,
-} from '../../lib/servicesContent';
+import { useLocalePath } from '../../contexts/LanguageContext';
+import type { ServicesPageContent } from '../../lib/servicesContent';
 import styles from './ServicesView.module.scss';
 import '../../app/styles/utilities.scss';
 
@@ -43,7 +40,7 @@ interface Props {
 }
 
 export default function ServicesView({ initialContent }: Props) {
-  const { language } = useLanguage();
+  const toLocale = useLocalePath();
   const [content, setContent] = useState(initialContent);
   /* El detalle no scrollea: es un panel fijo debajo de la grilla que cambia
      según la tarjeta activa. Arranca en el primer servicio para que el panel
@@ -61,15 +58,14 @@ export default function ServicesView({ initialContent }: Props) {
     return () => window.removeEventListener('hashchange', pick);
   }, [initialContent]);
 
-  /* El servidor ya mandó el contenido en inglés. Este efecto solo traduce
-     cuando el visitante cambia de idioma — mismo criterio que ProjectsView. */
+  /* El servidor manda el contenido en el idioma de la URL; cambiar de idioma
+     es navegar y trae contenido nuevo — mismo criterio que ProjectsView. */
   useEffect(() => {
-    setContent(language === 'en' ? initialContent : getServicesContent(language));
-  }, [language, initialContent]);
+    setContent(initialContent);
+  }, [initialContent]);
 
   const { hero, labels, services } = content;
   const active = services.find((s) => s.key === activeKey) ?? services[0];
-  const ActiveIcon = ICONS[active.key];
 
   return (
     <ClientLayout>
@@ -118,7 +114,7 @@ export default function ServicesView({ initialContent }: Props) {
                     role="tab"
                     id={`tab-${service.key}`}
                     aria-selected={isActive}
-                    aria-controls="service-panel"
+                    aria-controls={`panel-${service.key}`}
                     className={`${styles.card} ${isActive ? styles.cardActive : ''}`}
                     onClick={() => setActiveKey(service.key)}
                   >
@@ -139,100 +135,86 @@ export default function ServicesView({ initialContent }: Props) {
               })}
             </div>
 
-            {/* Panel fijo. `key` fuerza el remount al cambiar de servicio: sin
-                eso la animación de entrada no se vuelve a disparar y el cambio
-                pasa desapercibido. */}
-            <div
-              key={active.key}
-              id="service-panel"
-              role="tabpanel"
-              aria-labelledby={`tab-${active.key}`}
-              className={styles.panel}
-            >
-              {/* Encabezado a todo el ancho: nombre, tagline y la descripción
-                  como bajada. Es la unidad de lectura que abre el panel. */}
-              <header className={styles.panelHead}>
-                <span className={styles.panelIcon}>
-                  {ActiveIcon && <ActiveIcon size={20} className={styles.serviceIcon} />}
-                </span>
-                <h3 className={styles.panelTitle}>{active.name}</h3>
-                <p className={styles.panelTagline}>{active.tagline}</p>
-                <p className={styles.panelDescription}>{active.description}</p>
-              </header>
+            {/* Los seis paneles viajan en el HTML y solo el activo se muestra:
+                un crawler sin JS lee el detalle de todos los servicios, y el
+                visitante ve exactamente el mismo contenido al tocar cada
+                tarjeta. Al pasar de `hidden` a visible la animación de entrada
+                (.panel) se vuelve a disparar sola, como antes con el remount. */}
+            {services.map((service) => {
+              const PanelIcon = ICONS[service.key];
+              return (
+                <div
+                  key={service.key}
+                  id={`panel-${service.key}`}
+                  role="tabpanel"
+                  aria-labelledby={`tab-${service.key}`}
+                  hidden={service.key !== active.key}
+                  className={styles.panel}
+                >
+                  {/* Encabezado a todo el ancho: nombre, tagline y la descripción
+                      como bajada. Es la unidad de lectura que abre el panel. */}
+                  <header className={styles.panelHead}>
+                    <span className={styles.panelIcon}>
+                      {PanelIcon && <PanelIcon size={20} className={styles.serviceIcon} />}
+                    </span>
+                    <h3 className={styles.panelTitle}>{service.name}</h3>
+                    <p className={styles.panelTagline}>{service.tagline}</p>
+                    <p className={styles.panelDescription}>{service.description}</p>
+                  </header>
 
-              {/* Las dos listas, en columnas. Es lo que el visitante compara
-                  entre un servicio y otro, así que van juntas y alineadas. */}
-              <div className={styles.panelLists}>
-                <section className={styles.detailGroup}>
-                  <h4 className={styles.detailLabel}>{labels.includesLabel}</h4>
-                  <ul className={styles.checkList}>
-                    {active.includes.map((item) => (
-                      <li key={item}>
-                        <Check size={14} className={styles.checkIcon} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+                  {/* Las dos listas, en columnas. Es lo que el visitante compara
+                      entre un servicio y otro, así que van juntas y alineadas. */}
+                  <div className={styles.panelLists}>
+                    <section className={styles.detailGroup}>
+                      <h4 className={styles.detailLabel}>{labels.includesLabel}</h4>
+                      <ul className={styles.checkList}>
+                        {service.includes.map((item) => (
+                          <li key={item}>
+                            <Check size={14} className={styles.checkIcon} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
 
-                <section className={styles.detailGroup}>
-                  <h4 className={styles.detailLabel}>{labels.deliverablesLabel}</h4>
-                  <ul className={styles.checkList}>
-                    {active.deliverables.map((item) => (
-                      <li key={item}>
-                        <Check size={14} className={styles.checkIcon} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </div>
+                    <section className={styles.detailGroup}>
+                      <h4 className={styles.detailLabel}>{labels.deliverablesLabel}</h4>
+                      <ul className={styles.checkList}>
+                        {service.deliverables.map((item) => (
+                          <li key={item}>
+                            <Check size={14} className={styles.checkIcon} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  </div>
 
-              {/* Pie del panel: el criterio de auto-selección, el stack y el
-                  CTA. `margin-top: auto` en el CSS lo empuja al fondo, que es
-                  lo que iguala el alto del panel al de la columna de tarjetas. */}
-              <footer className={styles.panelFoot}>
-                <div className={styles.fitBox}>
-                  <span className={styles.fitLabel}>{labels.fitLabel}</span>
-                  <p className={styles.fitText}>{active.fit}</p>
+                  {/* Pie del panel: el criterio de auto-selección, el stack y el
+                      CTA. `margin-top: auto` en el CSS lo empuja al fondo, que es
+                      lo que iguala el alto del panel al de la columna de tarjetas. */}
+                  <footer className={styles.panelFoot}>
+                    <div className={styles.fitBox}>
+                      <span className={styles.fitLabel}>{labels.fitLabel}</span>
+                      <p className={styles.fitText}>{service.fit}</p>
+                    </div>
+
+                    <div className={styles.footRow}>
+                      <ul className={styles.stackList} aria-label={labels.stackLabel}>
+                        {service.stack.map((tech) => (
+                          <li key={tech} className={styles.stackTag}>{tech}</li>
+                        ))}
+                      </ul>
+
+                      <Link href={toLocale('/contact')} className={styles.panelCta}>
+                        {labels.cta}
+                        <ArrowRight size={15} />
+                      </Link>
+                    </div>
+                  </footer>
                 </div>
-
-                <div className={styles.footRow}>
-                  <ul className={styles.stackList} aria-label={labels.stackLabel}>
-                    {active.stack.map((tech) => (
-                      <li key={tech} className={styles.stackTag}>{tech}</li>
-                    ))}
-                  </ul>
-
-                  <Link href="/contact" className={styles.panelCta}>
-                    {labels.cta}
-                    <ArrowRight size={15} />
-                  </Link>
-                </div>
-              </footer>
-            </div>
-
-            {/* Los otros cinco servicios también tienen que estar en el HTML
-                servido, no solo el activo: si el detalle viviera únicamente en
-                el estado de React, un crawler sin JS vería un único servicio.
-                Se renderizan ocultos y solo para lectura de máquina. */}
-            <div className={styles.seoOnly} aria-hidden="true">
-              {services
-                .filter((service) => service.key !== active.key)
-                .map((service) => (
-                  <article key={service.key}>
-                    <h3>{service.name}</h3>
-                    <p>{service.tagline}</p>
-                    <p>{service.description}</p>
-                    <p>{service.fit}</p>
-                    <ul>
-                      {[...service.includes, ...service.deliverables].map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-            </div>
+              );
+            })}
           </div>
         </section>
 

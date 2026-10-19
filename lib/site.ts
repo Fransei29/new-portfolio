@@ -13,6 +13,16 @@ export const AUTHOR = {
   twitter: '@francoseiler',
 };
 
+/** Imagen de compartir por defecto (la genera app/og.png/route.tsx). Cada ruta
+ *  que declara su propio `openGraph` tiene que incluirla explícitamente: Next
+ *  no mezcla el `openGraph` del layout con el de la página, lo reemplaza. */
+export const OG_IMAGE = {
+  url: `${SITE_URL}/og.png`,
+  width: 1200,
+  height: 630,
+  alt: 'Franco Seiler — Custom software & business automation',
+};
+
 export const BLOG_TITLE: Record<'es' | 'en', string> = {
   es: 'Blog | Franco Seiler',
   en: 'Blog | Franco Seiler',
@@ -23,9 +33,9 @@ export const BLOG_DESCRIPTION: Record<'es' | 'en', string> = {
   en: 'Articles on web development, software architecture, and the technical decisions behind the products we build.',
 };
 
-/** URL canónica de un post. El idioma va como query param para no romper el routing actual. */
+/** URL canónica de un post: el español vive bajo /es (ver lib/i18n.ts). */
 export const postUrl = (slug: string, language: 'es' | 'en') =>
-  language === 'en' ? `${SITE_URL}/blog/${slug}` : `${SITE_URL}/blog/${slug}?lang=es`;
+  language === 'en' ? `${SITE_URL}/blog/${slug}` : `${SITE_URL}/es/blog/${slug}`;
 
 export const blogUrl = (language: 'es' | 'en') =>
-  language === 'en' ? `${SITE_URL}/blog` : `${SITE_URL}/blog?lang=es`;
+  language === 'en' ? `${SITE_URL}/blog` : `${SITE_URL}/es/blog`;

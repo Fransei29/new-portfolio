@@ -152,6 +152,12 @@
   }
 }
 
+// `display: flex` le gana al atributo `hidden`; sin esto se verían todos los
+// paneles apilados.
+.tabPanel[hidden] {
+  display: none;
+}
+
 .titleHeader {
   display: flex;
   align-items: flex-start;

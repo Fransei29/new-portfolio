@@ -9,9 +9,8 @@ export const runtime = 'nodejs';
 
 /** Redirige a la página de estado en vez de devolver JSON: al usuario le llega por navegador. */
 const redirectTo = (request: Request, status: string, language: string) => {
-  const url = new URL(`/newsletter/${status}`, new URL(request.url).origin);
-  if (language === 'es') url.searchParams.set('lang', 'es');
-  return Response.redirect(url, 302);
+  const path = `${language === 'es' ? '/es' : ''}/newsletter/${status}`;
+  return Response.redirect(new URL(path, new URL(request.url).origin), 302);
 };
 
 export async function GET(request: Request) {

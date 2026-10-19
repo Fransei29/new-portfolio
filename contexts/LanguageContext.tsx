@@ -1,6 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState, ReactNode } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { LOCALE_COOKIE, localePath, stripLocale } from '../lib/i18n';
 
 // Types
 interface Translations {
@@ -36,6 +38,8 @@ const getNestedValue = (obj: any, path: string): string => {
 
 interface LanguageProviderProps {
   children: ReactNode;
+  initialLanguage?: Language;
+  routed?: boolean;
 }
 
 // Load translations synchronously for initial render
@@ -73,55 +77,97 @@ const loadTranslationsSync = (lang: string): Translations => {
   }
 };
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  // SSR y primer render de cliente arrancan en 'en' para evitar hydration mismatch
-  // y, sobre todo, para que el primer paint tenga las traducciones cargadas
-  // (no flash de claves "nav.home").
-  const [language, setLanguageState] = useState<Language>('en');
-  const [translations, setTranslations] = useState<Translations>(() => loadTranslationsSync('en'));
+/** Guarda la elección del visitante: la cookie la lee el middleware (para
+ *  mandar a /es a quien eligió español y entra por un link sin prefijo) y
+ *  localStorage la leen las páginas que cambian idioma sin navegar. */
+const rememberLanguage = (lang: Language) => {
+  try {
+    localStorage.setItem('language', lang);
+  } catch {
+    /* modo privado o storage bloqueado: la cookie alcanza */
+  }
+  document.cookie = `${LOCALE_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+};
+
+/**
+ * Dos modos:
+ *
+ * - **routed** (el sitio): el idioma viene de la URL (`/es/...`), así que el
+ *   servidor ya renderiza el HTML en ese idioma y `<html lang>` es correcto
+ *   desde el primer byte. Cambiar de idioma es navegar a la otra URL.
+ * - **local** (fun mode, design-exploration): sin rutas por idioma; arranca en
+ *   inglés y aplica la preferencia guardada o la del navegador al hidratar.
+ */
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({
+  children,
+  initialLanguage = 'en',
+  routed = false,
+}) => {
+  const router = useRouter();
+  // null solo fuera del App Router; acá siempre hay ruta.
+  const pathname = usePathname() ?? '/';
+  const [localLanguage, setLocalLanguage] = useState<Language>(initialLanguage);
   const [isHydrated, setIsHydrated] = useState(false);
   const isLoading = false;
 
-  // Después de hidratar, aplicar idioma del usuario (localStorage o navegador).
+  // En modo routed el idioma es el de la URL, sin estado propio: al navegar de
+  // /x a /es/x el layout re-renderiza con el nuevo valor.
+  const language = routed ? initialLanguage : localLanguage;
+  const translations = useMemo(() => loadTranslationsSync(language), [language]);
+
   useEffect(() => {
-    let preferred: Language = 'en';
-    const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage === 'es' || savedLanguage === 'en') {
-      preferred = savedLanguage;
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem('language');
+    } catch {
+      /* sin storage: se usa el navegador */
+    }
+
+    if (routed) {
+      // Primera visita sin elección previa y navegador en español: se lo lleva
+      // a /es una sola vez. Googlebot renderiza con navegador en inglés, así que
+      // no entra acá, y el HTML de las URLs sin prefijo sigue siendo inglés.
+      if (!saved && initialLanguage === 'en' && navigator.language.split('-')[0] === 'es') {
+        rememberLanguage('es');
+        router.replace(`${localePath('es', stripLocale(pathname))}${window.location.search}${window.location.hash}`);
+      }
     } else {
-      const browserLanguage = navigator.language.split('-')[0];
-      preferred = browserLanguage === 'es' ? 'es' : 'en';
+      const preferred: Language =
+        saved === 'es' || saved === 'en'
+          ? saved
+          : navigator.language.split('-')[0] === 'es'
+            ? 'es'
+            : 'en';
+      if (preferred !== localLanguage) setLocalLanguage(preferred);
     }
-    if (preferred !== 'en') {
-      setLanguageState(preferred);
-      setTranslations(loadTranslationsSync(preferred));
-    }
+
     // Señal global única para que header + hero arranquen su entrada
     // exactamente en el mismo frame (en vez de depender de re-renders separados).
     document.documentElement.classList.add('hydrated');
     setIsHydrated(true);
+    // Solo al montar.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Mantiene <html lang> en sincronía con el idioma activo.
-  //
-  // El layout lo sirve como "en" porque es un Server Component y el idioma se
-  // resuelve recién en el cliente. Sin esta corrección, una página leída en
-  // español queda declarada como inglés: los lectores de pantalla la pronuncian
-  // con fonética equivocada y los buscadores la clasifican mal.
-  //
-  // Es un parche, no la solución de raíz — el HTML inicial sigue diciendo "en".
-  // Lo correcto sería rutas /es y /en, pero eso implica cambiar todas las URLs.
-  // (El blog no tiene este problema: se renderiza en el servidor.)
+  // En modo local el HTML se sirve como "en"; esto lo corrige al cambiar. En
+  // modo routed el servidor ya lo manda bien.
   useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+    if (!routed) document.documentElement.lang = language;
+  }, [language, routed]);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem('language', lang);
-    const newTranslations = loadTranslationsSync(lang);
-    setTranslations(newTranslations);
-  };
+  const setLanguage = useCallback(
+    (lang: Language) => {
+      rememberLanguage(lang);
+      if (!routed) {
+        setLocalLanguage(lang);
+        return;
+      }
+      if (lang === language) return;
+      const target = localePath(lang, stripLocale(pathname));
+      router.push(`${target}${window.location.search}${window.location.hash}`, { scroll: false });
+    },
+    [routed, language, pathname, router]
+  );
 
   const t = (key: string): string => {
     const value = getNestedValue(translations, key);
@@ -139,4 +185,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       {children}
     </LanguageContext.Provider>
   );
+};
+
+/** Ruta en el idioma actual: `useLocalePath()('/contact')` → `/es/contact`. */
+export const useLocalePath = () => {
+  const { language } = useLanguage();
+  return useCallback((path: string) => localePath(language, path), [language]);
 };

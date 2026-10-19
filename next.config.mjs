@@ -34,6 +34,10 @@ const nextConfig = {
   experimental: {
     optimizeCss: true, // Optimiza el CSS
     scrollRestoration: true, // Mejora el control de scroll
+    // 404 propio para todo el sitio. El layout raíz vive en app/[lang], y con
+    // un layout raíz bajo un segmento dinámico not-found.tsx no atrapa las
+    // rutas inexistentes: Next devolvía un documento de error vacío.
+    globalNotFound: true,
   },
   reactStrictMode: true, // Asegura que el código esté más optimizado y sin errores
   // Demos para clientes: URL limpia y fuera de los buscadores

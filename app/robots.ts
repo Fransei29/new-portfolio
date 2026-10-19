@@ -1,6 +1,25 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '../lib/site';
 
-const SITE_URL = 'https://www.francoseiler.com';
+// Crawlers de buscadores y de motores de respuesta nombrados uno por uno. El
+// `*` ya los deja pasar; listarlos deja la decisión documentada por crawler
+// (lo pide el playbook, fase 0.2) y sobrevive si algún día se endurece el `*`.
+// OAI-SearchBot es el que alimenta ChatGPT Search; GPTBot es entrenamiento.
+const SEARCH_AND_AI_CRAWLERS = [
+  'Googlebot',
+  'Bingbot',
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'GPTBot',
+  'ClaudeBot',
+  'Claude-User',
+  'Claude-SearchBot',
+  'PerplexityBot',
+  'Perplexity-User',
+  'Google-Extended',
+  'Applebot',
+  'Applebot-Extended',
+];
 
 /**
  * Los crawlers de LLM (GPTBot, ClaudeBot, PerplexityBot…) quedan permitidos a
@@ -16,6 +35,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/newsletter/'],
+      },
+      {
+        userAgent: SEARCH_AND_AI_CRAWLERS,
         allow: '/',
         disallow: ['/api/', '/newsletter/'],
       },

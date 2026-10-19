@@ -1,0 +1,42 @@
+// app/page.tsx
+// Server Component a propósito: la home es la página más importante del sitio y
+// necesita su propio title, description y canonical. Un componente cliente no
+// puede exportar `metadata`, así que la UI (que sí es interactiva: scroll,
+// idioma, animaciones) vive en components/HomeContent y esta capa solo declara
+// los metadatos.
+//
+// Sin esto la home heredaba el title y la description del layout raíz, que es
+// exactamente lo que prohíbe la regla de "metadatos únicos por ruta": la página
+// que más tiene para decir era la única sin canonical propio.
+
+import type { Metadata } from 'next';
+import HomeContent from '../../components/HomeContent/HomeContent';
+import { isLocale } from '../../lib/i18n';
+import { routeMetadata } from '../../lib/seo';
+
+const META = {
+  en: {
+    title: 'Franco Seiler | Custom Software & Business Automation',
+    description:
+      'Software studio building custom platforms and automations for teams whose operations have outgrown spreadsheets. You work directly with the team building your software.',
+  },
+  es: {
+    title: 'Franco Seiler | Software a Medida y Automatización',
+    description:
+      'Estudio de software que construye plataformas a medida y automatizaciones para equipos cuyas operaciones ya superaron las planillas. Trabajás directamente con el equipo que construye tu software.',
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = isLocale(lang) ? lang : 'en';
+  return routeMetadata({ locale, path: '/', ...META[locale] });
+}
+
+export default function Home() {
+  return <HomeContent />;
+}

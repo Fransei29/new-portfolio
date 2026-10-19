@@ -2,7 +2,7 @@
 
 import { JSX, useEffect, useRef } from "react";
 import styles from "./ServicesComponent.module.scss";
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import Button from '../Button/Button';
 import {
   Sparkles,
@@ -62,6 +62,7 @@ interface Service {
 export const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const toLocale = useLocalePath();
 
   useEffect(() => {
     const ref = servicesRef.current;
@@ -313,7 +314,7 @@ export const Services = () => {
               })()}
             </div>
 
-            <a href="/projects" className={styles.featuredCta}>
+            <a href={toLocale('/projects')} className={styles.featuredCta}>
               <span className={styles.featuredCtaText}>{t('services.seeCaseStudies')}</span>
               <span className={styles.featuredCtaArrow}>
                 <ArrowUpRight size={15} />
@@ -323,7 +324,7 @@ export const Services = () => {
 
           {/* Other cards */}
           {others.map((service) => (
-            <a key={service.key} href={`/services#${service.key}`} className={styles.card}>
+            <a key={service.key} href={toLocale(`/services#${service.key}`)} className={styles.card}>
               <div className={styles.cardTop}>
                 <div className={styles.iconWrapper}>
                   <service.Icon size={20} className={styles.serviceIcon} />
@@ -347,7 +348,7 @@ export const Services = () => {
 
         <div className={`${styles.ctaContainer} piece-pop piece-delay-5`}>
           <Button
-            href="/services"
+            href={toLocale('/services')}
             label={t('services.cta')}
             variant="secondary"
           />

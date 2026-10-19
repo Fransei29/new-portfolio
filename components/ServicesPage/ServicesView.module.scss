@@ -656,15 +656,8 @@
   }
 }
 
-/* Los servicios que no están activos: presentes en el HTML para el crawler,
-   fuera de la vista y del árbol de accesibilidad. No es display:none porque
-   algunos motores descartan lo que está explícitamente oculto. */
-.seoOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
+// `display: flex` de .panel le gana al atributo `hidden` del navegador; sin
+// esto los seis paneles se verían apilados.
+.panel[hidden] {
+  display: none;
 }

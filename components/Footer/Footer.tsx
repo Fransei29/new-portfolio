@@ -5,10 +5,11 @@ import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 
 const Footer = () => {
   const { t } = useLanguage();
+  const toLocale = useLocalePath();
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -50,7 +51,7 @@ const Footer = () => {
               <FaGithub />
             </a>
             <a 
-              href="https://linkedin.com/in/francoseiler" 
+              href="https://www.linkedin.com/in/franco-seiler/" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="LinkedIn"
@@ -65,22 +66,22 @@ const Footer = () => {
         <div className={styles.navSection}>
           <h3 className={styles.sectionTitle}>{t('footer.navigation')}</h3>
           <nav className={styles.navLinks}>
-            <Link href="/" className={styles.navLink}>
+            <Link href={toLocale('/')} className={styles.navLink}>
               {t('nav.home')}
             </Link>
-            <Link href="/projects" className={styles.navLink}>
+            <Link href={toLocale('/projects')} className={styles.navLink}>
               {t('nav.projects')}
             </Link>
-            <Link href="/services" className={styles.navLink}>
+            <Link href={toLocale('/services')} className={styles.navLink}>
               {t('nav.services')}
             </Link>
-            <Link href="/blog" className={styles.navLink}>
+            <Link href={toLocale('/blog')} className={styles.navLink}>
               {t('nav.blog')}
             </Link>
-            <Link href="/tutorials" className={styles.navLink}>
+            <Link href={toLocale('/tutorials')} className={styles.navLink}>
               {t('nav.tutorials')}
             </Link>
-            <Link href="/about" className={styles.navLink}>
+            <Link href={toLocale('/about')} className={styles.navLink}>
               {t('nav.about')}
             </Link>
           </nav>

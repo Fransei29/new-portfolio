@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { HiArrowRight } from 'react-icons/hi';
+import { useLocalePath } from '../../contexts/LanguageContext';
 import styles from './Button.module.scss';
 
 type ButtonVariant = 'primary' | 'secondary';
@@ -25,6 +26,7 @@ const Button: React.FC<ReusableButtonProps> = ({
   text,
   variant = 'primary',
 }) => {
+  const toLocale = useLocalePath();
   const isExternalLink = href.startsWith('http://') || href.startsWith('https://');
 
   const buttonClass = [
@@ -56,7 +58,7 @@ const Button: React.FC<ReusableButtonProps> = ({
             {buttonContent}
           </a>
         ) : (
-          <Link href={href} className={styles.buttonLink}>
+          <Link href={href.startsWith('/') ? toLocale(href) : href} className={styles.buttonLink}>
             {buttonContent}
           </Link>
         )}

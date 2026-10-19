@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { useCallback, useEffect, useRef } from 'react';
+import { useLocalePath } from '../../contexts/LanguageContext';
 import styles from './CaseStudyTabs.module.scss';
 
 export interface CaseStudyTab {
@@ -25,6 +26,7 @@ export default function CaseStudyTabs({
   backLabel,
   projectTitle,
 }: Props) {
+  const toLocale = useLocalePath();
   const listRef = useRef<HTMLDivElement>(null);
   const activeIndex = tabs.findIndex((tab) => tab.id === activeId);
 
@@ -53,7 +55,7 @@ export default function CaseStudyTabs({
       {/* Volver y contexto viven acá adentro: son navegación, igual que los
           tabs, y ocupaban 217px de aire muerto arriba de la página. */}
       <Link
-        href="/projects"
+        href={toLocale('/projects')}
         className={styles.back}
         aria-label={`${backLabel} — ${projectTitle}`}
         title={backLabel}

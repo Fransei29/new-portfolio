@@ -1,4 +1,13 @@
-const SITE_URL = 'https://www.francoseiler.com';
+import { SITE_URL } from '../../lib/site';
+
+/* Los perfiles que el sitio enlaza. Deben ser las URLs reales: sameAs es lo
+   que usan los motores para confirmar que el sitio y los perfiles son la misma
+   entidad, y una URL rota rompe esa asociación en vez de reforzarla. */
+const PROFILES = [
+  'https://www.linkedin.com/in/franco-seiler/',
+  'https://github.com/Fransei29',
+  'https://www.youtube.com/@francoseiler1710',
+];
 
 /**
  * Datos estructurados de sitio. Van en el layout, así que aplican a todas las
@@ -48,13 +57,7 @@ const jsonLd = {
         'Multi-tenancy',
         'API design',
       ],
-      /* Deben ser las URLs reales: sameAs es lo que usan los motores para
-         confirmar que el sitio y los perfiles son la misma entidad. Una URL
-         rota acá rompe esa asociación en vez de reforzarla. */
-      sameAs: [
-        'https://linkedin.com/in/francoseiler',
-        'https://github.com/Fransei29',
-      ],
+      sameAs: PROFILES,
     },
     {
       /* La persona sigue existiendo en el grafo, pero como fundador del
@@ -64,10 +67,7 @@ const jsonLd = {
       name: 'Franco Seiler',
       url: SITE_URL,
       worksFor: { '@id': orgId },
-      sameAs: [
-        'https://linkedin.com/in/francoseiler',
-        'https://github.com/Fransei29',
-      ],
+      sameAs: PROFILES,
     },
     {
       '@type': 'ProfessionalService',

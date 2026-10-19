@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
-import styles from '../../app/(site)/projects/projects.module.scss';
+import styles from '../../app/[lang]/projects/projects.module.scss';
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
 import { useLanguage } from '../../contexts/LanguageContext';
 import '../../app/styles/utilities.scss'; 
@@ -24,29 +24,14 @@ const Projects = ({ initialProjects }: Props) => {
   // esconde la mayor parte del trabajo. El destacado queda a un clic, al lado.
   const [activeTab, setActiveTab] = useState<TabKey>('all');
   const elementsRef = useScrollAnimation();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
-  /* El servidor ya mandó la lista en inglés dentro del HTML. Este efecto solo
-     corre para traducirla cuando el visitante cambia el idioma: si pidiera
-     siempre, volveríamos a depender de JS para mostrar contenido que ya está. */
+  /* El servidor manda la lista ya en el idioma de la URL (/es/projects o
+     /projects). Cambiar de idioma es navegar, y la navegación trae una lista
+     nueva: alcanza con sincronizarla. */
   useEffect(() => {
-    if (language === 'en') {
-      setProjects(initialProjects);
-      return;
-    }
-
-    let cancelled = false;
-    fetch(`/api/projects?lang=${language}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!cancelled) setProjects(data);
-      })
-      .catch((error) => console.error('Error fetching projects:', error));
-
-    return () => {
-      cancelled = true;
-    };
-  }, [language, initialProjects]);
+    setProjects(initialProjects);
+  }, [initialProjects]);
 
   const tabs: { key: TabKey; labelKey: string }[] = [
     // 'all' primero porque es el estado por defecto: el tab activo al entrar

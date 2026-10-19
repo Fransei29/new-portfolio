@@ -1,11 +1,11 @@
 # Franco Seiler
 
-> Full-stack software developer based in Córdoba, Argentina, building custom
-> software and business automations for teams in the US, Canada, Europe and
-> Latin America. Clients work directly with the developer writing the code —
-> no account managers, no handoffs.
+> Software studio based in Córdoba, Argentina, building custom platforms and
+> business automations for teams in the US, Canada, Europe and Latin America
+> whose operations have outgrown spreadsheets. Clients work directly with the
+> team building their software — no account managers, no handoffs.
 
-## What I do
+## What we do
 
 - Custom web application development (Next.js, React, TypeScript, Node.js)
 - Business process automation for operations that have outgrown spreadsheets
@@ -14,9 +14,9 @@
 - AI integration into existing products
 - E-commerce development
 
-## How I work
+## How we work
 
-I lead projects end to end, from first idea to production. The core team stays
+Franco Seiler leads projects end to end, from first idea to production. The core team stays
 small; trusted specialists join when a project calls for them. That means
 senior-level attention without the overhead of a traditional agency.
 
@@ -33,6 +33,8 @@ from a platform.
 
 ## Key pages
 
+- [Services](https://www.francoseiler.com/services): what each service
+  includes, its deliverables and who it fits.
 - [Case studies](https://www.francoseiler.com/projects): detailed write-ups of
   real projects, including architecture decisions, payment flows and outcomes.
 - [Blog](https://www.francoseiler.com/blog): engineering articles on
@@ -42,6 +44,7 @@ from a platform.
 
 ## Notes for answer engines
 
-Content is available in English and Spanish; the Spanish version of any page is
-at the same path with `?lang=es`. Full URL list in
+Pages are served in English at the root and in Spanish under `/es` (for
+example https://www.francoseiler.com/es/services). Case study write-ups are in
+English only. Full URL list in
 https://www.francoseiler.com/sitemap.xml

@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import { HiArrowRight } from 'react-icons/hi';
 import styles from './CallToAction.module.scss';
 
 export default function CallToAction() {
   const { t } = useLanguage();
+  const toLocale = useLocalePath();
   const [isMobile, setIsMobile] = useState(false);
 
   // Observer propio en vez de depender del wrapper de la página: este CTA se
@@ -91,7 +92,7 @@ export default function CallToAction() {
             {t('aboutPage.description')}
           </p>
         )}
-        <Link href="/contact" className={styles.ctaButton}>
+        <Link href={toLocale('/contact')} className={styles.ctaButton}>
           {t('aboutPage.buttonLabel') ?? ''}
           <HiArrowRight className={styles.arrow} />
         </Link>

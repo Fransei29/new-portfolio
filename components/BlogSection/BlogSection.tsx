@@ -7,6 +7,7 @@ import { HiArrowRight } from 'react-icons/hi';
 import styles from './BlogSection.module.scss';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { localePath } from '../../lib/i18n';
 
 /**
  * Subconjunto de PostMeta que expone /api/blog. No se importa PostMeta de
@@ -65,9 +66,9 @@ const BlogSection: React.FC = () => {
   // desaparece por completo en vez de mostrar un bloque vacío con título.
   if (!loaded || posts.length === 0) return null;
 
-  const blogHref = language === 'es' ? '/blog?lang=es' : '/blog';
+  const blogHref = localePath(language, '/blog');
   const postHref = (slug: string) =>
-    language === 'es' ? `/blog/${slug}?lang=es` : `/blog/${slug}`;
+    localePath(language, `/blog/${slug}`);
 
   return (
     <section className={styles.blogSection}>

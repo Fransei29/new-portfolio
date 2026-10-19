@@ -11,7 +11,7 @@ import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import FunModeButton from '../FunModeButton/FunModeButton';
 import { X, ArrowUpRight } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 
 export default function Header() {
   const elementsRef = useScrollAnimation();
@@ -19,6 +19,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolled = useScrollDetection();
   const { t, language } = useLanguage();
+  const toLocale = useLocalePath();
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   // Cerrar con Escape. El menú ocupa TODA la pantalla, así que el viejo
@@ -61,7 +62,7 @@ export default function Header() {
           id="banner"
           ref={(el) => { if (el) elementsRef.current[0] = el; }}
         >
-          <Link href="/" passHref className={styles.logoLink}>
+          <Link href={toLocale('/')} passHref className={styles.logoLink}>
             <div className={styles.logoContainer}>
               {/* Imagotipo horizontal (panda + wordmark). Se muestra la variante
                   clara u oscura según el tema vía CSS (sin hydration mismatch). */}
@@ -104,38 +105,38 @@ export default function Header() {
 
         {/* Menú desktop */}
         <section className={`${styles.centerMenu} ${styles.desktopOnly}`}>
-          <Link href="/" passHref>
+          <Link href={toLocale('/')} passHref>
             <p className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
               {t('nav.home')}
             </p>
           </Link>
-          <Link href="/projects" passHref>
+          <Link href={toLocale('/projects')} passHref>
             <p className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`}>
               {t('nav.projects')}
             </p>
           </Link>
-          <Link href="/services" passHref>
+          <Link href={toLocale('/services')} passHref>
             <p className={`${styles.navLink} ${pathname === '/services' ? styles.active : ''}`}>
               {t('nav.services')}
             </p>
           </Link>
-          <Link href="/blog" passHref>
+          <Link href={toLocale('/blog')} passHref>
             {/* startsWith para que el link siga activo dentro de /blog/[slug] */}
             <p className={`${styles.navLink} ${pathname?.startsWith('/blog') ? styles.active : ''}`}>
               {t('nav.blog')}
             </p>
           </Link>
-          <Link href="/tutorials" passHref>
+          <Link href={toLocale('/tutorials')} passHref>
             <p className={`${styles.navLink} ${pathname === '/tutorials' ? styles.active : ''}`}>
               {t('nav.tutorials')}
             </p>
           </Link>
-          <Link href="/about" passHref>
+          <Link href={toLocale('/about')} passHref>
             <p className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
               {t('nav.about')}
             </p>
           </Link>
-          <Link href="/contact" passHref>
+          <Link href={toLocale('/contact')} passHref>
             <p className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>
               {t('nav.contact')}
             </p>
@@ -187,7 +188,7 @@ export default function Header() {
             que sin esto se pierde la referencia de marca y el camino al home.
             Mismas dos variantes light/dark que el header, alternadas por CSS; en
             dark va el panda con contorno blanco, que se recorta contra el fondo. */}
-        <Link href="/" passHref onClick={toggleMobileMenu} className={styles.mobileMenuLogo}>
+        <Link href={toLocale('/')} passHref onClick={toggleMobileMenu} className={styles.mobileMenuLogo}>
           <Image
             src="/brand-header.svg"
             alt="Franco Seiler — Software Studio"
@@ -216,38 +217,38 @@ export default function Header() {
         
         {/* Sin iconos: la lista se lee como tipografía sola. El estado activo lo
             marca el color del link, no un adorno a la izquierda. */}
-        <Link href="/" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/' ? styles.mobileActive : ''}`}>
             {t('nav.home')}
           </p>
         </Link>
-        <Link href="/projects" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/projects')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/projects' ? styles.mobileActive : ''}`}>
             {t('nav.projects')}
           </p>
         </Link>
-        <Link href="/services" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/services')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/services' ? styles.mobileActive : ''}`}>
             {t('nav.services')}
           </p>
         </Link>
-        <Link href="/blog" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/blog')} passHref onClick={toggleMobileMenu}>
           {/* startsWith, igual que en desktop: sigue activo dentro de /blog/[slug] */}
           <p className={`${styles.mobileNavLink} ${pathname?.startsWith('/blog') ? styles.mobileActive : ''}`}>
             {t('nav.blog')}
           </p>
         </Link>
-        <Link href="/tutorials" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/tutorials')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/tutorials' ? styles.mobileActive : ''}`}>
             {t('nav.tutorials')}
           </p>
         </Link>
-        <Link href="/about" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/about')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/about' ? styles.mobileActive : ''}`}>
             {t('nav.about')}
           </p>
         </Link>
-        <Link href="/contact" passHref onClick={toggleMobileMenu}>
+        <Link href={toLocale('/contact')} passHref onClick={toggleMobileMenu}>
           <p className={`${styles.mobileNavLink} ${pathname === '/contact' ? styles.mobileActive : ''}`}>
             {t('nav.contact')}
           </p>
