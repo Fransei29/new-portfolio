@@ -18,6 +18,9 @@ POSTS = [
     (11, 'Carrusel · Comply DQ', 'carrusel-09-complydq/slides', None),
     (12, 'Carrusel · BGV Mayorista', 'carrusel-07-bgv/slides', None),
     (13, 'Carrusel · Globaly', 'carrusel-08-globaly/slides', None),
+    (14, 'Carrusel · Tecnomar', 'carrusel-10-tecnomar/slides', None),
+    (15, 'Carrusel · Ateevo Wholesale', 'carrusel-11-ateevo/slides', None),
+    (16, 'Carrusel · Event Scheduler', 'carrusel-12-event-scheduler/slides', None),
 ]
 
 def slides(folder):

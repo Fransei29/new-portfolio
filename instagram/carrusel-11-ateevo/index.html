@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrusel 11 — Ateevo Wholesale</title>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; }
+
+      /* Formato 3:4 (1080x1440): es lo que muestra la grilla del perfil.
+         Regla de legibilidad en celu: nada de texto propio por debajo de 34px. */
+      :root {
+        --dark: #2e294e;
+        --ink: #292833;
+        --lilac: #b59cf8;
+        --lilac-2: #8e7ae6;
+        --lilac-3: #7d68d8;
+        --lilac-ink: #5b45c4; /* lila oscuro para slides claras: contraste ~6:1 sobre --paper */
+        --paper: #f3f2f4;
+        --mist: #e9e7ee;
+        --muted: #8a8599;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #111; font-family: "Plus Jakarta Sans", sans-serif; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+      .slide { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: var(--paper); color: var(--ink); }
+      .slide.dark { background: var(--dark); color: #fff; }
+      .slide.mist { background: var(--mist); }
+
+      /* HUD, igual que en los reels */
+      .hud { position: absolute; top: 64px; left: 80px; right: 80px; display: flex; justify-content: flex-end; font: 600 26px "Plus Jakarta Sans"; letter-spacing: 0.18em; z-index: 5; }
+      .hud .count { font-variant-numeric: tabular-nums; }
+      .dark .hud { color: rgba(255,255,255,0.75); }
+      .hud { color: var(--muted); }
+      .progress { position: absolute; left: 80px; right: 80px; bottom: 56px; height: 4px; background: rgba(142,122,230,0.2); border-radius: 2px; z-index: 2; }
+      .progress i { display: block; height: 100%; background: var(--lilac-2); border-radius: 2px; }
+      .dark .progress { background: rgba(255,255,255,0.12); }
+      .dark .progress i { background: var(--lilac); }
+
+      .copy { position: absolute; left: 80px; right: 80px; top: 170px; z-index: 4; }
+      .kicker { font: 600 30px "Plus Jakarta Sans"; letter-spacing: 0.16em; color: var(--lilac-ink); margin-bottom: 28px; }
+      .dark .kicker { color: var(--lilac); }
+      h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 500; letter-spacing: -0.025em; line-height: 1.04; }
+      h1 { font-size: 112px; }
+      h2 { font-size: 84px; }
+      h2 em, h1 em { font-style: normal; color: var(--lilac-ink); }
+      .dark h2 em, .dark h1 em { color: var(--lilac); }
+      .lead { font-size: 38px; line-height: 1.4; margin-top: 30px; color: #5c5866; }
+      .dark .lead { color: rgba(255,255,255,0.78); }
+      .note { font: 600 32px "Plus Jakarta Sans"; margin-top: 22px; color: var(--lilac-ink); }
+      .dark .note { color: var(--lilac); }
+      /* Slide en video: las pantallas scrollean la página completa (scroll.mjs → slides/02.mp4) */
+      .scroll { position: relative; overflow: hidden; }
+      .scroll img { position: absolute; left: 0; width: 100%; top: calc(var(--y, 0) * -1px); }
+
+      /* Celular: captura real a 390px de ancho, escalada x1.6 */
+      .phone { position: absolute; width: 624px; border-radius: 76px; background: #16141f; padding: 18px; box-shadow: 0 40px 90px rgba(20,16,40,0.35); z-index: 3; }
+      .phone img { display: block; width: 100%; border-radius: 60px; }
+      .dark .phone { background: #0f0d18; box-shadow: 0 40px 100px rgba(0,0,0,0.45); }
+
+      .browser { position: absolute; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.35); z-index: 3; }
+      .browser .bar { height: 60px; background: #ecebf0; display: flex; align-items: center; gap: 12px; padding: 0 26px; }
+      .browser .bar span { width: 16px; height: 16px; border-radius: 50%; background: #cfcbd8; }
+      .browser .crop { overflow: hidden; position: relative; }
+      .browser .crop img { position: absolute; display: block; }
+
+      .glow { position: absolute; border-radius: 50%; filter: blur(10px); z-index: 1; }
+      .swipe { position: absolute; left: 80px; bottom: 120px; font: 600 32px "Plus Jakarta Sans"; display: flex; align-items: center; gap: 16px; z-index: 4; }
+      .swipe b { display: inline-block; width: 64px; height: 64px; border-radius: 50%; background: var(--lilac); color: var(--dark); text-align: center; line-height: 62px; font-size: 34px; }
+
+      .chips { display: flex; flex-wrap: wrap; gap: 14px; }
+      .chip { font: 500 30px "Plus Jakarta Sans"; padding: 14px 26px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(181,156,248,0.35); color: #fff; }
+
+      .list { list-style: none; margin-top: 56px; font-size: 44px; }
+      .list li { display: flex; gap: 30px; align-items: baseline; padding: 30px 0; border-top: 2px solid rgba(46,41,78,0.12); font: 500 1em/1.25 "Bricolage Grotesque"; letter-spacing: -0.01em; }
+      .list li:last-child { border-bottom: 2px solid rgba(46,41,78,0.12); }
+      .dark .list li, .dark .list li:last-child { border-color: rgba(255,255,255,0.14); }
+      .dark .list li small { color: var(--lilac); }
+      .list li small { font: 600 30px "Plus Jakarta Sans"; color: var(--lilac-3); min-width: 56px; letter-spacing: 0.08em; }
+
+      /* Notebook y celu chico (capturas de escritorio y mobile reales) */
+      .laptop { position: absolute; z-index: 3; }
+      .laptop .screen { background: #0e0d14; border-radius: 26px 26px 0 0; padding: 20px 20px 24px; box-shadow: 0 50px 110px rgba(10,8,25,0.4); }
+      .laptop .screen img { display: block; width: 100%; border-radius: 6px; }
+      .laptop .base { height: 28px; margin: 0 -64px; background: linear-gradient(#d9d7e0, #a9a6b4); border-radius: 0 0 26px 26px; position: relative; }
+      .laptop .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 170px; height: 11px; margin-left: -85px; background: #bdbac7; border-radius: 0 0 12px 12px; }
+      .phone.sm { border-radius: 52px; padding: 13px; height: var(--h); overflow: hidden; z-index: 4; }
+      .phone.sm img { border-radius: 40px; height: calc(var(--h) - 26px); object-fit: cover; object-position: top; }
+      /* Propios de Acer0 (se mantienen igual en BGV): captura del panel en navegador y scroll */
+      .browser .crop img { width: 100%; }
+      .phone.sm .scroll { border-radius: 40px; height: calc(var(--h) - 26px); }
+      .phone.sm .scroll img, .laptop .screen .scroll img { height: auto; border-radius: 0; }
+      .laptop .screen .scroll { border-radius: 6px; }
+      /* Slide en video (flujo.mjs): las pantallas pasan de a una dentro del navegador */
+      .reel { display: flex; height: 100%; transform: translateX(calc(var(--x, 0) * -100%)); }
+      .reel img { position: static !important; flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+    </style>
+  </head>
+  <body>
+
+    <!-- 7 slides, una idea por slide: título corto + la captura grande. El texto largo va en el caption.
+         Ángulo: venta mayorista de moda (cliente en Canadá). No hay sitio en vivo: capturas del case study, recortadas del marco de shots.so.
+         Slide 02 es un video (flujo.mjs): las pantallas del pedido pasan de a una. -->
+
+    <!-- 01 · PORTADA -->
+    <section class="slide dark" id="s1">
+      <div class="hud"><span class="count">1</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.25),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">CASO DE ESTUDIO</div>
+        <h1>Ateevo Wholesale</h1>
+        <p class="lead">Una plataforma de venta mayorista para marcas de moda.</p>
+        <p class="note">La desarrollamos para un cliente en Canadá: catálogo, pedidos, contratos y reportes en un solo lugar.</p>
+      </div>
+      <div class="browser" style="left:260px;top:640px;width:780px;z-index:3">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:382px"><img src="media/tienda.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="browser" style="left:60px;top:870px;width:820px;z-index:4">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:320px"><img src="media/login.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="swipe"><span>Deslizá</span><b>→</b></div>
+      <div class="progress"><i style="width:14.3%"></i></div>
+    </section>
+
+    <!-- 02 · EL PEDIDO (video) -->
+    <section class="slide mist" id="s2">
+      <div class="hud"><span class="count">2</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">01 — EL PEDIDO</div>
+        <h2>De elegir la temporada <em>a confirmar el pedido.</em></h2>
+        <p class="lead">Cada comercio ve el catálogo de la temporada, arma su pedido por talle y color y lo sigue hasta el envío.</p>
+      </div>
+      <div class="browser" style="left:60px;top:800px;width:960px">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:470px"><div class="reel"><img src="media/catalogo.png" alt="" /><img src="media/carrito.png" alt="" /><img src="media/resumen.png" alt="" /><img src="media/pedido-firma.png" alt="" /><img src="media/catalogo.png" alt="" /></div></div>
+      </div>
+      <div class="progress"><i style="width:28.6%"></i></div>
+    </section>
+
+    <!-- 03 · CONTRATOS -->
+    <section class="slide dark" id="s3">
+      <div class="hud"><span class="count">3</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.25),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">02 — CONTRATOS</div>
+        <h2>Contratos firmados <em>sin imprimir un papel.</em></h2>
+        <p class="lead">Cada pedido genera su contrato. El cliente lo firma en pantalla y queda guardado en PDF.</p>
+      </div>
+      <div class="browser" style="left:260px;top:740px;width:780px;z-index:3">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:382px"><img src="media/pedido-firma.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="browser" style="left:60px;top:970px;width:820px;z-index:4">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:402px"><img src="media/contrato.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="progress"><i style="width:42.9%"></i></div>
+    </section>
+
+    <!-- 04 · PEDIDOS -->
+    <section class="slide" id="s4">
+      <div class="hud"><span class="count">4</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">03 — GESTIÓN</div>
+        <h2>Cada pedido, <em>de punta a punta.</em></h2>
+        <p class="lead">Desde que entra hasta que se cobra, con estados claros para el equipo y para el cliente.</p>
+      </div>
+      <div class="browser" style="left:260px;top:740px;width:780px;z-index:3">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:382px"><img src="media/mis-pedidos.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="browser" style="left:60px;top:970px;width:820px;z-index:4">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:402px"><img src="media/admin-pedidos.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="progress"><i style="width:57.1%"></i></div>
+    </section>
+
+    <!-- 05 · REPORTES -->
+    <section class="slide dark" id="s5">
+      <div class="hud"><span class="count">5</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(181,156,248,0.25),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">04 — REPORTES</div>
+        <h2>Números claros <em>para decidir mejor.</em></h2>
+        <p class="lead">Ventas, disponibilidad y márgenes en dólares estadounidenses, canadienses y pesos mexicanos.</p>
+      </div>
+      <div class="browser" style="left:260px;top:740px;width:780px;z-index:3">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:382px"><img src="media/reporte-disponibilidad.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="browser" style="left:60px;top:970px;width:820px;z-index:4">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:402px"><img src="media/dashboard.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="progress"><i style="width:71.4%"></i></div>
+    </section>
+
+    <!-- 06 · VARIAS MARCAS -->
+    <section class="slide mist" id="s6">
+      <div class="hud"><span class="count">6</span></div>
+      <div class="glow" style="width:1100px;height:1100px;left:-10px;top:440px;background:radial-gradient(circle,rgba(142,122,230,0.22),transparent 62%)"></div>
+      <div class="copy">
+        <div class="kicker">05 — VARIAS MARCAS</div>
+        <h2>Una plataforma, <em>muchas marcas.</em></h2>
+        <p class="lead">Cada marca tiene su propio espacio, con su logo, sus colores y sus datos por separado.</p>
+      </div>
+      <div class="browser" style="left:260px;top:740px;width:780px;z-index:3">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:382px"><img src="media/temporadas.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="browser" style="left:60px;top:970px;width:820px;z-index:4">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="crop" style="height:402px"><img src="media/marca.png" alt="" style="left:0;top:0px" /></div>
+      </div>
+      <div class="progress"><i style="width:85.7%"></i></div>
+    </section>
+
+    <!-- 07 · CTA -->
+    <section class="slide dark" id="s7">
+      <div class="hud"><span class="count">7</span></div>
+      <div class="glow" style="width:900px;height:900px;left:90px;top:200px;background:radial-gradient(circle,rgba(181,156,248,0.3),transparent 65%)"></div>
+      <img src="media/panda-programando.svg" alt="" style="position:absolute;left:375px;top:170px;width:330px;z-index:3" />
+      <div class="copy" style="top:560px;text-align:center">
+        <h2>Software a medida para resolver <em>problemas reales de negocio.</em></h2>
+        <p class="lead" style="margin-top:36px">¿Hay un proceso en tu empresa que podría funcionar mejor con software propio?</p>
+        <p class="lead" style="margin-top:20px">Hablemos.</p>
+        <p style="font:600 48px 'Plus Jakarta Sans';color:var(--lilac);margin-top:14px">francoseiler.com</p>
+      </div>
+      <p style="position:absolute;left:0;right:0;bottom:130px;text-align:center;font:500 32px 'Plus Jakarta Sans';color:rgba(255,255,255,0.6);z-index:4">Guardalo para cuando lo necesites ✦</p>
+      <div class="progress"><i style="width:100.0%"></i></div>
+    </section>
+
+  </body>
+</html>

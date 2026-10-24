@@ -148,5 +148,54 @@ Un proyecto en equipo, para un cliente de Canadá.
 
 #casodeestudio #desarrolloweb #paginaweb #trabajoremoto #softwareamedida
 
+## 14 · Carrusel: Tecnomar
+Archivos: `carrusel-10-tecnomar/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+Una bomba industrial es difícil de explicar con palabras. Por eso, en el sitio nuevo de Tecnomar, la mostramos.
+
+Tecnomar repara y reacondiciona bombas sanitarias para la industria alimenticia, farmacéutica y química. Rediseñamos su sitio web con un modelo 3D de una bomba que se desarma pieza por pieza a medida que bajás por la página, y en cada pieza se explica qué hacen.
+
+→ Bomba 3D que se mueve con el scroll, también en el celular
+→ Cada etapa del servicio contada sobre la pieza real
+→ Servicios y proceso técnico explicados de forma simple
+→ WhatsApp, cotizador y folletos técnicos siempre a mano
+
+¿Tu producto merece mostrarse mejor? Hablemos → francoseiler.com
+
+#casodeestudio #diseñoweb #desarrolloweb #industria #3d
+
+## 15 · Carrusel: Ateevo Wholesale
+Archivos: `carrusel-11-ateevo/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+Vender ropa por mayor implica temporadas, preventas, talles, colores, contratos y clientes en distintos países.
+
+Para un cliente de Canadá desarrollamos Ateevo Wholesale, una plataforma donde las marcas de moda venden a sus comercios y gestionan todo el negocio mayorista.
+
+→ Catálogo por temporada, con pedidos por talle y color
+→ Contratos que el cliente firma en pantalla, guardados en PDF
+→ Seguimiento de cada pedido, desde que entra hasta que se cobra
+→ Reportes de ventas, disponibilidad y márgenes en dólares, dólares canadienses y pesos mexicanos
+→ Varias marcas en una misma plataforma, cada una con su logo, sus colores y sus datos
+
+¿Tenés un proceso que podría funcionar mejor con software propio? Hablemos → francoseiler.com
+
+#casodeestudio #softwareamedida #moda #ventamayorista #ecommerce
+
+## 16 · Carrusel: Event Scheduler
+Archivos: `carrusel-12-event-scheduler/slides/01.png` a `07.png` (el 02 va como video: `02.mp4`)
+
+Reservar un salón para un evento suele llevar muchos mails, llamadas y presupuestos que van y vienen.
+
+Event Scheduler es una plataforma que conecta salones de eventos con quienes organizan casamientos, fiestas y eventos corporativos. Todo se resuelve online, desde la elección del espacio hasta el pago.
+
+→ Elegís espacio, fecha, catering y extras en un solo recorrido
+→ El precio se actualiza en cada paso, sin sorpresas al final
+→ Reserva y pago con tarjeta en el mismo lugar
+→ Un portal guiado para que cada salón cargue su espacio, sus menús y su contrato
+
+¿Tu negocio podría vender o reservar online? Hablemos → francoseiler.com
+
+#casodeestudio #softwareamedida #eventos #reservasonline #desarrolloweb
+
 ## 3 y 9 · Videos de Franco a cámara
 Sin grabar todavía. Cuando estén, se publican como los posts más nuevos.
