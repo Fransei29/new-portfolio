@@ -224,15 +224,15 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     transition: transform 0.4s ease;
-    width: 320px;
-    height: 320px;
+    width: 380px;
+    height: 380px;
     border: 1px solid var(--primary-color);
    
     @media (max-width: 768px) {
       width: 100%;
       height: auto;
       aspect-ratio: 1;
-      max-width: 350px;
+      max-width: 280px;
       margin: 0 auto;
     }
   }

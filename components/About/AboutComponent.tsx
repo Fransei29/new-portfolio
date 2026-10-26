@@ -56,10 +56,11 @@ const About = () => {
           <section className={`${styles.imageSection} piece-r piece-delay-2`}>
             <div className={styles.imageWrapper}>
               <Image
-                src='/yo.jpg'
+                src='/franco-perfil.jpg'
                 alt="Franco Seiler"
-                width={200}
-                height={200}
+                width={640}
+                height={640}
+                sizes="(max-width: 768px) 280px, 380px"
                 className={styles.image}
               />
             </div>

@@ -184,6 +184,33 @@
   @media (max-width: 768px) {
     padding: 1.35rem 1.5rem;
   }
+
+  /* Hover suave: la fila se aclara apenas y el dato se corre y toma el lila
+     suave. Solo con mouse, en táctil no aplica. */
+  @media (hover: hover) {
+    transition: background-color 0.3s ease;
+
+    dd {
+      transition: transform 0.35s cubic-bezier(0.34, 0.8, 0.3, 1), color 0.3s ease;
+    }
+
+    dt {
+      transition: color 0.3s ease;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+
+      dd {
+        transform: translateX(4px);
+        color: var(--lila-suave);
+      }
+
+      dt {
+        color: #fff;
+      }
+    }
+  }
 }
 
 /* El alcance va en columna: etiqueta, regiones y la línea que lo explica. */
@@ -260,7 +287,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .button,
-  .arrow {
+  .arrow,
+  .stat,
+  .stat dd,
+  .stat dt {
     transition: none;
+  }
+
+  .stat:hover dd {
+    transform: none;
   }
 }

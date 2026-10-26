@@ -126,7 +126,7 @@
   },
   "behindStudio": {
     "title": "Quiénes construyen tu producto",
-    "quote": "Mantenemos el equipo chico para involucrarnos de verdad en cada proyecto. Hablás directamente con quienes toman las decisiones técnicas y escriben el código, desde el primer día hasta el lanzamiento.",
+    "quote": "Cada proyecto tiene nuestra atención directa, desde las primeras decisiones hasta la puesta en producción.",
     "name": "Franco Seiler",
     "role": "Fundador · Córdoba, Argentina",
     "button": "Conocé al equipo",
@@ -139,17 +139,17 @@
     "reachLabel": "Experiencia trabajando con clientes de distintos mercados."
   },
   "learn": {
-    "title": "Conocimiento que podés poner en práctica",
+    "title": "Aprendé con nosotros",
     "subtitle": "Compartimos guías, código y recursos basados en tecnologías y problemas reales de desarrollo.",
     "tutorialsTitle": "Tutoriales",
     "tutorialsDescription": "{count} guías prácticas para desarrolladores: Redis, TypeScript, Node.js, ecommerce, MongoDB y más.",
     "tutorialsButton": "Ver todos los tutoriales",
     "academyTitle": "Academia",
-    "academyDescription": "Aprendé a desarrollar aplicaciones completas, desde los fundamentos de frontend hasta el backend en producción, con proyectos prácticos en cada módulo.",
-    "academyVideos": "Videos paso a paso de cada proyecto",
-    "academyCode": "El código de cada módulo en GitHub",
+    "academyDescription": "Aprendé desarrollo full-stack con proyectos prácticos, del frontend al backend en producción.",
+    "academyVideos": "Videos paso a paso",
+    "academyCode": "Código de cada módulo en GitHub",
     "academyButton": "Explorar la academia",
-    "blogText": "¿Preferís leer? En el blog contamos decisiones de ingeniería de proyectos reales.",
-    "blogLink": "Ir al blog"
+    "blogText": "¿Preferís leer?",
+    "blogLink": "Visitá nuestro blog"
   }
 }

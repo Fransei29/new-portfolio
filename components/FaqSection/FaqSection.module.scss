@@ -363,6 +363,37 @@
   }
 }
 
+/* Mobile: las preguntas van dentro de una tarjeta en vez de líneas sueltas de
+   borde a borde. Blanco translúcido y sin sombra: un blanco lleno cortaba
+   fuerte contra el lila; así la tarjeta se funde con la franja. */
+@media (max-width: 768px) {
+  .list {
+    padding: 0.25rem 1.1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    :global(html.dark) & {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .item {
+    &:first-child {
+      border-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .itemOpen .toggle {
+    background: var(--background-colorB);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .toggle,
   .arrow,

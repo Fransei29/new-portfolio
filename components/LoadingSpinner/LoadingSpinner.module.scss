@@ -17,6 +17,9 @@
     margin-top: -7rem;
     background-color: transparent !important;
     box-shadow: none !important;
+    /* El render sale con la cara muy quemada: bajamos el brillo sin perder
+       contraste en las orejas y los ojos. */
+    filter: brightness(0.82) contrast(1.08) saturate(0.95);
 
     @media (max-width: 768px) {
       width: 84px;

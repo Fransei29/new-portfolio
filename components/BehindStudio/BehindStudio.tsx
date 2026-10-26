@@ -28,7 +28,7 @@ export default function BehindStudio() {
             <figcaption className={styles.author}>
               <Image
                 className={styles.avatar}
-                src="/yo.jpg"
+                src="/franco-avatar-fundador.jpg"
                 alt=""
                 width={112}
                 height={112}
