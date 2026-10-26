@@ -49,14 +49,10 @@ export default function BehindStudio() {
                   <dd>{t(`behindStudio.${key}Value`)}</dd>
                 </div>
               ))}
-              {/* El alcance no es un número: etiqueta arriba, las regiones y una
-                  línea que lo explica. */}
+              {/* El alcance no es un número: etiqueta arriba y las regiones. */}
               <div className={`${styles.stat} ${styles.statReach}`}>
-                <dt>{t('behindStudio.reachLabel')}</dt>
-                <dd>
-                  <span className={styles.reachKicker}>{t('behindStudio.reachKicker')}</span>
-                  {t('behindStudio.reachValue')}
-                </dd>
+                <dt className={styles.reachKicker}>{t('behindStudio.reachKicker')}</dt>
+                <dd>{t('behindStudio.reachValue')}</dd>
               </div>
             </dl>
 

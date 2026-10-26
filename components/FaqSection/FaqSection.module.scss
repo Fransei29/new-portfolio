@@ -129,7 +129,8 @@
 
   @media (max-width: 768px) {
     font-size: var(--subtitle-font-size-mobile);
-    margin-bottom: 0.5rem;
+    /* Va acá y no en el bloque de 900px: esta regla viene después y lo pisaba. */
+    margin-bottom: 2.25rem;
   }
 }
 
