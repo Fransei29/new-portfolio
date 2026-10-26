@@ -135,8 +135,10 @@
   background: none;
   cursor: pointer;
   filter: drop-shadow(0 6px 12px rgba(46, 41, 78, 0.14));
-  // Crece desde la punta de la colita, como si saliera de la cabeza.
-  transform-origin: 104% 116%;
+  // Crece desde la punta de la colita, como si saliera de la cabeza. El 93.6%
+  // es el mismo punto que antes (116% de un alto de 113) sobre el alto nuevo
+  // del viewBox (140).
+  transform-origin: 104% 93.6%;
   // Aparece, queda ~4 s, se va, y vuelve ~7 s después.
   opacity: 0;
   visibility: hidden;

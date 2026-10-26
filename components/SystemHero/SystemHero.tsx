@@ -414,7 +414,11 @@ export default function SystemHero() {
                   aria-label={lang === 'es' ? 'Ver cómo está hecho' : 'See how it is built'}
                   title={lang === 'es' ? 'Ver cómo está hecho' : 'See how it is built'}
                 >
-                  <svg viewBox="554 262 236 113" overflow="visible" aria-hidden="true">
+                  {/* Alto 140 y no 113: con 113 el borde inferior del globo caía justo
+                      en el límite del viewBox y en mobile se perdía la última
+                      franja. El ancho no cambia, así que escala y posición
+                      siguen iguales. */}
+                  <svg viewBox="554 262 236 140" overflow="visible" aria-hidden="true">
                     {/* Espejado: la cabeza está inclinada a la izquierda, así que el
                         globo se abre hacia arriba a la izquierda (al aire, no sobre
                         el dashboard) y la colita, abajo a la derecha, sale de la

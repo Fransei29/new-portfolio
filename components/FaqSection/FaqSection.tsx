@@ -57,7 +57,7 @@ export default function FaqSection({ items }: { items: FaqItem[] }) {
                     onClick={() => setOpen(isOpen ? null : i)}
                   >
                     {item.q}
-                    <span className={styles.toggle} aria-hidden>+</span>
+                    <span className={styles.toggle} aria-hidden />
                   </button>
                 </h3>
                 <div id={aId} role="region" aria-labelledby={qId} className={styles.panel}>

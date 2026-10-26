@@ -118,17 +118,21 @@
 }
 
 .cardDark {
-  background: var(--lila-profundo);
-  border-color: var(--lila-profundo);
-  color: #fff;
+  // Lavanda claro y no el lila profundo sólido: el bloque oscuro pesaba
+  // demasiado sobre la sección blanca y no se integraba con la tarjeta de
+  // Tutoriales. Se distingue igual por el tinte y el borde lila.
+  background: linear-gradient(160deg, #f6f3ff 0%, #ece6ff 100%);
+  border-color: rgba(142, 122, 230, 0.28);
+  color: var(--text-color);
 
   &:hover {
-    border-color: var(--lila-profundo);
+    border-color: rgba(142, 122, 230, 0.45);
   }
 
   :global(html.dark) & {
-    background: var(--lila-profundo);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(160deg, rgba(142, 122, 230, 0.16) 0%, rgba(142, 122, 230, 0.08) 100%);
+    border-color: rgba(181, 156, 248, 0.22);
+    color: #fff;
   }
 }
 
@@ -156,11 +160,24 @@
   border: 1px solid rgba(142, 122, 230, 0.22);
   color: var(--lila-corporativo);
 
-  .cardDark &,
   :global(html.dark) & {
     background: rgba(181, 156, 248, 0.14);
     border-color: rgba(181, 156, 248, 0.28);
     color: var(--lila-suave);
+  }
+}
+
+/* El gorro de la academia en el lila profundo que antes tenía la tarjeta
+   entera: un acento fuerte y chico sobre el lavanda. */
+.cardDark .cardIcon {
+  background: var(--lila-profundo);
+  border-color: var(--lila-profundo);
+  color: #fff;
+
+  :global(html.dark) & {
+    background: var(--lila-profundo);
+    border-color: rgba(181, 156, 248, 0.35);
+    color: #fff;
   }
 }
 
@@ -181,11 +198,19 @@
     align-items: center;
     gap: 0.6rem;
     font-size: 0.93rem;
-    color: #e6e1fb;
+    color: var(--text-color);
 
     svg {
       flex: none;
-      color: var(--lila-suave);
+      color: var(--lila-corporativo);
+    }
+
+    :global(html.dark) & {
+      color: rgba(235, 235, 235, 0.85);
+
+      svg {
+        color: var(--lila-suave);
+      }
     }
   }
 }
@@ -204,7 +229,11 @@
   max-width: 36ch;
   font-size: 0.975rem;
   line-height: 1.6;
-  color: #c9c3e6;
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
 }
 
 .blog {

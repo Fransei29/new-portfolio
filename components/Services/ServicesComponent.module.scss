@@ -363,17 +363,16 @@
 .orbitBg {
   display: none;
 
-  // Desactivado también en mobile (2026-10-26): recortado en la esquina se
-  // leía como restos del diagrama encima del CTA. Ahora mobile muestra el
-  // diagrama completo (.orbital), más chico. Se deja el bloque por si vuelve.
   @media (max-width: 768px) {
-    display: none;
+    display: block;
     position: absolute;
     // Anclado abajo a la derecha y saliendo por el borde: el recorte de .card
     // corta parte de la figura, y eso la mantiene en registro de fondo.
-    right: -26%;
-    bottom: -34%;
-    width: 74%;
+    // Más arriba que antes (-34% → -16%): con el centro tan abajo, la figura
+    // caía justo sobre el botón de flecha del CTA y se leía como un recorte.
+    right: -24%;
+    bottom: -16%;
+    width: 66%;
     aspect-ratio: 1;
     z-index: 0;
     pointer-events: none;
@@ -478,15 +477,8 @@
     height: 230px;
   }
 
-  // Mobile: el diagrama completo, reducido, como bloque propio entre el texto
-  // y el CTA (antes se escondía y en su lugar quedaba el fondo recortado).
   @media (max-width: 768px) {
-    height: 210px;
-    margin: 0;
-
-    .orbitStage {
-      transform: translate(-50%, -50%) scale(0.78);
-    }
+    display: none;
   }
 }
 

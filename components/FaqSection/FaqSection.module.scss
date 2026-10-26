@@ -56,13 +56,42 @@
   }
 }
 
-/* En una columna (mobile) el título y el subtítulo van centrados, como el
-   resto de los títulos de la home. */
+/* En una columna (mobile): título y subtítulo centrados, como el resto de los
+   títulos de la home, y el orden pasa a ser título → preguntas → "¿Tenés
+   alguna otra pregunta?". La columna izquierda se disuelve (display:contents)
+   para que sus piezas queden como items de la grilla y se puedan reordenar. */
 @media (max-width: 900px) {
+  .inner {
+    gap: 0;
+  }
+
+  .side {
+    display: contents;
+  }
+
   .side > .title,
   .side > .subtitle {
     align-self: stretch;
     text-align: center;
+    max-width: none;
+  }
+
+  .title {
+    order: 0;
+  }
+
+  .subtitle {
+    order: 1;
+    margin: 0.5rem 0 1.75rem;
+  }
+
+  .list {
+    order: 2;
+  }
+
+  .ask {
+    order: 3;
+    margin-top: 2rem;
     max-width: none;
   }
 }
@@ -248,17 +277,33 @@
 }
 
 .toggle {
+  position: relative;
   flex: none;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
   border: 1px solid rgba(46, 41, 78, 0.18);
   color: var(--lila-corporativo);
-  font-size: 1.1rem;
-  line-height: 1;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+
+  // La cruz va dibujada y no como el carácter "+": el glifo no queda centrado
+  // en el círculo (y al rotarlo a "×" se notaba más).
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 11px;
+    height: 1.5px;
+    border-radius: 1px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
 
   :global(html.dark) & {
     border-color: rgba(255, 255, 255, 0.2);
