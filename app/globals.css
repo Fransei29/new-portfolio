@@ -624,6 +624,18 @@ html.dark .wave-from-white {
   --wave-b: var(--dark-light);
 }
 
+/* bToA que sale de una franja B y entra a OTRA sección B de distinto color
+   (la FAQ lila → el gris de "Quiénes construyen"). bToA rellena la curva con
+   --wave-a: acá se pisa con el gris B de siempre, así es una sola curva y no
+   dos waves seguidos con una franja blanca en el medio. */
+.wave-to-gray {
+  --wave-a: var(--nav-surface);
+}
+
+html.dark .wave-to-gray {
+  --wave-a: var(--nav-surface-dark);
+}
+
 html.dark .section-bg-ink {
   --wave-a: #2e294e;
 }
@@ -704,86 +716,6 @@ html.dark .hero-section::after {
     min-height: auto !important;
     padding: 1.5rem 0 0;
     align-items: flex-start;
-  }
-}
-
-/* Host del panda "programando": el bloque wave(aToB) + SkillsSummary. Relative
-   para anclar el panda a su borde SUPERIOR (donde vive el wave).
-
-   isolation:isolate es OBLIGATORIO, no decorativo: el panda usa z-index:-1 para
-   meterse detrás del wave. Sin un contexto de apilado propio acá, ese -1 sube a
-   buscar el del ancestro y el panda se hunde DETRÁS del fondo de la sección,
-   que lo recorta. Antes esto funcionaba de casualidad, porque el host llevaba
-   `fade-in-left` y su `will-change: transform` creaba el contexto como efecto
-   colateral; al pasar a `.assemble` (que a propósito no transforma nada) ese
-   apoyo desapareció. Ahora la condición queda declarada donde se necesita. */
-.toolsPandaHost {
-  position: relative;
-  isolation: isolate;
-  /* Fondo de respaldo, del color de la sección que este bloque contiene
-     (SkillsSummary). isolation:isolate hace que el bloque componga en su propia
-     capa, y con zoom o devicePixelRatio fraccionario el borde entre el wave y la
-     sección puede caer en una fracción de píxel: ahí queda una fila que ninguno
-     de los dos pinta del todo. Sin este fondo, por esa fila se ve el blanco del
-     body y se lee como una línea fina cruzando el ancho, justo sobre "Tools".
-
-     Va como gradiente de corte duro y no como color plano porque el host
-     empieza ARRIBA de la curva (el wave ocupa sus primeros ~56px) y por ahi
-     asoma el panda: pintar todo el host de --wave-b dejaba esa banda superior
-     de otro color que la seccion de la que viene, y se recortaba como una
-     franja detras del panda (bien visible en dark, donde --wave-a #292833 y
-     --wave-b #181c33 no se parecen). Arriba del corte sigue el color de la
-     seccion anterior; debajo, el de esta. El corte a 52px cae dentro del
-     relleno opaco de la curva, asi que la costura queda tapada igual. */
-  background-image: linear-gradient(
-    to bottom,
-    var(--wave-a) 0,
-    var(--wave-a) 52px,
-    var(--wave-b) 52px,
-    var(--wave-b) 100%
-  );
-}
-
-/* El wave de este bloque pierde su fondo blanco (--wave-a) para que la zona por
-   ENCIMA de la curva sea transparente y deje ver al panda que está detrás. Solo
-   el relleno gris de la curva (opaco) tapa la base del panda, siguiendo la curva
-   exacta. Sin fondo blanco → sin franja blanca.
-
-   La sombra base (ver WaveDivider.module.scss) se reemplaza por una con más
-   desplazamiento y menos desenfoque: acá el wave va sobre el panda, y un blur
-   que se expande hacia arriba dibujaría una línea sobre él. Desplazada queda por
-   debajo de la curva —donde el panda ya está tapado por el relleno gris— así que
-   la costura se lee igual que en los demás waves sin ensuciar al panda. */
-.toolsWave [class*="WaveDivider_root"] path {
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.36)) !important;
-}
-.toolsWave [class*="WaveDivider_root"] {
-  background: transparent !important;
-}
-
-
-/* El panda se ancla al borde superior del host (top:0 ≈ cresta de la curva) y
-   asoma hacia arriba. Va DETRÁS del wave (z-index:-1): el relleno gris de la
-   curva lo tapa por abajo; la zona transparente sobre la curva lo deja ver. */
-.toolsPanda {
-  position: absolute;
-  top: 0;
-  left: 250px;
-  width: 292px;
-  height: auto;
-  transform: translateY(-54%) rotate(-1.25deg);
-  pointer-events: none;
-  user-select: none;
-  z-index: -1;
-
-  @media (max-width: 768px) {
-    width: 185px;
-    /* Pegado al borde izquierdo: el negativo deja que el hombro del panda se
-       recorte contra el borde en vez de quedar flotando en el medio. */
-    left: -30px;
-    /* Menos negativo = el panda BAJA y queda más tapado por el relleno de la
-       curva. -52% dejaba asomar casi medio cuerpo; -49% lo esconde apenas más. */
-    transform: translateY(-49%) rotate(-1.25deg);
   }
 }
 

@@ -14,6 +14,7 @@ import HomeContent from '../../components/HomeContent/HomeContent';
 import SystemHero from '../../components/SystemHero/SystemHero';
 import { isLocale } from '../../lib/i18n';
 import { routeMetadata } from '../../lib/seo';
+import { getHomeFaq } from '../../lib/homeFaq';
 
 const META = {
   en: {
@@ -44,15 +45,41 @@ export async function generateMetadata({
 // GLTFLoader y DRACOLoader los piden con fetch().
 const PRELOAD = ['/hero3d/system.glb', '/hero3d/panda.glb', '/draco/draco_wasm_wrapper.js', '/draco/draco_decoder.wasm'];
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = isLocale(lang) ? lang : 'en';
+  const faq = getHomeFaq(locale);
+
+  // Las mismas preguntas que muestra la sección, para que Google y los
+  // asistentes de IA puedan citar las respuestas tal cual.
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+
   return (
     <>
+      {faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {PRELOAD.map((href) => (
         <link key={href} rel="preload" as="fetch" href={href} crossOrigin="anonymous" />
       ))}
       {/* Con CORS, como la pide el TextureLoader (y el póster): una sola descarga. */}
       <link rel="preload" as="image" href="/hero3d/screen.webp" crossOrigin="anonymous" />
-      <HomeContent hero={<SystemHero />} panda3d />
+      <HomeContent hero={<SystemHero />} panda3d faq={faq} />
     </>
   );
 }

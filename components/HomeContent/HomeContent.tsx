@@ -3,7 +3,6 @@
 import React, { type ReactNode } from 'react';
 import ClientLayout from '../../components/ClientLayout/ClientLayout';
 import '../../app/globals.css';
-import SkillsSummary from '../../components/Skills/SkillsSummary';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import HomeText from '../../components/HomeText/HomeText';
 import ScrollExplodeDashboard from '../../components/HeroDashboard/ScrollExplodeDashboard';
@@ -12,11 +11,11 @@ import { Services } from '../../components/Services/ServicesComponent';
 import { useLanguage } from '../../contexts/LanguageContext';
 import Testimonials from '../../components/Testimonials/TestimonialsComponent';
 import CallToAction from '../../components/CallToAction/CallToAction';
-import WhyChooseUs from '../../components/WhyChooseUs/WhyChooseUs';
-import AutomationComparison from '../../components/AutomationComparison/AutomationComparison';
-import ComparisonMatrix from '../../components/ComparisonMatrix/ComparisonMatrix';
+import FaqSection from '../../components/FaqSection/FaqSection';
+import LearnSection from '../../components/LearnSection/LearnSection';
+import BehindStudio from '../../components/BehindStudio/BehindStudio';
+import type { FaqItem } from '../../lib/homeFaq';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
-import BlogSection from '../../components/BlogSection/BlogSection';
 import WaveDivider from '../../components/WaveDivider/WaveDivider';
 // Desmontado del hero, se guarda para otro lugar del sitio. Ver el comentario
 // en el <section> del hero, más abajo.
@@ -27,9 +26,11 @@ type HomeContentProps = {
   hero?: ReactNode;
   /** El panda de "cómo trabajamos" en 3D (también de la home). */
   panda3d?: boolean;
+  /** Preguntas frecuentes, leídas en el servidor (ver lib/homeFaq.ts). */
+  faq?: FaqItem[];
 };
 
-export default function HomeContent({ hero, panda3d }: HomeContentProps = {}) {
+export default function HomeContent({ hero, panda3d, faq = [] }: HomeContentProps = {}) {
   const elementsRef = useScrollAnimation();
   const { t } = useLanguage();
 
@@ -70,109 +71,58 @@ export default function HomeContent({ hero, panda3d }: HomeContentProps = {}) {
             <Services />
           </div>
 
-          <WaveDivider variant="bToA" />
-
-          <div ref={(el) => {elementsRef.current[4] = el;}} className="assemble">
-            <AutomationComparison />
-          </div>
-
+          {/* Servicios y case studies comparten el gris (B): van seguidos, sin
+              wave entre medio. Antes los separaba AutomationComparison. */}
           <div ref={(el) => {elementsRef.current[5] = el;}} className="assemble">
-            <WaveDivider variant="aToB" />
             <ProjectsSection variant="projects" />
           </div>
 
-          {/* Va DESPUÉS de los case studies a propósito: la objeción real
-              ("¿y por qué no una agencia?") recién aparece cuando ya vieron el
-              trabajo. Antes de eso el visitante todavía no está comparando. */}
-          <div ref={(el) => {elementsRef.current[14] = el;}} className="assemble">
-            {/* Cierra el gris (B) de ProjectsSection y abre el blanco (A) de
-                esta sección. Sin este wave las dos franjas se tocaban a filo
-                recto y el bToA de HowWeWork salía de un color que no era el
-                de arriba. */}
-            <WaveDivider variant="bToA" />
-            <ComparisonMatrix />
-          </div>
-
-          {/* wave-from-white: arriba quedó el blanco (A) de ComparisonMatrix,
-              pero bToA pinta su franja con --wave-b (el gris). Ese gris ya no
-              existe acá, así que el wave se veía como una banda suelta.
-              La clase redefine --wave-b a blanco sólo para este bloque; el
-              relleno de la curva sigue siendo --wave-a, que .section-bg-ink ya
-              pisa con el lila profundo de HowWeWork. */}
-          <div ref={(el) => {elementsRef.current[6] = el;}} className="assemble section-bg-ink wave-from-white">
+          {/* bToA desde el gris de los case studies hacia el lila profundo:
+              .section-bg-ink pisa --wave-a con el color de HowWeWork. */}
+          <div ref={(el) => {elementsRef.current[6] = el;}} className="assemble section-bg-ink">
             <WaveDivider variant="bToA" />
             <HowWeWork panda3d={panda3d} />
           </div>
 
-          <div className="section-bg-lila">
-            {/* Este wave CIERRA HowWeWork (no abre WhyChooseUs), así que es el
-                único que va FUERA del bloque animado.
-                `wave-static` no alcanzaba acá: exime al wave de su propio fade,
-                pero el bloque padre sigue aplicando translateX(-50px) y un
-                transform arrastra a todo su subárbol — el wave viajaba igual.
-                En los otros waves no se nota porque abren su sección y entran
-                junto con ella; este cierra la anterior, y el desfase queda a la
-                vista al terminar de leer HowWeWork.
-                Conserva section-bg-ink: esa clase define --wave-a (#2e294e), el
-                color del lado del que VIENE la curva. Sin ella la costura con
-                HowWeWork deja de calzar. */}
-            <div className="section-bg-ink">
-              <WaveDivider variant="aToB" />
-            </div>
-
-            {/* Sin `assemble` ni ref del observer: la sección se pinea y se
-                anima sola. El wrapper de fade ya no tiene piezas que escalonar
-                (las tarjetas entran con el desplazamiento horizontal), y un
-                contenedor de más sólo agrega un nodo entre el pin y el layout.
-                Conserva section-bg-ink porque esa clase define --wave-a, el
-                color con el que calza la costura del wave de arriba. */}
-            <div className="section-bg-ink">
-              <WhyChooseUs />
-            </div>
-
-            <WaveDivider variant="bToA" />
+          {/* Este wave CIERRA HowWeWork, así que va FUERA de un bloque animado:
+              el translateX del padre arrastraría la curva y la costura con la
+              sección de arriba quedaría desfasada.
+              section-bg-ink define --wave-a (el color del que VIENE la curva) y
+              wave-from-white pone --wave-b en el blanco de Testimonios. */}
+          <div className="section-bg-ink wave-from-white">
+            <WaveDivider variant="aToB" />
           </div>
 
-          <div ref={(el) => {elementsRef.current[11] = el;}} className="assemble">
-            <ProjectsSection variant="tutorials" />
-          </div>
-
-          {/* El panda "programando" se ancla al borde superior de este bloque
-              (la CRESTA de la curva del wave gris) y asoma hacia arriba. Va detrás
-              del relleno gris (curva del wave + SkillsSummary) que lo tapa con la
-              forma exacta de la curva. El fondo blanco del wave se hace
-              transparente (variante toolsWave) para que NO tape al panda con la
-              franja de 52px sobre la curva. */}
-          <div ref={(el) => {elementsRef.current[9] = el;}} className="assemble toolsPandaHost">
-            {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}
-            <img
-              className="toolsPanda"
-              src="/isotipo-panda-programando.svg"
-              alt=""
-              aria-hidden
-              loading="lazy"
-            />
-            <div className="toolsWave">
-              <WaveDivider variant="aToB" />
-            </div>
-            <SkillsSummary />
-          </div>
-
+          {/* Testimonios pegados al trabajo y al proceso: la prueba social
+              llega cuando el visitante todavía está evaluando. */}
           <div ref={(el) => {elementsRef.current[10] = el;}} className="assemble">
-            <WaveDivider variant="bToA" />
             <Testimonials />
           </div>
 
-          {/* Blog antes del CTA final: quien todavía no está listo para agendar
-              encuentra algo más para leer, y quien sí lo está no se distrae
-              antes de llegar al botón. */}
-          {/* Wave arriba como el resto de la home, pero NO abajo: el CTA que
-              sigue usa su propio contenedor flotante, así que un wave de cierre
-              chocaría con esa forma. En su lugar el gris se desvanece a blanco
-              dentro de la propia sección (ver .blogSection en su módulo). */}
-          <div ref={(el) => {elementsRef.current[13] = el;}} className="assemble">
-            <WaveDivider variant="aToB" />
-            <BlogSection />
+          {/* Preguntas frecuentes en la franja lila: responden las dudas que
+              frenan la compra y llevan a contacto. */}
+          <div className="section-bg-lila">
+            <div ref={(el) => {elementsRef.current[7] = el;}} className="assemble">
+              <WaveDivider variant="aToB" />
+              <FaqSection items={faq} />
+            </div>
+            <div className="wave-to-gray">
+              <WaveDivider variant="bToA" />
+            </div>
+          </div>
+
+          {/* Quién está detrás, en lugar de la grilla de tecnologías (que sigue
+              completa en /about). Sin wave propio: la curva de arriba ya pasa
+              del lila de la FAQ a su gris. */}
+          <div ref={(el) => {elementsRef.current[9] = el;}} className="assemble">
+            <BehindStudio />
+          </div>
+
+          {/* Tutoriales, academy y blog como llamado a la acción. Va último
+              antes del CTA: es lo menos comercial de la página. */}
+          <div ref={(el) => {elementsRef.current[11] = el;}} className="assemble">
+            <WaveDivider variant="bToA" />
+            <LearnSection />
           </div>
 
           <div ref={(el) => {elementsRef.current[12] = el;}} className="assemble">

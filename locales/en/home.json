@@ -42,7 +42,7 @@
     "dedicationTitle": "Years building",
     "dedication": "4+",
     "interestsTitle": "Case studies",
-    "interests": "20+",
+    "interests": "30+",
     "reachTitle": "US · Canada · Europe · Latin America",
     "reach": "Global"
   },
@@ -116,5 +116,40 @@
     "commitment": {
       "label": "Post-launch support"
     }
+  },
+  "faqSection": {
+    "title": "Before we start",
+    "subtitle": "Pricing, timelines, code ownership and support after launch.",
+    "askTitle": "Have another question?",
+    "askText": "Talk directly to the person who will build your project.",
+    "askButton": "Write to us"
+  },
+  "behindStudio": {
+    "title": "The people building your product",
+    "quote": "We keep the team small so we can be truly involved in every project. You talk directly to the people who make the technical decisions and write the code, from day one to launch.",
+    "name": "Franco Seiler",
+    "role": "Founder · Córdoba, Argentina",
+    "button": "Meet the team",
+    "yearsValue": "4+",
+    "yearsLabel": "Years of experience",
+    "projectsValue": "30+",
+    "projectsLabel": "Projects delivered",
+    "reachKicker": "International reach",
+    "reachValue": "US · Canada · Europe · Latin America",
+    "reachLabel": "Experience working with clients across different markets."
+  },
+  "learn": {
+    "title": "Knowledge you can put into practice",
+    "subtitle": "We share guides, code and resources based on real technologies and real development problems.",
+    "tutorialsTitle": "Tutorials",
+    "tutorialsDescription": "{count} hands-on guides for developers: Redis, TypeScript, Node.js, e-commerce, MongoDB and more.",
+    "tutorialsButton": "View all tutorials",
+    "academyTitle": "Academy",
+    "academyDescription": "Learn to build complete applications, from frontend fundamentals to backend in production, with hands-on projects in every module.",
+    "academyVideos": "Step-by-step videos for every project",
+    "academyCode": "The code for every module on GitHub",
+    "academyButton": "Explore the academy",
+    "blogText": "Prefer reading? On the blog we share engineering decisions from real projects.",
+    "blogLink": "Go to the blog"
   }
 }

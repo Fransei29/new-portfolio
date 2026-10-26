@@ -42,7 +42,7 @@
     "dedicationTitle": "Años construyendo",
     "dedication": "4+",
     "interestsTitle": "Case studies",
-    "interests": "20+",
+    "interests": "30+",
     "reachTitle": "EE.UU. · Canadá · Europa · Latinoamérica",
     "reach": "Global"
   },
@@ -116,5 +116,40 @@
     "commitment": {
       "label": "Soporte post-lanzamiento"
     }
+  },
+  "faqSection": {
+    "title": "Antes de empezar",
+    "subtitle": "Precios, plazos, propiedad del código y soporte después del lanzamiento.",
+    "askTitle": "¿Tenés alguna otra pregunta?",
+    "askText": "Hablá directamente con quien va a desarrollar tu proyecto.",
+    "askButton": "Escribinos"
+  },
+  "behindStudio": {
+    "title": "Quiénes construyen tu producto",
+    "quote": "Mantenemos el equipo chico para involucrarnos de verdad en cada proyecto. Hablás directamente con quienes toman las decisiones técnicas y escriben el código, desde el primer día hasta el lanzamiento.",
+    "name": "Franco Seiler",
+    "role": "Fundador · Córdoba, Argentina",
+    "button": "Conocé al equipo",
+    "yearsValue": "4+",
+    "yearsLabel": "Años de experiencia",
+    "projectsValue": "30+",
+    "projectsLabel": "Proyectos desarrollados",
+    "reachKicker": "Alcance internacional",
+    "reachValue": "EE. UU. · Canadá · Europa · Latinoamérica",
+    "reachLabel": "Experiencia trabajando con clientes de distintos mercados."
+  },
+  "learn": {
+    "title": "Conocimiento que podés poner en práctica",
+    "subtitle": "Compartimos guías, código y recursos basados en tecnologías y problemas reales de desarrollo.",
+    "tutorialsTitle": "Tutoriales",
+    "tutorialsDescription": "{count} guías prácticas para desarrolladores: Redis, TypeScript, Node.js, ecommerce, MongoDB y más.",
+    "tutorialsButton": "Ver todos los tutoriales",
+    "academyTitle": "Academia",
+    "academyDescription": "Aprendé a desarrollar aplicaciones completas, desde los fundamentos de frontend hasta el backend en producción, con proyectos prácticos en cada módulo.",
+    "academyVideos": "Videos paso a paso de cada proyecto",
+    "academyCode": "El código de cada módulo en GitHub",
+    "academyButton": "Explorar la academia",
+    "blogText": "¿Preferís leer? En el blog contamos decisiones de ingeniería de proyectos reales.",
+    "blogLink": "Ir al blog"
   }
 }

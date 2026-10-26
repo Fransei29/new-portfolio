@@ -18,6 +18,9 @@ export interface ProjectCard {
   link2?: string | null;
   link3?: string | null;
   previewImage?: string;
+  /** Línea corta ("Plataforma de E-Commerce a Medida"): la usa la vitrina
+      mobile de la home, donde la descripción completa no entra. */
+  subtitle?: string;
   technologies?: string[];
   category?: 'product' | 'platform' | 'landing';
   status?: 'latest';
@@ -41,6 +44,13 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     let value: any = translations;
     for (const k of key.split('.')) value = value?.[k];
     return typeof value === 'string' && value.length > 0 ? value : key;
+  };
+
+  // Sin el fallback a la clave que tiene `t`: si un proyecto no tiene
+  // subtítulo, queda vacío en vez de mostrar "projects.items.x.subtitle".
+  const subtitleOf = (slug: string): string => {
+    const value = translations?.projects?.items?.[slug]?.subtitle;
+    return typeof value === 'string' ? value : '';
   };
 
   return [
@@ -401,5 +411,5 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     technologies: ['Next.js', 'JavaScript', 'CSS'],
     category: 'product',
   },
-] as ProjectCard[];
+].map((card) => ({ ...card, subtitle: subtitleOf(card.slug) })) as ProjectCard[];
 }

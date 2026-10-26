@@ -322,27 +322,27 @@
       "items": [
         {
           "q": "How do you price a project?",
-          "a": "Fixed price per scope, defined after the first call. For open-ended or evolving work, a monthly retainer. You always know the number before anything starts."
+          "a": "We work with fixed quotes based on the agreed scope, defined after a first call. For ongoing projects, we offer monthly plans. You always know the cost before we start."
         },
         {
           "q": "How long does a project take?",
-          "a": "An automation or a landing page: one to three weeks. A full application: six to twelve weeks depending on scope. The proposal breaks it into phases with dates."
+          "a": "A landing page or an automation usually takes one to three weeks. A full application, six to twelve, depending on its complexity. Every proposal includes the work stages and their estimated timelines."
         },
         {
-          "q": "Do you work with existing code?",
-          "a": "Yes. Audits, migrations and feature work on codebases someone else wrote are a regular part of the job."
+          "q": "Do you work on existing code?",
+          "a": "Yes. We join projects already in motion to improve their architecture, migrate technologies, solve technical problems or build new features."
         },
         {
           "q": "Who owns the code?",
-          "a": "You do. Repository, infrastructure and accounts are in your name from day one."
+          "a": "The code is yours. The repository, the infrastructure and the project accounts are under your control from the start."
         },
         {
           "q": "What happens after launch?",
-          "a": "A support window is included with every project. After that, maintenance is available as a monthly plan or per request."
+          "a": "Every project includes a support period after delivery. After that, you can hire monthly maintenance or request specific improvements as you need them."
         },
         {
-          "q": "What time zones do you work with?",
-          "a": "Based in Córdoba, Argentina, working with teams in the US, Canada, Europe and Latin America. Overlap with US hours is full, and with Europe it is the morning."
+          "q": "Which time zones do you work with?",
+          "a": "We work from Córdoba, Argentina, with clients in the United States, Canada, Europe and Latin America. We coordinate working hours and meetings to keep communication smooth throughout the project."
         }
       ]
     },

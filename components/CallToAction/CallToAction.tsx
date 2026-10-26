@@ -6,6 +6,20 @@ import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import { HiArrowRight } from 'react-icons/hi';
 import styles from './CallToAction.module.scss';
 
+// Destellos del fondo: posición (%), tamaño (px) y desfase de la animación (s).
+// Fijos y no aleatorios para que el HTML del servidor y el del cliente
+// coincidan.
+const GLINTS = [
+  { x: 9, y: 22, s: 2, d: 0 },
+  { x: 21, y: 74, s: 3, d: 2.4 },
+  { x: 34, y: 14, s: 2, d: 4.1 },
+  { x: 47, y: 86, s: 2, d: 1.2 },
+  { x: 63, y: 18, s: 3, d: 3.3 },
+  { x: 72, y: 70, s: 2, d: 5.2 },
+  { x: 84, y: 40, s: 2, d: 0.7 },
+  { x: 92, y: 82, s: 3, d: 2.9 },
+];
+
 export default function CallToAction() {
   const { t } = useLanguage();
   const toLocale = useLocalePath();
@@ -65,9 +79,25 @@ export default function CallToAction() {
 
   return (
     <section ref={ctaRef} className={`${styles.ctaContainer} assemble`}>
-      {/* Foto de equipo de fondo, bajo un velo lila: le pone caras al cierre
-          de la página justo antes de pedir el contacto. */}
-      <div className={styles.ctaPhoto} aria-hidden />
+      {/* Fondo vivo pero quieto: dos manchas de luz de tonos apenas distintos
+          que se desplazan muy lento y unos puntos que titilan. */}
+      <div className={styles.ctaAmbient} aria-hidden>
+        <span className={styles.glowA} />
+        <span className={styles.glowB} />
+        {GLINTS.map((g) => (
+          <i
+            key={`${g.x}-${g.y}`}
+            className={styles.glint}
+            style={{
+              left: `${g.x}%`,
+              top: `${g.y}%`,
+              width: g.s,
+              height: g.s,
+              animationDelay: `${g.d}s`,
+            }}
+          />
+        ))}
+      </div>
       {/* Panda asomándose por el borde derecho del contenedor; el overflow:hidden
           del ctaContainer lo recorta en ese borde. */}
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image no lo optimiza */}

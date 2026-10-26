@@ -1,0 +1,373 @@
+@import '../../app/styles/utilities.scss';
+
+/* Sección A (blanca), en el lugar del carrusel de tutoriales: viene después del
+   wave bToA que cierra la franja lila. */
+.learnSection {
+  width: 100%;
+  margin: 0;
+  padding: 4.5rem 0 5rem;
+  background-color: var(--background-colorA);
+
+  :global(html.dark) & {
+    background-color: var(--dark-light);
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.inner {
+  /* El mismo ancho y aire lateral que el resto de las secciones de la home. */
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.head {
+  margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.subtitle {
+  margin: var(--subtitle-spacing-top) auto 0;
+  text-align: center;
+  font-weight: var(--subtitle-font-weight);
+  max-width: 60ch;
+  font-size: var(--subtitle-font-size);
+  line-height: var(--subtitle-line-height);
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  min-height: 340px;
+  padding: 1.9rem;
+  border-radius: 22px;
+  border: 1px solid rgba(46, 41, 78, 0.1);
+  background: var(--background-colorB);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba(46, 41, 78, 0.2);
+    box-shadow: 0 18px 40px -24px rgba(46, 41, 78, 0.45);
+
+    .arrow {
+      transform: rotate(-45deg);
+    }
+
+    .arrowOut {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--lila-principal);
+    outline-offset: 3px;
+  }
+
+  :global(html.dark) & {
+    background: var(--wave-b);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 0;
+    // Más aire: con 1.5rem de padding y 1rem entre piezas se veía apretado.
+    padding: 1.9rem 1.6rem;
+    gap: 1.35rem;
+    border-radius: 18px;
+  }
+}
+
+.cardDark {
+  background: var(--lila-profundo);
+  border-color: var(--lila-profundo);
+  color: #fff;
+
+  &:hover {
+    border-color: var(--lila-profundo);
+  }
+
+  :global(html.dark) & {
+    background: var(--lila-profundo);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* En una columna (mobile) la academia va primero. */
+@media (max-width: 820px) {
+  .cardDark {
+    order: -1;
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.cardIcon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(142, 122, 230, 0.12);
+  border: 1px solid rgba(142, 122, 230, 0.22);
+  color: var(--lila-corporativo);
+
+  .cardDark &,
+  :global(html.dark) & {
+    background: rgba(181, 156, 248, 0.14);
+    border-color: rgba(181, 156, 248, 0.28);
+    color: var(--lila-suave);
+  }
+}
+
+.features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.93rem;
+    color: #e6e1fb;
+
+    svg {
+      flex: none;
+      color: var(--lila-suave);
+    }
+  }
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.cardText {
+  margin: 0;
+  max-width: 36ch;
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: #c9c3e6;
+}
+
+.blog {
+  margin: 1.75rem 0 0;
+  text-align: center;
+  font-size: 0.975rem;
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+}
+
+.blogLink {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover .arrow {
+    transform: rotate(-45deg);
+  }
+
+  :global(html.dark) & {
+    color: #fff;
+  }
+}
+
+.cardTextMuted {
+  margin: 0;
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+}
+
+/* Terminal: va pasando por los repos reales de los tutoriales. */
+.terminal {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem 0.9rem;
+  border-radius: 12px;
+  background: #1a1830;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #d9d3fb;
+
+  /* En dark la tarjeta ya es oscura: el filo la despega del fondo. */
+  :global(html.dark) & {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+.termBar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 0.4rem;
+
+  i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.termLine {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:first-of-type {
+    animation: termIn 0.45s ease both;
+  }
+}
+
+.prompt {
+  color: #7fd1a4;
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: #d9d3fb;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes termIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.go {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.975rem;
+  padding-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.arrow {
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
+}
+
+.arrowOut {
+  margin-left: 0.4rem;
+  transition: transform 0.3s ease;
+}
+
+/* Panda programando (versión con borde claro) asomando por la esquina de la
+   tarjeta oscura; el overflow:hidden de la tarjeta lo recorta. */
+.panda {
+  position: absolute;
+  z-index: -1;
+  right: -18px;
+  bottom: -38px;
+  width: 200px;
+  height: auto;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .card:hover & {
+    transform: rotate(-12deg) translate(-4px, -6px);
+  }
+
+  @media (max-width: 768px) {
+    width: 112px;
+    right: -14px;
+    bottom: -24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .panda,
+  .arrow,
+  .arrowOut {
+    transition: none;
+  }
+
+  .termLine:first-of-type,
+  .cursor {
+    animation: none;
+  }
+}

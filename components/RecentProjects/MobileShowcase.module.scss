@@ -1,0 +1,222 @@
+/* Solo mobile y tablet: en desktop sigue el carrusel de RecentProjects. */
+.showcase {
+  display: none;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem 0.5rem;
+  }
+}
+
+.featured {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid rgba(46, 41, 78, 0.08);
+  box-shadow: 0 14px 30px -22px rgba(46, 41, 78, 0.55);
+  color: var(--text-color);
+  text-decoration: none;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+}
+
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  /* Recorta el zoom de .image: sin esto la captura agrandada tapaba la
+     etiqueta de abajo. */
+  overflow: hidden;
+  background: #1c1a2e;
+}
+
+.image {
+  object-fit: cover;
+  /* Las capturas de las tarjetas traen una franja de marco arriba y abajo: el
+     zoom la deja afuera. */
+  transform: scale(1.22);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.imageOn {
+  opacity: 1;
+}
+
+/* Cuánto falta para el próximo: se reinicia en cada cambio (key en el TSX). */
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: var(--lila-principal);
+  animation: fill 5s linear forwards;
+}
+
+@keyframes fill {
+  to {
+    width: 100%;
+  }
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem 1rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--lila-corporativo);
+
+  :global(html.dark) & {
+    color: var(--lila-suave);
+  }
+}
+
+.title {
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.go {
+  margin-top: 0.55rem;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--br);
+  background: var(--lila-profundo);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  :global(html.dark) & {
+    background: var(--button-color);
+  }
+}
+
+.goArrow {
+  font-size: 0.85rem;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
+
+  .featured:active &,
+  .featured:hover & {
+    transform: rotate(-45deg);
+  }
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.65);
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: listIn 0.45s ease;
+}
+
+@keyframes listIn {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.row {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(46, 41, 78, 0.1);
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 0;
+  color: var(--text-color);
+  text-decoration: none;
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+}
+
+.thumb {
+  position: relative;
+  flex: none;
+  width: 88px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px -6px rgba(46, 41, 78, 0.45);
+  overflow: hidden;
+  background: #1c1a2e;
+}
+
+.thumbImage {
+  object-fit: cover;
+  /* Mismo recorte que la grande: en chiquito el marco de la captura se comía
+     media miniatura. */
+  transform: scale(1.3);
+}
+
+.rowText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rowTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rowSubtitle {
+  font-size: 0.8rem;
+  color: var(--subtitle-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+
+  .progress,
+  .list {
+    animation: none;
+  }
+}

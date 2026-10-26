@@ -397,9 +397,15 @@ $step-column-gap: 10rem;
     box-shadow: 0 6px 20px -14px rgba(20, 16, 45, 0.5);
   }
 
-  .stepTitle,
+  // Más contraste que antes (0.72 en los dos): las tarjetas que todavía no
+  // alcanzó el panda se tienen que poder leer igual.
+  .stepTitle {
+    color: rgba(248, 246, 255, 0.92);
+    transition: color 0.6s ease;
+  }
+
   .stepDescription {
-    color: rgba(240, 238, 250, 0.72);
+    color: rgba(240, 238, 250, 0.8);
     transition: color 0.6s ease;
   }
 
@@ -457,11 +463,11 @@ $step-column-gap: 10rem;
     }
 
     .stepTitle {
-      color: rgba(248, 246, 255, 0.9);
+      color: rgba(255, 255, 255, 0.96);
     }
 
     .stepDescription {
-      color: rgba(240, 238, 250, 0.82);
+      color: rgba(240, 238, 250, 0.88);
     }
 
     .iconWrapper {
@@ -599,7 +605,7 @@ $step-column-gap: 10rem;
 
 .stepCurrent .stepPhoto,
 .stepDone .stepPhoto {
-  opacity: 0.12;
+  opacity: 0.09;
 }
 
 .iconWrapper {
@@ -648,8 +654,11 @@ $step-column-gap: 10rem;
 }
 
 .stepTitle {
-  font-size: var(--card-title-font-size);
-  font-weight: 500;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: calc(var(--card-title-font-size) * 1.08);
+  font-weight: 600;
+  // Sombra mínima: despega el texto de la foto de fondo sin que se note.
+  text-shadow: 0 1px 2px rgba(15, 12, 35, 0.35);
   color: var(--text-color);
   margin: 0;
   line-height: 1.3;
@@ -663,13 +672,15 @@ $step-column-gap: 10rem;
   }
 
   @media (max-width: 768px) {
-    font-size: var(--card-title-font-size-mobile);
+    // 0.9rem quedaba chico al lado del ícono.
+    font-size: 1.02rem;
   }
 }
 
 .stepDescription {
   color: var(--text-color-light);
-  line-height: 1.55;
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(15, 12, 35, 0.3);
   margin: 0;
   font-size: 0.95rem;
   // Por encima de la marca de agua (ver .stepNumber).

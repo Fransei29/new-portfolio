@@ -52,67 +52,6 @@
     }
 }
 
-.mobileStack {
-    --peek: 10%;
-    display: none;
-    /* El eje horizontal lo maneja el swipe en JS; el vertical sigue siendo del
-       navegador, así arrastrar sobre las tarjetas para scrollear la página no
-       queda trabado. */
-    touch-action: pan-y;
-
-    @media (max-width: 1024px) {
-        display: flex;
-        flex-direction: column;
-        /* El gap se suma al padding vertical de cada .mobileViewport, así que
-           el hueco real entre filas era gap + 1.5 + 1.5rem. Se baja el gap y
-           se recorta ese padding (abajo) para acercar las dos filas. */
-        gap: 0.25rem;
-        width: 100%;
-        /* padding-top bajo: la primera fila queda más cerca del subtítulo. */
-        padding: 0.25rem 0 0.5rem;
-        box-sizing: border-box;
-    }
-}
-
-.mobileViewport {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    /* Solo padding vertical (si va a 0 la sombra queda cortada por overflow:hidden).
-       El inset lateral va en `.mobileViewportInner`, igual que en desktop. */
-    padding: 0.5rem 0;
-}
-
-/* Mismo patrón que `.viewportInner`: el inset como margin, con su propio recorte. */
-.mobileViewportInner {
-    margin-left: 1.25rem;
-    /* Igual que `.viewportInner`: hidden en ambos ejes y el aire para la sombra
-       con padding vertical compensado por margen negativo. */
-    overflow: hidden;
-    padding: 0.5rem 0;
-    margin-top: -0.5rem;
-    margin-bottom: -0.5rem;
-}
-
-.mobileTrack {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    will-change: transform;
-
-    @media (prefers-reduced-motion: reduce) {
-        transition: none !important;
-    }
-}
-
-.mobileSlide {
-    flex: 0 0 calc(100% - var(--peek));
-    min-width: 0;
-    box-sizing: border-box;
-    padding-right: 1.25rem;
-}
-
-
 /* El inset lateral va acá y no en `.viewport`: este elemento tiene su propio
    `overflow: hidden`, así que recorta el track en el borde del container y el
    slide saliente no asoma. Es la estructura del carrusel de Testimonials. */

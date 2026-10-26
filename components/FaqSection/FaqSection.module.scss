@@ -1,0 +1,329 @@
+@import '../../app/styles/utilities.scss';
+
+/* Va en la franja lila (.section-bg-lila) que antes ocupaba "Por qué trabajar
+   así": toma --background-colorB para que los waves de entrada y salida calcen. */
+.faqSection {
+  width: 100%;
+  margin: 0;
+  /* Menos aire arriba que el resto: el wave lila ya aporta su altura. */
+  padding: 3rem 0 5.5rem;
+  background-color: var(--background-colorB);
+
+  :global(html.dark) & {
+    background-color: var(--background-colorB, var(--dark-light));
+    color: rgb(235, 235, 235);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 0 3rem;
+  }
+}
+
+.inner {
+  /* El mismo ancho y aire lateral que el resto de las secciones de la home. */
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+}
+
+/* Columna izquierda fija mientras se recorre el acordeón: la salida a contacto
+   queda siempre a la vista. Frena a 8.5rem y no a 6rem: el header mide ~104px
+   y con 6rem el título se metía por debajo. */
+.side {
+  position: sticky;
+  top: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  @media (max-width: 900px) {
+    position: static;
+  }
+}
+
+/* En una columna (mobile) el título y el subtítulo van centrados, como el
+   resto de los títulos de la home. */
+@media (max-width: 900px) {
+  .side > .title,
+  .side > .subtitle {
+    align-self: stretch;
+    text-align: center;
+    max-width: none;
+  }
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: var(--h3-font-size);
+  font-weight: var(--h3-font-weight);
+  line-height: 1.2;
+  letter-spacing: var(--h3-letter-spacing, -0.015em);
+  color: var(--h3-color);
+  text-wrap: balance;
+
+  :global(html.dark) & {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--h3-font-size-mobile);
+  }
+}
+
+.subtitle {
+  margin: 0 0 1rem;
+  font-size: var(--subtitle-font-size);
+  line-height: var(--subtitle-line-height);
+  font-weight: var(--subtitle-font-weight);
+  color: var(--subtitle-color);
+  max-width: 40ch;
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--subtitle-font-size-mobile);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.ask {
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: var(--background-colorA);
+  /* Borde y sombra suaves para que la caja se apoye en el lila en vez de
+     flotar como un recorte blanco. */
+  border: 1px solid rgba(142, 122, 230, 0.22);
+  box-shadow: 0 1px 2px rgba(46, 41, 78, 0.04), 0 12px 28px -18px rgba(46, 41, 78, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  max-width: 360px;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.askTitle {
+  margin: 0;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+
+  :global(html.dark) & {
+    color: #fff;
+  }
+}
+
+.askText {
+  margin: 0 0 0.6rem;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: var(--subtitle-color);
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.7);
+  }
+}
+
+.askButton {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  padding: 0 1.4rem;
+  border-radius: var(--br);
+  background: var(--lila-profundo);
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--ink-hover);
+
+    .arrow {
+      transform: rotate(-45deg);
+    }
+  }
+
+  :global(html.dark) & {
+    background: var(--button-color);
+
+    &:hover {
+      background: var(--button-color-hover);
+    }
+  }
+}
+
+.arrow {
+  font-size: 0.85rem;
+  margin-left: 0.55rem;
+  transition: transform 0.3s cubic-bezier(0.34, 0.8, 0.3, 1);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.item {
+  border-bottom: 1px solid rgba(46, 41, 78, 0.12);
+
+  &:first-child {
+    border-top: 1px solid rgba(46, 41, 78, 0.12);
+  }
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.questionWrap {
+  margin: 0;
+  font: inherit;
+}
+
+.question {
+  width: 100%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0.1rem;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-color);
+  transition: color 0.25s ease;
+
+  &:hover {
+    color: var(--lila-corporativo);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--lila-principal);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  :global(html.dark) & {
+    color: #fff;
+
+    &:hover {
+      color: var(--lila-suave);
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.98rem;
+    padding: 1.05rem 0;
+  }
+}
+
+.toggle {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(46, 41, 78, 0.18);
+  color: var(--lila-corporativo);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+
+  :global(html.dark) & {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--lila-suave);
+  }
+}
+
+.itemOpen .toggle {
+  transform: rotate(45deg);
+  background: var(--background-colorA);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Despliegue suave: la fila de la grilla pasa de 0fr a 1fr y el contenido se
+   recorta con overflow; la respuesta además entra con un fundido corto. */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .itemOpen & {
+    grid-template-rows: 1fr;
+  }
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.answer {
+  margin: 0;
+  padding: 0 2.75rem 1.35rem 0.1rem;
+  font-size: 0.975rem;
+  line-height: 1.65;
+  color: var(--subtitle-color);
+  max-width: 62ch;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .itemOpen & {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s;
+  }
+
+  :global(html.dark) & {
+    color: rgba(235, 235, 235, 0.72);
+  }
+
+  @media (max-width: 768px) {
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle,
+  .arrow,
+  .panel,
+  .answer,
+  .question {
+    transition: none;
+  }
+}

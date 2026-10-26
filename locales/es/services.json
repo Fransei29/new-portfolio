@@ -323,27 +323,27 @@
       "items": [
         {
           "q": "¿Cómo se cotiza un proyecto?",
-          "a": "Precio cerrado por alcance, definido después de la primera llamada. Para trabajo abierto o que va evolucionando, un abono mensual. Siempre sabés el número antes de que arranque nada."
+          "a": "Trabajamos con presupuestos cerrados según el alcance acordado, definidos después de una primera llamada. Para proyectos continuos, ofrecemos planes mensuales. Siempre conocés el costo antes de empezar."
         },
         {
           "q": "¿Cuánto tarda un proyecto?",
-          "a": "Una automatización o una landing: de una a tres semanas. Una aplicación completa: de seis a doce semanas según el alcance. La propuesta lo divide en fases con fechas."
+          "a": "Una landing o una automatización suele llevar entre una y tres semanas. Una aplicación completa, entre seis y doce, según su complejidad. Cada propuesta incluye las etapas de trabajo y sus plazos estimados."
         },
         {
           "q": "¿Trabajan sobre código existente?",
-          "a": "Sí. Auditorías, migraciones y nuevas funcionalidades sobre código que escribió otro equipo son parte habitual del trabajo."
+          "a": "Sí. Nos incorporamos a proyectos en marcha para mejorar su arquitectura, migrar tecnologías, resolver problemas técnicos o desarrollar nuevas funcionalidades."
         },
         {
           "q": "¿De quién es el código?",
-          "a": "Tuyo. El repositorio, la infraestructura y las cuentas están a tu nombre desde el día uno."
+          "a": "El código es tuyo. El repositorio, la infraestructura y las cuentas del proyecto quedan bajo tu control desde el inicio."
         },
         {
           "q": "¿Qué pasa después del lanzamiento?",
-          "a": "Todos los proyectos incluyen una ventana de soporte. Después, el mantenimiento se puede tomar como plan mensual o por pedido."
+          "a": "Cada proyecto incluye un período de soporte posterior a la entrega. Después, podés contratar mantenimiento mensual o solicitar mejoras puntuales según tus necesidades."
         },
         {
           "q": "¿Con qué zonas horarias trabajan?",
-          "a": "Con base en Córdoba, Argentina, trabajando con equipos de EE.UU., Canadá, Europa y Latinoamérica. La superposición con horario de EE.UU. es total y con Europa, la mañana."
+          "a": "Trabajamos desde Córdoba, Argentina, con clientes de Estados Unidos, Canadá, Europa y Latinoamérica. Coordinamos horarios de trabajo y reuniones para mantener una comunicación fluida durante todo el proyecto."
         }
       ]
     },
