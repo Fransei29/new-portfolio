@@ -13,10 +13,31 @@
  * Quien eligió español (cookie `lang=es`) y entra por un link sin prefijo va a
  * /es con un 307. Los crawlers no mandan cookies, así que siempre reciben el
  * inglés en las URLs sin prefijo.
+ *
+ * Primera visita (sin cookie) con el navegador en español: también va a /es,
+ * acá y no en el cliente. Detectarlo al hidratar mostraba la página en inglés
+ * un instante antes de saltar al español. Los bots quedan afuera por
+ * user-agent: Google pide no redirigir a sus crawlers según el idioma.
  */
 
 import { NextResponse, type NextRequest } from 'next/server';
 import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale, localePath, stripLocale } from './lib/i18n';
+
+const BOT_UA = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|preview|lighthouse/i;
+
+/** Idioma preferido según Accept-Language: `es-AR,es;q=0.9,en;q=0.8` → `es`. */
+function preferredLanguage(header: string | null): string | null {
+  if (!header) return null;
+  let best: { lang: string; q: number } | null = null;
+  for (const part of header.split(',')) {
+    const [tag, ...params] = part.trim().split(';');
+    const qParam = params.find((p) => p.trim().startsWith('q='));
+    const q = qParam ? Number(qParam.trim().slice(2)) : 1;
+    const lang = tag.split('-')[0].toLowerCase();
+    if (lang && lang !== '*' && (!best || q > best.q)) best = { lang, q };
+  }
+  return best?.lang ?? null;
+}
 
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
@@ -43,10 +64,24 @@ export function middleware(request: NextRequest) {
 
   if (pathname === '/es' || pathname.startsWith('/es/')) return NextResponse.next();
 
-  if (request.cookies.get(LOCALE_COOKIE)?.value === 'es') {
+  const chosen = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (chosen === 'es') {
     const url = request.nextUrl.clone();
     url.pathname = localePath('es', pathname);
     return NextResponse.redirect(url, 307);
+  }
+
+  if (
+    !chosen &&
+    !BOT_UA.test(request.headers.get('user-agent') ?? '') &&
+    preferredLanguage(request.headers.get('accept-language')) === 'es'
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = localePath('es', pathname);
+    const response = NextResponse.redirect(url, 307);
+    // Una sola vez: si después elige inglés, el botón pisa la cookie con `en`.
+    response.cookies.set(LOCALE_COOKIE, 'es', { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    return response;
   }
 
   const url = request.nextUrl.clone();

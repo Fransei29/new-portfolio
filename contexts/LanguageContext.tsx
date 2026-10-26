@@ -124,9 +124,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     }
 
     if (routed) {
-      // Primera visita sin elección previa y navegador en español: se lo lleva
-      // a /es una sola vez. Googlebot renderiza con navegador en inglés, así que
-      // no entra acá, y el HTML de las URLs sin prefijo sigue siendo inglés.
+      // Red de seguridad: el middleware ya manda a /es por Accept-Language antes
+      // de renderizar. Esto solo cubre el caso raro en que el header dice otra
+      // cosa que navigator.language. Googlebot renderiza con navegador en
+      // inglés, así que no entra acá.
       if (!saved && initialLanguage === 'en' && navigator.language.split('-')[0] === 'es') {
         rememberLanguage('es');
         router.replace(`${localePath('es', stripLocale(pathname))}${window.location.search}${window.location.hash}`);

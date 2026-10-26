@@ -88,6 +88,11 @@ export default function Header() {
           </Link>
         </section>
 
+        {/* Idioma fuera del menú en mobile: a la vista sin tener que abrirlo. */}
+        <div className={styles.mobileOnly}>
+          <LanguageSelector />
+        </div>
+
         {/* Botón hamburguesa */}
         <div className={styles.mobileMenuButton}>
           <button 
@@ -275,7 +280,6 @@ export default function Header() {
         </a>
 
         <div className={styles.mobileMenuControls}>
-          <LanguageSelector />
           <ThemeToggleButton />
           <FunModeButton />
         </div>
