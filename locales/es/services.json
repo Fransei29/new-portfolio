@@ -323,27 +323,27 @@
       "items": [
         {
           "q": "¿Cómo se cotiza un proyecto?",
-          "a": "Trabajamos con presupuestos cerrados según el alcance acordado, definidos después de una primera llamada. Para proyectos continuos, ofrecemos planes mensuales. Siempre conocés el costo antes de empezar."
+          "a": "Definimos un presupuesto cerrado según el alcance, antes de empezar."
         },
         {
           "q": "¿Cuánto tarda un proyecto?",
-          "a": "Una landing o una automatización suele llevar entre una y tres semanas. Una aplicación completa, entre seis y doce, según su complejidad. Cada propuesta incluye las etapas de trabajo y sus plazos estimados."
+          "a": "Entre 1 y 3 semanas para una landing o automatización, y entre 6 y 12 para una aplicación. Los plazos dependen de la complejidad."
         },
         {
-          "q": "¿Trabajan sobre código existente?",
-          "a": "Sí. Nos incorporamos a proyectos en marcha para mejorar su arquitectura, migrar tecnologías, resolver problemas técnicos o desarrollar nuevas funcionalidades."
+          "q": "¿Pueden trabajar sobre código existente?",
+          "a": "Sí. Mejoramos sistemas existentes, migramos tecnologías, resolvemos problemas técnicos y desarrollamos nuevas funcionalidades."
         },
         {
-          "q": "¿De quién es el código?",
-          "a": "El código es tuyo. El repositorio, la infraestructura y las cuentas del proyecto quedan bajo tu control desde el inicio."
+          "q": "¿Quién es dueño del código?",
+          "a": "Vos. El código, el repositorio y las cuentas del proyecto quedan bajo tu control."
         },
         {
-          "q": "¿Qué pasa después del lanzamiento?",
-          "a": "Cada proyecto incluye un período de soporte posterior a la entrega. Después, podés contratar mantenimiento mensual o solicitar mejoras puntuales según tus necesidades."
+          "q": "¿Ofrecen soporte después del lanzamiento?",
+          "a": "Sí. Cada proyecto incluye un período de soporte. Después, podés contratar mantenimiento mensual o solicitar mejoras puntuales."
         },
         {
-          "q": "¿Con qué zonas horarias trabajan?",
-          "a": "Trabajamos desde Córdoba, Argentina, con clientes de Estados Unidos, Canadá, Europa y Latinoamérica. Coordinamos horarios de trabajo y reuniones para mantener una comunicación fluida durante todo el proyecto."
+          "q": "¿En qué zonas horarias trabajan?",
+          "a": "Trabajamos desde Argentina con clientes de América y Europa, coordinando horarios para mantener una comunicación fluida."
         }
       ]
     },

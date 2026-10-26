@@ -119,10 +119,10 @@
   },
   "faqSection": {
     "title": "Antes de empezar",
-    "subtitle": "Precios, plazos, propiedad del código y soporte después del lanzamiento.",
+    "subtitle": "Precios, plazos, propiedad del código y soporte.",
     "askTitle": "¿Tenés alguna otra pregunta?",
-    "askText": "Hablá directamente con quien va a desarrollar tu proyecto.",
-    "askButton": "Escribinos"
+    "askText": "Hablá directamente con quien desarrolla tu proyecto.",
+    "askButton": "Hablemos"
   },
   "behindStudio": {
     "title": "Quiénes construyen tu producto",

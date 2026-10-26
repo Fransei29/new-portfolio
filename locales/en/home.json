@@ -119,10 +119,10 @@
   },
   "faqSection": {
     "title": "Before we start",
-    "subtitle": "Pricing, timelines, code ownership and support after launch.",
+    "subtitle": "Pricing, timelines, code ownership and support.",
     "askTitle": "Have another question?",
-    "askText": "Talk directly to the person who will build your project.",
-    "askButton": "Write to us"
+    "askText": "Talk directly to the person building your project.",
+    "askButton": "Let's talk"
   },
   "behindStudio": {
     "title": "The people building your product",
