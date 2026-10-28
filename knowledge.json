@@ -677,42 +677,6 @@
       "engagement": "Practice project",
       "liveDemo": "https://clonetwitter-zy47-git-main-francos-projects-94304a5e.vercel.app/",
       "github": "https://github.com/Fransei29/clonetwitter.git"
-    },
-    {
-      "slug": "vestire",
-      "name": "Vestiré",
-      "tagline": "Fashion E-Commerce Platform",
-      "summary": "",
-      "stack": [
-        "React",
-        "Node.js",
-        "Express",
-        "PostgreSQL",
-        "CSS",
-        "JWT Auth",
-        "Vercel"
-      ],
-      "url": "https://www.francoseiler.com/projects/vestire",
-      "role": "Frontend",
-      "engagement": "Practice project",
-      "liveDemo": "https://vestire-front-s196.vercel.app/",
-      "github": "https://github.com/Fransei29/vestire_front.git"
-    },
-    {
-      "slug": "trip-planner",
-      "name": "Trip Planner",
-      "tagline": "Simple Trip Planning App",
-      "summary": "Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.",
-      "stack": [
-        "Next.js",
-        "JavaScript",
-        "CSS"
-      ],
-      "url": "https://www.francoseiler.com/projects/trip-planner",
-      "role": "Frontend",
-      "engagement": "Practice project",
-      "liveDemo": "https://trip-planner-c.vercel.app/",
-      "github": "https://github.com/Fransei29/trip-planner-c"
     }
   ],
   "blog": {

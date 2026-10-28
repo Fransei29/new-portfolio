@@ -169,7 +169,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Fintech",
+        "tags": [
+          "Agentes de voz con IA",
+          "Emails con IA",
+          "Workflows visuales"
+        ],
+        "summary": "Plataforma multi-tenant de cobranzas con agentes de voz con IA que llaman a los deudores, emails automatizados y workflows configurables para recuperar facturas vencidas. Gestiona lotes de hasta 500 facturas y centraliza grabaciones, transcripciones y resultados."
       },
       "bgv-mayorista": {
         "title": "BGV Mayorista",
@@ -356,7 +363,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Mayorista",
+        "tags": [
+          "Precios para mayoristas",
+          "Mercado Pago",
+          "Asistente de IA"
+        ],
+        "summary": "Plataforma B2B para una distribuidora mayorista, con acceso por cuentas aprobadas, precios y descuentos por cliente, compras mínimas y pagos integrados. Incluye un asistente de IA para consultas y captación comercial, más un panel para gestionar productos, pedidos, estadísticas y contenido."
       },
       "comply-dq": {
         "title": "Comply DQ",
@@ -496,7 +510,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Transporte",
+        "tags": [
+          "Verificación de documentos",
+          "Suscripciones con Stripe",
+          "Login empresarial"
+        ],
+        "summary": "SaaS multi-tenant de compliance para transportistas norteamericanos que centraliza documentación de conductores, licencias, certificados médicos y pólizas, con trazabilidad para auditorías, autenticación empresarial, suscripciones con Stripe y migraciones de datos en producción."
       },
       "globaly": {
         "title": "Globaly",
@@ -625,7 +646,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Colaboración remota",
+        "tags": [
+          "Escena 3D",
+          "Sonido espacial",
+          "3 idiomas"
+        ],
+        "summary": "Sitio web inmersivo para una plataforma de colaboración, con una oficina 3D interactiva en tiempo real, avatares, conversaciones y audio espacial. Incluye 33 páginas en tres idiomas, precios localizados, comparativas de planes, sección enterprise y blog administrable mediante CMS."
       },
       "red-lizard-studioz": {
         "title": "Red Lizard Studioz",
@@ -765,7 +793,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Agencia de marketing",
+        "tags": [
+          "Redacción con IA",
+          "Agentes de chat",
+          "Multi-cliente"
+        ],
+        "summary": "Plataforma multi-tenant para agencias de marketing y sus clientes, con contenido SEO generado por IA, bases de conocimiento, agentes conversacionales para atención y captación, pipeline comercial, dominios propios y un panel operativo de 24 secciones."
       },
       "comply-dq-site": {
         "title": "ComplyDQ — Sitio institucional",
@@ -907,7 +942,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Transporte",
+        "tags": [
+          "Herramientas interactivas",
+          "Blog con CMS",
+          "Deploy sin cortes"
+        ],
+        "summary": "Sitio de marketing para una plataforma de compliance, con herramientas interactivas de preparación para auditorías, cálculo de ROI y cumplimiento normativo. Incorpora blog con CMS y despliegues automatizados con validaciones, actualizaciones sin interrupciones y rollback ante fallos."
       },
       "bellum-property-management": {
         "title": "Bellum Property Management",
@@ -1009,7 +1051,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Inmobiliario",
+        "tags": [
+          "Sistema de diseño",
+          "SEO por página",
+          "Formulario de propuesta"
+        ],
+        "summary": "Sitio institucional para una administradora de propiedades en Virginia, orientado a captar propuestas comerciales. Reconstruido desde una implementación en producción sin acceso al código fuente, con sistema de diseño propio y SEO optimizado por página, sin interrumpir el servicio."
       },
       "royal-parking-services": {
         "title": "Royal Parking Services",
@@ -1169,7 +1218,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Estacionamientos",
+        "tags": [
+          "Pagos con Stripe",
+          "Portal de clientes",
+          "Gestión de permisos"
+        ],
+        "summary": "Aplicación web para una empresa canadiense de control de estacionamiento que integra el sitio público con un portal de clientes: consulta de infracciones por patente, fotografías de evidencia y pagos con Stripe. Incluye gestión empresarial de permisos, vehículos, tarjetas guardadas y facturación."
       },
       "sophie-callander": {
         "title": "Sophie Callander Consulting",
@@ -1312,7 +1368,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Mediación",
+        "tags": [
+          "7 idiomas",
+          "Escritura RTL",
+          "SEO multilingüe"
+        ],
+        "summary": "Sitio profesional de una mediadora en Canadá, en siete idiomas y con soporte RTL, con servicios, credenciales, artículos administrables mediante CMS y contacto. Incluye SEO y datos estructurados adaptados a cada idioma y página."
       },
       "acer0": {
         "title": "Acer0",
@@ -1468,7 +1531,14 @@
               ]
             }
           ]
-        }
+        },
+        "sector": "Manufactura",
+        "tags": [
+          "Carrito y checkout",
+          "Mercado Pago",
+          "Panel de administración"
+        ],
+        "summary": "E-commerce propio para una marca de manufactura y retail, con catálogo, filtros, cupones, pagos, cuentas y seguimiento de pedidos. Integra un asistente de IA para consultas comerciales y un panel para gestionar operaciones, ventas y conocimiento del asistente."
       },
       "bellum": {
         "title": "Bellum",
@@ -1489,7 +1559,14 @@
         ],
         "role": "Full-stack · CMS a medida",
         "industry": "Administración de consorcios",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Administración de HOAs",
+        "tags": [
+          "CMS a medida",
+          "Flujo de propuestas",
+          "Blog"
+        ],
+        "summary": "Sitio web para una firma de gestión financiera de consorcios, con escenas 3D, animaciones y un asistente de IA conectado al contenido y a una base de conocimiento propia. Incluye un panel para administrar servicios, precios, blog, propuestas, conversaciones y leads, con generación automática de SEO."
       },
       "grupo-el-triunfo": {
         "title": "Grupo El Triunfo",
@@ -1509,7 +1586,14 @@
         ],
         "role": "Full-stack · Sitio corporativo",
         "industry": "Agroindustria",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Agronegocios",
+        "tags": [
+          "Hero con video",
+          "Animaciones con scroll",
+          "6 unidades de negocio"
+        ],
+        "summary": "Sitio corporativo para un holding agroindustrial de Córdoba con más de 36 años de trayectoria. Presenta seis unidades de negocio mediante páginas de servicio, hero en video, galerías, animaciones vinculadas al scroll y mapa integrado."
       },
       "home-trades-online": {
         "title": "Home Trades Online",
@@ -1528,7 +1612,14 @@
         ],
         "role": "Full-stack · SaaS",
         "industry": "Construcción y oficios",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Construcción y oficios",
+        "tags": [
+          "Propuestas con IA",
+          "Firma digital",
+          "Inglés/español"
+        ],
+        "summary": "SaaS mobile-first para contratistas que genera propuestas comerciales con IA, incluidos conceptos y precios, en menos de 30 segundos. Incorpora enlaces compartibles, firma digital, equipos con permisos por rol, referidos y soporte bilingüe."
       },
       "salesforpro": {
         "title": "Home Trades Online Landing",
@@ -1548,7 +1639,14 @@
         ],
         "role": "Frontend · Landing de producto",
         "industry": "Construcción y oficios",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Construcción y oficios",
+        "tags": [
+          "Demo interactiva",
+          "Animación de intro",
+          "Modo oscuro"
+        ],
+        "summary": "Landing interactiva que permite probar el generador de propuestas con IA antes de registrarse. Combina un recorrido guiado por el producto, animaciones cinematográficas, transiciones vinculadas al scroll y versiones completas en inglés y español."
       },
       "starton": {
         "title": "StartOn ",
@@ -1567,7 +1665,14 @@
         ],
         "role": "Full-stack",
         "industry": "Empleo tech",
-        "engagement": "Producto propio"
+        "engagement": "Producto propio",
+        "sector": "Startups",
+        "tags": [
+          "Paneles por rol",
+          "Mensajería interna",
+          "Login con Google"
+        ],
+        "summary": "Plataforma que conecta profesionales tecnológicos con startups, con experiencias diferenciadas por rol, mensajería interna, networking entre fundadores, filtros avanzados, blog y autenticación con Google."
       },
       "mi-agenda": {
         "title": "Mi Agenda",
@@ -1587,7 +1692,14 @@
         ],
         "role": "Full-stack · Pagos e integraciones",
         "industry": "Servicios con turnos",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Servicios",
+        "tags": [
+          "Reservas online",
+          "Google Calendar",
+          "Mercado Pago"
+        ],
+        "summary": "Sistema de reservas con disponibilidad por servicio y sincronización con Google Calendar. Integra pagos únicos y suscripciones mediante Mercado Pago, notificaciones por email, push y WhatsApp, y una aplicación instalable con recordatorios y acceso offline."
       },
       "tecnomar": {
         "title": "TecnoMar",
@@ -1606,7 +1718,14 @@
         ],
         "role": "Full-stack · Sitio corporativo",
         "industry": "Industrial",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Servicios industriales",
+        "tags": [
+          "Modelo 3D a medida",
+          "Animación con scroll",
+          "Pedido de cotización"
+        ],
+        "summary": "Experiencia corporativa 3D para una empresa de bombas industriales. Un modelo interactivo se desmonta pieza por pieza durante el recorrido, con materiales realistas, etiquetas y sonido opcional, integrado con un cotizador online y contenido corporativo."
       },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
@@ -1627,7 +1746,14 @@
         ],
         "role": "Full-stack · Sitio corporativo",
         "industry": "Fitness y entrenamiento",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Fitness",
+        "tags": [
+          "Planes de entrenamiento",
+          "Testimonios",
+          "Formulario de contacto"
+        ],
+        "summary": "Sitio profesional para un entrenador personal, con planes de entrenamiento, testimonios, transformaciones y contenido sobre hábitos. Su arquitectura contempla la futura incorporación de venta online de planes y un área privada para miembros."
       },
       "property-recommender": {
         "title": "Habita",
@@ -1644,7 +1770,14 @@
         ],
         "role": "Full-stack",
         "industry": "Inmobiliario",
-        "engagement": "Producto propio"
+        "engagement": "Producto propio",
+        "sector": "Inmobiliario",
+        "tags": [
+          "Búsqueda de propiedades",
+          "Recomendaciones",
+          "Responsive"
+        ],
+        "summary": "Aplicación de recomendación inmobiliaria que identifica propiedades relevantes mediante algoritmos de similitud. Incluye filtros, ordenamiento de resultados y un espacio personal para guardar y administrar propiedades favoritas."
       },
       "ecommerce": {
         "title": "Quiero Sport",
@@ -1661,7 +1794,14 @@
           "Configuramos Docker para desarrollo local y desplegamos en Vercel."
         ],
         "role": "Full-stack",
-        "engagement": "Proyecto de práctica"
+        "engagement": "Proyecto de práctica",
+        "sector": "Retail",
+        "tags": [
+          "Carrito",
+          "Mercado Pago",
+          "Docker"
+        ],
+        "summary": "E-commerce full-stack con catálogo, carrito, checkout con Mercado Pago y cuentas de usuario con historial de pedidos. Desarrollado con una arquitectura contenerizada mediante Docker y desplegado en Vercel."
       },
       "healthcare-crm": {
         "title": "Medicare ",
@@ -1681,7 +1821,14 @@
         ],
         "role": "Full-stack",
         "engagement": "Proyecto de práctica",
-        "industry": "Salud"
+        "industry": "Salud",
+        "sector": "Salud",
+        "tags": [
+          "Pacientes",
+          "Tratamientos",
+          "Modo oscuro"
+        ],
+        "summary": "CRM de salud para gestionar pacientes, medicación y tratamientos mediante paneles administrativos y formularios validados. Incluye backend en NestJS, modo oscuro y pruebas automatizadas."
       },
       "taskmanager": {
         "title": "Task Manager",
@@ -1698,7 +1845,14 @@
           "Gestionamos estado y llamadas API con Axios."
         ],
         "role": "Full-stack",
-        "engagement": "Proyecto de práctica"
+        "engagement": "Proyecto de práctica",
+        "sector": "Productividad",
+        "tags": [
+          "Tareas",
+          "Login de usuarios",
+          "Responsive"
+        ],
+        "summary": "Aplicación de gestión de tareas con autenticación, creación y edición de tareas y persistencia en PostgreSQL. Desarrollada con Next.js, con una interfaz enfocada en claridad y facilidad de uso."
       },
       "flipper": {
         "title": "Flipper",
@@ -1715,38 +1869,14 @@
           "Desplegamos la aplicación en Vercel."
         ],
         "role": "Full-stack",
-        "engagement": "Proyecto de práctica"
-      },
-      "vestire": {
-        "title": "Vestiré",
-        "subtitle": "Plataforma E-Commerce de Moda",
-        "description": "Una plataforma e-commerce especializada en ropa, que ofrece una amplia selección de productos con navegación intuitiva y un proceso de checkout fluido.\nEl frontend está construido con React, mientras que el backend utiliza Node.js y Express para operaciones del lado del servidor.\nAxios se usa para manejar solicitudes HTTP, y PostgreSQL sirve como la base de datos.\nLa aplicación incluye autenticación de usuarios para gestionar sesiones de usuario y pedidos.",
-        "whatIs": "Una plataforma e-commerce elegante y moderna para moda y accesorios, construida con React y estilizada con CSS.\nLas características incluyen autenticación de usuarios, navegación de productos, funcionalidad de carrito de compras y un diseño limpio y responsive.\nLa aplicación muestra una colección de artículos de ropa, zapatillas y accesorios con información detallada del producto.\nIncluye autenticación segura de usuarios y gestión de sesiones para una experiencia de compra personalizada.",
-        "problemSolved": "Los minoristas de moda locales necesitaban una presencia online moderna para llegar a los clientes.\nEsta aplicación proporciona una solución elegante con una experiencia de compra intuitiva,\nmostrando productos con imágenes de alta calidad y descripciones detalladas.\nLa autenticación segura asegura que los usuarios puedan gestionar de forma segura sus cuentas y pedidos.",
-        "learnings": [
-          "Construimos una interfaz e-commerce responsive con React.",
-          "Implementamos autenticación segura de usuarios con JWT.",
-          "Creamos una experiencia intuitiva de navegación de productos.",
-          "Desarrollamos APIs RESTful con Node.js y Express.",
-          "Gestionamos operaciones de base de datos con PostgreSQL.",
-          "Desplegamos la aplicación en Vercel.",
-          "Implementamos prácticas modernas de UI/UX."
+        "engagement": "Proyecto de práctica",
+        "sector": "Red social",
+        "tags": [
+          "Tiempo real",
+          "Seguidores",
+          "Redis"
         ],
-        "role": "Frontend",
-        "engagement": "Proyecto de práctica"
-      },
-      "trip-planner": {
-        "title": "Trip Planner",
-        "subtitle": "App simple de planificación de viajes",
-        "description": "App pequeña en Next.js para planificar viajes. UI mínima, fuente Geist, desplegada en Vercel.",
-        "whatIs": "App pequeña en Next.js para planificar viajes. Creada con create-next-app, usa la fuente Geist y una UI mínima. Desplegada en Vercel.",
-        "problemSolved": "Proyecto lateral para probar Next.js App Router con un alcance acotado—enfocado en un flujo simple de planificación de viajes.",
-        "learnings": [
-          "Configuración con Next.js App Router y create-next-app.",
-          "Desplegado en Vercel (trip-planner-c.vercel.app)."
-        ],
-        "role": "Frontend",
-        "engagement": "Proyecto de práctica"
+        "summary": "Red social inspirada en Twitter, con publicaciones, me gusta, comentarios y seguimiento de usuarios. Incorpora actualizaciones en tiempo real para sincronizar la actividad sin recargas manuales."
       },
       "dynamic-blog": {
         "title": "Dynamic Blog",
@@ -1810,7 +1940,14 @@
         ],
         "role": "Full-stack · Automatización con IA",
         "industry": "Legal",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Legal",
+        "tags": [
+          "Gestión de expedientes",
+          "Seguimiento con IA",
+          "Avisos por Gmail y Telegram"
+        ],
+        "summary": "Plataforma de gestión judicial que centraliza expedientes, cédulas, operaciones y escritos. Integra IA para detectar novedades y sugerir acciones, notificaciones automáticas mediante Gmail y Telegram, y estadísticas de actividad."
       },
       "lexmax-landing": {
         "title": "LexMax Landing",
@@ -1830,7 +1967,14 @@
         ],
         "role": "Frontend · Landing de producto",
         "industry": "Legal",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Legal",
+        "tags": [
+          "Vitrina de servicios",
+          "Cifras de impacto",
+          "Contacto"
+        ],
+        "summary": "Landing comercial para una plataforma de automatización legal que presenta gestión de expedientes, bots, generación masiva de escritos y análisis con IA mediante secciones de producto y métricas de impacto."
       },
       "the-club-northfield": {
         "title": "The Club at Northfield",
@@ -1850,7 +1994,14 @@
         ],
         "role": "Full-stack · CMS con Strapi",
         "industry": "Deportes y fitness",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Deportes y fitness",
+        "tags": [
+          "CMS",
+          "Eventos",
+          "Membresías"
+        ],
+        "summary": "Sitio institucional para un club de deportes de raqueta y fitness en Ontario, con eventos dinámicos, servicios, membresías y preguntas frecuentes. Incluye un CMS para que el equipo gestione el contenido de forma autónoma."
       },
       "event-scheduler": {
         "title": "Event Scheduler",
@@ -1874,7 +2025,14 @@
         ],
         "role": "Full-stack",
         "industry": "Eventos y espacios",
-        "engagement": "Producto propio"
+        "engagement": "Producto propio",
+        "sector": "Eventos",
+        "tags": [
+          "Reserva de espacios",
+          "Alta en 13 pasos",
+          "Portal de administración"
+        ],
+        "summary": "Plataforma que conecta organizadores de eventos con espacios disponibles. Incluye configuración guiada de espacios, búsqueda mediante mapa, combinación de proveedores, precios en tiempo real, contratos digitales y reservas con pagos mediante Stripe."
       },
       "ateevo-wholesale": {
         "title": "Ateevo Wholesale",
@@ -1901,7 +2059,14 @@
         ],
         "role": "Full-stack · B2B e-commerce",
         "industry": "Moda mayorista",
-        "engagement": "Trabajo para cliente"
+        "engagement": "Trabajo para cliente",
+        "sector": "Moda",
+        "tags": [
+          "Catálogos por temporada",
+          "Inventario",
+          "Multi-marca"
+        ],
+        "summary": "Plataforma B2B multi-marca para el sector de la moda, con catálogos por temporada, preventas, inventario, pedidos y clientes. Incorpora contratos digitales con PDF automático, reportes de disponibilidad y márgenes, precios en tres monedas y experiencias de marca blanca."
       }
     },
     "tabOverview": "Overview",
@@ -1925,7 +2090,9 @@
       "Santiago, Chile": "Santiago, Chile",
       "United States": "Estados Unidos",
       "Virginia, United States": "Virginia, Estados Unidos"
-    }
+    },
+    "live": "En vivo",
+    "private": "Privado"
   },
   "pages": {
     "projects": {

@@ -1,0 +1,306 @@
+// Tarjeta vitrina de case studies. Colores de marca: lila profundo como
+// protagonista, velo lila de fondo para el "escenario" de la compu.
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--grisecito, #eeedf1);
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(142, 122, 230, 0.45);
+    box-shadow: 0 18px 40px rgba(46, 41, 78, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--lila-principal, #8e7ae6);
+    outline-offset: 3px;
+  }
+
+  :global(html.dark) & {
+    background: var(--grafito-elevado, #2e2a3a);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.4rem 1.5rem 1.1rem;
+  background: var(--lila-velo, #f2effb);
+
+  :global(html.dark) & {
+    background: var(--lila-velo-dark, #262336);
+  }
+}
+
+.category {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--lila-profundo, #2e294e);
+  background: #fff;
+  border-radius: 999px;
+
+  :global(html.dark) & {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Compu dibujada en CSS: marco oscuro con la captura y la base metálica.
+.laptop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screen {
+  position: relative;
+  width: 68%;
+  // 16:9 y no 16:10: las capturas son apaisadas y así se recortan menos.
+  aspect-ratio: 16 / 9;
+  background: #14121c;
+  border: 5px solid #14121c;
+  border-bottom-width: 7px;
+  border-radius: 9px 9px 0 0;
+  box-shadow: 0 18px 30px rgba(46, 41, 78, 0.18);
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+.screenImage {
+  object-fit: cover;
+  // Arriba a la izquierda: ahí suelen estar el logo y el titular del sitio.
+  object-position: left top;
+  border-radius: 3px;
+  transition: transform 0.5s ease;
+
+  .card:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.base {
+  width: 80%;
+  height: 7px;
+  background: linear-gradient(#e4e2ea, #b6b3c2);
+  border-radius: 0 0 8px 8px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex-grow: 1;
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-heading), 'Bricolage Grotesque', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--lila-profundo, #2e294e);
+
+  :global(html.dark) & {
+    color: #fff;
+  }
+}
+
+.live,
+.private {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &::before {
+    content: '●';
+    margin-right: 0.3rem;
+  }
+}
+
+.live {
+  color: var(--verde-bosque, #58876e);
+}
+
+.private {
+  color: var(--gris-medio, #8a8599);
+}
+
+.oneLiner {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--subtitle-color, #4a4a4a);
+
+  :global(html.dark) & {
+    color: var(--text-color-light, #b8b5c4);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--lila-profundo, #2e294e);
+  background: var(--arena, #f3f2f4);
+  border-radius: 8px;
+
+  :global(html.dark) & {
+    color: #e6e2f5;
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--grisecito, #eeedf1);
+  font-size: 0.82rem;
+
+  :global(html.dark) & {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.sector {
+  color: var(--text-color-light, #6b6b6b);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  color: var(--lila-profundo, #2e294e);
+  white-space: nowrap;
+
+  :global(html.dark) & {
+    color: #fff;
+  }
+}
+
+// Flecha en un círculo lila: al pasar por la tarjeta se rellena y avanza.
+.ctaIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--lila-corporativo, #7d68d8);
+  background: var(--lila-velo, #f2effb);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+
+  .card:hover & {
+    color: #fff;
+    background: var(--lila-profundo, #2e294e);
+    transform: translateX(2px);
+  }
+
+  :global(html.dark) & {
+    color: var(--lila-suave, #b59cf8);
+    background: rgba(181, 156, 248, 0.14);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 16px;
+  }
+
+  .stage {
+    padding: 2.2rem 1rem 0.85rem;
+  }
+
+  .category {
+    top: 0.7rem;
+    left: 0.7rem;
+    font-size: 0.7rem;
+  }
+
+  .screen {
+    width: 60%;
+    border-width: 4px;
+    border-bottom-width: 5px;
+  }
+
+  .base {
+    width: 72%;
+    height: 6px;
+  }
+
+  .body {
+    gap: 0.5rem;
+    padding: 0.85rem 1rem 1rem;
+  }
+
+  .title {
+    font-size: 1.15rem;
+  }
+
+  .oneLiner {
+    font-size: 0.86rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+  }
+
+  .footer {
+    padding-top: 0.6rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .screenImage,
+  .ctaIcon {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .screenImage {
+    transform: none;
+  }
+}

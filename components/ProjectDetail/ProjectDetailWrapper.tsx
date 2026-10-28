@@ -31,7 +31,7 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
 
   // Get translated content - if translation doesn't exist, fall back to original
   const getTranslatedField = (
-    field: 'title' | 'subtitle' | 'whatIs' | 'problemSolved' | 'role' | 'engagement' | 'industry' | 'duration' | 'client' | 'location'
+    field: 'title' | 'subtitle' | 'summary' | 'whatIs' | 'problemSolved' | 'role' | 'engagement' | 'industry' | 'duration' | 'client' | 'location'
   ): string => {
     const key = `projects.items.${slug}.${field}`;
     const translated = t(key);
@@ -47,6 +47,18 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
   const translatedSubtitle = getTranslatedField('subtitle');
   const translatedWhatIs = getTranslatedField('whatIs');
   const translatedProblemSolved = getTranslatedField('problemSolved');
+
+  // Etiquetas de "lo que incluye" (las mismas de la vitrina), del locale.
+  let tagsToShow: string[] | undefined;
+  const tagsRaw = t(`projects.items.${slug}.tags`);
+  if (tagsRaw && !tagsRaw.startsWith('projects.items.')) {
+    try {
+      const parsed = JSON.parse(tagsRaw);
+      if (Array.isArray(parsed)) tagsToShow = parsed;
+    } catch {
+      // sin etiquetas
+    }
+  }
 
   // Use translated learnings array when available (locale has projects.items.<slug>.learnings)
   let learningsToShow: string[] | undefined = (project as { learnings?: string[] }).learnings;
@@ -96,6 +108,8 @@ export default function ProjectDetailWrapper({ slug }: ProjectDetailWrapperProps
     <ProjectDetailComponent
       title={getTranslatedField('title') || project.title}
       subtitle={translatedSubtitle || project.subtitle}
+      summary={getTranslatedField('summary')}
+      tags={tagsToShow}
       whatIs={translatedWhatIs || project.whatIs}
       problemSolved={translatedProblemSolved || project.problemSolved}
       techStack={project.techStack}

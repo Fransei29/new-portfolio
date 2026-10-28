@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './ProjectDetailComponent.module.scss';
-import { Github, ExternalLink, ChevronLeft, ChevronRight, Lock, X, FileText, Target, Code2, GraduationCap, Link2, MapPin, Layers, Server } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight, Lock, X, FileText, Target, Code2, GraduationCap, Link2, MapPin, Layers, Server, Briefcase, Building2, Clock, Check } from 'lucide-react';
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, useLocalePath } from '../../contexts/LanguageContext';
 import CaseStudyMeta from './CaseStudyMeta';
 import CaseStudyTabs, { type CaseStudyTab } from './CaseStudyTabs';
 import DeepDiveSection from './DeepDiveSection';
@@ -31,6 +32,12 @@ import NestIcon from '../../public/icons/nest.svg';
 interface ProjectProps {
   title: string;
   subtitle?: string;
+  /** Resumen breve del proyecto (dos líneas): va bajo el título y reemplaza al
+      subtítulo. Sin resumen cargado, se muestra el subtítulo como antes. */
+  summary?: string;
+  /** Lo que incluye el proyecto (las mismas etiquetas de la vitrina). Va al pie
+      del recuadro del resumen, en segundo plano. */
+  tags?: string[];
   whatIs?: string;
   problemSolved?: string;
   techStack?: string[];
@@ -74,6 +81,11 @@ const AUTOPLAY_INTERVAL_MS = 4500;
 
 /** Cuánto se queda quieto después de que alguien lo mueve a mano. */
 const AUTOPLAY_PAUSE_MS = 12000;
+
+/* Las capturas vienen con el marco de la plantilla de Instagram. Dentro de la
+   compu del carrusel se usa la copia sin marco de public/sinmarco/ (misma ruta,
+   en .webp); el lightbox sigue mostrando la original. */
+const framelessSrc = (src: string) => `/sinmarco${src.replace(/\.[^./]+$/, '')}.webp`;
 
 
 // Función para mapear nombres de tecnologías a iconos
@@ -131,6 +143,8 @@ const getTechIcon = (techName: string): TechIcon | null => {
 export default function ProjectDetailComponent({
   title,
   subtitle,
+  summary,
+  tags,
   whatIs,
   problemSolved,
   techStack,
@@ -156,6 +170,7 @@ export default function ProjectDetailComponent({
   deliverables,
 }: ProjectProps) {
   const { t, language } = useLanguage();
+  const toLocale = useLocalePath();
   
   const validScreenshots = screenshots?.filter(Boolean) || [];
   const hasVideo = Boolean(videoUrl);
@@ -168,6 +183,15 @@ export default function ProjectDetailComponent({
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  // Capturas verticales (de celular): dentro de la compu se muestran enteras
+  // en vez de recortadas.
+  const [portraitImages, setPortraitImages] = useState<Set<string>>(new Set());
+  const handleScreenshotLoad = (screenshot: string, img: HTMLImageElement) => {
+    setLoadedImages(prev => new Set(prev).add(screenshot));
+    if (img.naturalHeight > img.naturalWidth) {
+      setPortraitImages(prev => new Set(prev).add(screenshot));
+    }
+  };
 
   // Interactuar con el carrusel lo pausa, pero solo un rato: la rotación se
   // retoma sola pasado ese tiempo. Detenerla para siempre dejaba el carrusel
@@ -414,6 +438,83 @@ export default function ProjectDetailComponent({
     return () => ctx.revert();
   }, [activeTab]);
 
+  // Ficha del proyecto (rol, tipo de trabajo, industria, duración): va arriba,
+  // dentro del recuadro del resumen, en vez de una grilla dentro del Overview.
+  const isFilled = (value?: string) => Boolean(value && value.trim() && value.trim() !== '—');
+  const metaLabels = language === 'es'
+    ? { role: 'Rol', engagement: 'Tipo de trabajo', industry: 'Industria', duration: 'Duración', includes: 'Incluye' }
+    : { role: 'Role', engagement: 'Engagement', industry: 'Industry', duration: 'Timeline', includes: 'Includes' };
+  const durationValue = [duration, year].filter(isFilled).join(' · ');
+  const metaItems = [
+    { key: 'role', label: metaLabels.role, value: role, Icon: Code2 },
+    { key: 'engagement', label: metaLabels.engagement, value: engagement, Icon: Briefcase },
+    { key: 'industry', label: metaLabels.industry, value: industry, Icon: Building2 },
+    { key: 'duration', label: metaLabels.duration, value: durationValue, Icon: Clock },
+  ].filter((item) => isFilled(item.value));
+  const includeTags = (tags || []).filter(isFilled);
+
+  // El primer carrusel se usa dos veces: en la columna de fotos (desktop) y,
+  // en mobile, entre el resumen y los tabs, como única foto.
+  const firstCarousel = firstHalf.length > 0 && (
+    <div className={styles.imageCarouselContainer}>
+      <div className={styles.laptop}>
+        <div className={styles.laptopScreen}>
+          {!loadedImages.has(firstHalf[0]) && <div className={styles.skeleton} />}
+          <div className={styles.imageCarousel}>
+            {firstHalf.map((screenshot, index) => (
+              <div
+                key={index}
+                className={`${styles.carouselImage} ${index === currentImageIndex1 ? styles.active : ''}`}
+                onClick={() => openLightbox(index, 'first')}
+              >
+                <Image
+                  src={framelessSrc(screenshot)}
+                  alt={`${title} screenshot ${index + 1}`}
+                  fill
+                  className={`${styles.carouselImg} ${portraitImages.has(screenshot) ? styles.carouselImgPortrait : ''}`}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  unoptimized
+                  onLoad={(e) => handleScreenshotLoad(screenshot, e.currentTarget)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.laptopBase} aria-hidden />
+      </div>
+      
+      {hasMultipleImages1 && (
+        <>
+          <button
+            className={`${styles.carouselNavButton} ${styles.carouselNavButtonLeft}`}
+            onClick={goToPrevious1}
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            className={`${styles.carouselNavButton} ${styles.carouselNavButtonRight}`}
+            onClick={goToNext1}
+            aria-label="Next image"
+          >
+            <ChevronRight size={24} />
+          </button>
+          
+          <div className={styles.carouselIndicators}>
+            {firstHalf.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.indicator} ${index === currentImageIndex1 ? styles.active : ''}`}
+                onClick={() => { pauseAutoPlay(); setCurrentImageIndex1(index); }}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div className={styles.projectContainer}>
       {/* El Back vive dentro de la barra de tabs: es navegación igual que ellos,
@@ -425,83 +526,35 @@ export default function ProjectDetailComponent({
         {/* Columna izquierda: Contenido (carruseles / video) */}
         <div className={styles.rightColumn} ref={mediaRef}>
           {/* Primer carrusel - Primera mitad de imágenes */}
-          {firstHalf.length > 0 && (
-            <div className={styles.imageCarouselContainer}>
-              {!loadedImages.has(firstHalf[0]) && <div className={styles.skeleton} />}
-              <div className={styles.imageCarousel}>
-                {firstHalf.map((screenshot, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.carouselImage} ${index === currentImageIndex1 ? styles.active : ''}`}
-                    onClick={() => openLightbox(index, 'first')}
-                  >
-                    <Image
-                      src={screenshot}
-                      alt={`${title} screenshot ${index + 1}`}
-                      fill
-                      className={styles.carouselImg}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized
-                      onLoad={() => setLoadedImages(prev => new Set(prev).add(screenshot))}
-                    />
-                  </div>
-                ))}
-              </div>
-              
-              {hasMultipleImages1 && (
-                <>
-                  <button
-                    className={`${styles.carouselNavButton} ${styles.carouselNavButtonLeft}`}
-                    onClick={goToPrevious1}
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    className={`${styles.carouselNavButton} ${styles.carouselNavButtonRight}`}
-                    onClick={goToNext1}
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
-                  
-                  <div className={styles.carouselIndicators}>
-                    {firstHalf.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`${styles.indicator} ${index === currentImageIndex1 ? styles.active : ''}`}
-                        onClick={() => { pauseAutoPlay(); setCurrentImageIndex1(index); }}
-                        aria-label={`Go to image ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
+          {firstCarousel}
 
           {/* Segundo carrusel - solo cuando NO hay video (para ocupar espacio) */}
           {!hasVideo && secondHalf.length > 0 && (
             <div className={styles.imageCarouselContainer}>
-              {!loadedImages.has(secondHalf[0]) && <div className={styles.skeleton} />}
-              <div className={styles.imageCarousel}>
-                {secondHalf.map((screenshot, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.carouselImage} ${index === currentImageIndex2 ? styles.active : ''}`}
-                    onClick={() => openLightbox(index, 'second')}
-                  >
-                    <Image
-                      src={screenshot}
-                      alt={`${title} screenshot ${midPoint + index + 1}`}
-                      fill
-                      className={styles.carouselImg}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized
-                      onLoad={() => setLoadedImages(prev => new Set(prev).add(screenshot))}
-                    />
+              <div className={styles.laptop}>
+                <div className={styles.laptopScreen}>
+                  {!loadedImages.has(secondHalf[0]) && <div className={styles.skeleton} />}
+                  <div className={styles.imageCarousel}>
+                    {secondHalf.map((screenshot, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.carouselImage} ${index === currentImageIndex2 ? styles.active : ''}`}
+                        onClick={() => openLightbox(index, 'second')}
+                      >
+                        <Image
+                          src={framelessSrc(screenshot)}
+                          alt={`${title} screenshot ${midPoint + index + 1}`}
+                          fill
+                          className={`${styles.carouselImg} ${portraitImages.has(screenshot) ? styles.carouselImgPortrait : ''}`}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          unoptimized
+                          onLoad={(e) => handleScreenshotLoad(screenshot, e.currentTarget)}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+                <div className={styles.laptopBase} aria-hidden />
               </div>
               
               {hasMultipleImages2 && (
@@ -557,49 +610,91 @@ export default function ProjectDetailComponent({
         {/* Columna derecha: Info */}
         <div className={styles.leftColumn}>
           <div className={styles.textContent} ref={textContentRef}>
-            <div className={styles.titleHeader}>
-              <div className={styles.titleBlock}>
-                <h1 className={styles.projectTitle}>{title}</h1>
-                {subtitle && <p className={styles.titleSubtitle}>{subtitle}</p>}
-              </div>
+            {/* Recuadro con el título, la ubicación, el resumen, la ficha del
+                proyecto y lo que incluye. */}
+            {/* Volver, arriba del recuadro: es lo primero que se ve. La flechita
+                que había al lado de los tabs pasaba desapercibida. */}
+            <Link href={toLocale('/projects')} className={styles.mobileBack}>
+              <span className={styles.mobileBackIcon} aria-hidden>
+                <ChevronLeft size={16} />
+              </span>
+              {t('projects.back')}
+            </Link>
 
-              {/* El sitio en vivo va en el header, al lado de la ubicación: es
-                  la prueba más directa del proyecto y al final del Overview,
-                  debajo de dos bloques de texto, casi nadie llegaba a verlo. */}
-              {(locationChips.length > 0 || liveDemoLink) && (
-              <div className={styles.headerAside}>
-              {locationChips.length > 0 && (
-                <div className={styles.locationChips}>
-                  {locationChips.map((place) => (
-                    <span
-                      key={place.label}
-                      className={styles.locationChip}
-                      title={t('projects.clientLocation')}
-                    >
-                      {place.flag ? (
-                        <span className={styles.locationFlag} aria-hidden>{place.flag}</span>
-                      ) : (
-                        <MapPin className={styles.locationPin} size={13} aria-hidden />
-                      )}
-                      {place.label}
-                    </span>
-                  ))}
+            <div className={styles.summaryCard}>
+              <div className={styles.titleHeader}>
+                <div className={styles.titleBlock}>
+                  <h1 className={styles.projectTitle}>{title}</h1>
+                  {/* Ubicación en una línea bajo el título: como chips al lado del
+                      botón, con dos países se apilaban y desarmaban el encabezado. */}
+                  {locationChips.length > 0 && (
+                    <p className={styles.titleLocations} title={t('projects.clientLocation')}>
+                      {locationChips.map((place) => (
+                        <span key={place.label} className={styles.titleLocation}>
+                          {place.flag ? (
+                            <span aria-hidden>{place.flag}</span>
+                          ) : (
+                            <MapPin size={13} aria-hidden />
+                          )}
+                          {place.label}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                  {!summary && subtitle && <p className={styles.titleSubtitle}>{subtitle}</p>}
                 </div>
-              )}
-              {liveDemoLink && (
-                <a
-                  href={liveDemoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.liveSiteButton}
-                >
-                  {t('projects.visitSite')}
-                  <ExternalLink size={15} aria-hidden />
-                </a>
-              )}
+
+                {/* El sitio en vivo va en el header, al lado de la ubicación: es
+                    la prueba más directa del proyecto y al final del Overview,
+                    debajo de dos bloques de texto, casi nadie llegaba a verlo. */}
+                {liveDemoLink && (
+                <div className={styles.headerAside}>
+                {liveDemoLink && (
+                  <a
+                    href={liveDemoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.liveSiteButton}
+                  >
+                    {t('projects.visitSite')}
+                    <ExternalLink size={15} aria-hidden />
+                  </a>
+                )}
+                </div>
+                )}
               </div>
-              )}
+                {summary && <p className={styles.titleSummary}>{summary}</p>}
+                {metaItems.length > 0 && (
+                  <dl className={styles.metaGrid}>
+                    {metaItems.map(({ key, label, value, Icon }) => (
+                      <div key={key} className={styles.metaItem}>
+                        <span className={styles.metaIcon} aria-hidden>
+                          <Icon size={15} />
+                        </span>
+                        <div className={styles.metaText}>
+                          <dt>{label}</dt>
+                          <dd>{value}</dd>
+                        </div>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                {includeTags.length > 0 && (
+                  <p className={styles.includes}>
+                    <span className={styles.includesLabel}>{metaLabels.includes}</span>
+                    {includeTags.map((tag) => (
+                      <span key={tag} className={styles.includesItem}>
+                        <Check size={13} aria-hidden />
+                        {tag}
+                      </span>
+                    ))}
+                  </p>
+                )}
             </div>
+
+            {/* Mobile: una sola compu entre la info clave y el resto. La columna
+                de fotos completa se oculta en mobile (ver .rightColumn). */}
+            {firstCarousel && <div className={styles.mobileMedia}>{firstCarousel}</div>}
 
             {/* Tabs fijos: el control de navegación no se pierde con el scroll,
                 y cada pestaña cambia el contenido en vez de saltar dentro de un
@@ -608,8 +703,6 @@ export default function ProjectDetailComponent({
               tabs={tabs}
               activeId={activeTab}
               onChange={handleTabChange}
-              backLabel={t('projects.back')}
-              projectTitle={title}
             />
 
             {/* Todos los paneles se renderizan y los inactivos llevan `hidden`:
@@ -626,18 +719,6 @@ export default function ProjectDetailComponent({
                   id="panel-overview"
                   aria-labelledby="tab-overview"
                 >
-                  <CaseStudyMeta
-                    language={language === 'es' ? 'es' : 'en'}
-                    role={role}
-                    engagement={engagement}
-                    duration={duration}
-                    client={client}
-                    industry={industry}
-                    year={year}
-                    // Los resultados y el testimonio viven en la pestaña de
-                    // resultados; acá solo el contexto.
-                  />
-
                   {whatIs && (
                     <section className={styles.detailSection}>
                       <div className={styles.sectionHeader}>

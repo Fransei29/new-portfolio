@@ -1,9 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { useCallback, useEffect, useRef } from 'react';
-import { useLocalePath } from '../../contexts/LanguageContext';
 import styles from './CaseStudyTabs.module.scss';
 
 export interface CaseStudyTab {
@@ -15,18 +12,13 @@ interface Props {
   tabs: CaseStudyTab[];
   activeId: string;
   onChange: (id: string) => void;
-  backLabel: string;
-  projectTitle: string;
 }
 
 export default function CaseStudyTabs({
   tabs,
   activeId,
   onChange,
-  backLabel,
-  projectTitle,
 }: Props) {
-  const toLocale = useLocalePath();
   const listRef = useRef<HTMLDivElement>(null);
   const activeIndex = tabs.findIndex((tab) => tab.id === activeId);
 
@@ -44,25 +36,21 @@ export default function CaseStudyTabs({
     [activeIndex, tabs, onChange]
   );
 
+  // Lleva la pestaña activa a la vista moviendo solo la fila de tabs. Con
+  // scrollIntoView también se movía la página: si los tabs quedaban debajo del
+  // primer pantallazo, al cargar te bajaba hasta ellos.
   useEffect(() => {
-    const buttons = listRef.current?.querySelectorAll('button');
-    const active = buttons?.[activeIndex] as HTMLElement | undefined;
-    active?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    const list = listRef.current;
+    const active = list?.querySelectorAll('button')[activeIndex] as HTMLElement | undefined;
+    if (!list || !active) return;
+    const left = active.offsetLeft - list.offsetLeft;
+    const right = left + active.offsetWidth;
+    if (left < list.scrollLeft) list.scrollLeft = left;
+    else if (right > list.scrollLeft + list.clientWidth) list.scrollLeft = right - list.clientWidth;
   }, [activeIndex]);
 
   return (
     <div className={styles.wrap}>
-      {/* Volver y contexto viven acá adentro: son navegación, igual que los
-          tabs, y ocupaban 217px de aire muerto arriba de la página. */}
-      <Link
-        href={toLocale('/projects')}
-        className={styles.back}
-        aria-label={`${backLabel} — ${projectTitle}`}
-        title={backLabel}
-      >
-        <ArrowLeft size={16} aria-hidden />
-      </Link>
-
       <div className={styles.list} role="tablist" ref={listRef}>
         {tabs.map((tab) => {
           const isActive = tab.id === activeId;

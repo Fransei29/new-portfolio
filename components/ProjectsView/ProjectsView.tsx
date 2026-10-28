@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import ProjectShopCard from '../../components/ProjectShopCard/ProjectShopCard';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/Scroll';
 import styles from '../../app/[lang]/projects/projects.module.scss';
@@ -110,7 +110,7 @@ const Projects = ({ initialProjects }: Props) => {
                     minHeight: 'inherit',
                   }}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectShopCard project={project} priority={index < 3} />
                 </motion.div>
               ))}
             </div>

@@ -21,6 +21,15 @@ export interface ProjectCard {
   /** Línea corta ("Plataforma de E-Commerce a Medida"): la usa la vitrina
       mobile de la home, donde la descripción completa no entra. */
   subtitle?: string;
+  /** Rubro en una o dos palabras ("Fintech", "Transporte"): la tarjeta tipo
+      vitrina de /projects. No es el `industry` largo del detalle. */
+  sector?: string;
+  /** Tres cosas concretas que incluye el proyecto, para entenderlo sin leer
+      la descripción. */
+  tags?: string[];
+  /** Captura sin el marco de la plantilla (public/img/vitrina/<slug>.webp,
+      recortada de previewImage): va dentro de la compu de la vitrina. */
+  shopImage?: string;
   technologies?: string[];
   category?: 'product' | 'platform' | 'landing';
   status?: 'latest';
@@ -52,6 +61,8 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     const value = translations?.projects?.items?.[slug]?.subtitle;
     return typeof value === 'string' ? value : '';
   };
+
+  const itemOf = (slug: string) => translations?.projects?.items?.[slug] ?? {};
 
   return [
   {
@@ -379,17 +390,6 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     category: 'product',
   },
   {
-    slug: 'vestire',
-    title: t('projects.items.vestire.title'),
-    isTutorial: false,
-    description: t('projects.items.vestire.description'),
-    link2: 'https://github.com/Fransei29/vestire_front.git',
-    link3: 'https://vestire-front-s196.vercel.app/',
-    previewImage: '/img/img/Vestire/vestireA.webp',
-    technologies: ['Node.js', 'Express', 'React', 'Axios', 'PostgreSQL'],
-    category: 'product',
-  },
-  {
     slug: 'flipper',
     title: t('projects.items.flipper.title'),
     isTutorial: false,
@@ -400,16 +400,11 @@ export function getProjectCards(lang: CardLanguage = 'en'): ProjectCard[] {
     technologies: ['Node.js', 'Express', 'Redis', 'Tailwind CSS'],
     category: 'product',
   },
-  {
-    slug: 'trip-planner',
-    title: t('projects.items.trip-planner.title'),
-    isTutorial: false,
-    description: t('projects.items.trip-planner.description'),
-    link2: 'https://github.com/Fransei29/trip-planner-c',
-    link3: 'https://trip-planner-c.vercel.app/',
-    previewImage: '/img/img/Trip/trip.webp',
-    technologies: ['Next.js', 'JavaScript', 'CSS'],
-    category: 'product',
-  },
-].map((card) => ({ ...card, subtitle: subtitleOf(card.slug) })) as ProjectCard[];
+].map((card) => ({
+    ...card,
+    subtitle: subtitleOf(card.slug),
+    sector: typeof itemOf(card.slug).sector === 'string' ? itemOf(card.slug).sector : '',
+    tags: Array.isArray(itemOf(card.slug).tags) ? itemOf(card.slug).tags : [],
+    shopImage: `/img/vitrina/${card.slug}.webp`,
+  })) as ProjectCard[];
 }

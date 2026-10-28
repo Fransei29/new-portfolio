@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './RecentProjects.module.scss';
-import ProjectCard from '../ProjectCard/ProjectCard';
+import ProjectShopCard from '../ProjectShopCard/ProjectShopCard';
+import type { ProjectCard as ProjectCardData } from '../../lib/projectCards';
 import Button from '../Button/Button';
 import MobileShowcase from './MobileShowcase';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-type Project = {
-  slug?: string;
+type Project = ProjectCardData & {
+  slug: string;
   title: string;
   subtitle?: string;
   category?: 'product' | 'platform' | 'landing';
@@ -56,7 +57,8 @@ const RecentProjects = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const visibleCount = 2;
+  // Tarjetas vitrina (más chicas que las viejas): entran 3.
+  const visibleCount = 3;
   // Same rotation cadence on both desktop and mobile: one step per cycle (mobile mirrors desktop)
   const stepSize = 1;
 
@@ -115,7 +117,7 @@ const RecentProjects = () => {
           >
             {trackItems.map((project, i) => (
               <div key={`${project.title}-${i}`} className={styles.slide}>
-                <ProjectCard project={project} />
+                <ProjectShopCard project={project} />
               </div>
             ))}
           </div>

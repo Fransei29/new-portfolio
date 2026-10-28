@@ -42,12 +42,26 @@
       "arventa": {
         "title": "Arventa",
         "subtitle": "AI Voice-Agent Accounts Receivable Automation Platform",
-        "description": "Multi-tenant platform that automates collections on overdue invoices. AI voice agents place outbound calls, AI-drafted emails follow up, and a visual workflow engine decides who gets contacted, through which channel and when. Runs are durable state machines in Postgres that park while waiting on a call, a reply or a timer, and resume when the callback arrives."
+        "description": "Multi-tenant platform that automates collections on overdue invoices. AI voice agents place outbound calls, AI-drafted emails follow up, and a visual workflow engine decides who gets contacted, through which channel and when. Runs are durable state machines in Postgres that park while waiting on a call, a reply or a timer, and resume when the callback arrives.",
+        "sector": "Fintech",
+        "tags": [
+          "AI voice agents",
+          "AI-written emails",
+          "Visual workflows"
+        ],
+        "summary": "Multi-tenant collections platform with AI voice agents that call debtors, automated emails and configurable workflows to recover overdue invoices. It handles batches of up to 500 invoices and centralizes recordings, transcripts and outcomes."
       },
       "bgv-mayorista": {
         "title": "BGV Mayorista",
         "subtitle": "B2B Wholesale E-Commerce with an AI Assistant",
-        "description": "Online store for a household-goods distributor that sells to retailers by the closed pack. The catalog is public while prices and purchasing are reserved for approved wholesale accounts, with minimum orders, pack multiples, per-company discounts, Mercado Pago and bank transfer payments, and an AI assistant that never reveals prices to anonymous visitors."
+        "description": "Online store for a household-goods distributor that sells to retailers by the closed pack. The catalog is public while prices and purchasing are reserved for approved wholesale accounts, with minimum orders, pack multiples, per-company discounts, Mercado Pago and bank transfer payments, and an AI assistant that never reveals prices to anonymous visitors.",
+        "sector": "Wholesale",
+        "tags": [
+          "Wholesale-only pricing",
+          "Mercado Pago",
+          "AI assistant"
+        ],
+        "summary": "B2B platform for a wholesale distributor, with access through approved accounts, per-customer pricing and discounts, minimum orders and integrated payments. It includes an AI assistant for inquiries and lead capture, plus a panel to manage products, orders, analytics and content."
       },
       "comply-dq": {
         "title": "Comply DQ",
@@ -65,7 +79,14 @@
           "Responsive, productized UI: Next.js App Router, Redux for complex client state, Ant Design / MUI / Radix-style component stacks, and layouts optimized for desktop dashboards + mobile-friendly operator tasks.",
           "Operational excellence: structured logging, tenant-aware API guards, and deployment-oriented configuration for staging/production parity.",
           "Pixel-perfect responsive design across the entire admin surface — looks impeccable from operator tablets on the road up to ultra-wide compliance dashboards."
-        ]
+        ],
+        "sector": "Transportation",
+        "tags": [
+          "Document verification",
+          "Stripe subscriptions",
+          "Enterprise login"
+        ],
+        "summary": "Multi-tenant compliance SaaS for North American carriers that centralizes driver documentation, licenses, medical certificates and insurance policies, with audit traceability, enterprise authentication, Stripe subscriptions and production data migrations."
       },
       "globaly": {
         "title": "Globaly",
@@ -83,7 +104,14 @@
           "A measured performance budget rather than a guessed one: the chat widget moved to lazy loading after real-user monitoring measured 1784 ms of INP on a hero call to action that was not responding while the main thread hydrated.",
           "A content security policy with its concessions written down, documenting why per-request nonces would force dynamic rendering on every page of a marketing site.",
           "Feature-parking as a delivery pattern: parked sections carry their reason and reactivation criterion in the same comment, so pages keep routing and building."
-        ]
+        ],
+        "sector": "Remote collaboration",
+        "tags": [
+          "3D scene",
+          "Spatial audio",
+          "3 languages"
+        ],
+        "summary": "Immersive website for a collaboration platform, with a real-time interactive 3D office, avatars, conversations and spatial audio. It includes 33 pages in three languages, localized pricing, plan comparisons, an enterprise section and a CMS-managed blog."
       },
       "red-lizard-studioz": {
         "title": "Red Lizard Studioz",
@@ -101,7 +129,14 @@
           "Cost engineering as an architectural constraint: a cheap helper model for routing and verification, clipped context windows, and content-hash caching.",
           "Two independent rate-limit ceilings on an endpoint that cannot be authenticated, bounding both single-widget abuse and distributed runs.",
           "Failure isolation as a recurring discipline: image generation never fails an article, and a failed translation no longer rolls back a generated post."
-        ]
+        ],
+        "sector": "Marketing agency",
+        "tags": [
+          "AI writing",
+          "Chat agents",
+          "Multi-client"
+        ],
+        "summary": "Multi-tenant platform for marketing agencies and their clients, with AI-generated SEO content, knowledge bases, conversational agents for support and lead capture, a sales pipeline, custom domains and a 24-section operations panel."
       },
       "comply-dq-site": {
         "title": "ComplyDQ — Marketing Site",
@@ -119,12 +154,26 @@
           "Tenant isolation against a shared CMS, applied to the detail query as well as the list so another client's article cannot be read by guessing a URL.",
           "Resilient ISR against an external dependency: the CMS client never throws, so an outage degrades the blog rather than breaking the build.",
           "Structured data constrained to what the page actually asserts, with external profile links omitted for want of confirmed sources."
-        ]
+        ],
+        "sector": "Transportation",
+        "tags": [
+          "Interactive tools",
+          "CMS blog",
+          "Zero-downtime deploys"
+        ],
+        "summary": "Marketing site for a compliance platform, with interactive tools for audit readiness, ROI calculation and regulatory compliance. It includes a CMS-managed blog and automated deployments with validation, zero-downtime updates and rollback on failure."
       },
       "bellum-property-management": {
         "title": "Bellum Property Management",
         "subtitle": "Corporate Website for an HOA Management Company",
-        "description": "Corporate website for an HOA and condominium management company in Virginia. The source code was recovered from the compiled production bundle, migrated to Vite, audited and redesigned on a custom design system, with per-route SEO, structured data and an accessible proposal questionnaire."
+        "description": "Corporate website for an HOA and condominium management company in Virginia. The source code was recovered from the compiled production bundle, migrated to Vite, audited and redesigned on a custom design system, with per-route SEO, structured data and an accessible proposal questionnaire.",
+        "sector": "Real estate",
+        "tags": [
+          "Design system",
+          "Per-page SEO",
+          "Proposal form"
+        ],
+        "summary": "Corporate website for a Virginia property management company, built to generate proposal requests. Rebuilt from a production deployment with no access to the source code, on a custom design system with per-page SEO, without interrupting service."
       },
       "royal-parking-services": {
         "title": "Royal Parking Services",
@@ -141,7 +190,14 @@
           "Third-party widget suppression across client-side navigation, recognising that a third-party script's DOM outlives React's tree.",
           "CMS integration with graceful degradation, falling back to committed local content so an outage degrades to static posts.",
           "Stripe integrated twice, deliberately differently: modern PaymentIntents for the anonymous one-off payment, tokenization for stored B2B credentials."
-        ]
+        ],
+        "sector": "Parking",
+        "tags": [
+          "Stripe payments",
+          "Client portal",
+          "Permit management"
+        ],
+        "summary": "Web application for a Canadian parking enforcement company that combines the public site with a client portal: violation lookup by plate, photo evidence and Stripe payments. It includes business management of permits, vehicles, saved cards and invoicing."
       },
       "sophie-callander": {
         "title": "Sophie Callander Consulting",
@@ -159,7 +215,14 @@
           "Structured data bounded by what the page actually shows, typed as ProfessionalService precisely because no physical address is published.",
           "Image pipeline tuned to the actual asset set, capping device sizes where larger breakpoints produced byte-identical output.",
           "Accessibility encoded in the token layer, with measured contrast ratios as comments and 62 logical-property declarations carrying the RTL layout."
-        ]
+        ],
+        "sector": "Mediation",
+        "tags": [
+          "7 languages",
+          "Right-to-left",
+          "Multilingual SEO"
+        ],
+        "summary": "Professional website for a mediator in Canada, in seven languages with right-to-left support, featuring services, credentials, CMS-managed articles and contact. It includes SEO and structured data tailored to each language and page."
       },
       "acer0": {
         "title": "Acer0",
@@ -176,7 +239,14 @@
           "Hardened security with Helmet, express-rate-limit, Zod validation on every endpoint, Google reCAPTCHA on all public forms, and input sanitization across the BFF proxy layer.",
           "Containerized the entire stack with Docker Compose (PostgreSQL 17, backend, frontend) and automated VPS deployment with PM2 cluster mode for zero-downtime releases.",
           "Delivered a pixel-perfect mobile-first responsive UI with SCSS modules and breakpoints at 480px, 640px, 768px, and 900px — looks impeccable on every device, from small phones to ultra-wide desktops."
-        ]
+        ],
+        "sector": "Manufacturing",
+        "tags": [
+          "Cart & checkout",
+          "Mercado Pago",
+          "Admin panel"
+        ],
+        "summary": "Custom e-commerce for a manufacturing and retail brand, with catalog, filters, coupons, payments, accounts and order tracking. It integrates an AI assistant for customer inquiries and a panel to manage operations, sales and the assistant’s knowledge."
       },
       "bellum": {
         "title": "Bellum",
@@ -194,7 +264,14 @@
           "Transactional email system via Resend for contact submissions and proposal notifications, with branded templates fully editable from the admin panel.",
           "Full SEO implementation: dynamic sitemap, robots.txt, Open Graph metadata, FAQ JSON-LD, and Organization structured data — automatically regenerated whenever content changes through the admin.",
           "Mobile-first SCSS architecture with modular component design, fluid responsive typography, smooth crossfade hero carousel, and a consistent design system using custom variables and mixins — flawless from 320px phones to ultra-wide desktops."
-        ]
+        ],
+        "sector": "HOA management",
+        "tags": [
+          "Custom CMS",
+          "Proposal flow",
+          "Blog"
+        ],
+        "summary": "Website for a firm that manages finances for homeowner associations, with 3D scenes, animations and an AI assistant connected to the site content and a dedicated knowledge base. It includes a panel to manage services, pricing, blog, proposals, conversations and leads, with automatic SEO generation."
       },
       "grupo-el-triunfo": {
         "title": "Grupo El Triunfo",
@@ -211,7 +288,14 @@
           "Implemented a multi-section company page with history timeline, mission/vision, stats, gallery, and brand values.",
           "Pixel-perfect responsive mobile-first layout with custom breakpoints, fluid typography, and optimized image delivery via Next.js <Image> — looks impeccable on every device, from small phones to 4K monitors.",
           "Contact page with form, info cards, and Google Maps embed integration."
-        ]
+        ],
+        "sector": "Agribusiness",
+        "tags": [
+          "Video hero",
+          "Scroll animations",
+          "6 business units"
+        ],
+        "summary": "Corporate website for an agribusiness holding in Córdoba with over 36 years in the industry. It presents six business units through service pages, a video hero, galleries, scroll-linked animations and an integrated map."
       },
       "home-trades-online": {
         "title": "Home Trades Online",
@@ -227,7 +311,14 @@
           "Full internationalization infrastructure with URL-prefix routing, country-aware currency formatting, and complete Argentine Spanish translation — enabling near-zero-effort expansion to 9+ countries.",
           "Pixel-perfect mobile-first UX engineered for outdoor and job-site conditions: 48px+ touch targets, high-contrast design, true one-handed operation, glove-friendly inputs, and streaming proposal generation with progressive skeleton loading — flawless from small phones to large tablets.",
           "Production deployment pipeline with Docker Compose, Gunicorn, Nginx reverse proxy, Let's Encrypt SSL, and GitHub Actions CI (unit tests + Playwright E2E)."
-        ]
+        ],
+        "sector": "Construction & trades",
+        "tags": [
+          "AI proposals",
+          "Digital signatures",
+          "English/Spanish"
+        ],
+        "summary": "Mobile-first SaaS for contractors that generates AI proposals, including line items and pricing, in under 30 seconds. It adds shareable links, digital signatures, teams with role-based permissions, referrals and bilingual support."
       },
       "salesforpro": {
         "title": "Home Trades Online Landing",
@@ -244,7 +335,14 @@
           "Integrated Django i18n with {% trans %} tags across all marketing content for seamless English/Spanish switching via URL prefix routing (/ar/).",
           "Implemented accessibility best practices: prefers-reduced-motion media query disabling all animations, ARIA labels, semantic HTML, visible focus rings, and aria-live regions for loading states.",
           "CTA shimmer effect with CSS-only animated gradient sweep, wave dividers using inline SVG paths, and skeleton loading states with shimmer animation for the proposal generation preview."
-        ]
+        ],
+        "sector": "Construction & trades",
+        "tags": [
+          "Interactive demo",
+          "Intro animation",
+          "Dark mode"
+        ],
+        "summary": "Interactive landing page that lets visitors try the AI proposal generator before signing up. It combines a guided product walkthrough, cinematic animations, scroll-linked transitions and full English and Spanish versions."
       },
       "starton": {
         "title": "StartOn ",
@@ -260,7 +358,14 @@
           "Persistent private messaging system and advanced filters by city, technology, and company type.",
           "UX/UI optimization: mobile-first, smooth animations, scalable typography, and consistent color palette.",
           "Implementation of blogs, service pages, and founder networking system."
-        ]
+        ],
+        "sector": "Startups",
+        "tags": [
+          "Role dashboards",
+          "Internal messaging",
+          "Google login"
+        ],
+        "summary": "Platform connecting tech professionals with startups, with role-specific experiences, internal messaging, founder networking, advanced filters, a blog and Google sign-in."
       },
       "mi-agenda": {
         "title": "Mi Agenda",
@@ -277,7 +382,14 @@
           "Google Calendar sync to mark busy blocks and prevent booking overlap.",
           "Real-time updates via WebSockets (Socket.io with Redis adapter) for bookings and notifications.",
           "PWA «Mi agenda»: installable, offline page, push notifications and app shortcuts."
-        ]
+        ],
+        "sector": "Services",
+        "tags": [
+          "Online booking",
+          "Google Calendar",
+          "Mercado Pago"
+        ],
+        "summary": "Booking system with per-service availability and Google Calendar sync. It integrates one-time payments and subscriptions through Mercado Pago, email, push and WhatsApp notifications, and an installable app with reminders and offline access."
       },
       "tecnomar": {
         "title": "TecnoMar",
@@ -293,7 +405,14 @@
           "Online quote form on dedicated route and links to Contact; differentiated CTAs (quote vs contact) in Approach and Process.",
           "Mobile-first design: animated hamburger (lines → X), aligned contact cards, client logos with desktop/mobile sizes and priority load for first row.",
           "Loading overlay with fixed logo and spinner; map integration in contact section."
-        ]
+        ],
+        "sector": "Industrial services",
+        "tags": [
+          "Custom 3D model",
+          "Scroll animation",
+          "Quote form"
+        ],
+        "summary": "Corporate 3D experience for an industrial pumps company. An interactive model comes apart piece by piece as visitors scroll, with realistic materials, labels and optional sound, connected to an online quote form and corporate content."
       },
       "augusto-fit-program": {
         "title": "Augusto Fit Program",
@@ -311,7 +430,14 @@
           "Viewport and meta configured for consistency between development and production on mobile.",
           "Deployment on Vercel with a single project connected to the repository.",
           "Architecture ready to scale into a shop (plans purchase, members area) if the client grows the product."
-        ]
+        ],
+        "sector": "Fitness",
+        "tags": [
+          "Training plans",
+          "Testimonials",
+          "Contact form"
+        ],
+        "summary": "Professional website for a personal trainer, with training plans, testimonials, transformations and habit content. Its architecture is ready to add online plan sales and a private members area."
       },
       "property-recommender": {
         "title": "Habita",
@@ -325,7 +451,14 @@
           "Applied modular SCSS for clean, reusable styling.",
           "Optimized app performance and user experience through efficient data handling and UI design.",
           "Created an admin panel for user property management and favorites tracking."
-        ]
+        ],
+        "sector": "Real estate",
+        "tags": [
+          "Property search",
+          "Recommendations",
+          "Responsive"
+        ],
+        "summary": "Real estate recommendation app that surfaces relevant properties using similarity algorithms. It includes filters, result sorting and a personal space to save and manage favorite properties."
       },
       "ecommerce": {
         "title": "Quiero Sport",
@@ -340,7 +473,14 @@
           "Managed state and side effects with React hooks.",
           "Used Prisma ORM for database operations.",
           "Set up Docker for local development and deployed on Vercel."
-        ]
+        ],
+        "sector": "Retail",
+        "tags": [
+          "Cart",
+          "Mercado Pago",
+          "Docker"
+        ],
+        "summary": "Full-stack e-commerce with catalog, cart, Mercado Pago checkout and user accounts with order history. Built on a containerized Docker architecture and deployed on Vercel."
       },
       "healthcare-crm": {
         "title": "Medicare ",
@@ -357,7 +497,14 @@
           "Tested core services and edge cases with unit and integration tests.",
           "Designed a responsive, accessible UI with Tailwind and dark mode toggle.",
           "Managed environment configuration for deployment across Render and Vercel."
-        ]
+        ],
+        "sector": "Healthcare",
+        "tags": [
+          "Patients",
+          "Treatments",
+          "Dark mode"
+        ],
+        "summary": "Healthcare CRM to manage patients, medications and treatments through admin dashboards and validated forms. It includes a NestJS backend, dark mode and automated tests."
       },
       "taskmanager": {
         "title": "Task Manager",
@@ -372,7 +519,14 @@
           "Set up Docker for local development environment.",
           "Implemented responsive design with CSS Modules.",
           "Managed state and API calls with Axios."
-        ]
+        ],
+        "sector": "Productivity",
+        "tags": [
+          "Tasks",
+          "User login",
+          "Responsive"
+        ],
+        "summary": "Task management app with authentication, task creation and editing, and PostgreSQL persistence. Built with Next.js, with an interface focused on clarity and ease of use."
       },
       "flipper": {
         "title": "Flipper",
@@ -387,34 +541,14 @@
           "Set up Docker for containerization and deployment.",
           "Implemented real-time features for social interaction.",
           "Deployed the application on Vercel."
-        ]
-      },
-      "vestire": {
-        "title": "Vestiré",
-        "subtitle": "Fashion E-Commerce Platform",
-        "description": "An e-commerce platform specializing in clothing, offering a wide selection of products with intuitive navigation and a seamless checkout process.\nThe frontend is built with React, while the backend utilizes Node.js and Express for server-side operations.\nAxios is used for handling HTTP requests, and PostgreSQL serves as the database.\nThe application includes user authentication to manage user sessions and orders.",
-        "whatIs": "A sleek and modern e-commerce platform for fashion and accessories, built with React and styled with CSS.\nFeatures include user authentication, product browsing, shopping cart functionality, and a clean, responsive design.\nThe application showcases a collection of clothing items, sneakers, and accessories with detailed product information.\nIncludes secure user authentication and session management for a personalized shopping experience.",
-        "problemSolved": "Local fashion retailers needed a modern online presence to reach customers.\nThis app provides an elegant solution with an intuitive shopping experience,\nshowcasing products with high-quality images and detailed descriptions.\nSecure authentication ensures users can safely manage their accounts and orders.",
-        "learnings": [
-          "Built a responsive e-commerce interface with React.",
-          "Implemented secure user authentication with JWT.",
-          "Created an intuitive product browsing experience.",
-          "Developed RESTful APIs with Node.js and Express.",
-          "Managed database operations with PostgreSQL.",
-          "Deployed the application on Vercel.",
-          "Implemented modern UI/UX practices."
-        ]
-      },
-      "trip-planner": {
-        "title": "Trip Planner",
-        "subtitle": "Simple Trip Planning App",
-        "description": "Small Next.js app for planning trips. Minimal UI, Geist font, deployed on Vercel.",
-        "whatIs": "Small Next.js app for planning trips. Bootstrapped with create-next-app, uses Geist font and a minimal UI. Deployed on Vercel.",
-        "problemSolved": "Quick side project to try Next.js App Router and keep the scope small—focused on a simple trip-planning flow.",
-        "learnings": [
-          "Next.js App Router and create-next-app setup.",
-          "Deployed on Vercel (trip-planner-c.vercel.app)."
-        ]
+        ],
+        "sector": "Social network",
+        "tags": [
+          "Live updates",
+          "Follows",
+          "Redis"
+        ],
+        "summary": "Twitter-inspired social network with posts, likes, comments and follows. It includes real-time updates to keep activity in sync without manual reloads."
       },
       "dynamic-blog": {
         "title": "Dynamic Blog",
@@ -475,7 +609,14 @@
           "Built a comprehensive dashboard with statistics and data visualization.",
           "Designed a scalable architecture with Node.js and Express backend.",
           "Implemented responsive design with SCSS for optimal user experience."
-        ]
+        ],
+        "sector": "Legal",
+        "tags": [
+          "Case files",
+          "AI tracking",
+          "Gmail & Telegram alerts"
+        ],
+        "summary": "Legal case management platform that centralizes case files, notices, filings and documents. It uses AI to detect updates and suggest actions, sends automatic notifications through Gmail and Telegram, and tracks activity statistics."
       },
       "lexmax-landing": {
         "title": "LexMax Landing",
@@ -492,7 +633,14 @@
           "Implemented responsive navigation with hamburger menu for mobile devices.",
           "Created visual effects and animations to enhance user engagement.",
           "Optimized page performance and loading times with Next.js optimizations."
-        ]
+        ],
+        "sector": "Legal",
+        "tags": [
+          "Services showcase",
+          "Impact stats",
+          "Contact"
+        ],
+        "summary": "Sales landing page for a legal automation platform that presents case management, bots, bulk document generation and AI analysis through product sections and impact metrics."
       },
       "the-club-northfield": {
         "title": "The Club at Northfield",
@@ -509,7 +657,14 @@
           "Optimized for static export and fast loading times.",
           "Designed modular components for easy maintenance.",
           "Created an intuitive navigation system for better user experience."
-        ]
+        ],
+        "sector": "Sports & fitness",
+        "tags": [
+          "CMS",
+          "Events",
+          "Memberships"
+        ],
+        "summary": "Corporate website for a racquet sports and fitness club in Ontario, with dynamic events, services, memberships and FAQs. It includes a CMS so the team can manage content on its own."
       },
       "event-scheduler": {
         "title": "Event Scheduler",
@@ -530,7 +685,14 @@
           "Designed a dual-interface system (admin portal and public website) with shared components.",
           "Implemented auto-save functionality to prevent data loss during form completion.",
           "Developed a complete event coordination system with availability management."
-        ]
+        ],
+        "sector": "Events",
+        "tags": [
+          "Venue booking",
+          "13-step onboarding",
+          "Admin portal"
+        ],
+        "summary": "Platform connecting event organizers with available venues. It includes guided venue setup, map-based search, vendor bundling, real-time pricing, digital contracts and bookings with Stripe payments."
       },
       "ateevo-wholesale": {
         "title": "Ateevo Wholesale",
@@ -554,7 +716,14 @@
           "Super admin: multiple tenants, automatic DB creation, impersonation, and activation/deactivation.",
           "Fully responsive design for desktop, tablet, and mobile.",
           "Security: JWT, bcrypt, roles (Customer/Admin/Super Admin), isolated database per tenant."
-        ]
+        ],
+        "sector": "Fashion",
+        "tags": [
+          "Seasonal catalogs",
+          "Inventory",
+          "Multi-brand"
+        ],
+        "summary": "Multi-brand B2B platform for the fashion industry, with seasonal catalogs, pre-orders, inventory, orders and customers. It includes digital contracts with automatic PDFs, availability and margin reports, pricing in three currencies and white-label experiences."
       }
     },
     "tabOverview": "Overview",
@@ -564,7 +733,9 @@
     "sectionArchitecture": "System architecture",
     "sectionInfra": "Infrastructure & deployment",
     "clientLocation": "Client location",
-    "tabTools": "Tools"
+    "tabTools": "Tools",
+    "live": "Live",
+    "private": "Private"
   },
   "pages": {
     "projects": {

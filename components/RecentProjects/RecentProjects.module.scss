@@ -20,8 +20,8 @@
 }
 
 .viewport {
-    --gap: 3rem;
-    --visible-count: 2;
+    --gap: 2.25rem;
+    --visible-count: 3;
     --peek: 7%;
     --container-inset: max(2rem, calc((var(--page-w) - var(--container-max-width)) / 2));
     position: relative;

@@ -40,39 +40,6 @@
   }
 }
 
-.back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2rem;
-  align-self: center;
-  height: 2rem;
-  border-radius: 999px;
-  color: var(--text-color);
-  opacity: 0.6;
-  text-decoration: none;
-  transition: opacity 0.25s ease, background 0.25s ease, transform 0.25s ease;
-
-  &:hover {
-    opacity: 1;
-    background: rgba(46, 41, 78, 0.07);
-    transform: translateX(-2px);
-  }
-
-  :global(html.dark) & {
-    color: var(--text-color-dark-mode);
-  }
-
-  :global(html.dark) &:hover {
-    background: rgba(181, 156, 248, 0.16);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-  }
-}
 
 .list {
   display: flex;

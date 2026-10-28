@@ -55,8 +55,11 @@
   margin: 0;
   padding: clamp(1.75rem, 3.5vw, 3rem);
   border-radius: 22px;
-  background: var(--background-colorA);
+  /* Apenas más oscuro que el fondo de la sección (#f9f9fa) y con una sombra
+     suave: solo para despegarla un poco, sin que pese. */
+  background: #f4f3f7;
   border: 1px solid rgba(46, 41, 78, 0.08);
+  box-shadow: 0 4px 16px rgba(46, 41, 78, 0.07);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -64,6 +67,7 @@
   :global(html.dark) & {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
   }
 }
 

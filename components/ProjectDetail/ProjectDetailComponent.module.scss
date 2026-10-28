@@ -1,10 +1,11 @@
 .projectContainer {
-  padding: 4.5rem 2rem 6rem;
+  // Poco aire arriba: el contenido arranca enseguida debajo del header.
+  padding: 2rem 2rem 6rem;
   max-width: var(--container-max-width);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   position: relative;
 
   @media (max-width: 768px) {
@@ -58,8 +59,11 @@
   // necesita tanto espacio como cuando era un documento continuo.
   // Con cinco tabs, la columna de texto necesita un poco más de aire; la foto
   // cede lo justo para que la fila entre sin scroll horizontal.
-  grid-template-columns: 1.32fr 1fr;
-  gap: 2.5rem;
+  // Las fotos ceden ancho al contenido: con 1.32fr dominaban la página y el
+  // resumen y la navegación quedaban relegados.
+  grid-template-columns: 1fr 1.15fr;
+  // Aire entre las fotos y el texto.
+  gap: 4rem;
   align-items: start;
 
   @media (max-width: 768px) {
@@ -98,7 +102,7 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
+  gap: 2.5rem;
   min-width: 0;
   position: sticky;
   // Misma altura de reposo que los tabs (header 104px + aire): así la imagen y
@@ -107,9 +111,19 @@
   align-self: start;
 
   @media (max-width: 768px) {
-    gap: 1rem;
-    position: static;
-    top: auto;
+    // En mobile la columna de fotos no se muestra: una sola compu va entre el
+    // resumen y los tabs (.mobileMedia). Dos escenarios apilados empujaban la
+    // info del proyecto varias pantallas hacia abajo.
+    display: none;
+  }
+}
+
+.mobileMedia {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    margin-bottom: 1.25rem;
   }
 }
 
@@ -160,7 +174,9 @@
 
 .titleHeader {
   display: flex;
-  align-items: flex-start;
+  // Título, ubicación y botón en la misma línea: alineados arriba, el título
+  // quedaba suelto al lado de una columna de dos cosas.
+  align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   margin-bottom: 1.25rem;
@@ -176,6 +192,149 @@
   flex: 1 1 auto;
   min-width: 0;
 }
+
+// Resumen breve bajo el título: se entiende el proyecto sin abrir el texto
+// largo del Overview.
+.titleSummary {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--lila-profundo, #2e294e);
+
+  :global(html.dark) & {
+    color: var(--text-color-light, #d6d2e6);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+// Recuadro lila con la ficha del proyecto, el resumen y lo que incluye.
+.summaryCard {
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 0.25rem 0 2rem;
+  padding: 1.25rem 1.5rem 1.35rem;
+  border-radius: 20px;
+  // Un tono más claro que el lila velo de la marca (#f2effb).
+  background: #f6f4fd;
+  border: 1px solid #e8e2fa;
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 768px) {
+    margin: 0 0 1.25rem;
+    padding: 1.15rem 1.1rem;
+    border-radius: 16px;
+  }
+}
+
+.metaGrid {
+  display: grid;
+  // Dos y dos: cada dato tiene ancho para leerse en una o dos líneas.
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid #ddd5f6;
+
+  :global(html.dark) & {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.55rem 0.65rem;
+  // Blanco translúcido: se integra con el lila del recuadro en vez de saltar.
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(125, 104, 216, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(46, 41, 78, 0.03), 0 3px 10px rgba(46, 41, 78, 0.04);
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+}
+
+.metaIcon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ece7fc;
+  color: #6d5dd3;
+
+  :global(html.dark) & {
+    background: rgba(181, 156, 248, 0.15);
+    color: var(--lila-suave, #b59cf8);
+  }
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  dt {
+    font-size: 0.68rem;
+    color: var(--gris-medio, #8a8599);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--lila-profundo, #2e294e);
+
+    :global(html.dark) & {
+      color: #fff;
+    }
+  }
+}
+
+// Lo que incluye: en segundo plano, para no competir con la ficha.
+.includes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-color-light, #6b6b6b);
+
+  svg {
+    color: #a99de0;
+  }
+}
+
+.includesLabel {
+  font-weight: 600;
+  color: var(--gris-medio, #8a8599);
+}
+
+.includesItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 
 .projectTitle {
   display: block;
@@ -202,12 +361,12 @@
   // chips, dejaba al título en una columna de una palabra por línea. El tope
   // de ancho hace que los chips bajen de línea antes de apretar el título.
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
   gap: 0.5rem;
   flex: 0 1 auto;
-  max-width: 55%;
-  margin-top: 0.3rem;
+  max-width: 60%;
 
   // Dentro del grupo, los chips ya no necesitan su propio margen.
   .locationChips {
@@ -580,28 +739,64 @@
 }
 
 .imageCarouselContainer {
+  // Escenario lila con la captura dentro de una compu (mismo recurso que la
+  // vitrina de /projects y los posts de Instagram).
   position: relative;
-  // Ocupa todo el ancho de su columna: el max-width de 820px la achicaba en
-  // pantallas grandes, que es justo donde las capturas se aprovechan.
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  aspect-ratio: 16 / 9;
-  min-height: 285px;
-  border-radius: var(--br);
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin-bottom: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.75rem 3rem;
+  border-radius: 22px;
+  background: var(--lila-velo, #f2effb);
 
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: none;
-    min-height: 220px;
-    margin-bottom: 1rem;
+  :global(html.dark) & {
+    background: var(--lila-velo-dark, #262336);
   }
 
-  &:last-of-type {
-    margin-bottom: 0;
+  @media (max-width: 768px) {
+    padding: 1.4rem 1rem 2.4rem;
+    border-radius: 18px;
+  }
+}
+
+.laptop {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.laptopScreen {
+  position: relative;
+  width: 100%;
+  // Misma proporción que las capturas sin marco (~1.9:1): se ven casi
+  // enteras, sin comerse los costados.
+  aspect-ratio: 19 / 10;
+  box-sizing: border-box;
+  background: #14121c;
+  border: 6px solid #14121c;
+  border-bottom-width: 8px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  box-shadow: 0 18px 30px rgba(46, 41, 78, 0.2);
+
+  @media (max-width: 768px) {
+    border-width: 4px;
+    border-bottom-width: 6px;
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+.laptopBase {
+  width: 111%;
+  height: 9px;
+  background: linear-gradient(#e4e2ea, #b6b3c2);
+  border-radius: 0 0 9px 9px;
+
+  @media (max-width: 768px) {
+    height: 7px;
   }
 }
 
@@ -686,9 +881,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  border-radius: var(--br);
+  // Centrada horizontalmente: anclada a la izquierda, todo el recorte caía del
+  // lado derecho y la captura se veía corrida.
+  object-position: center top;
+  border-radius: 2px;
   display: block;
+}
+
+// Capturas de celular: enteras, centradas sobre la pantalla oscura.
+.carouselImgPortrait {
+  object-fit: contain;
+  object-position: center;
 }
 
 .carouselNavButton {
@@ -757,56 +960,55 @@
 }
 
 .carouselIndicators {
+  // Debajo de la compu, sobre el fondo lila del escenario.
   position: absolute;
-  bottom: 16px;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  padding: 8px 12px;
-  border-radius: 20px;
 
   @media (max-width: 768px) {
-    bottom: 12px;
-    gap: 6px;
-    padding: 6px 10px;
+    bottom: 0.8rem;
   }
 }
 
 .indicator {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 4px;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: #cfc8ea;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: width 0.3s ease, background 0.3s ease;
   padding: 0;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(1.2);
+    background: #b59cf8;
   }
 
   &.active {
-    background: var(--primary-color);
-    width: 10px;
-    height: 10px;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+    width: 22px;
+    background: var(--lila-profundo, #2e294e);
+  }
+
+  :global(html.dark) & {
+    background: rgba(255, 255, 255, 0.25);
+
+    &.active {
+      background: var(--lila-suave, #b59cf8);
+    }
   }
 
   @media (max-width: 768px) {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
 
     &.active {
-      width: 8px;
-      height: 8px;
+      width: 18px;
     }
   }
 }
@@ -1258,3 +1460,161 @@
     padding: 6px 12px;
   }
 }
+// `.textContent p` (más arriba) les pone margen y tamaño a todos los párrafos
+// del panel; dentro del recuadro del resumen manda este bloque.
+.textContent .summaryCard p {
+  margin: 0;
+}
+
+.textContent .summaryCard .titleSummary {
+  font-size: 1.02rem;
+  line-height: 1.65;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+.textContent .summaryCard .includes {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+// Dentro del recuadro, el encabezado no lleva margen propio: lo da el gap.
+.summaryCard .titleHeader {
+  margin-bottom: 0;
+}
+
+.titleLocations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gris-medio, #8a8599);
+}
+
+.textContent .summaryCard .titleLocations {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+
+  // En mobile, apenas más separación entre el título y los países.
+  @media (max-width: 768px) {
+    margin-top: 0.8rem;
+  }
+}
+
+.titleLocation {
+  // Badge, como antes, pero debajo del título.
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--lila-profundo, #2e294e);
+  background: #fff;
+  border: 1px solid #e3dcf8;
+  border-radius: 999px;
+
+  :global(html.dark) & {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Si hay una cantidad impar de datos, el último ocupa todo el ancho en vez de
+// quedar solo en media fila.
+.metaItem:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  // En mobile el encabezado del recuadro va alineado a la izquierda, con el
+  // botón debajo del título y la ubicación.
+  // Título a la izquierda y "Ver sitio en vivo" en la misma línea, a la
+  // derecha; los países bajan a una fila propia a todo el ancho. Ahorra la
+  // altura del botón apilado.
+  .summaryCard .titleHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 0.75rem;
+    row-gap: 0;
+    text-align: left;
+  }
+
+  .summaryCard .titleBlock {
+    display: contents;
+  }
+
+  .summaryCard .projectTitle {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+
+  .summaryCard .titleLocations {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .summaryCard .headerAside {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none;
+    margin: 0;
+  }
+}
+
+// Volver: pastilla blanca con borde lila suave, flecha y texto adentro.
+.mobileBack {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0 0.9rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lila-profundo, #2e294e);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e8e2fa;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(46, 41, 78, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: #d8cff7;
+    box-shadow: 0 3px 10px rgba(46, 41, 78, 0.09);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  :global(html.dark) & {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0.25rem 0 0.75rem;
+  }
+}
+
+.mobileBackIcon {
+  display: inline-flex;
+  color: var(--lila-corporativo, #7d68d8);
+
+  :global(html.dark) & {
+    color: var(--lila-suave, #b59cf8);
+  }
+}
+
